@@ -1,0 +1,22 @@
+{
+  "name": "@maple/types",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  }
+}
