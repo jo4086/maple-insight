@@ -1,0 +1,17 @@
+{
+  // "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node", "react", "react-dom"]
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "include": ["src", "*.cjs"],
+  "exclude": ["node_modules", "dist"]
+}
+
