@@ -1,0 +1,12 @@
+.Input_Base {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  outline: none;
+
+  &::placeholder {
+    color: red;
+  }
+}

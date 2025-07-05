@@ -1,0 +1,83 @@
+:root {
+  --divider-width: 5rem;
+  --divider-gap: 2rem;
+  --label-font-size-hold: 1.2rem;
+  --label-font-size-move: 0.7rem;
+}
+
+.TextField-root {
+  display: flex;
+  position: relative;
+
+  width: 300px;
+  height: 3rem;
+
+  & * {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  & .TextField-input {
+    text-align: start;
+    padding: 0.5rem 1rem;
+    border: none;
+  }
+
+  & .TextField-label,
+  & .TextField-divider {
+    font-size: var(--label-font-size-hold);
+    position: absolute;
+    width: var(--divider-width);
+    left: 0;
+    top: 0;
+    transition-duration: 0.5s;
+    pointer-events: none;
+    transition-timing-function: ease;
+  }
+
+  & .TextField-divider {
+    left: calc(var(--divider-width) / 2);
+    width: 0;
+    opacity: 0;
+    height: 4px;
+    background-color: white;
+    border: 1px solid white;
+
+    transform: translateY(-50%);
+    color: transparent;
+    transition-property: transform left width;
+  }
+
+  & .TextField-label {
+    transition-property: font-size transform;
+    background-color: transparent;
+    z-index: 100;
+  }
+
+  &:focus-within .TextField-label {
+    transform: translateX(0%) translateY(-55%);
+    font-size: var(--label-font-size-move);
+  }
+  &:focus-within .TextField-divider {
+    opacity: 1;
+    font-size: var(--label-font-size-move);
+    width: calc(var(--divider-width) - var(--divider-gap));
+    left: calc(var(--divider-gap) / 2);
+  }
+
+  &.is-floating {
+    & .TextField-label {
+      transform: translateX(0%) translateY(-55%);
+      font-size: var(--label-font-size-move);
+    }
+
+    & .TextField-divider {
+      opacity: 1;
+      font-size: var(--label-font-size-move);
+      width: calc(var(--divider-width) - var(--divider-gap));
+      left: calc(var(--divider-gap) / 2);
+    }
+  }
+}

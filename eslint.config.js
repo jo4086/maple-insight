@@ -102,7 +102,7 @@ export default tseslint.config(
     rules: {
       ...pluginImport.configs.recommended.rules,
       ...pluginImport.configs.typescript.rules,
-      'no-console': 'warn',
+      // 'no-console': 'warn',
       'no-unused-vars': [
         'warn',
         {
