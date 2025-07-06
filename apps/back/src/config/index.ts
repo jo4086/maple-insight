@@ -1,6 +1,6 @@
 export * from './api-config';
 
-const characterApi = [
+/* const characterApi = [
   'list',
   'basic',
   'popularity',
@@ -21,4 +21,4 @@ const characterApi = [
   'hexamatrix',
   'hexamatrix-stat',
   'dojang',
-] as const;
+] as const; */

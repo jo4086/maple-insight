@@ -7,10 +7,12 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "CHOKIDAR_USEPOLLING=true TS_NODE_PROJECT=tsconfig.json ts-node-dev --respawn --files src/index.ts",
+    "dev2": "TS_NODE_PROJECT=tsconfig.json ts-node-dev --files src/index.ts",
     "build": "tsup",
     "lint": "eslint .",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "sync:domain-types": "ts-node scripts/sync-domain-types.ts"
   },
   "dependencies": {
     "axios": "^1.10.0",

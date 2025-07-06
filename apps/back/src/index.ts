@@ -3,9 +3,9 @@ import app, { App } from './app';
 
 const PORT = Number(process.env.PORT) || 8000;
 
-async function server() {
+function server() {
   try {
-    await App();
+    App();
     app.listen(PORT, () => {
       console.log(`Server running at http://localhost:${PORT}`);
     });

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+import { useSendNick } from '../../api/mutations';
 import { TextField } from '../../components';
 
 export const Home = () => {
   const [nick, setNick] = useState<string>('');
+  const mutation = useSendNick();
 
   interface HandleOnInputProps {
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>;
@@ -16,6 +18,10 @@ export const Home = () => {
     if (value.length > maxLength) target.value = value.substr(0, maxLength);
   };
 
+  const handleSubmit = () => {
+    mutation.mutate(nick);
+  };
+
   return (
     <>
       <TextField
@@ -25,6 +31,11 @@ export const Home = () => {
         value={nick}
         label="닉네임"
       />
+      <button onClick={handleSubmit}>검색 </button>
+
+      {mutation.isPending && <p>Sending...</p>}
+      {mutation.isSuccess && <p>Success!</p>}
+      {mutation.isError && <p>Error: {mutation.error?.message}</p>}
     </>
   );
 };

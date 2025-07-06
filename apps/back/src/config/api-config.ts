@@ -1,6 +1,6 @@
 import { getValidatedApiKeys } from '../middlewares/validators';
 
-import type { EnvMapType, ApiStructure } from './config.type';
+import type { EnvMapType, ApiStructure, Homepage } from './config.type';
 
 const requiredAPIKeyMap: EnvMapType = {
   nexon: 'NEXON_API_KEY',
@@ -9,10 +9,28 @@ export const config = {
   apiKey: getValidatedApiKeys(requiredAPIKeyMap),
 };
 
+const homepageConfigMap: Record<Homepage, { baseUrl: string; apiKey: string }> = {
+  nexon: {
+    baseUrl: 'https://open.api.nexon.com/maplestory/v1',
+    apiKey: process.env.NEXON_API_KEY || '',
+  },
+  example: {
+    baseUrl: 'https://api.example.com',
+    apiKey: process.env.EXAMPLE_API_KEY || '',
+  },
+  test: {
+    baseUrl: 'https://api.test.com',
+    apiKey: process.env.TEST_API_KEY || '',
+  },
+};
+export function getHomepageConfig(homepage: Homepage) {
+  return homepageConfigMap[homepage];
+}
+
 export function createApiConfig<T extends ApiStructure>(config: T): T {
   return config;
 }
-export const API_URL = createApiConfig({
+export const nexonApiConfig = createApiConfig({
   nexon: {
     base: 'https://open.api.nexon.com/maplestory/v1',
     secParams: {
@@ -52,8 +70,8 @@ export const API_URL = createApiConfig({
 });
 export function generateMapleStoryApiUrls(ocid: string): Record<string, string[]> {
   const categorizedUrls: Record<string, string[]> = {};
-  // API_URL은 같은 모듈 안에 있으므로 바로 접근합니다.
-  const nexonConfig = API_URL.nexon;
+  // nexonApiConfig은 같은 모듈 안에 있으므로 바로 접근합니다.
+  const nexonConfig = nexonApiConfig.nexon;
   const base = nexonConfig.base;
 
   // Object.entries를 사용해 카테고리 이름('stat' 등)과 내용을 함께 가져옵니다.
@@ -85,7 +103,7 @@ export function generateMapleStoryApiUrls(ocid: string): Record<string, string[]
   return categorizedUrls;
 }
 
-const myOcid = 'asd1234';
+/* const myOcid = 'asd1234';
 const mapleUrls = generateMapleStoryApiUrls(myOcid);
 
-console.log(mapleUrls);
+console.log(mapleUrls); */

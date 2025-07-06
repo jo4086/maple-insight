@@ -20,3 +20,4 @@ interface ApiConfig<T extends { [key: string]: string }> {
 export interface ApiStructure {
   [key: string]: ApiConfig<{ [key: string]: string }>;
 }
+export type Homepage = 'nexon' | 'example' | 'test';
