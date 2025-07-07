@@ -1,13 +1,16 @@
 // import { useState } from 'react';
 
 import './App.css';
-import { Home } from './pages';
+import { Routes, Route } from 'react-router-dom';
+
+import { Gemini, Home } from './pages';
 
 const App = () => {
   return (
-    <>
-      <Home />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/gemini" element={<Gemini />} />
+    </Routes>
   );
 };
 

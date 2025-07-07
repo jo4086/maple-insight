@@ -1,26 +1,13 @@
 import React from 'react';
 
-import type { IconProps } from './Icon.type';
-
-/* export function Icon<AsTag extends React.ElementType = 'img'>(props: IconProps) {
-  const { className, onClick } = props;
-
-  if (props.mode === 'component') {
-    const Component = props.component;
-    return <Component className={className} onClick={onClick} />;
-  }
-
-  // custom 모드
-  const Tag = props.as || 'img';
-  return <Tag {...props.modes} className={className} onClick={onClick} />;
-} */
+import type { IconProps } from './Icon_gemini.type';
 
 export function Icon(props: IconProps) {
   const { className, onClick } = props;
 
   if (props.modeType === 'union') {
     if (props.mode === 'component') {
-      const Component = props.modes.component; // ✅ 정상
+      const Component = props.modes.component;
       return <Component className={className} onClick={onClick} />;
     }
 
@@ -35,4 +22,5 @@ export function Icon(props: IconProps) {
       );
     }
   }
+  return null;
 }

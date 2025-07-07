@@ -1,7 +1,16 @@
 import type React from 'react';
 
+import type { CreateModeSelector } from '../../../types/mode-utils';
+
+export type TextProps = CreateModeSelector<CommonProps, MyModes>;
+
 type Tailwindcss = string;
 type InlineStyle = React.CSSProperties;
+
+type MyModes = {
+  tailwind: TailwindStyleProps;
+  style: InlineStyleProps;
+};
 
 // 공통 Props
 interface CommonProps {
@@ -14,6 +23,7 @@ interface CommonProps {
     input?: string;
     label?: string;
   };
+  onEnter?: () => void;
 }
 
 // Tailwind 스타일 Props

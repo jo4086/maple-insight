@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-import { useSendNick } from '../../api/mutations';
-import { TextField } from '../../components';
-
-import { Asd } from './Asd.jsx';
+import { useSendNick } from '../../../api/mutations';
+import { TextField } from '../../../_gemini/components/shared/TextField_gemini/index_gemini';
 
 export const Home = () => {
   const [nick, setNick] = useState<string>('');
@@ -33,19 +31,15 @@ export const Home = () => {
         onEnter={handleSubmit}
         value={nick}
         label="닉네임"
+        tailwinds={{
+          root: 'bg-gray-100',
+          input: 'text-blue-500',
+          label: 'text-green-500',
+        }}
       />
-      {/*       <button
-        // onSubmit={handleSubmit}
-        onClick={handleSubmit}
-      >
-        검색{' '}
-      </button> */}
-
       {mutation.isPending && <p>Sending...</p>}
       {mutation.isSuccess && <p>Success!</p>}
       {mutation.isError && <p>Error: {mutation.error?.message}</p>}
-
-      <Asd />
     </>
   );
 };
