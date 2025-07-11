@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "CHOKIDAR_USEPOLLING=true TS_NODE_PROJECT=tsconfig.json ts-node-dev --respawn --files src/index.ts",
+    "dev3": "NODE_OPTIONS='--loader ts-node/esm' ts-node-dev --respawn --files src/index.ts",
     "dev2": "TS_NODE_PROJECT=tsconfig.json ts-node-dev --files src/index.ts",
     "build": "tsup",
     "lint": "eslint .",
@@ -24,7 +25,8 @@
     "express-session": "^1.18.1",
     "morgan": "^1.10.0",
     "multer": "^2.0.1",
-    "pm2": "^6.0.8"
+    "pm2": "^6.0.8",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

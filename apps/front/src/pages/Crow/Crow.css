@@ -1,0 +1,14 @@
+.crow-root {
+  width: 100%;
+  display: flex;
+  border: 1px solid gray;
+  justify-content: center;
+}
+
+.crow-title {
+  font-size: 2rem;
+}
+
+.TextField-root {
+  margin: 1rem auto;
+}

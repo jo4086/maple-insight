@@ -8,3 +8,10 @@ export default defineConfig({
   clean: true,
   skipNodeModulesBundle: true,
 });
+
+/* export default defineConfig({
+  entry: ['src/index.ts'],
+  format: ['esm'],
+  target: 'esnext',
+  outDir: 'dist',
+}); */

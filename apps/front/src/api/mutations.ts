@@ -9,6 +9,7 @@ export const useSendNick = () => {
         const res = await apiClient.get(`/character/search`, {
           params: { nick },
         });
+        console.log(res.data);
         return res.data;
       } catch (error) {
         // Axios 에러라면 에러 응답에서 메시지 추출 가능

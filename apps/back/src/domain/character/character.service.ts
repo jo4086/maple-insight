@@ -5,9 +5,10 @@ const getCharacterOCID = async (nick: string) => {
     const response = await nexonBaseApi.get('/id', {
       params: {
         character_name: nick,
+        date: '2025-07-10',
       },
     });
-    // console.log(response.data);
+    console.log(response.data);
 
     return response.data;
   } catch (error) {

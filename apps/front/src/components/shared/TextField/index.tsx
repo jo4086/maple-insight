@@ -9,25 +9,11 @@ import type { TextFieldProps } from './index.type';
 
 export function TextField(props: TextFieldProps) {
   const [focused, setFocused] = useState<boolean>(false);
-  const {
-    value,
-    onChange,
-    label,
-    prefix = 'TextField',
-    classNames,
-    mode,
-    onEnter,
-    ...rest
-  } = props;
+  const { value, onChange, label, prefix = 'TextField', classNames, mode, onEnter, ...rest } = props;
 
-  console.log(value);
   const shouldFloat = focused || value.length > 0;
 
-  const rootClass = cn(
-    `${prefix}-root`,
-    classNames?.root,
-    mode === 'tailwind' ? props.tailwinds?.root : undefined,
-  );
+  const rootClass = cn(`${prefix}-root`, classNames?.root, mode === 'tailwind' ? props.tailwinds?.root : undefined);
   const rootStyle = mode === 'style' ? props.styles?.root : undefined;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,20 +35,12 @@ export function TextField(props: TextFieldProps) {
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         onKeyDown={handleKeyDown}
-        className={cn(
-          `${prefix}-input`,
-          classNames?.input,
-          mode === 'tailwind' ? props.tailwinds?.input : undefined,
-        )}
+        className={cn(`${prefix}-input`, classNames?.input, mode === 'tailwind' ? props.tailwinds?.input : undefined)}
         style={mode === 'style' ? props.styles?.input : undefined}
         {...rest}
       />
       <Label
-        className={cn(
-          `${prefix}-label`,
-          classNames?.label,
-          mode === 'tailwind' ? props.tailwinds?.label : undefined,
-        )}
+        className={cn(`${prefix}-label`, classNames?.label, mode === 'tailwind' ? props.tailwinds?.label : undefined)}
         style={mode === 'style' ? props.styles?.label : undefined}
       >
         {label}
@@ -76,7 +54,7 @@ export function TextField(props: TextFieldProps) {
         }}
         onClick={onEnter}
       />
-      <Icon
+      {/* <Icon
         modeType="union"
         mode="custom"
         modes={{
@@ -85,15 +63,15 @@ export function TextField(props: TextFieldProps) {
         }}
         as="img"
         onClick={onEnter}
-      />
-      <Icon
+      /> */}
+      {/*  <Icon
         modeType="union"
         mode="component"
         modes={{
-          component: FaSearch, // 삽입할 컴포넌트
+          component: FaSearch,
         }}
         onClick={onEnter}
-      />
+      /> */}
     </Container>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 import { useSendNick } from '../../api/mutations';
-import { TextField } from '../../components';
-
-import { Asd } from './Asd.jsx';
+import { TextField, Sidebar } from '../../components';
 
 export const Home = () => {
   const [nick, setNick] = useState<string>('');
-  const mutation = useSendNick();
+  const [activeTab, setActiveTab] = useState('캐릭터');
+  // const mutation = useSendNick();
+  const { mutate, data, isPending, error, isSuccess, isError } = useSendNick();
 
   interface HandleOnInputProps {
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>;
@@ -21,11 +21,31 @@ export const Home = () => {
   };
 
   const handleSubmit = () => {
-    mutation.mutate(nick);
+    mutate(nick);
   };
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
+  if (isPending) {
+    return (
+      <>
+        <TextField
+          mode="tailwind"
+          onInput={(e) => handleOnInput({ e, maxLength: 6 })}
+          onChange={(e) => setNick(e.target.value)}
+          onEnter={handleSubmit}
+          value={nick}
+          label="닉네임"
+        />
+      </>
+    );
+  }
 
   return (
     <>
+      <Sidebar activeTab="" isCollapsed={false} onTabChange={handleTabChange} />
       <TextField
         mode="tailwind"
         onInput={(e) => handleOnInput({ e, maxLength: 6 })}
@@ -41,11 +61,13 @@ export const Home = () => {
         검색{' '}
       </button> */}
 
-      {mutation.isPending && <p>Sending...</p>}
-      {mutation.isSuccess && <p>Success!</p>}
-      {mutation.isError && <p>Error: {mutation.error?.message}</p>}
-
-      <Asd />
+      {isError && <p>Error: {error?.message}</p>}
+      {isSuccess && data && (
+        <div>
+          <h2>검색 결과:</h2>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
     </>
   );
 };
