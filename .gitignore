@@ -5,3 +5,8 @@ dist/
 package-lock.json
 
 .pnpm-debug.log
+
+# custom
+.readdy/
+archive/
+

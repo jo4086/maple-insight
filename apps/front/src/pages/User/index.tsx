@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { Dashboard, Sidebar } from './user-components';
+import cn from 'classnames';
+
+import { Sidebar } from './user-components';
+// import { Container } from '@/components';
+import { Dashboard } from './Dashboard';
 
 export function User() {
   const [activeTab, setActiveTab] = useState<string>('캐릭터');
@@ -17,7 +21,7 @@ export function User() {
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar isCollapsed={isCollapsed} onTabChange={handleTabChange} activeTab={activeTab} />
-      <Dashboard activeTab={activeTab} isCollapsed={isCollapsed} onToggleSidebar={toggleSidebar} />
+      <Dashboard activeTab={activeTab} isCollapsed={isCollapsed} onToggleSidebar={toggleSidebar}></Dashboard>
     </div>
   );
 }
