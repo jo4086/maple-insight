@@ -107,3 +107,9 @@ import { React, cn } from '@/shared';
 사용결과 작지만 생산력을 증가시켰으며 다양하게 바리에이션한 **re-export**를 적절하게 사용하게 된다면\
 점점 누적되어 유의미한 수치가 되지 않을까 생각한다.\
 이런 기술의 사용은 계속해서 고민하고 적용해보면서 경험을 늘려 적재적소에 사용할 수 있는 감각을 키우는 것이 중요할 것이다.
+
+## 2025-07-17
+
+### 백엔드 주도 역수출 타입 파이프라인 설계
+
+_keyword: #CI_CD #pipeline #reverse_dependency #DDD #architecture #automation_types #type_sync ._
