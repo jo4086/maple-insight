@@ -1,4 +1,5 @@
 import { nexonBaseApi } from '../../api/baseApi';
+import { renameBasicApiResponse } from '@maple/types';
 
 const getCharacterOCID = async (nick: string) => {
   try {
@@ -8,7 +9,7 @@ const getCharacterOCID = async (nick: string) => {
         date: '2025-07-10',
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data;
   } catch (error) {
@@ -27,6 +28,9 @@ const getStatInfo = async (ocid: string) => {
     const response = await nexonBaseApi.get('/character/basic', {
       params: { ocid },
     });
+
+    const a = renameBasicApiResponse(response.data);
+    console.log(a);
 
     return response.data;
   } catch (error) {

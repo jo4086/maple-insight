@@ -7,7 +7,7 @@ const searchNick: AppHandler<object, unknown, unknown, { nick: string }> = async
 
     const data = await characterService.getInfo(nick);
 
-    console.log('data:', data);
+    // console.log('data:', data);
 
     return res.status(200).json({
       success: true,
