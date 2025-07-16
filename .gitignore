@@ -8,5 +8,6 @@ package-lock.json
 
 # custom
 .readdy/
+readdy/
+Readdy/
 archive/
-

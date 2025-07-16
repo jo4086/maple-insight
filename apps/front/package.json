@@ -24,6 +24,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
+    "@maple/types": "workspace:*",
     "autoprefixer": "^10.4.21",
     "classnames": "^2.5.1",
     "eslint-import-resolver-typescript": "^4.4.4",

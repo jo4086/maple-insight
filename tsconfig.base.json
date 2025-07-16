@@ -9,14 +9,14 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@maple/types": ["packages/types/src"]
+      "@maple/types": ["packages/mapleInsight-types/src"]
     },
     "jsx": "react-jsx",
+    "types": ["node"],
 
     /* Linting */
-    "strict": true,
-
-  },
+    "strict": true
+  }
   // "include": ["src"],
   // "exclude": ["node_modules", "dist"]
 }
