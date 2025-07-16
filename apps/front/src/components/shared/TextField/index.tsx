@@ -24,7 +24,7 @@ export function TextField(props: TextFieldProps) {
 
   return (
     <Container
-      className={cn(`${rootClass}`, 'rounded border border-blue-300', {
+      className={cn(`${rootClass}`, 'rounded border border-blue-300 bg-white', {
         'is-floating': shouldFloat,
       })}
       style={rootStyle}
@@ -45,7 +45,7 @@ export function TextField(props: TextFieldProps) {
       >
         {label}
       </Label>
-      <Divider className={cn(`${prefix}-divider`)}>{label}</Divider>
+      <Divider className={cn(`${prefix}-divider bg-white border-white`)}>{label}</Divider>
       <Icon
         modeType="common"
         custom={{

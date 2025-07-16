@@ -42,8 +42,8 @@
     width: 0;
     opacity: 0;
     height: 4px;
-    background-color: white;
-    border: 1px solid white;
+    /* background-color: white; */
+    /* border: 1px solid white; */
 
     transform: translateY(-50%);
     color: transparent;

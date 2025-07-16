@@ -4,14 +4,15 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { Navigation } from './components';
-import { Gemini, Home, Mcp, Crow, User } from './pages';
+import { Main, Gemini, Home, Mcp, Crow, User } from './pages';
 
 const App = () => {
   return (
     <>
       {/* <Navigation /> */}
       <Routes>
-        <Route path="/" element={<User />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/gemini" element={<Gemini />} />
         <Route path="/crow" element={<Crow />} />
         <Route path="/mcp" element={<Mcp />} />
