@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@maple/types": "workspace:*",
+    "@maple/utils": "workspace:*",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",

@@ -6,7 +6,9 @@
     "baseUrl": ".",
     "outDir": "dist",
     "types": ["node"],
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "ts-node": {
     "files": true
