@@ -3,6 +3,7 @@ const BasicApiResponseMap = {
   world_name: 'world',
   character_name: 'name',
   character_gender: 'gender',
+  character_level: 'level',
   character_class: 'class',
   character_class_level: 'class_level',
   character_exp: 'exp',
