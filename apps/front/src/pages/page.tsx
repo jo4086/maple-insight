@@ -1,9 +1,10 @@
-import { Container, StickyBox, TextField } from '@/components';
-import { React, cn } from '@/shared';
-import { Page2 } from './page2';
 import { useState } from 'react';
 
+import { Page2 } from './page2';
+
 import { useSendNick } from '@/api/mutations';
+import { Container, StickyBox as _StickyBox, TextField } from '@/components';
+import { React, cn } from '@/shared';
 
 export const Main = () => {
   const [nick, setNick] = useState('');

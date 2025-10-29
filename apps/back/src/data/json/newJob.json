@@ -1,8 +1,10 @@
 {
   "000": {
     "class": "beginner",
-    "affiliation": "adventurer",
-    "type": "base",
+    "extends": {
+      "affiliation": "adventurer",
+      "type": "base"
+    },
     "tier": "0",
     "children": ["1**", "2**", "3**", "4**", "5**"]
   },

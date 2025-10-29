@@ -1,0 +1,251 @@
+import { AllJobClasses } from '@/jobs';
+
+export type ItemCategory = 'armor' | 'accessory' | 'weapon' | 'pet' | 'arcane' | 'authentic';
+
+type ArmorSlot = 'top' | 'bottom' | 'hat' | 'glove' | 'cape' | 'subWeapon' | 'shoes' | 'overall';
+export const ArmorMap = {
+  hat: '모자',
+  top: '상의',
+  bottom: '하의',
+  glove: '장갑',
+  cape: '망토',
+  shoes: '신발',
+  overall: '한벌옷',
+  subWeapon: '보조무기',
+} as const;
+
+export type ArmorEn = keyof typeof ArmorMap;
+export type ArmorKo = (typeof ArmorMap)[ArmorEn];
+
+type AccessorySlot =
+  | 'badge'
+  | 'belt'
+  | 'earrings'
+  | 'emblem'
+  | 'eye'
+  | 'face'
+  | 'medal'
+  | 'pendant'
+  | 'pocket'
+  | 'powerSource'
+  | 'ring'
+  | 'shoulder';
+
+type WeaponSlot = 'oneHanded' | 'twoHanded';
+
+type WeaponMap = {
+  oneHanded:
+    | 'shiningRod'
+    | 'soulShooter'
+    | 'desperado'
+    | 'oneHandedSword'
+    | 'oneHandedAxe'
+    | 'oneHandedBlunt'
+    | 'dagger'
+    | 'cane'
+    | 'wand'
+    | 'staff'
+    | 'espLimiter'
+    | 'chain'
+    | 'lucentGauntlet'
+    | 'energySword'
+    | 'buchae'
+    | 'breathShooter'
+    | 'bladecaster'
+    | 'hwando'
+    | 'blade';
+  twoHanded:
+    | 'twoHandedSword'
+    | 'twoHandedAxe'
+    | 'twoHandedBlunt'
+    | 'spear'
+    | 'polearm'
+    | 'longSword'
+    | 'broadSword'
+    | 'revolverGauntlet'
+    | 'bow'
+    | 'crossBow'
+    | 'dualBowguns'
+    | 'ancientBow'
+    | 'claw'
+    | 'chakram'
+    | 'knuckle'
+    | 'gun'
+    | 'handCannon';
+};
+
+type WeaponData = {
+  [K in keyof WeaponMap]: {
+    weaponType: K;
+    weapon: WeaponMap[K];
+  };
+}[keyof WeaponMap];
+
+type OneHandedWeapons =
+  | 'shiningRod'
+  | 'soulShooter'
+  | 'desperado'
+  | 'oneHandedSword'
+  | 'oneHandedAxe'
+  | 'oneHandedBlunt'
+  | 'dagger'
+  | 'cane'
+  | 'wand'
+  | 'staff'
+  | 'espLimiter'
+  | 'chain'
+  | 'lucentGauntlet'
+  | 'energySword'
+  | 'buchae'
+  | 'breathShooter'
+  | 'bladecaster'
+  | 'hwando'
+  | 'blade';
+
+type TwoHandedWeapons =
+  | 'twoHandedSword'
+  | 'twoHandedAxe'
+  | 'twoHandedBlunt'
+  | 'spear'
+  | 'polearm'
+  | 'longSword'
+  | 'broadSword'
+  | 'revolverGauntlet'
+  | 'bow'
+  | 'crossBow'
+  | 'dualBowguns'
+  | 'ancientBow'
+  | 'claw'
+  | 'chakram'
+  | 'knuckle'
+  | 'gun'
+  | 'handCannon';
+
+type SubWeapon =
+  | 'medal'
+  | 'rosary'
+  | 'chain'
+  | 'spellBook-redGreen'
+  | 'spellBook-blueSilver'
+  | 'spellBook-whiteGold'
+  | 'arrowFeater'
+  | 'bowThimble'
+  | 'relic'
+  | 'charm'
+  | 'daggerScabbard'
+  | 'wristBand'
+  | 'scope'
+  | 'powderKeg'
+  | 'jewel'
+  | 'soulShield'
+  | 'charge'
+  | 'magicMarble'
+  | 'arrowHead'
+  | 'magnum'
+  | 'forceShield'
+  | 'controller'
+  | 'weight'
+  | 'document'
+  | 'orb'
+  | 'magicArrow'
+  | 'card'
+  | 'foxMarble'
+  | 'novaEssence'
+  | 'weaponBelt'
+  | 'transmitter'
+  | 'soulRing'
+  | 'bracelet'
+  | 'magicWing'
+  | 'hexSeeker'
+  | 'path'
+  | 'dragonPearl'
+  | 'norigae'
+  | 'seonchu'
+  | 'chessPiece';
+// | 'shield';
+
+const secondaryWeaponByJob: Record<SubWeapon, string[]> = {
+  medal: ['히어로'],
+  rosary: ['팔라딘'],
+  chain: ['다크나이트'],
+  'spellBook-redGreen': ['아크메이지(불,독)'],
+  'spellBook-blueSilver': ['아크메이지(썬,콜)'],
+  'spellBook-whiteGold': ['비숍'],
+  arrowFeater: ['보우마스터'],
+  bowThimble: ['신궁'],
+  relic: ['패스파인더'],
+  charm: ['나이트로드'],
+  daggerScabbard: ['섀도어'],
+  wristBand: ['바이퍼'],
+  scope: ['캡틴'],
+  powderKeg: ['캐논슈터'],
+  jewel: ['소울마스터', '윈드브레이커', '나이트워커', '플레임위자드', '스트라이커'],
+  soulShield: ['미하일'],
+  charge: ['블래스터'],
+  magicMarble: ['배틀메이지'],
+  arrowHead: ['와일드헌터'],
+  magnum: ['메카닉'],
+  forceShield: ['데몬슬레이어', '데몬어벤저'],
+  controller: ['제논'],
+  weight: ['아란'],
+  document: ['에반'],
+  orb: ['루미너스'],
+  magicArrow: ['메르세데스'],
+  card: ['팬텀'],
+  foxMarble: ['은월'],
+  novaEssence: ['카이저'],
+  weaponBelt: ['카인'],
+  transmitter: ['카데나'],
+  soulRing: ['엔젤릭버스터'],
+  bracelet: ['아델'],
+  magicWing: ['일리움'],
+  hexSeeker: ['칼리'],
+  path: ['아크'],
+  dragonPearl: ['렌'],
+  norigae: ['라라'],
+  seonchu: ['호영'],
+  chessPiece: ['키네시스'],
+};
+
+export const secondaryWeaponByClass: Record<SubWeapon, AllJobClasses[]> = {
+  medal: ['hero'],
+  rosary: ['paladin'],
+  chain: ['darkNight'],
+  'spellBook-redGreen': ['archMageFire'],
+  'spellBook-blueSilver': ['archMageIce'],
+  'spellBook-whiteGold': ['bishop'],
+  arrowFeater: ['bowMaster'],
+  bowThimble: ['marksman'],
+  relic: ['pathfinder'],
+  charm: ['nightLord'],
+  daggerScabbard: ['shadower'],
+  wristBand: ['viper'],
+  scope: ['captain'],
+  powderKeg: ['cannonShooter'],
+  jewel: ['soulMaster', 'windBreaker', 'nightWalker', 'flameWizard', 'striker'],
+  soulShield: ['mikhail'],
+  charge: ['blaster'],
+  magicMarble: ['battleMage'],
+  arrowHead: ['wildHunter'],
+  magnum: ['mechanic'],
+  forceShield: ['demonSlayer', 'demonAvenger'],
+  controller: ['xenon'],
+  weight: ['aran'],
+  document: ['evan'],
+  orb: ['luminous'],
+  magicArrow: ['mercedes'],
+  card: ['phantom'],
+  foxMarble: ['eunwol'],
+  novaEssence: ['kaiser'],
+  weaponBelt: ['kain'],
+  transmitter: ['cadena'],
+  soulRing: ['angelicBuster'],
+  bracelet: ['adele'],
+  magicWing: ['illiumn'],
+  hexSeeker: ['khali'],
+  path: ['ark'],
+  dragonPearl: ['len'],
+  norigae: ['lara'],
+  seonchu: ['hoYoung'],
+  chessPiece: ['kinesis'],
+};

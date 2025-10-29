@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false, // 명확히 덮어쓰기
+    "erasableSyntaxOnly": true,
+    "noUncheckedSideEffectImports": true // assert { type: 'side-effect' };
+  },
+  "include": ["src"]
+}

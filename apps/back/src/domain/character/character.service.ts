@@ -1,14 +1,15 @@
 import { nexonBaseApi } from '../../api/baseApi';
 import { renameBasicApiResponse } from '@maple/types';
 
-const getCharacterOCID = async (nick: string) => {
+export const getCharacterOCID = async (nick: string) => {
   try {
     const response = await nexonBaseApi.get('/id', {
       params: {
         character_name: nick,
-        date: '2025-07-10',
+        // date: '2025-07-10',
       },
     });
+    // console.clear();
     // console.log(response.data);
 
     return response.data;
@@ -23,16 +24,24 @@ const getCharacterOCID = async (nick: string) => {
   }
 };
 
-const getStatInfo = async (ocid: string) => {
+const getStatInfo = async (ocid: string, date: string | null) => {
   try {
     const response = await nexonBaseApi.get('/character/basic', {
-      params: { ocid },
+      params: { ocid, date },
     });
 
-    const a = renameBasicApiResponse(response.data);
-    console.log(a);
+    const formatedData = renameBasicApiResponse(response.data);
+    const {
+      guild: _guild,
+      image_url: _image_url,
+      gender: _gender,
+      class_level: _class_level,
+      // created_at: _created_at,
+      ...rest
+    } = formatedData;
+    console.log(rest);
 
-    return response.data;
+    return rest;
   } catch (error) {
     if (error instanceof Error) {
       console.error(`API Request Error:`, error.message);
@@ -44,10 +53,10 @@ const getStatInfo = async (ocid: string) => {
   }
 };
 
-export const getInfo = async (nick: string) => {
+export const getInfo = async (nick: string, date: string | null) => {
   const { ocid } = await getCharacterOCID(nick);
 
-  return await getStatInfo(ocid);
+  return await getStatInfo(ocid, date);
 };
 
 export default { getCharacterOCID, getInfo };

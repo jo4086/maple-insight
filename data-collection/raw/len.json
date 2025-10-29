@@ -1,0 +1,224 @@
+{
+  "001": {
+    "level": 270,
+    "combatPower": 16556600,
+    "analysisData": {
+      "창룡파천검 : 승천": {
+        "damage": 1135119401873,
+        "share": 23.56,
+        "activationCount": 85,
+        "hitCount": 1101,
+        "damagePerSecond": 59743126414,
+        "averageDamagePerActivation": 13354345904,
+        "maxDamagePerHit": 1390465108,
+        "minDamagePerHit": 805665523
+      },
+      "매화검 절기 : 만리향": {
+        "damage": 584365601165,
+        "share": 12.13,
+        "activationCount": 404,
+        "hitCount": 1212,
+        "damagePerSecond": 30756084271,
+        "averageDamagePerActivation": 1446449507,
+        "maxDamagePerHit": 815955513,
+        "minDamagePerHit": 217874009
+      },
+      "매화검 2초식 : 쇄매 VI": {
+        "damage": 517232562770,
+        "share": 10.73,
+        "activationCount": 459,
+        "hitCount": 1377,
+        "damagePerSecond": 27222766461,
+        "averageDamagePerActivation": 1126868328,
+        "maxDamagePerHit": 456351856,
+        "minDamagePerHit": 214046075
+      },
+      "망혼각성": {
+        "damage": 489764582312,
+        "share": 10.16,
+        "activationCount": 222,
+        "hitCount": 534,
+        "damagePerSecond": 25777083279,
+        "averageDamagePerActivation": 2206146767,
+        "maxDamagePerHit": 2141992923,
+        "minDamagePerHit": 379648684
+      },
+      "매화검 절기 : 섬무": {
+        "damage": 464685312800,
+        "share": 9.64,
+        "activationCount": 56,
+        "hitCount": 336,
+        "damagePerSecond": 24457112200,
+        "averageDamagePerActivation": 8297952175,
+        "maxDamagePerHit": 1565975249,
+        "minDamagePerHit": 1089644430
+      },
+      "망혼검 절기 : 심검": {
+        "damage": 372130365236,
+        "share": 7.72,
+        "activationCount": 52,
+        "hitCount": 184,
+        "damagePerSecond": 19585808696,
+        "averageDamagePerActivation": 7156353177,
+        "maxDamagePerHit": 2405278006,
+        "minDamagePerHit": 1567034563
+      },
+      "망혼검 절기 : 무량겁 VI": {
+        "damage": 330044992938,
+        "share": 6.85,
+        "activationCount": 48,
+        "hitCount": 272,
+        "damagePerSecond": 17368683838,
+        "averageDamagePerActivation": 6875104019,
+        "maxDamagePerHit": 1444614821,
+        "minDamagePerHit": 673751544
+      },
+      "망혼검 본초 : 영격 VI": {
+        "damage": 236888645669,
+        "share": 4.91,
+        "activationCount": 29,
+        "hitCount": 116,
+        "damagePerSecond": 12467823456,
+        "averageDamagePerActivation": 8168573988,
+        "maxDamagePerHit": 2502289029,
+        "minDamagePerHit": 1167055388
+      },
+      "망혼검 절기 : 망탄 VI": {
+        "damage": 159520656488,
+        "share": 3.31,
+        "activationCount": 4,
+        "hitCount": 36,
+        "damagePerSecond": 8395824025,
+        "averageDamagePerActivation": 39880164122,
+        "maxDamagePerHit": 4767305323,
+        "minDamagePerHit": 4127670305
+      },
+      "망혼강림 VI": {
+        "damage": 139371376455,
+        "share": 2.89,
+        "activationCount": 24,
+        "hitCount": 120,
+        "damagePerSecond": 7335335602,
+        "averageDamagePerActivation": 5807140685,
+        "maxDamagePerHit": 1304961227,
+        "minDamagePerHit": 950464840
+      },
+      "망혼검 절기 : 열지 VI": {
+        "damage": 136393894002,
+        "share": 2.83,
+        "activationCount": 8,
+        "hitCount": 48,
+        "damagePerSecond": 7178783894,
+        "averageDamagePerActivation": 17049611750,
+        "maxDamagePerHit": 3095427972,
+        "minDamagePerHit": 2486534653
+      },
+      "망혼검 2초식 : 연참 VI": {
+        "damage": 100141541551,
+        "share": 2.07,
+        "activationCount": 84,
+        "hitCount": 168,
+        "damagePerSecond": 5270607450,
+        "averageDamagePerActivation": 1192161208,
+        "maxDamagePerHit": 689941083,
+        "minDamagePerHit": 337616432
+      },
+      "매화검 3초식 : 일격예인 VI": {
+        "damage": 85884022481,
+        "share": 1.78,
+        "activationCount": 20,
+        "hitCount": 140,
+        "damagePerSecond": 4518106446,
+        "averageDamagePerActivation": 4292201124,
+        "maxDamagePerHit": 730837723,
+        "minDamagePerHit": 391932024
+      },
+      "매화검 본초 : 선참 VI": {
+        "damage": 49599465072,
+        "share": 1.02,
+        "activationCount": 22,
+        "hitCount": 110,
+        "damagePerSecond": 2610498161,
+        "averageDamagePerActivation": 2254521139,
+        "maxDamagePerHit": 535656698,
+        "minDamagePerHit": 294385954
+      }
+    },
+    "hexa": {
+      "창룡파천검 : 승천": {
+        "type": "skill",
+        "subType": "origin",
+        "maxLevel": 30,
+        "currentLevel": 1
+      },
+      "창룡파천검 : 일매낙화 천비인적": {
+        "type": "skill",
+        "subType": "ascent",
+        "maxLevel": 30,
+        "currentLevel": 0
+      },
+      "매화검 본초 : 선참 VI": {
+        "type": "mastery",
+        "subTypeo": null,
+        "maxLevel": 30,
+        "currentLevel": 1,
+        "linkedSkill": ["매화검 본초 : 선참"]
+      },
+      "망혼검 본초 : 영격 VI": {
+        "type": "mastery",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 1,
+        "linkedSkill": ["망혼검 본초 : 영격", "망혼검 2초식 : 연참"]
+      },
+      "망혼강림 VI": {
+        "type": "mastery",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 1,
+        "linkedSkill": ["망혼강림", "망혼검 절기 : 열지", "망혼검 절기 : 망탄", "망혼검 절기 : 무량겁"]
+      },
+      "매화검 2초식 : 쇄매 VI": {
+        "type": "mastery",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 1,
+        "linkedSkill": ["매화검 2초식 : 쇄매", "매화검 3초식 : 예인"]
+      },
+      "매화검 절기 : 만리향": {
+        "type": "enhance",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 1,
+        "linkedSkill": ["매화검 절기 : 만리향"]
+      },
+      "망혼각성": {
+        "type": "enhance",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 0,
+        "linkedSkill": ["망혼각성"]
+      },
+      "매화검 절기 : 섬무": {
+        "type": "enhance",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 0,
+        "linkedSkill": ["매화검 절기 : 섬무"]
+      },
+      "망혼검 절기 : 심검": {
+        "type": "enhance",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 0,
+        "linkedSkill": ["망혼검 절기 : 심검"]
+      },
+      "솔 야누스": {
+        "type": "common",
+        "subType": null,
+        "maxLevel": 30,
+        "currentLevel": 1
+      }
+    }
+  }
+}

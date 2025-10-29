@@ -1,0 +1,17 @@
+{
+  "date": null,
+  "character_name": "취히로",
+  "world_name": "스카니아",
+  "character_gender": "여",
+  "character_class": "히어로",
+  "character_class_level": "6",
+  "character_level": 292,
+  "character_exp": 14210732728204,
+  "character_exp_rate": "3.991",
+  "character_guild_name": "Waltz",
+  "character_image": "https://open.api.nexon.com/static/maplestory/character/look/OMNICKPLLOELCNCBIOJIDIJKNDHDGEOGNPBDGMMCEHJNEGKOKCFEFOGAEMCFGBJONNGHLOKNKKPECNNIGMGHAJBNLJPHMEEJCLFOCIPLLHEFHBLPNMNPLMPLHLOLNCICHKKEJOENONJJKCNPBMJHLKCEPKKBJFAFBOKKBPJNADKDBFFFDNEPHDBLKBGBALJJCOCNAAMIKGFAPOLGFGBIEHIHPGAKBNCGIKPPIECMJIAOGNJOOMCHFGJHHJNFFNNP",
+  "character_date_create": "2018-06-21T00:00+09:00",
+  "access_flag": "true",
+  "liberation_quest_clear_flag": "true",
+  "liberation_quest_clear": "1"
+}

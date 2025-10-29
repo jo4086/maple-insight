@@ -1,7 +1,34 @@
 @import 'tailwindcss';
+@import './theme/custom.css';
+
+@theme {
+  --color-avocado-500: oklch(0.8 0.15 120);
+}
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* 

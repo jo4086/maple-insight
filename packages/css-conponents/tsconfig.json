@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "types": ["react", "react-dom", "node"],
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+
+    /* Bundler mode*/
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true, // TypeScript가 import/export 구문을 수정하거나 자동보완하지 않고 그대로 유지
+    "noEmit": false,
+    // "composite": true,
+
+    /* Linting */
+    // "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+
+    "outDir": "./dist",
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

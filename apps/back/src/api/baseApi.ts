@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { getHomepageConfig } from '../config';
 
-export const nexonConfig = getHomepageConfig('nexon');
+const nexonConfig = getHomepageConfig('nexon');
 
 const baseUrl = nexonConfig.baseUrl;
 const apiKey = nexonConfig.apiKey;
