@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/apiClient.ts","./src/api/characterApi.ts","./src/components/index.ts","./src/components/InputField/index.tsx","./src/components/shared/index.ts","./src/components/shared/SearchBox/index.tsx","./src/pages/index.ts","./src/pages/Main/index.tsx"],"errors":true,"version":"5.8.3"}

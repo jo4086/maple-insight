@@ -1,0 +1,26 @@
+.ROOT {
+  background-color: white;
+  &:hover {
+    & .testBox {
+      transform: translateY(0px);
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  & .testBox {
+    transform: translateY(-2%);
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  & .item {
+    border-radius: 0.25rem;
+  }
+}
+
+/* .testBox {
+  &:hover {
+    transform: translateX(0);
+  }
+} */
