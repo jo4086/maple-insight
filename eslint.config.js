@@ -75,9 +75,17 @@ export default defineConfig([
       globals: globals.node,
     },
   },
-
   {
-    files: ['apps/front/**/*.{ts,tsx}'],
+    // COMMENT: TEST
+    files: ['apps/TEST/**/*.ts'],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: {},
+  },
+  {
+    // COMMENT: Front-End
+    files: ['apps/front/**/*.{ts,tsx}', 'apps/ricemc/**/*.{ts,tsx}'],
     languageOptions: {
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
