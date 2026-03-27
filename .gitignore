@@ -14,3 +14,7 @@ archive/
 ignores/
 csv/
 test/
+
+# typescript dotfills
+**/.*.ts
+**/.*.tsx
