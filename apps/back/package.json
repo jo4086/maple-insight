@@ -13,7 +13,9 @@
     "build": "tsup",
     "lint": "eslint .",
     "start": "node dist/index.js",
-    "sync:domain-types": "ts-node scripts/sync-domain-types.ts"
+    "sync:domain-types": "ts-node scripts/sync-domain-types.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "axios": "^1.10.0",
@@ -41,6 +43,7 @@
     "@types/node": "^24.0.10",
     "csvtojson": "^2.0.10",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "vitest": "^4.0.18"
   }
 }
