@@ -1,5 +1,6 @@
-import { nexonBaseApi } from '../../api/baseApi';
 import { renameBasicApiResponse } from '@maple/types';
+
+import { nexonBaseApi } from '../../api/baseApi';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -16,26 +17,12 @@ export class CharacterService {
     return res.data;
   }
 
-  public async call(
-    endpoint:
-      | 'basic'
-      | 'stat'
-      | 'hyper-stat'
-      | 'item-equipment'
-      | 'ability'
-      | 'propensity'
-      | 'symbol-equipment'
-      | 'set-effect',
-  ) {
+  public async call(endpoint: 'basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect') {
     console.count();
     return this.fetch(endpoint);
   }
 
-  public async getMultiple(
-    endpoints: Array<
-      'basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect'
-    >,
-  ) {
+  public async getMultiple(endpoints: ('basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect')[]) {
     // console.log('[요청할 endpoint 목록]', endpoints);
     const results = await Promise.all(endpoints.map((ep) => this.call(ep).then((data) => [ep, data] as const)));
     // console.count();
@@ -43,9 +30,7 @@ export class CharacterService {
   }
 
   public async getMultipleWithDelay(
-    endpoints: Array<
-      'basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect'
-    >,
+    endpoints: ('basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect')[],
     delayMs: number = 300, // 💡 300ms 정도 기본 텀
   ) {
     const results: [string, unknown][] = [];
