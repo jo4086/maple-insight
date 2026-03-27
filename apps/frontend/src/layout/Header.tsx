@@ -1,4 +1,5 @@
 import { Container } from '@/components/ui';
+import { CharacterSearchInput } from '@/features/character/components/CharacterSearchInput';
 
 export function Header() {
   return (
@@ -6,9 +7,10 @@ export function Header() {
       className="
       flex justify-center items-center
       border
+      p-4
       "
     >
-      <h1> 헤더 영역</h1>
+      <CharacterSearchInput />
     </Container>
   );
 }
