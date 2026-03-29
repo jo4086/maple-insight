@@ -3,7 +3,11 @@ import { toNumberSafe } from 'src/utils/number';
 import type { CharacterHyperStat, PresetInfo, HyperStatPreset } from '../types/hyper-stat';
 import type { HyperStatRaw } from '../types/hyper-stat.raw';
 
-const PRESET_NOS = [1, 2, 3] as const;
+const HYPER_STAT_PRESET_PAIRS = [
+  ['hyper_stat_preset_1', 'hyper_stat_preset_1_remain_point'],
+  ['hyper_stat_preset_2', 'hyper_stat_preset_2_remain_point'],
+  ['hyper_stat_preset_3', 'hyper_stat_preset_3_remain_point'],
+] as const;
 
 function mapPresetInfo(preset: HyperStatRaw['hyper_stat_preset_1']): PresetInfo[] {
   return preset.map((item) => ({
@@ -15,14 +19,11 @@ function mapPresetInfo(preset: HyperStatRaw['hyper_stat_preset_1']): PresetInfo[
 }
 
 export function toCharacterHyperStat(raw: HyperStatRaw): CharacterHyperStat {
-  const presets: HyperStatPreset[] = PRESET_NOS.map((no) => {
-    const presetKey = `hyper_stat_preset_${no}` as keyof HyperStatRaw;
-    const remainPointKey = `hyper_stat_preset_${no}_remain_point` as keyof HyperStatRaw;
-
+  const presets: HyperStatPreset[] = HYPER_STAT_PRESET_PAIRS.map(([presetKey, remainPointKey], index) => {
     return {
-      no,
-      remainPoint: raw[remainPointKey] as number,
-      items: mapPresetInfo(raw[presetKey] as HyperStatRaw['hyper_stat_preset_1']),
+      no: index + 1,
+      remainPoint: raw[remainPointKey],
+      items: mapPresetInfo(raw[presetKey]),
     };
   });
 

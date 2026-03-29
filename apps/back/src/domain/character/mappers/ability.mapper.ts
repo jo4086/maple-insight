@@ -2,14 +2,19 @@ import { toNumberSafe } from 'src/utils/number';
 
 import type { AbilityInfo, AbilityPreset, CharacterAbility } from '../types/ability';
 import type { AbilityRaw, AbilityPresetRaw, AbilityInfoRaw } from '../types/ability.raw';
-import { RarityGrade } from '../types/common';
-import { mapPresets } from '../utils/preset';
+import { toRarityGrade } from '../utils/grade';
+
+const ABILITY_PRESET_KEYS = [
+  'ability_preset_1',
+  'ability_preset_2',
+  'ability_preset_3',
+] as const;
 
 /** 개별 옵션 변환 */
 function mapAbilityInfo(raw: AbilityInfoRaw): AbilityInfo {
   return {
     abilityNo: toNumberSafe(raw.ability_no),
-    grade: raw.ability_grade as RarityGrade,
+    grade: toRarityGrade(raw.ability_grade),
     value: raw.ability_value,
   };
 }
@@ -18,24 +23,19 @@ function mapAbilityInfo(raw: AbilityInfoRaw): AbilityInfo {
 function mapAbilityPreset(raw: AbilityPresetRaw, presetNo: number): AbilityPreset {
   return {
     presetNo,
-    grade: raw.ability_preset_grade as RarityGrade,
+    grade: toRarityGrade(raw.ability_preset_grade),
     info: raw.ability_info.map(mapAbilityInfo),
   };
 }
 
 /** AbilityRaw -> CharacterAbility */
 export function toCharacterAbility(raw: AbilityRaw): CharacterAbility {
-  const presets = mapPresets((presetNo) => {
-    const presetKey = `ability_preset_${presetNo}` as keyof AbilityRaw;
-    const preset = raw[presetKey] as AbilityPresetRaw;
-
-    return mapAbilityPreset(preset, presetNo);
-  });
+  const presets = ABILITY_PRESET_KEYS.map((presetKey, index) => mapAbilityPreset(raw[presetKey], index + 1));
 
   return {
     date: raw.date,
     equipped: {
-      grade: raw.ability_grade as RarityGrade,
+      grade: toRarityGrade(raw.ability_grade),
       info: raw.ability_info.map(mapAbilityInfo),
     },
     remainFame: raw.remain_fame,
