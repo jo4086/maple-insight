@@ -47,6 +47,7 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
       'hexamatrix-stat',
       'other-stat',
       'ring-reserve-skill-equipment',
+      'cashitem-equipment',
     ]);
 
     console.log(data);

@@ -29,7 +29,8 @@ export class CharacterService {
       | 'set-effect'
       | 'hexamatrix-stat'
       | 'other-stat'
-      | 'ring-reserve-skill-equipment',
+      | 'ring-reserve-skill-equipment'
+      | 'cashitem-equipment',
   ) {
     console.count();
     return this.fetch(endpoint);
@@ -48,6 +49,7 @@ export class CharacterService {
       | 'hexamatrix-stat'
       | 'other-stat'
       | 'ring-reserve-skill-equipment'
+      | 'cashitem-equipment'
     )[],
   ) {
     // console.log('[요청할 endpoint 목록]', endpoints);
@@ -69,6 +71,7 @@ export class CharacterService {
       | 'hexamatrix-stat'
       | 'other-stat'
       | 'ring-reserve-skill-equipment'
+      | 'cashitem-equipment'
     )[],
     delayMs: number = 300, // 💡 300ms 정도 기본 텀
   ) {
