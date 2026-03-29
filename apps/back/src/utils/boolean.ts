@@ -1,3 +1,3 @@
 export function toBooleanByFlag(value: string): boolean {
-  return value === 'true' || value === '1' || value === 'Y';
+  return value === 'true' || value === '1' || value === 'Y' || value === '적용';
 }
