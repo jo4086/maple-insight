@@ -17,12 +17,39 @@ export class CharacterService {
     return res.data;
   }
 
-  public async call(endpoint: 'basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect') {
+  public async call(
+    endpoint:
+      | 'basic'
+      | 'stat'
+      | 'hyper-stat'
+      | 'item-equipment'
+      | 'ability'
+      | 'propensity'
+      | 'symbol-equipment'
+      | 'set-effect'
+      | 'hexamatrix-stat'
+      | 'other-stat'
+      | 'ring-reserve-skill-equipment',
+  ) {
     console.count();
     return this.fetch(endpoint);
   }
 
-  public async getMultiple(endpoints: ('basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect')[]) {
+  public async getMultiple(
+    endpoints: (
+      | 'basic'
+      | 'stat'
+      | 'hyper-stat'
+      | 'item-equipment'
+      | 'ability'
+      | 'propensity'
+      | 'symbol-equipment'
+      | 'set-effect'
+      | 'hexamatrix-stat'
+      | 'other-stat'
+      | 'ring-reserve-skill-equipment'
+    )[],
+  ) {
     // console.log('[요청할 endpoint 목록]', endpoints);
     const results = await Promise.all(endpoints.map((ep) => this.call(ep).then((data) => [ep, data] as const)));
     // console.count();
@@ -30,7 +57,19 @@ export class CharacterService {
   }
 
   public async getMultipleWithDelay(
-    endpoints: ('basic' | 'stat' | 'hyper-stat' | 'item-equipment' | 'ability' | 'propensity' | 'symbol-equipment' | 'set-effect')[],
+    endpoints: (
+      | 'basic'
+      | 'stat'
+      | 'hyper-stat'
+      | 'item-equipment'
+      | 'ability'
+      | 'propensity'
+      | 'symbol-equipment'
+      | 'set-effect'
+      | 'hexamatrix-stat'
+      | 'other-stat'
+      | 'ring-reserve-skill-equipment'
+    )[],
     delayMs: number = 300, // 💡 300ms 정도 기본 텀
   ) {
     const results: [string, unknown][] = [];

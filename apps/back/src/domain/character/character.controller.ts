@@ -35,7 +35,19 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
 
     const service = new CharacterService(ocid, date);
 
-    const data = await service.getMultipleWithDelay(['basic', 'ability', 'propensity', 'symbol-equipment', 'item-equipment', 'stat', 'hyper-stat', 'set-effect']);
+    const data = await service.getMultipleWithDelay([
+      'basic',
+      'ability',
+      'propensity',
+      'symbol-equipment',
+      'item-equipment',
+      'stat',
+      'hyper-stat',
+      'set-effect',
+      'hexamatrix-stat',
+      'other-stat',
+      'ring-reserve-skill-equipment',
+    ]);
 
     console.log(data);
 
