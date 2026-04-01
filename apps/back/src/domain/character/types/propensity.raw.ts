@@ -1,3 +1,3 @@
-import type { CharacterPropensity } from './propensity';
+import type { CharacterPropensity } from '@maple/types';
 
 export type PropensityRaw = CharacterPropensity;

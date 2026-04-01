@@ -1,3 +1,3 @@
-import type { CharacterPopularity } from './popularity';
+import type { CharacterPopularity } from '@maple/types';
 
 export type PopularityRaw = CharacterPopularity;
