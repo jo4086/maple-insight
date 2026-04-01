@@ -1,0 +1,22 @@
+export const PET3_NULL_KEYS = [
+  "date",
+  "item_description",
+  "item_icon",
+  "item_name",
+  "item_shape",
+  "item_shape_icon",
+  "pet_1_appearance",
+  "pet_1_appearance_icon",
+  "pet_1_auto_skill",
+  "pet_1_date_expire",
+  "pet_1_description",
+  "pet_1_equipment",
+  "pet_1_icon",
+  "pet_1_name",
+  "pet_1_nickname",
+  "pet_1_pet_type",
+  "pet_2_pet_type",
+  "pet_3_pet_type",
+  "skill_2",
+  "skill_2_icon"
+] as const;

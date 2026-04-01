@@ -1,3 +1,9 @@
+/**
+ * 실행 방법
+ * - 실행 위치: @root/apps/back
+ * - 명령어: npx ts-node src/domain/character/utils/generate-null-keys.ts src/domain/character/samples/{파일명}
+ *
+ * */
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
@@ -49,9 +55,7 @@ function main() {
 
   const filePath = path.resolve(process.cwd(), inputArg);
   const baseName = path.basename(filePath, path.extname(filePath));
-  const outputPath = outputArg
-    ? path.resolve(process.cwd(), outputArg)
-    : path.resolve(process.cwd(), 'src/domain/character/generated', `${baseName}-null-keys.ts`);
+  const outputPath = outputArg ? path.resolve(process.cwd(), outputArg) : path.resolve(process.cwd(), 'src/domain/character/generated', `${baseName}-null-keys.ts`);
   const exportName = exportArg ?? `${toConstCase(baseName)}_NULL_KEYS`;
   const sample = JSON.parse(readFileSync(filePath, 'utf-8')) as unknown;
   const nullKeyMap = collectNullKeys(sample);
