@@ -10,10 +10,7 @@ const ExtendedDomainList: DomainType[] = [...DomainList] as const;
 // 사용시 주석 제거
 // ExtendedDomainList.push('test' as DomainType);  // 타입 강제 확장 시 as 사용
 
-const cacheRegistry = {} as Record<
-  DomainType,
-  [Map<string, CacheValue>, WeakMap<object, CacheValue>]
->;
+const cacheRegistry = {} as Record<DomainType, [Map<string, CacheValue>, WeakMap<object, CacheValue>]>;
 
 ExtendedDomainList.forEach((domain) => {
   cacheRegistry[domain] = [new Map(), new WeakMap()];
@@ -25,6 +22,10 @@ export function setCache(domain: DomainType, key: string, value: CacheValue) {
 
 export function getCache(domain: DomainType, key: string) {
   return cacheRegistry[domain][0].get(key);
+}
+
+export function deleteCache(domain: DomainType, key: string) {
+  cacheRegistry[domain][0].delete(key);
 }
 
 export type ExtendDomainType = (typeof ExtendedDomainList)[number];
