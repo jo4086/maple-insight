@@ -33,14 +33,15 @@ export default defineConfig([
       ...pluginImport.configs.typescript.rules,
       'prefer-const': 'off',
       'import/no-unresolved': 'off',
-      'no-unused-vars': [
+      'no-unused-vars': 'off',
+      /*       [
         'warn',
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
         },
-      ],
+      ], */
       'import/order': [
         'warn',
         {
