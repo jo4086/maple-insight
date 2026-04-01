@@ -1,6 +1,6 @@
 type Locales = 'en-US' | 'ko-KR';
 
-export const formatFileSize = (bytes: number, format: 'KB' | 'MB' | 'GB' = 'KB', locale: Locales = 'ko-KR'): string => {
+export function formatFileSize(bytes: number, format: 'KB' | 'MB' | 'GB' = 'KB', locale: Locales = 'ko-KR'): string {
   const kb = bytes / 1024;
   const mb = kb / 1024;
   const gb = mb / 1024;
@@ -20,13 +20,13 @@ export const formatFileSize = (bytes: number, format: 'KB' | 'MB' | 'GB' = 'KB',
     default:
       return `${numberFormat.format(kb)} KB`;
   }
-};
+}
 
 // if (kb < 10000) return `${kb.toFixed(1)} KB`;
 // return `${(kb / 1024).toFixed(1)} MB`;
 
-export const formatFileSizeSplit = (bytes: number): [string, 'KB' | 'MB'] => {
+export function formatFileSizeSplit(bytes: number): [string, 'KB' | 'MB'] {
   const kb = bytes / 1024;
   if (kb < 10000) return [kb.toFixed(1), 'KB'];
   return [(kb / 1024).toFixed(1), 'MB'];
-};
+}

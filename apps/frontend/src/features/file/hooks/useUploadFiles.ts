@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { uploadFiles } from '../api';
 import type { UploadParams, UploadResp } from '../types';
 
-export const useUploadFiles = () => {
+export function useUploadFiles() {
   return useMutation<UploadResp, Error, UploadParams>({
     mutationFn: uploadFiles,
     retry: (failureCount, error) => {
@@ -11,4 +11,4 @@ export const useUploadFiles = () => {
       return failureCount < 3;
     },
   });
-};
+}

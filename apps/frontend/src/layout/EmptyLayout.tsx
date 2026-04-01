@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-export function EmptyLayout() {
+export const EmptyLayout = () => {
   return (
     <main>
       <Outlet />
     </main>
   );
-}
+};

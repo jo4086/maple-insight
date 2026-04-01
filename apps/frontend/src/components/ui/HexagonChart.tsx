@@ -10,7 +10,7 @@ export interface HexagonChartProps {
   values: HexnagonChartItemProps[];
 }
 
-export function HexagonChart({ values }: HexagonChartProps) {
+export const HexagonChart = ({ values }: HexagonChartProps) => {
   return (
     <ResponsiveContainer className="w-fit" width="20%" height={320}>
       <RadarChart data={values}>
@@ -26,4 +26,4 @@ export function HexagonChart({ values }: HexagonChartProps) {
       </RadarChart>
     </ResponsiveContainer>
   );
-}
+};

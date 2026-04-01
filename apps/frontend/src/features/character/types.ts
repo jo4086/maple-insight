@@ -29,7 +29,7 @@ interface SymbolProps {
   symbol_require_growth_count: number;
 }
 
-interface ItemOptionProps {
+export interface ItemOptionProps {
   str?: string;
   dex?: string;
   int?: string;
@@ -66,7 +66,7 @@ interface ItemPotentialProps {
 }
 type RemovePotentialKeys = keyof ItemPotentialProps | keyof ItemAdditionalPotentialProps;
 
-interface ItemEquipmentProps {
+export interface ItemEquipmentProps {
   item_equipment_part: string;
   item_equipment_slot: string;
   item_name: string;
@@ -233,6 +233,26 @@ export interface CharacterSetEffect {
   set_effect: SetEffectProps[];
 }
 
+export interface CharacterOtherStat {
+  date: string | null;
+  other_stat: {
+    other_stat_type: string;
+    stat_info: {
+      stat_name: string;
+      stat_value: string;
+    }[];
+  }[];
+}
+
+export interface CharacterSpecialring {
+  date: string | null;
+  character_class: string;
+  special_ring_reserve_name: string;
+  special_ring_reserve_level: number;
+  special_ring_reserve_icon: string;
+  special_ring_reserve_description: string;
+}
+
 export interface SearchNickResponse {
   basic: CharacterBasic;
   ability: CharacterAbility;
@@ -242,4 +262,472 @@ export interface SearchNickResponse {
   stat: CharacterStat;
   'hyper-stat': CharacterHyperStat;
   'set-effect': CharacterSetEffect;
+  'other-stat': CharacterOtherStat;
+  'ring-reserve-skill-equipment': CharacterSpecialring;
+  'beauty-equipment': CharacterBeauty;
+  'android-equipment': CharacterAndroid;
+  'pet-equipment': CharacterPet;
+  skill: SkillRaw;
+  'link-skill': LinkSkillRaw;
+  vmatrix: VmatrixRaw;
+  hexamatrix: HexamatrixRaw;
+  'hexamatrix-stat': HexamatrixStatRaw;
+}
+
+// 임시 타입들
+export interface CharacterAndroid {
+  date: string | null;
+  android_name: string;
+  android_nickname: string;
+  android_icon: string;
+  android_description: string;
+  android_hair: {
+    hair_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  android_face: {
+    face_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  android_skin: {
+    skin_name: string;
+    color_style: string;
+    hue: number;
+    saturation: number;
+    brightness: number;
+  };
+  android_cash_item_equipment: {
+    cash_item_equipment_part: string;
+    cash_item_equipment_slot: string;
+    cash_item_name: string;
+    cash_item_icon: string;
+    cash_item_description: string;
+    cash_item_option: {
+      option_type: string;
+      option_value: string;
+    }[];
+    date_expire: string;
+    date_option_expire: string;
+    cash_item_label: string;
+    cash_item_coloring_prism: {
+      color_range: string;
+      hue: number;
+      saturation: number;
+      value: number;
+    };
+    android_item_gender: string;
+    freestyle_flag: string;
+  }[];
+  android_ear_sensor_clip_flag: string;
+  android_gender: string;
+  android_grade: string;
+  android_non_humanoid_flag: string;
+  android_shop_usable_flag: string;
+  preset_no: number;
+  android_preset_1: {
+    android_name: string;
+    android_nickname: string;
+    android_icon: string;
+    android_description: string;
+    android_gender: string;
+    android_grade: string;
+    android_skin: {
+      skin_name: string;
+      color_style: string;
+      hue: number;
+      saturation: number;
+      brightness: number;
+    };
+    android_hair: {
+      hair_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_face: {
+      face_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_ear_sensor_clip_flag: string;
+    android_non_humanoid_flag: string;
+    android_shop_usable_flag: string;
+  };
+  android_preset_2: {
+    android_name: string;
+    android_nickname: string;
+    android_icon: string;
+    android_description: string;
+    android_gender: string;
+    android_grade: string;
+    android_skin: {
+      skin_name: string;
+      color_style: string;
+      hue: number;
+      saturation: number;
+      brightness: number;
+    };
+    android_hair: {
+      hair_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_face: {
+      face_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_ear_sensor_clip_flag: string;
+    android_non_humanoid_flag: string;
+    android_shop_usable_flag: string;
+  };
+  android_preset_3: {
+    android_name: string;
+    android_nickname: string;
+    android_icon: string;
+    android_description: string;
+    android_gender: string;
+    android_grade: string;
+    android_skin: {
+      skin_name: string;
+      color_style: string;
+      hue: number;
+      saturation: number;
+      brightness: number;
+    };
+    android_hair: {
+      hair_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_face: {
+      face_name: string;
+      base_color: string;
+      mix_color: string;
+      mix_rate: string;
+      freestyle_flag: string;
+    };
+    android_ear_sensor_clip_flag: string;
+    android_non_humanoid_flag: string;
+    android_shop_usable_flag: string;
+  };
+}
+
+export interface CharacterBeauty {
+  date: string | null;
+  character_gender: string;
+  character_class: string;
+  character_hair: {
+    hair_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  character_face: {
+    face_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  character_skin: {
+    skin_name: string;
+    color_style: string;
+    hue: number;
+    saturation: number;
+    brightness: number;
+  };
+  additional_character_hair: {
+    hair_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  additional_character_face: {
+    face_name: string;
+    base_color: string;
+    mix_color: string;
+    mix_rate: string;
+    freestyle_flag: string;
+  };
+  additional_character_skin: {
+    skin_name: string;
+    color_style: string;
+    hue: number;
+    saturation: number;
+    brightness: number;
+  };
+}
+
+export interface CharacterPet {
+  date: string;
+  pet_1_name: string;
+  pet_1_nickname: string;
+  pet_1_icon: string;
+  pet_1_description: string;
+  pet_1_equipment: {
+    item_name: string;
+    item_icon: string;
+    item_description: string;
+    item_option: {
+      option_type: string;
+      option_value: string;
+    }[];
+    scroll_upgrade: number;
+    scroll_upgradable: number;
+    item_shape: string;
+    item_shape_icon: string;
+    item_date_expire: string;
+  };
+  pet_1_auto_skill: {
+    skill_1: string;
+    skill_1_icon: string;
+    skill_2: string;
+    skill_2_icon: string;
+  };
+  pet_1_pet_type: string;
+  pet_1_skill: string[];
+  pet_1_date_expire: string;
+  pet_1_appearance: string;
+  pet_1_appearance_icon: string;
+  pet_2_name: string;
+  pet_2_nickname: string;
+  pet_2_icon: string;
+  pet_2_description: string;
+  pet_2_equipment: {
+    item_name: string;
+    item_icon: string;
+    item_description: string;
+    item_option: {
+      option_type: string;
+      option_value: string;
+    }[];
+    scroll_upgrade: number;
+    scroll_upgradable: number;
+    item_shape: string;
+    item_shape_icon: string;
+    item_date_expire: string;
+  };
+  pet_2_auto_skill: {
+    skill_1: string;
+    skill_1_icon: string;
+    skill_2: string;
+    skill_2_icon: string;
+  };
+  pet_2_pet_type: string;
+  pet_2_skill: string[];
+  pet_2_date_expire: string;
+  pet_2_appearance: string;
+  pet_2_appearance_icon: string;
+  pet_3_name: string;
+  pet_3_nickname: string;
+  pet_3_icon: string;
+  pet_3_description: string;
+  pet_3_equipment: {
+    item_name: string;
+    item_icon: string;
+    item_description: string;
+    item_option: {
+      option_type: string;
+      option_value: string;
+    }[];
+    scroll_upgrade: number;
+    scroll_upgradable: number;
+    item_shape: string;
+    item_shape_icon: string;
+    item_date_expire: string;
+  };
+  pet_3_auto_skill: {
+    skill_1: string;
+    skill_1_icon: string;
+    skill_2: string;
+    skill_2_icon: string;
+  };
+  pet_3_pet_type: string;
+  pet_3_skill: string[];
+  pet_3_date_expire: string;
+  pet_3_appearance: string;
+  pet_3_appearance_icon: string;
+}
+
+export interface SkillRaw {
+  date: string | null;
+  character_class: string;
+  character_skill_grade: string;
+  character_skill: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_effect_next: string;
+    skill_icon: string;
+  }[];
+}
+
+export interface LinkSkillRaw {
+  date: string | null;
+  character_class: string;
+  character_link_skill: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_effect_next: string;
+    skill_icon: string;
+  }[];
+  character_link_skill_preset_1: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  }[];
+  character_link_skill_preset_2: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  }[];
+  character_link_skill_preset_3: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  }[];
+  character_owned_link_skill: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  };
+  character_owned_link_skill_preset_1: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  };
+  character_owned_link_skill_preset_2: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  };
+  character_owned_link_skill_preset_3: {
+    skill_name: string;
+    skill_description: string;
+    skill_level: number;
+    skill_effect: string;
+    skill_icon: string;
+  };
+}
+
+export interface VmatrixRaw {
+  date: string | null;
+  character_class: string;
+  character_v_core_equipment: {
+    slot_id: string;
+    v_core_name: string;
+    v_core_type: string;
+    v_core_level: number;
+  }[];
+  character_v_matrix_remain_slot_upgrade_point: number;
+}
+
+export interface HexamatrixRaw {
+  date: string | null;
+  character_hexa_core_equipment: {
+    hexa_core_name: string;
+    hexa_core_level: number;
+    hexa_core_type: string;
+    linked_skill: {
+      hexa_skill_id: string;
+    }[];
+  }[];
+}
+
+export interface HexamatrixStatRaw {
+  date: string | null;
+  character_class: string;
+  character_hexa_stat_core: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
+  character_hexa_stat_core_2: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
+  character_hexa_stat_core_3: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
+  preset_hexa_stat_core: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
+  preset_hexa_stat_core_2: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
+  preset_hexa_stat_core_3: {
+    slot_id: string;
+    main_stat_name: string;
+    sub_stat_name_1: string;
+    sub_stat_name_2: string;
+    main_stat_level: number;
+    sub_stat_level_1: number;
+    sub_stat_level_2: number;
+    stat_grade: number;
+  }[];
 }

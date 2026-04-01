@@ -4,7 +4,7 @@ interface RefreshButtonProps {
   isRefreshing?: boolean;
 }
 
-export function RefreshButton({ onRefresh, disabled = false, isRefreshing = false }: RefreshButtonProps) {
+export const RefreshButton = ({ onRefresh, disabled = false, isRefreshing = false }: RefreshButtonProps) => {
   return (
     <button
       type="button"
@@ -15,4 +15,4 @@ export function RefreshButton({ onRefresh, disabled = false, isRefreshing = fals
       {isRefreshing ? '새로고침 중...' : '새로고침'}
     </button>
   );
-}
+};

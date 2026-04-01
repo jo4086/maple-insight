@@ -14,7 +14,7 @@ type DatePickerProps = {
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
-export function DatePicker({ value = '', onChange, className, placeholder = '날짜 선택' }: DatePickerProps) {
+export const DatePicker = ({ value = '', onChange, className, placeholder = '날짜 선택' }: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(value);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -88,4 +88,4 @@ export function DatePicker({ value = '', onChange, className, placeholder = '날
       )}
     </div>
   );
-}
+};

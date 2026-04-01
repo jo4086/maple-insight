@@ -11,7 +11,7 @@ type CalendarProps = DayPickerProps & {
   className?: string;
 };
 
-export function Calendar({ className, classNames, month: controlledMonth, onMonthChange, ...props }: CalendarProps) {
+export const Calendar = ({ className, classNames, month: controlledMonth, onMonthChange, ...props }: CalendarProps) => {
   const [internalMonth, setInternalMonth] = useState<Date>(controlledMonth ?? new Date());
   const displayMonth = controlledMonth ?? internalMonth;
 
@@ -61,4 +61,4 @@ export function Calendar({ className, classNames, month: controlledMonth, onMont
       {...props}
     />
   );
-}
+};

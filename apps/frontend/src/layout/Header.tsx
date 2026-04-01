@@ -1,16 +1,30 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Container } from '@/components/ui';
 import { CharacterSearchInput } from '@/features/character/components/CharacterSearchInput';
 
-export function Header() {
+export const Header = () => {
+  const navigate = useNavigate();
   return (
     <Container
       className="
-      flex justify-center items-center
+      flex w-full
       border
-      p-4
+      px-0
       "
     >
-      <CharacterSearchInput />
+      <div
+        className="
+        flex justify-between items-center
+        w-full m-auto
+        border
+        "
+      >
+        <div className="cursor-pointer border flex self-stretch items-center justify-center w-30" onClick={() => navigate('/')}>
+          Logo
+        </div>
+        <CharacterSearchInput />
+      </div>
     </Container>
   );
-}
+};

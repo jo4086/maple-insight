@@ -1,0 +1,41 @@
+export const world_icon_map = {
+  스카니아: 'scania',
+  베라: 'bera',
+  루나: 'luna',
+  제니스: 'zenith',
+  크로아: 'croa',
+  유니온: 'union',
+  엘리시움: 'elysium',
+  이노시스: 'enosis',
+  레드: 'red',
+  오로라: 'aurora',
+  아케인: 'arcane',
+  노바: 'nova',
+  에오스: 'eos',
+  헬리오스: 'helios',
+  버닝: 'burning',
+  챌린저스: 'challengers',
+  예티X핑크빈: 'yeti_pinkbean',
+} as const;
+
+export const world_icon_path_map = {
+  스카니아: '/world_icons/scania.webp',
+  베라: '/world_icons/bera.webp',
+  루나: '/world_icons/luna.png',
+  제니스: '/world_icons/zenith.png',
+  크로아: '/world_icons/croa.png',
+  유니온: '/world_icons/union.png',
+  엘리시움: '/world_icons/elysium.png',
+  이노시스: '/world_icons/enosis.png',
+  레드: '/world_icons/red.png',
+  오로라: '/world_icons/aurora.webp',
+  아케인: '/world_icons/arcane.png',
+  노바: '/world_icons/nova.png',
+  에오스: '/world_icons/eos.png',
+  헬리오스: '/world_icons/helios.png',
+  버닝: '/world_icons/burning.png',
+  챌린저스: '/world_icons/challengers.png',
+  예티X핑크빈: '/world_icons/yeti_pinkbean.webp',
+} as const;
+
+export type WorldName = keyof typeof world_icon_path_map;
