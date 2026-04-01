@@ -1,6 +1,3 @@
-import { toBooleanByFlag } from 'src/utils/boolean';
-import { toNumberSafe } from 'src/utils/number';
-
 import type {
   CharacterItem,
   ClassExclusiveItemEquipment,
@@ -16,9 +13,11 @@ import type {
   PresetItemEquipment,
   PresetItemPotentials,
   Title,
-} from '../types/item-equipment';
+} from '@maple/types';
+import { toBooleanByFlag } from 'src/utils/boolean';
+import { toNumberSafe } from 'src/utils/number';
+
 import type { ItemEquipmentRaw } from '../types/item-equipment.raw';
-import { mapPresets } from '../utils/preset';
 
 type MainItemRaw = ItemEquipmentRaw['item_equipment'][number];
 type PresetItemRaw = ItemEquipmentRaw['item_equipment_preset_1'][number];
@@ -45,8 +44,7 @@ function toItemOption(raw: FullItemOptionRaw | PartialItemOptionRaw): ItemOption
     ignoreMonsterArmor: 'ignore_monster_armor' in raw ? toNumberSafe(raw.ignore_monster_armor) : undefined,
     allStat: 'all_stat' in raw ? toNumberSafe(raw.all_stat) : undefined,
     damage: 'damage' in raw ? toNumberSafe(raw.damage) : undefined,
-    equipmentLevelDecrease:
-      'equipment_level_decrease' in raw ? raw.equipment_level_decrease : undefined,
+    equipmentLevelDecrease: 'equipment_level_decrease' in raw ? raw.equipment_level_decrease : undefined,
     maxHpRate: 'max_hp_rate' in raw ? toNumberSafe(raw.max_hp_rate) : undefined,
     maxMpRate: 'max_mp_rate' in raw ? toNumberSafe(raw.max_mp_rate) : undefined,
   };
@@ -155,12 +153,7 @@ function toPresetItemPotentials(raw: PresetItemRaw): PresetItemPotentials {
   };
 }
 
-function toUpgradeInfo(
-  raw:
-    | MainItemRaw
-    | PresetItemRaw
-    | ClassExclusiveItemRaw,
-): ItemUpgradeInfo {
+function toUpgradeInfo(raw: MainItemRaw | PresetItemRaw | ClassExclusiveItemRaw): ItemUpgradeInfo {
   return {
     growthExp: raw.growth_exp,
     growthLevel: raw.growth_level,
