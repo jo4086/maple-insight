@@ -22,3 +22,5 @@ test/
 
 # backend sample data
 samples/
+legacy/
+**/legacy/
