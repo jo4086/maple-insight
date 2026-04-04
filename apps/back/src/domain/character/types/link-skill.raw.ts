@@ -1,4 +1,6 @@
-export interface LinkSkillRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface LinkSkillRawBase {
   date: string | null;
   character_class: string;
   character_link_skill: {
@@ -59,3 +61,5 @@ export interface LinkSkillRaw {
     skill_icon: string;
   };
 }
+
+export type LinkSkillRaw = DeepNullable<LinkSkillRawBase>;

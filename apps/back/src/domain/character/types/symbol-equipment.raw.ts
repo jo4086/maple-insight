@@ -1,4 +1,6 @@
-export interface SymbolRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface SymbolRawBase {
   date: string | null;
   character_class: string;
   symbol: {
@@ -20,3 +22,5 @@ export interface SymbolRaw {
     symbol_require_growth_count: number;
   }[];
 }
+
+export type SymbolRaw = DeepNullable<SymbolRawBase>;

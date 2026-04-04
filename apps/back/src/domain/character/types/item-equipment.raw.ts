@@ -1,3 +1,5 @@
+import type { DeepNullable } from '@/types/deep-nullable';
+
 export interface ItemOptionRaw {
   str?: string;
   dex?: string;
@@ -35,7 +37,7 @@ export interface ItemPotentialRaw {
   potential_option_3: string | null;
 }
 
-export interface ItemEquipmentRaw {
+interface ItemEquipmentRawBase {
   date: string;
   character_gender: string;
   character_class: string;
@@ -170,7 +172,7 @@ export interface ItemEquipmentRaw {
   }[];
   item_equipment_preset_1: {
     item_equipment_part: string;
-    equipment_slot: string;
+    item_equipment_slot: string;
     item_name: string;
     item_icon: string;
     item_description: string | null;
@@ -296,7 +298,7 @@ export interface ItemEquipmentRaw {
   }[];
   item_equipment_preset_2: {
     item_equipment_part: string;
-    equipment_slot: string;
+    item_equipment_slot: string;
     item_name: string;
     item_icon: string;
     item_description: string | null;
@@ -422,7 +424,7 @@ export interface ItemEquipmentRaw {
   }[];
   item_equipment_preset_3: {
     item_equipment_part: string;
-    equipment_slot: string;
+    item_equipment_slot: string;
     item_name: string;
     item_icon: string;
     item_description: string | null;
@@ -566,7 +568,7 @@ export interface ItemEquipmentRaw {
   };
   dragon_equipment: {
     item_equipment_part: string;
-    equipment_slot: string;
+    item_equipment_slot: string;
     item_name: string;
     item_icon: string;
     item_description: string | null;
@@ -683,7 +685,7 @@ export interface ItemEquipmentRaw {
   }[];
   mechanic_equipment: {
     item_equipment_part: string;
-    equipment_slot: string;
+    item_equipment_slot: string;
     item_name: string;
     item_icon: string;
     item_description: string | null;
@@ -799,3 +801,5 @@ export interface ItemEquipmentRaw {
     freestyle_flag: string;
   }[];
 }
+
+export type ItemEquipmentRaw = DeepNullable<ItemEquipmentRawBase>;

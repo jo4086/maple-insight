@@ -1,4 +1,6 @@
-export interface DojangRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface DojangRawBase {
   date: string | null;
   character_class: string;
   world_name: string;
@@ -6,3 +8,5 @@ export interface DojangRaw {
   date_dojang_record: string | null;
   dojang_best_time: number;
 }
+
+export type DojangRaw = DeepNullable<DojangRawBase>;

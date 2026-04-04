@@ -1,4 +1,6 @@
-export interface VmatrixRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface VmatrixRawBase {
   date: string | null;
   character_class: string;
   character_v_core_equipment: {
@@ -14,3 +16,5 @@ export interface VmatrixRaw {
   }[];
   character_v_matrix_remain_slot_upgrade_point: number;
 }
+
+export type VmatrixRaw = DeepNullable<VmatrixRawBase>;

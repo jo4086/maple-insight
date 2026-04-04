@@ -23,6 +23,6 @@
 |  17  | `vmatrix`                      | V매트릭스                |    v     |      v      |   v    |
 |  18  | `hexamatrix`                   | HEXA코어                 |    v     |      v      |   v    |
 |  19  | `hexamatrix-stat`              | HEXA스탯                 |    v     |      v      |   v    |
-|  20  | `dojang`                       | 무릉도장                 |          |             |        |
-|  21  | `other-stat`                   | 기타 능력치 영향 요소    |          |             |        |
-|  22  | `ring-reserve-skill-equipment` | 예비 특수 반지 장착 정보 |          |             |        |
+|  20  | `dojang`                       | 무릉도장                 |    v     |      v      |   v    |
+|  21  | `other-stat`                   | 기타 능력치 영향 요소    |    v     |      v      |   v    |
+|  22  | `ring-reserve-skill-equipment` | 예비 특수 반지 장착 정보 |    v     |      v      |   v    |

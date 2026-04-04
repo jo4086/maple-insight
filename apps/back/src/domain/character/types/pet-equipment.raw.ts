@@ -1,4 +1,6 @@
-export interface PetRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface PetRawBase {
   date: string | null;
   pet_1_name: string | null;
   pet_1_nickname: string | null;
@@ -88,3 +90,5 @@ export interface PetRaw {
   pet_3_appearance: string | null;
   pet_3_appearance_icon: string | null;
 }
+
+export type PetRaw = DeepNullable<PetRawBase>;

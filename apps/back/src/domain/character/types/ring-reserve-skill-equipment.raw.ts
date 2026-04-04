@@ -1,4 +1,6 @@
-export interface RingReserveSkillEquipmentRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface RingReserveSkillEquipmentRawBase {
   date: string | null;
   character_class: string;
   special_ring_reserve_name: string;
@@ -6,3 +8,5 @@ export interface RingReserveSkillEquipmentRaw {
   special_ring_reserve_icon: string;
   special_ring_reserve_description: string;
 }
+
+export type RingReserveSkillEquipmentRaw = DeepNullable<RingReserveSkillEquipmentRawBase>;

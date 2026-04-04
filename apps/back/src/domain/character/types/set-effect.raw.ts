@@ -1,4 +1,6 @@
-export interface SetEffectRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface SetEffectRawBase {
   date: string | null;
   set_effect: {
     set_name: string;
@@ -13,3 +15,5 @@ export interface SetEffectRaw {
     }[];
   }[];
 }
+
+export type SetEffectRaw = DeepNullable<SetEffectRawBase>;

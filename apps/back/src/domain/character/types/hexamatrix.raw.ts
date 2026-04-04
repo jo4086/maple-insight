@@ -1,4 +1,6 @@
-export interface HexamatrixRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface HexamatrixRawBase {
   date: string | null;
   character_hexa_core_equipment: {
     hexa_core_name: string;
@@ -9,3 +11,5 @@ export interface HexamatrixRaw {
     }[];
   }[];
 }
+
+export type HexamatrixRaw = DeepNullable<HexamatrixRawBase>;

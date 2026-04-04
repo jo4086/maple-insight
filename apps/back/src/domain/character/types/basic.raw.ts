@@ -1,4 +1,6 @@
-export interface BasicRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface BasicRawBase {
   date: string | null;
   character_name: string;
   world_name: string;
@@ -14,3 +16,5 @@ export interface BasicRaw {
   access_flag: string;
   liberation_quest_clear: string;
 }
+
+export type BasicRaw = DeepNullable<BasicRawBase>;

@@ -1,4 +1,6 @@
-export interface HexamatrixStatRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface HexamatrixStatRawBase {
   date: string | null;
   character_class: string;
   character_hexa_stat_core: {
@@ -62,3 +64,5 @@ export interface HexamatrixStatRaw {
     stat_grade: number;
   }[];
 }
+
+export type HexamatrixStatRaw = DeepNullable<HexamatrixStatRawBase>;

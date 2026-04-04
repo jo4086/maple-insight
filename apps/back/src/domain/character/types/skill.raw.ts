@@ -1,4 +1,6 @@
-export interface SkillRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface SkillRawBase {
   date: string | null;
   character_class: string;
   character_skill_grade: string;
@@ -11,3 +13,5 @@ export interface SkillRaw {
     skill_icon: string;
   }[];
 }
+
+export type SkillRaw = DeepNullable<SkillRawBase>;

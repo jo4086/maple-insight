@@ -1,4 +1,6 @@
-export interface HyperStatRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface HyperStatRawBase {
   date: string | null;
   character_class: string;
   use_preset_no: string;
@@ -25,3 +27,5 @@ export interface HyperStatRaw {
   }[];
   hyper_stat_preset_3_remain_point: number;
 }
+
+export type HyperStatRaw = DeepNullable<HyperStatRawBase>;

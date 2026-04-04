@@ -10,5 +10,5 @@ export interface Skill {
 export interface CharacterSkill {
   date: string | null;
   skillGrade: string;
-  skill: Skill[];
+  skills: Skill[];
 }

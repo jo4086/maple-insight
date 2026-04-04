@@ -1,4 +1,6 @@
-export interface StatRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface StatRawBase {
   date: string | null;
   character_class: string;
   final_stat: {
@@ -7,3 +9,5 @@ export interface StatRaw {
   }[];
   remain_ap: number;
 }
+
+export type StatRaw = DeepNullable<StatRawBase>;

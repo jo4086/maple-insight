@@ -1,4 +1,6 @@
-export interface CashRawData {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface CashRawDataBase {
   date: string | null;
   character_gender: string;
   character_class: string;
@@ -245,3 +247,5 @@ export interface CashRawData {
     emotion_name: string | null;
   }[];
 }
+
+export type CashRawData = DeepNullable<CashRawDataBase>;

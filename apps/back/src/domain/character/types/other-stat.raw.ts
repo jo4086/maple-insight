@@ -1,4 +1,6 @@
-export interface OtherStatRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface OtherStatRawBase {
   date: string | null;
   other_stat: {
     other_stat_type: string;
@@ -8,3 +10,5 @@ export interface OtherStatRaw {
     }[];
   }[];
 }
+
+export type OtherStatRaw = DeepNullable<OtherStatRawBase>;

@@ -1,4 +1,6 @@
-export interface AndroidRaw {
+import type { DeepNullable } from '@/types/deep-nullable';
+
+interface AndroidRawBase {
   date: string | null;
   android_name: string | null;
   android_nickname: string | null;
@@ -150,3 +152,5 @@ export interface AndroidRaw {
     android_shop_usable_flag: string | null;
   } | null;
 }
+
+export type AndroidRaw = DeepNullable<AndroidRawBase>;
