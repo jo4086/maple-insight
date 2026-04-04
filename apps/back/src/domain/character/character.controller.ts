@@ -1,6 +1,9 @@
 import { getCachedCharacterLookup, setCachedCharacterLookup } from './character.cache';
-import { type CharacterEndpoint } from './character.constants';
+import { CHARACTER_ENDPOINTS } from './character.constants';
 import { CharacterService, getCharacterOCID } from './character.service';
+
+import { createSuccessResponse } from '@/types/api-response';
+import { toCharacterResponse } from './mappers';
 
 function getCharacterClassFromBasic(data: unknown): string | null {
   if (!data || typeof data !== 'object') return null;
@@ -32,36 +35,14 @@ function mergeSkillResults(data: Record<string, unknown>) {
   return mergedData;
 }
 
-const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string | null }> = async (req, res) => {
+const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string | null }> = async (req, res, next) => {
   try {
     const { nick, date = null } = req.query;
     const cachedLookup = getCachedCharacterLookup(nick);
     const ocid = cachedLookup?.ocid ?? (await getCharacterOCID(nick)).ocid;
 
     const service = new CharacterService(ocid, date, cachedLookup?.characterClass ?? null);
-    const endpoints: CharacterEndpoint[] = [
-      'ability',
-      'android-equipment',
-      'basic',
-      'beauty-equipment',
-      'cashitem-equipment',
-      'hyper-stat',
-      'item-equipment',
-      'popularity',
-      'propensity',
-      'stat',
-      'set-effect',
-      'symbol-equipment',
-      'pet-equipment',
-      'skill',
-      'link-skill',
-      'vmatrix',
-      'hexamatrix',
-      'hexamatrix-stat',
-      'dojang',
-      'other-stat',
-      'ring-reserve-skill-equipment',
-    ];
+    const endpoints = [...CHARACTER_ENDPOINTS];
 
     const shouldFetchBasic = endpoints.includes('basic');
     const endpointsWithoutBasic = endpoints.filter((endpoint) => endpoint !== 'basic');
@@ -82,22 +63,19 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
     const requests = await service.createRequestsWithSkill(endpointsWithoutBasic);
     const restData = await service.getMultipleWithDelay(requests);
     const rawData = shouldFetchBasic ? { basic: basicData, ...restData } : restData;
-    const data = mergeSkillResults(rawData);
+    const mergedData = mergeSkillResults(rawData);
+    const data = toCharacterResponse(mergedData);
 
     console.log(data);
 
-    return res.status(200).json({
-      success: true,
-      data,
-      status: '200',
-    });
+    return res.status(200).json(createSuccessResponse(data));
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      status: 'Internal Server Error (500)',
-      message: '캐릭터 ocid 조회 중 오류 발생',
-    });
+    const appError: AppError = {
+      statusCode: 500,
+      message: error instanceof Error ? error.message : '캐릭터 조회 중 오류 발생',
+    };
+
+    next?.(appError);
   }
 };
 

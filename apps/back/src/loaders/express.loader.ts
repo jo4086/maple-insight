@@ -15,7 +15,10 @@ function expressLoader(app: Application) {
     }),
   );
 
-  app.use(morgan('dev'));
+  if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+  }
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser(cookieSecret));
