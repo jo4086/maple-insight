@@ -113,6 +113,11 @@ export interface PresetItemEquipment extends ItemMetadata {
   freestyleFlag: boolean;
 }
 
+export interface ItemPresets {
+  no: number;
+  info: PresetItemEquipment[];
+}
+
 export interface ClassExclusiveItemEquipment extends ItemMetadata {
   itemOptions: ItemOptionSet<ItemOption>;
   upgrade: ItemUpgradeInfo;
@@ -150,10 +155,7 @@ export interface CharacterItem {
   characterClass: string;
   presetNo: number;
   itemEquipment: MainItemEquipment[];
-  presets: {
-    no: number;
-    info: PresetItemEquipment[];
-  }[];
+  presets: ItemPresets[];
   title: Title | null;
   medalShape: MedalShape | null;
   dragonEquipment: ClassExclusiveItemEquipment[];

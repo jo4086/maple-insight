@@ -109,14 +109,16 @@ type SidebarPanelProps = {
 };
 
 const SidebarPanel = ({ activeSection, data, isExpanded }: SidebarPanelProps) => {
-  const worldIcon = world_icon_path_map[data.basic.world_name as keyof typeof world_icon_path_map];
+  const basic = data.basic.info;
+  const worldIcon = world_icon_path_map[basic.worldName as keyof typeof world_icon_path_map];
+  const combatPower = data.stat.finalStat?.find((stat) => stat.statName === '전투력');
 
   if (activeSection === 'home') {
     return (
       <div className="flex h-full flex-col">
         <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Overview</p>
         <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-          <p className="text-lg font-semibold">{data.basic.character_name}</p>
+          <p className="text-lg font-semibold">{basic.name}</p>
           <p className="mt-1 text-sm text-gray-400"></p>
         </div>
       </div>
@@ -130,24 +132,25 @@ const SidebarPanel = ({ activeSection, data, isExpanded }: SidebarPanelProps) =>
           <div className="flex h-40 w-40 items-center justify-center overflow-hidden rounded-3xl border border-white/20 bg-black">
             <div
               className={twMerge('h-full w-full origin-center bg-center bg-[length:175%] transition-transform duration-300 ease-out', isExpanded ? 'scale-100' : 'scale-75')}
-              style={{ backgroundImage: `url(${data.basic.character_image})` }}
+              style={{ backgroundImage: `url(${basic.imageUrl})` }}
             />
           </div>
 
           <div className="min-w-0 text-center">
-            <p className="truncate text-xl font-semibold">{data.basic.character_name}</p>
-            <p className="mt-1 text-sm text-gray-400">{data.basic.character_class}</p>
+            <p className="truncate text-xl font-semibold">{basic.name}</p>
+            <p className="mt-1 text-sm text-gray-400">{basic.class}</p>
             <div className="mt-1 flex items-center justify-center gap-2 text-sm text-gray-400">
-              {worldIcon && <img src={worldIcon} alt={data.basic.world_name} className="h-4 w-4" />}
-              <p>{data.basic.world_name}</p>
+              {worldIcon && <img src={worldIcon} alt={basic.worldName} className="h-4 w-4" />}
+              <p>{basic.worldName}</p>
             </div>
           </div>
         </div>
 
         <div className="grid gap-2">
-          <InfoRow label="길드" value={data.basic.character_guild_name || '-'} />
-          <InfoRow label="레벨" value={String(data.basic.character_level ?? '-')} />
-          <InfoRow label="경험치" value={data.basic.character_exp?.toLocaleString('ko-KR') ?? '-'} />
+          <InfoRow label="길드" value={basic.guildName || '-'} />
+          <InfoRow label="레벨" value={String(basic.level ?? '-')} />
+          <InfoRow label="경험치" value={basic.exp?.toLocaleString('ko-KR') ?? '-'} />
+          {combatPower && <InfoRow label={combatPower.statName} value={combatPower.statValue?.toLocaleString('ko-KR') ?? '-'} />}
         </div>
       </div>
     );

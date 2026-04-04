@@ -4,8 +4,8 @@ type EquipmentSlotProps = {
   icon?: string;
   label: string;
   className?: string;
-  potentialOptionGrade?: string;
-  additionalPotentialOptionGrade?: string;
+  potentialOptionGrade?: string | null;
+  additionalPotentialOptionGrade?: string | null;
 };
 
 const GRADE_PRIORITY = {
@@ -26,7 +26,7 @@ const GRADE_BORDER_CLASS = {
 
 type GradeKey = keyof typeof GRADE_PRIORITY;
 
-const normalizeGrade = (grade?: string): GradeKey | null => {
+const normalizeGrade = (grade?: string | null): GradeKey | null => {
   if (!grade) return 'normal';
 
   const normalized = grade.trim().toLowerCase();
@@ -39,7 +39,7 @@ const normalizeGrade = (grade?: string): GradeKey | null => {
   return 'normal';
 };
 
-const getHigherGrade = (potentialOptionGrade?: string, additionalPotentialOptionGrade?: string): GradeKey | null => {
+const getHigherGrade = (potentialOptionGrade?: string | null, additionalPotentialOptionGrade?: string | null): GradeKey | null => {
   const potentialGrade = normalizeGrade(potentialOptionGrade);
   const additionalGrade = normalizeGrade(additionalPotentialOptionGrade);
 

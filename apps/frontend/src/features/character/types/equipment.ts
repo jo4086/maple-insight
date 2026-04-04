@@ -29,7 +29,7 @@ export const EQUIPMENT_LAYOUT: EquipmentLayoutCell[] = [
   { slot: '훈장', col: 7, row: 4 },
 
   { slot: '벨트', col: 1, row: 5 },
-  { slot: '펜던트', col: 2, row: 5 },
+  { slot: '펜던트1', col: 2, row: 5 },
   { slot: '무기', col: 3, row: 5 },
   { slot: '보조무기', col: 4, row: 5 },
   { slot: '엠블렘', col: 5, row: 5 },

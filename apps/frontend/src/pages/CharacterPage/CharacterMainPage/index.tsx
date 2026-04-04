@@ -13,7 +13,9 @@ export const CharacterMainPage = () => {
 
   const { data, isPending, isError, error } = useSearchNick(nick);
 
+  const characterImg = data?.basic.info.imageUrl || '';
   const equipment = data?.['item-equipment'];
+  const android = data?.['android-equipment'];
 
   useEffect(() => {
     if (!data) {
@@ -76,15 +78,9 @@ export const CharacterMainPage = () => {
           </div>
         )}
 
-        {equipment && (
+        {equipment && android && (
           <EquipmentContainer>
-            <EquipmentGrid
-              items={equipment.item_equipment}
-              initialPresetNo={equipment.preset_no}
-              preset1={equipment.item_equipment_preset_1}
-              preset2={equipment.item_equipment_preset_2}
-              preset3={equipment.item_equipment_preset_3}
-            />
+            <EquipmentGrid characterImg={characterImg} items={equipment.itemEquipment} initialPresetNo={equipment.presetNo} presets={equipment.presets} android={android} />
           </EquipmentContainer>
         )}
       </section>

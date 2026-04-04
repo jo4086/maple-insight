@@ -1,5 +1,5 @@
 import type { MainItemEquipment, PresetItemEquipment, ItemPresets, CharacterAndroid } from '@maple/types';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { EQUIPMENT_LAYOUT } from '../../types/equipment';
@@ -27,10 +27,6 @@ const normalizeEquipmentSlot = (slot: string) => {
 export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, presets, android }: EquipmentGridProps) => {
   const [selectedPresetNo, setSelectedPresetNo] = useState(initialPresetNo);
 
-  useEffect(() => {
-    setSelectedPresetNo(initialPresetNo);
-  }, [initialPresetNo]);
-
   const presetItemsByNo = useMemo(() => {
     const presetMap = new Map<number, EquipmentItem[]>();
 
@@ -43,23 +39,38 @@ export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, preset
     return presetMap;
   }, [initialPresetNo, items, presets]);
 
-  const currentItems = presetItemsByNo.get(selectedPresetNo) ?? [];
+  const preset1Items = useMemo(() => {
+    if (initialPresetNo === 1) return items;
+    return presetItemsByNo.get(1) ?? [];
+  }, [initialPresetNo, items, presetItemsByNo]);
 
-  const preset1Android = useMemo(() => {
-    if (android.presetNo === 1) return android.equipped;
-    return android.presets.find((preset) => preset.no === 1)?.info ?? null;
-  }, [android]);
+  const currentItems = useMemo(() => {
+    if (selectedPresetNo === 1) return preset1Items;
+
+    const preset1BySlot = new Map<string, EquipmentItem>();
+    const selectedBySlot = new Map<string, EquipmentItem>();
+
+    preset1Items.forEach((item) => {
+      preset1BySlot.set(normalizeEquipmentSlot(item.slot), item);
+    });
+
+    (presetItemsByNo.get(selectedPresetNo) ?? []).forEach((item) => {
+      selectedBySlot.set(normalizeEquipmentSlot(item.slot), item);
+    });
+
+    const mergedBySlot = new Map(preset1BySlot);
+
+    selectedBySlot.forEach((item, slot) => {
+      mergedBySlot.set(slot, item);
+    });
+
+    return Array.from(mergedBySlot.values());
+  }, [preset1Items, presetItemsByNo, selectedPresetNo]);
 
   const currentAndroid = useMemo(() => {
-    if (selectedPresetNo === android.presetNo) {
-      return android.equipped ?? preset1Android;
-    }
-
-    const selectedPresetAndroid = android.presets.find((preset) => preset.no === selectedPresetNo)?.info ?? null;
-
-    return selectedPresetAndroid ?? preset1Android;
-  }, [android, preset1Android, selectedPresetNo]);
-
+    if (selectedPresetNo === android.presetNo) return android.equipped;
+    return android.presets.find((preset) => preset.no === selectedPresetNo)?.info ?? null;
+  }, [android, selectedPresetNo]);
   const equipmentBySlot = Object.fromEntries(currentItems.map((item) => [normalizeEquipmentSlot(item.slot), item]));
 
   return (
@@ -85,7 +96,7 @@ export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, preset
 
         const normalizedSlot = normalizeEquipmentSlot(cell.slot);
         const item = equipmentBySlot[normalizedSlot];
-        const icon = cell.slot === '안드로이드' ? (currentAndroid?.icon ?? item?.icon) : item?.icon;
+        const icon = cell.slot === '안드로이드' ? currentAndroid?.icon ?? item?.icon : item?.icon;
 
         return (
           <div
@@ -106,7 +117,7 @@ export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, preset
       })}
 
       {[1, 2, 3].map((presetNo) => {
-        const hasPreset = (presetItemsByNo.get(presetNo) ?? []).length > 0;
+        const hasPreset = presetNo === 1 ? preset1Items.length > 0 : (presetItemsByNo.get(presetNo) ?? []).length > 0 || preset1Items.length > 0;
 
         return (
           <div

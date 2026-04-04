@@ -1,4 +1,4 @@
-export interface BasicData {
+export interface BasicInfo {
   /** 캐릭터 이름 */
   name: string;
   /** 월드 이름 */
@@ -32,5 +32,5 @@ export interface CharacterBasic {
   date: string | null;
 
   /** 기본 캐릭터 정보 */
-  data: BasicData;
+  info: BasicInfo;
 }
