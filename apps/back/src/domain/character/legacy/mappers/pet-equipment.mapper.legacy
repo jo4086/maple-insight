@@ -5,10 +5,10 @@ type PetNo = 1 | 2 | 3;
 type PetEquipmentRaw = NonNullable<PetRaw['pet_1_equipment']>;
 type PetAutoSkillRaw = NonNullable<PetRaw['pet_1_auto_skill']>;
 
-function toPetEquipmentOption(raw: NonNullable<PetEquipmentRaw['item_option']>[number]): PetEquipmentOption {
+function toPetEquipmentOption(raw: PetEquipmentRaw['item_option'][number]): PetEquipmentOption {
   return {
-    type: raw.option_type ?? '',
-    value: raw.option_value ?? '',
+    type: raw.option_type,
+    value: raw.option_value,
   };
 }
 
@@ -19,9 +19,9 @@ function toPetEquipment(raw: PetEquipmentRaw | null): PetEquipment | null {
     name: raw.item_name,
     icon: raw.item_icon,
     description: raw.item_description,
-    option: (raw.item_option ?? []).map(toPetEquipmentOption),
-    scrollUpgrade: raw.scroll_upgrade ?? 0,
-    scrollUpgradable: raw.scroll_upgradable ?? 0,
+    option: raw.item_option.map(toPetEquipmentOption),
+    scrollUpgrade: raw.scroll_upgrade,
+    scrollUpgradable: raw.scroll_upgradable,
     shape: raw.item_shape,
     shapeIcon: raw.item_shape_icon,
     dateExpire: raw.item_date_expire,
@@ -76,7 +76,7 @@ function toPetInfo(raw: PetRaw, no: PetNo): PetInfo | null {
     equipment: toPetEquipment(equipment),
     autoSkill: toPetAutoSkill(autoSkill),
     type,
-    skill: (skill ?? []).filter((item): item is string => item != null),
+    skill,
     dateExpire,
     appearance,
     appearanceIcon,

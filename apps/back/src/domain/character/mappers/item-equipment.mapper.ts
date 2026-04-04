@@ -10,6 +10,7 @@ import type {
   MainItemEquipment,
   MainItemPotentials,
   MedalShape,
+  ItemPresets,
   PresetItemEquipment,
   PresetItemPotentials,
   Title,
@@ -19,68 +20,68 @@ import { toNumberSafe } from 'src/utils/number';
 
 import type { ItemEquipmentRaw } from '../types/item-equipment.raw';
 
-type MainItemRaw = ItemEquipmentRaw['item_equipment'][number];
-type PresetItemRaw = ItemEquipmentRaw['item_equipment_preset_1'][number];
-type ClassExclusiveItemRaw = ItemEquipmentRaw['dragon_equipment'][number];
+type MainItemRaw = NonNullable<ItemEquipmentRaw['item_equipment']>[number];
+type PresetItemRaw = NonNullable<ItemEquipmentRaw['item_equipment_preset_1']>[number];
+type ClassExclusiveItemRaw = NonNullable<ItemEquipmentRaw['dragon_equipment']>[number];
 type FullItemOptionRaw = MainItemRaw['item_total_option'];
 type PartialItemOptionRaw = MainItemRaw['item_add_option'] | MainItemRaw['item_etc_option'] | MainItemRaw['item_starforce_option'];
 type PresetKey = 'item_equipment_preset_1' | 'item_equipment_preset_2' | 'item_equipment_preset_3';
 const PRESET_KEYS: PresetKey[] = ['item_equipment_preset_1', 'item_equipment_preset_2', 'item_equipment_preset_3'];
 
-function toItemOption(raw: FullItemOptionRaw | PartialItemOptionRaw): ItemOption {
+function toItemOption(raw: FullItemOptionRaw | PartialItemOptionRaw | null): ItemOption {
   return {
-    str: toNumberSafe(raw.str),
-    dex: toNumberSafe(raw.dex),
-    int: toNumberSafe(raw.int),
-    luk: toNumberSafe(raw.luk),
-    maxHp: toNumberSafe(raw.max_hp),
-    maxMp: toNumberSafe(raw.max_mp),
-    attackPower: toNumberSafe(raw.attack_power),
-    magicPower: toNumberSafe(raw.magic_power),
-    armor: toNumberSafe(raw.armor),
-    speed: toNumberSafe(raw.speed),
-    jump: toNumberSafe(raw.jump),
-    bossDamage: 'boss_damage' in raw ? toNumberSafe(raw.boss_damage) : undefined,
-    ignoreMonsterArmor: 'ignore_monster_armor' in raw ? toNumberSafe(raw.ignore_monster_armor) : undefined,
-    allStat: 'all_stat' in raw ? toNumberSafe(raw.all_stat) : undefined,
-    damage: 'damage' in raw ? toNumberSafe(raw.damage) : undefined,
-    equipmentLevelDecrease: 'equipment_level_decrease' in raw ? raw.equipment_level_decrease : undefined,
-    maxHpRate: 'max_hp_rate' in raw ? toNumberSafe(raw.max_hp_rate) : undefined,
-    maxMpRate: 'max_mp_rate' in raw ? toNumberSafe(raw.max_mp_rate) : undefined,
+    str: toNumberSafe(raw?.str ?? '0'),
+    dex: toNumberSafe(raw?.dex ?? '0'),
+    int: toNumberSafe(raw?.int ?? '0'),
+    luk: toNumberSafe(raw?.luk ?? '0'),
+    maxHp: toNumberSafe(raw?.max_hp ?? '0'),
+    maxMp: toNumberSafe(raw?.max_mp ?? '0'),
+    attackPower: toNumberSafe(raw?.attack_power ?? '0'),
+    magicPower: toNumberSafe(raw?.magic_power ?? '0'),
+    armor: toNumberSafe(raw?.armor ?? '0'),
+    speed: toNumberSafe(raw?.speed ?? '0'),
+    jump: toNumberSafe(raw?.jump ?? '0'),
+    bossDamage: raw && 'boss_damage' in raw ? toNumberSafe(raw.boss_damage ?? '0') : undefined,
+    ignoreMonsterArmor: raw && 'ignore_monster_armor' in raw ? toNumberSafe(raw.ignore_monster_armor ?? '0') : undefined,
+    allStat: raw && 'all_stat' in raw ? toNumberSafe(raw.all_stat ?? '0') : undefined,
+    damage: raw && 'damage' in raw ? toNumberSafe(raw.damage ?? '0') : undefined,
+    equipmentLevelDecrease: raw && 'equipment_level_decrease' in raw ? (raw.equipment_level_decrease ?? 0) : undefined,
+    maxHpRate: raw && 'max_hp_rate' in raw ? toNumberSafe(raw.max_hp_rate ?? '0') : undefined,
+    maxMpRate: raw && 'max_mp_rate' in raw ? toNumberSafe(raw.max_mp_rate ?? '0') : undefined,
   };
 }
 
-function toItemBaseOption(raw: MainItemRaw['item_base_option']): ItemBaseOption {
+function toItemBaseOption(raw: MainItemRaw['item_base_option'] | null): ItemBaseOption {
   return {
     ...toItemOption(raw),
-    baseEquipmentLevel: raw.base_equipment_level,
+    baseEquipmentLevel: raw?.base_equipment_level ?? 0,
   };
 }
 
-function toItemExceptionalOption(raw: MainItemRaw['item_exceptional_option']): ItemExceptionalOption {
+function toItemExceptionalOption(raw: MainItemRaw['item_exceptional_option'] | null): ItemExceptionalOption {
   return {
-    str: toNumberSafe(raw.str),
-    dex: toNumberSafe(raw.dex),
-    int: toNumberSafe(raw.int),
-    luk: toNumberSafe(raw.luk),
-    maxHp: toNumberSafe(raw.max_hp),
-    maxMp: toNumberSafe(raw.max_mp),
-    attackPower: toNumberSafe(raw.attack_power),
-    magicPower: toNumberSafe(raw.magic_power),
-    exceptionalUpgrade: raw.exceptional_upgrade,
+    str: toNumberSafe(raw?.str ?? '0'),
+    dex: toNumberSafe(raw?.dex ?? '0'),
+    int: toNumberSafe(raw?.int ?? '0'),
+    luk: toNumberSafe(raw?.luk ?? '0'),
+    maxHp: toNumberSafe(raw?.max_hp ?? '0'),
+    maxMp: toNumberSafe(raw?.max_mp ?? '0'),
+    attackPower: toNumberSafe(raw?.attack_power ?? '0'),
+    magicPower: toNumberSafe(raw?.magic_power ?? '0'),
+    exceptionalUpgrade: raw?.exceptional_upgrade ?? 0,
   };
 }
 
-function toClassExclusiveExceptionalOption(raw: ClassExclusiveItemRaw['item_exceptional_option']): ItemOption {
+function toClassExclusiveExceptionalOption(raw: ClassExclusiveItemRaw['item_exceptional_option'] | null): ItemOption {
   return {
-    str: toNumberSafe(raw.str),
-    dex: toNumberSafe(raw.dex),
-    int: toNumberSafe(raw.int),
-    luk: toNumberSafe(raw.luk),
-    maxHp: toNumberSafe(raw.max_hp),
-    maxMp: toNumberSafe(raw.max_mp),
-    attackPower: toNumberSafe(raw.attack_power),
-    magicPower: toNumberSafe(raw.magic_power),
+    str: toNumberSafe(raw?.str ?? '0'),
+    dex: toNumberSafe(raw?.dex ?? '0'),
+    int: toNumberSafe(raw?.int ?? '0'),
+    luk: toNumberSafe(raw?.luk ?? '0'),
+    maxHp: toNumberSafe(raw?.max_hp ?? '0'),
+    maxMp: toNumberSafe(raw?.max_mp ?? '0'),
+    attackPower: toNumberSafe(raw?.attack_power ?? '0'),
+    magicPower: toNumberSafe(raw?.magic_power ?? '0'),
   };
 }
 
@@ -121,14 +122,14 @@ function toMainItemPotentials(raw: MainItemRaw): MainItemPotentials {
   return {
     potential: {
       grade: raw.potential_option_grade,
-      flag: toBooleanByFlag(raw.potential_option_flag),
+      flag: toBooleanByFlag(raw.potential_option_flag ?? '0'),
       option1: raw.potential_option_1,
       option2: raw.potential_option_2,
       option3: raw.potential_option_3,
     },
     additional: {
       grade: raw.additional_potential_option_grade,
-      flag: toBooleanByFlag(raw.additional_potential_option_flag),
+      flag: toBooleanByFlag(raw.additional_potential_option_flag ?? '0'),
       option1: raw.additional_potential_option_1,
       option2: raw.additional_potential_option_2,
       option3: raw.additional_potential_option_3,
@@ -155,42 +156,42 @@ function toPresetItemPotentials(raw: PresetItemRaw): PresetItemPotentials {
 
 function toUpgradeInfo(raw: MainItemRaw | PresetItemRaw | ClassExclusiveItemRaw): ItemUpgradeInfo {
   return {
-    growthExp: raw.growth_exp,
-    growthLevel: raw.growth_level,
-    scrollUpgrade: toNumberSafe(raw.scroll_upgrade),
-    cuttableCount: toNumberSafe(raw.cuttable_count),
-    goldenHammerFlag: toBooleanByFlag(raw.golden_hammer_flag),
-    scrollResilienceCount: toNumberSafe(raw.scroll_resilience_count),
-    scrollUpgradableCount: toNumberSafe(raw.scroll_upgradable_count),
+    growthExp: raw.growth_exp ?? 0,
+    growthLevel: raw.growth_level ?? 0,
+    scrollUpgrade: toNumberSafe(raw.scroll_upgrade ?? '0'),
+    cuttableCount: toNumberSafe(raw.cuttable_count ?? '0'),
+    goldenHammerFlag: toBooleanByFlag(raw.golden_hammer_flag ?? '0'),
+    scrollResilienceCount: toNumberSafe(raw.scroll_resilience_count ?? '0'),
+    scrollUpgradableCount: toNumberSafe(raw.scroll_upgradable_count ?? '0'),
     soulName: raw.soul_name,
     soulOption: raw.soul_option,
-    starforce: toNumberSafe(raw.starforce),
-    starforceScrollFlag: raw.starforce_scroll_flag,
+    starforce: toNumberSafe(raw.starforce ?? '0'),
+    starforceScrollFlag: raw.starforce_scroll_flag ?? '0',
   };
 }
 
 function toMainMetadata(raw: MainItemRaw): ItemMetadata {
   return {
-    part: raw.item_equipment_part,
-    slot: raw.item_equipment_slot,
-    name: raw.item_name,
-    icon: raw.item_icon,
+    part: raw.item_equipment_part ?? '',
+    slot: raw.item_equipment_slot ?? '',
+    name: raw.item_name ?? '',
+    icon: raw.item_icon ?? '',
     description: raw.item_description,
-    shapeName: raw.item_shape_name,
-    shapeIcon: raw.item_shape_icon,
+    shapeName: raw.item_shape_name ?? '',
+    shapeIcon: raw.item_shape_icon ?? '',
     gender: raw.item_gender,
   };
 }
 
 function toSecondaryMetadata(raw: PresetItemRaw | ClassExclusiveItemRaw): ItemMetadata {
   return {
-    part: raw.item_equipment_part,
-    slot: raw.equipment_slot,
-    name: raw.item_name,
-    icon: raw.item_icon,
+    part: raw.item_equipment_part ?? '',
+    slot: raw.item_equipment_slot ?? '',
+    name: raw.item_name ?? '',
+    icon: raw.item_icon ?? '',
     description: raw.item_description,
-    shapeName: raw.item_shape_name,
-    shapeIcon: raw.item_shape_icon,
+    shapeName: raw.item_shape_name ?? '',
+    shapeIcon: raw.item_shape_icon ?? '',
     gender: raw.item_gender,
   };
 }
@@ -201,10 +202,10 @@ function toMainItemEquipment(raw: MainItemRaw): MainItemEquipment {
     itemOptions: toMainItemOptions(raw),
     potentials: toMainItemPotentials(raw),
     upgrade: toUpgradeInfo(raw),
-    equipmentLevelIncrease: raw.equipment_level_increase,
-    specialRingLevel: raw.special_ring_level,
+    equipmentLevelIncrease: raw.equipment_level_increase ?? 0,
+    specialRingLevel: raw.special_ring_level ?? 0,
     dateExpire: raw.date_expire,
-    freestyleFlag: toBooleanByFlag(raw.freestyle_flag),
+    freestyleFlag: toBooleanByFlag(raw.freestyle_flag ?? '0'),
   };
 }
 
@@ -214,10 +215,10 @@ function toPresetItemEquipment(raw: PresetItemRaw): PresetItemEquipment {
     itemOptions: toPresetItemOptions(raw),
     potentials: toPresetItemPotentials(raw),
     upgrade: toUpgradeInfo(raw),
-    equipmentLevelIncrease: raw.equipment_level_increase,
-    specialRingLevel: raw.special_ring_level,
+    equipmentLevelIncrease: raw.equipment_level_increase ?? 0,
+    specialRingLevel: raw.special_ring_level ?? 0,
     dateExpire: raw.date_expire,
-    freestyleFlag: toBooleanByFlag(raw.freestyle_flag),
+    freestyleFlag: toBooleanByFlag(raw.freestyle_flag ?? '0'),
   };
 }
 
@@ -226,55 +227,57 @@ function toClassExclusiveItemEquipment(raw: ClassExclusiveItemRaw): ClassExclusi
     ...toSecondaryMetadata(raw),
     itemOptions: toClassExclusiveItemOptions(raw),
     upgrade: toUpgradeInfo(raw),
-    equipmentLevelIncrease: raw.equipment_level_increase,
-    specialRingLevel: raw.special_ring_level,
+    equipmentLevelIncrease: raw.equipment_level_increase ?? 0,
+    specialRingLevel: raw.special_ring_level ?? 0,
     dateExpire: raw.date_expire,
-    freestyleFlag: toBooleanByFlag(raw.freestyle_flag),
+    freestyleFlag: toBooleanByFlag(raw.freestyle_flag ?? '0'),
   };
 }
 
-function toTitle(raw: ItemEquipmentRaw['title']): Title {
+function toTitle(raw: ItemEquipmentRaw['title']): Title | null {
+  if (!raw) return null;
   return {
-    name: raw.title_name,
-    icon: raw.title_icon,
+    name: raw.title_name ?? '',
+    icon: raw.title_icon ?? '',
     description: raw.title_description,
     dateExpire: raw.date_expire,
-    dateOptionExpire: raw.date_option_expire,
-    shapeName: raw.title_shape_name,
-    shapeIcon: raw.title_shape_icon,
+    dateOptionExpire: raw.date_option_expire ?? '',
+    shapeName: raw.title_shape_name ?? '',
+    shapeIcon: raw.title_shape_icon ?? '',
     shapeDescription: raw.title_shape_description,
   };
 }
 
-function toMedalShape(raw: ItemEquipmentRaw['medal_shape']): MedalShape {
+function toMedalShape(raw: ItemEquipmentRaw['medal_shape']): MedalShape | null {
+  if (!raw) return null;
   return {
-    name: raw.medal_shape_name,
-    icon: raw.medal_shape_icon,
+    name: raw.medal_shape_name ?? '',
+    icon: raw.medal_shape_icon ?? '',
     description: raw.medal_shape_description,
-    changedName: raw.medal_shape_changed_name,
-    changedIcon: raw.medal_shape_changed_icon,
+    changedName: raw.medal_shape_changed_name ?? '',
+    changedIcon: raw.medal_shape_changed_icon ?? '',
     changedDescription: raw.medal_shape_changed_description,
   };
 }
 
 export function toCharacterItem(raw: ItemEquipmentRaw): CharacterItem {
-  const presets = PRESET_KEYS.map((presetKey, index) => {
+  const presets: ItemPresets[] = PRESET_KEYS.map((presetKey, index) => {
     return {
       no: index + 1,
-      info: raw[presetKey].map(toPresetItemEquipment),
+      info: (raw[presetKey] ?? []).map(toPresetItemEquipment),
     };
   });
 
   return {
     date: raw.date,
-    characterGender: raw.character_gender,
-    characterClass: raw.character_class,
-    presetNo: raw.preset_no,
-    itemEquipment: raw.item_equipment.map(toMainItemEquipment),
+    characterGender: raw.character_gender ?? '',
+    characterClass: raw.character_class ?? '',
+    presetNo: raw.preset_no ?? 0,
+    itemEquipment: (raw.item_equipment ?? []).map(toMainItemEquipment),
     presets,
     title: toTitle(raw.title),
     medalShape: toMedalShape(raw.medal_shape),
-    dragonEquipment: raw.dragon_equipment.map(toClassExclusiveItemEquipment),
-    mechanicEquipment: raw.mechanic_equipment.map(toClassExclusiveItemEquipment),
+    dragonEquipment: (raw.dragon_equipment ?? []).map(toClassExclusiveItemEquipment),
+    mechanicEquipment: (raw.mechanic_equipment ?? []).map(toClassExclusiveItemEquipment),
   };
 }

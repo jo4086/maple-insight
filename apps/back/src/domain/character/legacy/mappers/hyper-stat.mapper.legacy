@@ -10,11 +10,11 @@ const HYPER_STAT_PRESET_PAIRS = [
 ] as const;
 
 function mapPresetInfo(preset: HyperStatRaw['hyper_stat_preset_1']): PresetInfo[] {
-  return (preset ?? []).map((item) => ({
-    type: item.stat_type ?? '',
-    point: item.stat_point ?? 0,
-    level: item.stat_level ?? 0,
-    increase: item.stat_increase ?? '',
+  return preset.map((item) => ({
+    type: item.stat_type,
+    point: item.stat_point,
+    level: item.stat_level,
+    increase: item.stat_increase,
   }));
 }
 
@@ -22,16 +22,16 @@ export function toCharacterHyperStat(raw: HyperStatRaw): CharacterHyperStat {
   const presets: HyperStatPreset[] = HYPER_STAT_PRESET_PAIRS.map(([presetKey, remainPointKey], index) => {
     return {
       no: index + 1,
-      remainPoint: raw[remainPointKey] ?? 0,
+      remainPoint: raw[remainPointKey],
       items: mapPresetInfo(raw[presetKey]),
     };
   });
 
   return {
     date: raw.date,
-    characterClass: raw.character_class ?? '',
-    usePresetNo: toNumberSafe(raw.use_preset_no ?? '0'),
-    useAvailableHyperStat: raw.use_available_hyper_stat ?? 0,
+    characterClass: raw.character_class,
+    usePresetNo: toNumberSafe(raw.use_preset_no),
+    useAvailableHyperStat: raw.use_available_hyper_stat,
     presets,
   };
 }

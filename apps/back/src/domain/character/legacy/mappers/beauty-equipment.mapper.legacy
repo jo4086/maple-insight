@@ -12,11 +12,11 @@ function toHairStyle(raw: HairRaw): HairStyle | null {
   if (!raw) return null;
 
   return {
-    name: raw.hair_name ?? '',
-    baseColor: raw.base_color ?? '',
-    mixColor: raw.mix_color ?? '',
-    mixRate: toNumberSafe(raw.mix_rate ?? '0'),
-    freestyleFlag: toBooleanByFlag(raw.freestyle_flag ?? '0'),
+    name: raw.hair_name,
+    baseColor: raw.base_color,
+    mixColor: raw.mix_color,
+    mixRate: toNumberSafe(raw.mix_rate),
+    freestyleFlag: toBooleanByFlag(raw.freestyle_flag),
   };
 }
 
@@ -24,11 +24,11 @@ function toFaceStyle(raw: FaceRaw): FaceStyle | null {
   if (!raw) return null;
 
   return {
-    name: raw.face_name ?? '',
-    baseColor: raw.base_color ?? '',
-    mixColor: raw.mix_color ?? '',
-    mixRate: toNumberSafe(raw.mix_rate ?? '0'),
-    freestyleFlag: toBooleanByFlag(raw.freestyle_flag ?? '0'),
+    name: raw.face_name,
+    baseColor: raw.base_color,
+    mixColor: raw.mix_color,
+    mixRate: toNumberSafe(raw.mix_rate),
+    freestyleFlag: toBooleanByFlag(raw.freestyle_flag),
   };
 }
 
@@ -36,11 +36,11 @@ function toSkinStyle(raw: SkinRaw): SkinStyle | null {
   if (!raw) return null;
 
   return {
-    name: raw.skin_name ?? '',
-    colorStyle: raw.color_style ?? '',
-    hue: raw.hue ?? 0,
-    saturation: raw.saturation ?? 0,
-    brightness: raw.brightness ?? 0,
+    name: raw.skin_name,
+    colorStyle: raw.color_style,
+    hue: raw.hue,
+    saturation: raw.saturation,
+    brightness: raw.brightness,
   };
 }
 
@@ -55,7 +55,7 @@ function toBeautyInfo(hair: HairRaw, face: FaceRaw, skin: SkinRaw): BeautyState 
 export function toCharacterBeauty(raw: BeautyRaw): CharacterBeauty {
   return {
     date: raw.date,
-    characterGender: raw.character_gender ?? '',
+    characterGender: raw.character_gender,
     equipped: toBeautyInfo(raw.character_hair, raw.character_face, raw.character_skin),
     additional: toBeautyInfo(raw.additional_character_hair, raw.additional_character_face, raw.additional_character_skin),
   };

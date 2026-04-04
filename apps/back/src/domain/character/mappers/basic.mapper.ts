@@ -13,20 +13,20 @@ function toLiberationQuestClear(value: string): 0 | 1 | 2 {
 export function toCharacterBasic(raw: BasicRaw): CharacterBasic {
   return {
     date: raw.date,
-    data: {
-      name: raw.character_name,
-      worldName: raw.world_name,
-      gender: raw.character_gender,
-      class: raw.character_class,
-      classLevel: raw.character_class_level,
-      level: raw.character_level,
-      exp: raw.character_exp,
-      expRate: raw.character_exp_rate,
-      guildName: raw.character_guild_name,
-      imageUrl: raw.character_image,
-      createdAt: raw.character_date_create,
-      accessFlag: toBooleanByFlag(raw.access_flag),
-      liberationQuestClear: toLiberationQuestClear(raw.liberation_quest_clear),
+    info: {
+      name: raw.character_name ?? '',
+      worldName: raw.world_name ?? '',
+      gender: raw.character_gender ?? '',
+      class: raw.character_class ?? '',
+      classLevel: raw.character_class_level ?? '',
+      level: raw.character_level ?? 0,
+      exp: raw.character_exp ?? 0,
+      expRate: raw.character_exp_rate ?? '',
+      guildName: raw.character_guild_name ?? '',
+      imageUrl: raw.character_image ?? '',
+      createdAt: raw.character_date_create ?? '',
+      accessFlag: toBooleanByFlag(raw.access_flag ?? '0'),
+      liberationQuestClear: toLiberationQuestClear(raw.liberation_quest_clear ?? '0'),
     },
   };
 }

@@ -7,17 +7,16 @@ import { getStatUnit } from '../utils/getStatUnit';
 export function toCharacterStat(raw: StatRaw): CharacterStat {
   return {
     date: raw.date,
-    characterClass: raw.character_class ?? '',
-    finalStat: (raw.final_stat ?? []).map((stat) => {
-      const statName = stat.stat_name ?? '';
-      const statUnit = getStatUnit(statName);
+    characterClass: raw.character_class,
+    finalStat: raw.final_stat.map((stat) => {
+      const statUnit = getStatUnit(stat.stat_name);
 
       return {
-        statName,
-        statValue: toNumberSafe(stat.stat_value ?? '0'),
+        statName: stat.stat_name,
+        statValue: toNumberSafe(stat.stat_value),
         ...(statUnit ? { statUnit } : {}),
       };
     }),
-    remainAp: raw.remain_ap ?? 0,
+    remainAp: raw.remain_ap,
   };
 }
