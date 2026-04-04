@@ -58,6 +58,7 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
       'vmatrix',
       'hexamatrix',
       'hexamatrix-stat',
+      'dojang',
       'other-stat',
       'ring-reserve-skill-equipment',
     ];

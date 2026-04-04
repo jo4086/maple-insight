@@ -21,8 +21,8 @@ export async function searchNick(nick: string) {
     // console.log('vmatrix: ', data['vmatrix']);
     // console.log('hexamatrix: ', data['hexamatrix']);
     console.log('hexa-stat: ', data['hexamatrix-stat']);
-    // console.log('dojang: ', data['dojang'])
-    // console.log('other-stat: ', data['other-stat'])
+    console.log('dojang: ', data['dojang']);
+    console.log('other-stat: ', data['other-stat']);
     console.log('special-ring :', data['ring-reserve-skill-equipment']);
 
     return data;

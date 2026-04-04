@@ -262,8 +262,6 @@ export interface SearchNickResponse {
   stat: CharacterStat;
   'hyper-stat': CharacterHyperStat;
   'set-effect': CharacterSetEffect;
-  'other-stat': CharacterOtherStat;
-  'ring-reserve-skill-equipment': CharacterSpecialring;
   'beauty-equipment': CharacterBeauty;
   'android-equipment': CharacterAndroid;
   'pet-equipment': CharacterPet;
@@ -272,6 +270,20 @@ export interface SearchNickResponse {
   vmatrix: VmatrixRaw;
   hexamatrix: HexamatrixRaw;
   'hexamatrix-stat': HexamatrixStatRaw;
+  dojang: DojangRaw;
+  'other-stat': CharacterOtherStat;
+  'ring-reserve-skill-equipment': CharacterSpecialring;
+}
+
+export interface OtherStatRaw {
+  date: string | null;
+  other_stat: {
+    other_stat_type: string;
+    stat_info: {
+      stat_name: string;
+      stat_value: string;
+    }[];
+  }[];
 }
 
 // 임시 타입들
@@ -730,4 +742,13 @@ export interface HexamatrixStatRaw {
     sub_stat_level_2: number;
     stat_grade: number;
   }[];
+}
+
+export interface DojangRaw {
+  date: string | null;
+  character_class: string;
+  world_name: string;
+  dojang_best_floor: number;
+  date_dojang_record: string | null;
+  dojang_best_time: number;
 }
