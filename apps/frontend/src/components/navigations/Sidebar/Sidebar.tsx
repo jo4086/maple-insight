@@ -12,6 +12,7 @@ type CharacterSidebarProps = {
   data: SearchNickResponse;
   onRefresh?: () => void;
   isRefreshSpinning?: boolean;
+  isRefreshDisabled?: boolean;
 };
 
 const NAV_ITEMS: {
@@ -25,7 +26,7 @@ const NAV_ITEMS: {
   { id: 'symbol', label: '심볼', icon: <div /> },
 ];
 
-export const CharacterSidebar = ({ data, onRefresh, isRefreshSpinning = false }: CharacterSidebarProps) => {
+export const CharacterSidebar = ({ data, onRefresh, isRefreshSpinning = false, isRefreshDisabled = false }: CharacterSidebarProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [activeSection, setActiveSection] = useState<SidebarSection>('character');
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ export const CharacterSidebar = ({ data, onRefresh, isRefreshSpinning = false }:
             type="button"
             onClick={onRefresh}
             title="새로고침"
-            disabled={!onRefresh || isRefreshSpinning}
+            disabled={!onRefresh || isRefreshSpinning || isRefreshDisabled}
             className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             <FiRefreshCw className={twMerge('h-5 w-5', isRefreshSpinning && 'animate-spin')} />
