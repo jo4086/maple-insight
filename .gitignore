@@ -15,6 +15,7 @@ ignores/
 csv/
 test/
 .codex
+unused-dummy-files.txt
 
 # typescript dotfills
 **/.*.ts
