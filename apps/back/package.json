@@ -15,6 +15,7 @@
     "start": "node dist/index.js",
     "sync:domain-types": "ts-node scripts/sync-domain-types.ts",
     "test": "vitest run",
+    "test:raw": "vitest run src/domain/character/character.raw.test.ts",
     "test:watch": "vitest"
   },
   "dependencies": {
