@@ -1,24 +1,24 @@
 import type { DeepNullable } from '@/types/deep-nullable';
 
 export interface ItemOptionRaw {
-  str?: string;
-  dex?: string;
-  int?: string;
-  luk?: string;
-  max_hp?: string;
-  max_mp?: string;
-  attack_power?: string;
-  magic_power?: string;
-  armor?: string;
-  speed?: string;
-  jump?: string;
-  boss_damage?: string;
-  ignore_monster_armor?: string;
-  all_stat?: string;
-  damage?: string;
-  equipment_level_decrease?: number;
-  max_hp_rate?: string;
-  max_mp_rate?: string;
+  str: string;
+  dex: string;
+  int: string;
+  luk: string;
+  max_hp: string;
+  max_mp: string;
+  attack_power: string;
+  magic_power: string;
+  armor: string;
+  speed: string;
+  jump: string;
+  boss_damage: string;
+  ignore_monster_armor: string;
+  all_stat: string;
+  damage: string;
+  equipment_level_decrease: number;
+  max_hp_rate: string;
+  max_mp_rate: string;
 }
 
 export interface ItemAdditionalPotentialRaw {
