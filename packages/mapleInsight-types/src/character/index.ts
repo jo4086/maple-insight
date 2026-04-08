@@ -21,3 +21,4 @@ export type * from './skill';
 export type * from './stat';
 export type * from './symbol-equipment';
 export type * from './vmatrix';
+export * from './class';

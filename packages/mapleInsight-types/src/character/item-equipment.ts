@@ -21,6 +21,7 @@ export interface ItemOption {
 
 export interface ItemBaseOption extends ItemOption {
   baseEquipmentLevel: number;
+  starforceLimit: number;
 }
 
 export interface ItemExceptionalOption extends ItemOption {
