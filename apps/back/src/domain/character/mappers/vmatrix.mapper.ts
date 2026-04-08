@@ -1,4 +1,5 @@
-import type { CharacterVmatrix, Core } from '../types/vmatrix';
+import type { CharacterVmatrix, Core } from '@maple/types';
+
 import type { VmatrixRaw } from '../types/vmatrix.raw';
 
 type CoreRaw = NonNullable<VmatrixRaw['character_v_core_equipment']>[number];

@@ -1,4 +1,5 @@
-import type { CharacterHexamatrix, HexaCore, LinkedSkill } from '../types/hexamatrix';
+import type { CharacterHexamatrix, HexaCore, LinkedSkill } from '@maple/types';
+
 import type { HexamatrixRaw } from '../types/hexamatrix.raw';
 
 type HexaCoreRaw = NonNullable<HexamatrixRaw['character_hexa_core_equipment']>[number];

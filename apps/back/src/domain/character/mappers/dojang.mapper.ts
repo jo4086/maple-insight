@@ -1,4 +1,5 @@
-import type { CharacterDojang } from '../types/dojang';
+import type { CharacterDojang } from '@maple/types';
+
 import type { DojangRaw } from '../types/dojang.raw';
 
 export function toCharacterDojang(raw: DojangRaw): CharacterDojang {

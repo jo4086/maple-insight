@@ -1,8 +1,9 @@
 import type { CharacterStat } from '@maple/types';
-import { toNumberSafe } from 'src/utils/number';
 
 import type { StatRaw } from '../types/stat.raw';
 import { getStatUnit } from '../utils/getStatUnit';
+
+import { toNumberSafe } from '@/utils/number';
 
 export function toCharacterStat(raw: StatRaw): CharacterStat {
   return {

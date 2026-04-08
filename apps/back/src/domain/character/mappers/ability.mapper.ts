@@ -1,8 +1,9 @@
 import type { AbilityInfo, AbilityPreset, CharacterAbility } from '@maple/types';
-import { toNumberSafe } from 'src/utils/number';
 
 import type { AbilityRaw, AbilityPresetRaw, AbilityInfoRaw } from '../types/ability.raw';
 import { toRarityGrade } from '../utils/grade';
+
+import { toNumberSafe } from '@/utils/number';
 
 const ABILITY_PRESET_KEYS = ['ability_preset_1', 'ability_preset_2', 'ability_preset_3'] as const;
 

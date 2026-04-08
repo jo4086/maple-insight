@@ -15,10 +15,12 @@ import type {
   PresetItemPotentials,
   Title,
 } from '@maple/types';
-import { toBooleanByFlag } from 'src/utils/boolean';
-import { toNumberSafe } from 'src/utils/number';
 
 import type { ItemEquipmentRaw } from '../types/item-equipment.raw';
+import { getMaxStarforceCap } from '../utils/getMaxStarforceByBaseLevel';
+
+import { toBooleanByFlag } from '@/utils/boolean';
+import { toNumberSafe } from '@/utils/number';
 
 type MainItemRaw = NonNullable<ItemEquipmentRaw['item_equipment']>[number];
 type PresetItemRaw = NonNullable<ItemEquipmentRaw['item_equipment_preset_1']>[number];
@@ -51,10 +53,16 @@ function toItemOption(raw: FullItemOptionRaw | PartialItemOptionRaw | null): Ite
   };
 }
 
-function toItemBaseOption(raw: MainItemRaw['item_base_option'] | null): ItemBaseOption {
+function toItemBaseOption(raw: MainItemRaw['item_base_option'] | null, itemName: string): ItemBaseOption {
+  const baseEquipmentLevel = raw?.base_equipment_level ?? 0;
+
   return {
     ...toItemOption(raw),
-    baseEquipmentLevel: raw?.base_equipment_level ?? 0,
+    baseEquipmentLevel,
+    starforceLimit: getMaxStarforceCap({
+      name: itemName,
+      baseEquipmentLevel,
+    }),
   };
 }
 
@@ -88,7 +96,7 @@ function toClassExclusiveExceptionalOption(raw: ClassExclusiveItemRaw['item_exce
 function toMainItemOptions(raw: MainItemRaw): ItemOptionSet {
   return {
     total: toItemOption(raw.item_total_option),
-    base: toItemBaseOption(raw.item_base_option),
+    base: toItemBaseOption(raw.item_base_option, raw.item_name ?? ''),
     exceptional: toItemExceptionalOption(raw.item_exceptional_option),
     add: toItemOption(raw.item_add_option),
     etc: toItemOption(raw.item_etc_option),
@@ -99,7 +107,7 @@ function toMainItemOptions(raw: MainItemRaw): ItemOptionSet {
 function toPresetItemOptions(raw: PresetItemRaw): ItemOptionSet {
   return {
     total: toItemOption(raw.item_total_option),
-    base: toItemBaseOption(raw.item_base_option),
+    base: toItemBaseOption(raw.item_base_option, raw.item_name ?? ''),
     exceptional: toItemExceptionalOption(raw.item_exceptional_option),
     add: toItemOption(raw.item_add_option),
     etc: toItemOption(raw.item_etc_option),
@@ -110,7 +118,7 @@ function toPresetItemOptions(raw: PresetItemRaw): ItemOptionSet {
 function toClassExclusiveItemOptions(raw: ClassExclusiveItemRaw): ItemOptionSet<ItemOption> {
   return {
     total: toItemOption(raw.item_total_option),
-    base: toItemBaseOption(raw.item_base_option),
+    base: toItemBaseOption(raw.item_base_option, raw.item_name ?? ''),
     exceptional: toClassExclusiveExceptionalOption(raw.item_exceptional_option),
     add: toItemOption(raw.item_add_option),
     etc: toItemOption(raw.item_etc_option),

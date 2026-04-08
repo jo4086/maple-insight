@@ -1,8 +1,9 @@
-import { toBooleanByFlag } from 'src/utils/boolean';
-import { toNumberSafe } from 'src/utils/number';
+import type { BeautyState, CharacterBeauty, FaceStyle, HairStyle, SkinStyle } from '@maple/types';
 
-import type { BeautyState, CharacterBeauty, FaceStyle, HairStyle, SkinStyle } from '../types/beauty-equipment';
 import type { BeautyRaw } from '../types/beauty-equipment.raw';
+
+import { toBooleanByFlag } from '@/utils/boolean';
+import { toNumberSafe } from '@/utils/number';
 
 type HairRaw = BeautyRaw['character_hair'];
 type FaceRaw = BeautyRaw['character_face'];

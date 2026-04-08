@@ -1,10 +1,9 @@
-import type { CashItem, CashItemOption, PrismOption } from '@maple/types';
-import { toBooleanByFlag } from 'src/utils/boolean';
-import { toNumberSafe } from 'src/utils/number';
+import type { CashItem, CashItemOption, PrismOption, BeautyState, FaceStyle, HairStyle, SkinStyle, AndroidInfo, CharacterAndroid } from '@maple/types';
 
-import type { AndroidInfo, CharacterAndroid } from '../types/android-equipment';
 import type { AndroidRaw } from '../types/android-equipment.raw';
-import type { BeautyState, FaceStyle, HairStyle, SkinStyle } from '../types/beauty-equipment';
+
+import { toBooleanByFlag } from '@/utils/boolean';
+import { toNumberSafe } from '@/utils/number';
 
 type AndroidCashItem = Omit<CashItem, 'effectPrism' | 'skills' | 'emotionName'>;
 type HairRaw = AndroidRaw['android_hair'];

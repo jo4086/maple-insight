@@ -1,4 +1,5 @@
-import type { CharacterSetEffect, SetEffect, SetOption } from '../types/set-effect';
+import type { CharacterSetEffect, SetEffect, SetOption } from '@maple/types';
+
 import type { SetEffectRaw } from '../types/set-effect.raw';
 
 type SetEffectItemRaw = NonNullable<SetEffectRaw['set_effect']>[number];

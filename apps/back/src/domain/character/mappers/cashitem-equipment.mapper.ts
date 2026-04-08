@@ -1,7 +1,8 @@
 import type { CashItem, CashItemOption, CharacterCashItem, PrismOption } from '@maple/types';
-import { toBooleanByFlag } from 'src/utils/boolean';
 
 import type { CashRawData } from '../types/cashitem-equipment.raw';
+
+import { toBooleanByFlag } from '@/utils/boolean';
 
 type CashItemRaw = NonNullable<NonNullable<CashRawData['cash_item_equipment_base']>[number]>;
 type NormalPresetKey = 'cash_item_equipment_preset_1' | 'cash_item_equipment_preset_2' | 'cash_item_equipment_preset_3';

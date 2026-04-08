@@ -1,7 +1,8 @@
-import { toNumberSafe } from 'src/utils/number';
+import type { SymbolOption, CharacterSymbol } from '@maple/types';
 
-import type { SymbolOption, CharacterSymbol } from '../types/symbol-equipment';
 import type { SymbolRaw } from '../types/symbol-equipment.raw';
+
+import { toNumberSafe } from '@/utils/number';
 
 type SymbolItemRaw = NonNullable<SymbolRaw['symbol']>[number];
 

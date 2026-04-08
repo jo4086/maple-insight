@@ -1,4 +1,5 @@
-import type { CharacterOtherStat, OtherStat } from '../types/other-stat';
+import type { CharacterOtherStat, OtherStat } from '@maple/types';
+
 import type { OtherStatRaw } from '../types/other-stat.raw';
 
 type OtherStatItemRaw = NonNullable<OtherStatRaw['other_stat']>[number];

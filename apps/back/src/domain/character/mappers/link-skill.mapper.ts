@@ -1,4 +1,5 @@
-import type { CharacterLinkSkill, EquippedLinkSkill, LinkSkill } from '../types/link-skill';
+import type { CharacterLinkSkill, EquippedLinkSkill, LinkSkill } from '@maple/types';
+
 import type { LinkSkillRaw } from '../types/link-skill.raw';
 
 type EquippedLinkSkillRaw = NonNullable<LinkSkillRaw['character_link_skill']>[number];

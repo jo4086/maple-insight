@@ -1,7 +1,8 @@
 import type { CharacterBasic } from '@maple/types';
-import { toBooleanByFlag } from 'src/utils/boolean';
 
 import type { BasicRaw } from '../types/basic.raw';
+
+import { toBooleanByFlag } from '@/utils/boolean';
 
 function toLiberationQuestClear(value: string): 0 | 1 | 2 {
   if (value === '0') return 0;

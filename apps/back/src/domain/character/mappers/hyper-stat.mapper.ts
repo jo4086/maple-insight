@@ -1,7 +1,8 @@
 import type { CharacterHyperStat, PresetInfo, HyperStatPreset } from '@maple/types';
-import { toNumberSafe } from 'src/utils/number';
 
 import type { HyperStatRaw } from '../types/hyper-stat.raw';
+
+import { toNumberSafe } from '@/utils/number';
 
 const HYPER_STAT_PRESET_PAIRS = [
   ['hyper_stat_preset_1', 'hyper_stat_preset_1_remain_point'],

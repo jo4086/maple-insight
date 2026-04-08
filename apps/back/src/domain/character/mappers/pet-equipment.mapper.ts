@@ -1,4 +1,5 @@
-import type { CharacterPet, PetAutoSkill, PetEquipment, PetEquipmentOption, PetInfo } from '../types/pet-equipment';
+import type { CharacterPet, PetAutoSkill, PetEquipment, PetEquipmentOption, PetInfo } from '@maple/types';
+
 import type { PetRaw } from '../types/pet-equipment.raw';
 
 type PetNo = 1 | 2 | 3;
