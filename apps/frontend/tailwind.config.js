@@ -5,7 +5,11 @@ import plugin from 'tailwindcss/plugin';
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@maple/ui/dist/index.{js,cjs}', '../../packages/mapleInsight-ui/src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        mixed: ['"JetBrains Mono"', '"Noto Sans KR"', 'sans-serif'],
+      },
+    },
   },
   plugins: [
     tailwindScollabr,

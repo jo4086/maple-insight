@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  --font-malgun: 'Malgun Gothic', sans-serif;
+  --font-mixed: 'JetBrains Mono', 'Noto Sans KR', sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +14,7 @@ html {
 }
 
 body {
+  font-family: 'Malgun Gothic';
   margin: 0;
   padding: 0;
   width: 100%;
