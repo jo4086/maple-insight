@@ -6,8 +6,26 @@
   "module": "./dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./equipment": {
+      "types": "./dist/equipment.d.ts",
+      "import": "./dist/equipment.js",
+      "require": "./dist/equipment.cjs"
+    },
+    "./character": {
+      "types": "./dist/character.d.ts",
+      "import": "./dist/character.js",
+      "require": "./dist/character.cjs"
+    },
+    "./shared": {
+      "types": "./dist/shared.d.ts",
+      "import": "./dist/shared.js",
+      "require": "./dist/shared.cjs"
+    }
   },
   "scripts": {
     "build": "tsup",
@@ -19,4 +37,3 @@
     "tsup": "^8.5.0"
   }
 }
-

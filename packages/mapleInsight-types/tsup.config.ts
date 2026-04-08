@@ -1,9 +1,15 @@
-import { defineConfig } from 'tsup';
-import alias from 'esbuild-plugin-alias';
 import { resolve } from 'path';
 
+import alias from 'esbuild-plugin-alias';
+import { defineConfig } from 'tsup';
+
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    index: 'src/index.ts',
+    equipment: 'src/equipment/index.ts',
+    character: 'src/character/index.ts',
+    shared: 'src/shared/index.ts',
+  },
   format: ['esm', 'cjs'],
   dts: true,
   sourcemap: true,
