@@ -1,0 +1,10 @@
+{
+  "name": "@maple/db-workspace",
+  "private": true,
+  "scripts": {
+    "typecheck": "pnpm -r --filter @maple/db --filter @maple/data-admin run typecheck",
+    "build": "pnpm -r --filter @maple/db --filter @maple/data-admin run build",
+    "dev": "pnpm -r --parallel --filter @maple/db --filter @maple/data-admin run dev",
+    "lint": "pnpm -r --filter @maple/db --filter @maple/data-admin run lint"
+  }
+}

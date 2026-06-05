@@ -1,0 +1,130 @@
+{
+  "name": "@maple/api-character",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./ability": {
+      "types": "./dist/ability.d.ts",
+      "import": "./dist/ability.js",
+      "require": "./dist/ability.cjs"
+    },
+    "./android-equipment": {
+      "types": "./dist/android-equipment.d.ts",
+      "import": "./dist/android-equipment.js",
+      "require": "./dist/android-equipment.cjs"
+    },
+    "./basic": {
+      "types": "./dist/basic.d.ts",
+      "import": "./dist/basic.js",
+      "require": "./dist/basic.cjs"
+    },
+    "./beauty-equipment": {
+      "types": "./dist/beauty-equipment.d.ts",
+      "import": "./dist/beauty-equipment.js",
+      "require": "./dist/beauty-equipment.cjs"
+    },
+    "./cashitem-equipment": {
+      "types": "./dist/cashitem-equipment.d.ts",
+      "import": "./dist/cashitem-equipment.js",
+      "require": "./dist/cashitem-equipment.cjs"
+    },
+    "./dojang": {
+      "types": "./dist/dojang.d.ts",
+      "import": "./dist/dojang.js",
+      "require": "./dist/dojang.cjs"
+    },
+    "./hexamatrix": {
+      "types": "./dist/hexamatrix.d.ts",
+      "import": "./dist/hexamatrix.js",
+      "require": "./dist/hexamatrix.cjs"
+    },
+    "./hexamatrix-stat": {
+      "types": "./dist/hexamatrix-stat.d.ts",
+      "import": "./dist/hexamatrix-stat.js",
+      "require": "./dist/hexamatrix-stat.cjs"
+    },
+    "./hyper-stat": {
+      "types": "./dist/hyper-stat.d.ts",
+      "import": "./dist/hyper-stat.js",
+      "require": "./dist/hyper-stat.cjs"
+    },
+    "./item-equipment": {
+      "types": "./dist/item-equipment.d.ts",
+      "import": "./dist/item-equipment.js",
+      "require": "./dist/item-equipment.cjs"
+    },
+    "./link-skill": {
+      "types": "./dist/link-skill.d.ts",
+      "import": "./dist/link-skill.js",
+      "require": "./dist/link-skill.cjs"
+    },
+    "./other-stat": {
+      "types": "./dist/other-stat.d.ts",
+      "import": "./dist/other-stat.js",
+      "require": "./dist/other-stat.cjs"
+    },
+    "./pet-equipment": {
+      "types": "./dist/pet-equipment.d.ts",
+      "import": "./dist/pet-equipment.js",
+      "require": "./dist/pet-equipment.cjs"
+    },
+    "./popularity": {
+      "types": "./dist/popularity.d.ts",
+      "import": "./dist/popularity.js",
+      "require": "./dist/popularity.cjs"
+    },
+    "./propensity": {
+      "types": "./dist/propensity.d.ts",
+      "import": "./dist/propensity.js",
+      "require": "./dist/propensity.cjs"
+    },
+    "./ring-reserve-skill-equipment": {
+      "types": "./dist/ring-reserve-skill-equipment.d.ts",
+      "import": "./dist/ring-reserve-skill-equipment.js",
+      "require": "./dist/ring-reserve-skill-equipment.cjs"
+    },
+    "./set-effect": {
+      "types": "./dist/set-effect.d.ts",
+      "import": "./dist/set-effect.js",
+      "require": "./dist/set-effect.cjs"
+    },
+    "./skill": {
+      "types": "./dist/skill.d.ts",
+      "import": "./dist/skill.js",
+      "require": "./dist/skill.cjs"
+    },
+    "./stat": {
+      "types": "./dist/stat.d.ts",
+      "import": "./dist/stat.js",
+      "require": "./dist/stat.cjs"
+    },
+    "./symbol-equipment": {
+      "types": "./dist/symbol-equipment.d.ts",
+      "import": "./dist/symbol-equipment.js",
+      "require": "./dist/symbol-equipment.cjs"
+    },
+    "./vmatrix": {
+      "types": "./dist/vmatrix.d.ts",
+      "import": "./dist/vmatrix.js",
+      "require": "./dist/vmatrix.cjs"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0"
+  }
+}

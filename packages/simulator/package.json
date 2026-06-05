@@ -1,0 +1,41 @@
+{
+  "name": "@maple/simulator",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./stat": {
+      "types": "./dist/stat/index.d.ts",
+      "import": "./dist/stat/index.js",
+      "require": "./dist/stat/index.cjs"
+    },
+    "./symbol": {
+      "types": "./dist/symbol/index.d.ts",
+      "import": "./dist/symbol/index.js",
+      "require": "./dist/symbol/index.cjs"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run --reporter verbose",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@maple/game-data": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0",
+    "vitest": "^4.0.18"
+  }
+}

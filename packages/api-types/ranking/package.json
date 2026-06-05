@@ -1,0 +1,40 @@
+{
+  "name": "@maple/api-ranking",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./guild": {
+      "types": "./dist/guild/index.d.ts",
+      "import": "./dist/guild/index.js",
+      "require": "./dist/guild/index.cjs"
+    },
+    "./overall": {
+      "types": "./dist/overall/index.d.ts",
+      "import": "./dist/overall/index.js",
+      "require": "./dist/overall/index.cjs"
+    },
+    "./union": {
+      "types": "./dist/union/index.d.ts",
+      "import": "./dist/union/index.js",
+      "require": "./dist/union/index.cjs"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0"
+  }
+}

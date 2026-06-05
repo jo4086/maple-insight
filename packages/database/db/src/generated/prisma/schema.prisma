@@ -1,0 +1,510 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["app", "ranking", "game_data", "equipment"]
+}
+
+/// INFO:
+/// 전체 월드 랭킹 수집 실행 메타 정보다.
+/// - 대량 닉네임 수집의 실행 단위를 기록한다.
+model RankingRun {
+  id          BigInt             @id @default(autoincrement())
+  rankingDate String             @map("ranking_date")
+  pageStart   Int                @map("page_start")
+  pageEnd     Int                @map("page_end")
+  totalNames  Int                @default(0) @map("total_names")
+  status      String
+  startedAt   DateTime           @default(now()) @map("started_at") @db.Timestamptz(3)
+  finishedAt  DateTime?          @map("finished_at") @db.Timestamptz(3)
+  lastError   String?            @map("last_error")
+  rawPages    RankingRawPage[]
+  ocidCursor  RankingOcidCursor?
+
+  @@index([rankingDate])
+  @@index([status])
+  @@map("ranking_runs")
+  @@schema("ranking")
+}
+
+/// INFO:
+/// 랭킹 조회 원본 페이지를 그대로 저장하는 테이블이다.
+/// - 랭킹 수집 단계는 여기까지만 수행한다.
+/// - 이후 별도 단계에서 raw page를 읽어 닉네임과 ocid를 처리한다.
+model RankingRawPage {
+  id          BigInt     @id @default(autoincrement())
+  runId       BigInt     @map("run_id")
+  rankingDate String     @map("ranking_date")
+  page        Int
+  rawPayload  Json       @map("raw_payload")
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  run         RankingRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@unique([runId, page])
+  @@index([rankingDate, page])
+  @@index([runId])
+  @@map("ranking_raw_pages")
+  @@schema("ranking")
+}
+
+/// INFO:
+/// raw ranking page에서 ocid 적재를 어디까지 진행했는지 저장한다.
+/// - completed run마다 하나의 cursor만 가진다.
+/// - page 내부 offset까지 저장해서 development에서 50명 단위로 쪼개 처리할 수 있다.
+model RankingOcidCursor {
+  /// cursor row 자체의 PK다.
+  id                BigInt     @id @default(autoincrement())
+  /// 처리 대상 ranking_runs.id다. completed ranking run 하나당 cursor 하나만 가진다.
+  runId             BigInt     @unique @map("run_id")
+  /// 이 run에서 ocid 적재가 완전히 끝난 마지막 ranking page다. 0이면 아직 시작 전이다.
+  lastProcessedPage Int        @default(0) @map("last_processed_page")
+  /// 다음 처리 page 내부에서 이미 처리한 이름 개수다. page가 끝나면 0으로 초기화한다.
+  pageOffset        Int        @default(0) @map("page_offset")
+  /// 이 cursor가 완료 처리한 ranking raw page 수다.
+  processedPages    Int        @default(0) @map("processed_pages")
+  /// 기존 ocids에 없어서 /id 조회 대상으로 처리한 캐릭터 이름 수다.
+  processedNames    Int        @default(0) @map("processed_names")
+  /// pending/running/completed/failed 등 ocid 적재 진행 상태다.
+  status            String     @default("pending")
+  /// 마지막 실패 원인이다. 성공 또는 재시작 시 null로 초기화한다.
+  lastError         String?    @map("last_error")
+  /// 이 cursor row가 처음 생성된 시각이다.
+  startedAt         DateTime   @default(now()) @map("started_at") @db.Timestamptz(3)
+  /// completed 또는 failed 상태로 종료된 시각이다.
+  finishedAt        DateTime?  @map("finished_at") @db.Timestamptz(3)
+  /// DB row 생성 시각이다.
+  createdAt         DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  /// DB row 수정 시각이다.
+  updatedAt         DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  /// cursor가 추적하는 ranking run이다. run 삭제 시 cursor도 같이 삭제한다.
+  run               RankingRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([lastProcessedPage])
+  @@index([lastProcessedPage, pageOffset])
+  @@map("ranking_ocid_cursors")
+  @@schema("ranking")
+}
+
+/// INFO:
+/// 닉네임별 /id 조회 결과를 저장하는 기본 테이블이다.
+/// - characterName은 조회 기준 이름이다.
+/// - ocid는 조회 성공 시 저장하고, 없으면 null일 수 있다.
+/// - status로 found/not_found/failed/pending 등을 관리한다.
+model Ocid {
+  id                         BigInt                 @id @default(autoincrement())
+  characterName              String                 @unique @map("character_name")
+  ocid                       String?                @unique
+  status                     String
+  createdAt                  DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                  DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  searchHistories            SearchHistory[]
+  unionRanking               UnionRanking?          @relation("UnionRankingOwner")
+  representedInUnionRankings UnionRanking[]         @relation("UnionRankingRepresentative")
+  memberOfGroups             CharacterGroupMember[]
+  characterGroups            CharacterGroup[]
+
+  @@index([ocid])
+  @@index([status])
+  @@map("ocids")
+  @@schema("app")
+}
+
+/// INFO:
+/// 캐릭터 검색 발생 시에만 생성되는 일자별 검색 기록이다.
+/// - 하루에 한 캐릭터당 한 row만 유지한다.
+/// - searchCount는 그날의 총 검색 횟수다.
+/// - searchSnapshots는 각 검색 시점의 basic 스냅샷 배열이다.
+/// - updatedAt은 그날 마지막 검색 시각 역할을 한다.
+model SearchHistory {
+  id              BigInt   @id @default(autoincrement())
+  ocidRowId       BigInt   @map("ocid_row_id")
+  searchDate      DateTime @map("search_date") @db.Date
+  searchCount     Int      @default(0) @map("search_count")
+  searchSnapshots Json?    @map("search_snapshots")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  ocidRow         Ocid     @relation(fields: [ocidRowId], references: [id], onDelete: Cascade)
+
+  @@unique([ocidRowId, searchDate])
+  @@index([searchDate])
+  @@index([ocidRowId])
+  @@map("search_histories")
+  @@schema("app")
+}
+
+/// INFO:
+/// /ranking/union 최신 응답을 캐릭터별로 저장한다.
+/// - 동일 accountKey를 같은 계정 그룹 후보로 본다.
+/// - 최신값만 유지하고 상세 원본은 rawPayload로 둔다.
+model UnionRanking {
+  id                      BigInt   @id @default(autoincrement())
+  ocidRowId               BigInt   @unique @map("ocid_row_id")
+  rankingDate             String   @map("ranking_date")
+  queriedCharacterName    String   @map("queried_character_name")
+  primaryCharacterName    String?  @map("primary_character_name")
+  isPrimaryCharacter      Boolean? @map("is_primary_character")
+  accountKey              String?  @map("account_key")
+  representativeOcidRowId BigInt?  @map("representative_ocid_row_id")
+  ranking                 Int?
+  worldName               String?  @map("world_name")
+  className               String?  @map("class_name")
+  subClassName            String?  @map("sub_class_name")
+  unionLevel              Int?     @map("union_level")
+  unionPower              Int?     @map("union_power")
+  rawPayload              Json     @map("raw_payload")
+  fetchedAt               DateTime @default(now()) @map("fetched_at") @db.Timestamptz(3)
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  ocidRow                 Ocid     @relation("UnionRankingOwner", fields: [ocidRowId], references: [id], onDelete: Cascade)
+  representativeOcidRow   Ocid?    @relation("UnionRankingRepresentative", fields: [representativeOcidRowId], references: [id], onDelete: SetNull)
+
+  @@index([accountKey])
+  @@index([representativeOcidRowId])
+  @@index([worldName, unionLevel, unionPower, primaryCharacterName])
+  @@index([primaryCharacterName])
+  @@map("union_rankings")
+  @@schema("ranking")
+}
+
+/// INFO:
+/// 같은 계정으로 추정되는 캐릭터 묶음의 그룹 메타다.
+/// - active/superseded 버전 관리를 한다.
+/// - 최초에는 union ranking 기준으로 생성한다.
+model CharacterGroup {
+  id                      BigInt                 @id @default(autoincrement())
+  previousGroupId         BigInt?                @map("previous_group_id")
+  label                   String?
+  accountKey              String?                @map("account_key")
+  status                  String                 @default("active")
+  primaryCharacterName    String?                @map("primary_character_name")
+  representativeOcidRowId BigInt?                @map("representative_ocid_row_id")
+  memberCount             Int                    @default(0) @map("member_count")
+  memberNamesSnapshot     Json?                  @map("member_names_snapshot")
+  unionLevel              Int?                   @map("union_level")
+  unionPower              Int?                   @map("union_power")
+  unionRankingDate        String?                @map("union_ranking_date")
+  source                  String?
+  confidence              Float?
+  createdAt               DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  lastValidatedAt         DateTime?              @map("last_validated_at") @db.Timestamptz(3)
+  previousGroup           CharacterGroup?        @relation("CharacterGroupVersion", fields: [previousGroupId], references: [id], onDelete: SetNull)
+  nextGroups              CharacterGroup[]       @relation("CharacterGroupVersion")
+  representativeOcidRow   Ocid?                  @relation(fields: [representativeOcidRowId], references: [id], onDelete: SetNull)
+  members                 CharacterGroupMember[]
+
+  @@index([previousGroupId])
+  @@index([accountKey])
+  @@index([status])
+  @@index([representativeOcidRowId])
+  @@map("character_groups")
+  @@schema("app")
+}
+
+/// INFO:
+/// 그룹에 속한 멤버 목록이다.
+/// - 어떤 ocid row가 어떤 그룹에 속했는지 기록한다.
+/// - role은 main/sub/unknown 중 하나다.
+model CharacterGroupMember {
+  id                    BigInt         @id @default(autoincrement())
+  groupId               BigInt         @map("group_id")
+  ocidRowId             BigInt         @map("ocid_row_id")
+  characterNameSnapshot String         @map("character_name_snapshot")
+  role                  String
+  firstSeenAt           DateTime       @default(now()) @map("first_seen_at") @db.Timestamptz(3)
+  lastSeenAt            DateTime       @default(now()) @map("last_seen_at") @db.Timestamptz(3)
+  createdAt             DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt             DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+  group                 CharacterGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  ocidRow               Ocid           @relation(fields: [ocidRowId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, ocidRowId])
+  @@index([groupId])
+  @@index([ocidRowId])
+  @@map("character_group_members")
+  @@schema("app")
+}
+
+/// INFO:
+/// 보스의 난이도 단위 메타 정보다.
+/// - 보스명과 난이도별 공통 정보와 보상 정보를 저장한다.
+/// - phase 상세는 별도 boss_phases에서 관리한다.
+model BossDifficulty {
+  id               BigInt      @id @default(autoincrement())
+  bossName         String      @map("boss_name")
+  difficulty       String
+  forceType        String      @map("force_type")
+  rewardMeso       BigInt      @map("reward_meso")
+  entryLevel       Int?        @map("entry_level")
+  partySize        Int?        @map("party_size")
+  timeLimitSeconds Int?        @map("time_limit_seconds")
+  createdAt        DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
+  phases           BossPhase[]
+
+  @@unique([bossName, difficulty])
+  @@index([bossName])
+  @@index([difficulty])
+  @@map("boss_difficulties")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 보스 난이도 아래의 페이즈 단위 스펙이다.
+/// - 단일 대상인 경우 hp/defenseRate를 phase row에 직접 저장할 수 있다.
+/// - 다중 대상인 경우 상세 target 정보는 boss_phase_targets에서 관리한다.
+model BossPhase {
+  id               BigInt            @id @default(autoincrement())
+  bossDifficultyId BigInt            @map("boss_difficulty_id")
+  phase            Int
+  level            Int?
+  requiredForce    Int?              @map("required_force")
+  hp               BigInt?
+  defenseRate      Int?              @map("defense_rate")
+  timeLimitSeconds Int?              @map("time_limit_seconds")
+  createdAt        DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+  bossDifficulty   BossDifficulty    @relation(fields: [bossDifficultyId], references: [id], onDelete: Cascade)
+  targets          BossPhaseTarget[]
+
+  @@unique([bossDifficultyId, phase])
+  @@index([bossDifficultyId])
+  @@map("boss_phases")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 한 페이즈에 여러 대상이 존재하는 경우의 상세 타겟 정보다.
+/// - 본체/부하/오브젝트 등 targetRole로 역할을 구분할 수 있다.
+/// - 단일 대상 페이즈는 이 테이블 없이 boss_phases의 hp/defenseRate만 사용 가능하다.
+model BossPhaseTarget {
+  id            BigInt    @id @default(autoincrement())
+  bossPhaseId   BigInt    @map("boss_phase_id")
+  targetName    String    @map("target_name")
+  targetRole    String?   @map("target_role")
+  level         Int?
+  requiredForce Int?      @map("required_force")
+  hp            BigInt?
+  defenseRate   Int?      @map("defense_rate")
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  bossPhase     BossPhase @relation(fields: [bossPhaseId], references: [id], onDelete: Cascade)
+
+  @@unique([bossPhaseId, targetName])
+  @@index([bossPhaseId])
+  @@index([targetRole])
+  @@map("boss_phase_targets")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 게임 데이터 원본 JSON 파일 단위 메타 정보다.
+/// - 버전과 파일명 단위로 원본 레코드 묶음을 관리한다.
+/// - 정규화 테이블로 가공하기 전 raw 적재 경계다.
+model GameDataRawFile {
+  id        BigInt              @id @default(autoincrement())
+  version   String
+  fileName  String              @map("file_name")
+  rowCount  Int                 @map("row_count")
+  createdAt DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+  records   GameDataRawRecord[]
+
+  @@unique([version, fileName])
+  @@index([version])
+  @@map("game_data_raw_files")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 게임 데이터 원본 JSON의 레코드 단위 payload다.
+/// - payload는 원본 row를 그대로 보존한다.
+/// - sourceKey는 skillID/jobID처럼 파일별 주요 조회 키를 저장한다.
+model GameDataRawRecord {
+  id        BigInt          @id @default(autoincrement())
+  fileId    BigInt          @map("file_id")
+  rowIndex  Int             @map("row_index")
+  sourceKey String?         @map("source_key")
+  payload   Json
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  file      GameDataRawFile @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@unique([fileId, rowIndex])
+  @@index([sourceKey])
+  @@map("game_data_raw_records")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 게임 데이터 직업 원본 정규화 테이블이다.
+/// - jobId는 원본 jobID 문자열을 앞자리 0까지 보존한다.
+model GameJob {
+  version   String
+  jobId     String      @map("job_id")
+  jobName   String      @map("job_name")
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
+  skills    GameSkill[]
+
+  @@id([version, jobId])
+  @@index([jobName])
+  @@map("game_jobs")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 게임 데이터 스킬 원본 정규화 테이블이다.
+/// - skillId는 원본 skillID 문자열을 앞자리 0까지 보존한다.
+model GameSkill {
+  version       String
+  skillId       String               @map("skill_id")
+  jobId         String               @map("job_id")
+  skillName     String               @map("skill_name")
+  skillDesc     String?              @map("skill_desc")
+  maxLevel      Int?                 @map("max_level")
+  invisible     Boolean?
+  hyper         Int?
+  reqSkill      String?              @map("req_skill")
+  reqSkillLevel Int?                 @map("req_skill_level")
+  reqLevel      Int?                 @map("req_level")
+  createdAt     DateTime             @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime             @updatedAt @map("updated_at") @db.Timestamptz(3)
+  job           GameJob              @relation(fields: [version, jobId], references: [version, jobId], onDelete: Cascade)
+  common        GameSkillCommon[]
+  hint          GameSkillHint?
+  levels        GameSkillLevel[]
+  pvpCommon     GameSkillPvpCommon[]
+
+  @@id([version, skillId])
+  @@index([version, jobId])
+  @@index([skillName])
+  @@map("game_skills")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// ms_skillCommon.json의 스킬별 공통 수식/값 테이블이다.
+model GameSkillCommon {
+  version     String
+  skillId     String    @map("skill_id")
+  commonName  String    @map("common_name")
+  commonValue String    @map("common_value")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  skill       GameSkill @relation(fields: [version, skillId], references: [version, skillId], onDelete: Cascade)
+
+  @@id([version, skillId, commonName])
+  @@index([commonName])
+  @@map("game_skill_common")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// ms_skillH.json의 스킬별 설명/힌트 테이블이다.
+model GameSkillHint {
+  version   String
+  skillId   String    @map("skill_id")
+  desc      String?
+  pdesc     String?
+  h         String?
+  ph        String?
+  hch       String?
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  skill     GameSkill @relation(fields: [version, skillId], references: [version, skillId], onDelete: Cascade)
+
+  @@id([version, skillId])
+  @@map("game_skill_hints")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// ms_skillLevel.json의 스킬 레벨별 설명 테이블이다.
+model GameSkillLevel {
+  version   String
+  skillId   String    @map("skill_id")
+  level     Int
+  levelDesc String?   @map("level_desc")
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  skill     GameSkill @relation(fields: [version, skillId], references: [version, skillId], onDelete: Cascade)
+
+  @@id([version, skillId, level])
+  @@index([level])
+  @@map("game_skill_levels")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// ms_skillPVPCommon.json의 PVP용 스킬 공통 수식/값 테이블이다.
+model GameSkillPvpCommon {
+  version     String
+  skillId     String    @map("skill_id")
+  commonName  String    @map("common_name")
+  commonValue String    @map("common_value")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  skill       GameSkill @relation(fields: [version, skillId], references: [version, skillId], onDelete: Cascade)
+
+  @@id([version, skillId, commonName])
+  @@index([commonName])
+  @@map("game_skill_pvp_common")
+  @@schema("game_data")
+}
+
+/// INFO:
+/// 생성된 장비 데이터의 최종 표시/계산용 아이템 테이블이다.
+/// - generator/src/generated/equipment/*.json 결과를 적재한다.
+/// - keywords는 검색/필터용 key를 유지하고, 그 외 표시 필드는 한글명을 저장한다.
+model EquipmentItem {
+  id                      BigInt   @id @default(autoincrement())
+  name                    String
+  category                String
+  keywords                String[]
+  part                    String
+  setName                 String?  @map("set_name")
+  luckyFlag               Boolean  @default(false) @map("lucky_flag")
+  potentialEnabled        Boolean  @default(true) @map("potential_enabled")
+  starforceEnabled        Boolean  @default(true) @map("starforce_enabled")
+  scrollUpgradeEnabled    Boolean  @default(true) @map("scroll_upgrade_enabled")
+  additionalOptionEnabled Boolean  @default(true) @map("additional_option_enabled")
+  requiredLevel           Int?     @map("required_level")
+  requiredClass           Json     @map("required_class")
+  classGroup              String?  @map("class_group")
+  handType                String?  @map("hand_type")
+  weaponConstant          Float?   @map("weapon_constant")
+  str                     Int      @default(0)
+  dex                     Int      @default(0)
+  int                     Int      @default(0)
+  luk                     Int      @default(0)
+  maxHp                   Int      @default(0) @map("max_hp")
+  maxMp                   Int      @default(0) @map("max_mp")
+  maxHpRate               Int      @default(0) @map("max_hp_rate")
+  maxMpRate               Int      @default(0) @map("max_mp_rate")
+  attackPower             Int      @default(0) @map("attack_power")
+  magicPower              Int      @default(0) @map("magic_power")
+  armor                   Int      @default(0)
+  bossDamage              Int      @default(0) @map("boss_damage")
+  ignoreMonsterArmor      Int      @default(0) @map("ignore_monster_armor")
+  criRate                 Int      @default(0) @map("cri_rate")
+  criDamage               Int      @default(0) @map("cri_damage")
+  normalDamage            Int      @default(0) @map("normal_damage")
+  speed                   Int      @default(0)
+  jump                    Int      @default(0)
+  upgradeScroll           Int      @default(0) @map("upgrade_scroll")
+  exceptionalScroll       Int      @default(0) @map("exceptional_scroll")
+  specialRingLevel        Int      @default(0) @map("special_ring_level")
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([name])
+  @@index([category])
+  @@index([part])
+  @@index([setName])
+  @@index([classGroup])
+  @@map("equipment_items")
+  @@schema("equipment")
+}

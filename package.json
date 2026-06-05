@@ -3,12 +3,22 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages",
+    "packages/*",
+    "packages/api-types/*",
+    "packages/contracts/*",
+    "packages/database/*"
   ],
   "scripts": {
     "build": "pnpm -r build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "typecheck:pkgs": "pnpm --filter @maple/packages-workspace run typecheck",
+    "lint:pkgs": "pnpm --filter @maple/packages-workspace run lint",
+    "build:pkgs": "pnpm --filter @maple/packages-workspace run build",
+    "convert:csv-json": "node scripts/convert-csv-to-json.mjs",
+    "sync:package-entrypoints": "node scripts/sync-package-entrypoints.mjs"
   },
   "author": "jo4086",
   "license": "MIT",
@@ -30,5 +40,12 @@
     "turbo": "^2.5.8",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "overrides": {
+      "esbuild": "0.25.5",
+      "typescript": "^5.9.3"
+    }
   }
 }

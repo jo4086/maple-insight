@@ -1,0 +1,2778 @@
+[
+  {
+    "classId": "00000",
+    "className": "초보자",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "00100",
+    "className": "검사",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00110",
+    "className": "파이터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00111",
+    "className": "크루세이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00112",
+    "className": "히어로",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00113",
+    "className": "히어로",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00114",
+    "className": "히어로",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00115",
+    "className": "히어로",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00120",
+    "className": "페이지",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00121",
+    "className": "나이트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00122",
+    "className": "팔라딘",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00123",
+    "className": "팔라딘",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00124",
+    "className": "팔라딘",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00125",
+    "className": "팔라딘",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00130",
+    "className": "스피어맨",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00131",
+    "className": "버서커",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00132",
+    "className": "다크나이트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00133",
+    "className": "다크나이트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00134",
+    "className": "다크나이트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00135",
+    "className": "다크나이트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00200",
+    "className": "메지션",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00210",
+    "className": "위자드(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00211",
+    "className": "메이지(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00212",
+    "className": "아크메이지(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00213",
+    "className": "아크메이지(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00214",
+    "className": "아크메이지(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00215",
+    "className": "아크메이지(불,독)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00220",
+    "className": "위자드(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00221",
+    "className": "메이지(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00222",
+    "className": "아크메이지(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00223",
+    "className": "아크메이지(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00224",
+    "className": "아크메이지(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00225",
+    "className": "아크메이지(썬,콜)",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00230",
+    "className": "클레릭",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00231",
+    "className": "프리스트",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00232",
+    "className": "비숍",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00233",
+    "className": "비숍",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00234",
+    "className": "비숍",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00235",
+    "className": "비숍",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00300",
+    "className": "아처",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00310",
+    "className": "헌터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00311",
+    "className": "레인저",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00312",
+    "className": "보우마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00313",
+    "className": "보우마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00314",
+    "className": "보우마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00315",
+    "className": "보우마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00320",
+    "className": "사수",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00321",
+    "className": "저격수",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00322",
+    "className": "신궁",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00323",
+    "className": "신궁",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00324",
+    "className": "신궁",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00325",
+    "className": "신궁",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00330",
+    "className": "에이션트 아처",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00331",
+    "className": "체이서",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00332",
+    "className": "패스파인더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00333",
+    "className": "패스파인더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00334",
+    "className": "패스파인더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00335",
+    "className": "패스파인더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00400",
+    "className": "로그",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00410",
+    "className": "어쌔신",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00411",
+    "className": "허밋",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00412",
+    "className": "나이트로드",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00413",
+    "className": "나이트로드",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00414",
+    "className": "나이트로드",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00415",
+    "className": "나이트로드",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00420",
+    "className": "시프",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00421",
+    "className": "시프마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00422",
+    "className": "섀도어",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00423",
+    "className": "섀도어",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00424",
+    "className": "섀도어",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00425",
+    "className": "섀도어",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00430",
+    "className": "세미듀어러",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00431",
+    "className": "듀어러",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 1.5
+  },
+  {
+    "classId": "00432",
+    "className": "듀얼마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00433",
+    "className": "슬래셔",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 2.5
+  },
+  {
+    "classId": "00434",
+    "className": "듀얼블레이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00435",
+    "className": "듀얼블레이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00436",
+    "className": "듀얼블레이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00437",
+    "className": "듀얼블레이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00438",
+    "className": "듀얼블레이더",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00500",
+    "className": "해적",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "00510",
+    "className": "인파이터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00511",
+    "className": "버커니어",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00512",
+    "className": "바이퍼",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00513",
+    "className": "바이퍼",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00514",
+    "className": "바이퍼",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00515",
+    "className": "바이퍼",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00520",
+    "className": "건슬링거",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00521",
+    "className": "발키리",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00522",
+    "className": "캡틴",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00523",
+    "className": "캡틴",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00524",
+    "className": "캡틴",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00525",
+    "className": "캡틴",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "00530",
+    "className": "캐논슈터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "00531",
+    "className": "캐논블래스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "00532",
+    "className": "캐논마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "00533",
+    "className": "캐논마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "00534",
+    "className": "캐논마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "00535",
+    "className": "캐논마스터",
+    "affiliation": "모험가",
+    "lineage": "모험가",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01000",
+    "className": "노블레스",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "01100",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01101",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01102",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01103",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01104",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01105",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01106",
+    "className": "소울마스터",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01110",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01111",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01112",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01113",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01114",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01115",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01116",
+    "className": "미하일",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01200",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01201",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01202",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01203",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01204",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01205",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01206",
+    "className": "플레임위자드",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01300",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01301",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01302",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01303",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01304",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01305",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01306",
+    "className": "윈드브레이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01400",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01401",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01402",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01403",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01404",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01405",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01406",
+    "className": "나이트워커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "01500",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "01501",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "01502",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "01503",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "01504",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "01505",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "01506",
+    "className": "스트라이커",
+    "affiliation": "시그너스 기사단",
+    "lineage": "시그너스 기사단",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02000",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02100",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02101",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02102",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02103",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02104",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02105",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02106",
+    "className": "아란",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02001",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02200",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02201",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02202",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02203",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02204",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02205",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02206",
+    "className": "에반",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02002",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02210",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02211",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02212",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02213",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02214",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02215",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02216",
+    "className": "루미너스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02003",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02300",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02301",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02302",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02303",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02304",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02305",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02306",
+    "className": "메르세데스",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02004",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02400",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02401",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02402",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02403",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02404",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02405",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02406",
+    "className": "팬텀",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "02005",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "02500",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "02501",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "02502",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "02503",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "02504",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "02505",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "02506",
+    "className": "은월",
+    "affiliation": "영웅",
+    "lineage": "영웅",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03000",
+    "className": "시티즌",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "03100",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03101",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03102",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03103",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03104",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03105",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03106",
+    "className": "블래스터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03200",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03201",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03202",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03203",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03204",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03205",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03206",
+    "className": "배틀메이지",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03300",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03301",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03302",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03303",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03304",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03305",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03306",
+    "className": "와일드헌터",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03500",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03501",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03502",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03503",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03504",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03505",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03506",
+    "className": "메카닉",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03001",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "03110",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03111",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03112",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03113",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03114",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03115",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03116",
+    "className": "데몬슬레이어",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03002",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "03120",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03121",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03122",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03123",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03124",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03125",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03126",
+    "className": "데몬어벤져",
+    "affiliation": "레지스탕스",
+    "lineage": "데몬",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "03003",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "03400",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "03401",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "03402",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "03403",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "03404",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "03405",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "03406",
+    "className": "제논",
+    "affiliation": "레지스탕스",
+    "lineage": "레지스탕스",
+    "classGroup": ["도적", "해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "04000",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "04100",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "04101",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "04102",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "04103",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "04104",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "04105",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "04106",
+    "className": "카이저",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "04001",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "04300",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 1
+  },
+  {
+    "classId": "04301",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 2
+  },
+  {
+    "classId": "04302",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 3
+  },
+  {
+    "classId": "04303",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 4
+  },
+  {
+    "classId": "04304",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "04305",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 5
+  },
+  {
+    "classId": "04306",
+    "className": "카인",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["궁수"],
+    "classLevel": 6
+  },
+  {
+    "classId": "04002",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "04400",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "04401",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "04402",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "04403",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "04404",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "04405",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "04406",
+    "className": "카데나",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "04003",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "04500",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "04501",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "04502",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "04503",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "04504",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "04505",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "04506",
+    "className": "엔젤릭버스터",
+    "affiliation": "노바",
+    "lineage": "노바",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "05000",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "05100",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "05101",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "05102",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "05103",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "05104",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "05105",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "05106",
+    "className": "제로",
+    "affiliation": "초월자",
+    "lineage": "초월자",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "06000",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "06200",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "06201",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "06202",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "06203",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "06204",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "06205",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "06206",
+    "className": "키네시스",
+    "affiliation": "프렌즈 월드",
+    "lineage": "프렌즈 월드",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "07000",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "07100",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "07101",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "07102",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "07103",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "07104",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "07105",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "07106",
+    "className": "아델",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "07001",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "07200",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "07201",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "07202",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "07203",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "07204",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "07205",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "07206",
+    "className": "일리움",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "07002",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "07400",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "07401",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "07402",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "07403",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "07404",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "07405",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "07406",
+    "className": "칼리",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "07003",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "07500",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "07501",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "07502",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "07503",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "07504",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "07505",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "07506",
+    "className": "아크",
+    "affiliation": "레프",
+    "lineage": "레프",
+    "classGroup": ["해적"],
+    "classLevel": 6
+  },
+  {
+    "classId": "08000",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "08100",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "08101",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "08102",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "08103",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "08104",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "08105",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "08106",
+    "className": "렌",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["전사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "08001",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "08200",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 1
+  },
+  {
+    "classId": "08201",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 2
+  },
+  {
+    "classId": "08202",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 3
+  },
+  {
+    "classId": "08203",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 4
+  },
+  {
+    "classId": "08204",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "08205",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 5
+  },
+  {
+    "classId": "08206",
+    "className": "라라",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["마법사"],
+    "classLevel": 6
+  },
+  {
+    "classId": "08002",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["미전직"],
+    "classLevel": 0
+  },
+  {
+    "classId": "08400",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 1
+  },
+  {
+    "classId": "08401",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 2
+  },
+  {
+    "classId": "08402",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 3
+  },
+  {
+    "classId": "08403",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 4
+  },
+  {
+    "classId": "08404",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": "hyper"
+  },
+  {
+    "classId": "08405",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 5
+  },
+  {
+    "classId": "08406",
+    "className": "호영",
+    "affiliation": "아니마",
+    "lineage": "아니마",
+    "classGroup": ["도적"],
+    "classLevel": 6
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "name": "@maple/generator",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./generated": {
+      "types": "./dist/generated/index.d.ts",
+      "import": "./dist/generated/index.js",
+      "require": "./dist/generated/index.cjs"
+    }
+  },
+  "scripts": {
+    "pretypecheck": "pnpm --filter @maple/game-data run build && pnpm --filter @maple/data-class run build && pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "pnpm --filter @maple/game-data run build && pnpm --filter @maple/data-class run build && pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts",
+    "generate:class-json": "pnpm run build && node scripts/generate-class-json.mjs",
+    "generate:boss-json": "pnpm run build && node scripts/generate-boss-json.mjs",
+    "generate:game-skills-by-raw-job": "pnpm run build && node scripts/generate-game-skills-by-raw-job.mjs",
+    "generate:taxonomy-affiliation-class": "pnpm run build && node scripts/generate-taxonomy-affiliation-class.mjs",
+    "generate:equipment-json": "pnpm run build && node scripts/generate-equipment-json.mjs",
+    "generate:potential-option-grade-json": "pnpm --filter @maple/data-potential run build && node scripts/generate-potential-option-grade-json.mjs",
+    "generate:potential-option-grade-part-json": "pnpm --filter @maple/data-potential run build && node scripts/generate-potential-option-grade-part-json.mjs"
+  },
+  "dependencies": {
+    "@maple/data-core": "workspace:*",
+    "@maple/data-equipment": "workspace:*",
+    "@maple/data-skill": "workspace:*",
+    "@maple/db": "workspace:*",
+    "@maple/game-data": "workspace:*",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@maple/contracts": "workspace:*",
+    "@maple/internal": "workspace:*",
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0"
+  }
+}

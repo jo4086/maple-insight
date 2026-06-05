@@ -1,0 +1,2587 @@
+[
+  {
+    "level": 0,
+    "medalName": "저주를 푼 자",
+    "stats": "올스탯 +4, 이동속도 +10, 점프력 +5, 손재주 +2",
+    "obtainCondition": "2008 헌티드 맨션 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/VDIXPWlb9UxvOvMLcSrEYNr717Er85vYSucJjM9S380M3IuWLfOxDdbeTyZ87b75sl2CFALYGFXYE0fCkAxeBQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "매크로 사냥금지",
+    "stats": "이동속도 +10",
+    "obtainCondition": "겨울방학 '그린 캠페인' 이벤트 선택 훈장",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/k0II5cBuYFZrusxztxhVoMwOSo0dL7g2QWkf0035KPVqmZrTfKdwWiDNEaXnOtFOJMCh4xNxUdmbEETcdEr12Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "바른말 고운말 쓰기",
+    "stats": "이동속도 +10",
+    "obtainCondition": "겨울방학 '그린 캠페인' 이벤트 선택 훈장",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/kzgUcP7sjZ2zgYW9zxK2YZq3x9C3nlzxHM2yMfoj15PXi41Jd5Vyb9rDiL5cEQqfOy-ifQPdi6LiY_8FmFkpQQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "무엇이든 물어보세요",
+    "stats": "이동속도 +10",
+    "obtainCondition": "겨울방학 '그린 캠페인' 이벤트 선택 훈장",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ghilAJzIKUM9IZLRafY8w0VHu_B7Y5bURkOZz-PUeKVoTs0hoqkFiS3QZTmrqw5dIcqcJJf1M7ikpESfDoSdzg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "저와 친구해주세요",
+    "stats": "이동속도 +10",
+    "obtainCondition": "겨울방학 '그린 캠페인' 이벤트 선택 훈장",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/uzeEiXAZhzC4g1CGDEPdPiHmhnQz42uGN1NTYbs9IMOrU_gupnSLqu10wTZHbCiNExZ3TzYhxjY8oQG45DHlyg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "명예 메소레인저",
+    "stats": "이동속도 +10",
+    "obtainCondition": "2008.12 김박사와 메소레인저! 해킹 방지 대작전 이벤트 참여 보상 홈페이지에 스크린샷 게시 후 선별",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/l3DbjgAlZt0zUDRatldwdcQsJPe5ifsWE4gcuYRLlVcuVQh1rn8nr92RK-JkpYa9QnX8iQkkJq5GSX_XXOVNgA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "1일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 1일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/YqXwL7vG6vxUddGSytGwcja1M0_Zk9KvZb0k3ClT45dKF2mt7eImOZ4QcO58zAATp9RgB8d0Y49BU-7ml0gBsg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 2일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/8xkkGcIOqWLOBSoqaThb2KOqZjjul2eXSAdGey6ygVhbl09FWrjMwSzmu4K6SWUuCtrPQeeUNa4067cxn1DOMg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "3일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 3일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/PwBg4AuSHHKoH6w0B-sKIDuf_hp2-lZ6te08szhUfp50-Di53Xd2v0lRT94NtXx2eymO5ZdnH1jLVXXq2clKuA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "4일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 4일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/wobjlj1-86Ds_GWIXWV8xTKoaIi8q1uLRtIrIzOarFEt0sQaXQGdJ2PPd-gR9KslAk3Q15GNcjm1NEu4cK0U9A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "5일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 5일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/HeHmGAEbcUuxUDopzAXmQeBCaS0vQA5uXJygdyM-tJiRR6zIhqhlVzfhJ-mog28PuCyN_z8vrK9M1soYtmGnIw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "6일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 6일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/xkqh19ptBrCzHZtTCguIYmm0ZfheOjX3Oc2LcLMTPTBYeIlQdACSKIXxq4NV16_RXkvKgJ5FgAywRhe3uqy8Tw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "7일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 7일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/1sDxMCIw1bZiHzG6xJGw33qIWvxwiWfO8Tah5HdkvE4TY0Hc1HBWHxS0ReTPmlHafiqVjtxiRjkQ5LN43gDdHw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "8일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 8일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/YNGg_Eml41Zip8BE3U10-SJla95EH64YG3I--i6kxRS5ATl8BgSdLGpo7CBG0XTj2RnychDuZsrQlFVMmL-cDQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "9일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 9일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/skNqSlIAeFxzCrmLndkUPOPIaupd-aVnoOydLKWU80__sqCoA5HuHSHMlysmpAU7r26-2biH5ZOCSQlaYIB8hQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "10일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 10일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/mflPY0qK4lW6sjsoTcbuU6SfQgAwAYkhXxOh_iPsTqQd7Ri7U_sdRMmaqGR8uCqLB9hVnTtlXniXacaDAmbgZg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "11일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 11일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/wOmrjFz1oKTG-oLs3TrJwSVAE8nVya78fffIAI3uzkODGqKuL9GFMMxmmnqz6slAEFlwsTTl1muP4bxwxfqmXQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "12일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 12일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/hQv4FMH_GxfWKY4a4AeFgthxnmh8vYfAnBLU0wF9FMw0CqAxZEDs9CYKgu7za2oARbB3GVhSMtHSl7505Ji-jg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "13일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 13일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/asNASkIJ-DE3ZoKoBB2TRn-LXjFRvwSaEbdDH1eouqsqgklnmCcfHMHc42-FfrNDhDWR1OQ78JyBt_GCpi2bOA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "14일 꿈",
+    "stats": "STR +1",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 14일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/VGIaOmzIoDsiAwPH4pdeky85TRog6zvCqvGjF2vM4wmafP7BiCICXJQYmJENMS17pW7ZpoUny6IRo8_I3Vz1CA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "15일 꿈",
+    "stats": "올스탯 +3",
+    "obtainCondition": "끊임없는 여정 이벤트 1시간씩 15일 접속",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/CNYo1fUgzr6HN31Ni-NZr6it8EQF31J2jRdK41IJihiRDQ0d8mtB9jutgd3yaHvcgHCzlULv5asVB8-2PZclPQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플러버",
+    "stats": "올스탯 +4",
+    "obtainCondition": "v1.2.73 6주년 이벤트 : 15일 꿈을 교환",
+    "medalIconImage": "//i.namu.wiki/i/8lYPB4dxlSAqhk590pjNAJlt21SB3D75Fk7kif-xgJjx92_Cz6e6LhMqUJIKaHw6QRNAtdS6QyAvGEQwymjnJA.png",
+    "displayImage": "//i.namu.wiki/i/CtH0L6Shb1Mynhpv0TFJGK8ucx_pIAP8VeJpqrjkJrYLm92fs0gp37Ja6N3egjI90f1rxb8h_MwyHN2dxma2Kg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "참 나라사랑",
+    "stats": "이동속도 +10, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "1월 국가보훈처 이벤트 참여 보상(일일 3,300명 한정)",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/mn9iNsMXobJp3JnYYE-V-tmvwQjdN2hKtsVNmQTS2qrO4u5rW1PRyrmI3Z5BtR6SBRsv8EMeR0Mv8yxuBKDeuA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "명예 메소레인저 2기",
+    "stats": "올스탯 +1, 이동속도 +10, 점프력 +5",
+    "obtainCondition": "2009.7 김박사의 보안본부배 체력증진 달리기 대회 이벤트 참여 보상 홈페이지에 완주 스크린샷 게시 후 선정",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/SQKrTjiURN_ZaN4WTLqyRElsM7QfhhtoKvds6Ih9P55GHrIYHGIILoBedwObVUGV-rwLu-Uj6iSij0soIoxPEQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "유물 대회 Top10",
+    "stats": "옵션 없음",
+    "obtainCondition": "2009.6 , 2009.11 , 2010.5 고대 유물 대회 Top 10 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/QzmU7qQ2o9jvUfAg224qTQhFtS3i-2bGfqDnBMsuyMGLtfMEFr89j-RNumanP-yWfk0fSCgY4qzCLs8l3zMBDA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "신비로운 유물 발견자",
+    "stats": "올스탯 +1, 이동속도 +5, 점프력 +5",
+    "obtainCondition": "2009.6 , 2009.11 , 2010.5 고대 유물 대회 신비로운 유물 8개 발견",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/nq5el6HU_fM1MMQ4aSX2apAT2QBJ4nxk_TwDTYxqjHw9McaeJg2X218dFzmERgEZLf_uEtQN3-oSQwJm3d8wjA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 스쿨",
+    "stats": "최대 HP/MP +70, 명중치 +5",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 1: 아란의 귀환' 구매 보상",
+    "medalIconImage": "//i.namu.wiki/i/oQAhMECGJ851G4JinYDe3XKIDMisH_OsxTrT5XaL-1ArGMktkjsfd_jQNlbKtsRhEQbwt2fcaM_Sk-G3gxaazQ.png",
+    "displayImage": "//i.namu.wiki/i/O63_ec4quJNcXWiodVxezDT1MvzGQm-F-qKGU4kd-gHKeNvACt8udXLRxdjQ5faZQg4yYkTq_MlPS8U0ftfvKw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "콤보 매니아",
+    "stats": "올스탯 +1, 명중치 +2",
+    "obtainCondition": "콤보의 달인 이벤트 [1] 동안 아란 직업으로 콤보 50 이상 누적",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/UaDzQrQLKOxHiB7Emp6V2QcEwUi0uXyk8Jb0Ta4beTkTNByqrw6xWukZjlPtiRrgFRwrGT857Tl0ESQbzyS3Zg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "콤보의 달인",
+    "stats": "올스탯 +2, 명중치 +3",
+    "obtainCondition": "콤보의 달인 이벤트 [2] 동안 아란 직업으로 콤보 200 이상 누적",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/bVxaulW94JbWxC8JWf-3_9k4iXMTDIiXQvnMefCbYVXTkvzAL3szdYwGzyWa6yn1geMlg28KQHjJgrd9Y5EhOA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "콤보왕",
+    "stats": "올스탯 +3, 최대 HP +50, 명중치 +5",
+    "obtainCondition": "콤보의 달인 이벤트 [3] 동안 아란 직업으로 콤보 500 이상 누적",
+    "medalIconImage": "//i.namu.wiki/i/nTJxgsCNRqHa2fIK-0z5rXLmevPM9kIPDuEeG05EunVqoUXrvnUb5q4EwlN74fVGAD4pJhGnLUACXWJdPfZzzw.png",
+    "displayImage": "//i.namu.wiki/i/EelvGSpnXRql8J9oG25oQaGvavzZ4v6kMRFyN_ULZm2QKJhUXhcKnQFFuclzbTbNqwAD6SdaH8l_9ElMSst5cA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2009 여름 소년",
+    "stats": "공격력 +2, 마력 +4, 훈장 신비의 모루 사용 불가 [4]",
+    "obtainCondition": "2009 여름 방학 이벤트에서 획득 20회 이상 획득 시 30일 기간제 훈장 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/wKtexvjLeUQ_wlpGj3Z8ooVlwWEf1o4VUmKq3OziZvP3YRjy4dX9W2-3xoadbShth2uHjSDAJ0gUVe8qSI0zCw.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2009 여름 소녀",
+    "stats": "공격력 +2, 마력 +4, 훈장 신비의 모루 사용 불가 [5]",
+    "obtainCondition": "2009 여름 방학 이벤트에서 획득 20회 이상 획득 시 30일 기간제 훈장 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/G_4pdxGfvyLXgvFGvp51HrXwrfMR6ebR6nXjca1RO1pGEKSUd1hh6fKjFdQvBwqSA1rXVnc1BqDwVZpD2tB8nQ.png"
+  },
+  {
+    "level": 20,
+    "medalName": "류호 이주민",
+    "stats": "최대 HP/MP +70",
+    "obtainCondition": "이벤트 기간 [6] 동안 류호 서버에서 레벨 20 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/F_qanSFeD3Yiph8jcXS3tNtjVowORpVTIkFFc1ewQTCcV7rGXRnombIvE4R0UIyh_oz-fjvfhSAADJQA0rSliw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "류호 도전자",
+    "stats": "최대 HP/MP +100, 명중치 +10",
+    "obtainCondition": "이벤트 기간 [7] 동안 류호 서버에서 레벨 30 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/BJHe7Tq8qEvsjBepbI4PCmjfaHe-fXC_q2csueUjXlWAeu8G7WkV2r-HU4EwUbmbXtbcQOhzKJ93kd4wuigk6Q.png"
+  },
+  {
+    "level": 40,
+    "medalName": "류호 정착자",
+    "stats": "최대 HP/MP +120, 명중치 +10",
+    "obtainCondition": "이벤트 기간 [8] 동안 류호 서버에서 레벨 40 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-WnhLahqm2nfoykdHJOTLfTXvf3MT_HRUpVmNr3cJiQ4Dv3zyNgjRZeTei7u5ZJ0ilWubmECewoKYNpEu_25PA.png"
+  },
+  {
+    "level": 50,
+    "medalName": "류호 개척자",
+    "stats": "올스탯 +1, 최대 HP/MP +120, 공/마 +1, 이동속도 +1, 점프력 +1, 손재주 +1, 명중치 +1, 회피치 +1",
+    "obtainCondition": "이벤트 기간 [9] 동안 류호 서버에서 레벨 50 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/T7aFN_chThrgaphpvF2ny_Pg9htP0a7tvnNxSxwR5KmEHgls-rRN8e-ycPLzTFGepgycd5r4lZgTZn5qry5hDQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "명예 메소레인저 3기",
+    "stats": "올스탯 +1, 이동속도 +10, 점프력 +5",
+    "obtainCondition": "2009.12 김박사와 메소레인저의 해킹 방지 대작전! 이벤트 참여 보상 '해킹자료 분석' 퀘스트 완료 후 20% 확률로 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/kof-qF9N7Hjy0dtbjrFfd_rqI61IY_6rjuFIsdfnki-Eg5o8mvtLkABTME3zABJ1eOwcsw7DN5FLHFv59_zL3w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "명예 맨손레인저",
+    "stats": "점프력 +5, 손재주 +10",
+    "obtainCondition": "위와 동일 '해킹자료 분석' 퀘스트 완료 후 40% 확률로 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/P9ESErhLsVbS05qIHP5-DPhdpjbxqlbQdduOsxlItPvtJ_92hapDYQ7uCnjnPM3-L8hkZwBW-XLZY2TfoBDdiw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "명예 맨발레인저",
+    "stats": "점프력 +5",
+    "obtainCondition": "위와 동일 '해킹자료 분석' 퀘스트 완료 후 40% 확률로 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/TVnM-Jx3QC2GMwUQeB9Uo6Q6CpmNWI9J56s9Z7RykSMtWgElsgxKIqtfHErmlrCRtZDM1hgWTG_0BeOWYeTDDg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2009루돌프",
+    "stats": "최대 HP/MP +25, 방어력 +25, 손재주 +5, 명중치 +5, 회피치 +5",
+    "obtainCondition": "2009 크리스마스 이벤트 참여 [10]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Fgg4svsb-S-MIEiqe8zsD1brG5FCh_aQB5bqOn0pNr-pN4NdKn0A_D_YpJajpbTZaPCmOXGW-M-fMdLMJPuTaw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "DS 매니아",
+    "stats": "올스탯 +1, 최대 HP/MP +20",
+    "obtainCondition": "메이플스토리 DS",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/1HbljSps7o5QxvCZ6KYttKGzLxTeMTmjplvrMmb_I0N5s60ax44-7xSMBO60DDxDDQdp14YoGRlwtEsElgZ0CA.png"
+  },
+  {
+    "level": 40,
+    "medalName": "명예 모험가",
+    "stats": "올스탯 +1,최대 HP/MP +100, 이동속도 +5, 점프력 +5, 손재주 +10",
+    "obtainCondition": "모험가의 귀환 이벤트 기간 [11] 동안 모험가 레벨 40 달성",
+    "medalIconImage": "//i.namu.wiki/i/EPLoJHSqh0VMHu8jVlHZz4js3saiT42ePFeBz8jajZHEbrccYw1qCuB1FjgQi1mBhMvcG1KKftklEldXOP12JQ.png",
+    "displayImage": "//i.namu.wiki/i/Ly6_hCx-wU4R0QyOuUspfigz4YtJkoBU4GAbUkE3v9BPh93koecn6m-KqC5QBFCotBmVbt45rjnEXE1W4D3s-A.png"
+  },
+  {
+    "level": 10,
+    "medalName": "블레이드 명인",
+    "stats": "올스탯 +3, 손재주 +50",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ZL9nol1tMBGILBnEVdyqqKHVuUr6Xuxf47lckrgv6c1Aj2xE1S2qdm5ySiIZDvOp7I_grg-1Ugu5oTbgRKA_JQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "블레이드 최고명인",
+    "stats": "올스탯 +3, 손재주 +80",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/P17qn_GTwlqYLFblqlTkYg-TEwJSlfBFL8enGiSIbZeJ1KrScueAxvWZOHGT23dZl0rrXWUDb0cQNvF1YM-16g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 가족",
+    "stats": "올스탯 +2",
+    "obtainCondition": "v1.2.96 7주년 이벤트 [12] : 출석 도장 7일 받기",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/zYda1HExosiM15OLX-3sqnQT48_pGMvNpcyyytxFCFB_x6YF-yjOznPqvRwl2QPJXfM_BYcZGIJrOai5KpHMOA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 진정한 가족",
+    "stats": "올스탯 +4, 손재주 +20, 회피치 +20",
+    "obtainCondition": "v1.2.96 7주년 이벤트 [13] : 출석 도장 14일 받기",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RwrZu6c0CydiJajG1dnrW3KAsqUIZ5Nq1BMefkMEA7BqF1DgTFLQr6iSpS1IkLnabgIVvO6rNYMMBpxt7Z2_dg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "7주년 파티 멤버",
+    "stats": "올스탯 +1",
+    "obtainCondition": "2010.5.9 메이플스토리 오프라인 7주년 생일파티 참여",
+    "medalIconImage": "//i.namu.wiki/i/Croem8_WCCjOVMBOghSarE5qQyK69PF1ZQzbFM540XLTU5Hs_41cLndju7SjsphK3YzrCJAM4V4Hzf56ZpUOcA.png",
+    "displayImage": "//i.namu.wiki/i/CDWPCWYearYaGkLX3QEZBeuDZNv4p7IViOiuNZLrGzlOxG3Smt9drbuXxrm-bo3hIMthM_PIzn8QiTDfVj8Vpg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "모바일 메이플",
+    "stats": "올스탯 +1",
+    "obtainCondition": "모바일 메이플스토리 시그너스 기사단 에서 챔피언쉽 7회 이상 참여",
+    "medalIconImage": "//i.namu.wiki/i/UOgkOCmHFCI6cEA4BBJ4mojUIGLnPhDpccwL39QRmEuMJToke_-XPVDHOH3N0cuM3PFr0yZujYxZqXyrPOb1kw.png",
+    "displayImage": "//i.namu.wiki/i/xt5s43Z56N2CZeA62UK0FijzUvbxvQjk0O91Pwj0h78xCqu8s1hKe56y7DRzew1qUrdTI-R9q6m9WlbG-U761Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "천안함 46 용사 추모",
+    "stats": "옵션 없음",
+    "obtainCondition": "천안함 희생 장병 추모 #",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/waTRkL0vZ38r_bsSp7wTX6Cqfn8DIhts7_-1p3eG8pFn4ayGonljQ-RtghYWqQSDeFPjXy-VKg6entUT7m8GHA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "나는야 럭키가이★",
+    "stats": "올스탯 +5, 최대 HP/MP +300, 공/마 +5, 방어력 +300, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100 , 재발급 불가 [교환]",
+    "obtainCondition": "2010.8.14 메카닉 오픈 기념 핫타임 당첨 보상 2013.5.25, 6.6 핫타임 당첨 보상 [15]",
+    "medalIconImage": "//i.namu.wiki/i/HztXHhBM-_0OnflfHFiuDYj5pfzBGsPaFlVBSp2A-WatveyhEf7CvMD6qkipAR7XTaGJYu1G4ECiCOamA09utg.png",
+    "displayImage": "//i.namu.wiki/i/jv3hc4RiR1GPjz80cuOl4IMNLLwwHqA8o4-tUj-fi7SNNVI6z14nKPcYZT42fcBLjNUY2_TRk7HzyNR26vfpXA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "달빛의 음유시인",
+    "stats": "올스탯 +2, 이동속도 +10, 점프력 +15",
+    "obtainCondition": "2010.9 추석 이벤트 달빛의 축복: 달빛소나타의 행방 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/KMjPu--UQO2c3iWWxgQpaI2Dxgo7Hl8mdSUjYG2KTr1LENjilnp4XHDXZPImNzgomD8JEwBsTAicRD7f2tkSng.png",
+    "displayImage": "//i.namu.wiki/i/GSpDB3RExsFZAoRBthHUaDo81atfVnO0auvtOc3E4eQp8WPBlAAItmeVRFxazjsdrZbEXEunTwzIvEYTyLp8XQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 가이드북3",
+    "stats": "최대 HP/MP +100, 방어력 +20",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 3: 레지스탕스' 구매 보상",
+    "medalIconImage": "//i.namu.wiki/i/oQdiFn5WXO4i4FgitDsFttTXopzNOhFAIL2tCQwCq3wsi_gCsAPN_lcn5mCtiUeSzzPsEE5Rkecj6e49vCcuyw.png",
+    "displayImage": "//i.namu.wiki/i/PlK5fH9PLSEvhG0MoCceGhaS8a2Gsyku8ZDZ0rd3aa2-ovgT6qbfoG6dbwiri4eFG02AlHS6904_LmwELbkb8Q.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 가이드북4",
+    "stats": "올스탯 +1",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 4: 빅뱅' 구매 보상",
+    "medalIconImage": "//i.namu.wiki/i/l8d2umm5MCaab3X4GGSJtsfMJqIJb6-563LyNnb1GbN3W514Q6ldsaAgBUgkK_yyblz5Padzd06-goaIzO1nIA.png",
+    "displayImage": "//i.namu.wiki/i/ZVwUofm_beCT7XqXlJ_PyFWoi_rTcclERS0BhuWJ8nzODicPAfhKYg3GBYM1azOADlZm45twhv7ER6lz04C2LA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 가이드북 마스터",
+    "stats": "올스탯 +1, 최대 HP/MP +100, 방어력 +20",
+    "obtainCondition": "'메이플 가이드북3', '메이플 가이드북4' 훈장 보유",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Eel15TNzHXZyLyYfIspq2HujbMT7GSYYcFwBdyAuA0y-6HL-pnjxmzDOu8iTz6GmGkkvt8ExSTBbrr-dcN769A.png"
+  },
+  {
+    "level": 10,
+    "medalName": "OTP이용자의 허세",
+    "stats": "올스탯 +2, 이동속도 +10, 점프력 +5",
+    "obtainCondition": "2010.10 보안 이벤트 '계정을 지켜라': 특정 조건 달성 [16]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Y9_f7WBninizBuyaffi0eemmExqkEEpSliewKe0QmF3qB3cKD73EtT0Txjc0mc0SH55WGAjKbczvXQpUBAtvkw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "깜찍한 뉴비",
+    "stats": "이동속도 +2, 점프력 +2",
+    "obtainCondition": "2010.12 혼돈의 용사 이벤트 : 신규 캐릭터 생성",
+    "medalIconImage": "//i.namu.wiki/i/v1qAlEezCoAM-8e5tFdTbO6j1fKVQ26KP8yVAfZTlxD3i6j2CyA_npVnBz7T6MXgSNmYZVpSm_x1-XC4Yf4-Yg.png",
+    "displayImage": "//i.namu.wiki/i/JY97qxVOSzVTyAMP0l21g3ZA2pX_umRhB6Rl8UwHyhx1WzDOeyoDvIVdA3IwghPk-ot9u0ot447V2RJIL8ge9Q.png"
+  },
+  {
+    "level": 30,
+    "medalName": "쑥쑥커라",
+    "stats": "이동속도 +4, 점프력 +4, 명중치 +5, 회피치 +5 , 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "2010.12 혼돈의 용사 이벤트 : 신규 캐릭터 생성 후 30레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/OQQGr35KZnI2z0hpVq8w1KVmkvIzitTVzlIGV-eDVabHSgozRD9oGr63rclRTJStpnzNjGboaa_hsQ9MHM83tw.png",
+    "displayImage": "//i.namu.wiki/i/ExARu2PoU81OKC6pU_CQmnLHOcR2cRDAkBd232h2Gd4PHEQXcwJwaKi26vusulMZawGejbImBZeFOQmhpKiByA.png"
+  },
+  {
+    "level": 50,
+    "medalName": "럭셔리 유저",
+    "stats": "올스탯 +1, 이동속도 +6, 점프력 +6, 명중치 +10, 회피치 +10 , 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "2010.12 혼돈의 용사 이벤트 : 신규 캐릭터 생성 후 50레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/oVcR1Wko6WnwqaH_uvdKRBEYLQpw6D6AjFSjbJQfRyXioaJemmWu8GfaFhtfSUhmMKpot5XLLob4kkrZ8KMW3w.png",
+    "displayImage": "//i.namu.wiki/i/cA4lxXyZDT7i5q4si8XTMREX6-Tkji6UBARS97699RZj2OD_DJEzSUQ1jyjivywO9gn8i76OUT6N9jKGyUHgzA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2010루돌프",
+    "stats": "최대 HP/MP +250, 방어력 +50, 손재주 +5, 명중치 +5, 회피치 +5",
+    "obtainCondition": "2010 크리스마스 이벤트 참여 [17]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/r6pbuRLaTzw1ZAvRqF6j_z36Stkd2XR0WHIawv4sz2QcyV1OYzV9piIV-JCQlSqWS8VyxLv0EzRZKzAneMPHZQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "메이플 퀴즈스타 훈장",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "메이플 퀴즈스타K [18] 50문제 중 46문제 이상 정답",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/clQfvE7WX_r40W8XKP_P6jV5zegHxtqb6_oBkuNxv8hxbu8L1A3C6wyGu3FUfuBjxb0qhVkeqSwan8YfcyEFRQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "메이플 퀴즈왕 훈장",
+    "stats": "올스탯 +2, 최대 HP/MP +200, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100",
+    "obtainCondition": "메이플 퀴즈스타K 4주차 모두 50문제 중 46문제 이상 정답",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/rSxAxabY4dvSdbnuN8L7oIOWN6sxDZzgUU5F-7XkY70aWmt80c42L-33ZZWABlBdSTl_VDPLiGuht7NJbfAL3g.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2011 복만이",
+    "stats": "방어력 +30",
+    "obtainCondition": "2011.1 설날 이벤트 에서 거대 도령월묘, 거대 아씨월묘에게 가장 많은 타격을 입힌 1명",
+    "medalIconImage": "//i.namu.wiki/i/AC_Oiq0pL5iosBpk3Ho1r6LZs_douue1imxZAIyXpqgzfDHDUe-W2Ni7MXbZ1jN-1DYDevZ3mVOTFchIQ9KXLA.png",
+    "displayImage": "//i.namu.wiki/i/F8nr4IDbh41q0F1heYj4zgvK8YhoutzeXfiBrmQwbqfLtRkSR1Esf9UguBGTMXC3ezZw6grcY1X1mio97iX1qg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "아이스나이트",
+    "stats": "올스탯 +2",
+    "obtainCondition": "v1.2.125 대난투 아이스나이트 모드 오픈 이벤트 [19] : NPC '저주받은 기사'의 퀘스트 완료 [20]",
+    "medalIconImage": "//i.namu.wiki/i/rWO2U19LwQnZ2W_clo1ypQ7OZ_RVlUfr-UQHfmWVEDwGlBMNISpYDfBbRZzwWdP5Y7asilPsTAPwfpmyVqk1bg.png",
+    "displayImage": "//i.namu.wiki/i/ic9kCmI_NLdX23AN3xtbRsmugeCcAfctwSIM6oE7r2edh81P_QqRnSr6JvogkgDjp4otXdEaEHa72puOVyG3Jg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "출석체크 종결자",
+    "stats": "올스탯 +7, 최대 HP/MP +200, 공/마 +5",
+    "obtainCondition": "새학기 맞이 '출석체크! 너라면 할 수 있어!' 이벤트 기간 [21] 동안 출석 [22] 30일 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/w5sxQQKrc5cZNEra9MMpALSe0QUGLmERZub5wOSCRXZ7u3zAeT7Pw1KmWh_BpmKSKc7xX4Yv7-awkH06BQNQIA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "카오스를 깨달은 자",
+    "stats": "올스탯 +1",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 6: 카오스' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/m9Qy4zqLc2IXA7B7d2u4RyrN80rix69gfTBXILreFedDDNofbaX_Ul-mBGuoxM_w8FkG2AU2j1E33O3pZFLmXw.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2011 유물 대회 참가자",
+    "stats": "올스탯 +1, 이동속도 +10, 점프력 +10",
+    "obtainCondition": "2011.2 고대 유물 대회 5000점 달성 2011.6 고대 유물 대회 출석체크 1일차 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3A_g9lCEAUGJr7gv_4zQUee9noXvu4cf2okDOCrdMZ4pnHetc1C-en9rDRcWmZXRt_chYAhMnOiW3-I7eWlBHA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2011 유물 대회 Top 10",
+    "stats": "올스탯 +5, 최대 HP/MP +100, 공/마 +3, 방어력 +150, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "2011.2 고대 유물 대회 Top 10 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/c885gAm40DZqPYLCTSvpYQVBwPGNS7yDxNrqmel8M6ojNXS32MLNYalMtytfInSLR9oeWMSTcolPymHnocHLng.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2011 신비로운 유물 발견자",
+    "stats": "올스탯 +2, 방어력 +100, 이동속도 +10, 점프력 +10",
+    "obtainCondition": "2011.2, 2011.6 고대 유물 대회 신비로운 유물 8개 발견",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/EkbRIS13zO2soqhr3nndEop8m9rhhGWmVI4c9_Gvqhd3GxpkFK8Twtp7htKwAuofqsuxEl86TUBbxPfQHLp_cg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 8樂 지존",
+    "stats": "올스탯 +8, 최대 HP/MP +80, 명중치 +80, 회피치 +80",
+    "obtainCondition": "v1.2.131 8주년 이벤트 : 10개의 8주년 모두 미션 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/GC6KjBwWTYUtDZpvyi_RxfO862bnID4q8_T8Tg3j8etJbKieoxH7Aizy_T1qA4JOUfqtZHaLdmRw8wpIddDV2g.png"
+  },
+  {
+    "level": 13,
+    "medalName": "성실한 발굴단원",
+    "stats": "올스탯 +3, 최대 HP/MP +100, 공/마 +2, 방어력 +100, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "2011.6 고대 유물 대회 출석체크 7일차 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3rt1coHi3p1G1hmcLc6L_IYxapvyZ1r27VBz806sjPQbMWoBnWseIiGD0K39pnetMfXL6nf0U5g01BUfCfoDKA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 가이드북 훈장",
+    "stats": "올스탯 +1",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 7 전사 해적, VOL. 8 마법사, VOL. 9 궁수 도적' 구매 보상",
+    "medalIconImage": "//i.namu.wiki/i/l8d2umm5MCaab3X4GGSJtsfMJqIJb6-563LyNnb1GbN3W514Q6ldsaAgBUgkK_yyblz5Padzd06-goaIzO1nIA.png",
+    "displayImage": "//i.namu.wiki/i/Wh1sgwjLAqIZM5aDKz05WU2QAGeulvq20Bh4fannhYnW3aSTS5lyW0SdyqpftbkuC8IbPET0qY-txfolRhP2GQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 3000일 훈장",
+    "stats": "올스탯 +3, 최대 HP/MP +100, 명중치 +100, 회피치 +100",
+    "obtainCondition": "메이플 3000일 이벤트: 메이플 3000일 기념 우표 3000개 모으기",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/BCBCckfZXsR0r5ZWw_5e0D_98uND4Rph3YRf9L1ObgQX_NbYnWBdpdztU_uqwR3VA8KEOTmTVTi1U6yL0_2r2g.png"
+  },
+  {
+    "level": 50,
+    "medalName": "레전드 62만의 주인공",
+    "stats": "올스탯 +8, 최대 HP/MP +80, 명중치 +80, 회피치 +80",
+    "obtainCondition": "레전드 메이플 방어구 아이템 7종 구입, 황금단풍잎을 모아서 받을 수 있는 주황버섯 라이딩 30일 이용권 사용",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_Kz14yJQi9fUMXuieZAjKzqxN8mxy3sCstKV3f8F0pxrTihD64sk249MV89aa6u5Ts3z-ZjVbjbjg05VBVBu_w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "깜찍한 뉴비",
+    "stats": "최대 HP/MP +50, 이동속도 +10",
+    "obtainCondition": "2011.9 카우보이 뉴비 이벤트 : 신규 캐릭터 생성",
+    "medalIconImage": "//i.namu.wiki/i/v1qAlEezCoAM-8e5tFdTbO6j1fKVQ26KP8yVAfZTlxD3i6j2CyA_npVnBz7T6MXgSNmYZVpSm_x1-XC4Yf4-Yg.png",
+    "displayImage": "//i.namu.wiki/i/JY97qxVOSzVTyAMP0l21g3ZA2pX_umRhB6Rl8UwHyhx1WzDOeyoDvIVdA3IwghPk-ot9u0ot447V2RJIL8ge9Q.png"
+  },
+  {
+    "level": 50,
+    "medalName": "근사한 유저",
+    "stats": "올스탯 +1, 최대 HP/MP +80, 명중치 +10, 회피치 +10",
+    "obtainCondition": "2011.9 카우보이 뉴비 이벤트 : 신규 캐릭터 생성 후 50레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/oVcR1Wko6WnwqaH_uvdKRBEYLQpw6D6AjFSjbJQfRyXioaJemmWu8GfaFhtfSUhmMKpot5XLLob4kkrZ8KMW3w.png",
+    "displayImage": "//i.namu.wiki/i/pACzfHuCfXhHWaGy4tGrVWcSZmFN1aO8ddOvBhdFjfdlHGt0-0sJ42jqrZhtijAQQzvElFtASZFCWtUp9ID-LQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 가이드북 훈장",
+    "stats": "올스탯 +1",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 10: 월드맵' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/MGmGrKl3d34ZVLbrS_pqDGHIVDSasyybamHl2yFe9VPBCC73kTZHZd8_WnewEqS8y8jztujAerpMTe_vHuu4pQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "초코스틱 위크엔드 스페셜",
+    "stats": "올스탯 +2, 최대 HP/MP +50, 공/마 +1 주말 추가 옵션: 올스탯 +4, 최대 HP/MP +150, 공/마 +2, 방어력 +30, 명중치 +30, 회피치 +30",
+    "obtainCondition": "2011.11.12 핫타임 확정 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/alZ8rfRBblIuMN_oDSSZaHPMtUeOkaZTTg-EpO-Iy9OXnDp_h9L1lgr1QLk1NSDUi6-HLuYwQGIpO9NqSkiRhQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "2011 크리스마스 훈장",
+    "stats": "올스탯 +4, 최대 HP/MP +100, 공/마 +2, 방어력 +50, 명중치 +50, 회피치 +50",
+    "obtainCondition": "2011.12.24 핫타임 확정 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Zz3jorXhqOX1ZdJ1FkAIbThpaoZa4BQFk18Y7BIk5YUTy_wPqvAIkCyBD5KgbMzeveouvNcwsWdOAsyyr3LG4g.png"
+  },
+  {
+    "level": 10,
+    "medalName": "크리스마스의 기적",
+    "stats": "올스탯 +5, 최대 HP/MP +300, 공/마 +5, 방어력 +300, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100",
+    "obtainCondition": "2011.12.24 핫타임 당첨 보상, 서버당 3명",
+    "medalIconImage": "//i.namu.wiki/i/c4EAzrGjAAe3cr0EQFn6HeUbE6hn-9_2Oeu8p9q4MGUoYJKV5k3b3JjbTdBL5jQlQD5BxUA1uxdmsrYPidgA8A.png",
+    "displayImage": "//i.namu.wiki/i/zywd4-tmPw9dKxP9pliioWw5SKGu1NyymawB2_K4Ah4jGh6hEdr1BnISZnGXei2MVco8C6m05NqK8HDmK1EQJw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "새롭게 태어난 듀블",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "2012.2 듀얼블레이드 개편 이벤트 : 신규 듀얼블레이드 캐릭터 생성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-mmIJDiS6VUqZhTyv0rlFxAQFA0Lx0SpTBFfoc8Eu4l97duYmYVyvAW7mEtzgC-YUCm_id7F6ErIM910pmoYcw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "어둠 속의 회오리",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "2012.2 듀얼블레이드 개편 이벤트 : 신규 듀얼블레이드 캐릭터 생성 후 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/3yi-Q_HkcLQMDIhdM6uP4aSvBzhFMV0wW3hDlLD16slJWK14pJ_ZprfFwwZtUCT-7tMebeH0KNbe5BUBPgHcCQ.png",
+    "displayImage": "//i.namu.wiki/i/zKJ0hz9n8ad6-7C4Ku4LVmTb8TGyACJZ_vuKBckC1P8VIt8HtZoShPXTvzzN7F7K-Tit2VNmpBkZ2LUED-Zg_w.png"
+  },
+  {
+    "level": 60,
+    "medalName": "바람을 가르는 자",
+    "stats": "올스탯 +1, 최대 HP/MP +150, 회피치 +50",
+    "obtainCondition": "2012.2 듀얼블레이드 개편 이벤트 : 신규 듀얼블레이드 캐릭터 생성 후 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/LY-CnXysv19gqDS0eKjGco5VP27SeLeHuXaYoEYhG2qQ-WMjLzlLOHCz2Gko6NUv0HRfmM8zVnjiAPaLlrGj-A.png",
+    "displayImage": "//i.namu.wiki/i/XCOJn_1vBH_jWuhePJK849akOpO77LNJYH-GjJWNF4gpdZ9cJQgySiuKWO4euZXa9BSwmsro3beOdyP6Sa0FRw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "가장 빛나는 그림자",
+    "stats": "올스탯 +2, 최대 HP/MP +200, 회피치 +100",
+    "obtainCondition": "2012.2 듀얼블레이드 개편 이벤트 : 신규 듀얼블레이드 캐릭터 생성 후 4차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/OTz0IN70EKbL7SVTbv_T0WaoIOfkwhac1eeaxN-HYycAoo2flVtA_rsE66u3zOniypWEFmGXJ-IHGmc1iZ--nQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 가이드북 지식인",
+    "stats": "올스탯 +1",
+    "obtainCondition": "'메이플스토리 공식 가이드북 VOL. 11: 캐릭터' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Jx8bIF7XVtAjn_doW2AHHisVIeWeud59I477sAGDYc9lSoF0bKWxi3tedHL67GwS1lpXWX6K-vxHjfIrIj6elA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "2012 유물대회 참가자",
+    "stats": "올스탯 +1, 이동속도 +10, 점프력 +10",
+    "obtainCondition": "2012.4 슈피겔만의 이상한 고대 유물대회 출석체크 1일차 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/IVbv4O5m_X3z4MfzDKUfOpjOzYoYDiJFLrADVde-kBDun3w09O6xjUDbZw_f9FuFqigiRse7D17BzAm6oc1xZw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "2012 슈피겔만의 유물 발굴자",
+    "stats": "올스탯 +2, 공/마 +3, 방어력 +100, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "2012.4 슈피겔만의 이상한 고대 유물대회 잃어버린 발굴 도구 8개 발견",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/zI4ikHXtRJ7DTjnZjQzfumj0J9XpKkhN5KxXwW-7wsT2yon6KH5q34eth_Ax9UikGJVIxijbWHr8Wg_mP8IAlQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 9주년 기념 훈장",
+    "stats": "올스탯 +9, 최대 HP/MP +99, 방어력 +99",
+    "obtainCondition": "v1.2.157 9주년 이벤트 : 2012.4.29 핫타임 확정 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/G7ywfuYyfZ-ygjdC84DPTWC0SwQoc2PEE8wIB7085jOXd8RB4yuryFf414qiRBIvK1oP-GuE-rN7-5uh4v-Chg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "정다정다정다정다정",
+    "stats": "올스탯 +1, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "9주년 기념 역전! 메이플 야매 요리 웹툰 이벤트 참여 #",
+    "medalIconImage": "//i.namu.wiki/i/vNJH32-3RsSZJzYkK_uJFOcuzVCAjgU6EMRfunW3aX1uRS7LzqtWjS574CzWOUlRtX93aT1fPO9TA8mg1gMoEg.png",
+    "displayImage": "//i.namu.wiki/i/BDS10-ReMf8cVofdwIAANar4XqMfHw-4J61UF3r2Ua3DMYjsBLMr16rVIedVeTuUraVtV2HBcCYNlpFJQoMohw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "SIU의 윙트리 훈장",
+    "stats": "올스탯 +1, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "9주년 기념 신의 탑 웹툰 이벤트 참여 #1 #2",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8NISn7FGLTWw8W-0WkxOlI3wCK7ULic0gKYQvd5YqIQep1gB8GaHv-9ufXKgJGr_6AufyvYY9bLcA3TV4QLwvg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "시간 여행자",
+    "stats": "올스탯 +1, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "'메이플스토리 역사본부. 3' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3CPX2B9zDnQPMI3iOSpwJ6q83EijtqyDMvx_EuiKNtWBX420wFwffQx3OsgTHIBQlHp16ERAvIh-LHTFQCNltg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "다시 태어난 영웅",
+    "stats": "올스탯 +1, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "'빅토리메이플 스타. 16' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Mhocf-5ZMk5xafjdICKgKgV-J3Aq7vr2KvI4od3MHtuoMfS0anfpRI6ktpjQhQCe-60Z6bOgepf-VsTsDq-I2Q.png"
+  },
+  {
+    "level": 30,
+    "medalName": "성공한 독서가",
+    "stats": "올스탯 +3, 공/마 +1, 이동속도 +23, 점프력 +23",
+    "obtainCondition": "'시간 여행자', '성공한 독서가' 훈장 보유",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xmE9wM_5PGH8Z6Xn4bq6q5fRGfZFnGlu8Ata10l0tQY1vTR_8_AQOqogh4XDS0wJgOiE79daAyJBo3N6ASx92A.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 뉴페이스",
+    "stats": "최대 HP/MP +500, 공/마 +10, 방어력 +50, 이동속도 +20, 점프력 +20",
+    "obtainCondition": "2012.7 투게더메이플 이벤트: 첫 번째 선물",
+    "medalIconImage": "//i.namu.wiki/i/2h0L4LFX9AKtrI22e3hzo_iAk1TwhgLKXIlFNJCEvaF-RQp4_kadTNCobVxfjZEoJyAeK0hqfjBcC6VO2AayHA.png",
+    "displayImage": "//i.namu.wiki/i/hXE7HZBNTjR5-A16YwoQjnoXd_DMD7S4JXJoDAPFA-PPVRg2VXqjSmJDOggeUEIDuzttimy-AggmAIaEttpEWA.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 반 레온의 악몽",
+    "stats": "STR +10, 공/마 +2",
+    "obtainCondition": "2012.8 , 2014.3 , 2014.5 미스틱 반 레온 퇴치 보상으로 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/N_d5pH3pFNEciIo1kUlIdCinApniORiXIxx0grG13qJsMwg0_YugqFdRoAI8xbzwX2MhtYpIJcLsIO6rNo_rdw.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 아카이럼의 악몽",
+    "stats": "INT +10, 공/마 +2",
+    "obtainCondition": "미스틱 아카이럼 퇴치 보상으로 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/oFDD-tS9l1oEyNh8A4qb1Cgbvy7XrYS7M8OtFLwA_yIT9VJ802ivJNt5255J3kuYs_ViDdB1H98WqFvSQToJPA.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 힐라의 악몽",
+    "stats": "DEX +10, 공/마 +2",
+    "obtainCondition": "미스틱 힐라 퇴치 보상으로 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/0puMFRCL7juDs1oh5k08doC3CadB1qWKZp1jYF0p8-UNbJ8MKz4M0Z4PSvpwCJ6GJGtjD8KIxmz37At2QSncBA.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 자쿰의 악몽",
+    "stats": "LUK +10, 공/마 +2",
+    "obtainCondition": "미스틱 자쿰 퇴치 보상으로 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/DS63Lf3GKwh-AulVkz42oUn-VF06dwl6qT_O-FyNV5qq73eOh_1svTNUV4JUae8Y7f7PF7Cp_lfEZf9NJIbY7g.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 혼테일의 악몽",
+    "stats": "최대 HP/MP +500, 공/마 +2",
+    "obtainCondition": "미스틱 혼테일 퇴치 보상으로 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/JwuCw4Ey7DADoMH208xgGbQdZyG7-596_opXWqQD-dQZKZomi2aWqCeP0LJWvpGCwqVDfwvXfVxjsjx3vlID3g.png"
+  },
+  {
+    "level": 75,
+    "medalName": "미스틱 게이트 연구자",
+    "stats": "올스탯 +5, 공/마 +3",
+    "obtainCondition": "미스틱 게이트에서 퇴치 보상을 100개 사용",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/aDWjVK5usUkavUjUiGbUqXgUtgnEj_yZh5rVa2QnEoKqbvGCCzvZ1ItXYB6yNB8v1G-rvmav_sJa2KR_eSDfRQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 유령스쿨 훈장",
+    "stats": "공/마 +8, 명중치 +10, 회피치 +10",
+    "obtainCondition": "2012.9 메이플 유령학교 이벤트 : 챕터 7까지 모두 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/hpgC5Toy3kSqeSIaDsCZL83BAomKA8h3pKn-HX-cTAbH9wKOyuxXXCIpKBn5NHpEQBMZV_afvZSbPgOBn1dxwA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "폭풍을 이끄는 자",
+    "stats": "올스탯 +1, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "'빅토리메이플 스타. 17' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/j5WUmZi3KG4yE2p5IbJFfV90Tl734ok_3PosUfpHetSIGuFDMOBGezaWZiTg-CRqRKr19lMg-3pSlxqGgIO7Uw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "매그너스 격파 선봉장",
+    "stats": "올스탯 +10, 공/마 +10, 레벨 10 이상일 때 보스 공격 시 데미지 +10%",
+    "obtainCondition": "2012.8 매그너스 격파 이벤트 : 하드 매그너스를 격파한 월드 당 선착순 1파티 [23]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/0Cpi99GJsU4JRccCiM77QigsFMHFdS_sIsyZLbfU9ITxkzkqNDRP3YoLO1EPLKdjvPsQ9veAzKlvQenVhJkLOw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 박물왕",
+    "stats": "최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "메이플 박물왕 이벤트: 이벤트 기간 [24] 동안 박물관 3곳 완성 1일 1회씩 7번 완료",
+    "medalIconImage": "//i.namu.wiki/i/_AcW9-RA7g4AhlyrypReo9l2Qw0SF03-Q3h63VoOzK8Gz7Uv1PIoDckpKpdq31gjdsCFXEUwd2fwIUrw7W8XrA.png",
+    "displayImage": "//i.namu.wiki/i/MxIrUdtNON16Hn3sbR0nKOuhYgjen2FmWIskvMy8QUJf4kTa7IXWwYjQHFAKkIIkIoIxzl7oQBNGewklFBVBtw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "다섯 영웅의 완성",
+    "stats": "최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "2012.8 다섯 영웅의 완성 축하 이벤트 : 아란, 에반, 메르세데스, 팬텀, 루미너스 캐릭터로 10레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/cI5mcxot2Q6iR3ElGbYOTISnkaoh7xqP0f7Ea0qEFfdwnlC27BMecJOqYfUW7gnNryZ7rT7pGaPbAMCBMHppng.png",
+    "displayImage": "//i.namu.wiki/i/9Kh4_O7XF-_73RJSYqphoPLJ2HTz7GAnBgc-TVwV_InbYD7-0MRIr9RzWRPFZP3yWeMT0qtE0aUFU4DOo2C4Rg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "할로윈의 별",
+    "stats": "공/마 +8",
+    "obtainCondition": "2012.10 할로윈 이벤트 : 매일 20시 핫타임 당첨 보상",
+    "medalIconImage": "//i.namu.wiki/i/OcgDKlpLOTlqVjR2vvs0SocNlCrb3lgS-I6Yfz_mrMYWeKMJ4-Uhvmk3c0PqEn--DoVu46MOgkBKx_yK6qgyqA.png",
+    "displayImage": "//i.namu.wiki/i/p6X0CgQJGTVNxXkkoksa2z_-USPO-5zzLXzhJh-u6CfUDruHj6btJWrIZzzZBgUt9IW9MpfLeoEy45s0T6haAw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "빅토리 할로윈 스타",
+    "stats": "올스탯 +1, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "'빅토리메이플 스타. 18' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ykNErd_iDjhrgiL2b-1NEeYih7HhJoaJoXVDV5vriYnTtNMvZ-C3-WnL55HDOFOfk3TFh53ziYnwYVe7iNmt-w.png"
+  },
+  {
+    "level": 75,
+    "medalName": "2012 버닝 메이플 훈장",
+    "stats": "올스탯 +3, 최대 HP/MP +50, 공/마 +1",
+    "obtainCondition": "2012 G-STAR , 2012.12.14 코엑스 오프라인 이벤트 : 아이템 쿠폰북 코드 입력",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/vPidj2nwkSYO-wOAqTjQmsqpDLoxRzYulwgGXNDyv3xo1yBxxcQiqD1iPafIBba5kvTPQlahKTcrZPQs4pvSiA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "용감한 리본돼지의 기상",
+    "stats": "공/마 +8",
+    "obtainCondition": "2012.11 꼬마 인디언 이벤트 : 구출 일지 6개 항목 모두 완료",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/93ptKL1HB_tVeC-D1WAi6cB0H-t1gxpQbQaSnzTRcTmgzPosnZFKyQE9Z5OfNVeLjOSXqiIWypdk3LfsgDYtlA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "내가 바로 액션 히어로",
+    "stats": "올스탯 +8, 공/마 +8",
+    "obtainCondition": "2012.11 꼬마 인디언 이벤트 : 액션 히어로 업적 4개 모두 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/CJ7W51dU-bKV5_MmV6PF2Vu1SKH2RNm6T7US3yFtz46_X4swzSLQxALZ4e-Jxwcu28NYxHAu8w1Gc7RmdJ20kA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "내껀내가지킨다",
+    "stats": "올스탯 +2 이동속도 +10, 점프력 +5",
+    "obtainCondition": "2012.11 U-OTP+ 가입 이벤트",
+    "medalIconImage": "//i.namu.wiki/i/5n1LK5rEo-NGzBFkilwfAweH06jGd7cezgPeSey6eOCkdylNUhzF6H0unBJpXSm9MCv2lQfikQpyvmAfhFZ_HQ.png",
+    "displayImage": "//i.namu.wiki/i/J62uhMnX58dYW3py8AdCoBlf29GC3iuWJsQJIKkQZuBLZ-Hi-RIJjXNDaANePVeTAxW-qKSJiZ3BAKfkfJT15g.png"
+  },
+  {
+    "level": 13,
+    "medalName": "글로리어스 윈터",
+    "stats": "공/마 +8",
+    "obtainCondition": "2012.12 윈터 도전 목표 시즌1 : 도전목표 6개 모두 달성",
+    "medalIconImage": "//i.namu.wiki/i/08MToAP2gHZwaH303L2ERbrkoDM3-uJrrUTaxIZPaXZfC-yP9VikeEpkuXDO_FUpyq15vGWt8svKVPI_zImkmQ.png",
+    "displayImage": "//i.namu.wiki/i/UAyTg62R5C6Am7lvdz4cv1Nwt3YMVbAn9rvx5HMm4ik2boR1G9LqapkuqOypi5vnJ175f5Epaop1pNdiqm33YA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "언리미티드 훈장",
+    "stats": "올스탯 +8, 최대 HP/MP +300, 공/마 +8, 방어력 +300, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100 , 재발급 불가 [주의] [교환]",
+    "obtainCondition": "2012.12.08, 09, 15, 16, 22 / 2013.1.5 핫타임 당첨 보상, 월드당 5명",
+    "medalIconImage": "//i.namu.wiki/i/4YGHq-MwTf9_XyyGv38mWAesEdxSNOuQAwWisJqWM3NDhp7YffqhzfEK_Mxc9jXAll7HMJbetq8bonoJ4R2NLA.png",
+    "displayImage": "//i.namu.wiki/i/GZpRDn7_RuA0ixIUwH4g_lzGTRcmu_oVeD6Uc6rPHJVhIddczA2kQmjNgbR7FGZ0OhowfRGbFUNqVuqwnLK8AA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "연합을 이끄는 자",
+    "stats": "올스탯 +1, 이동속도 +15, 점프력 +15",
+    "obtainCondition": "'빅토리메이플 스타. 19' 구매 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/f1jKCs8LPPzpdjRRXHSCcRYlLPDMqo_ZOinbXapE_vKbNsJM2TOqXzPXlS-jDsyJ7a7eVFIGux1zCHcSPmHucA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "럭키럭키 훈장",
+    "stats": "올스탯 +6, 최대 HP/MP +300, 공/마 +6, 방어력 +300, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100 , 재발급 불가 [교환]",
+    "obtainCondition": "2012.12 럭키 럭키 몬스터리 이벤트 : 몬스터 카드 5개 일치",
+    "medalIconImage": "//i.namu.wiki/i/2SgLpF55rgaakjRkN7VH_k4brq8TH0PtkDdi9I4S3xCunx3pkRabAo_-AtTFRMk5ZbGOKwmRxup-LnJBwdU4-g.png",
+    "displayImage": "//i.namu.wiki/i/gdp0MzI6Kl_VI79RoYGouz1sAZKE3mza7Jz_px7lu38Ocq4IVQSBWvUrXY6LJFhqdeXFruYydoelmBcMdil6-w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "얼티밋의 별",
+    "stats": "올스탯 +5, 공/마 +1",
+    "obtainCondition": "2012.12 얼티밋 오픈 기념 이벤트 : 얼티밋 서버에서 레벨 100 달성",
+    "medalIconImage": "//i.namu.wiki/i/RiF7Uz2ROvACFngrYroOPvA16wqrFAp5W0lJZ69Omq1AUb5tjDh1b3ihcnDQKulm7KY6BAtSRYgD7NYcCFgCRQ.png",
+    "displayImage": "//i.namu.wiki/i/82H6wehJKMjPTuFJFfy2HZW4ck4KF1Zs3mNfAz6grWXgYbQKn_whvTYTxcse0qg9fh6QNNTwNdQuxe1sycMEqA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "올마이티 데몬",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/ab9kTedcH6b5zpcbYfHpffDSLFf3e76UlNbPsHermjBQNeKdRCw8m6PboHq5oM8WsCrFI5-siad5uQnLFi-YdA.png",
+    "displayImage": "//i.namu.wiki/i/tzVtPItNaPgWqDrb7Kt1x-3lwKgxvYEyQcSYtIu_WAobWCWejFG2fX1O4DAWSZOUffTYsLLGbxPlN8_WjEA8vw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메리크리스마스",
+    "stats": "올스탯 +5, 최대 HP/MP +200, 공/마 +5, 방어력 +200, 이동속도 +10, 점프력 +10, 명중치 +100, 회피치 +100",
+    "obtainCondition": "2012.12.25 핫타임 확정 보상",
+    "medalIconImage": "//i.namu.wiki/i/mEAMTJkDxrlx4-16Ta9IZNJXluYuM8vAQlz2fjGRHYlVLKuidAx1CoWlNQDfGFmDX28VfnDK_nXsHEBHXJhstA.png",
+    "displayImage": "//i.namu.wiki/i/vLzzDQHnkr3830913isSNQE9FOn2JlpcV0vJxBLbZ1vq6_8FBHVNxf7Pj_Rk-AQnt0Kci2ypnGlkbjn28cAOHQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "아이테르의 별",
+    "stats": "올스탯 +5, 공/마 +1",
+    "obtainCondition": "2013년 1월 신규 월드 '아이테르' [28] 에서 100레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/KUjszNM5brUPmbEJqKBteyl-1u0INscDG5SFE85QLX-p1CW1Cx74YhSXmo6Oe3uLfoESi6WmycmJVfhgYuchbQ.png",
+    "displayImage": "//i.namu.wiki/i/uT7J7ekOFBviiOoDM08TwciSSzl7xjhazYCxolJCZbNPUaNADFnTg40SD1x8maZy8TVUasdNTbT2HWEcAz_Bxg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "2013 설날",
+    "stats": "공/마 +7",
+    "obtainCondition": "설날 이벤트 도전목표 5개 모두 완료",
+    "medalIconImage": "//i.namu.wiki/i/HuBNYSXzfUxbWeIomZ7j06h8cxiD61wPwKBOVyNQkKJC9uV-8pBlgeU1HLohm3wPmMu_5Ujzvqq9qAtFMTFBuA.png",
+    "displayImage": "//i.namu.wiki/i/4ngBTWKEy9i4HQA5YrzWrESdx--gmFPZYF1gZ12VuRtq57lG1k43CiEvIadY8GAtRggYrf-CZhHEs9BhO4fdEA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "★★13개의 별★★",
+    "stats": "올스탯 +13, 공/마 +13, 방어력 +13, 이동속도 +13, 점프력 +13",
+    "obtainCondition": "헤파이스토스에 도전하라 참조. '놀라운 장비강화 주문서'만 사용하여 장비강화 13성 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/C1sbbhsV3rN3TIBmS-J0Hn-gAYJUc0SunzB2mPHogNdhdO21-gqmVNoKs8w9gXYYfzwEzB_dKR4rXv5AOlLKqg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "시그너스 리턴즈",
+    "stats": "올스탯 +6, 공/마 +6",
+    "obtainCondition": "2013년 2월 23일 윈드브레이커 개편 기념 핫타임 보상",
+    "medalIconImage": "//i.namu.wiki/i/7Whylt8tJ1tphbkSUqULJiu9Poa-MUeNO-XSQiBI54MMUJ6Gf_neLuwbWB5j0_9ahHh6Ius8HamOKiLOzhzIiw.png",
+    "displayImage": "//i.namu.wiki/i/Gnjs4JdBeh0Cm2G-9SxakcQj3jLpms3YWwNHu4v-KnsCz1rVNp4yg4TQEL7E7OqoxE3BfGAgiJ1Zht36ioxtiA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "설날 의자왕",
+    "stats": "올스탯 +10, 공/마 +3",
+    "obtainCondition": "2013.2 에인션트 박스에서 복덩이 월묘 의자 획득",
+    "medalIconImage": "//i.namu.wiki/i/SwR8fDsvUOX6Y1Egfg7s3gmly42476uBghHG1h3NwAKIt-fTmgC_f4MlrECmJxVb_m-scig7nSOD4FpqbxWG8w.png",
+    "displayImage": "//i.namu.wiki/i/qKAM_2_ZkgmYerNrfSgT6wl76PLu-PW7zgDrQ09PRsY4K9ID4OATPqhoJ-Da65F7jo03mQmaeMFyMiaY9R6M2Q.png"
+  },
+  {
+    "level": 13,
+    "medalName": "메이플 박물왕중왕",
+    "stats": "최대 HP/MP +300, 공/마 +5",
+    "obtainCondition": "2013.2 메이플 박물왕 이벤트 시즌2: 이벤트 기간 [29] 동안 박물관 3곳 완성 1일 1회씩 7번 완료",
+    "medalIconImage": "//i.namu.wiki/i/_AcW9-RA7g4AhlyrypReo9l2Qw0SF03-Q3h63VoOzK8Gz7Uv1PIoDckpKpdq31gjdsCFXEUwd2fwIUrw7W8XrA.png",
+    "displayImage": "//i.namu.wiki/i/N1fDlaUmmwzq4_LoKn-1LvWlQihS4RYTH4nsyOOV5II7z7WPqTi7Yun-clF1NwXiEymL3c0IzpXNwryrzDRg-Q.png"
+  },
+  {
+    "level": 13,
+    "medalName": "메이플 모태솔로",
+    "stats": "올스탯 +4, 공/마 +3",
+    "obtainCondition": "2013.4 블랙데이 커플 브레이커 이벤트 : 솔로 포인트 3만점으로 교환",
+    "medalIconImage": "//i.namu.wiki/i/2U6H-cs76iKSBhfwr-kGpeaVdrFaeR5mhLgsS-xGuTfCBVYZPou1Yx4dChvRud29XQzrGw9n3iQ-N8jhPzmh3g.png",
+    "displayImage": "//i.namu.wiki/i/12aNvwt5sLP-D6XQtT8jcL0a_7zJvU0WxFGT1pjb11r_WY9JZ8TlGSQFDitIoFV_1aqsJnjrkIYCj6lZGp90sw.png"
+  },
+  {
+    "level": 13,
+    "medalName": "메이플 하트브레이커",
+    "stats": "올스탯 +8, 공/마 +6",
+    "obtainCondition": "2013.4 블랙데이 커플 브레이커 이벤트: 솔로 포인트 8만점으로 교환",
+    "medalIconImage": "//i.namu.wiki/i/2U6H-cs76iKSBhfwr-kGpeaVdrFaeR5mhLgsS-xGuTfCBVYZPou1Yx4dChvRud29XQzrGw9n3iQ-N8jhPzmh3g.png",
+    "displayImage": "//i.namu.wiki/i/qbD5ghoC24AxuOn8SWRGWcv-H-VOSvtRUUF907qPkwuNbT0y5UpktMqOEyCfPF5snQp3JiMdvByEPBr9cD7HjA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "10주년 광고모델",
+    "stats": "공/마 +5",
+    "obtainCondition": "10주년 광고 모델 선정",
+    "medalIconImage": "//i.namu.wiki/i/0Dp4MdkMIz2Jcsxycq70bcV9nHrfIyfYXSeRMGsqiXu5fmlvJ2ZRsoYDY-ZjwiHXP7i5mPqAD39d6ZqNh4Julw.png",
+    "displayImage": "//i.namu.wiki/i/7gSqDoNwkIGLj4IDthtOedU1tWViaYmrcJFHT-MfipN1b-jtU_aDJ_fyPY1MTwrTLS5PXD0VinfPu2hw1ZxLHQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "공모자들",
+    "stats": "공/마 +1",
+    "obtainCondition": "10주년 사연/몬스터/그림 축전 공모",
+    "medalIconImage": "//i.namu.wiki/i/oHaB7TouhxwI6GcVWwQ-gb-dP0XHZ3k-p0CE5L_0EzSCsdpdG1Lm8infku4AFtJH2emg3-Imw6FmachHCgvYeg.png",
+    "displayImage": "//i.namu.wiki/i/wP2YXdYtrvsw2uMAQoshhHrlTeOZLBez3pkHq3aN-ObsLgq0p0pJSqdFO1xja7iQeRVu_fNKta1teZUWWtucPg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 10년의 주인",
+    "stats": "올스탯 +10, 최대 HP/MP+100, 공/마 +10 올스탯 +10, 최대 HP/MP +100, 공/마 +10",
+    "obtainCondition": "메이플 10주년 이벤트: 10주년 업적 7개 모두 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/4H0eSM1urTss6FJdT0F3ic_unh03b53sZE-9E6TcgwUrcKILGAl_DwECOWbXcWHmacTDivOgoCPPoCbvy0cnwg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "메이플 10년의 기적",
+    "stats": "올스탯 +10, 최대 HP/MP +100, 공/마 +10, 재발급 불가 [무한]",
+    "obtainCondition": "2013.5.4 핫타임 당첨 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/l7UBD4aoFvz1lLFG5MAoTziL0aal485dWHhzoJ6tWYdSaOTlaDCAHBrd3R_slTWR8WRNcXNq-NZXAgA_7MQW0g.png"
+  },
+  {
+    "level": 13,
+    "medalName": "10주년의 화가",
+    "stats": "올스탯 +10, 공/마 +5",
+    "obtainCondition": "더미데이터: 카산드라의 그림 이벤트",
+    "medalIconImage": "//i.namu.wiki/i/aOOWT3h81nv9xJ3CR-2j7OUY_C6Ie5AYB8_euC6Lu_PBWWM4yoO3UDaAeGI8L9b4eXSPQ7PUDMi8Hn-d5HNRxQ.png",
+    "displayImage": "//i.namu.wiki/i/ijoY_IkzFQnJPXSsnkqR7PEnALADTlQ5rPoZIGL_cd3bvnr5ClbJvlE7f3Fw3ygSeWHqwa5k4gnEKbNw0UhTvg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "왕관 쌓기의 달인",
+    "stats": "올스탯 +5, 최대 HP +300, 공/마 +3",
+    "obtainCondition": "2013.5 높이높이 왕관 쌓기 이벤트 : 미션 문장 완성",
+    "medalIconImage": "//i.namu.wiki/i/PJmS6Vm5mQ_cIKIKmCY5PA9Pjkz8wWt-jhu4zFR47_p0cxeZ66HctCnlleEwBsxWeQxUiA8lmk01cDMxxzQ5VA.png",
+    "displayImage": "//i.namu.wiki/i/1NL6zWfi6PIoYLfd4eRNDUHzyPvoscX3SGUJmZm0hp1b8GgfZfvS8CtsjkHDwcJuUJIGnkuLZes-_WTthozMAQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "지구방위대 훈장",
+    "stats": "올스탯 +10, 최대 HP/MP +500, 공/마 +5, 방어력 +300",
+    "obtainCondition": "2013.5 메소다이저를 완성하라 이벤트 : 홈페이지에 메소다이저 의자 완성 스크린샷 게시 후 선별된 10파티",
+    "medalIconImage": "//i.namu.wiki/i/f4kAmZ2YeScLnEjjgMteWFbH-0_sil9Q3agm2LgzlOyOPDG2Uk4Ki330T-8PsadH4VmjOtjulvXofRmcLt95Ng.png",
+    "displayImage": "//i.namu.wiki/i/v1eAYTT3QdH00I6gPM1IbxVu5duAN_LUmjX0aGhbMtpXZyfSI9fl5j31LYnMJ-quarjQT1-xgMfG6a1H97WX0w.png"
+  },
+  {
+    "level": 13,
+    "medalName": "양떼 목장의 지배자",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "2013.6 양떼 목장의 결투 이벤트 : 멀티 플레이 모드 20회 이상 승리",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/i9bCHmp7a4yo45U1w2E4kZe-I6N6-5BVvi1K81MHVKxvkHTQyGkuGHQT_9VxUd6oEFoUfaZ0OzzPVzNe468sKA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "붉은 여름의 문턱",
+    "stats": "올스탯 +7, 최대 HP/MP +175 올스탯 +7, 최대 HP/MP +175, 공/마 +5",
+    "obtainCondition": "2013년 7월 4일~7월 17일 레드 업데이트 기념 시즌 1 미션 5개 완료",
+    "medalIconImage": "//i.namu.wiki/i/2-qCxAl8-EyeCWbzXt6W0woACRQmS-XxCs2bKPrB74yusw6UppyIQwvNnwuWrlxx-yVA7B8-QExL8GLqePgs1g.png",
+    "displayImage": "//i.namu.wiki/i/we2YVLqZctkCtCMEG9L7qETTxiAz9KXYr5X-EFC5ErkMjStX8YYSrOEbTjyxtsl7iJKG4ZVRPl-1c6QQJzY2HQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "붉은 여름 안에서",
+    "stats": "올스탯 +7, 최대 HP/MP +175 올스탯 +7, 최대 HP/MP +175, 공/마 +5",
+    "obtainCondition": "2013년 7월 18일~7월 31일 레드 업데이트 기념 시즌 2 미션 5개 완료",
+    "medalIconImage": "//i.namu.wiki/i/2-qCxAl8-EyeCWbzXt6W0woACRQmS-XxCs2bKPrB74yusw6UppyIQwvNnwuWrlxx-yVA7B8-QExL8GLqePgs1g.png",
+    "displayImage": "//i.namu.wiki/i/3KtquNFh5zew7Io4eoVSlm5ewT_N2Pxm9UO1d3zwVM7NQmRYRFR91L3uE0gNG002Lcl5CffwUXXQNRakzBczSA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "붉은 여름의 승리자",
+    "stats": "올스탯 +7, 최대 HP/MP +175 올스탯 +7, 최대 HP/MP +175, 공/마 +7",
+    "obtainCondition": "2013년 8월 1일~8월 14일 레드 업데이트 기념 시즌 3 미션 5개 완료",
+    "medalIconImage": "//i.namu.wiki/i/2-qCxAl8-EyeCWbzXt6W0woACRQmS-XxCs2bKPrB74yusw6UppyIQwvNnwuWrlxx-yVA7B8-QExL8GLqePgs1g.png",
+    "displayImage": "//i.namu.wiki/i/cydDAmEOrLCRe4ImeY2Cf8WeQrNqvMiwh7Xz3ezmI3jjsUxBqYRQgV04NTZDKP3spjuJ7SGdqSmo5ce7xfg95A.png"
+  },
+  {
+    "level": 10,
+    "medalName": "붉은 여름을 기억하는",
+    "stats": "올스탯 +7, 최대 HP/MP +175 올스탯 +7, 최대 HP/MP +175, 공/마 +7",
+    "obtainCondition": "2013년 8월 15일~8월 29일 레드 업데이트 기념 시즌 4 미션 5개 완료",
+    "medalIconImage": "//i.namu.wiki/i/2-qCxAl8-EyeCWbzXt6W0woACRQmS-XxCs2bKPrB74yusw6UppyIQwvNnwuWrlxx-yVA7B8-QExL8GLqePgs1g.png",
+    "displayImage": "//i.namu.wiki/i/egq2e0pSaXa-Ps_TXwUhEbc3eyWNgMdTR93Zg_y7f-4hzA3yY5L3qnTTscE-j_LiuUwNInKt9s4Zx-nhAeW8HQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "예전의 내가 아니야",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "듀얼블레이드&캐논슈터 새로운 모험의 시작 이벤트 : 목표 레벨 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/tc2EpTEvbOsKX_-uyKLpVxVveMDdmIG_g3m1bYeFWwfUrY63r2BQbuM1WSlp7WiJGqGQem7ZAf1l96cXpYKSdg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "의자왕 훈장",
+    "stats": "올스탯 +10, 공/마 +3",
+    "obtainCondition": "2013.8 추억의 의자 스크린샷 이벤트 : 에피의 상자에서 특정 추억의 의자 획득 스크린샷 홈페이지에 게시 후 당첨",
+    "medalIconImage": "//i.namu.wiki/i/r9R09UVePKt4gx4vDQFnJ8AIqMhmdY1J26dOISa-yG4mbmAdTCwAZRys0pKNCWfrS29eAGqsVtVwCT2htHiRYw.png",
+    "displayImage": "//i.namu.wiki/i/ytj3TPvivOXzrhAopZbqiMvyDkNid5WZ6SB5qSTS19V1tTjEfX3GHgVBMnrhcwDdD55QZ2mGlJH6b2VpV5zVEw.png"
+  },
+  {
+    "level": 13,
+    "medalName": "한가위 한가득",
+    "stats": "올스탯 +3, 공/마 +5",
+    "obtainCondition": "2013.9 추석 이벤트 : 한가위 업적 5개 모두 완료",
+    "medalIconImage": "//i.namu.wiki/i/9vCH6iJV0RsobMJ_wAkWs-xcdSMYxh-Bp6H5cgnLYfpEdlNjlsGJfYhCILcaGZbvO2td2UX84dFPtExJoMBviQ.webp",
+    "displayImage": "//i.namu.wiki/i/_bXbonujupn-Q__-GqiFbE1--K8sKS9qp3v2Oy950yYxsiXbULtq478JODIRlvdx5xAlTTvtj9kQhwTGqvbcnA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "커플을 지킨 솔로",
+    "stats": "올스탯 +5, 최대 HP/MP +100, 공/마 +1",
+    "obtainCondition": "2014.1 솔로 예티 부대의 침공 이벤트 : '고장난 사이클롭스 아이'를 '사이클롭스 아이 Lv.3'으로 진화",
+    "medalIconImage": "//i.namu.wiki/i/3tvjxHrqgC_0jENIHt1bufGKYe_fL7cxsdkdtGjQ_vSeROiqRulJJe5AO2jlJWZ7L-XUGBTl23JUlePzVgV7Rg.png",
+    "displayImage": "//i.namu.wiki/i/jzrPQyHw0Ux-rHyNbH5ubUNU4U7VdN9AMfzhGeA3ybYb4P8v-THpscM7SpzHe2unNJIF-6hBmDfGeAEZKlKamw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "새해 목표왕",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "2014년 새해맞이 업적 5개 완료 [31]",
+    "medalIconImage": "//i.namu.wiki/i/Zw6tzJlrb-h91ULTHamNphX1xsd3lndeRDQpb8LgngoqHzM7_wj-I9pKTH4qigDGPdrUhYXF0yez5bms0oteQw.png",
+    "displayImage": "//i.namu.wiki/i/gVUjMGiKyC5oO290LxaabLTv_TcOL3hR5U7hkXzpZm4NdmGNgiCuDhVoYbVrpCTv9FOXxdBRfolz3rQn7JXh0A.png"
+  },
+  {
+    "level": 33,
+    "medalName": "타이피스트",
+    "stats": "올스탯 +1",
+    "obtainCondition": "세뱃돈 디펜스에서 20만 점 돌파",
+    "medalIconImage": "//i.namu.wiki/i/WoUHCt6IxngE42S-aUE1UQ2hU90wz3tn6tUihI8orqPenzT4dk9kNdUk-ua6h9ubOrPBM5I0RHtC-bBuUO4GAA.png",
+    "displayImage": "//i.namu.wiki/i/S7DvRsxMlKaN6s3d_bi4kvmEU2kKkh4niiSNN3NQz6zTC8a7g_ZsUOpiAtMFUvztILFGA5pvJCL8yswonUR-EA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "광속의 댓글러",
+    "stats": "올스탯 +1, 최대 HP/MP +100",
+    "obtainCondition": "세뱃돈 디펜스에서 100만 점 돌파",
+    "medalIconImage": "//i.namu.wiki/i/u70yxTwHlz3k5i_yiIF64SU1a31kqjnJtF2r1XTS4Ea_ss3xoczp-E5QGSUqVMHp4LEvG3kagBRWmlsK5FdXCQ.png",
+    "displayImage": "//i.namu.wiki/i/sQykmujRJeLo5kFaj1YRE70G9payK-CqvnCGZP0PYp7m0TcfQvnkhvM8WlY8CsyIQlj6KqKoKaaHgrqTsMmT1A.png"
+  },
+  {
+    "level": 33,
+    "medalName": "키보드 배틀의 신",
+    "stats": "올스탯 +3, 최대 HP/MP +200",
+    "obtainCondition": "세뱃돈 디펜스에서 300만 점 돌파",
+    "medalIconImage": "//i.namu.wiki/i/8aNEngDTTJ-yObu849pijWjHEOg9LqTLBYWnXhooqAPnfyZbGyO9Ux0VNTRH2aycuh6yxgIZdy3tNyW_OI4rKA.png",
+    "displayImage": "//i.namu.wiki/i/ZmvPel8VCBf8pKNa7rafve_fLOS9KjfnZjZNsBqi24mcLnuAuS9_DnIitHisEx5ShypC1_86g0n3r256p5PqPA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "비자발적 독신주의자",
+    "stats": "올스탯 +3, 공/마 +2",
+    "obtainCondition": "화이트데이 돌격! 솔로부대 이벤트 3일차 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/HW17tkqKu2kVHLmb5hd4fhIL5zFKLuvaz4qPqR_RfYhP9xgPXm1ZwLQCSHxdPlMgyG6oIaZU0B16hodlQNfUdw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "미스틱 게이트 마스터",
+    "stats": "올스탯 +10, 공/마 +4",
+    "obtainCondition": "미스틱 게이트에서 퇴치 보상을 200개 사용",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/b0yTbd50r9XkkE95VaFXjHmuTDkG8ZsuJTQj6eRGD--RGgy229wdC8IDttp4sBkUHN7a1lPzahRZhzEJs1SCDQ.png"
+  },
+  {
+    "level": 13,
+    "medalName": "예전의 내가 아니야",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "2013년 8월 듀얼블레이드/캐논슈터 개편 이벤트 [32]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/tc2EpTEvbOsKX_-uyKLpVxVveMDdmIG_g3m1bYeFWwfUrY63r2BQbuM1WSlp7WiJGqGQem7ZAf1l96cXpYKSdg.png"
+  },
+  {
+    "level": 13,
+    "medalName": "절대적인 힘에 도전한 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "8월 절대반지 이벤트 14일차 선물",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/qZX6Bp8UM2yO8Ms2KcRLQvZweW6A9YK-k-9eHqn67qxFRpJQqQKOg5H2PshH43Wbmpl9vCF3rRkddlm3SIyfHA.png"
+  },
+  {
+    "level": 13,
+    "medalName": "왕관 쌓기의 대가",
+    "stats": "올스탯 +5, 최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "미션 문장 완성",
+    "medalIconImage": "//i.namu.wiki/i/ZzmlIGLCH-dOEMH37mamxHlLwo9xmh_1H7CDHTy3MNN3xAVs1b5Lcwnj_VEgqpdYzSr19XfeQ2cNWQ_6cH38gw.png",
+    "displayImage": "//i.namu.wiki/i/jQrzkUyVPGFmuUjf80KAenpz_BrA91gP8TD_rqulKMZs4h4rmxksrzFjjxkObPIk9ZsWct_1IDq8k5NxfuoUsw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "미니게임의 달인",
+    "stats": "옵션 없음, 재발급 불가 [주의] 스타플래닛에서만 장착 가능",
+    "obtainCondition": "9월 스타플래닛 이벤트 참여 보상",
+    "medalIconImage": "//i.namu.wiki/i/HsDX7U4muzQWhM0nsDdepsYmfQ6PtyQC-A1zCtbpxrnmoCdmjL-ajFF1fNVkzr_P4Zh920014sjotn1aGIfk9g.png",
+    "displayImage": "//i.namu.wiki/i/FID-Jw9wD5w5iSag28Ec2cfP_0Y_JQFK_Eb5tRRhP1UQrJ3SylNsIQR1ThKVIltVGpR06v9WCedlM5X684on2A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "루밍의 수제자",
+    "stats": "옵션 없음, 재발급 불가 [주의] 스타플래닛에서만 장착 가능",
+    "obtainCondition": "9월 스타플래닛 이벤트 참여 보상",
+    "medalIconImage": "//i.namu.wiki/i/ktkKByeUSAVGWsLhOF4PLHAlAhmP_QaXA4MMNoqjTjEGSWDO1xYek8RSJ7EoMcCtQxSD0f_XrXQb793KooCs6A.png",
+    "displayImage": "//i.namu.wiki/i/bsYQpOYl-_9L_UIO5LouY7BECIDY-nwVQz8eCOOFS2jQkW9wT-onBqC3za44ekyc1hzF4CYU0Ul2kmFAJNR2-g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "11주년을 함께한",
+    "stats": "올스탯 +9, 최대 HP/MP +200, 공/마 +5, 방어력 +70",
+    "obtainCondition": "11주년 기간 중 30명에게 버프 30번 걸어주기",
+    "medalIconImage": "//i.namu.wiki/i/fG4ZiFteCHPGii0vDtws6P43M5tYSygkOIAxhvCr7RMKd2RPMl6_9S1OVdtQOXF8yO7KQ1cvI8SoKLPhqEB0yA.png",
+    "displayImage": "//i.namu.wiki/i/mECsr2aLcbcdzg2Mmq_vsg49OIgqgY2izvjvCzWlJJxKEtSrObZVdGzNYewHk1FnTWnGyOIZJNoJaJ1oMScQDg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "몬스터 연구가",
+    "stats": "올스탯 +5, 공/마 +2",
+    "obtainCondition": "11주년 이벤트: 태초에 버섯이 있었다 완료",
+    "medalIconImage": "//i.namu.wiki/i/dOseEvq1XeksvQlK_yjTYjYR-Z6nSBzx8yv5ab4eb5hlfDQnKXe1WSxog0zziwcX9kxL3u_xFIgm9T5JekHi-A.png",
+    "displayImage": "//i.namu.wiki/i/BmBUS8vdVPmCP8SNYsNPGW0wTkPCQZm4kmzzhgs7_GxxXb6vfrjF8LyJy9Uqf_-bESU0_EFgqZ2OkyeQyJQE1g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "친구가 사줬어",
+    "stats": "올스탯 +5, 최대 HP/MP +400, 공/마 +10",
+    "obtainCondition": "12월 네 얼음에 내 불꽃이 닿을 때까지 이벤트 당첨 보상 [35]",
+    "medalIconImage": "//i.namu.wiki/i/PHP3ouhX-Q0uV_wgEba7Nke262GY6sRtNh1uAXUgpGdWtBM5QFHmFP00pS4I5G8lx5SNuivp-h0YsqjEOcRwmQ.png",
+    "displayImage": "//i.namu.wiki/i/rzkeGpcXYDziEgiuKo6lSuqLkRW7tL4f0YToAoG1DiEYiBU93V7r5pCiVCDl2zv59DCdJKkIACN83EqoUzz-1A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "떡국 맛 좀 보신 분",
+    "stats": "올스탯 +3, 공/마 +3",
+    "obtainCondition": "레범몬 이벤트 누적 30회 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/1WwuvzWn0RyY-b6sJ28GcLCgczMTc_zf4WD3D1083VlR9SQinHi718Qn_7XwX-JMioBZCF24kyYpesL6RKnlJg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "호로록 떡국 푸드파이터",
+    "stats": "올스탯 +10, 공/마 +10",
+    "obtainCondition": "레범몬 이벤트 누적 150회 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/lb-2gd9UkJYpRnxzag_tuq4k1C4NBHSwokwXKM0tL01gLzWMTRQwHwvrMFlVzOjeNjEXa47Stcu9-TfOlcfutQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "성공적, 로맨티스트",
+    "stats": "올스탯 +3, 공/마 +2",
+    "obtainCondition": "발렌타인데이 출석체크 4일차 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/W98s_HF5BkvCbY_jnLodZJ-UQ3JECqroop_FE1HJ1uIYiIy91RMY5IHFRPvCG-2RQKa7DPz8DnhvkIycwaIQfA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "모은다, 적립한다, 쓴다",
+    "stats": "올스탯 +7, 최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "메이플 마일리지 출시 이벤트",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ZsyGARWmEtT2s-esa6hcMmqGv5IlcrBvQiD8aSk-z3me_Cc8-8GO46VfcmwwTn6HHsWa6_HkKjpUUptz5TK-XQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 트레져",
+    "stats": "올스탯 +10, 최대 HP/MP +200, 공/마 +7, 방어력 +80",
+    "obtainCondition": "역대 n주년 기념 아이템 전종 수집",
+    "medalIconImage": "//i.namu.wiki/i/mt-D8NKYNwojelzhljlIhQ_l7EYgMFQ1L74xPrV_DWWsk0zPHhO5_W4kGQsHduO98s6buWqYYLDv3gdNklQksw.png",
+    "displayImage": "//i.namu.wiki/i/yNQbr2ACaFrsMe1mJXGd_I3FF1o9UQoZBhI9qYvG8muWP0h-0uZ5MNYAgAL05vfvZoayIhqULbwbpoags_hxoA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "BlackHeavenLover",
+    "stats": "올스탯 +10, 최대 HP/MP +500, 공/마 +5",
+    "obtainCondition": "메이플스토리 展 : The MAY.Full 특전 패키지 동봉 훈장",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/snPuC_O5_Ja5u2uda40alF9U_G4eECXXFQWF-M6LWRX60CKQlQxLaaLfPniZk-psjYeWVSGmZ0rmhImJl5Cs1A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플스토리전을 함께한",
+    "stats": "올스탯 +4, 최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "메이플스토리 展 : The MAY.Full 오프라인 행사 참여",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/eyP5pPd1AQ34MaKQzXnL39VmLnug0N3jvVyvgtJXbiLQf18-dVhdLysYKq58JHpRrlt7vK0k-gCM_Y3uile1oA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "돼지바 퀴즈왕",
+    "stats": "공/마 +8 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "돼지바 콜라보레이션 이벤트 퀴즈 20개 통과",
+    "medalIconImage": "//i.namu.wiki/i/EL2XMumBfwU99ZN9c9xxolk_aeBu1CpAdYO5O1TNFpPxdsUZb79rzoqG1oXm0SJH0rqAllPFXCX5EUqSlh2inQ.png",
+    "displayImage": "//i.namu.wiki/i/2gnABtPD53zuhienYfia0YXOaD1FK4G0EblTWozmKvtcRrDpNwM7Md7TvBoc7xIapSzeHY6rFz8DtNkejZ_KRA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내 친구는 핑크빈",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10",
+    "obtainCondition": "핑크빈 레벨 100 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/k2IHPjqqsKNuLgwi-X9g3igmzvZoJIKflcLuOajN1D-RR1yku4fybKnhJa_MQJqY5SZJ_zRjV_43ufoVplG76Q.png",
+    "displayImage": "//i.namu.wiki/i/peHzG4iTd3MRK1ChNOfU0zqhLXTiNHJ1YELZoesRx0nKhAOPDSABav9aJDZC-7yukotzl54DArStgocxaTjfUQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "빙수 소믈리에",
+    "stats": "올스탯 +3, 공/마 +3",
+    "obtainCondition": "레범몬 이벤트 누적 400회 달성",
+    "medalIconImage": "//i.namu.wiki/i/kUBYwyb2NBsHWFu_hSwqcH_LM0_XZQCkv0e8WqK6VrKBoEN_xBtiOnQiGRMgHia9dXhAyJVUQ7vIuRYPPBqCoQ.png",
+    "displayImage": "//i.namu.wiki/i/JCa1ip6-KtSCR2zemYxSwWN_zm22MhD8J-VHeJ8sRD_GP6EHVO8I1qZ8yrdUZhYKYZKE6QFgUJnZFfezmC4Itg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "빙수학 명예박사",
+    "stats": "올스탯 +10, 공/마 +10",
+    "obtainCondition": "레범몬 이벤트 누적 1200회 달성",
+    "medalIconImage": "//i.namu.wiki/i/lpynIZAiNEZPbeBA_yFmsvKLp2sUhqr0KAuH6sYI67CpkB9lsQUkazBI-1pIshsEZloEN4YUBIl0JsYxMaXq7g.png",
+    "displayImage": "//i.namu.wiki/i/4XR7fkpLRni_pyXg_cpBqr4zfvG9zbOaOWnPTkOVsZL9oY2FIrZ3by6dnfIQ7lwIIcsW2kXFZ8I0fQGV4IDdjw.png"
+  },
+  {
+    "level": 120,
+    "medalName": "2015 세계여행자",
+    "stats": "STR +5, DEX +5, INT +7, LUK +5, 최대 HP/MP +350, 공/마 +1, 방어력 +150",
+    "obtainCondition": "세계여행 이벤트 미니게임 3종 각 10회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/sd6BQkbZHtwloUksRfIabWbQ104g5PSUxMfgfx7YRqaLUe-uXFwJtfmUaI5i5a3PIzKZfViGVriFFNtU8mRCUA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "황룡파 문하생",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "세계여행 이벤트 중국 와호장룡에서 황룡파 선택",
+    "medalIconImage": "//i.namu.wiki/i/ESERAPoR9VypXADmwSn4JvdOaLGQx6tiAEKCqCdnI2hbjETQEKLwQVbfBTv9TlX2lKdXyMfh7SxEPwrez3Caag.png",
+    "displayImage": "//i.namu.wiki/i/rI21LnqBgpjZNnStEHYF22-2kiTpvtLSgo8ORrYrBAMdKcYsvLH_a6qIGI9pQFjlwhcpCw8euYZKbPKzkjvZeA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "적호파 문하생",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "세계여행 이벤트 중국 와호장룡에서 적호파 선택",
+    "medalIconImage": "//i.namu.wiki/i/z25ehoipducnvxoZlvVNqXJ1ECzq_IGCbvv6sMTGHDAL3dTRhJVKu4YG0tLoyZj-iP8G1PymkfLGRGprxCWA9g.png",
+    "displayImage": "//i.namu.wiki/i/FPjDkMD1qmRQ6HP3j5SSOOkTS4op8QaiZ62BVAJwoGaIAooAr7r2pLkHdE5LzUm7eIDAzgJo4aC4jm21GEYubA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "황룡파 문하생",
+    "stats": "올스탯 +5, 최대 HP/MP +200, 공/마 +3",
+    "obtainCondition": "세계여행 이벤트 중국 와호장룡 클리어",
+    "medalIconImage": "//i.namu.wiki/i/ESERAPoR9VypXADmwSn4JvdOaLGQx6tiAEKCqCdnI2hbjETQEKLwQVbfBTv9TlX2lKdXyMfh7SxEPwrez3Caag.png",
+    "displayImage": "//i.namu.wiki/i/rI21LnqBgpjZNnStEHYF22-2kiTpvtLSgo8ORrYrBAMdKcYsvLH_a6qIGI9pQFjlwhcpCw8euYZKbPKzkjvZeA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "적호파 문하생",
+    "stats": "올스탯 +5, 최대 HP/MP +200, 공/마 +3",
+    "obtainCondition": "세계여행 이벤트 중국 와호장룡 클리어",
+    "medalIconImage": "//i.namu.wiki/i/z25ehoipducnvxoZlvVNqXJ1ECzq_IGCbvv6sMTGHDAL3dTRhJVKu4YG0tLoyZj-iP8G1PymkfLGRGprxCWA9g.png",
+    "displayImage": "//i.namu.wiki/i/FPjDkMD1qmRQ6HP3j5SSOOkTS4op8QaiZ62BVAJwoGaIAooAr7r2pLkHdE5LzUm7eIDAzgJo4aC4jm21GEYubA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "히에이잔",
+    "stats": "올스탯 +5, 공/마 +3, 방어력 +200",
+    "obtainCondition": "세계여행 이벤트 일본 히에이잔 롤플레이 3회 클리어",
+    "medalIconImage": "//i.namu.wiki/i/q1TFn22xv4QJ8T9-rds-hBADnBcBk0LyTg5oFh4BdFMyJAKgrJDQVVLcIeXB1tYZ3maSqpLh7hGwewK6YFCKQQ.png",
+    "displayImage": "//i.namu.wiki/i/j7rECvOgvMvkQ9-Je3-AJ6gzL7RYeP6keofvD1IKjDXGFr_RVm3vY4a6Fh9kE6QNullogTzGH_pP5OiEe8ZmUg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "털었다. 완소 메이플스토어",
+    "stats": "올스탯 +4, 최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "메이플스토어 에서 1만 원 이상 구매",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/CgE87262P1PL6rxRAzxzgmHrCkr_tQQQ3GlP1mNBsDKlFEziG38FI2cZNDHTjx-kvj_CfvxAxxEZ3Z2Ad2stUA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "몸에 좋은 황금물고기",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10, 보스 몬스터 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "슈피겔만의 설귀도 탐험열차",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/x1yiFuKKnK4kHJSRZ6bgi7hhlcvM3QGPxZ0SeTypxzmYs4GmgWXHHKRcABnDuUZFD2v5k6NignkqX5FrYmMKKg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "간담회에 간담",
+    "stats": "올스탯+4, 최대 HP/MP +300, 공/마 +3",
+    "obtainCondition": "2016년 3월 20일 판교 유저간담회 참여",
+    "medalIconImage": "//i.namu.wiki/i/rPV345IYVxfj_BOLb_1S73p9Y2d90f0ClFJp9AU9PxzOCFgdSBT_ESPN_BTyfcRMJX1PHaBQSApdbn5skgY6Bg.png",
+    "displayImage": "//i.namu.wiki/i/s0zf_lGGVJWn62mjbo4cL2s0Us8L43fUpzi7d1fW92Co7JK6mPuyEDl8fp42Doby9MkaV8hFzjc42uQ5RNThOw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "메이플 컬렉터",
+    "stats": "올스탯 +13, 최대 HP/MP +300, 공/마 +7, 방어력 +100",
+    "obtainCondition": "13주년 이벤트: 역대 n주년 아이템 전종 수집",
+    "medalIconImage": "//i.namu.wiki/i/E6NJcwr7gcsmDb4tFvCXGisIZpFQ2vs-oDbxU-2vELJfKgpu4zMvxbYrE-ujXYzdR5ZK37cDOYlg14q_kiHIYQ.png",
+    "displayImage": "//i.namu.wiki/i/Eq-u7W9eU_2JHEmaaMomSWSeyRH1QVA-js7YATgI5rWJ77qqDKMVgsfALPijkmRpmJAROxllrDmANai8kId0rw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "가위바위보 참 쉼쿰",
+    "stats": "올스탯 +10, 최대 HP/MP +300, 공/마 +5",
+    "obtainCondition": "가위바위보 이벤트에서 특별 미션 올클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/dssNBreze8s4M2PHRU45UiuWhshIuZEBaf-NVTD-dUfDNaduD53k9kP3v2uqz8YbU833WkO8VW9_yJAcRCb0wQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "왕관쌓기의 고수",
+    "stats": "올스탯 +5, 최대 HP +250, 공/마 +3, 추가 경험치 +20%",
+    "obtainCondition": "모든 랜덤 칭호(왕관) 획득",
+    "medalIconImage": "//i.namu.wiki/i/T9ntwEEcVHe4jjo1k5v2qnPS9M9bsd4xAWQvnmXnNdJHaxypiUSKf28AdaJ7rdg3MOERMIJ-pDCGbM2etmP7_g.png",
+    "displayImage": "//i.namu.wiki/i/yKhpC0Ire8fP5u2pWiL5jChBtsxJmSTZzOHBtSukvEv4G1X8hoghFp5JzK4mJh1Ss2THfTiat41aq1RG7pt4Fw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내 친구는 핑크빈",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10",
+    "obtainCondition": "핑크빈 레벨 100 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/k2IHPjqqsKNuLgwi-X9g3igmzvZoJIKflcLuOajN1D-RR1yku4fybKnhJa_MQJqY5SZJ_zRjV_43ufoVplG76Q.png",
+    "displayImage": "//i.namu.wiki/i/peHzG4iTd3MRK1ChNOfU0zqhLXTiNHJ1YELZoesRx0nKhAOPDSABav9aJDZC-7yukotzl54DArStgocxaTjfUQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "원티드 프레시",
+    "stats": "올스탯 +5, 최대 HP/MP +200, 공/마 +3",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/neB6wh6gACs12og5jpdyMmT2ghpL7m6SFA6PfToWfNFJfZW4pbtH0nnT4dJ0bqgDkV9M1UZCS1H74_gRpb8ofQ.png",
+    "displayImage": "//i.namu.wiki/i/vXph7bxLIgXfwsRIVfhsThOjPT_ZNPD0oHO2mvrnlvMNIMihUi6f4OSNequ8ZpWY6TIG3HMPe34ksQ4GhCEZEA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "원티드 엘리트",
+    "stats": "올스탯 +7, 최대 HP/MP +300, 공/마 +5",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/chjB8QYye3GsS92sJZMARMhOGf5ncIEWgRzHL0bMQXHDTMyOF-cCqzWWotfw0bzewiDfH7gtyGK8KaLcBByAFw.png",
+    "displayImage": "//i.namu.wiki/i/5b4MVtSRuPTQbCt9JaQIZj5CGh2uQCW1XS7aAOH7uH1FDpBpGg9ZDH16u48sSvghLxTj3fjK3oZ39Fwqt_777Q.png"
+  },
+  {
+    "level": 33,
+    "medalName": "원티드 베테랑",
+    "stats": "올스탯 +10, 최대 HP/MP +500, 공/마 +7",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/OSxXITb_TsbOwh2EVlYHyBBr5R5DfBoAVopjeUV1KTojv2OAuXIwFb9s-ee1YoL7iXZhZsqIH6yNk8YKRbAPeg.png",
+    "displayImage": "//i.namu.wiki/i/bJwzSRYn8UukywlbOSyDe811kwuW6Q0TAWCFYHW1n1aoRP4tsH9owfHcDrXWteFFOkPhQ1FyM_N12dFf7XEmeQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "원티드 에이스",
+    "stats": "올스탯 +15, 최대 HP/MP +500, 공/마 +10",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/Zu-q0kF4Bk2-pdnM41_k3SfafHQIGIBQLkgqVMNm_xm42xtJoabBKS3hxjJxs1HYBYuTgoML2rTzT6kamxBPiw.png",
+    "displayImage": "//i.namu.wiki/i/VS7yyQZpDSvlf1jjdp1gxDff2yGEu19oua0WiFWola-Or2ObyLJPEcUggUZUsRd-0QkwEcx3d0MNvm_QRFEYbw.png"
+  },
+  {
+    "level": 150,
+    "medalName": "리부트2 개척자",
+    "stats": "올스탯 +5, 공/마 +3, 추가 경험치 +10%",
+    "obtainCondition": "리부트2 월드에서 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/-rAFCZYH6OCUfk9bqkCt8WaK-avJ2mXZTgC0cstQxlkXitmunC7VojLQ2ijWSJl0yAA5gtA2HKS3ywyG-uUBHA.png",
+    "displayImage": "//i.namu.wiki/i/9SyyrUh24pE6ZRqIJRam7ZDdMDJNVIdvD1FdnYe7vJKLsCX2NjkEfoIpnuRw_FfJwfZ7bh5XZZBiuIiGj-GcbA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플스토리M 훈장",
+    "stats": "올스탯 +10, 최대 HP +500, 공/마 +5 보스 몬스터 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "메이플스토리M 캐릭터 50레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/FX-8LPQRO755F-VTY3zWXlNn92hVuSyjLDcK3R45MCUMCemqi2UX4CLg-8Tml5elkK3135Zh7fChX2oUuvKsqA.png",
+    "displayImage": "//i.namu.wiki/i/RgAu7fcEMtvFJeVDC-gHmxsxtXa7rlj3B4VVrTZ47qjVQGHbelIzY62uvsqGXKyo_z7E1ippq9JaCnc9C5ILTQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "호빵의 신",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10 보스 몬스터 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "레범몬 이벤트 누적 140회 완료",
+    "medalIconImage": "//i.namu.wiki/i/LvoyXrF006ejX-aY1ClgXE6Pt1hhl5KGtmeRYJG6k-sCUFO0SvuSrSX3ugoGwON0yZc1wW-2gJt2jvNd-UI2JA.png",
+    "displayImage": "//i.namu.wiki/i/jhA4MDvApuW9LJd2c9KJepm-WApz6loyE60pZRAfEqOqUZ3iI0XtwErP3V_ExfXeCSHfhFphvZe1Nx1VwFyixg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "라떼 아티스트",
+    "stats": "올스탯 +7, 공/마 +7",
+    "obtainCondition": "레범몬 이벤트 누적 500회 달성",
+    "medalIconImage": "//i.namu.wiki/i/IyVJlPyMcFVkt6tcrr8lU5tuzH9K_FmqNrblkPsuHkdjEXvOgOFcYYuV6-1BvigqFFLzaNiYJomnD1ka-eUegg.png",
+    "displayImage": "//i.namu.wiki/i/YSyIkI_-0-ZiNrhigGoAdmZCVQ6Mo215UgeWemMk7M2PIIyBf4atHER53k3zk8RtBT22goK3yT9xPFEgn-rHgA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "까치와 함께 보낸 설",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10 보스 몬스터 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "'까치와 함께 보낸 설' 이벤트 모든 업적 완료",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/u1IXp3Lo-L_GeNtHuPNwBJ3gn4xoXT6f1afFJjVTIFUWwtV6RQHchg9o-M3Kq3stB6kAYygKC-j5GqGmYSUVXA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "무신강림 훈장",
+    "stats": "올스탯 +3, 최대 HP/MP +500, 공/마 +2",
+    "obtainCondition": "싸워라! 전설의 귀환 모든 업적 완료",
+    "medalIconImage": "//i.namu.wiki/i/4Hx1Wygdq_xwOMFpp4tkX1ex3CWMv6KbZz25Sx6-snvWkeB75PzoVJ0ckb4_xNim2NFpLKEoyvKuN5rQTlj8Vg.png",
+    "displayImage": "//i.namu.wiki/i/Xej42F5GKgcfmf5yQXXzqkfvP242UuUrszy-HpDIk3bzl5XkCK5SxLbuXNi2gWbvQL6lJPaO-tvQMXW0YpjosA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "룬 역사학자",
+    "stats": "올스탯 +3, 최대 HP/MP +150",
+    "obtainCondition": "너의 동아리는? 이벤트 7일차 선택 보상",
+    "medalIconImage": "//i.namu.wiki/i/DmBHKPFOtppgEKX1e8RrwH1-QNpf2KRqmCKyWNnpzC-sjwaQ9gKy2AkeGWdxZMTQM-expckZtXZLc-Nk3yomEg.png",
+    "displayImage": "//i.namu.wiki/i/6gEfauUMgoZxgbwHKjcrDo6HvFKNL4LJilH_AWqlVcuv2EfCJx-vsDK1Z0GJGwk4W71Ei3TTF7EfPYmta13_LQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "동아리 트레이너",
+    "stats": "올스탯 +3, 최대 HP/MP +150",
+    "obtainCondition": "너의 동아리는? 이벤트 7일차 선택 보상",
+    "medalIconImage": "//i.namu.wiki/i/DmBHKPFOtppgEKX1e8RrwH1-QNpf2KRqmCKyWNnpzC-sjwaQ9gKy2AkeGWdxZMTQM-expckZtXZLc-Nk3yomEg.png",
+    "displayImage": "//i.namu.wiki/i/SlX-wPHhqmbI33k_0yOusKVTzQZ7CJmNBQ0OF6XHJtNCeN7VclF-Z9oetdWfrEFtAYck63VfqJNcU9lW66B3ZQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "유령 조사원",
+    "stats": "올스탯 +3, 최대 HP/MP +150",
+    "obtainCondition": "너의 동아리는? 이벤트 7일차 선택 보상",
+    "medalIconImage": "//i.namu.wiki/i/DmBHKPFOtppgEKX1e8RrwH1-QNpf2KRqmCKyWNnpzC-sjwaQ9gKy2AkeGWdxZMTQM-expckZtXZLc-Nk3yomEg.png",
+    "displayImage": "//i.namu.wiki/i/XDbaiKXU52dCUGsDLSmJFvHExJfal6Idk_AK9kMUM0cuUuMZS4UDRHtcgjcfsFKp2gXUxQFm9rTrGHqv545HWA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "캔디는 달콤해",
+    "stats": "올스탯 +10, 최대 HP/MP +500, 공/마 +10",
+    "obtainCondition": "화이트데이 전후 접속 보상",
+    "medalIconImage": "//i.namu.wiki/i/3xZd7vMulpZJqUxZ5cnWoobsFHf5QC_XQKuD_cnEG3RyGoQ8Wp5AORoLXcl5fRk2nd2tq-a20Srr53jXu6iDNQ.png",
+    "displayImage": "//i.namu.wiki/i/z4uxivTyupNOGAMdMbg6oHlPH8BWvMs6LcQ5597iktpEPucZ4o85QxmcNsALiZDsGr6IrTSd8Ryfv2M5kluTcQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "꿀 떨어진다",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10 보스 몬스터 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "레범몬 출석 이벤트 11일차 보상",
+    "medalIconImage": "//i.namu.wiki/i/CGnU0CWFkZhL3icGIsoSQQX3T6be8F3jrQpHq2i-KXqghfXZYHS_1ZC4yaDLpHEU11g3xj9YuwFdGy2201EEJA.png",
+    "displayImage": "//i.namu.wiki/i/15CaD-rmfZQX7962DzKcWJFe00_7YN6TMGEpI6y0b3t07RFuhFDGbGlErP6XamdfCYUWvUkxsuNF6SqbneT3Sg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내 친구는 핑크빈",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10",
+    "obtainCondition": "핑크빈 레벨 100 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/k2IHPjqqsKNuLgwi-X9g3igmzvZoJIKflcLuOajN1D-RR1yku4fybKnhJa_MQJqY5SZJ_zRjV_43ufoVplG76Q.png",
+    "displayImage": "//i.namu.wiki/i/peHzG4iTd3MRK1ChNOfU0zqhLXTiNHJ1YELZoesRx0nKhAOPDSABav9aJDZC-7yukotzl54DArStgocxaTjfUQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "해변의 무법자",
+    "stats": "옵션 없음",
+    "obtainCondition": "모든 '해변의 무법자' 이벤트 업적 완료",
+    "medalIconImage": "//i.namu.wiki/i/49ouuhNuDhChczMxBsYpswWO-_AB1ljhm0E15RaY0MINx5L1eHj-oNw4Q4EIShjEDP9LkWqWNBNcEVNwRHyLzg.png",
+    "displayImage": "//i.namu.wiki/i/8oznI455iE0dfN8EUbxRw3PGAjijl-ZFhVqBP643THMuOvMQi7f-L3naddKYfEeh3V6kXUf1zBToZYfmyG0SNw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플블리츠X 훈장",
+    "stats": "올스탯 +10 보스 공격력 공격시 데미지 +10%, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "메이플블리츠X 일일 퀘스트 90개 완료 보상 . 기간제 90일",
+    "medalIconImage": "//i.namu.wiki/i/pf1E-fwSTBQOVpWabRYzfJ7mDUGw5RPcxUeS8HHXnpB-2kKm4lS6XxpdjmWw8jJOwHb8Vh802K4Tqe6mSaMIDA.png",
+    "displayImage": "//i.namu.wiki/i/yp7cr2lQTDrL-LnHZ7LGZAwefOsLjp5yy-R79OCzxOyZPfV1vGNfxEYNA2zdGf0Ht5v5z0TI-hIrvBt7bnp4_Q.png"
+  },
+  {
+    "level": 33,
+    "medalName": "왕관 쌓기의 장인",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +5",
+    "obtainCondition": "랜덤 미션 문장 5개 획득",
+    "medalIconImage": "//i.namu.wiki/i/zo9ZGjeV1plqG8UTVDBpDfkiSnr7sp7piDPEGAazkf8TvxTqDgnX6I32oL6r5f_aSs_fSfjjOYP19CMvbwkyjg.png",
+    "displayImage": "//i.namu.wiki/i/WqNBkDAnAKAd3etqUmpCP96oL8JNUxBzfxVejBHyr7XZhgBLJ7dD-hfNeFN9LzZZpA2UnuAzeCeLcbeqUjhMQA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "15번가 셀럽",
+    "stats": "올스탯 +15, 최대 HP/MP +750, 공/마 +7",
+    "obtainCondition": "메이플 15주년 전체 이벤트 미션 완료",
+    "medalIconImage": "//i.namu.wiki/i/w7d2u91n92PL3hBY0PJ5XT6wh47MRkqYPm3cSWdv-sfm4f1qJRouAHjN4aAcBvoGXKSvH0w7TnNfuA6CxDJ0og.png",
+    "displayImage": "//i.namu.wiki/i/t4VY5mLUgOPF7SEXCpPv6BVI6hL_W22nkuAxLC6D1aPgG5zorTf3kqRpEGVBTDFQd0UNa7l9NHVqncYh-4wPxQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내 친구는 핑크빈",
+    "stats": "올스탯 +30, 최대 HP/MP +2000, 공/마 +10",
+    "obtainCondition": "핑크빈 레벨 100 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/k2IHPjqqsKNuLgwi-X9g3igmzvZoJIKflcLuOajN1D-RR1yku4fybKnhJa_MQJqY5SZJ_zRjV_43ufoVplG76Q.png",
+    "displayImage": "//i.namu.wiki/i/peHzG4iTd3MRK1ChNOfU0zqhLXTiNHJ1YELZoesRx0nKhAOPDSABav9aJDZC-7yukotzl54DArStgocxaTjfUQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "꿈의 오케스트라",
+    "stats": "올스탯 +5, 공/마 +5, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "'18년 5월 게임 속의 오케스트라 관람",
+    "medalIconImage": "//i.namu.wiki/i/6Z5VCU6QNlhTW5wMVkCJnfA4VdBJWK_0MP_BQ_1JPlJxZdAf1pEELB-STQ8IDyhCn8reYtOM40HBJgMv-8ImcA.png",
+    "displayImage": "//i.namu.wiki/i/peFeBdaY0PhBwYJtjG5UFz7Ht7LuzOZKek0AXsNDRcFsvwHoFqirYpnqlhlVEEiinnGPzQoTXwAUfQL2SB8uwg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "연합의 증표",
+    "stats": "공/마 +3, 월드 내 캐릭터간 이동만 가능",
+    "obtainCondition": "'18년 여름 검은마법사 이벤트 [36]",
+    "medalIconImage": "//i.namu.wiki/i/BHRS8QvXYoeJM6KuLrU-JI7FHvxI4xmFbNtuW5_VqhdJChOmRTuOiTM1q2hFtOMx3MbSQnbRBH-_lOw83K9oLQ.png",
+    "displayImage": "//i.namu.wiki/i/TcSub2292GCjDcQlIP4fmPJzkafhzJLc8t7MZn4EsaNdW1APvN5qABcREpbAVwN_hgGv8IR7MArKszPaZdWBHw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "공허를 극복한 자",
+    "stats": "공/마 +3, 월드 내 캐릭터간 이동만 가능",
+    "obtainCondition": "'18년 여름 검은마법사 이벤트( 문브릿지 ) [37]",
+    "medalIconImage": "//i.namu.wiki/i/GACwQDbCUE6thWTUg2pv946dwMEJjpB_TEFccs9HK3MGowC43ka1k_DIorDHMsysxL2Pl9cXVv5kL4qAXnDp2A.png",
+    "displayImage": "//i.namu.wiki/i/EHv0a7sQSwj7hZG6C5QSH3p7HWbRkF82kRPPaj5ze_wuI-7UAB8K-8kjNISInQBJIcKeL701DdaSDl_spqek1A.png"
+  },
+  {
+    "level": 200,
+    "medalName": "영원의 늪에서 일어난 빛",
+    "stats": "공/마 +3",
+    "obtainCondition": "'18년 여름 검은마법사 이벤트( 고통의 미궁 ) [38]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/mGM388pctKyp9IbePUgXyYWoVZ0OjCbSQu5N3s_cm1_YiwvbN1oDDbVBdoDs6qNA8jijthOtELuyOHaZu9sXFg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "운명을 넘어선 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "'18년 여름 검은마법사 이벤트( 리멘 ) [39]",
+    "medalIconImage": "//i.namu.wiki/i/npeuxgdraGTt78P6NyvO_CyaHGV_ypADXUjSWx3d2mr6fS_tZeVw0QDg9ekGE4YaA1gv-1VwdisJj7NXoXxThA.webp",
+    "displayImage": "//i.namu.wiki/i/FG_Nl_rnbMLDG2k3pBVlEzFE3WJvwCRrnPFk_Ew8NoW5nIX8qHfiA__T-Ml6i8qe-xL2fBRW9XcZ7ndo_q9GuA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "BURNING",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1, 재발급 불가",
+    "obtainCondition": "버닝 월드 캐릭터 생성 선물",
+    "medalIconImage": "//i.namu.wiki/i/3Vr6MH3-3CrWwr1EMNf3Rwmza1pT5QyEm1i8JGKICWWKYtu5CDGaKQWRztcF67xMhQY02hXWf3VgGlqQqQgm2g.png",
+    "displayImage": "//i.namu.wiki/i/9-SjKVZiRF7N64JRCsexy9BqLLxpRC7VuoQytKd_N2OQhGZ3m7MhHLpIKFFsqFkvznJNmd9STtTWVOfgBlD1KQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내가 바로 메잘알",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "메잘알 오프라인 쇼케이스 한정 기념품",
+    "medalIconImage": "//i.namu.wiki/i/T3SzFxZdpenuqQM1k2JxxIW33WY3GUgZCB_ElT8PrnJe2-sj7Mwl5xad4ctM7zjbtbYCgw82SoyFFDPwvywTPQ.png",
+    "displayImage": "//i.namu.wiki/i/U03CK1KC32qcHKunBqj8zLX6pcrb5na2tljhY_GHkm-DIJHHAw7HX9Qf9m3Ekpi39N31F0ZCJDoiFaCg-l8ZmQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "뉴트로 히어로",
+    "stats": "올스탯 +16, 최대 HP/MP +750, 공/마 +7",
+    "obtainCondition": "16주년 이벤트 뉴트로 오딧세이 모든 미션 완수",
+    "medalIconImage": "//i.namu.wiki/i/bwpSvykjaAkxPe52zDFeyxcBsrag5_64pVC79b02P9IJUPazEKmeBVEbC3x8nnc7aNWfumMNKSPR_qlK5dsMiA.png",
+    "displayImage": "//i.namu.wiki/i/jPoJAbabQs2sHnV2hVUvIamseY66f0AsS87QecPwCyOhtduNumVJDJm0pUABB_V6dKaJ6AmCWloSDP3-JygllQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "호텔 메이플 VIP 멤버",
+    "stats": "올스탯 +17, 최대 HP/MP +850, 공/마 +7",
+    "obtainCondition": "17주년 이벤트 VIP PRESTIGE 등급 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3HzWMLWiOgxklStv5S6z1joIHko2oXAleS0VEH4TLkV6cthq5metAmk66w1T5C7vZVPF988AmLY0v0FAsAgBiA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "medal 블랙스완",
+    "stats": "올스탯 +6, 최대 HP/MP +613 [40] , 공/마 +3, 방어력 +613, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "메이플스토리x BTS 콜라보레이션 이벤트 구매 보상",
+    "medalIconImage": "//i.namu.wiki/i/JGawWJOotxiBrFCS7Q5tUO4UQre87so4dVCFtkmfDhEHIYOKP6dZTqLAGl-FXRkjlIdyAqtDr_69wT_hIsi8cA.webp",
+    "displayImage": "//i.namu.wiki/i/psVZMdwh_VIr2Lt4_Z-FCSk_aqyW7auNuFcx30DGRguDjUcWtYXNDHqNVPDDfJ3S2Xixf3ll6GYTISF-dQx3lw.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "블루밍 메이플",
+    "stats": "올스탯 +18, 최대 HP/MP +950, 공/마 +7",
+    "obtainCondition": "18주년 이벤트 블루밍 플라워 모든 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/wjgsEan8IQrDpv-DKZkOAxvwCrm21V9JGgRYiQy66I6_Sw_-E_u7_ITbkWAWcHzPqhTXVFgO8U-wsfmEadNK-w.png",
+    "displayImage": "//i.namu.wiki/i/OXQCBEV2d8ITFhwW9K81DadF85hKxky13NXgAHtWKh_ra-9ZrwjoMYTCTS6ZpJw4uvoODUS17z7MSfr81FWazw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "★★★★★★★★★★",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "2021년 4월 11일 메이플스토리 고객간담회 에 유저 대표로 참여한 10명에게 지급",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/NogXR2N1Bkece3QEFBdvquuG8QObpNsiC2g8M1GSaqM_-Bc3O4SxlkAFMbmZ_ZtShlLmiHmB6poWCjKgVSkwgQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플의 ★",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "2021년 4월 11일 메이플스토리 고객간담회 에 참석한 서포터 유저 49명에게 지급",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ZSjrtSX1HTALBNCEmvKUGAzOjjUZKDK2Eat5uyj9Svu3tSoB_Zy5dJ5u5PmrTaDtUefPwhc6EYQy7f0-MaWnHQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "영예의 금손",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "제 1회 금손 어워즈 금손 수상",
+    "medalIconImage": "//i.namu.wiki/i/G3nhOf3GgQ-l9cGfmekN-x74OrsibHmVFnT9vyZ0RX9THhdcmz_PXzCKJ5CQkCySKpnHpu3UWDi0HqOQrgIGlg.png",
+    "displayImage": "//i.namu.wiki/i/-079xXhCSQ0U0D9PIyVgp0NfC82Xh8vovkm7RRbe8WxTr7Rl1Tm1bXXfY8UeKFBsfO8cryyIypz4cZu62hUDyQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "빛나는 은손",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "제 1회 금손 어워즈 은손 수상",
+    "medalIconImage": "//i.namu.wiki/i/HowqzIlqsqeVtOoHBte_ezgs4yf4xWtRsnaO5f0VqbyB8oBIqKCQS7tIkd5ggwWtl-c5N4L5QP4Vrxnf4roTYQ.png",
+    "displayImage": "//i.namu.wiki/i/Y-ZFl50TSjyKuj8HAZfDw98mhIff0ShpMP8y13D-l82TZikf80fBAlCmGP1ihWMHBFMhIoZODKHGieIcOiYdQQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "환상 오케스트라",
+    "stats": "올스탯 +5, 공/마 +5, 월드 내 나의 캐릭터 간 이동만 가능 , 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "심포니 오브 메이플스토리 관람",
+    "medalIconImage": "//i.namu.wiki/i/4VqbOBzcidSzoG90wvtKIwHK8lE3b6erePgDFYeCqwZJH_Bl1FlsvXVwIBqrSKNLTxODt67H13JvRsTZbvWCEQ.png",
+    "displayImage": "//i.namu.wiki/i/5ZOgqQqC6wNHizIfh_czxLI-hcX3rh-UqZBxWRXrR1_bUKkRurSQziOPok6RvwEE725QX8x9BrI69wiBdSe4TQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 모멘트리",
+    "stats": "올스탯 +19, 최대 HP/MP +950, 공/마 +7",
+    "obtainCondition": "19주년 이벤트 : 메이플 모멘트리 모든 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/9ZjjI_bttdUcsKgE09dEyTEYgljZFRxAtPsho2CSQMshtEIfuC__msmheTrbHlALPmov1d_u0PraHSHn8RZrAQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "MAPLE LIVE TALK",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "2022년 5월 1일 메이플 라이브 토크 참석",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/l054kGLYuyhtTm94PaeARL1Yrh9LCKeRbWST-HRAQKlptnRMhhKtC9QmMSriZCQVVISDVVfO68D4jSuimLPwHQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2022 싸전귀 레전드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "2022년 여름 싸워라! 전설의 귀환 레전드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ZFuY1_O7dDB0SWmsx_bkrfSWV6TYkG2o2bOlSARnAED4FlW9s04u4vckpeJgZbYSff4Qlz8UrAg410IUei1aSA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2022 싸전귀 다이아",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "2022년 여름 싸워라! 전설의 귀환 다이아 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/XqNk4zvxyjUOzeAmJff0aM5OwHhkacSbArPczoneKnep3_OYWg0i6zhUtDhK_F-7nJsGvsTpSF-Y8ZH4dLXG6g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2022 싸전귀 골드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "2022년 여름 싸워라! 전설의 귀환 골드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/w7ROAAE0NGCeaT8UNPPnKVG12H_aBVWB381-Lmpt3FZv9gKoh2hcXXFyD9-mCnL2mVZV_NG2ZVlQZzHrZA0uDQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2022 싸전귀 실버",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "2022년 여름 싸워라! 전설의 귀환 실버 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/BqTUkiJkFVKTBj4UqN9_Y77vUI9yd0TeKw1vinm0tEmwH078kv2fSFS5F-_wTkYs1iJiZKZw2iRAwHmuazZQ6Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "진 천사",
+    "stats": "올스탯 +12, 최대 HP/MP +1204 [41] , 공/마 +4, 방어력 +1204, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "진 천사 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/fB5rc-xPKgj1wCAdeTPlkF9AgjsnFKtBeaP9fJzP_cBZZvR4mIZmZOS1oOQ_IxjAJuu2yqHN_Q5dKo9NdzfTXQ.png",
+    "displayImage": "//i.namu.wiki/i/8ga-TRPL9C0ijXVSGeGWq_KwWe8VjM8F5R-k5ZQjSv8efeA_RfLK4MGygOLQfsWpvKkMrWDu3MXxPS-G9tXPAw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "진 악마",
+    "stats": "올스탯 +12, 최대 HP/MP +1204, 공/마 +4, 방어력 +1204, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "진 악마 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/GcfLVhrcecc6RC06vvnvy1sthCBUUa_Oh9dmuokyqCgk86zouG6gnehFi1_PgpmmgqpPQwpLzPozQKzOoQgF8g.png",
+    "displayImage": "//i.namu.wiki/i/61wsqt48monOxXqstwg3FbtweLvKvh9sjlxQh5K8LfdPfANboJvQ5xhBl93pyGm2HtSA00puMGj9xb98DqikeA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "풀 문 미니게임 콜렉터",
+    "stats": "공/마 +3",
+    "obtainCondition": "IGNITION 풀 문 파티: 모든 미니게임 콜렉터 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/VdgTAZ24dAN7V8sy_cOPQ3OANCWjRpBFBM1dBa8L6DQFqYwv21ymh6WQHT77kRd_j6Y1VF1mtTPhjjQwFwnBdQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "슈퍼 예티X핑크빈",
+    "stats": "공/마 +3",
+    "obtainCondition": "슈퍼 예티X핑크빈 : 스텝업 17단계 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/hLgI7pOtkDUwDc6nhkqmsLI8Ea-NUnb-QbDnOO_60TrZgY3mJVQAvb6m1ehpuz5x61Twpjdc_ooaA_A8oScS1w.webp",
+    "displayImage": "//i.namu.wiki/i/p9dIpwkvzN_LGLCG29ebZ6wy9FQSi-xJQaqDCb_Ocj9gUOS6nukitL7NYYTWLBV0GLTt2gYk_BEMU7aWFaA3zw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "BLACK",
+    "stats": "올스탯 +6, 최대 HP/MP +808 [42] , 공/마 +3, 방어력 +808, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "BLACK 플래티넘 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/JtY5RQzNYJ88KkcVc3UaQ89mtk9v-Y-9GJBkkg0zbUabz1fwxkyL2qGSBsqMllrr8BYMmP064y-7vvjcoj3npA.png",
+    "displayImage": "//i.namu.wiki/i/4o9PGtj3qeLvCcrQIJP76pYZpA6bFJXAnOAFfLl75J3i2eyIbnoD-CLIk3H01q_dnVsnyrvOiBRYBvhj1yGC5w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "PINK",
+    "stats": "올스탯 +6, 최대 HP/MP +808, 공/마 +3, 방어력 +808, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "PINK 플래티넘 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/IxDdH7rBDmuL1XQaCg5WUcVrw-YOsZy1ouRawFAksTXtUdjIPOE7x3hnoyrdZLlPKHzZJS1Qb1nhD48STAhDrQ.png",
+    "displayImage": "//i.namu.wiki/i/sfvfSefQzljnPEjcMe78CW8ldrWMeT4EioF35FVeVTMZuVLh7g1uwSgt9QHldqVdURm6MyS6zeeqGUAL6c-UwQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "☆메이프릴 아일랜드☆",
+    "stats": "올스탯 +20, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "20주년 이벤트 : 메이프릴 아일랜드 모든 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/6syO8bhpYJ5so00Hwwgk9cNxspHSYJJtZFhfpHpWTK5VkBCx_Xro2B0bjtV7LHyur11IQpR1YIHhmGIYAqaKMw.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "프로즌 블래스트 노비스",
+    "stats": "공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "20주년 기념 파티 퀘스트 '프로즌 블래스트' 9분 이내 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/PgPJ7i1wrhIvk4TQ0bJ5jnLz_fOXcvy8JWp_Xf9na1S0BmhG7kNCfgkof-CoohEv7pKKQNsbAojtViWWMiFB1g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "프로즌 블래스트 익스퍼트",
+    "stats": "공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/HN7UM1pn1lbWbuRAxQwEXDMFRY8hKV6N8CbYCJtnnx0gsQtLL_UPtywChRBBhZ6VXBwaiWamHNA9W31FBKwJgg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "프로즌 블래스트 베테랑",
+    "stats": "공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "20주년 기념 파티 퀘스트 '프로즌 블래스트' 5분 이내 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RG0haPBbWuc2r8NKuc1nyFATooHpzl8PNJnQV6TVwa5rsVKgEfY5GwcWuu8KEC78P60cfOVtsGMIOoDdljOUhw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "NEW AGE",
+    "stats": "능력치 없음",
+    "obtainCondition": "NEW AGE 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/muprLVx6Xz_9c5KWadHp3KAWNl_gITemgqajHMWZusnRbOgs-DtWZVfCSuWt0YYdDyihH5jf-gDcAR0YiYMDcw.webp",
+    "displayImage": "//i.namu.wiki/i/z8rKhYPAtcM43Uh09lgDB1-U41lOo2LQzm4kV00MSTVQpcRzumQHFFOQATRdIBTZ-IYYU-WrAmoE51iBMUtlIA.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "HYPER BURNING",
+    "stats": "올스탯 +6, 공/마 +6",
+    "obtainCondition": "하이퍼 버닝 260레벨 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/OxTSqmXJxjp6XYTlenKIgNhv81TxO2lFinr-VPMRcwBmPssgrO4YHnhdtPss0tK8lJMbZBM8DORdGz2ZRhKpuQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "이덴티스크의 전사",
+    "stats": "공/마 +3",
+    "obtainCondition": "2023년 여름 이덴티스크 헌팅 어드벤처 전사 직업으로 3분 이내 클리어",
+    "medalIconImage": "//i.namu.wiki/i/pO74LCJ_B05TuA7pOlNX71R1VFBylA3VPZIBojZdJ_RcwsPIUq3HwQRPj9_mPQ4eDuPmv6VbparVEuwVBEhJAA.png",
+    "displayImage": "//i.namu.wiki/i/UKmMXNDqyLeAx3uiFySAwYueT3glXIugVLYaxn6ZmTJU-oXYxOB_TcTURHYl2HCZhrEdKA1BXLJBUFGSlQ6XdQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "이덴티스크의 주술사",
+    "stats": "공/마 +3",
+    "obtainCondition": "2023년 여름 이덴티스크 헌팅 어드벤처 주술사 직업으로 3분 이내 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/jRI7O8XifV02O5ZOI3U4OAIR9SDZVKoVJM-DBsxpPQTzIOf_Z-_u3eaeWzaTOKUx0iNTi0WaeLYfANirvDjO0Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "이덴티스크의 사냥꾼",
+    "stats": "공/마 +3",
+    "obtainCondition": "2023년 여름 이덴티스크 헌팅 어드벤처 사냥꾼 직업으로 3분 이내 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Mw23dxJhs6NUIf_N2_9VCRumUCye9YaZWjbNrS_YAGXqicd4aB_1QMffoe8XyxKS3iHJjW3-_jO-BKXdFOng0A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "이덴티스크의 베테랑 헌터",
+    "stats": "공/마 +3",
+    "obtainCondition": "2023년 여름 이덴티스크 헌팅 어드벤처 모든 직업으로 3분 이내 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/QOsVaf2tR5tTXLNBcSJ92kVrm3WG7x9BoWkJv6j0iRrSiXwN2klXXHbq2oMdsFRtZ4PDA-IfpNYE3pUtdVkLvA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘 클리어",
+    "stats": "올스탯 +10, 최대 HP/MP +1000, 공/마 +3, 방어력 +1000, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "DJMAX RESPECT V 엘 클리어 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/GDaIinkPKrY-6S6tCxE_MQlJ4fEcTmFAIwws595ABvU0IsxKQzu4B14BNgeBLRTRfhXcvhwgb35OGHp8zesmeg.webp",
+    "displayImage": "//i.namu.wiki/i/89E7iHIMHlB1KYY66pIZ6CBZ7cHCDIJHc9FZenL67SbAvtCIeImO2-qnRIGS2eAYIyRy0JWMK0liW7MWPHBbMA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘 페일",
+    "stats": "올스탯 +10, 최대 HP/MP +1000, 공/마 +3, 방어력 +1000, 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "DJMAX RESPECT V 엘 페일 패키지 구매",
+    "medalIconImage": "//i.namu.wiki/i/bt7l3Hp94NB_YAwhqBUNS334qIu3zZOJre3LPNVN4ZgPXI3E6ShRBL--BR2fcQTCr7gtFyx67LGVf5jli0UNPw.png",
+    "displayImage": "//i.namu.wiki/i/zwNUsUc7A6_WvRLLhitJq0vgp-3WTZQQcLg9kEaI4q9ov53IJ8KAadjBNMJK0VvYI_X-C8xXwFRZa3KXGoOKnw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "재즈 온 메이플",
+    "stats": "올스텟+5, 공/마 +5, 월드 내 나의 캐릭터 간 이동만 가능 , 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "재즈 온 메이플스토리 오프라인 공연 관람",
+    "medalIconImage": "//i.namu.wiki/i/FZulD-Smy1HrqtFcw53zZocEk9YMKOox0S932xZopy-YqdRbwamC0OqtmXkJWqcQqFFpGSHiHHDce_sPRjfc4g.png",
+    "displayImage": "//i.namu.wiki/i/Js8eC1gA7g34PyMWvfyJpoL0rmpCh6UyGNtAOPbcsYRMEjddxz7A6C51X5O62MHKNZWSu5OmLtun5qmcPw-z1w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "BlackHeavenLover",
+    "stats": "능력치 없음",
+    "obtainCondition": "메이플 추석 바우처 교환 상품 (블랙헤븐 스우 풀패키지)",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xRufbzvs01a5-vYWYl__bTPejpaj1d8Cq_fjid8o9ySIRe4uqb_fFkT1LmkhwIL6wbh-AAFeOI8Cr4LvRZSMHA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "싣나모 아래 우리",
+    "stats": "능력치 없음",
+    "obtainCondition": "보셨나요? 한글날 과거시험 1위 수상",
+    "medalIconImage": "//i.namu.wiki/i/xPppvmWaDX-HD3EKA8X9X1ykKf3yeGAJMFW9-7XsHADZwt1jH_XizTuRsFitpYtcCphCAO6jAgByrw9uTUh8KQ.png",
+    "displayImage": "//i.namu.wiki/i/zFmawW25-mjOYzxpUFBYRCQZmxHiq2iBObdgmTPTrdI2nMuUZ_TxH4YTTC6jCMMlX2DVX438rAh6DY9KyzNrxw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "뜻을 아로새긴 자",
+    "stats": "능력치 없음",
+    "obtainCondition": "보셨나요? 한글날 과거시험 2위 수상",
+    "medalIconImage": "//i.namu.wiki/i/yVEviw2UGCKcM6K5gjKLLexVblX4MXtJg3pawRaK73OlAd9_LwFAvyO59Bo8S7kw-bXdj9xFAhXUmu-xHmt0FQ.png",
+    "displayImage": "//i.namu.wiki/i/6lSYGIgo8teTGLt9jljT-HQhOPi88iySHY0TC_ul8erHjt0YcnGxjOv3puQ1yihQ5QJNIaQ3chO0TlC_kwEFHw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "아스라이 나리는 꿈",
+    "stats": "능력치 없음",
+    "obtainCondition": "보셨나요? 한글날 과거시험 3위 수상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/pE0JjfwyIP9WpWDY9M9pYN3-9SsRgqNoQiGjVEMaSPiCWdf4WP6arq26-DwuU_uMNkyqdnwPPriqraYRzJPnmg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "DREAMER",
+    "stats": "능력치 없음",
+    "obtainCondition": "DREAMER 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/g5Lw7wHrhOsEVq3zWHDXMmHkL-rwUWBtzZSOe2z97S5Krv941-H1UP410_vxmY0Vci5Pi3-wIGgalboRH6te2g.webp",
+    "displayImage": "//i.namu.wiki/i/WIglJsXdMtGQd-sI3nXqKHnPFYyhllfRVeI56QK3C1uTihEW4Ix9tvjG1PPEsbVVd6j7ZdqkAXqpa8b3ekh6dPLkYTTvw5eq-66aCmxzbsHkF9zmqbXhaeMZIZzjQY88k775AWmop2aK68Z_Il_kBw.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "춤의 조각 수집가",
+    "stats": "공/마 +3",
+    "obtainCondition": "DREAMER 몬스터 아케이드: 모든 미니게임 콜렉터 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/zNUEULuL4Ruu-vhCz7KAPDxET8lLdzclgJlg0-donxB_TqmOBas2PxN6P6q_yxV1L_M4nYA0n10nBaw5c_hsTw.webp",
+    "displayImage": "//i.namu.wiki/i/L2wNifKIPVp_JJBdTzFKm0RcaLStzkOzWgP5yJjS5FdWYae6RAgMrpQQymmTvSQ1utFTkcTC5WJ94ntSjLBvew.png"
+  },
+  {
+    "level": 0,
+    "medalName": "빅토리아컵",
+    "stats": "올스탯 +21, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "21주년 이벤트 : 빅토리아컵 스탬프 북 모든 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/2j3oB2rpQQz4JhMnxFGeu2zAZvII0sHSQZS8Hd0-M2k2Vn_sZI9w-VGJfKNxfyqZ-HO7C-Tt6loQC3uiVyB_2A.png",
+    "displayImage": "//i.namu.wiki/i/WbSk1eostdlQRIqBLhtry1LsaFt3rFH0TEK00VEF_PaoFKVtMOk-ROEQMZhQ6qsQHfMkXBfeQXWba0GD2t67nw.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "검은 천국의 대적자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "익스트림 스우 선착순 100명 1인 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/6Ry10AjWKD0QvXarAoTTFfF2AafIsxMcrlIwDauYMy0uOUNkhgCgrtuBzDsMmed9gTb4msZf5tbgoWyhYz7DgQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "2024 싸전귀 레전드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "21주년 이벤트 : 싸워라! 전설의 귀환 레전드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Zc_viyOVgRLOORBJoxuzogQzfmTzedPPbViNNRRXGTfzpb6hmcdW4g0Z0YVDvgm4XKer3QkyyxaW3KCoSlmsig.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2024 싸전귀 다이아",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "21주년 이벤트 : 싸워라! 전설의 귀환 다이아 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8-2O2R3tiDILmEIV6oXqkCKUEhlUbOcmF2jDVJLJBR_okyV69L_bI2aNeK_L0CfFqCSv0BjwYeAjwMhLRooKBg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2024 싸전귀 골드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "21주년 이벤트 : 싸워라! 전설의 귀환 골드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/IaZkgLTMnAqRBz5r18MsI-hdF_gF3Ymq7WZpjuK6dxCICqm8r9RUW2JXD7aefsCTkTpo_NJvIQ3IcR79Ce-lzA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2024 싸전귀 실버",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "21주년 이벤트 : 싸워라! 전설의 귀환 실버 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/SYOjL_uVqt5tqOoy_hrveIxWpBlvEc8UrKhdVkkkp0JekEqFMfLZWwjYg0Wn7BlD0Ep_e_Vqtosov1e0iT73Rw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "MILESTONE",
+    "stats": "능력치 없음",
+    "obtainCondition": "MILESTONE 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/Pp0tOE7mRz5gROMgbEAQEJ-Ae575s2FS6LPSqbGg-qMZbLn7QKA0bqGNjb36X2BuPg428fjzQ8UTIU0ol_QEgA.png",
+    "displayImage": null
+  },
+  {
+    "level": 200,
+    "medalName": "근원의 지배자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "하드 림보 선착순 3파티 격파",
+    "medalIconImage": "//i.namu.wiki/i/ESOJO04s8JVzylV1K1IJhypPiJvLzvOYgI6vmzOYvtSSvAGf53EacY4cCa6y8YCNRVbqK3exyrJMXlk73acBuw.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "챔피언",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MILESTONE 챔피언 챌린지: 하드 진 힐라 1인 격파 3회 완료",
+    "medalIconImage": "//i.namu.wiki/i/jBCTgOdC_S5yvVSLMpuvuDqQRsw9Wjic4Uu5mFKoiBC_QvlPBcK_EPJ6t3bMweUfGEFAC5G-Z7sJNrtTSd7VjA.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "DAVE THE DIVER",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "세이브 더 다이버 : 모든 챕터 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/OyocX4ortYeWWLVzOXL_DzCgqiGuQEKtXuhYoA6M64GZ0QDRcbHUnAS3G-sC184o9OwoyxZM93JO6KGsYDfzGA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "귀살대",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "귀멸의 칼날 : 탄지로의 모험일지 21단계 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/rBiZJQlqEFhBzWthjKbLCuuWs7sWyFCAu_-FqtkujM1bMc9kgOD8HEcIW3wLzT06nZn2x5nSW-of_7WwDZGsBg.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 X 귀멸의 칼날",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "귀멸의 칼날 : 탄지로의 모험일지 24단계 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RpHbbAf7WiMuw3Hu84cRQ8vgomnuZneDsbVJjc6RsFC06E1O25wPJ2pAXhQuAD0kUB5kJGCWIgb2wedJZx3Kvw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "힘내라, 탄지로! 힘내라!",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "귀멸의 칼날 : 탄지로의 모험일지 카오스 벨룸 격파 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/FP-SDEn0TMuqnaDBtmX8p69UAFF3iuo-G1A1nkA43UuEcaK6zKttGP0XjkrFN5vzmjkyOtYKdqR7AamiR5N3uA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "내가 제일 잘 올라",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "차원의 탑 정상 도달 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/p3QHWjwr7apbYKorQ61sPwzAJ0_vLj5ZvKIK8x8IyO-wBa0mxZ3hHiXU_FVl_MJWSkBw_DKGqq16u_s6xsNOmQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 캅스 출동",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "클린 캠페인 우수 신고자 보상",
+    "medalIconImage": "//i.namu.wiki/i/nYZJdzD0leXN8vdCxMO8Vq4HIZy1S08XJRYNgjbCll_f8Bmb3hySCVQ8QjYvL8N14D4aUnG4Tfb6FlHLUf8VCg.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "NEXT",
+    "stats": "능력치 없음",
+    "obtainCondition": "NEXT 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/wKe8U8jJFICc2q4AQMQf4vsrFvGqZHZnmDvUXvMrBj8yhU__D6q8aYx8A6_Uc93DetSfMPe1fDhiw3Co-7UhIw.png",
+    "displayImage": null
+  },
+  {
+    "level": 200,
+    "medalName": "HYPER BURNING MAX",
+    "stats": "올스탯 +6, 공/마 +6",
+    "obtainCondition": "하이퍼 버닝 MAX 260레벨 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/D6sHQtEPA3Uk7fdcsAWeEP588bEKvKmI8zJTRefu3Zff5_yl0WrhD14x4lZJAeh1IfE9U6BBRq9uopb7oBvmLQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "에오스의 인도자",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "에오스 서버 260레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/NXoF3XEP-1E5WEuGxcuwIX8KqsduAIQJQroqtA0T6WKDDbVJJOHz3Pbrhic6k5qq1gLRGWiZQZ2st_CaQrRRuQ.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "헬리오스의 인도자",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "핼리오스 서버 260레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/PH0yx8c-Glw5NBEaH21CjZBeUK7M6oBnwPaXMHsUXrmnJ9xEGjMPontT4C9e9SXGhobAGmWa8H-gd2VW-fzMAw.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "완전히 이해했어",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "윈터 튜토리얼 미션 19단계 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/qVDuUbdy6Jrxn-SB000rwqJH7rZHbj1zkFnGQPPFKr3VGQ2S-bvaCu9ZpJrk8h_BK56v_skQhzY6Vu9CfNkY2A.png",
+    "displayImage": null
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 브론즈",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 브론즈 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/15bSmNyVMW54Vdf9Crwhs1f45ZFhPl8v2ay-I5PZvfaMv-ZJePsF_ufbizGHuLDs9if492iVv3cYd3MgDzsxgQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 실버",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 실버 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/vnnqKJsMz5snufUcfrBApFtuTqiM_KGMjjSgyDXZrNf6MvM1xoaAqvxeR9DT0EUHTrP3iqNJf9rrw-kiJyGoLQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 골드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 골드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/01h5-gbbIQSPev387z-7aHVxlp0a0yrW5LnZ5vUwBTLF4Yi9QkZkVY5a-qLIfnvpodfMwp9Di-ymw1MCsNncWQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 에메랄드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 에메랄드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/5-6TJwQNwZMx6D3oArbm73G4V7JuodLJOVAA8eu_oPGL5TMheOKHbH8iILuZTyjO9sWmfa0UoC8EHxe4pb9JcA.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 다이아",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 다이아 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/k9FUbUnUx3CKgfilNjCisfzb4oVdBIsebmrVYo1H0wIYQTCgNjRZ4WDuaenCuVJt-hc8RkVPTgqcU7wA0c3vAA.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 챌린저",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 챌린저 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/5HHToF0AlK3ClvcM0xqfk9ieokG6SlFQF3Q8urTl06DcOizm_M4iwUAi3emyj8Y-7VB0myB5QHdyonVCDX0arw.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "윷놀이의 달인",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "헤네시스 윷놀이 대회 승리 횟수 누적 20회 달성",
+    "medalIconImage": "//i.namu.wiki/i/H0gFtdDK2n8Md2QtK_LD0R__2O32LCwGFOREJEso3-jA_XwhDO5ZTnWXMd5VOVFQHxgYh9VfIoKdB2Mm8DhJ-Q.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "황금 문어의 심장",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "NEXT 도전! 대왕 황금 문어: 황금 문어 도전 점수 15점 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/6nZYjsLCTgHQjk_wzzfvq7WWePXHVUePprA9ptBKQYkkZDiIycuSKnqSSdW87GKe88EdcmXrkhlxN0RYe0Xiow.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 대학교",
+    "stats": "올스탯 +22, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "22주년 이벤트 : 캠퍼스 라이프 모든 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/flWtDZ2n0surmhLS6pcFm39-QyT5APxI1mT5lzYQ_unoWuKUUuD8_WrPIDBmNMBchmGkqyD0ku4RwDcXJfFiag.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 대학생",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "22주년 이벤트 : 핑크빈의 전국 캠퍼스 투어 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/5VI5--yOM2yItWdNRxA0NkDtCg-wrtERgcYmgsPbGA4DtdW8K-f9_qPwyjQdeovKdtgkz7_kro29WvL0mIPV7A.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "내가 제일 잘 올라",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "차원의 탑 Stage 1 완주 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/p3QHWjwr7apbYKorQ61sPwzAJ0_vLj5ZvKIK8x8IyO-wBa0mxZ3hHiXU_FVl_MJWSkBw_DKGqq16u_s6xsNOmQ.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "차원의 TOP",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "차원의 탑 Stage 2 완주 보상",
+    "medalIconImage": "//i.namu.wiki/i/Cnihmyofru_RuGbcs5IKRTCZNEna4boXdbw58C_r-DTWFD-clle50lJqK_XO65VfSrREnlHyI7mefZGs9jdVag.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "2025 싸전귀 레전드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "22주년 이벤트 : 싸워라! 전설의 귀환 레전드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/iMRlN7N18TZWqMKCsMdf2l9mDszacpE31xCunRAAu-7nCai03odgwm9ZmXZcVuN9QkstF87TQlhbYT0GrsheDw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2025 싸전귀 다이아",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "22주년 이벤트 : 싸워라! 전설의 귀환 다이아 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/saBaExvIqJDk1u8oul4MO--95RiW4hcHzl6jiKRzeEDzNCZCRc6kfJ-y7UwGYbY6KufCCwvVvcx35m4nkFCdyw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2025 싸전귀 골드",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "22주년 이벤트 : 싸워라! 전설의 귀환 골드 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/KfCzmoMobSRI87tJ1TOqu6zsvSiI6urhM40K9z-HpAbAAbm1sOuLJ7DcjDYAOns4M8PgzaDsX6XXueRiniBwrw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "2025 싸전귀 실버",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1",
+    "obtainCondition": "22주년 이벤트 : 싸워라! 전설의 귀환 실버 랭킹 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/iiD9cNlTPwESTx_8CNs5tFa_WHHPJ1RpMCkwtWacQzBR8kXVNfL0Pqhpq82qNUctCdn086kBTfIurU8ldJE_8A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "유랑의 시작",
+    "stats": "능력치 없음",
+    "obtainCondition": "렌 사전예약 보상",
+    "medalIconImage": "//i.namu.wiki/i/0Iww4vXhcWJaErKzgTsNEB18bVaoc1S2vhTeowKtIn_mezXCuMlHuxEMTS55ZZThDMdUtN0I8yt55GHsq_PyGg.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "여행의 끝",
+    "stats": "능력치 없음",
+    "obtainCondition": "렌 유랑자의 여행기 스텝업 9단계 미션 완료",
+    "medalIconImage": "//i.namu.wiki/i/poPmDLxJ1zRgp-bHMOS8k5xSHEpiVj6eitLOkdJKeA7xHTV8lATDRnECxLFbDohC-VaDXVuNAY-oFd5dBh1nYQ.webp",
+    "displayImage": null
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 브론즈",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 브론즈 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/NpRTDnihigJ1AUMK7TBa0EHjvjCp5BaegmAqjQM6JKqa2uQF2c94y5M39dH5afjrHmdTvJJ6D_aRj4Hmp7KyHA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 실버",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 실버 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/SQK_DHWbkv5YfTRqTwOsjK3IEq3eGC0JuCLWRykB8RiGL-Tp6mxJEmPpDyUoMMH60KvYES2ysCYQpkijCaOGww.png"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 골드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 골드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/TInKBGa_-RVN_EsRfweIg9diMa-q-9ihkNuZUYX90PpB0_EW7yx5m0JsRPDoaUgFlba_o09jGcbvYkLHsnU3Pw.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 플래티넘",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 플래티넘 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/v5qYTB9Jyy6z4uNnUtnNktSRf_M4X6ek9f6aCxOCYbTMzWkjL0JQw3TmVP7ob933s0qpdGokvTyEZr2J2Os1SQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 에메랄드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 에메랄드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/v1VvRGbf-TBa49pPMbQH7a548tbYtTB_t_vUINY2VM4rgxFCDy64SKUFr7w_nfgkT1RkK6eqK_yXiGstrIQrwQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 다이아몬드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 다이아몬드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/w1hE3h-phc0IhbAHVlHWdQaNDDvvpUVJ-pgIam_AWjApQrHs4qP7K0FiN4F3rIr7gPZDxcshXfY-PpCIP6YYtw.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 마스터",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 마스터 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ZP8aTi_GzbDG_Fp7Z70HDRPRjBkUUQYSpcYQhjnYNisXqK3aPFSDLSF8mCEyQ-1LMIzeoMzYC1fNFQm-0uy-DQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 2 챌린저",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 2 챌린저 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/OOn1lgD73wc9SAKSCrBd7vSq1bOiceMWH90Ob_U57jmbbg7dsulExwEAMGSGOby7kRtUVemiDNwtl_--JuuVKw.webp"
+  },
+  {
+    "level": 0,
+    "medalName": "ASSEMBLE",
+    "stats": "능력치 없음",
+    "obtainCondition": "ASSEMBLE 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/P6LHmNGcbTaTvoHXnxCf6GXMq9UIt3ZfNft4-ZjG23s0oUjgvw0jed32OW220Jg3D8D_h2kxPATfwkAsZmU-6Q.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "내가 바로 메이플 캅스",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "클린 캠페인 우수 신고자 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/d2taWFNWz4jBZm1khddt8CGyFD474oz3Q-i5VZmT8MwjL_oxjW7kJceCxsp1rPuV0TD-qjabx-3bXIZX5lNvhA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "하이퍼 바디",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "빅토리아 어드벤처 전사 직업 최대 레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/FLK0fNRcsnWWPNxdJLuMT13ybeuMFKMuU5sv_UPVs_v8uW7yAjEXNdzowZ_B1RUXqgsbuQCvLlDF8jBq2rOvSQ.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "선더 볼트",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "빅토리아 어드벤처 마법사 직업 최대 레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/TSbTRixfTZQM7xGlGbMb9RfCpc2OKNoT9rJ36iyykr0skfseyP1B___Kw8g-XO8El2L_ia3yOxsNjKNpVRX7ZQ.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "유니온 포커스",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "빅토리아 어드벤처 궁수 직업 최대 레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/JZ9HsTsOrHCSHY0u3kdeOTqdu58TFPE4ygnVeESQZUSjdctP6blERfqbP100CloQNHw750XsPPknDrbHkVUT0A.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "새비지 블로우",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "빅토리아 어드벤처 도적 직업 최대 레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/orY_lwGFN_iaPlofwYRKtwmXjxP9xFYNDIRYo7IaDuPQlxPqLQDFO-ydZTEkgxDorgyRJinlEFImupmnWi4mzA.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": null,
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "빅토리아 어드벤처 모든 직업 최대 레벨 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/zrk9Yh0IYso3Ws5E5hu1IXV9fRE7UiXiFmwx3SjTcAtYDPUAbTrTXGteMhvyWT3X1apB1O40BQ04qvKuhhEL5w.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "신비한 한글의 기운",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "한글의 기운 보상 [43]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/JYCpMwGp0lZlWjSdQBLrIFeH-cTs5_UNUD-aBfsXAjYMxYropLhG5R3okVxRPsNfj9lAyK0SIkuMklzllKQpZA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 월드의 히어로",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "원펀맨 : 히어로의 모험일기 12단계 보상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/GKJKAt8_f2PB4aTJZT6YmcxePMOWy8PpN8OgGoXYPbVbsrRfvvLoMj1kLVAH-O1hvfpBrzdIiL5GxMv7PuXasw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "귀신 사이보그",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "원펀맨 : 가상 전투 시스템 모든 스페셜 미션 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/nQDUsJ8_v3yTzGExpFKPdj4MEqnBS7WIN7ZYFm2eVFwlYNfUdEuuZJikxzYCKms-5_VTM1GsN9WeakjYCr3cNg.png",
+    "displayImage": null
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 브론즈",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 브론즈 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-YudMhwab6JlHRq40H0MmwFIV3vE8NE0LzE6REIH_uIGzCn9ydU2UXTXLfMrNlQ8C--2zXr6DTw-u_muAn20ag.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 실버",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 실버 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/LJzEaIIV99RxpnfsGdnXyAbYHhPjxQf43DmbDNFHayCNqBsw_z3WkmZawmgBNVXi_eR-dAPi5jNjk8SRDFkNBA.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 골드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 골드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ORCj2N1UET44TXNEwNMhHghxNgMB8YaZccXP7rSY0ulBigfuRNJAl2KgiuxpfGPcl60qDQe_ZK4IHCW9x9WXAQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 플래티넘",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 플래티넘 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Ia2Eio_1VOX4yI8DCOIT7yZCJnetWuHRaSHwKBs3QrtpOTrm7DOWVEwEQ_3V9WAHqXVZrdRC3cjRCALEhHuLcQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 에메랄드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 에메랄드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/u4JgImkP7u_ZoV51k3_l_7wAhLTEc9vtoFDYFBlTgdNY1CF14Q_NrLgzTjQP2tC7zSoT0fDXx7xXwQMaWpgX4A.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 다이아몬드",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 다이아몬드 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ob2niDOGND-62LAzj5fHvuqHAg9us8PKgLaHb34n3HiyajgRHx5jX8aO05zRcIrPphN2aVO1zW-t-aBnuQeucg.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 마스터",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 마스터 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8d6vChLSkePfdXTLGe9AGGDRYz6m2Bkj9gw_1UPX5U2xYxR7d27emGy_NtYl1xpyF699N_nL1Jk7CAD9CVNBsQ.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "챌린저스 월드 시즌 3 챌린저",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 월드 시즌 3 챌린저 등급 달성 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/I8M9fVi7oSEALB3pnx5TBUudLtUBi5gfF2ttDmlNx7tSuX99DMiWqeFQqvtkv5VeBaga1qSdDO22kQmozhUjQA.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "영혼의 파트너",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "챌린저스 파트너 노멀 칼로스 처치 미션 달성 보상",
+    "medalIconImage": "//i.namu.wiki/i/WXUngmRufQAxV7sNV-lgbNWjI7zjHqe_D4_ksTk4yCM7EabNMnEVWaVHWdPBtt2GpdcTFGKrLf9mCqNFlG8NEw.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "CROWN",
+    "stats": "능력치 없음",
+    "obtainCondition": "CROWN 쇼케이스 개최 기념 보상",
+    "medalIconImage": "//i.namu.wiki/i/LEH2ZFO4Squ1vDYG6xP-k3L6tZjmu7GNUhKH0sqIf_k0ayaXWHXOXQxiKR7QSZqgcNrwnX-y2Nwjo0TkcTucYA.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "KINETIC",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "KINETIC 출석체크 10일차 보상",
+    "medalIconImage": "//i.namu.wiki/i/CtlpYvHLKMFJ0zRX_Zo9Asjb45SwqmXTO95P26cxPELWiLODiPFipe_p9QceYmqhd38DGG8fY80CZZ9aAnpqxA.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 캅스 임무 완료",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "클린 캠페인 우수 신고자 보상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/0vk6OCo2udq7vRtHvRbcjCw_ZaKXFehGWYdlskcmZ8A_k-PoQKWO5lEhM8mFJAtWNbb0B1qNtgByTPHuUgHihQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "탐식의 마침표",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +3, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "하드 유피테르 선착순 3파티 격파",
+    "medalIconImage": "//i.namu.wiki/i/XmdvN--mf1V5efiulcHXSRx7hlNVxd9rxErXHPS3mbP7GIVn7Qz-5Roe_UPg3QGZi0qat1LeGmaSd-uEpD3tPg.png",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 X 프리렌",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 재발급 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "장송의 프리렌 굿즈 컬렉션에서 랜덤으로 획득",
+    "medalIconImage": "//i.namu.wiki/i/2whRSUU10BDF4yjKuXrkrcrVIFgH5HlO6f11wjWx1WJ-3C-ID5B1OPoMAS1F-R09j3BqLIaSufnBIcfruNiUVw.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "일급 마법사",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가 , 재발급 불가 , 프리즘 불가 , 커스텀 일러스트 불가",
+    "obtainCondition": "장송의 프리렌 굿즈 컬렉션에서 랜덤으로 획득",
+    "medalIconImage": "//i.namu.wiki/i/pci8rcWM69TrBC6cXZ1T8dAYcv6Z84EQGiqF3uB0zYyPHO4PRa9Omb82Jk7CucLCYcEkiPnhUSxRj0DfkDQCPA.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 어택",
+    "stats": "올스탯 +23, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "23주년 이벤트 : 마스코트 퍼레이드 모든 보상 획득",
+    "medalIconImage": "//i.namu.wiki/i/_iwhUlLL-B3RT6M7fss6PiyPNILCSQzH1U8GDL2jvhVMYgbMReyHwkz4uZH4EQvxnlXtoHg-VxmWRePWd3g1gQ.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "악몽의 주인",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "체인지 버닝: 루시드 : 하드 루시드 격파 보상",
+    "medalIconImage": "//i.namu.wiki/i/oifC7Nz20gWOI5v8lWd3DAHj1giRbaCzDVK5emDwMZxnOmK38AhBCIMqUJbEqNTKJUx7VSTI3Psrmz9BvqpGSg.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "차원의 탑 정복자",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "차원의 탑 모든 스테이지 완주 보상 [44]",
+    "medalIconImage": "//i.namu.wiki/i/KiBmrhRA2meWHosvGsc1NoQecjFESfjNTwExaoGjUB1YNG4PlFpbR6mU2MDN4EPJa1fIDiCOsVZR-c2nmn9zRg.webp",
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "시즌 4 월드 베스트",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "월드 베스트 펀치킹 SEASON 4 직업별 1~10위 보상",
+    "medalIconImage": null,
+    "displayImage": null
+  },
+  {
+    "level": 0,
+    "medalName": "DEAR MY HERO",
+    "stats": "능력치 없음, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "극장판 메이플스토리: 디어 마이 히어로 관련 이벤트 추정",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/joilAfS3CUFMhd0-ggbl0240vwavm4lQauvx9IfcIWOL2zlDsqGtxJZwqEit8Zv20sIvoc1Ob2kfzafg51BLSg.png"
+  }
+]
+

@@ -1,0 +1,33 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@@types": [
+        "src/internal/types.ts"
+      ],
+      "@@util": [
+        "src/internal/util.ts"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "src/generated/**",
+    "**/.*.ts",
+    "**/.*.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.legacy.ts",
+    "**/*.legacy.tsx",
+    "**/legacy",
+    "**/legacy/**"
+  ]
+}

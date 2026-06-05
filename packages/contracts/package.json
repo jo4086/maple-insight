@@ -1,0 +1,10 @@
+{
+  "name": "@maple/contracts-workspace",
+  "private": true,
+  "scripts": {
+    "typecheck": "pnpm -r --filter @maple/contracts --filter @maple/nexon-contracts run typecheck",
+    "build": "pnpm -r --filter @maple/contracts --filter @maple/nexon-contracts run build",
+    "dev": "pnpm -r --parallel --filter @maple/contracts --filter @maple/nexon-contracts run dev",
+    "lint": "pnpm -r --filter @maple/contracts --filter @maple/nexon-contracts run lint"
+  }
+}

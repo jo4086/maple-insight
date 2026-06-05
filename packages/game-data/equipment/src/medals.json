@@ -1,0 +1,3563 @@
+[
+  {
+    "level": 8,
+    "medalName": "초보 모험가",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "모험가 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/uQkF6xJsHxG9Y1vh0MJE7Nb-pWP4dh4AUqMm9NqZtL-wbF2jfOYHczWziqgSc3zx674NIX7Mwo7o1DpCJ9FItg.png",
+    "displayImage": "//i.namu.wiki/i/KUjKh22h3ysEq5GgKwd8u54i9dinAUS-ivCi6DDunwDqC-xM9q-g3GdzekjPNa2EPyjMXswTJ_HpXH2DJaqPlg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "주니어 모험가",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "모험가 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/dApeNm8HGz_NFNMWienTr0c712igYemezUwWi51KFM3Gh02GYsERpnwfafJ_mcj-YNfHffoYJjZbBFYYtttrFA.png",
+    "displayImage": "//i.namu.wiki/i/R-eVvcoMjsSpsIhGXYh8gLS2FGxGx2bKxMTtNfVKJnn5tOcG63JsXrFkxZ2PqRatZ4AXE41tBBj_tXyW-sGPtg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "베테랑 모험가",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "모험가 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/wPcxbEvLmofLL-ZN10RdGDo4we12ezmwUHKRziXPjbGptrGIGl4GzgJhz6AOShiwr9u6kEtVnnCR6Do9XKV2aw.png",
+    "displayImage": "//i.namu.wiki/i/W39yFgiUau0qy_MExutXSTaXRH6JwuJIAstxhM0jbUbn628Pz6Co65mpPuBl6Aco9odYeO00Ma6oe63PlZktDg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "시그너스의 후계자",
+    "stats": "최대 HP/MP +200, 공/마 +2, 이동속도 +10, 점프력 +10",
+    "obtainCondition": "궁극의 모험가 생성",
+    "medalIconImage": "//i.namu.wiki/i/aO4GqRZGDHXQfmmMU760i7S-yxX6ULw8MxinLGonkjViC0x_tW4Us2UGegCvyK2omhS_W9-3zrqTMsU3WMChhg.png",
+    "displayImage": "//i.namu.wiki/i/NBSIZa0MVN0E7_6hGCFxfX4POHNi0wedkJ2LVES02psui0AFazO0KU4yU_XWCczlRlLC2wuML8uwjvq7EO2Trg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "마스터 모험가",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "모험가 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/8X3gtZg8zyTLP9DoBcc4AJJqb6Fmk0_J9urZf8a2JJxkUVhpuHh6NeIQiyIcE2GmZRvRUPzBL1AGyMpnmp2gqg.png",
+    "displayImage": "//i.namu.wiki/i/UM3NPGa84ZVpneUZ4vuTtQFxAwY41pnszRfFTdyBrvFBgK16pTQqsS8r9CRIqbN4v5HZ_J09gbw5irEePGgwaw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "투신",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "모험가 전사 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hIiBbA88q4O_JL_iPDemAnKSlDqiflcLlyJkMVi84HjlZJ6jE6OCUWutNxF3R3TLR6LIClLmkTOMgdbdjHBNzg.png",
+    "displayImage": "//i.namu.wiki/i/F_czf7ZdHPMN97AmaLMhchKrLcv1ajnGS6IiAZglFheTmVgapVZvXK09N8T-jqTBusORr4fGkv_feBs7Rblong.png"
+  },
+  {
+    "level": 200,
+    "medalName": "현자",
+    "stats": "최대 HP +50, 마력 +8",
+    "obtainCondition": "모험가 마법사 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hIiBbA88q4O_JL_iPDemAnKSlDqiflcLlyJkMVi84HjlZJ6jE6OCUWutNxF3R3TLR6LIClLmkTOMgdbdjHBNzg.png",
+    "displayImage": "//i.namu.wiki/i/buQ4hcv1SmN2w4YTAOTiLditQElUIqN_-6Z_MTIsMg2Mcj62YYjYzgQbMSJnkZj-QdQVc2yl7jIKyeI4eobXfA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "스나이퍼 로드",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "모험가 궁수 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hIiBbA88q4O_JL_iPDemAnKSlDqiflcLlyJkMVi84HjlZJ6jE6OCUWutNxF3R3TLR6LIClLmkTOMgdbdjHBNzg.png",
+    "displayImage": "//i.namu.wiki/i/h1yVu0jvEVZimBuKFnQWOxoLM_T01sZUNtEhfCSWn_QWMcvZ-ieu8GkF_w8znGckE_L65B-kS4Y5DR7FZObxuA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "레전더리 시프",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "모험가 도적 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hIiBbA88q4O_JL_iPDemAnKSlDqiflcLlyJkMVi84HjlZJ6jE6OCUWutNxF3R3TLR6LIClLmkTOMgdbdjHBNzg.png",
+    "displayImage": "//i.namu.wiki/i/cKWhWC4rNFUhqsxb0sfOlKrmehAaXhJzPqB05lBf3jjZXugAA9_ASTTkY7yVCcZXOqtH0jhqsxugfwVLkA1nRA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "해적왕",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "모험가 해적 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hIiBbA88q4O_JL_iPDemAnKSlDqiflcLlyJkMVi84HjlZJ6jE6OCUWutNxF3R3TLR6LIClLmkTOMgdbdjHBNzg.png",
+    "displayImage": "//i.namu.wiki/i/e6fv9lcebhRq1dbZmQ9gVuCXsr9oUH2N4gw9s-Rk4J4nnX2aTlHeFRxCIimgYht3ISL9So3TEGUgdB4Gl8wMew.png"
+  },
+  {
+    "level": 10,
+    "medalName": "저주에 사로잡힌 자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "패스파인더 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/PeZ1u47C8l6gLZftWExCcBXQ1MoYe1XZvENEKsaRX57nZ4clk4Voi8XL_WStMuh0waQfhZD4ABEVWNbBvwi9dA.png",
+    "displayImage": "//i.namu.wiki/i/g4OJHv0U-JUlnpOPx1xBOc74zHXnnp3LIAVv9WbRGD2H9od6qzli8dQQFKZeG75GfLPl5AuwmjfW2IU3KQCOWg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "시련과 맞선 자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "패스파인더 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/Rb_qwDuFbZV00WZGhEtFEX4A8mkepRkkJZXNgAyQCK44CifOEShwSPLSNy-hkydwqM_IL5iBZYFnmyhxtYOlNQ.png",
+    "displayImage": "//i.namu.wiki/i/A2P1h3kqyvjHz3jJQEkf8V4sDP3OlerssVzEAWWC5ZIr6cceGFYucSL9KnwK9rC9ZeQ9ckSMuAfVF55Oeuy--g.png"
+  },
+  {
+    "level": 60,
+    "medalName": "어둠의 추적자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "패스파인더 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/qXPnQqSSrpHW3AnROlX75R1sRWUYEcIXFyVx3haHP1R3bJAKNLvnhLtEukrowf0PM9fWKDTVqbh2jM1YdcUQ6g.png",
+    "displayImage": "//i.namu.wiki/i/teoj13dWxyXREwj5njKA2Ul2t73UYspwkyfIrWrTvj1qT_F2YNGsJp27IYfEiZ88UA2mHWnsfAPTpLsQDgkeHw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "길을 찾는 자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "패스파인더 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/-GeapzwXaVad3Ri___lTVAyq1vPDTedd1PJXA3rKyabnxt5Oq0cXdvTgF1bjR6xYK12y_4xt5SGaEL8DdklpRw.png",
+    "displayImage": "//i.namu.wiki/i/nV36tBIDLMfXJT6f93LWqef5Zdc4bIvtV6e0YBtXNwvlmfyR_h42Xj5Iqzj6-WYQ-BOvwvL_LCEhRiShQlAYGQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "고대 힘의 주인",
+    "stats": "공격력 +3",
+    "obtainCondition": "패스파인더 200 레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/q3cPPh5NNh23g5Sd-R44REYL_v87-1S0diS2NfkbS1bXD2ywh2Be1Aggz82s-GNtQMEwJZ_wNfNODWi0wne0_w.webp",
+    "displayImage": "//i.namu.wiki/i/TBg5D64zuZ7qs72Va5s6oqsZrPjthCE8_Ondayi55xUynaPRy5kzak2CixWmXH0aV7jby7QjFPJ3uQTCuhKe1w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "노블레스",
+    "stats": "-",
+    "obtainCondition": "시그너스 기사단 캐릭터 생성",
+    "medalIconImage": "//i.namu.wiki/i/AUAQa4Li7eTPns2iN9FtGZw25nJ7V3fkVZqN8IyRPNOaOtdoUPN3MPW4HPuNx95_kqrlKHEFHVrIbDQxr-8uPQ.png",
+    "displayImage": "//i.namu.wiki/i/i4xMfZjpvS8j_dZQ9S_A19ULF2rqeU0kEvdBmlwKdok8yyfwjPwe7MwUQ9wHDZ1TPz-7iudhkfY9wxtUDfWDMQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "수련기사",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "시그너스 기사단 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/WQHNU67OmKqKbi-mouLYMP605BDfvCMidrRJ-0C418CVaWCdGfC2ax6SmdNFLppwlQqGkTcdhazLCDWb3bTnFA.png",
+    "displayImage": "//i.namu.wiki/i/zbmq9nsEhsZCKD5QmhCePhJnYGRnKMZZlvOLd1d5NzXMbcK9yp-O2gB6MHXsZceJosNge1GhE4uTfg3CPKBMCw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "정식기사",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "시그너스 기사단 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/faB6GmkVGXYzQXcwPKk58MOhULFxAzrNLeaTxfH1qGiCb3-HsHhXmsgzXlKEwDp8_mH36uNhpxfuLpGwr8DSeg.png",
+    "displayImage": "//i.namu.wiki/i/rdTM6DyJlZ-YFdBaVppD3sfREi71YeI3aWoJzXzyqWysShamfbZDP1Z9T9MunWnDJtm43gpAjnEll0ABCdaeFA.png"
+  },
+  {
+    "level": 60,
+    "medalName": "상급기사",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "시그너스 기사단 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/sszr13DYS3bLbg0d9wwFoyT6dTd1QsCzuhwX2YmykKmptAvr7NFNecLE_3y6PSMhditvD60kRHhp4DtiyTE_MQ.png",
+    "displayImage": "//i.namu.wiki/i/uK541bsE3dqnosh1oFC2Z_34ypndvfe1ddI4IML6mZv0Fmj-vUB0uR5sg9REgm7kJsJLg_lhQg2SnKq2UsYXOQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "기사단장",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "시그너스 기사단 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/vUYOF-wPD88o4XEqT8SWUsdzh-Ne1BDeBLTtPT0SDOcu2V0Af7ldUfn4-Fjopkm6y6Ptf06o9KGVP1boIoODxA.png",
+    "displayImage": "//i.namu.wiki/i/khSQIdh1Nb3ff5y837sFfF5Dbz6bo_6lINKdeAG0FoaRFFVJ4vOQi6XvGLJ0QV_LPoYG-xOLnDrTENrRJpJPcg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "시그너스의 여섯 별",
+    "stats": "최대 HP/MP +200, 공/마 +3",
+    "obtainCondition": "시그너스 기사단 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/kv_yLOBIAg60ZpawMJIwSdrWric4nLrYj4llPCRLa0hfAdDUp6wjXJ9a6AwD6Mj00d7cl_Mw1aBuqsKfTff6qg.png",
+    "displayImage": "//i.namu.wiki/i/LEImm_i4EeRJYWFcm40AuMLGDJJijreAPIjECPVRjx6IAclL_UrSqIAi7B9bikLMj-SAuY5FotqUUZWcacqDzA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "새로 태어난 빛",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "미하일 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/jCY9XPIjHQwyoyXgBUtAQ5JFCSNJRSZ2Zs6CfkosiItiJqoTVzRP40CQAP3tiZFFIuu0fHEF3NREZkKGH4gXDQ.png",
+    "displayImage": "//i.namu.wiki/i/RMzVUJSINTvITdV7FATWvIzKnGOI9a7wVtaxNLpVbo2kwjhi-tuA1Q-Yi8e_7xG8dFDKlQhLjhYjU7lusnXDaA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "수습 빛의 기사",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "미하일 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/nvAUEL2a25ySGyQmHvxDkim-8TmD7WaSz0uuB6wErWtkIK5oy-S6Z4P2CxwVTF_wT_Sni6DJ-4l_igMMJz4B4w.png",
+    "displayImage": "//i.namu.wiki/i/Y8Gt58zB9QaK8uZEdXVwG2aULIF8oAPnL_NGxwltctz-EXMMu7xPJ7op8MZwdZCXg-rSdDhJRs4A3W2gfkWFWA.png"
+  },
+  {
+    "level": 60,
+    "medalName": "정식 빛의 기사",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "미하일 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/S0hkYbiwgGUbumbLd-CAF3olkMa-i6lKbLW1Ht8Dpd8crGOwYa12rLHHiJFCIY-jCMQTqWe4Z70d5Hg0MdS7nw.png",
+    "displayImage": "//i.namu.wiki/i/y1Q9dXe-St19qbmCXOiz6YqqBZkw8o_HHiAd4GSV10E4URK8e1UV-mJBzoRqj-o71f944ztbkmiPZpnOSA3hRA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "빛의 기사단장",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "미하일 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/fIN4Kjdt09NHhBFbzlcrm_bh94hGXM14eLquMm0Wc-7kjwYj8jkMD3_XtM3YJjKqSvHtDoUKf-lpZSPOtFDlfA.png",
+    "displayImage": "//i.namu.wiki/i/EN9g78_DOjJsfAFazVu8RN1QChJxVRSmcgD7TiNJE4I3Qz1_G16J89qoYTW8naU1fQPkdpwA9T0qzn0tGx3dRQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "진정한 빛의 기사",
+    "stats": "최대 HP/MP +50, 공격력 +3",
+    "obtainCondition": "미하일 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/_7PZAJa5SqnB7PGK8uN_-aGMTMpk4iEcJIsSA961GZlEdRwivWibslV910YS42FzEJrvYH51A2GNtQGvJTMtUg.png",
+    "displayImage": "//i.namu.wiki/i/mAgtpB6GVje8leGisUsRydoxZ0fCc_NBTNJagxOYs7ERe0zI-2cUFgtVBGp9_1clg0GP2eInOT3incaGcE6ABw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "깨어난 아란",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "아란 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/wFqw_EdPG3KOZicmzC9M2VlgTq9Efkyh3lqdzWqxZM7cTYdqvrJkt38gG50axcRaQObFi-xf_J4C82S4YfCr4g.png",
+    "displayImage": "//i.namu.wiki/i/ZSZfncc1VGfV8g-EK4u9zN2j22n8I9J3ouLWp-vykG18eVJnAqTLJEyRnahqi3hScMRKGl3qe669M74swo3H0Q.png"
+  },
+  {
+    "level": 30,
+    "medalName": "기억속의 아란",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "아란 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/RDn5WU9YsCjSu_G2mVeJ-F62rwUCpyjRXBl0DfIDa2JL4q9DiMdQFCkNdloI5KWBIMnzPNWT38XzwyEwzoO9Pw.png",
+    "displayImage": "//i.namu.wiki/i/n1YhpQ64qZO-DuVZGzLLV-a-xMLGLwXLA3Y93BxgIlEJr7MasiB1FB2ACUcZAgqPH198Qf9DWqpsZ0cElEQZLQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "시련속의 아란",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "아란 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/-ZKPyia4PUGi-0DK1V_XndpH0J2CWgGGmlpAepkr2kq2gdAXADY5x2c1n2B7uC0PndTgH1EghmgmHg9xFqTl9w.png",
+    "displayImage": "//i.namu.wiki/i/Ub9fXEtrGKUdVhFWZk5Qmx15n9YAVOvtTE6yTlnKCZz3W11w6F7r6e1yZPZsM20Rw_6891l3NFhUV7446m562w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "희망속의 아란",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "아란 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/N_Q_tEppkgjf5uNEGAXvFhvkljX9VkB-buDAZaPxPejwD8T0WHMiulDZVIjCdR2WJI6aM5Hjj5UhV1lfblv2MA.png",
+    "displayImage": "//i.namu.wiki/i/hy84CF1UJO4Q4NCfW3wnhT7mbYVmkhCSw1SxU8jmJ-fQ-RDZXwJWU2Cad3bHHnVw_WQ8vF6DAFFmXOuoHz1tNg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "영웅 아란",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "아란 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/mXzDq3WMV6S5icNiCHpgFQTKMu76NP95GiF6Ssa2XpZoahS79-wNRJDmlhk-9eGpsQorApYR_owbxX1K8gWUqQ.png",
+    "displayImage": "//i.namu.wiki/i/1SDhZyvm7ajNa_oFwQlRZu7GjQ4SeQ1lpW2pUy2bFKo5qTO76V-KVp1hAjWfr_JMyocXSSbVbEbav4iQEK8wrg.png"
+  },
+  {
+    "level": 14,
+    "medalName": "착한 아이",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "에반 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/2vRgJKLifzk4hbB9PobDTGrIChWZ8jLcJ89TMHq7v3BajlXDVuM4cx0G6lU8Guvz6bxagO9bMQ9PoMGc2qWXHA.png",
+    "displayImage": "//i.namu.wiki/i/lN0RoM6AkzeG0UnCKpgca5unNtFsqszv5Eo5Y6Wv4KhBPMzDlnK-suw9lyFuurSNSgHlgRtodrKGAq8qWBSvjg.png"
+  },
+  {
+    "level": 21,
+    "medalName": "페리온 경비병",
+    "stats": "최대 HP/MP +80",
+    "obtainCondition": "에반 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/raKUXvLCWoKaug_SG8rlpnJZ24Yr2XsShHFTYjfsAStBo3tvE13XImtcAersRRwGS-YnJsdmSZt6kmuZHHoYYA.png",
+    "displayImage": "//i.namu.wiki/i/w6gEFynXoRjeNxt9domtQbFrQgce63qqhCJhTzpfSdSAdzkdrp05_q14lf_pVznQ4x8ZOs9yDpFhS8PGtcr7EA.png"
+  },
+  {
+    "level": 32,
+    "medalName": "커닝시티 명예시민",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "에반 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/vyxbJmJlfVj_YEsjje-olp09ZC-MTKst18GCEOR-9EMNGQ3LQrrPX0hBpLMdlnBbXwxWff1MMQ3h6YLgcHtBNg.png",
+    "displayImage": "//i.namu.wiki/i/YSA5U8fyQXY8Xd20ytttlgDDi0Dap7w_Rzn_KFLB-v-8kx_HYhqHPm7h2tfayDHTi3Tt32SdyEv5O8mpGdAHtw.png"
+  },
+  {
+    "level": 46,
+    "medalName": "비밀단체 임시멤버",
+    "stats": "최대 HP/MP +120",
+    "obtainCondition": "에반 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/zhIAGYO3ggqK6b-V7on1EIsyKaMVeTb29xpWNMYxro9j7hhe1gnH8awg4jr_3ac9RHPI5y-Q-_f9jhdGNMALaw.png",
+    "displayImage": "//i.namu.wiki/i/whqkn7qaPKBw4_8cquQvlnJwmZzyFNivdWc1FW3mb3Yrjv29aNDuZeXaw4OeQttV9RjW5d0VfYNMC0I_hfvEhQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "드래곤 마스터",
+    "stats": "올스탯 +1, 최대 HP/MP +160",
+    "obtainCondition": "에반 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/dXx2E1QIqEDX5FwkL_8X8UB97HBqqF-CptUltcQBfqgP0fn8FQcguhwo_3RovuG1-yXqm9M1tTe4I9FoUcqdwg.png",
+    "displayImage": "//i.namu.wiki/i/eo-B3FX9T0InxhT_wKOJXbeQHRdEoned2KNY4M2Pp5nYWXnPkGd4LfH5F5-f2QRtZoGL0KxxAA36iu1jpuVcig.png"
+  },
+  {
+    "level": 100,
+    "medalName": "드래곤 마스터2",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "에반 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/vPnI7d0YgcGteCeJhr5XCVf-mUqgTUgvqsbLaQAVe5TpTFR66H5-JAbLB93XQ1gCk3GPav75cAZJtSOxS7W6lA.png",
+    "displayImage": "//i.namu.wiki/i/-e3FnWFhBLaIuB4Tr8tRWSvt0J9POXkjnyeXs1ZxIRCsxu9_dUusPsSGYdwDPjnSotOfwlh50nbmDiwIBoY9rQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "영웅의 후계자",
+    "stats": "최대 HP +50, 마력 +8",
+    "obtainCondition": "에반 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/w6YsAVlIYzYYhn7etP4QK6xXrE2zBicqkWBoM_-IlBQznpEXqJjHXoc_s1UwM4XOCo-uWIx6a0tm8LyVGSgJvg.png",
+    "displayImage": "//i.namu.wiki/i/qZWuy-xOfuP-g4NMMqU6mWk2t0d0dQ1FrGwFUbT3_ZP2LepvNDtcTtNj8JSqkSkKFzD0rZ6UXlEenGxelpFzYQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "빛을 되찾은 자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "루미너스 빛의 길 선택",
+    "medalIconImage": "//i.namu.wiki/i/NaaZ_x_4LS2p0nERc1yo86a4858lpaoK2F9SoVhoMqb7Ktu_ppyJw_hTkov3_5JWmjp9at8m28jVuvlrWxfAYQ.png",
+    "displayImage": "//i.namu.wiki/i/d9gTU0-J4jXgBFT1xAvFEaviy3F7-Son63VVBgLV9-CZRmUwuNC2acQLesDXyYzerhr-AfRm1LivdCKDN2RGLg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "어둠에 물든 자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "루미너스 어둠의 길 선택",
+    "medalIconImage": "//i.namu.wiki/i/vACeszVdlirbaW7ltlBXorBsvNVx_wCO997jCniT7ItJRha9cI9mqTrqG_ObSsVY--3FM4BlTeTzkKFs0ElVTg.png",
+    "displayImage": "//i.namu.wiki/i/CCuOrNTNqqFbij59mljZCxq871aO1FSti8MBsnFRj9SiWTxHhHvk_bA2AccYWJkptWjYgrPiZM1ba1_gQO7Igg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "어둠을 극복한 자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "루미너스 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/O4SA8g__5QG8BERC78BAnmcUp6JIL6t-xPyoW4ZeBQQaIZfYPW6WXgqF0ZRSmZqVDd4_HIMUwJ95EczVwX59QA.png",
+    "displayImage": "//i.namu.wiki/i/uU4hQHmFZzuru3ctxLmodePuNhzeeFenkBRdfHaF3W920-rFqv1mnktGF9ynR90dJNktgNywedAPf4QoNazZ0g.png"
+  },
+  {
+    "level": 60,
+    "medalName": "어둠을 흡수한 자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "루미너스 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/r5Vw1Z6gE8gz4ipkANYQMB42GOnYs-fPB91HIVWFUzmp1sJI48cnw8wQBWiExLb1ht6rOmQuF4kt7vyqp66l1w.png",
+    "displayImage": "//i.namu.wiki/i/ywZmXZCEQ6N52i1JPFN8nXeVJs0OPuHMmyImiwzThjaMGaOven_I9_HETtfuczpu1jeVCSuYIYJmIVGMCDP7cw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "빛과 어둠의 수호자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "루미너스 4차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xHaMOBcvo_wCwgg20ULaZ8NJ_NHfQM3SuI9ED_ZqFVC1hZCh6IDVPTszD1Y32olZF7CbKl7l0Jxgrpa_kS52Lg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "운명의 대적자",
+    "stats": "최대 HP +50, 마력 +3",
+    "obtainCondition": "루미너스 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/RggqPKoJnq_yYgLTTI0DcVmZPGAiyFrYB12huvtRS6_WTY6yLaieXyzw09LmmRWYTZqADH_1ifrgvaKg8jtwUQ.png",
+    "displayImage": "//i.namu.wiki/i/Z0-UNx1-kZbUO5fWoABOF8qtc1_f2gukGRpnIZJB_gxw7Xnhp6IQskUr_K3B9Rd04s-HnDvEvbuKVkR7OC1z2A.png"
+  },
+  {
+    "level": 10,
+    "medalName": "영웅이었던 자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "메르세데스 1차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/eL3tjYIOtqNibl7y0gPQapEaYgt4GaLv73mJ8DVwuiCFXtgPmD6ye6I3-NUj6k3O2De7NxHZBiFrMIYTZCm9tQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "에우렐의 엘프",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "메르세데스 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/7UWX5l7tkALZmq_TSL_uIQo0IIOas3KrGlOKANSMtr1HHs1o7MJHUJOvH4cDEjMsq3ZHB10QNVLlSt69HxwLXg.png",
+    "displayImage": "//i.namu.wiki/i/skqwh_HdLxujeLAvCpRnFJm13zAPLLQmZHvFb6ioHtE11D0p55ck0ZRcBWsRwKngAby7zvhtknC3jkqNl7KBkQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "고귀한 자의 표식",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "메르세데스 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/radvpAAk7NUx0vFK5L9OOAAKFtKGYfKM3O8yitR7uyBjjC7pLgdfvx511UDl0rElB0d9d8b7j9vKtQz-bBQa1Q.png",
+    "displayImage": "//i.namu.wiki/i/qOJL-cf63PCAPrefajDBpGXxVvaoPzjX39QAEqkf5IUYbfJcAnJOWJ_hwiNEn2rx42qmyJCVr2G89z2IrU2bXw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "엘프의 영웅",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "메르세데스 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/GC_zwl_ySsNlB4sCYn1mxRH_-sUnKyt_lTi5b_YcdrkTxBpdBfXB-Pa_v7xS6AYn9Sf0wRI4ARb2Y1QiU3am4g.png",
+    "displayImage": "//i.namu.wiki/i/qIklu5pjSqFOKldneZMPx2IIqB1Gl0iS_9Q545MLpSb2JLfhY7vJ28BVSvcPzcO4rBSNVw0vH8zbFvDxovflmA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "엘프의 왕",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "메르세데스 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/FF1sxJYXPoKcxSiwdL94tKHo500nBeYbWi0vgiE5rO_ipoPoHbgm9hLMPIIvoO8STyPw6nDk1Ix4fwbxnX-sbA.png",
+    "displayImage": "//i.namu.wiki/i/e3OVBs0Z5-a8ViGFqmAYkckGwacR5qMlAtAo7dCGte-obfyLTIYy5IADL2mshEhZwBMwI-VotVWNmkpvHjIR5Q.png"
+  },
+  {
+    "level": 10,
+    "medalName": "영웅이었던 자(팬텀)",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "팬텀 1차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8kcjhc5VVeIgpp0y-qJC9WfCZ2bG3u49R2NpdlbvF-sLkDPI2F-2rjH12b56ZBVjIlGsH-MTIxsd4ZUjIm3DZg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "신출귀몰",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "팬텀 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/4T5Ms0iFhsXLPDwftYWgv2hm0_zbgrfscRg4HZmDiNFQuZnNeXa9b1t9C50rfXcSch07A1aV28KeboI52F8wIg.png",
+    "displayImage": "//i.namu.wiki/i/LEg3_2AJnmy9iRB5H1VIR0L_2LqhhmnzxnyiJg4Zo9bqQ8rZsTV4ZzSwFbNQ6S9gIxpjdhNa_ZyoI3aBamAhbQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "괴도 레이븐의 제자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "팬텀 3차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/CZQoKZtTqYykrf3QXCcU79VOKiEP4omEQPoRGdUYuXQV6baM0ow436BlbbzZjh_5jIdTicikkQeDvEHmj69YZw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "아리아를 기억하는 자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "팬텀 4차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/zA13XLuM-f1jk_VFvyMZTYZckxjNcYg8cTl5FaPryg7HM20cKrJgOSW5nAIDUpw88zMM7wwnuIX7MBEpe6NIHA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "괴도 팬텀",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "팬텀 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/1hR3Z3DB-oWWyZSXXgWM9yrfh8PnG6iwwOodBsYgN6ncuYi9Uwc9t3vRjGXaTo_5tmPayGP8drtPeoEgfH7BHQ.png",
+    "displayImage": "//i.namu.wiki/i/Po98LgPzDMGT6z5LPtMA9-JPHZ6exF8vRzWHEiC1oCOi20LbZbVmOXrnUAfinfSe8tgMKo06qk4Y9HD3vKcGDA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "이방인",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "은월 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/YrcYzDcYtjYwqapSuesgA56ZLgbjpoiKNr1zLRoxI6m-VwYtPNc0KVI3u8aFcd0DFDaQij1Uh5QrRWFw30iUnw.png",
+    "displayImage": "//i.namu.wiki/i/yu6EaPYk7gSkWHdJsOcTi1FgVOS5tbngl__EzQjRqOVOtzNCKcdCt0-RTUnZ_by0sesFdbhcAGjsMqlDrHrUvQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "뾰족귀 여우의 일원",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "은월 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/yebBZew-ykW0cZyzW0WW_sEUct1H-zmG2J6nwFgJBq-H9g4Q9ZnRvC5A2T636X-ZaoJw0KYMeSrH2prJw5a4MQ.png",
+    "displayImage": "//i.namu.wiki/i/kDXLKXIZIPMBOnCoPh33k3B_8y4tcw6WuGZawp-jukxg0SPHYDoXw14kUqxO6ciXAIyTb3DdFKyMXNBuw9Umww.png"
+  },
+  {
+    "level": 60,
+    "medalName": "기억 너머의 이",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "은월 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/ZdIxuGMtWF8IMiNFqsJbCiVdHuZixaSsVc6fleVU3e64tSNlDVdFPsJpf0USI423pA1YUHNjaB8lESz1aewPgA.png",
+    "displayImage": "//i.namu.wiki/i/g4NPbOCMsQ9Ny_mLv2Q_ejN9m9WRjiogPcOsbnEL9_zs5BN9owCGg-N5jbvsEh-9nf3KN3nxa2EWxTbb3h-NjA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "여우의 벗",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "은월 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/GFdfM1CO2dnS7HHAb26yLiyv2iprZlwhDjoVsm0Y4VPK1qMiLzfusp3ADtmXzYxBDvhWoGH34hjdqd4xH6ztug.png",
+    "displayImage": "//i.namu.wiki/i/YF-ETqof6N_GqjAt974BInn3FkzH8d5y34nbksH_Mu89XyFg9lWnJNbmr4Hz_utZtWLjheW-sV52w5tzItCDCg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "잊혀진 영웅",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "은월 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/DRNoac0qqQqLk3BpW1M_cpxTGDMjnYKCFGD8t_1Rr5a3kmHV-Q-XBfn9j94SIGA0g8cmtUK5yMK0iqUJhVDC9w.png",
+    "displayImage": "//i.namu.wiki/i/xf4ba347cfWqp44JohCQtmG02y5NypeBrI4CciGhdzL3Y4JnN9PijKiRMBs0l5R-Ztv_UnNKei9FUC2Wfm5Iug.png"
+  },
+  {
+    "level": 10,
+    "medalName": "특별수업 신입생",
+    "stats": "HP +50 / MP +50",
+    "obtainCondition": "레지스탕스 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/f8yB3FLu9-Zbi10kldbMpko0Plb3WBd6Yae7hW5-l4TR8mWW8HV42EGK6K5QMwGIoPlbU4dJTJrH2FbkqeEluw.png",
+    "displayImage": "//i.namu.wiki/i/RcbIpx61SLHPWYTw7iiADzuFp6Xafycr1eiyxqtoZVtis2TEceQhjtCO2pqwnMa4jSNapm1L1VWRTrJSu8JUlw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "특별수업 중급생",
+    "stats": "HP +100 / MP +100",
+    "obtainCondition": "레지스탕스 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/So_Ww2U7CqW7kmVkcdAFTriAi-qMA2-mt5Ed8kr6KSryoNVFtqwG45mBNxu1KZ_rI0Ybk7rIpBzZ74FvoUm6ow.png",
+    "displayImage": "//i.namu.wiki/i/_uDzm4E3RcFJdrFryQQa2vI1tI92LuWRCnrSxqxCvG4DpqwSDCBH5TgEpK_nSlkQefiUc2P68ejuoUp6132QHg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "특별수업 상급생",
+    "stats": "HP +150 / MP +150 / 올스탯 +1",
+    "obtainCondition": "레지스탕스 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/0Cjjfg5TmOLn5QGSbp1mVr2fjrfewwbmz5cX41tpZOefbQUup6w9j6bKCuqCfqHGPVNlGyaleZr1kjSi7bxWJQ.png",
+    "displayImage": "//i.namu.wiki/i/BCdwnFsGREerFIs8JMd8MOTktnnMBfScglmZo8DCL5iQI6WR2sRglOn4t-S8hba_KjifXy3yCF8wbTYqDuM9GQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "특별수업 최상급생",
+    "stats": "HP +200 / MP +200 / 올스탯 +2",
+    "obtainCondition": "레지스탕스 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/s0uF9MKA2yjWabBmyhByU9xq4J4tFhzeaWB-KeKosXORPVJu1T4DS5ZbULKJM-RRF1PS3ZXmWdHOZuo_aG9fUQ.png",
+    "displayImage": "//i.namu.wiki/i/vixoHUKA-EW6Aq4zbKc3qLFBQu79Yx35KfMnHos3eFrvi-Y8DTMIw1JWDGjP96l9JPFyTIKvgaM0aozhjDixCQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "특별수업 졸업생",
+    "stats": "공격력 +3 / 마력 +8 / HP +50",
+    "obtainCondition": "레지스탕스 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/Hzk3v4rYw-5bD4uG2CbwOAHLM5Vl98HMfGCRETmXib0HoIAUFBzumQYynw5HcWvQov3hu9xUrZ16G0C31Nm6Bg.png",
+    "displayImage": "//i.namu.wiki/i/wIt_aE2phFXULDQs-_lVsQK5FYLVDiCx_YA5PiPSuDFYd3AFHsC-i8nvaqsDD2-x9ivAeurcLI0pNj9NdxRIBw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "기억을 찾는 자",
+    "stats": "HP +50 / MP +50",
+    "obtainCondition": "제논 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/4cKwCwn-zFFFz2qadQkbC5dr_MSQnCArgQ2wtw9EeNmDuwc2Qm_MVPsU3Um1buhTLLHiQSQVqvaBNZJj30HBAA.png",
+    "displayImage": "//i.namu.wiki/i/t4HNgHf3MizeJakUhF_VLatgVc6cuW-e3dPoBj8qO_bDCY6phIgTCx2FGBwVwqu2d4YEY7DjdLWCeHzyPRDPmw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "비밀기관 특수요원",
+    "stats": "HP +100 / MP +100",
+    "obtainCondition": "제논 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/ajS2H7wVt2-RbfV5as6zlSjf1pYpcRkIl0DURuDaErT0Zem2frqgTIsqgiB3fhV7g5AAygpJiUvyH0-Jm8jCgQ.png",
+    "displayImage": "//i.namu.wiki/i/qadDB5HlcVvvA6eUzWFDZZQEA_g4vPsp4q9BfEgeB954PICLV3KsB01-VxMXD-Dvq8v0bvfiEjz5kfGoStnIqQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "자유를 추구하는 자",
+    "stats": "HP +150 / MP +150 / 올스탯 +1",
+    "obtainCondition": "제논 3차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/bavNLYcgb8Rq_LmET2CCmPxuzWU9zrceIPLybD7Nvi5FML6iQpzLk86dp6uZLYaM_6HipMJ1tntYRk7OVX75uQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "경계에 서있는 자",
+    "stats": "HP +200 / MP +200 / 올스탯 +2",
+    "obtainCondition": "제논 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/tOeHgjRVgvVwL_Ncw8HZDthcLTrj-o2bx0gh9DmZvBcjT2mtlx7EfNkiYQMbMPH-F6-kYs2kNM7qh6Cn0rlNBA.png",
+    "displayImage": "//i.namu.wiki/i/I-o1kXr4xs6hAR2hrCSEJDJA0kxtWVYWz3V_Lz6s2JUsQ5YIqIJOJ-b80vNyy2ApSH3KsZlAxQ7Mzz9SQbNCOg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "마지막 귀환자",
+    "stats": "공격력 +3 / HP +50",
+    "obtainCondition": "제논 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/66PWvOZmZuNazcWbg9D_Kf5cJh-pEatoMDHABdiZKJL6_dJkPHV30h7NrdcZgug0Bt52ycPT-HqcRoRb8Fmcxw.png",
+    "displayImage": "//i.namu.wiki/i/ZSTKrpXM-nrnl3h6gMgNF7SDXmntV8qi2opRY9xFzh9zwvlNy2V4FLps281nWte-3lNSpXqto6AmiMZW6ZGG5Q.png"
+  },
+  {
+    "level": 10,
+    "medalName": "부활한 마족",
+    "stats": "HP +50",
+    "obtainCondition": "데몬슬레이어 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/VAGu9RXDYij2CR_HJyr6O8AqLV7Ni05rqaaZdaAW6JY70cpG2lp4pLPWldyBSaY0rRzsJHYd5jB1dyKIBqwWIg.png",
+    "displayImage": "//i.namu.wiki/i/356_2ffIJEDvgSyPH3U6E2QVer2Nzmwox7PobOQIvepm53RCOrCGbGBmzNx0YW_aVLLRbFjFhzdugXXF3BVLog.png"
+  },
+  {
+    "level": 30,
+    "medalName": "어둠의 계약자",
+    "stats": "HP +100",
+    "obtainCondition": "데몬슬레이어 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/eDQ32JKicLSKdyEZvZCbkJ6Z5XvZs6KcgkW79usBbCTGt4_M7po8NRmOKFI7J5lPO5dEy0d-Fn1B5E6Y02yzgg.png",
+    "displayImage": "//i.namu.wiki/i/o4iVv8c4-mM4aWMliZARl2y4zJ-sMueuaUFIwd6ZjCiRagoy8qIcl9j77LunKvCrBHq_Pe5P_sm0vwomaYFfOg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "각성의 마족",
+    "stats": "HP +150 / 올스탯 +1",
+    "obtainCondition": "데몬슬레이어 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/CF6Z391Rp2e08EDrN2OodgidlE8eW4BqLzAdARa9r9G5KUQ0wlIk9g1rNXuvDeIEIu5F1MnpgRZetlgw1_9YgA.png",
+    "displayImage": "//i.namu.wiki/i/uHCwGDuF_P_5GKi8odr8PzXIC-rBPMjLme2i08vXgKJ_Mlxvyi9RBFrjV29YTPLG2CheTKwwa38mGiul6zVjhg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "어둠의 용사",
+    "stats": "HP +200 / 올스탯 +2",
+    "obtainCondition": "데몬슬레이어 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/kklqEobItFVeqjo8_Kece43yiHhVhNAzqrl4VxBUULgLz-JzjNCa5CmtRbnFZaK5HxnQxCsAPueWXcRmn3ep6g.png",
+    "displayImage": "//i.namu.wiki/i/VAdXhayD3TPnC4iGFT_u3e3hKiRuBTQQSRC08gsOWVPtG3OEiCGgq4wTpUwTXufbICUUqKx5oRAi2lYACS8qJA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "복수의 화신",
+    "stats": "공격력 +3 / HP +50",
+    "obtainCondition": "데몬슬레이어 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/hcW-Kp4m1qJa1Y6EMOifT5iKCKyVwNPbAefeUBIRN5RWlM0ekBIkS_A9dUFsZIW4Yd7GiqVoQ2i7IjLccWXWAQ.png",
+    "displayImage": "//i.namu.wiki/i/SJdlDKNSoKfdG4uv5I4os8Sfcw77jXzoQXkOdIIzzLhFw0b9An_veVFE6q5lLUweuQhtqqvHFwOyOjTtjEbmGQ.png"
+  },
+  {
+    "level": 10,
+    "medalName": "분노의 첫 걸음",
+    "stats": "HP +50 / MP +50",
+    "obtainCondition": "데몬어벤져 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/mFrfaRYO55iWFpy9a4GHw21w3Y2C6Tr-f8m5lErGaP-IwLSwYaC13H4pxnnS2Be-MisbBoPQxtGOW3k0FKGpUw.png",
+    "displayImage": "//i.namu.wiki/i/E5i7aLKS6GLZaeq3x2n68dn1tbg3NofPK7APyzq0iSL3f44PfZ1B5CE_twd99-eelaDztIWiWLYwww6Er_DdRQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "분노의 화신",
+    "stats": "HP +100/ MP +100",
+    "obtainCondition": "데몬어벤져 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/eUO6hSxDwNqmaZ9MWu_TshtndVWOpy6gzfzNDzUFkueBEKpZjkGuQZkjiksgGY1lsdEMJC3PpSimPtFRv0BDaQ.png",
+    "displayImage": "//i.namu.wiki/i/MZeOrg5jJBtoMRM1fTysbdmEEUpBw6t2rBtpJlmBoydeXoywXCwgf4p_b5n69--24AagoCiO2jrLiafyeFZzhg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "심연의 복수자",
+    "stats": "HP +150 / MP +150 / 올스탯 +1",
+    "obtainCondition": "데몬어벤져 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/wOpkKzenq8TkGPoBpdNSYHRu004gH6Brvbi6TNCUusxF5y1lpTL8t1NEQaPem2jYdb6zRHUo0e26Uqq7Bu0Jzg.png",
+    "displayImage": "//i.namu.wiki/i/evy6XYIPu6ElSlF6VyvJ-h33pi85PyeNBP83oKMQJiYXNjlXi6LRiscreDowK1bjKgmXzuhr1kvKQ6I8Fznygg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "분노의 정복자",
+    "stats": "HP +200 / MP +200 / 올스탯 +2",
+    "obtainCondition": "데몬어벤져 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/JdSR6B7CtGEmDrj3p-HMDJiOzqvx4ybdnLO1QmMtLV0mdkXMd0eWcu7uK3Odfu0LnH5B42uEdEBUDLm_bEG0Mg.png",
+    "displayImage": "//i.namu.wiki/i/eEtM8ho9GlYCj7imTqQSZSMbzP0oChZwcZrBETNK5t0DyhDKOhY_YxuGIUlWRyC2ITL0usscw3SXPOfSdnnzWw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "궁극의 복수자",
+    "stats": "공격력 +3 / HP +50",
+    "obtainCondition": "데몬어벤져 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/0OGuQFQMJmgFMzZTF6Rlm0BN4BJlImcUJ1Ad7pnOr6QnGDpq2cI3-TNM27yZqEf569XxaEiersi4j7ya5nqdxQ.png",
+    "displayImage": "//i.namu.wiki/i/n0AU_R5Y_uyRSn9ll7no47FvLcRfFxm01U3SEOFs1d4NzAEq2B2dlVb0sAR39LiW8MtKY6MMSk5sIbBbb0lINw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "환생한 카이저",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "카이저 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/g0LF2xoGsNPJwiT1lwnk3-hBok5TDZ2qO0MoRg25rZW89S1fow33RPXFp8AKwRACsC0u1ic91hagK9Fi3XJomA.png",
+    "displayImage": "//i.namu.wiki/i/DxTh2ziKhnMNTZdkp7Js8foMUXPN7FrqS20YQVq3RTc0Qo0S6HcY6u0l6kiDCk0h0taizh7ffpkcGR_Y9yP74w.png"
+  },
+  {
+    "level": 30,
+    "medalName": "카이저의 운명을 걷는 자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "카이저 2차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/9k1IeH8ropThaSzy7B4p9XdyC7sodKzsfAFbiisaVYVAVpcUCU7IW4bNSfHLd2yfXV_9ipnMptcr34Q-fbzfGQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "각성한 카이저",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "카이저 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/Y45UhpH5xEkR-DwPj_rh3OxzOcTGzRYy_edlXCyRA1FsHmMx3KTR5BuaLoO3B8n7_UNB_Ykp7zU0H807mS0rCQ.png",
+    "displayImage": "//i.namu.wiki/i/-rN4SBH7-uOIizrRH3VOTZO41IxzyMGFCTL2_naaXFtyADSzdLp4rXcJyULwRoUrms1CfSx5uMEYmXI4QBqvrg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "카이저의 의지를 잇는자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "카이저 4차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/f2J6avBIatBpTybA0nspeolF3YfBpyHWJfW-8iv0ZJRukTumwqNW6F_QOZtVGc_BmxJvxBrG7qBR-A66xT300w.png"
+  },
+  {
+    "level": 200,
+    "medalName": "극의에 도달한 자",
+    "stats": "최대 HP +50, 공격력 +3",
+    "obtainCondition": "카이저 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/q3ttLd5xEPjsFMxGL2i0rFLnk3ANbkMgT_xOifmNnpI_zG7EW-xonJ6RjJsMGPqeUMgEh8kWWNcdmeVgBi1LUw.png",
+    "displayImage": "//i.namu.wiki/i/pim0PEgqdEKSCOuinYIkUZK--to3fM95IcvR2FrbN5fZHH5iAqIlETrUnY33qr7mWBkpi4e5hecHwSMvLEQvnA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "밤의 응시자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "카인 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/kkeMEDkAl2EQ0rNUUCQMG2kLw8bZxe4ILkd9lI8fU8y5nxnWO4khBU8cm3pWMHfRSBYoCHsT03qMWHtco3DYMA.png",
+    "displayImage": "//i.namu.wiki/i/eT_sXnr3odFPhH--u9RXTy-9vdW0gRoB7a1saT2OR1dJ_ifEip0Lp-lbbhG2DQ9G2vhNVClKKYHSVc8Duf8SrQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "분노의 심판자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "카인 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/fmuEb4EgriA9GglP3pPNjkIgTjtDaTYLOiBVsIvAgeLSut9cwI_ZSMQ7BjSKWKTsJETj7s9Oppux0_NRoO6Wwg.png",
+    "displayImage": "//i.namu.wiki/i/YL1YnSH5bzD2xfj4zLJFRm08SKe3eQFFqOd8Q5gPgCRpVDDLXYEE2H5-kN56gkS7PSrB_yrf99BmR9aMItRO3A.png"
+  },
+  {
+    "level": 60,
+    "medalName": "기억의 탐색자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "카인 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/QF6xXNI0VFAn61cRYtcXZ6gz3_HT7oOnBzBeggN83nOu2C_-LqImkfSswDnft-zOyltyGD2mzAsQZRIn-IsYEA.png",
+    "displayImage": "//i.namu.wiki/i/MJsRKAQdaDqEM9vMbv6DKB0nmCjmi0xD5TMjNnlLcvgKxkQTJl1bOmpBCSaB2zcfQSTiifIVz0mexsXUa1PvXA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "악의의 계승자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "카인 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/zv-eOHgupWu-eTD_JGfyn8557G7ibv0HQGil5k5OOYsyMSqSUpsVVSJJkLSjN-ZFR3VOr2CBhiIik25yDgJpnQ.png",
+    "displayImage": "//i.namu.wiki/i/K5JXotvoSIwOJ1myaBgya4mSv0ypxZYT4kKbEHqvlDlMr8fhh-s5viCwmuNJEk9LaqcFOLyXYO5lKHGsH9avrg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "어둠의 추격자",
+    "stats": "공격력 +3",
+    "obtainCondition": "카인 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/t0lTl-hK47luX2s5ri-nJ5oQJBCpR1maVVkO_xLa5PvRFasrFrTpvcCsu5F8VinvDUmcq4afdLH9-rsa1r7eGQ.webp",
+    "displayImage": "//i.namu.wiki/i/xuAnjIrRNXU-l9uRSXnu_sLfQa9WsvzNBol4SAJQon2WSvGwzGEmVxgO0raPuee4eHzelJRmm_P_YXM0pck5FA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "뒷골목의 그림자",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "카데나 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/nPwmeQAt1yS_qoz1WjRdO-yZfhGE2ytgihmaps7gXHKangWsGeMHWnnE52gpt01FbIOyENXFIjfG_acvSD4wZg.png",
+    "displayImage": "//i.namu.wiki/i/WL2fGRvftUQbK2RoSJcFj3ySAXJxALHz90asO4IYUEWXujVmnFJAEXv2ld8jgBIlLrVSw4zMQROKa3pRxDXC9w.png"
+  },
+  {
+    "level": 30,
+    "medalName": "도시의 그림자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "카데나 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/Qy0B2YylPQCMcAa9jy3tnqL_Y9L8d9gP1W6tWI35YhGIgdd1yi5wlyI4aOYYVVDdWQGlcYc7tbxt7zybzk2QLw.png",
+    "displayImage": "//i.namu.wiki/i/hMFsIFzJGV2hbAELlkpx03ttwRH2pjrKD-9rAKTE4Sg4sY_3R04JqqGBtr3jMWWNlpoZ0cjkRP_-tPonTU86Jg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "그란디스의 그림자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "카데나 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/DPpwTvmdfuKq0x8a1JXWMDqYQ-UKM2ZuwD7nd-jjPy6a62a_TM0FVAiVQQPJlpcFZTBAIjD2o7YALYCU8oyw-w.png",
+    "displayImage": "//i.namu.wiki/i/pj6lHa_wVrKqMBRy9xAxfKyu7aHp1Jxd5NcQ3n_N1rH0fMzUHN6YwRxG0omVThHVPQlb1hxvq5IPuk5gi77IgA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "두 세계의 그림자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "카데나 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/Cs6CiJqAn5YlWKiVXbkQevimwzBtCIktQ2gNdIE7TB7H63f6-2Pvdn2PGDO4wHZjkcfBdDTlsawSVixv0C4-uw.png",
+    "displayImage": "//i.namu.wiki/i/l0rq1tkDRg-DH485wBNL6fBVXsYvzd3uTmSDAqhVOxxdr4jUO2yDglrW_27iAG8Xx1jAqtvqmcZ0-RuoftmJXA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "운명의 개척자",
+    "stats": "공격력 +3",
+    "obtainCondition": "카데나 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/t-RMgOmgLW_PSpJnohVQTXpzmmwXlCOGDmgyhmBP2HCDzZn8B5mFO0QNbHTnYGsc-B9OyU8-W9eyepu0qzRPaA.png",
+    "displayImage": "//i.namu.wiki/i/XD2TkjMXc8rtAyumvOzDvzZHly0nw-5UjksUu4JfRHFMdAWaiCA3mBD7qTPsD0IbtZgY00kpCiDNYQdwy9OdGg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "고대 노바의 계약자",
+    "stats": "최대 HP +100",
+    "obtainCondition": "엔젤릭버스터 1차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/IP7ojp2PACcmtfIv_SqIS10NT9oYGrTmAs0zqxtwHl84_Eb-CyAcqxS4o2m2ZYrgfF7ldVY0T14oLIT3cupoaQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "정의의 대리인",
+    "stats": "최대 HP +150",
+    "obtainCondition": "엔젤릭버스터 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/OSGMnrwVtWfbcQlf9TYFNGrif2a3EzYjZUM7ngCZhRD2bblpxDT1Fb3tA4MzmCmq-BaYTCa3McEeCFDeiXMp-w.png",
+    "displayImage": "//i.namu.wiki/i/rx1mpDqK5UBkgzSccFT82g6Aw_vRLlblsFItck6kZefLaA-QA9UIGtqVqPd8cUcoqJko4D1ldGKbgUSAL7114w.png"
+  },
+  {
+    "level": 60,
+    "medalName": "핑크 엔젤",
+    "stats": "올스탯 +1, 최대 HP +200",
+    "obtainCondition": "엔젤릭버스터 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/C9kIwIOI04lUwpX3vCFgk09jvm3GY2BgYPWVbHYpQNukCCU7roz6n-GLmfjCTZWJn1ElcPP8n1NbQxfFUftOxQ.png",
+    "displayImage": "//i.namu.wiki/i/AxWVfKMZ9n65BV2jIOvMn94fgVP1FEsClNFeVgpL320Nm7_8SFHw48UVu1KNxkTHuMgaHsvbQK6jlshxoe6mEw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "전장의 아이돌",
+    "stats": "올스탯 +2, 최대 HP +250",
+    "obtainCondition": "엔젤릭버스터 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/KRB_Tp8El0TTEVvYzhbKUUR4EqKpwhwR5wfqoN3vRUIIfp1HqVmACX8gZn9z84xluuVjHJeh465LzFpLYlxZnA.png",
+    "displayImage": "//i.namu.wiki/i/RI2xIKZNaiFyiKZZ554Y1paWWChkHYzNk_dtGoJ6NLgBpTXfxvQdN8sfUYaYEcVefxl6DIp3ON3smu__qhVffw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "슈퍼스타★",
+    "stats": "최대 HP +300, 공격력 +3",
+    "obtainCondition": "엔젤릭버스터 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/nTejXGn7I3gGsdiSv0wOsJZSpruWflXgnuw-LuuA67fIRGYycPg2sEueIM__iocMfnLDldULy0kNoEZ1cy9RWg.png",
+    "displayImage": "//i.namu.wiki/i/_xSoOSJZ-ZAHu_7QdD-Xw7Cumsch5cYNJrB6EpzjU6LF-wrI9LiVmWWD41cQyK4gJbrQA7S18lHdexL2bkmOkA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "검을 쥐어라",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/dA1jvMVD942DDu6EhL5_gI4rLVlpHIB-Up4OFpd6d1pASgg_VHxvXgPWmRRcqAOQlXm0cGll0nexvxu7WG7fbg.png",
+    "displayImage": "//i.namu.wiki/i/wucrRHyumtazwjkHdsNQpSaxn-6RHNdHZVGJPuW50xLHErequJLlUtAr1IaJAAescVUOUXm42cxNHZVQXaXLZQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "맹세의 불꽃을 태워라",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/JXe1LEn0lNl_R53nxoZG5HDQz_6E0KgPgrhcUY3nusRv53I6ZNDxU-QehCr8nzWKSgIeUIHX40AkhHzMJGFBHg.png",
+    "displayImage": "//i.namu.wiki/i/S1ABBIZb9WtZ1xpiovJEr0diyLDuNue8FOo00feQErXS8utmh_MOxHx_nh-UO4ttg7eqIy2ahv4S3rVMJnq-kg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "시련을 품에 안아라",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/RNM-yn4mMPOp3WkOIcl_DmFEHaOlxKF1CI9YZNOK5BTSmDjV17efyXwX46bi6plIIrZv7kHuZXsDqQ_rKlpU7g.png",
+    "displayImage": "//i.namu.wiki/i/Lv9eAJ2PsFTRL-VmIMrRnjE9PP8I9eOwW3uDmAgnv1mf45QgajWsbojLWj3IGWUV34tywte9rEAucxZfDzpKHQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "어둠 속 빛을 찾아라",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/Yv9O8Jw_LnAGdnasxCRvX57MWX8LG1WYp-jVgT4Y0gJsLO4oN4nZCZpwvwOhtt9cldGqbI8tQhpVUc_Wi4fy_g.png",
+    "displayImage": "//i.namu.wiki/i/cxOLletxMaB89PBBidW8oEQw67PfleJ2_7_ZJSqgwTyrD6mMXi-t4X93e3MndLCwf2dqrLgrnJ_PNRUdMk5pFw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "빛의 검이 되어라",
+    "stats": "공격력 +3",
+    "obtainCondition": "200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/pZh3l9G_Nap_DmMRGcJ9ASWgs4Q3S_h-WSQhOOUapqTXw9hv2d4rjDZMxon-YYh7sx_5d2M8rQaQ61P2ONPBvA.webp",
+    "displayImage": "//i.namu.wiki/i/aI5HsQ2X_At2Fhjd0A9_6WDh2tP6UKvfQfLU4AFF88RVT_PFbuCOwhgrFOsNCoS0VeiKV46E-3OjqDD3KX1lRg.png"
+  },
+  {
+    "level": 10,
+    "medalName": "미약한 신입",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "일리움 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/xz9v3s9w6IQ4XzctQvcIlBftnpznjuwpVI85a_yeJ5Km5_zQaJLhTFQ-YWW6ehnfZiRTZFwoHJTUkXalAzgvPQ.png",
+    "displayImage": "//i.namu.wiki/i/BUVKuYXyer2dAQCMWK3FP4VVA6ZcuyT8sGlCKMDaLMN1MhGjgsF1JAKttcyLaxdhYBfvrMkAMw8w0bRSZMm9xw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "피난처의 희망",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "일리움 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/ByY5CVJS9TNb6vFrQ0F6HoyFf4hvdV4z-UNeDTINHXgNY4bGfoKYaTyBLJBRoN0-DA_aM2ws_XgfhHYnUN2ZGg.png",
+    "displayImage": "//i.namu.wiki/i/MBayIrf9-_2yIj-wa0wsdFP6VzSP8OikP_3J9oryNnwWnCnXLPd5zmJV0l1gfxrX4ebZqJy5DOfovNNWBXfs7Q.png"
+  },
+  {
+    "level": 60,
+    "medalName": "불완전한 방랑자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "일리움 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/TtsY0RG2zuHeMKwy2vdlcGowhaK5POXXTODVQmIoO0NfOW92A6IoVjVe9dFbEABTBTxEXkqQQsou69lrGDksfw.png",
+    "displayImage": "//i.namu.wiki/i/bANwI6oiExIIwmwBWczUQi-m1FJ3qPv6IG8yycchQee0gMz6W0vgCIfY7dXNAUTmeqHRxOl_0Uhts7i1RgRHaA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "선택받은 언약자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "일리움 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/OJt7NQVyadTAxv_OIq1g5P19D26zxBn7Xq_NoNsma7feF2rVc3YjVmY-tWHYeuT6XFgia6DYXFDuQsaICoOGJw.png",
+    "displayImage": "//i.namu.wiki/i/VV4uUgVNEWsLAb3sTGPJx3OmXhbZQDc23kFgeBcCGQ7FRbe19q6nVRuCTYOT9hqpFJDcjY47m9d7G90OiwkF8A.png"
+  },
+  {
+    "level": 200,
+    "medalName": "광휘의 날개",
+    "stats": "마력 +3",
+    "obtainCondition": "일리움 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/S5OWUFHqDC-KxmtNVGC5Y7iM1Ybgy9KZI7nNnLW5LK0PIGCZYxOhcTE2G6tJqWxv_AmSYcntwHv9rTPNhxt4Yg.png",
+    "displayImage": "//i.namu.wiki/i/x9RDx06QPfGbB5N5lZRy0Zuxe-rpE-izDQnR_O1mYr4B8N10_1asnPWy2KnaJm6y1nKF14KkKz6KsqT1JgDp-w.png"
+  },
+  {
+    "level": 10,
+    "medalName": "모래의 날개",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "칼리 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/yhqbc5U18SXu7L_Iyitm6dLRlZM5FeqiPtBPBYyLcRVM1fImdhlzXwGdMi3eyP4pQJQk2E6f5K327lFtOOc2NA.png",
+    "displayImage": "//i.namu.wiki/i/XZytHnYRQvRa6Fb3yhYhhWRW5WhKU-YFUTBOOPD2PIXp9b7tpI9voGS3u4_p8YvzwwQ6eYG2ImEdmdg0bsNFUA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "죄악의 심판자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "칼리 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/CDxHFbjJsZYnoXIR7eU8spwcybYuWHpsk6fmGE0PJxQm07iVH58gP3AGpnJFUm4dzdN68R781MLNNzZVyDWDSw.png",
+    "displayImage": "//i.namu.wiki/i/vNBWIjCIbuuJXVqbL5MBzl0T4mJDmoULGnFREoKJqPFgw4_uC1DNKuOxFrQJc571s_vsLkY5dksKYxHTGxZmgw.png"
+  },
+  {
+    "level": 60,
+    "medalName": "사막의 그림자",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "칼리 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/CXkrB9Jnv3XTAiwIDvRcuSWEbxOXpO28Pq8oyjEpDOVuFuIXeJelYl5DpNrF1LMqjyRH5Yb9Y5jc8-PKhb4-zw.png",
+    "displayImage": "//i.namu.wiki/i/HSmhvKpO_ZAZS_uxoTMIopZAoZ27FWySKVG-f6jWyDk0JOyr9izDByleJ9NI4Aec_6FVz7atukVHJTxShKquGA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "분노의 칼날",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "칼리 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/mTCVZ_qGCF1XZb47IKhy0RMygvwW9WOE0ARUjdKSvNycbswb0CFcpIG5ADhbkX1v1-vSycvZCOOvAgswc-Diig.png",
+    "displayImage": "//i.namu.wiki/i/wzAjSUSPZLDafFxzFJJFt-8xGFN6ezxbxqdJQT2MqgLUUb590uDweFDtogi1VxYnFCw8VDJ4lbjXvV_aKh0GBg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "복수의 바람",
+    "stats": "공격력 +3",
+    "obtainCondition": "칼리 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/bglF3zcBEiaN6cz6dBM7z_9itNnr0bwTRVIUXxVH_4trSc3v-yndQhePapW7SAXTl8fpdI9_K25T3jOr-E--Iw.png",
+    "displayImage": "//i.namu.wiki/i/WeiOOBsMDTB-APWbgwJLzzQNTMNOW93yjT8Q-zxYc7S9q_VHyNSqO_5OJjGEOh5AdFqAV3720ReLgOfNlC102Q.png"
+  },
+  {
+    "level": 10,
+    "medalName": "움트는 심연",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "아크 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/rffutBpy4iSQCTFe-rInIxvMDmKy4oHj8g8ZJGsslPTenCbGkVfeSLBEEDOtvykV66EL8kRLHfrczQQmy-gmGA.png",
+    "displayImage": "//i.namu.wiki/i/bB2ZbZYcJ3VCJodT2zCiVwIw0wNiXgW0supI-k9VCzePTuhjhvhMnhOo3zKhOCSjkc7rM4UZrR4gS9v-60SZ7g.png"
+  },
+  {
+    "level": 30,
+    "medalName": "요동치는 심연",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "아크 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/r4MgukzAiGAAztqgUqKFU0t3f0XqU2SeykR6YwdzyDRghwoPKc2BU7d06yi_S3CQ2eIWVRWX-seTTZBvpIAVJw.png",
+    "displayImage": "//i.namu.wiki/i/GevQWUPUbaynsHfKHWNTT97aDMuk8lS8wkFrfJt7JV9KxKkAi1fwkrg5q7uY6xyaIaj7IBLQiwmAvYA6xwjSaA.png"
+  },
+  {
+    "level": 60,
+    "medalName": "심연 속에서",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "아크 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/3kxqoPz7y8xwIo_MzDiZ6lx1d_O2HPCZgK-acozSHpXQe3YAhfUROQnVAqGCbvq1LQLB9P2E3X19elUI198qcQ.png",
+    "displayImage": "//i.namu.wiki/i/VbZheKRyoL8GIhHNiiMHuf2UFlsX5lENhhArB4tz8QeXFMXHTDIOlNrNjTcM3ytl06D6_XISHpfG1VROsuUWiQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "심연 속의 빛",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "아크 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/LKq1dVVXRFa-lHMFiIBfqmURb-MH1xBk1FuhCNfyXH1MWhjnyyAe0zu-OnxRzYFFpLWxCti1WtMvIU5QGVk9ag.png",
+    "displayImage": "//i.namu.wiki/i/JIz3vUzBp7UV-ge7dr6RjckqgZQDc1jpdAvPxoVY8iz6EsfKPxFKw-wNK9Tgo6XpT2AzMRuigTtfITo92P4DCg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "심연을 삼키다",
+    "stats": "공격력 +3",
+    "obtainCondition": "아크 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/p2DXpx4x0YagiIJ6a5gPQBrpAH8jCzl2UgNu9P7mpR8U0oRsu4f1Ud6bv0MjLPYrSDaseB1neoHwLitvY1oL-A.png",
+    "displayImage": "//i.namu.wiki/i/PqaZZQQRuQfyjAGr-1rgXj95HF_944GwYdlcAhgJc6d41zlME61W6MtVJL0_Ppgpp_0o1_HWVjAYhm8va_hPkA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "용심청매",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "렌 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/wvR6MYQhVCIeXNJt2R_2QFeRlwHFvSH25YA2PwnTYbeb1scU6VKtVcudJEZOkDR9FR1lF40eEluusaUK1-GSMA.png",
+    "displayImage": "//i.namu.wiki/i/RV2n6QNsQISH5hnYBOrLiatkjteLkqgKkWQSM9m7Kz2pkmazkdk1z6ebZ9VjwF68GOd3O0EdcPJv9dGy2QnKlQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "천몽지로",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "렌 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/ZB1UtgNStqUk2dQ9u3fNLm4Xy54npsZk7nlmoEKMdpQeNsxAvlffRpFoAaW8WwMB-2Ekqfn9F-59AnBivfIVpg.png",
+    "displayImage": "//i.namu.wiki/i/cAr6CytxMPwkczzVdW_5UJv-b4M9h53DXCslZiCnbAGP8gqv4k4fvmJIOzVvbTjuy_Ocof8_Uv1LieIbrrAj8A.png"
+  },
+  {
+    "level": 60,
+    "medalName": "청풍검객",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "렌 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/0OXI25xp9QtOkwdjEjsc76dY88nNvd7TgX_fM4l-W7hkBtOmrSNJ3n3IVkdIfSUUtyeq_kZQX8fiVt4mxjUZKw.png",
+    "displayImage": "//i.namu.wiki/i/zaRepEMGVyw5JsL4e_UzeTKBmeuDQIH5PD8DghhwU-3TyX-bOIn7Cp1yUANJ3qF-t0PZDP3jZ9UWW7DKqrVjjQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "강호귀왕",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "렌 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/KWlg_P3N-TvicXTbPTuvCdCI0y5-dbUBwYzA9H0RzUWCMOG6gH0wzn5YSCT4elTejruZelcZeZCN11QREqKmGw.png",
+    "displayImage": "//i.namu.wiki/i/c0qjr-P3GaeW3kvkyR7bECwhgjpCVbsy9i3KnXwuk-o4PtQpQkV_Mse_XakxhBUXxW5RKppKSpqBcvTh6d-T5Q.png"
+  },
+  {
+    "level": 200,
+    "medalName": "적목객성",
+    "stats": "공격력 +3",
+    "obtainCondition": "렌 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/CjkxxlPFq3YbeOPU3MRvhhg81U_n_2adXX5FZ1trMIq5M8-5HYFSErqjLsYMM1crHZTj8EltWYEYL1BiaJm9EQ.png",
+    "displayImage": "//i.namu.wiki/i/271FAfBbERlJLG7rmOtD2jHWBEmcZxM0N6pD-_KxhHJoS5IC_QKxIfFdoTX0PzwpwbCyRF33Qe_3wH73huNBhA.png"
+  },
+  {
+    "level": 10,
+    "medalName": "견습 풍수사",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "라라 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/OTEeQUQjbBPJOlpQ6xMwUJOsRfhBYkZlFZruS1V-7OeH8rKdKAsZEuDLlNw0yz0oAvywPai6E5LaY-DbRbt-QA.png",
+    "displayImage": "//i.namu.wiki/i/6EUur7xq0rQw3ju6D1y31H5107gF12PGC2NXrGLTuKoplwXeyoIbis-CcxdSN7eatqd8ZFPpFfQxOHhzhpgMwg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "용맥을 읽는 자",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "라라 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/ZTrnRI_bpfinQOlkTMe0ZfxiwmKfOK167iR7HXCQZCJsBko6skayNPaIY72A291rGMqOXHBk2rPPnrePrWQxkQ.png",
+    "displayImage": "//i.namu.wiki/i/xPrYi62aQ_zI036ybcRLyCfWY4y4BsBxEWOJYU_XpLhxWeRWhsphm2L8FU0kqUNp4o3ki5GZcoobieRc3w57uw.png"
+  },
+  {
+    "level": 60,
+    "medalName": "토지령의 벗",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "라라 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/HDTHzcz3bHoQkJO5PDn7qVDLx6_mWgDiJCsHTcydGj99CgQ9gwwJ9AOVnUC5tv424PLa1wZsn5B4m9I6IF-S-g.png",
+    "displayImage": "//i.namu.wiki/i/NNaPNApMPbfK6JtLUbgXY8Yr532qG1KnLKAbTcNZJUF2QXD-PWqJaaOWG6pco2An9iH2OnetMyL7W_Gm3lhDaQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "소중한 이들의 수호자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "라라 4차 전직",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_SDUdeszO-soEiNiWo70W7afx6YZ8cawATG2r38ZVrJ2K-i2KfM4WbwMH35KoaO5XYvn6yfXlLw-ERoRA4NbMA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "희망의 전파자",
+    "stats": "마력 +3",
+    "obtainCondition": "라라 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/whCc74Wg6KMXknHLdGmeUOwnE9hN9WHDJdp9iWXawyCQYBfabTQUBoqYARjW3UY3omQS1D2_RXWhl-Tm4oqutg.png",
+    "displayImage": "//i.namu.wiki/i/CyyVNaeXYWwBL6VUG3OlnFyz-HbZ7YdXKZpNNw7G-08HLYN1G_-7UW7VS5dFpXR4mo_sDoiz1MDmqkAx7BWLXw.png"
+  },
+  {
+    "level": 10,
+    "medalName": "청운의 꿈",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "호영 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/YNOM0_uvca27E70v3uv80q7AJMbA5HjJJpK9tA9GuKfOYlNdGjRBD6rp-ux_W_SSO41-inS3vD8M0LDAXKxaCw.png",
+    "displayImage": "//i.namu.wiki/i/ewLaw0ht1bkpcmPrQ6APIx3LXsSpy4HBV1cFpDHOosMB9cqNReUBPjFCxRrvlU-RWpshVJADGa0uKSHQNX9Uww.png"
+  },
+  {
+    "level": 30,
+    "medalName": "천지인의 도",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "호영 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/oQuCZznBlzWnbbHyB28HpbotM9JOoQQ0KlruUu9gM7E2298gP_47MmwcBWGPCcDCa2TKSbINQ1NzMrrU7OvqLw.png",
+    "displayImage": "//i.namu.wiki/i/OuU41oSXHA6HuVRuabD21_1rgIQxXhOGNewNDQhVUI70TUtpu0g84wlpt0iywxctcxtH7DifS9sknKbKp2DVKg.png"
+  },
+  {
+    "level": 60,
+    "medalName": "천방지축 도사",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "호영 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/q_Ejju9tfhFULvDlXZ5Xdehg1-6SqshwUp3vRv1yEtat477ntYuayDXwEPq5oXWoJvImHpHiYHFXiNwBeArbeQ.png",
+    "displayImage": "//i.namu.wiki/i/5w7JIgt2nBQPSuAWNi6_CQeSzx-QymHDmry52qLNlxMgwsSUOESc2gOVgamBBrx2ALZiw2m8TtH5_ra2e9vnBg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "도술의 달인",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "호영 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/RZZMrj-b1gRsn_jyjlUQfN-3wQBL12Qlky07LmjeIgS1DB2iRXx7pa1tmJNAezmNEG5aGjIiyxsqNCaRhTyO4Q.png",
+    "displayImage": "//i.namu.wiki/i/KiqIShOPpImeHvd8kqPbMcJTib6Urtq528aj1B3XnMkgSE3Ie-Hy_dZzBxUZu1YVe8RQeKeIueTyTXaclGEYqw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "호연지기",
+    "stats": "공격력 +3",
+    "obtainCondition": "호영 200레벨 달성",
+    "medalIconImage": "//i.namu.wiki/i/ySjeqO19Or-XR7zBCRJ50joEXyRuQZQKmkVNHQPnN33nCbZSBiClRor_I3lnMG45H1H_ecMtQoMsKVqseMudOg.png",
+    "displayImage": "//i.namu.wiki/i/LmjlkVvDO7Tfbju1b9yGEHGSKhxvpRVsoWCT7zIRKAP9Wtai07qVw6hKe35D18s9DrUcN4DAXI4IIkCg4Jju3Q.png"
+  },
+  {
+    "level": 100,
+    "medalName": "그림자 기사",
+    "stats": "공/마 +1",
+    "obtainCondition": "스토리 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/RTQwq3w8q0-Ra06XhoaEbG1vwwi3tArNTnZiJXHgfAY5AE8SE_4Gw_0f68Lb2cwo-IMpVfkwdaePx3l-bsHc3Q.png",
+    "displayImage": "//i.namu.wiki/i/V73mvwtubmOoKn-n2amM8yyFRmt6vm9v3VFqKssDgI1ig2CzZT15GQUR1SInXA9ePYH-tM_EXMDTVsH2Ab0ncw.png"
+  },
+  {
+    "level": 180,
+    "medalName": "신의 아이",
+    "stats": "공/마 +2",
+    "obtainCondition": "스토리 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/mXgIRpcPyQWU-2i6ZemGWFnDtqEDRzhcpsgKguFOhw5Ig0RLiaI8UZ_RrJdG1jof-d_Q5OY2x4mWCJc0r4AEHg.png",
+    "displayImage": "//i.namu.wiki/i/b7_qJJ0aUqel_K9MvwSdqTW1y60SvCkImJNItsInHOkCkWKXjUOM0uWl5keb8KdhzQGvMC7Xwf7h-nGxcqY6HA.png"
+  },
+  {
+    "level": 8,
+    "medalName": "폰, 시작의 한 걸음",
+    "stats": "최대 HP +50",
+    "obtainCondition": "키네시스 1차 전직",
+    "medalIconImage": "//i.namu.wiki/i/d-NCNNSLIrO3n3ka1aJXsk96ZriX43nh8Ogy2JW7xsd_TWEg5G7_VF-j52keT75mHUhNgVbIxaRfbNT8_UbVzg.png",
+    "displayImage": "//i.namu.wiki/i/cMjPLU2h7xSu12S57o7RmYy11Yx1va8EP5G8Erk7SS1-HLFYQB3XNkiop_jWcigkX7Vk_O95DoCs7qkMlerNnQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "나이트, 고뇌의 움직임",
+    "stats": "최대 HP +100",
+    "obtainCondition": "키네시스 2차 전직",
+    "medalIconImage": "//i.namu.wiki/i/vcHhtFwIYwksLnBax_dCcYW9QksV9aLCjDqK7HoH-pevxX0np8t8gM9RPJytjTQrSL3SwUpZXd_Q-Yu8wtm3OA.png",
+    "displayImage": "//i.namu.wiki/i/haG-domI46COhgYbzGNmTv-pkaO8V2w2pBOUcUiRmxcXWiz64uiZfhMaF-SuD1K_ZKLSpZMi-vSCKk3RhtTybQ.png"
+  },
+  {
+    "level": 60,
+    "medalName": "룩, 물러섬 없는 도전",
+    "stats": "올스탯 +3, 최대 HP +150",
+    "obtainCondition": "키네시스 3차 전직",
+    "medalIconImage": "//i.namu.wiki/i/IPSg6fFypzsUiudoj88ScHM1_4fx5PPiDkHcf55rlOSMTY8EfV_svjpoWnCErrqeDhwciAUANBbMlq6QMP1gfw.png",
+    "displayImage": "//i.namu.wiki/i/S2LRe5aTpMo2YRI4-tCO9eRuRCsIGN51vGFug1aQ_ZsDLIHsK7EiT3EYRT1pKAMKcP91y8LJCp5rMwNbDZag_w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "퀸, 전장의 지배자",
+    "stats": "올스탯 +4, 최대 HP +200",
+    "obtainCondition": "키네시스 4차 전직",
+    "medalIconImage": "//i.namu.wiki/i/UnZjU0oxB91Mzb_wmEGx521d5Ib1y1Y6N5oriOrUMPMmWaYA4UXBGbRwbSXom6AtDJHbGO8GNToNG77oRu7dQQ.png",
+    "displayImage": "//i.namu.wiki/i/oD_ZuKkewNxu1VcvFyONWfR0xJjkhkZVxZ0uEcR7VcRFm6mjaoyiwxyC8PU-E4lUr7sWcs7LRAN2QBtTkFqj5Q.png"
+  },
+  {
+    "level": 200,
+    "medalName": "킹, 모든 움직임의 지배자",
+    "stats": "최대 HP +50, 마력 +3",
+    "obtainCondition": "키네시스 200레벨 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3v0RTqqgyG5bcbPGe6wocQN2sx8ihjksX07qgSYCmI-t7AEs8Ecjd8feCx6-WA8Ke8SW89_vVaf5h4wUWNz5fA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "등으로 말한다",
+    "stats": "STR +3",
+    "obtainCondition": "카리스마 20레벨 퀘스트 [4]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/cCEge4DoPbEwuQsWHaIac5Fg-B1WrkG6jey30ar6Nr5Cw80-UFefXaY1I6aeQdzDYElN--SB_KhE6vNogqRFAg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "턱수염 카리스마",
+    "stats": "STR +5",
+    "obtainCondition": "카리스마 60레벨 퀘스트 [5]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/V5oy93zK0MJxYcr-xv4NG61vQn5n1UXR8zPny43_Ld0Rsox4DziW3RIfm3bEw7l4dCE9f3bhbkVyMMlPNYI8IQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "왕의 위엄",
+    "stats": "STR +10",
+    "obtainCondition": "카리스마 100레벨 퀘스트 [6]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/OjFxPbLISYnIUzaEkY8O8VRAzoMDTCRRRoOxDAUidjkH33QlgZ0Lwgs8HHHfzTIgiKtbywybCw8AJzuXUFrHhg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "매의 눈",
+    "stats": "INT +3",
+    "obtainCondition": "통찰력 20레벨 퀘스트 [7]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/VUP_hP-eoL4g-3rO5M4T7mHRBwbgBGOEhRcL_HOSVZV-mFThIUlU-UoqzmQZaovCFeZBMZSVWv3r73ER6R45tw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "요정의 눈동자",
+    "stats": "INT +5",
+    "obtainCondition": "통찰력 60레벨 퀘스트 [8]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/w03aFN3AonuDAIVYt2t0MXm6x0OjKpwrSyfhArxGHb9FQporAiPak15JiJytXwFr02XIY8wjHtYeAcIhFNpYGQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "천리안",
+    "stats": "INT +10",
+    "obtainCondition": "통찰력 100레벨 퀘스트 [9]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/HLentnT44K3LqJ-exoHxYPkYZvp2Vmm5AKOY-CIR4Ih2T__waZSJz5GgeVkS8LWaKxipt3AIVlPB3rByVHUGRA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "고진감래",
+    "stats": "최대 HP/MP +300",
+    "obtainCondition": "의지 20레벨 퀘스트 [10]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/J0Fgl1JOCHmTSJVLBJXtQeOu_ysxJtVVCZTiSGcEe2l7bj01Rs01si4YarZyVVqFap2aJ96txiTNlBST7s_YEQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "기다림의 미학",
+    "stats": "최대 HP/MP +500",
+    "obtainCondition": "의지 60레벨 퀘스트 [11]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/d57XzVUjcxOqQGyal6wAAqnJzia84swt1pmJJliy45vsUjFTm905_q9-RxgQJJBNMsEgsR-A2EqnefnmrfHFjQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "인내의 화신",
+    "stats": "최대 HP/MP +700",
+    "obtainCondition": "의지 100레벨 퀘스트 [12]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/_b2-LnucRTr161ImwjyimLGQK8FIcJlX6bnSLv9KB1J_dA8v7SwxpRX9q1IdAMJp94St5A8qr6cwdEq-ASuLTg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "가정의 손길",
+    "stats": "DEX +3",
+    "obtainCondition": "손재주 20레벨 퀘스트 [13]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/wprNvm04UB-Orskx3NTnnGhYA-_E8gbvT9a6QUgcfphqi67wJNbm96qchmZl_9cu3zrs1y3QGfJtu_sS46Z_yw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "달인의 마음",
+    "stats": "DEX +5",
+    "obtainCondition": "손재주 60레벨 퀘스트 [14]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/_4RrhsUKwurIupoqRq_7mw04dK9x0dduEi3HoH9HVyhoVtr18UdT2hrw5WkR_1HyVOSOqcwylpKqkg9Oe1S2bg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "마이더스의 손",
+    "stats": "DEX +10",
+    "obtainCondition": "손재주 100레벨 퀘스트 [15]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/ute2KC3G7OYA2ECLAZK9EoR_qZ45kEeiMMaPtqBu_AGuztSpfkIdlRZCN7zUWMWm38Thi-vhK5hrFIGZLCnmNA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "질풍노도의 시기",
+    "stats": "이동속도 +3, 점프력 +3",
+    "obtainCondition": "감성 20레벨 퀘스트 [16]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/YDRiIqnM_439D1_gDhZafdcEM5GI4uaK_-U23QmMReCTIXWBvgWfWeD_6BKeKEvXDBIgxENaH6bJ-pAzSjfwFg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "음유시인",
+    "stats": "이동속도 +7, 점프력 +7",
+    "obtainCondition": "감성 60레벨 퀘스트 [17]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/ZP2UuYTBL7yBN91e_Vyqt7z5u9r-W8myeOzwwrAZk0r8srw5fSM1cQ5CQiVgv4-vyrxoFDxSe-AYGqGJ2rp6Sg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "인간의 마음",
+    "stats": "이동속도 +10, 점프력 +10",
+    "obtainCondition": "감성 100레벨 퀘스트 [18]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/h1XOkPaohai1D5izzXLnxX3a9sktO1Hp1eoPR-DsNU7YoF_F5h67thukwE6KUEqvIOAWnTJs0NzBibzDngCFqA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "시선집중",
+    "stats": "LUK +3",
+    "obtainCondition": "매력 19레벨 퀘스트 [19]",
+    "medalIconImage": "//i.namu.wiki/i/rDNE2ORJ-FfSy6HTgMlJX24c9ebHoxxyMuhIsZHvJWokEXHgQYDJ3YqgpjT0Xcl1jgF9ipFu540Hx7y4UKW7ag.png",
+    "displayImage": "//i.namu.wiki/i/MKlVR5JpOBiPlXZ7XnUp4t--OU1bbzvwWI_77iY3F6IfgH9bLv6iMHQsrXXgjAzoqZCrzf5KvsCszdZAdDk2Cg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "매력덩어리",
+    "stats": "LUK +5",
+    "obtainCondition": "매력 60레벨 퀘스트 [20]",
+    "medalIconImage": "//i.namu.wiki/i/HlorVQDVJqbdXtBL0fbI4Is3gxQu4NPnrdM3fwXoz37wTQMVsTR0MLbwXKEHt8tOcqxFE3FcdpXZwnSzpD6Khw.png",
+    "displayImage": "//i.namu.wiki/i/87x6az2Uli3xtEdpTdPcPH6oaAZNYCXSz6GsGRYArUqA8Oniydr3du3kIZeOOQTxh8aIXPGGrrJw2agDgD4t_Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "미의 결정체",
+    "stats": "LUK +10",
+    "obtainCondition": "매력 100레벨 퀘스트 [21]",
+    "medalIconImage": "//i.namu.wiki/i/lte_to9BKvGx0H19t9P93sB81MT2WL__5BlL3iYQE88nHdfW3nBgVyE9MlTwFJtOfg0jSlWdGzd1z7pGE3A9_g.png",
+    "displayImage": "//i.namu.wiki/i/aqUvIGjjZoTKpMxQgivBBqPcom4Iuid5wJ1J-QQ50l5bGQ08H0U4EloyB3VVLRWdLJfeq52_h1CTgvnklsHkJQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "요정학원 명예교수",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "요정학원 엘리넬",
+    "medalIconImage": "//i.namu.wiki/i/ICFHXDGfwySbYHk3ruPnv375IMQG48BuTAjbyfBrTRR1QeAl08yN4lmiEVZfS6oPMv4Rsz0A35knhlrpfP0-lg.png",
+    "displayImage": "//i.namu.wiki/i/TDlf2oLMzlLXsY7qf_CjdNRFYxT5hi1GLVMJ8VdxL3ljcH9gFAM2NaM-CEROZM6gmTFVt5iAjD9Zex6TDOgMWw.png"
+  },
+  {
+    "level": 30,
+    "medalName": "골드비치 멤버스",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "지상낙원 골드비치",
+    "medalIconImage": "//i.namu.wiki/i/mlJFgOssHgnuOivVJNju7KJQp4l9eBcqDE0jhF8waDMUGLghP0EY3z0i53g4MeIl25glmqV1xThi9Ofif6jdbQ.png",
+    "displayImage": "//i.namu.wiki/i/dkXnk-VC1egnBjskb19yJwcvGM4BYNWLoOGB9YZmDsLgZmCZkjA6fOYhDUhBZhjhHdkl0vYk7C3YckcGKMogqA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "견습 항해사",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "리에나 해협",
+    "medalIconImage": "//i.namu.wiki/i/iIQecI43sBlzJuVHWoMWyhBwmVYeC6gPSb0lvWYbRpoQoY9XfNKgk1RTZlWMwrdm6TdiYka0KmZPmCpBIoYTbw.png",
+    "displayImage": "//i.namu.wiki/i/PvMRbIY9iDoNFQkGcdMUgjQio5e8uBoOUBsaQhsg9YCckFYjwUVhWdvrlpP78lxlulMVqaI2MfYcPB43ahuIZQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "숲의 비밀을 파헤친 자",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "비밀의 숲 엘로딘",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RcmvWIBJ6Zfw0q5RcEOMgeeAaDNqpVfdPBzL3FsK2EONxGV_YBf_IT1W14oEWVrV7x9dsdqec-v7_2Qj1eFMCA.png"
+  },
+  {
+    "level": 30,
+    "medalName": "버섯왕국 수호자",
+    "stats": "올스탯 +2, 최대 HP/MP +100",
+    "obtainCondition": "버섯의 성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_XlU-yC8reFWalwSd8M62jFJPI7o4yi_g-Dbi2vUiTcyXUGguvK2DTFRdnCNLNKosRCW-C1B7sK0yyB-WevkHg.png"
+  },
+  {
+    "level": 35,
+    "medalName": "꿈을 이뤄준 은인",
+    "stats": "올스탯 +2, 최대 HP/MP +150",
+    "obtainCondition": "커닝 스퀘어",
+    "medalIconImage": "//i.namu.wiki/i/pPL0sp6j65Y0aKxVS8KbdVIa72Hg2Avz3wsFhxG0LoaS5Gvgpn47K3oXYyDOAVHMqHAa-zLIecXTbXK5S3_aQQ.png",
+    "displayImage": "//i.namu.wiki/i/ouUpA4J73ZSeja2XTEr-WhMaTXb8iqRxrnrxRi3M-s3fotSP1O3TL7rwJkj64h6Tj5wNBYRtKdis3tY9LXG9eQ.png"
+  },
+  {
+    "level": 35,
+    "medalName": "초심을 되찾은 자",
+    "stats": "올스탯 +2, 최대 HP/MP +150",
+    "obtainCondition": "커닝 스퀘어",
+    "medalIconImage": "//i.namu.wiki/i/XXlwWAvq8W6OuI9TkTOZbqI8T50ebWXytMb8kSqX23YFAkXR8fE6L9s-Ns23Za1xqODT3yN9iUZ4i6YEEV2-ug.png",
+    "displayImage": "//i.namu.wiki/i/BRDc-lM5UnnIZrV5vd9TLra32BYK-1AJ3Z3T52EpzDLW0oGT7CfChGnLguUDoRYLrjFunMDdhmzox2JM0yrEIA.png"
+  },
+  {
+    "level": 60,
+    "medalName": "크리세 구원자",
+    "stats": "올스탯 +2, 최대 HP/MP +200",
+    "obtainCondition": "천상의 크리세",
+    "medalIconImage": "//i.namu.wiki/i/25FHeq-WVs1PdcycaHsYxXL4E-uTmiUTkL4b4X7R1Hwj9_8nZZRHHzdSFLumcGm5WicGO77iWIa-Iv3hUHyAVA.png",
+    "displayImage": "//i.namu.wiki/i/bx_vl0ILbwzmVUIgPiZvWLj4i2uumvhqa46dlPzu_Qg9hWcX3Le__vfTWrEcf6q9JK9glBv-RJx5tqNnv0i_VQ.png"
+  },
+  {
+    "level": 65,
+    "medalName": "비올레타의 수호기사",
+    "stats": "올스탯 +2, 최대 HP/MP +300",
+    "obtainCondition": "버섯의 성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Mbittp7wyHe2JCusTWkQ54qr2MtK7tDOpMEY2J-i4kuKaGnErXqCxOQ1hUxbgYF0oDu_P-Z47lZEK_OasK5-6w.png"
+  },
+  {
+    "level": 75,
+    "medalName": "달과 벚꽃의 무사",
+    "stats": "올스탯 +3, 최대 HP/MP +230, 방어력 +50",
+    "obtainCondition": "벚꽃성",
+    "medalIconImage": "//i.namu.wiki/i/SWnFlc0gZpKTBhSne53QxgNdvp342f2BOWXOWpOzwssC5yY1h5U_EpMvqpRcWcQmJ3gnnmWHX6dYN6RJL9i7dw.png",
+    "displayImage": "//i.namu.wiki/i/AIR6WXY-u8nowSp6sNXryxYkuB-t3j79mA3CLVnNdulDE_EY7hzVYMBo6LpNOmwcoAPP7SpqmyXWUetUtiXsHA.png"
+  },
+  {
+    "level": 105,
+    "medalName": "엘린숲의 수호자",
+    "stats": "올스탯 +4, 최대 HP/MP +160, 공/마 +1, 방어력 +90, 이동속도 +7, 명중치 +40, 회피치 +40",
+    "obtainCondition": "엘린숲",
+    "medalIconImage": "//i.namu.wiki/i/xrb1hDezJStE8S5UkkKLPKt2heQJawS5OPjBy4pYN1rGqPBP301KN__MQgXIZf5PDlJF6IpLhppvX6RK470-GA.png",
+    "displayImage": "//i.namu.wiki/i/Liupyg-VGGH7eMFFtEpteZ6p_7P69zY4LXkpUK1Aco1eDTaFJCfDs19PFuSXz6_SjnZqqT6p0cvjTEjaUlm4jw.png"
+  },
+  {
+    "level": 110,
+    "medalName": "영원한 충정",
+    "stats": "올스탯 +5, 최대 HP/MP +300, 공/마 +1, 방어력 +100, 명중치 +50, 회피치 +50",
+    "obtainCondition": "사자왕의 성",
+    "medalIconImage": "//i.namu.wiki/i/dEv9Jd7wMUu_NEoH_qu8elVpQEwSY-WfHukLFbP2lMW747d0a7L_TqtjNO9MEBN5bXnq9wHl2W5MfsiXrHNvdA.png",
+    "displayImage": "//i.namu.wiki/i/YjK6a9aN934DDgW0WCUk49o3v3jO0clBzMRfdEQExUIAk-SXu21qvHUFeWxDAAgWBIAurOFaPh3buK-OuVI7bA.png"
+  },
+  {
+    "level": 110,
+    "medalName": "장미의 기사",
+    "stats": "최대 HP/MP +400, 방어력 +140",
+    "obtainCondition": "장미정원 [22]",
+    "medalIconImage": "//i.namu.wiki/i/YC362nFujmXC22dEqrl35H9OG-V6mv5slMY5pwX0VaUBaPLDJsEwmp8pGH9O8QyFhWzpruUrpwH_V26cpifzIQ.webp",
+    "displayImage": "//i.namu.wiki/i/XhiC8Lc9b8O0wBc5yR1nXLw4wO2DBtkWglrC4tJd-FRpJQXhAs5os7fOdjeCkM1eIQh40f7w994JHU2gJ-DFmg.png"
+  },
+  {
+    "level": 120,
+    "medalName": "황금사원의 구도자",
+    "stats": "올스탯 +5, 최대 HP/MP +350, 공/마 +1, 방어력 +100, 명중치 +100, 회피치 +100",
+    "obtainCondition": "황금사원",
+    "medalIconImage": "//i.namu.wiki/i/9NNKDm4KJuT8hwR4wMeArFCiMUR0iIMbk7KaHr3Rm9g28IY95y0B5a9Z6OYDf3dASLir9q1918W-caqLIzdmVQ.png",
+    "displayImage": "//i.namu.wiki/i/cQmU-yu3VujRlELlvJIliKB4w-9bKHre29cLmffA-oZKOOmceusT7wmKrJsC_rstOsaHdtDcNqTa8di23H8TNA.png"
+  },
+  {
+    "level": 125,
+    "medalName": "판타스틱 베이비",
+    "stats": "올스탯 +5, 최대 HP +100, 최대 MP +200, 공/마 +1, 방어력 +100, 명중치 +150, 회피치 +150",
+    "obtainCondition": "판타스틱 테마파크",
+    "medalIconImage": "//i.namu.wiki/i/HQpsKhY1KRMl8Gbo2V5-Nz7tYk_U5tHYomjdTg41AFcWmHbwZQfuO7Pwui5phpAcNeZR8S_Wu_onTpNvyURWVg.png",
+    "displayImage": "//i.namu.wiki/i/MLf74ubIaBlE8PXwv6ozg0qdT1DnkOKE-snJB1AwTP2xjTqBrm3RX3a_YTrN1QeFvpJ0m9meJW9WkcePEh3gag.png"
+  },
+  {
+    "level": 125,
+    "medalName": "101번째 프로포즈",
+    "stats": "올스탯 +5, 최대 HP +100, 최대 MP +200, 공/마 +1, 방어력 +100",
+    "obtainCondition": "판타스틱 테마파크",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/R6BaT4NP2959Eoot12q3ssrZ4L_XYNXb7yZQHBlx_jw5ySmoJw3hYOKQwRcPvwe1--jjs8qxtWo2p7Cmm2eVGA.png"
+  },
+  {
+    "level": 130,
+    "medalName": "구름처럼 바람처럼",
+    "stats": "올스탯 +7, 최대 HP/MP +200, 공/마 +1, 방어력 +100",
+    "obtainCondition": "아랫마을",
+    "medalIconImage": "//i.namu.wiki/i/glvxLRoyuPna4Yu-Tx2YSsn4wNojOpyKnRzoOnlIb5B0zGqymJ9QG0F6xIYIM0lIOklQ8YLQ_PL3ffzlwDiWfw.png",
+    "displayImage": "//i.namu.wiki/i/LRGrKNu6v9X1izg4N0Msh-abK17vK9azKWx-Cj9yat7PsBGWLwerJLTGHLFzXC-fuuoEGeKEkDUZaYifvvtlpg.png"
+  },
+  {
+    "level": 130,
+    "medalName": "마스테리아를 구할 자",
+    "stats": "올스탯 +7, 최대 MP +400, 공/마 +1, 방어력 +100, 명중치 +200, 회피치 +200",
+    "obtainCondition": "크림슨우드 성채",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/hmcw3IvuESNOIqhlWYCb7JJ-K2pjp1diACq7BPqWNCl87CUlVher1pIEyTDhPNEMisQVOCSYGmkS46NXu384Bw.png"
+  },
+  {
+    "level": 130,
+    "medalName": "시간을 여행한 자",
+    "stats": "올스탯 +6, 최대 HP/MP +400, 공/마 +1, 방어력 +50, 명중치 +200, 회피치 +200",
+    "obtainCondition": "네오시티",
+    "medalIconImage": "//i.namu.wiki/i/q6J-8dTwKvu0W2BLf_wGdhtrka8oSF_ayeMq2tPPL--MvizKS83qeMVjtMGqe6Sn-hg2y-3Ks3s_YL3J7bDjBw.png",
+    "displayImage": "//i.namu.wiki/i/4I5XbaO7F-23xK96efVf8jfrs9jh7Z8_4zPZmMflc0qz7F-raeC4kDVX8thvskNApHZ780iRmZ2bwkif52qISw.png"
+  },
+  {
+    "level": 135,
+    "medalName": "저주받은 항아리",
+    "stats": "올스탯 +7, 최대 MP +300, 공/마 +1, 방어력 +150",
+    "obtainCondition": "고대 유적 파르템",
+    "medalIconImage": "//i.namu.wiki/i/r6CtwUyZcqz5ng9SBz_EWYmTikI3Bm2m4JBiCsB-1DMH-uzhfsYcgNcTxm5osaiTZxyY-eiXvRhVU7Tgyo_sFQ.png",
+    "displayImage": "//i.namu.wiki/i/1a8Lx1RbfND7RPqXhBWsYYzlDnwCAwTNWUiKiEZrQnl26xQuJQr5Yd_Sq8O0lv8b18qTpyWQhuOxT7ABGtwpNw.png"
+  },
+  {
+    "level": 140,
+    "medalName": "메소레인저 화이트",
+    "stats": "올스탯 +7, 최대 HP/MP +350, 공/마 +1",
+    "obtainCondition": "지구방위본부",
+    "medalIconImage": "//i.namu.wiki/i/T7GuKTi3bID-GTkcl0EaHsFRYwLK0y236SZ64N7cXQc7z0Ore0tDZ4XBkauBkCDqtiUboWODlNbnQIaeDIrvMw.png",
+    "displayImage": "//i.namu.wiki/i/KZ5X0SobHn_Rn8AKA4-CVSVZz5S-CagQBPQGxsnkbgaiBGe-9fojUkFJVb--ixhu9Ig4fJjG8qQILfanJkTHbQ.png"
+  },
+  {
+    "level": 150,
+    "medalName": "대박엔터 공동대표",
+    "stats": "올스탯 +8, 최대 HP/MP +400, 공/마 +1",
+    "obtainCondition": "커닝 타워",
+    "medalIconImage": "//i.namu.wiki/i/icd0kD3ds5ye6jGiUBHMosPQC4Lz-X7UZtTf3X9GknDcdI8euuotYi6mGSFH8VCELp-aiU3DbS-ZreLRFXTNgQ.png",
+    "displayImage": "//i.namu.wiki/i/6jnmx1NBNFcIgebFL_yLxIdrwIuF6fZ9t5cV5JW4JSosoy2elbOBvkeFT1g8HU-qmwEL10S09Lxf05SesN6TEQ.png"
+  },
+  {
+    "level": 150,
+    "medalName": "거인만큼 위대한 자",
+    "stats": "올스탯 +8, 최대 MP +400, 공/마 +1, 방어력 +200, 명중치 +250, 회피치 +250",
+    "obtainCondition": "암벽거인 콜로서스",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RzV39XOZ36Qq57xPFXp3jKVhlH8FGSD33gmXfRLuqH26A6XNATr0oHM0a48nuobmdDzht9vbKCzfLtFWodELsA.png"
+  },
+  {
+    "level": 175,
+    "medalName": "탐정 레이브의 명예조수",
+    "stats": "올스탯 +9, 최대 HP/MP +200, 공/마 +1, 방어력 +200",
+    "obtainCondition": "탐정 레이브의 사건일지",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/gg6FvohRWGeuqsKmYuwOHIMnOCmLMieEJ7CXa-xYsfv32-WXtGkkV4jYSoAcDAXv7gf3aBbMZvTqvFlsJtYO-A.png"
+  },
+  {
+    "level": 180,
+    "medalName": "뾰족귀 수비대원",
+    "stats": "올스탯 +9, 최대 HP/MP +450, 공/마 +1, 방어력 +200",
+    "obtainCondition": "여우 골짜기",
+    "medalIconImage": "//i.namu.wiki/i/kypaRYEnhsBWjIcJDrMXqCp46fSRhMb1bNdP2YlxzM-rFzhu0ghgBrubGaeDTsBDoaFbYO4gBYJ0PJJQ-RcUBg.png",
+    "displayImage": "//i.namu.wiki/i/o2U3UXP7yayzblCv5NS7Y5DkUc_XoaTJsA_3DfD5mMBOR4GSRwgJy-86ILJt2HiAM5Y-b8hZdKJf3fRnurvjIQ.png"
+  },
+  {
+    "level": 45,
+    "medalName": "늪지대 해결사",
+    "stats": "올스탯 +2, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "커닝시티 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/dRHDUkf1vPnvxSKwJRHNkAuvO-wa1LhnntKgmvfI80g7lnkrD6SNncMP2hd3flBSjtxKNud_598gDuBWEsNaAw.png",
+    "displayImage": "//i.namu.wiki/i/qMJPyHUn9k2v4SaePHbD-Lf9emxlINICTguSwp6B21_XGN-o7Xr0exMjeAT5Bt029p80GvSsni8s-hu7tGOM1A.png"
+  },
+  {
+    "level": 55,
+    "medalName": "바위산의 사냥꾼",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +15",
+    "obtainCondition": "페리온 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/XGouvkYLIU6mjOr_RZ06FeHxDpyC6-G9AzH1ZtDLy6o2PPJLUjKdOHprNH9bL382V5uQGT0NgzTAfYPaQrlApw.png",
+    "displayImage": "//i.namu.wiki/i/zXMxaJi-Mrwdw4l6XrcqV6zp5slDYPoWlFarYUM6QO5FndI3TIGp4f1btW--Z6R7S5fVwUl-k-UpmWl3y9zMJw.png"
+  },
+  {
+    "level": 65,
+    "medalName": "위험을 쫓는 자",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +20",
+    "obtainCondition": "슬리피우드 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/SejPGOfazq5kF1kqmUzmJdQc9RFlpX25myf692HNVUoi6t9ueu4E4QSFnX90ZuIgDeMnunsIlwCOX0vgOnoq4g.png",
+    "displayImage": "//i.namu.wiki/i/j-UTvljHZq8HwyNyV0ujgFkRHrH2VW8ply9qCr0VGGGlQUHq3y5bSlxL79tO1VeizYuh54238MszPQ_wuFXOYw.png"
+  },
+  {
+    "level": 70,
+    "medalName": "구름 위의 조력자",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +30",
+    "obtainCondition": "오르비스 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/FbVmz2pkpWb2ihLN3NMyadNwLcw3WHoTrxr_ZGPtz63kewa7sTCZH1h5-pNxLipeVmvYSdynCjsVsitRPBdgFg.png",
+    "displayImage": "//i.namu.wiki/i/2CjUqFMmaP-K5uSLkGuvDVLzDnpsAEU7X4bB0TUqFXg6X4gLF0mEE3j8cCc47jG0XtShyaV9UauVfDpT-WcKGQ.png"
+  },
+  {
+    "level": 77,
+    "medalName": "설원의 탐험가",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +30",
+    "obtainCondition": "엘나스 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/36wHC_nBMWZf9P0MBKNuINXNwN9s9xwerNqu4LSX0BmB9tfrPtEQfPtVDCDRZSfamIsHGKEMMulHpDn_FbTE_A.png",
+    "displayImage": "//i.namu.wiki/i/GFKxARSZGMTnqPFUdyA8bubjQOuEJMd0uariqs-5cvFJv0ajoO2MC-xmvEFTU1SrQkJf88nWdqCKx_KlJRyHGA.png"
+  },
+  {
+    "level": 90,
+    "medalName": "아리안트 문화 전문가",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +50",
+    "obtainCondition": "아리안트 퀘스트 완료",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_NTWd51C7pwxiDajp52AtXid9je3c0Z-8B4waWtAtCCrViz3ysxY2i408OzufePhTiYi3bJQTXP21q9G8dwB8g.png"
+  },
+  {
+    "level": 95,
+    "medalName": "마가티아의 연금술사",
+    "stats": "올스탯 +3, 최대 HP/MP +150, 방어력 +60",
+    "obtainCondition": "마가티아 퀘스트 완료 [주의사항]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/o5JKeW47pQhVXVpkOZJ9ydZQVSJJO8WVGiE2EoAEtzl8_9aa5D3v-1u__h-VbIekUKqmDkXPbRRE70twK2v5yw.png"
+  },
+  {
+    "level": 110,
+    "medalName": "루디브리엄 보안관",
+    "stats": "올스탯 +5, 최대 HP/MP +250, 공/마 +1, 방어력 +100",
+    "obtainCondition": "루디브리엄 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/xgVZruqv1Xlu4vAtLdFmPU5XBOfsGUxTZgF9CiZDWevwryrWhMgEueafv3UtNe8h0zjOdRtiUfX_32oQmqFzGw.png",
+    "displayImage": "//i.namu.wiki/i/HSmJGWWidJCPZhKnQvy5JGGsxsq4MPXoEcjleB1ZIGIEqKtcZRWXlXSIsTKx4x6VeBEZ41zA6N-NZAzdQvlIiA.png"
+  },
+  {
+    "level": 110,
+    "medalName": "세계수의 수호자",
+    "stats": "올스탯 +3, 최대 HP/MP +200, 공/마 +1, 이동속도 +5, 점프력 +5",
+    "obtainCondition": "루타비스 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/9vRp1i5V8lbQMUvFmbXpn-3fb2yQzw19x0ywdSNKOmbwn44wsiywqainAQrz1WInM-7mTe37degC17q9a7C91w.webp",
+    "displayImage": "//i.namu.wiki/i/PXUOqpAlPrFBlWTUxTM3FBXWFSZS2xpJUjIvFntac8rc-i06NMRVIhixBAN-oW_iSXOPkCpWJni9MQdS9_UGzQ.png"
+  },
+  {
+    "level": 135,
+    "medalName": "신선 수행",
+    "stats": "올스탯 +7, 최대 HP/MP +350, 공/마 +1, 방어력 +120",
+    "obtainCondition": "무릉도원 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/g2hGJb9eS743tGYYMS5TSqKvyqE1oQ1pwSHV39ovoHKT0j_e4udHJjZRLQcHGk2mW5tAF5zyeLGOI4th4DM5yw.png",
+    "displayImage": "//i.namu.wiki/i/C5gBGkQz9UQPofa9dOpr1b3WGrodluJ_LwlABC-DJN7QxXLN-c3kJ0PHGEnYmzbu5UJuyJYLM9Re_JQh1P3Ygg.png"
+  },
+  {
+    "level": 160,
+    "medalName": "폐허에서 일어서다",
+    "stats": "올스탯 +8, 최대 HP/MP +400, 공/마 +1, 방어력 +200",
+    "obtainCondition": "파괴된 헤네시스 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/fVqAvAaDO72N2FbHfLi-xRtnEgpqzAb4JvnxpdrLaH2F4Rqkfn3OOPep5LtjoOrgf1JvcIScYjlIhk46y10asA.png",
+    "displayImage": "//i.namu.wiki/i/sXrmnMThRIgWajny46QZ1rpj-Qeyi8OgLPeI7Prf4NtvjXfQpitS2wdNvKfGpQxZhrTQgmvNaMi-AC5sdgV4Qg.png"
+  },
+  {
+    "level": 180,
+    "medalName": "황혼의 전사",
+    "stats": "올스탯 +9, 최대 HP/MP +450, 공/마 +1, 방어력 +200",
+    "obtainCondition": "황혼의 페리온 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/H_TbCwhFl4V5F0-ydrYRmistAwejkE3rLGliD7l1-JdnrePur_hwz9KCTevudsuctw2g7sWe587O4-1EDsM-Gg.png",
+    "displayImage": "//i.namu.wiki/i/56wefaFA0_OGja1xDi4gbBtqTbXRlesEfWn7fz2_3m5SeOojypmZJO2LyWfnb8Uti448c3poBwKBdFO9CVGKSQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "아즈모스 협곡 탐사대",
+    "stats": "공/마 +5",
+    "obtainCondition": "아즈모스 협곡 퀘스트 완료",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/y-7RYjBYQThki4tHQJKi70OudDbM0sv5jeb0rSHsaNTaPMNLhOYUHqH_9ZmkohwxLSacknjcYFl3ax_aDcbLgg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "나비의 꿈",
+    "stats": "공/마 +3",
+    "obtainCondition": "꿈의 도시 레헬른 [26]",
+    "medalIconImage": "//i.namu.wiki/i/rvo1zPiWve4QWokor6vHZydZN6BwvKmSSO29jqENrLGVAyI5OVVapya6sXy4vDEQPi7_LG7GrwFWKbQns83MQg.png",
+    "displayImage": "//i.namu.wiki/i/jgAjfTOpKa4b8QdFTK-SsDjVT5W-nuiLyQ2hh77sag_PzrWv5Eq3oue0QhpuG_o3Qu6UEeW8iY_1q-MFCq1mIg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "별을 삼킨 고래",
+    "stats": "공/마 +3",
+    "obtainCondition": "셀라스, 별이 잠긴 곳",
+    "medalIconImage": "//i.namu.wiki/i/2cWFE4uMw1H9G2H4nE8Hc9fOwRaWS5S8YBMh1HpeW7yzMVMFzXGWhDY4xIJE9SAWoQjPP6aNebsB2EX38o3e8Q.png",
+    "displayImage": "//i.namu.wiki/i/QLi7AKAU3zjU9oKi1C3U0Yv53nEXL6Zx1i-eKa_r4Hb97tlSf3xt1jISkXZK1aP3rj2jEKkgjNBLkOJefLdcvA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "연합의 증표",
+    "stats": "공/마 +3",
+    "obtainCondition": "전초기지",
+    "medalIconImage": "//i.namu.wiki/i/BHRS8QvXYoeJM6KuLrU-JI7FHvxI4xmFbNtuW5_VqhdJChOmRTuOiTM1q2hFtOMx3MbSQnbRBH-_lOw83K9oLQ.png",
+    "displayImage": "//i.namu.wiki/i/TcSub2292GCjDcQlIP4fmPJzkafhzJLc8t7MZn4EsaNdW1APvN5qABcREpbAVwN_hgGv8IR7MArKszPaZdWBHw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "공허를 극복한 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "문브릿지",
+    "medalIconImage": "//i.namu.wiki/i/GACwQDbCUE6thWTUg2pv946dwMEJjpB_TEFccs9HK3MGowC43ka1k_DIorDHMsysxL2Pl9cXVv5kL4qAXnDp2A.png",
+    "displayImage": "//i.namu.wiki/i/EHv0a7sQSwj7hZG6C5QSH3p7HWbRkF82kRPPaj5ze_wuI-7UAB8K-8kjNISInQBJIcKeL701DdaSDl_spqek1A.png"
+  },
+  {
+    "level": 200,
+    "medalName": "영원의 늪에서 일어난 빛",
+    "stats": "공/마 +3",
+    "obtainCondition": "고통의 미궁",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/mGM388pctKyp9IbePUgXyYWoVZ0OjCbSQu5N3s_cm1_YiwvbN1oDDbVBdoDs6qNA8jijthOtELuyOHaZu9sXFg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "운명을 넘어선 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "리멘",
+    "medalIconImage": "//i.namu.wiki/i/npeuxgdraGTt78P6NyvO_CyaHGV_ypADXUjSWx3d2mr6fS_tZeVw0QDg9ekGE4YaA1gv-1VwdisJj7NXoXxThA.webp",
+    "displayImage": "//i.namu.wiki/i/FG_Nl_rnbMLDG2k3pBVlEzFE3WJvwCRrnPFk_Ew8NoW5nIX8qHfiA__T-Ml6i8qe-xL2fBRW9XcZ7ndo_q9GuA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "검의 주인을 기다리며",
+    "stats": "공/마 +3",
+    "obtainCondition": "세르니움(전)",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/m2navfCmkUfWignofliaRTV20Q-sCO8FHdPA1IhnXCrDATfrlPYwYAkWojsWdbw3W4-cGBXKCoCtFiuibWAlzA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "구원은 그대의 손아귀에",
+    "stats": "공/마 +3",
+    "obtainCondition": "세르니움(후)",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/HCPnDphaXp6Uad6fHGnqOlJuwmukNkqea_FcdkXpTA64XvSTfdK0vQlYPfzLKqPlosvauNPcH2rb9HEJvyOQcA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "가장 느리지만 가장 빠른자",
+    "stats": "공/마 +3",
+    "obtainCondition": "호텔 아르크스",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/F3nttIfrvU6AUSp8vhj_UjI4NxdsvuSV7nRzXEW5jlzrbEI4-dr6M2eEQ8nG1HBsOn8LSk1enP9HnfbXoBZdrQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "혼돈의 눈을 감긴 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "오디움",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/BJq0zLP8Q0rDLRbiEGG-sHyshV5GjwKVA1vBNaQcWRH-lUyQ6Yad0FLw2rrXyeWAlCRSnS5VcJiVY-JmAxi6Jg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "낙원에 도달한 사람",
+    "stats": "공/마 +3",
+    "obtainCondition": "도원경",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/gXCw5S2ChnqiK_3PKS_YDGCm5waWEa00kmml35XYVpaEWYYxs2nmsXOoqhwlOjzlWcKAAJZcixAaoPhUBI49aQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "다시 만나길 기약하며",
+    "stats": "공/마 +3",
+    "obtainCondition": "아르테리아",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/SWw9GirSnSOTzuwQiwvcxFE1Gn0buYkQmD0PeMyQI7mYbJfx11ty65NKiMZ5ykPdFXlcyYaJUXODvYZ0AXo-BA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "영원의 나무를 지켜낸 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "카르시온",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/zfVUCG3IiDg3Biwzeb1bTiLLrH-3Semo7vdnw-pMIY-GTED5vwbAiIoxAiPHIfHWu_K2kM6kPBYVONeGd8BCrQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "미트라의 전설",
+    "stats": "공/마 +3",
+    "obtainCondition": "에픽 던전 : 하이마운틴",
+    "medalIconImage": "//i.namu.wiki/i/IKRQFqflddwE6sKax4jyopp99sW9RYGv0Hr33PRZDU_U0Z92jLd39zJtHJdABOdHBAH-6tG07_2K6qHGPMSCBw.png",
+    "displayImage": "//i.namu.wiki/i/cgUe1d0exBQnwFoEc_Hg2zmagYxobD8W2S448g_pBS7AbyexdA050fZRLaOdzVw28LNSO3pg4U9EhGz2uiFEEg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "심해 속 비밀에 닿은 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "에픽 던전 : 앵글러 컴퍼니",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/FykVB9f2SxGN7LrCiIwPPIA43UG3skYugoX1RPJD8I2cwb7VdJFDXfxXv-04g7Am3TFoFc9ZIGH2a_AyzG1c6A.png"
+  },
+  {
+    "level": 200,
+    "medalName": "운명을 거스르는 대적자",
+    "stats": "공/마 +3",
+    "obtainCondition": "탈라하트",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/dTWP6EFZSnkho-6K9lkHHBODwCF9Jh369IqGeLQST2WedkODjX0LN3oIOOnDLTICAtkK8mxmhBRlvrnfir3Zfw.png"
+  },
+  {
+    "level": 200,
+    "medalName": "악몽을 벤 자",
+    "stats": "공/마 +3",
+    "obtainCondition": "에픽 던전 : 악몽선경",
+    "medalIconImage": "//i.namu.wiki/i/8O_OBoWJ_unLvDp2--YRqkE7VaFZDr1t4ir4mmEWOudwqHQMDVkmVw5PwxMr0A673eh-N-8VnpzKnEPrPl3P7A.webp",
+    "displayImage": "//i.namu.wiki/i/SKqkuHWI7EUd_D9A-Bq6wfLQnDlrGXsZbpsFXZedSu5-_2a2Z6FOkRoXcCrHJ9EpbecdnW-rJNsbYsN3ywn3_w.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "신들의 진혼사",
+    "stats": "공/마 +3",
+    "obtainCondition": "기어드락",
+    "medalIconImage": "//i.namu.wiki/i/p55HoUJXhoLByNXr7Sd8jw_yGZxfB1YGoN4-4_sScectV1ewXaYMBD_t9PRlaVdfbH9E8VpzsPTFRbKFvfDblQ.png",
+    "displayImage": "//i.namu.wiki/i/M-tgQjBjhQHWIMM-YvzbwTGvOK_XwTU7WY7WyN21JEBeMga0F3T-apTdnIlv75Zn_-Yc3vJy80ym5oiAeRouKQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "성실한 모험가",
+    "stats": "올스탯 +1, 최대 HP +20, 손재주 +2",
+    "obtainCondition": "30일 중 27일 3시간 이상 게임 플레이",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/GkcLg6DfvPo-vv1cB4huaMlY11lp6tXbmVqKgw72A14Zeok9CBmf9hyGHrb4q9cShPT6uo5FCzBADPSVANPYEw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "파티퀘스트 매니아",
+    "stats": "올스탯 +4, 이동속도 +10, 점프력 +2",
+    "obtainCondition": "파티퀘스트 성적 S랭크 5개 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/A57lUuk7PMOZivhtIRPNYrTnC0aA_D0O0ALykEb396tzXOmJ34J8kNPlAwEie6dyDrtMq8pyENY2FEPEbQjaww.png"
+  },
+  {
+    "level": 0,
+    "medalName": "퀘스트 스페셜리스트",
+    "stats": "올스탯 +3, 점프력 +10, 회피치 +10",
+    "obtainCondition": "퀘스트 800개 완료 (이벤트 퀘스트 제외) [27] [28]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/t8JmhUpCp21ycPioePqT9RzxdzhXSmHccGec_FE_1LBCeyFoDBkYwR7nYlSptiNooced9kptD51rYDjvjyRS-A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "인기인",
+    "stats": "올스탯 +1, 최대 HP +5, 손재주 +5",
+    "obtainCondition": "30일 이내에 인기도 1000 상승 [29] [30]",
+    "medalIconImage": "//i.namu.wiki/i/h1QcKnxNkqWpllPsh5iHlH0Q2ltmsAgreXd0ciJbq9Fdh2oJvpV_Fw9YdhfIUQTBURY-Xqp9uWXj480kXaKNlw.png",
+    "displayImage": "//i.namu.wiki/i/pwRbXq31GhIS-2RYDLj26kmHl9N2ksw7vLF-xaG2rAMKiKOBbqGl5U2uuvIuxE4P0GA04oM14CgyJcZf6d-7jA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "노련한 사냥꾼",
+    "stats": "올스탯 +1, 이동속도 +5, 점프력 +2",
+    "obtainCondition": "30일 이내에 자신의 레벨보다 높은 레벨의 몬스터 100,000마리 사냥 ※ 120레벨 이상 캐릭터는 120레벨 이상 몬스터를 잡은 경우 인정",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/2sX7XNGuYkJ7uAWc05Q-jQ4QoM8rvR3Ne1YdT2jsOjvTdgo9yM8dvKp1FlpGGhzdBhTX8uyrdoLJdEfwuQyERw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "베스트 사회인",
+    "stats": "LUK +1",
+    "obtainCondition": "결혼 하기 + 길드 가입",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/fEdcGiTIPg4MPlbgOtXWOZ4GZ9KZo-wmViammquJDK6QT7sJJCwsBLGOPk3ntBSY07TbszVSeU2A8stLvN9ICQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "러블리 펫주인",
+    "stats": "DEX +1",
+    "obtainCondition": "펫 과의 친밀도 1400점 이상",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/1dL-cCdMWNcjGYG01hw12YlYLPiNYBFM8S8pzXL3nANOnuL2kyAjdvFd7EHVhwjyEFznoeOSTLq-Nkg_q6DD-w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "몬스터 박사",
+    "stats": "INT +1",
+    "obtainCondition": "몬스터 카드 30장 이상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/uEuMEGllKGqzMLGubrA74Wuwuh-DVIwHT2wm9uwyhSHZdlFMJ6-vyyK1j736z04nudBsf-gv1Nn5VJInnzAPkQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "끝없는 도전",
+    "stats": "STR +1",
+    "obtainCondition": "'끝없는 도전가' 퀘스트 완료 [31]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/nf5WuijibNC2BPJDdm9CYgpExPUlpDwc0mfkS5vJKJa3papm8K2jjkbMPu0J0PjTdVY88Rxm361xJWACU3aOgg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "버라이어티 헤어체인저",
+    "stats": "최대 HP/MP +80, 이동속도 +5, 점프력 +5, 손재주 +5, 명중치 +10, 회피치 +10",
+    "obtainCondition": "헤어 변경 50회 [32]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Ae9RWpg4wlOwFiSOV53GCvakGPHzRZt1wVZnP3R3uQX8XyOTvaM_6ULlmTZ9q79vukusFySYGdJmnsV7e-liqA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "정상에 서본 자",
+    "stats": "이동속도 +5, 점프력 +5",
+    "obtainCondition": "특정 맵(엘리니아 솟아오른 나무, 페리온, 커닝시티, 노틸러스 선착장, 오르비스 탑 입구)의 제일 높은 곳에 등반",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/GK3J3m9IZs89Y1tz0IcgMCK5nZt8qMNtvtjrNHlECMX6eGkH2rMBEz-nrJbXYqsAXKs-j8XOFRwpBiDWOjPGkA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "초보 탐험가",
+    "stats": "최대 HP/MP +60",
+    "obtainCondition": "빅토리아 아일랜드 특정 장소 20곳 탐험",
+    "medalIconImage": "//i.namu.wiki/i/g901dC9t9Lkpeb5o2Z7DsWQPKtSEX2zNWUEZEcmM4PzhhCwcjbHjitlOmta9opZeEgS9gbP1vl0rV4OKQCtjmA.webp",
+    "displayImage": "//i.namu.wiki/i/_pJHEVo1t00fAldV-I9hCXgD1L_T7guqw0oyCe5le1YkC7ylIBm6qKu8eT_dwx34eJ9p7VteljLWO8jfnd4AMw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "슬리피우드 탐험가",
+    "stats": "최대 HP/MP +120",
+    "obtainCondition": "슬리피우드 특정 장소 10곳 탐험",
+    "medalIconImage": "//i.namu.wiki/i/vJkyy0yHjnWVDW-0EZ4gVM2yLcSe-uRxjiORsHsZXgu7sVoAkTqhfd_wsA4gIuxUgg2ll9D_vL4nkWFz_nqZUQ.webp",
+    "displayImage": "//i.namu.wiki/i/SloT8IOXPQEp2c0Fk9LvD_EZTpZEPnkHyZ_IBIFnNSZQb8NuEfDRuP42j_oqN8GWxh07pS-chzFAnMnwudYlUA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "빅토리아 탐험가",
+    "stats": "최대 HP/MP +125",
+    "obtainCondition": "초보 탐험가, 슬리피우드 탐험가 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_CO3NhNEVRRz-atfS6isiszlCHzxh5Ujjb-rPowxO1RMlpz87mL2IhyQ31_qfAEY06K2Z8XOZzUhVydmrjW9rw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘나스 산맥 탐험가",
+    "stats": "최대 HP/MP +120",
+    "obtainCondition": "엘나스 산맥 특정장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/4Ms0hf-_1HxhUhyNNfQWg9kBi1jqpcSrmqDAdjFSFiVWxwnaYkY3CFKQmUg-Zv7FWxxedT2UHGm_U_V9NSpULw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "루더스 호수 탐험가",
+    "stats": "최대 HP/MP +110",
+    "obtainCondition": "루더스 호수 특정 장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/99Hf0iMiwwq4ehilYNzVjMIcr7Am_95hfR713iEy2Et-oSzHOu43QQ3NLMOTJf5XbwG6yV-_wrxoICHwbbOujQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "해저 탐험가",
+    "stats": "최대 HP/MP +110",
+    "obtainCondition": "아쿠아리움 특정 장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/TTdNzuu21I6Gg1PM2pGL3mINkLcGqrzDVg_G-q0TEADCPyNL7qXSeNU0N9rV07lGiVyLiz52-vH9Mr6fgV5yHA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "무릉도원 탐험가",
+    "stats": "최대 HP/MP +120",
+    "obtainCondition": "무릉도원 특정 장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_2wCISxLYU7XPWAch0DQCIVYZ3YMMSZ_xq4nhSM094jACXbawT47ibDnMIObOA_fpaTtTTXAo-C7urUG3MLIlg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "니할사막 탐험가",
+    "stats": "최대 HP/MP +150",
+    "obtainCondition": "니할사막 특정 장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/WLu1db9FvYEcCrDCIntB45_jIPmjd9TOhvn5ULX8hOa1KoNsFO-3nImMbFC0uRU5E9R6OLRifkXnu83CoA0PVg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "미나르숲 탐험가",
+    "stats": "최대 HP/MP +150",
+    "obtainCondition": "미나르숲 특정 장소 10곳 탐험",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/wQJsZqHmjW_C8C2y6Wnj6vWpeAGJFjDWwSaB9JDbN_SIImznE9-WGo5PX8B1ctfC1cTVSxTJfgf6ZE2DWhmYjw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "오시리아 탐험가",
+    "stats": "올스탯 +1, 최대 HP/MP +150",
+    "obtainCondition": "루더스 호수, 해저, 엘나스 산맥, 무릉도원, 니할사막, 미나르숲 탐험가 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/rzvHHKLWO3HqPdd_OM0OVpA0TGfaiAasUJe-X84F97OoJEkTL91UUe4P4ZK2xGa5lz6q0RxFR8UxeXvMedXYUw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 탐험가",
+    "stats": "올스탯 +1, 최대 HP/MP +180",
+    "obtainCondition": "빅토리아, 오시리아 탐험가 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/tXyUjjJL_tNxgv2T4W2PIHVSDLrhcYa8cwJrtMFXoKT_8QfzKGg5t73ywJbIEPwBtnbXZnyDIeoPfR6pTUAFjg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "메이플 아이돌스타",
+    "stats": "올스탯 +6, 최대 HP +10, 손재주 +10",
+    "obtainCondition": "월간 월드별 누적 인기도 1위",
+    "medalIconImage": "//i.namu.wiki/i/pJmNt3APpa-j-WdZygtGbBhxquQb3ThphOxJTbsNpp7kOhbNnq8IWTONspd1L0O0xtJaQwASoxSZEjjFFnP7Mg.png",
+    "displayImage": "//i.namu.wiki/i/KtPu1OGuXym3RQgJICOJR0Nrju7V9rYkpl8jPX-whZHgS96yp6xVm7JCm-T9TvXx0L03lWKg4MVWn0fRh1sf5A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "혼테일 슬레이어",
+    "stats": "올스탯 +5, 최대 HP +5",
+    "obtainCondition": "월드별 노멀 혼테일 퇴치 횟수 1위",
+    "medalIconImage": "//i.namu.wiki/i/Vri6z8QweTzkF44QMo7hkObMKFjqfj3KBJrqzATRIMfSe5PX6RqNh9H6sCKUVCKe4h-x_oHM8C-5uzCQ57hQ8w.png",
+    "displayImage": "//i.namu.wiki/i/v02wKyJOcC-fs_cSv7FuqsO2O4F4lVSbLRP4fY9_Rm5WOMdqXjvPWYgWx08BeuOSgSVV09bCwHNy7-636nebzA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "핑크빈 슬레이어",
+    "stats": "올스탯 +8, 최대 HP +10",
+    "obtainCondition": "월드별 노멀 핑크빈 퇴치 횟수 1위",
+    "medalIconImage": "//i.namu.wiki/i/k1LUN9KFTtAsg73E-AoOvmyZjNC7Ym3sSid2BiQLr1HlU8o-z-Oqxes1z5qTzckSIP4jFDneiD7VJ00xUYmbJA.png",
+    "displayImage": "//i.namu.wiki/i/u5mKFILpH4382xLoCC2WIWA3qH8v9hLG8tjXVaHAm6KrPcJTvTvj2OQoS3t7Pqiz5NPXECUSuWS_pMKFpw_RMQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "전설적인 사냥꾼",
+    "stats": "올스탯 +7, 이동속도 +10, 점프력 +5",
+    "obtainCondition": "월간 월드별 몬스터 누적 퇴치 수 1위",
+    "medalIconImage": "//i.namu.wiki/i/XPWW4rBgUU9xDP1ZkEKDPi21Eu-WS_du-PLJdOoJ4SEpFeVLTqN8a57LS5dAthgadrjWy0wNcsYMEo7i46nOdw.png",
+    "displayImage": "//i.namu.wiki/i/4SDxMxZGVtrDmEgYkxDpjz8IufD0Cz_-5NKBXMu1tWZX0RQ7BOZkFuvJBwauZ3VXowSZE2h2mHgKncUufW7AVg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "리스항구 기부왕",
+    "stats": "올스탯 +10, 최대 HP +100",
+    "obtainCondition": "리스항구 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/Mwxe-FgZ9fKhdyIOKXzLmSrPhrxB9u7lk83VIDbQ_dijwO_mlvZaO-EeyACKcLk5-c7Wckm5fsrq-t-VBoxT-g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "헤네시스 기부왕",
+    "stats": "DEX +10, 최대 HP +20, 이동속도 +10",
+    "obtainCondition": "헤네시스 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/0QQUKi7ook2NXdJOe044ZPqK4ACuHAhgX2_JxMOZnutVMs_gKIPaR_onV6qxm4Y69iqa9lmMA9e06zBxmojgOw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘리니아 기부왕",
+    "stats": "INT +10, 최대 HP +20",
+    "obtainCondition": "엘리니아 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/NU3UkkeS1YKGE5LUeiBqRDTV2t3gj2ZtgVyNUQYldbgltqv_Y_baFH5rQ6cOX5UihDHgvcdu7SAPVmgL8MEyrQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "노틸러스 기부왕",
+    "stats": "STR +10, DEX +10, 최대 HP +50",
+    "obtainCondition": "노틸러스 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/H0_2nN5GOG9wbz8F8i9Qarzz5yw93k1IMw5CHJZRSUpGyis_Eem-x5aRsZuxDE1r2Rcw39r_1Z5QVX33ww7mGw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "페리온 기부왕",
+    "stats": "STR +10, 최대 HP +20",
+    "obtainCondition": "페리온 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/zU_CQ7SooWjhNS51hFfVQs77XycO7oBtLuisKb-YFECj7d4_F1XBRbvnc8jFqnKmiFdq_stkhoz1ONugtLgCtg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "커닝시티 기부왕",
+    "stats": "LUK +10, 최대 HP +20, 이동속도 +10",
+    "obtainCondition": "커닝시티 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/36H7KDQdW42klFx_3ggtqqOcQ4IEEbmzkH8MSmeCZZLAHCNjqdHC83IRCJ3u4yqLGtR3SZn4X9KNp3495BAgug.png"
+  },
+  {
+    "level": 0,
+    "medalName": "슬리피우드 기부왕",
+    "stats": "올스탯 +10, 최대 HP +50, 이동속도 +10, 점프력 +10",
+    "obtainCondition": "슬리피우드 기부액 1위",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/O0TK_TZCTVNyZobLbPu4KbBMKfIiSh7vBiAA4pR3cadleeAPpCg3EvsUAQSSwj3Mubs_bE6H40m2-Sx9XwfJhg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘나스 기부왕",
+    "stats": "INT +10, LUK +3, 최대 HP +10",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/ZKjHpN3kVCjs3SA_IxHbwh-QwpDISZYuKq3Uk6KlSWgJoK3dJCo7qGBSg_qNHRR9HXquaA6LYCMswfNeIxmK8Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "아쿠아리움 기부왕",
+    "stats": "STR +10, DEX +10",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/TOYftoHSJPp_YMDZqrk5bdw7JsJcG6UwQ_9ZOnOwkPQu9IHZKX_2Eieavgcb8Y19QXYl_FpgIwcgMCDJWlKuvA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "루디브리엄 기부왕",
+    "stats": "LUK +10, 최대 HP +20",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/OIp8B3_cy6WLUBYvttE9apwJKmPio4fQ_b9RNZbo-pAei3gtBlRwHZqjGLkxIr_5HgD9aPx3CLXifFZoEp45kw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "지구방위본부 기부왕",
+    "stats": "STR +10, DEX +10",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/hWPqMHQgRl93eCWOM4SdDRFVgDWS2XoOb8qv1Kgv0TWjmhR2x0qKDyru9JP4EmK8is6HgicBuOvb9C3712tSMA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "아랫마을 기부왕",
+    "stats": "올스탯 +10, 최대 HP +30",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/59FIgl9cHTQmTC_SSCrEpQAGi8ro8U14F8m-sch609kKZdARdpFdMF22XWUcw2tmmR3cSVUoSrMgdOg1jZcvdQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "리프레 기부왕",
+    "stats": "STR +5, 최대 HP +40",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/3khb8M1FB3E2BIYB3uQh53j8NXMratpfiQxlVR0H2iUP0DevVKhlJV96Dvy61n3VOtIJLJwdke8YeeLSewsPNA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "무릉 기부왕",
+    "stats": "최대 HP +30",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/IoAjCkGYOYkgjhXa-s59S7HfIqMMCeo-OjQ5yaZoS3jreLGFSwPQzDJ-InladW9-t2OIcYup0W6BN8X5hwKX2Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "백초마을 기부왕",
+    "stats": "DEX +5, 최대 HP +30",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/KNx0JjeOaAoBWxE9smQOCJdvg0oax8bXs-cfT7GoIE4f-UXcxmDz3-IFZF8GjVCTvj_6I98uWNVG8umTLE0EMA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "아랫마을 기부왕",
+    "stats": "LUK +8, 최대 HP +30",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/59FIgl9cHTQmTC_SSCrEpQAGi8ro8U14F8m-sch609kKZdARdpFdMF22XWUcw2tmmR3cSVUoSrMgdOg1jZcvdQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "마가티아 기부왕",
+    "stats": "INT +8, 최대 HP +30",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/Ybm0qSSbw_j1GSK72VEkJAptOV7y46WSRM6WAm5pRerw0oa2Gg7IcqorYHHD1Twsx3KcP6-9edepllDWFGMv9A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "오르비스 기부왕",
+    "stats": "DEX +5, 최대 HP +40",
+    "obtainCondition": "더미데이터",
+    "medalIconImage": "//i.namu.wiki/i/kfb4_5lzv012_Bcof9r20EW93nomrkwtEbgyI-Ja2QkvwKhfYALll2He-I_tDKXBhOVQnkFAqlzvG5BQCOKW2Q.png",
+    "displayImage": "//i.namu.wiki/i/riMJWnRbz3qW85IjpkM8xiXOA9GBYWq9I7N64w5k9qtnYrEkM-kLZmF4hvJAirbNO3pIW4WNrhPGHrhnzXlZYQ.png"
+  },
+  {
+    "level": 70,
+    "medalName": "파티퀘스트 전설의 컬렉터",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "월드통합 파티 퀘스트의 모든 장비를 모으기 [35]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/2zwFUKo6CUnR9ThD80hHu3YmA_OHs4kh5jnki8T5YFYKFPxZRDbD9EQPqRsAmKf1DCKCGJYlWW4fJeFV4bx5SQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "훌륭한 요리사",
+    "stats": "공/마 +1, 방어력 +15",
+    "obtainCondition": "탕윤의 요리 3개 이상 성공",
+    "medalIconImage": "//i.namu.wiki/i/HBBYRMuNzvux5anlClbehccNS1T3kmGFA654CY2tXQDFJN7HateSuX6e_euF2iZkpkAhxxHfclxH40GycUWuvA.png",
+    "displayImage": "//i.namu.wiki/i/U9YsgyKmw5eGgwVuNAtxNABQKHOpeLp5ijBS7Ysfe9jK4dWa6U6ctVpXjYfU2ha2W69Gytk0eqPb1h4ivwIvvA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "대가족을 이끄는 자",
+    "stats": "올스탯 +2, 최대 HP +5, 이동속도 +5, 점프력 +3",
+    "obtainCondition": "패밀리원 1000명 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/PnDd-eQXFW7QY8DyQzV0Nh42S2JvOvP9L9xrNRBAWxOGp0jC-VNomO6eh19O0ht9GL6lu0Ea6vk2AuSP7Gg7LA.png"
+  },
+  {
+    "level": 51,
+    "medalName": "절대승리 카니발리언",
+    "stats": "올스탯 +7",
+    "obtainCondition": "몬스터 카니발 : 시즌2 에서 가장 많은 승리",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/oipHuJKNhN6WaMPbqLghbd3VT7IeqHbkDSU79I1cy8oW_PU5yYeJP3bskbhRk-8Ue5AL7Kv5jIgadpQLXWfrDg.png"
+  },
+  {
+    "level": 51,
+    "medalName": "천부적인 카니발리언",
+    "stats": "올스탯 +10, 최대 HP/MP +50",
+    "obtainCondition": "몬스터 카니발 : 시즌2 에서 가장 높은 승률",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Ejedbg3Uvj6B-6yammsydE_7HRoHcmnBIva1Y8ofH8JyvvMNYP0gptuxN5lfI7GAa6VmJU3YfltHDXXAdtFcOg.png"
+  },
+  {
+    "level": 30,
+    "medalName": "열혈카니발리언",
+    "stats": "최대 HP/MP +5, 이동속도 +5",
+    "obtainCondition": "이벤트 기간 [36] 동안 몬스터 카니발 : 시즌2 에 200회 이상 참여",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/4JSYtgBvdxa56c3bHWjxitJpQhFqaBQ2dqqkzimxsKLyM_xE_v6TbS3hVSxNPAdjW8odJVy2zf8JihvxsIteaQ.png"
+  },
+  {
+    "level": 30,
+    "medalName": "카니발위너",
+    "stats": "올스탯 +2, 손재주 +10, 명중치 +5, 회피치 +5",
+    "obtainCondition": "몬스터 카니발 150승",
+    "medalIconImage": "//i.namu.wiki/i/ARnkEtYVFTAq__ZI96vmxs0doy9AYSSGFjWZdbcZrwK_9CADqnL6fpRWsHeIb8zigs58ozfn5y0KahHcLBMijg.png",
+    "displayImage": "//i.namu.wiki/i/5LHcVHu3kp1BK4chunLzlBIuO_M9JSNbFcemGlH3whH4VkakDHy2MBABeI9WPsWUYCCM1qpINYkky9AGrgHstw.png"
+  },
+  {
+    "level": 25,
+    "medalName": "명예 역무원",
+    "stats": "최대 HP/MP +90",
+    "obtainCondition": "버려진 플랫폼에서 몬스터 10,000마리 이상 퇴치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RrxK-zUeE2BPYuwi8-47viLHMT-A1i56kQodoXu6svzlQkdDWcOP3fNq835fL5ODul7d6Covy7CrfIO8LpBQEA.png"
+  },
+  {
+    "level": 40,
+    "medalName": "파라오의 수호자",
+    "stats": "올스탯 +6, 공/마 +5, 명중치 +5, 회피치 +5",
+    "obtainCondition": "네트의 피라미드에서 몬스터 50,000마리 이상 퇴치 (모드무관)",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/2OIeaediqClZoBke_Grqzyo35DnrDPC8UzjpJthIx3k6OOZq6GmSCR5PRY2SrmAf2llvfOgGgKpRpuDTLZxpKA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "이볼빙 시스템 마스터",
+    "stats": "올스탯 +6, 공/마 +5",
+    "obtainCondition": "코어 500개 이상 사용 [37] 자신의 가상 세계로 다른 파티원 35회 이상 초대 다른 유저의 가상 세계를 35회 이상 방문",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/iX4qNb19n8zmieJMWXoULCEOhTY_iy-HNJskzr8DkRtNhtGwNbFCHSLrydOl-muDAZvJTi9RDS_g3qr1xFj1fQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "갓컨 브론즈 원스타",
+    "stats": "올스탯 +1, 공/마 +1",
+    "obtainCondition": "1~30 스테이지 모두 별 한 개 이상으로 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/PyLrw8cn89p0csgUTk3xuxRmUsUCsQPeVxNF4ufv1cx7Bk642qINpDrZXUoO0DVVCVUEyB045Bpbeqni38gUYQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "갓컨 브론즈 투스타",
+    "stats": "올스탯 +3, 공/마 +3",
+    "obtainCondition": "1~30 스테이지 모두 별 두 개 이상으로 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ocwpGOxWCKe_kfjvN2amlSyoawIzCVmkRcJ8IovaU3DvSweNzBpz6spb5xCxl4P_M5qCkzwXzkdU4T9UK_-Emw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "갓컨 브론즈 쓰리스타",
+    "stats": "올스탯 +5, 공/마 +5",
+    "obtainCondition": "1~30 스테이지 모두 별 세 개로 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xCWAYmTIoANR98tP3lvvIWkn1XM04bJ_J5y8mOlaKuZ9A1EKKGzmQZuH641Kbz8FISs4ps6MhkfUuCBUY1Z3rg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "마노 수행자",
+    "stats": "명중치 +1",
+    "obtainCondition": "마노 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8nEEMG7ALydL2Rbsvzdu7NZSMbnlp92xsPys0vmFD3eD3ZZWXPTpuI0LBcIw1tk3nf_FVYdqAqVZam7DHC8C3Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "스텀피 수행자",
+    "stats": "명중치 +1, 회피치 +1",
+    "obtainCondition": "스텀피 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/B11k-Z8Nm7ZGxQq5JpiFbFJBDocaHVW8wDyykJb75UEQANJdUMgpdxAzu95ztOtYbNFgr3qkIqj0EX1qrInW1g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "데우 수행자",
+    "stats": "명중치 +1, 회피치 +1",
+    "obtainCondition": "데우 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Mo_WksOVnrVllvEXgIfnmihhDp0BLgFo8g_76BAg8JHONLYuyThASDDKH_br7mlf3wehyNRaxtsFL2hvWI9Ffw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "킹슬라임 수행자",
+    "stats": "명중치 +2, 회피치 +1",
+    "obtainCondition": "킹슬라임 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/YCZsp7fPl99kFEOKPbaUM8uDQU4WTRVrS74pbZbFJdHFck5Qi5X95yCB_CnIHanbXBz6_WC8JXbA0uMsmp8WMQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "대왕지네 수행자",
+    "stats": "명중치 +2, 회피치 +2",
+    "obtainCondition": "대왕지네 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/WeTCdX_bNjjw0wpj-lgDcO86obHK9-ENQAXKBNHqAm2APDhaXcYrO4B8uOeX8QajwQNOwS6PZgviv85cfYeH4Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "파우스트 수행자",
+    "stats": "명중치 +2, 회피치 +2",
+    "obtainCondition": "파우스트 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/U8OUsUzD42R2BNNXfF4FvQxuih0vbvR3MzGg0o98N1P4okDRydKuJvY70wc5VYIQW_6Y9IUv4-Obi4ItgzF4fA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "킹크랑 수행자",
+    "stats": "명중치 +3, 회피치 +2",
+    "obtainCondition": "킹크랑 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/X1Dykwg2MYSHTORnJ67jj9l5U0iqcj-kXdVdWWqtyQlpmskmjn6aO3_HwoC3d1Eoy8VXYGdU7PR6EgSeEE9wRA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "머쉬맘 수행자",
+    "stats": "명중치 +3, 회피치 +3",
+    "obtainCondition": "머쉬맘 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/FBo4SC-i-12eu-oajJZMT07X5NtPKBjZRlbkbJzKjrxTDEblHCOeKCinn1yslrbAGVVa8vv_4iamev5LhK7tZA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "알리샤르 수행자",
+    "stats": "명중치 +3, 회피치 +3",
+    "obtainCondition": "알리샤르 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/rd8JOjhk2kSOUPW8NIt8Q92VvSAJE-luN4hz7-96M95rumltqQe4l0-s5Zw66Eci0ioNd7fmUZCxuxDkHnjc9A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "타이머 수행자",
+    "stats": "명중치 +4, 회피치 +3",
+    "obtainCondition": "타이머 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/XBbjmEjNdZ9LRfleWnuF4uJ0RwMsmEmOGqfaR9xnPUU1d1qAgChyt4QpXkEhjW3HRPKg2d6TVaGD9KaZdnhs-Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "다일 수행자",
+    "stats": "명중치 +4, 회피치 +4",
+    "obtainCondition": "다일 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/otILBavX6U-cawtyvERxexKJ4vHY1P1Vfif7xPB4qKU44suFy2EdljNjgvlEvIJwiwxdoHjd6r2KYFx0yHo2KQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "파파픽시 수행자",
+    "stats": "명중치 +4, 회피치 +4",
+    "obtainCondition": "파파픽시 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/RmFxfVM4WExebHTy_y3KUht6PuRsoc5FQA_JA7A4fup_jylt4GN5qrx_KTM6b2TJihXr9-1b_zI3coTDOnXf6Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "좀비머쉬맘 수행자",
+    "stats": "명중치 +5, 회피치 +4",
+    "obtainCondition": "좀비머쉬맘 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xyvYUIgtmAcP8QsX7v810yFfmwMO1o88ePtjfFpJglOpI3EgPhsVKE03u2lsiUv5MplMYTQV1ZWBhVigLRc1eQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "제노 수행자",
+    "stats": "명중치 +5, 회피치 +5",
+    "obtainCondition": "제노 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Y4jZPycJ7d0A3zEQOfmSxQPaIdPXjjn-6BSTSUImhQo9QSUcwb_EKJ10bBqgfWsZPhSzs4vvJvLSU0pX8njuVw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "데비존 수행자",
+    "stats": "명중치 +5, 회피치 +5",
+    "obtainCondition": "데비존 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_3EkBIDIoDE6PEmhvmvAeS0wO4S5Jcqu-PuYJdTjVQSRkwLrSaNP3xzV7zjw72OLcDu9O_JbqBVRwSqOXSbYjg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "구미호 수행자",
+    "stats": "명중치 +6, 회피치 +5",
+    "obtainCondition": "구미호 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/oUzKR0sDdxdhqxKCteftXfdQQ2K_OczjNl0D1cAjc2M1awuf3TYMxQQcDbffVO9gopvjOgDpiHYdY-gTdMkZmg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "태륜 수행자",
+    "stats": "명중치 +6, 회피치 +6",
+    "obtainCondition": "태륜 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/kG-vxe9A2UkX57U3AobqWMr1HFJBvTD-3dgGrJJNYmRQ7ijdTJ7vBbkTKe6g81QZEo3MKroiszzRgszH7GO8vQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "포이즌골렘 수행자",
+    "stats": "명중치 +6, 회피치 +6",
+    "obtainCondition": "포이즌골렘 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_NFy82ffCYtFJaLJIozSvf5GUDzEJXoOrDyPWiJRFPv41GYhQOA5Zs54eCBceRFNdI_qVjbCk7uwHEST2jZXuw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "요괴선사 수행자",
+    "stats": "명중치 +7, 회피치 +6",
+    "obtainCondition": "요괴선사 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/cCyBzWBV-lTjnai9SGy4lUmX3i1Ta1reYMdGdgh6xusrApnTm2QJEVmPcfpj5LNtSJu3wE5lxlWyEeHjKTq0MA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "주니어발록 수행자",
+    "stats": "명중치 +7, 회피치 +7",
+    "obtainCondition": "주니어발록 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/AmKqlpZnQvVfFzdwn4FnW0v9liCRvB6ZGoHVNE0HGW7NePtTjrwfOvaqa-vV4J0eapUnWLD95XsCcn6TPsnNhQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "엘리쟈 수행자",
+    "stats": "명중치 +7, 회피치 +7",
+    "obtainCondition": "엘리쟈 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/NIuJraDe0LKa2YuSVr1ghh5WcJjqlVnE6P0gP7CMxc5-o-qeSmttijm3P6s0QZ_RHuKX9kw00XqwLnmHT7kBHg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "프랑켄로이드 수행자",
+    "stats": "최대 HP +10, 명중치 +7, 회피치 +7",
+    "obtainCondition": "프랑켄로이드 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/xhoKCvgl28gHK8M1r1pjOxrNTum4FRquzhbxJCtWinS1-rm8d8YlD8J-_oqUAapHgRh_rv7ELkyuIMccs1wIVg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "키메라 수행자",
+    "stats": "최대 HP +20, 명중치 +7, 회피치 +7",
+    "obtainCondition": "키메라 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/5MnVpvQuscejIAfBCAXuZ6dhn4UxbuCXfABFirU0CryCUCSXr__HUevwjJO5uMk3Hb9yYxWt6YF26u3cjp9Bhg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "포장마차 수행자",
+    "stats": "최대 HP +30, 명중치 +7, 회피치 +7",
+    "obtainCondition": "포장마차 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/FzzKLJC5ggIG7AbjzOQnbZV3uNOCJvOtdSzx61UPhcmb4saq5y_Dek6CVblBlmwKwSBWlgSREUIcFQFy1DiU3w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "스노우맨 수행자",
+    "stats": "최대 HP +40, 명중치 +7, 회피치 +7",
+    "obtainCondition": "스노우맨 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/NVXwPtW1k4KLCykugGGz39UlUxzPV-SeurTCittyaa-rv7P86K-gzMMufhvrj28ObysmQMcmwcD88PDEH_rpxA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "블루머쉬맘 수행자",
+    "stats": "최대 HP +50, 명중치 +7, 회피치 +7",
+    "obtainCondition": "블루머쉬맘 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Aw_uC7DuXimfSIP_2O7EB176kkTQJZz55P0F24rurpVXLeTQhvNYSJS9ZBVunQR62bMiewtkB5AVUxzHHQrJOg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "크림슨발록 수행자",
+    "stats": "최대 HP +50, 방어력 +3, 명중치 +7, 회피치 +7",
+    "obtainCondition": "크림슨발록 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/6t5_n68cG_cQO5Hz3hD2-pcs7NHSO9bUSR22eER_R_0cpmWEgzk869s2Wtinw6Yl5wnqNRnFwrgwRuFF7as2XQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "마뇽 수행자",
+    "stats": "최대 HP +50, 방어력 +6, 명중치 +7, 회피치 +7",
+    "obtainCondition": "마뇽 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_UBsEgaqbyKDK01dwbJT1iYky94dUtg9HK0ilMHhAagDyzHECtDQ4RqRdQA3xdBUniY69BfMrYzpi7NGRu56Kw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "그리프 수행자",
+    "stats": "최대 HP +50, 방어력 +9, 명중치 +7, 회피치 +7",
+    "obtainCondition": "그리프 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/k2fdT-bP3mmpXWGpRhypF6T7t9upeC4SkFdDTJKtqXkuaaAa-RP8Alyi9PiUysgMHPXMd--Si2qYqcs17ONZ-w.png"
+  },
+  {
+    "level": 0,
+    "medalName": "레비아탄 수행자",
+    "stats": "최대 HP +50, 방어력 +12, 명중치 +7, 회피치 +7",
+    "obtainCondition": "레비아탄 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/pFsQY2wEsbFqJK9Pou0pAfSCvVReH962dycOOwHoZDmSnCogkcDySsw6LucCFGj83oTldBXy2_u8DzgHdCNwfg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "파풀라투스 수행자",
+    "stats": "최대 HP +50, 방어력 +15, 명중치 +7, 회피치 +7",
+    "obtainCondition": "파풀라투스 100회 격파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/kxiLIyagVyZ75qwJlW2_yNXTg0M9iH6tgvRIZvb5JswkPZPMFnkaU0UJgsC0yUA9KUnsl5ov5Vemafq6yuPOmg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "무릉도장 정복자",
+    "stats": "최대 HP +50, 공/마 +5, 방어력 +15, 명중치 +7, 회피치 +7",
+    "obtainCondition": "무릉도장 100번 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/XWgtfntQGUooqOXnu-bnPv-B9-gAvecYPGL2n-MlnuvF1b0adQi2erer8mWOb8_4CkKtY5VFPeNjEKWr0Tp4Hg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "소공의 후계자",
+    "stats": "올스탯 +2, 최대 HP/MP +100, 방어력 +50",
+    "obtainCondition": "무릉도장 노말 모드 클리어",
+    "medalIconImage": "//i.namu.wiki/i/7UjfClhxA5zG-RfVIgPaMIWMy2bkCq0Shsnsns3dgUIBmm7lefxbrzU6U3qxlJPraZ3NxDAJJUNJ7kUbOKubjw.png",
+    "displayImage": "//i.namu.wiki/i/0yJB-c0vcjNbgZuja9m_DWjhduYGN83RvpisePlziYIwLnX1uxI5EyZSVjGtaJ7sSx36dwTxfwQ25LMV0t-kew.png"
+  },
+  {
+    "level": 75,
+    "medalName": "견습 크로스헌터",
+    "stats": "올스탯 +2, 최대 HP/MP +80, 방어력 +30, 이동속도 +3, 명중치 +20, 회피치 +20",
+    "obtainCondition": "'[크로스헌터] 크로스 헌터' 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/FI29ifafsuFTqSxXp4wEqZ2IQ_iH7e7Uo_8cbBDjrhaa9UhJMtvxg_sirj7xbp7HNBZuJcFuAuhwTO2JqUZBnQ.png",
+    "displayImage": "//i.namu.wiki/i/xGJL_eP3Lz69EK9Ux0Jrv11AEBtohlWsHXu-BuXfceMl2-fOq4CpSE2sIikI41zqhRgEYe4Sz5yippV__HTMBw.png"
+  },
+  {
+    "level": 90,
+    "medalName": "정식 크로스헌터",
+    "stats": "올스탯 +3, 최대 HP/MP +120, 방어력 +60, 이동속도 +5, 명중치 +30, 회피치 +30",
+    "obtainCondition": "'[크로스헌터] 점점 강해지는 어둠의 기운' 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/qiAS_GLDFxaWFmD5pCXRG53-UhQkMPzC95K4jfEABbm45_-PPDYpnPAqRPw0P8o_dYRAQVU1-Xcd8lGaKQ_M_A.png",
+    "displayImage": "//i.namu.wiki/i/p9cZgkei1KDGTaEVSjk5Q96r20G3w3UtQkkPRWcKh4Ob4cs-JCJ609LWKU7dCtgpbYNjSGResZm9uIMoJ2vVeQ.png"
+  },
+  {
+    "level": 105,
+    "medalName": "전문 크로스헌터",
+    "stats": "올스탯 +4, 최대 HP/MP +160, 공/마 +1, 방어력 +90, 이동속도 +7, 명중치 +40, 회피치 +40",
+    "obtainCondition": "'[크로스헌터] 리프레의 양대 산맥' 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/OW4z2lhfCSAT95RHZlVAYR0dESr_xmBTlAT6GfnwQpnPMMpEI5rJRcg65K1HeO1q-6qOEXG7d3h0UBzLg4OHnQ.png",
+    "displayImage": "//i.namu.wiki/i/IQXNjU7PANSQWYBKSTvGRVop-dN6dm5HdcBJQRjjMmTIcsxYc6of7tJWZ4myhzwQDWMir6Hfe4Kdg7Er0LUNrQ.png"
+  },
+  {
+    "level": 120,
+    "medalName": "크로스헌터 마스터",
+    "stats": "올스탯 +5, 최대 HP/MP +200, 공/마 +1, 방어력 +120, 이동속도 +10, 명중치 +50, 회피치 +50",
+    "obtainCondition": "'[크로스헌터] 시간의 신관 아카이럼' 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/KpNfWh-0tGun7MKt8qo8x2sdLWQGrNMar36BSUs-FZPaFawwDKOp8E6KDJffRGkvghDLFUNKztRL6bO_clsCkQ.png",
+    "displayImage": "//i.namu.wiki/i/8TVRpSX1PeeozmwETZUlUwfHZiXMgD6XUEPw7SAtMlX4SW6gbjwASPVec6bWhpvOuZjlb9ph6GCju-VwYAwZxg.png"
+  },
+  {
+    "level": 180,
+    "medalName": "엘리트 크로스헌터",
+    "stats": "올스탯 +9, 최대 HP/MP +450, 공/마 +1, 방어력 +200",
+    "obtainCondition": "'[크로스헌터] 종결' 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/P0bdiYNrw5TwftYtF6h2uvYsIc3GRW-QlRWrGKTgy25TOKZO83pCERPRQ5NYDb_FkxcwD2KIKDM7KmkLtCVHuQ.png",
+    "displayImage": "//i.namu.wiki/i/qHXf2zPKCXP80EO-wSCtSGfVruydGmtieV2hBe-KsqAMjZ1Ua-0830a5u68QX0V70ng0tN24Wix_C3vc0Fgufg.png"
+  },
+  {
+    "level": 140,
+    "medalName": "방어전 참가자",
+    "stats": "올스탯 +5, 공/마 +2",
+    "obtainCondition": "디멘션 인베이드 클리어 10회",
+    "medalIconImage": "//i.namu.wiki/i/UpCUsN94xW9lJ3EYvd9ufievPDkC2-9SEdhWX9KYWJ1PN63vpymnv3ee8fMP0nvU2uoD39ZtTavqTRTDIZA_-Q.png",
+    "displayImage": "//i.namu.wiki/i/uYoNfazRTRYI0nfeCU8n74WRhGo8fK85lUmUNd4qOTRH32F65fLeSICaH4pMERx7SNYZazNJzaOjDIibvP6Iag.png"
+  },
+  {
+    "level": 140,
+    "medalName": "디펜스의 달인",
+    "stats": "올스탯 +7, 공/마 +4",
+    "obtainCondition": "디멘션 인베이드 클리어 100회",
+    "medalIconImage": "//i.namu.wiki/i/ErzDg1sg6B0XH0kShL41r7KxJxEY_KEBAn2OWpuMkH76ElbT5PTL7H59lG12wvwaZe8n1vI9iUcj4penFbRZxQ.png",
+    "displayImage": "//i.namu.wiki/i/PCcftgoTiyciuoBKOXO8_CXKTi5bV9i90x7Yg4nc58poHogKFGLo5hu0BKCTwR_0o-Cjp3B4DpoGiL9H4KOWmw.png"
+  },
+  {
+    "level": 140,
+    "medalName": "힐라의 위엄",
+    "stats": "공/마 +1, 명중치 +60",
+    "obtainCondition": "힐라의 분노 히든 스테이지 클리어 시 랜덤하게 획득",
+    "medalIconImage": "//i.namu.wiki/i/2eh9s9Uuxpq0Y5WSkxGcDXfI1aG5kW2WkX_ZTBf72XmMv8gT7NqqJAaUssmNrk_gHfm7mxg8H9HtQv1HzrYB2w.png",
+    "displayImage": "//i.namu.wiki/i/qY202ftAGY2F5JYGNj4XPuilO7U2lfN6zbBXPLQEyn0G95pxMKAZFbO6A3Vgx3gS_MDjrT7NGCKxpdQT8ySflg.png"
+  },
+  {
+    "level": 140,
+    "medalName": "매그너스의 위엄",
+    "stats": "공/마 +1, 회피치 +60",
+    "obtainCondition": "매그너스의 반격 스테이지 클리어 시 랜덤하게 획득",
+    "medalIconImage": "//i.namu.wiki/i/3GoSBjY5D7J7TfFAsxyixcnALmm10tSev9YdWINDWrV88om6Nu8F34DVkk4wL-iHEo2DHB3KBufgA7BURmtbPQ.png",
+    "displayImage": "//i.namu.wiki/i/Dn9iJnZsY8tY4-EICAHYZlQDdz_NpJcmvzLs1l9I1k5qoyuGzDy-kqfnyhNcHpotSbrjpwkmoJXrb0wzALSP5w.png"
+  },
+  {
+    "level": 140,
+    "medalName": "강 건너 불 구경",
+    "stats": "최대 HP/MP +300, 방어력 +150",
+    "obtainCondition": "힐라 vs 매그너스 스테이지 클리어 시 랜덤하게 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Zv20B_MUj2_lHygj0gD2UREDDgtziIwLEMmC1-HKjxnKi5NDb82F_mToMTEy_Cv4Rxc54GyklYJqMO9T5qtt6A.png"
+  },
+  {
+    "level": 160,
+    "medalName": "산전수전 공중전",
+    "stats": "올스탯 +7, 공/마 +3",
+    "obtainCondition": "'디펜스의 달인' 훈장 획득 및 히든 스테이지 '힐라, 힐라 VS 매그너스, 매그너스'를 모두 클리어",
+    "medalIconImage": "//i.namu.wiki/i/RrEm7a0G7zfQhsJCuEEMSjNMdJAH7DnTaN-dKZDq0vqa0UVsDWztuGRQvEdaocrFeE-AbIWJ8SsHRyF761Zw0w.png",
+    "displayImage": "//i.namu.wiki/i/aCku2p2_1dy_7aFrxsv_dfvPCvyrz4XvbU7yDNErsaVA_b6LJrqjXCarUDmgb4cfPSAAqSEDPHVWEvhO2Dejrw.png"
+  },
+  {
+    "level": 110,
+    "medalName": "The Seed 뉴비",
+    "stats": "최대 HP/MP +50",
+    "obtainCondition": "5층 돌파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/f4H4V9LKwyF8Gq_Nft3wPysUqsjmllj_2HmA0zyLjPwc2BVnr15ExN0L6F7uS5aVM2XzNcCflXzyFTTd5kvMfg.png"
+  },
+  {
+    "level": 110,
+    "medalName": "웹 페네트레이터",
+    "stats": "최대 HP/MP +100",
+    "obtainCondition": "10층 돌파",
+    "medalIconImage": "//i.namu.wiki/i/tCiLUne9CytThLt7cHe-MYgsCLfhVIAuS--qOLBC7cAQELBgTaX5hABgw9pQw2JovxFvAokAUNUxbrXD3Gf3QQ.png",
+    "displayImage": "//i.namu.wiki/i/ysRAhip6JlSvi6KqSDdf1X_zTUECLmE0QXFX5Me_nv1fwD1hn7-ZcTnwwphQwWxbFxv-Ct0W063G-cWqVvYG3g.png"
+  },
+  {
+    "level": 110,
+    "medalName": "The Seed 비기너",
+    "stats": "최대 HP/MP +150",
+    "obtainCondition": "15층 돌파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/KYZzpusZoi5cMs19EOWZmc94JRupYMvgZS_O2tiOk6KkxPY_OQhpNGus_BmUDCJmFXrxfif-qMWbj2HQagjsYw.png"
+  },
+  {
+    "level": 110,
+    "medalName": "아이언 멜터",
+    "stats": "최대 HP/MP +200",
+    "obtainCondition": "20층 돌파",
+    "medalIconImage": "//i.namu.wiki/i/vGa-oANqetNfCLghAbJLMj2QRTPtWBPA8GifD2ayXoKZtW7oAeA_osCPBBn9vdAfK431IBzJ22kMOWBLW6nvhw.png",
+    "displayImage": "//i.namu.wiki/i/x3zQLYMmIsD6-dTIjkvXmi592IITc33z9b9vMcAfVVgzAhtzhyrKs312GUv0_3oUvqFI46Un8j05_5qV5if8rg.png"
+  },
+  {
+    "level": 110,
+    "medalName": "The Seed 트레블러",
+    "stats": "최대 HP/MP + 300",
+    "obtainCondition": "25층 돌파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/0uvyLAoCE_qLxY4lydgpTg3z7j_qSssHZQ4cWhtNsu2kqIsiZW1OlpyrdmLTFhTYW8lgwJ3PublMULlgeefhPA.png"
+  },
+  {
+    "level": 110,
+    "medalName": "라이언 체이서",
+    "stats": "최대 HP/MP +300, 방어력 +50",
+    "obtainCondition": "30층 돌파",
+    "medalIconImage": "//i.namu.wiki/i/XCujZBCprgWmkTdnyqvvC0Hu_m4XlM0gJyojBBcOOZmqNZEZG6gS8kTwqEM1xLCuxSszq52Um-oqnNKJsNg8ew.png",
+    "displayImage": "//i.namu.wiki/i/x-_gYdo_1nv3W7T222nZDU-8yJ5CxRfOrBQ_vyaCzkpEy9kZdaQqZZqRInQmzUTUqIZlWKe-Cw6qnzwSv3GcRQ.png"
+  },
+  {
+    "level": 110,
+    "medalName": "The Seed 엑스퍼트",
+    "stats": "최대 HP/MP +300, 방어력 +100",
+    "obtainCondition": "35층 돌파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/6nDlyJhs7igMFru87qBB6bxksJiHv12GMuZ53beBLSO25Re6wZgJVbb2_lek5rYeBVTLVj2AIcvRcRG5rdanvg.png"
+  },
+  {
+    "level": 110,
+    "medalName": "헤이 버너",
+    "stats": "올스탯 +1, 최대 HP/MP +300, 방어력 +100",
+    "obtainCondition": "40층 돌파",
+    "medalIconImage": "//i.namu.wiki/i/l1vYfw95tgy_ow58RnhV8FXjRLMdS1bQlFXMXlKc1U3MceSfaJ6GMrZTSE9rOGM7x3DhsWCFwnYlPTezhNFOCw.png",
+    "displayImage": "//i.namu.wiki/i/wcqQMUjAQm_6lGWOEvBqsO28sMhBvHshcs1O_pS4lBhvjrUT3ajVWsqKTA6-M8DG8h3krPhx8Kaf1xaOwFUfYw.png"
+  },
+  {
+    "level": 110,
+    "medalName": "The Seed 마스터",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 방어력 +100",
+    "obtainCondition": "45층 돌파",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/f-lxolMHyH3L4aGRJzUP3ytyDB_vKxGWFcvyYZzKCLhefzdyXtvATLCYXhlaTDdhF1hZbiHEOhF3YN-KUrQLRQ.png"
+  },
+  {
+    "level": 110,
+    "medalName": "도로시 챌린저",
+    "stats": "올스탯 +10, 최대 HP/MP +300, 공/마 +10, 방어력 +100",
+    "obtainCondition": "도로시 격파",
+    "medalIconImage": "//i.namu.wiki/i/TG7eHAM9lZWTWmtn3QRtIKTVN-Vy_DeihoIb03pmWhma7DXnpfVq0PNvyRUR2PXFLZD8gJTpGglWAUBPCVveMA.webp",
+    "displayImage": "//i.namu.wiki/i/riAo2qJvJ94jT1keVYFMJ-p8FHWlph48gKo1Xtsmk99kIknBpkWlkzZEYxzGdCzNCcWKMde_s7UJvZEg9zNrgg.png"
+  },
+  {
+    "level": 130,
+    "medalName": "얼씨구 좋구나",
+    "stats": "올스탯 +4, 공/마 +4",
+    "obtainCondition": "고스트파크 일반모드 10회 입장",
+    "medalIconImage": "//i.namu.wiki/i/9VwUNemsIdpBp2S_Z8tyqOHAjSNbjt7fvO_sWuugvQlf-9z5frNszoHababP7q_7qeBNaUVgaRYfNp_AHTX1cQ.png",
+    "displayImage": "//i.namu.wiki/i/caRUDOJTc3jsygAp_oz8kDK9ASsj7cbREuANlKeo6I8oJAYx7VUQXJ8JAF-QXWUMAug2r9D8LzdZ2PqqvndM0A.png"
+  },
+  {
+    "level": 130,
+    "medalName": "풍악을 울려라",
+    "stats": "올스탯 +8, 공/마 +5",
+    "obtainCondition": "고스트파크 일반모드 100회 입장",
+    "medalIconImage": "//i.namu.wiki/i/ti3cGhYF5Q-aFpz7EDfqWF4XpD2YCfTlU8tFp-JELVZmdOvGJtTAczdZmgvYlZs8v9NXOaFtLBBEMZZma-Rn7g.png",
+    "displayImage": "//i.namu.wiki/i/yLO6kezm7AS-61VHo7VKukShXYtXUPtTRGmOR0lOPUtRFzt4uchmaVbTUGbg9mYIIphvanL1_UlLXwavmJ_RsA.png"
+  },
+  {
+    "level": 130,
+    "medalName": "닐리리야 니나노",
+    "stats": "올스탯 +9, 공/마 +6",
+    "obtainCondition": "고스트파크 일반모드 100회 생존 [38]",
+    "medalIconImage": "//i.namu.wiki/i/bhDZarTagMwsHxCw3uJsvqJqsLmR88akN-Fz3K6PW_5L3T65PCaKkjTA3G2PQqaaXdCEY828cFHpQdxtl4oKZg.png",
+    "displayImage": "//i.namu.wiki/i/nJ7pY5vNm2MRo92jM5a41qeCbFFGoFhIY123Rw-pFWEfVXi0vzFbIFjqcKZF_OVChwew1mVsNd0poklwGRajBQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "월요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (월요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 월요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/MKn1gdlvQjptiUZYgf_ntzd89h2QEaiREO5CNaIvXPEE0D2IH-WSEodjeYl7XiFw_2suDn-Vpb0ZjXSysjdYuA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "화요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (화요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 화요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/QesfL1y4iNwgMQPNoRxZOeT1_24KqU2Vx9A2AQSjC1QhSPp_yYIePVQ_ZtKp59_VtTzeun2wBpaDuZvKwOIASw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "수요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (수요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 수요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/L2fPF5LcYfkUqXq2S6BLKQfmDgxW30cVU0SdGVqKB2ehThAzgGcjuIApnI6zVnHQJIz7WASMH0jNTH-KTFffXA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "목요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (목요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 목요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/666J392TvTbuvUjbNmRDMEEGiDN85Ji3gLffX4zU4eOiJCahp82cE0w2eqMsnGsmMnqWWJpuCN_EN64w5M4tIQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "금요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (금요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 금요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/exV0xiK0Qy4v4132mJ7eHmPspOoO2RpK4ICTuZDeRFPy0tZSN8HTfnAbzWalYX2_M-Vtu0LS1poZWccOq_cjIA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "토요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (토요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 토요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/x5slRGjK_COk_MMxbDRIDTY6rfx_57xUb0kXTUrz8orr4sRP1Fs0RELi6yLWxaoEOFGC-900ts-dHgX0xp8sYA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "일요일엔 역시 몬스터파크",
+    "stats": "올스탯 +7, 공/마 +7 (일요일 한정) 몬스터 방어율 무시 +10%",
+    "obtainCondition": "몬스터파크 일요일 30회 또는 몬스터 파크 익스트림 3회 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/aTKb1nBJ3r84dAPzriuiVpnEyHRqXdZyJu_puYKWxbS9Cj5q0XBaseZ82jvV0VRYNRgPUi0eUgtKJl0uMijO9A.png"
+  },
+  {
+    "level": 100,
+    "medalName": "칠요의 몬스터파커",
+    "stats": "올스탯 +7, 공/마 +7, 몬스터 방어율 무시 +10%",
+    "obtainCondition": "7가지 요일 훈장 모두 획득",
+    "medalIconImage": "//i.namu.wiki/i/lOtdvFy-aDkbCskZg_BqiEu26D7Tz3Tc14onCgXXsRPf2p7K0jWtstT6-li1-PRBs3NSaZ2t4x-zREcGnufqFw.png",
+    "displayImage": "//i.namu.wiki/i/3P5SDyi0SMRr_K8uAT40UJHlhluMlxxDw37C1xC_10ZGDJ26ByvVLz6Il5LsAJkmFxp3AfK_A3-B3paRjHyHDg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "프리토의 친구",
+    "stats": "올스탯 +10, 최대 HP/MP +500, 공/마 +3",
+    "obtainCondition": "트레져 헌터 진행 중 프리토를 조우했을 경우 낮은 확률로 획득 [39]",
+    "medalIconImage": "//i.namu.wiki/i/QT4hQAVsU1e-pS0PYkCzGmwvJdX9_GNTOpFyTDHgrlYWNRlPon2uCwsE2RJ5SPoqObqo74cs_cs7OWrASn7hdQ.png",
+    "displayImage": "//i.namu.wiki/i/Jbb2RlJzhZP4rSodkhGJ6UTj1XF6NAdH41QB68uvnyMXkHOSPgGpkizROOlF5ZZQ-E6nV-gwZswUoR_ATEOk2g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "폴로의 친구",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +5",
+    "obtainCondition": "트레져 헌터 진행 중 폴로를 조우했을 경우 낮은 확률로 획득 [40]",
+    "medalIconImage": "//i.namu.wiki/i/xOfBEpffMT_0NX-DpkTCXNKKcLb2dTnNQ1n3O12dSyd-rBUjO4Qm3Pl-m14Zs3h8DlHYbL959Hg8Q--BM-nOEw.png",
+    "displayImage": "//i.namu.wiki/i/FrNTCI6GmYMVxXuVMj3n8QikMMhjn5n0zB_fDEiRe1fwREjF-KOj0JpxmglAuwlbAoLc5iKpNFbQYfNtckRxyA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "빅토리아의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "빅토리아 아일랜드 몬스터 50마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/pWptK0KK2FaVoniwrufp5oTDyFeVb7bA-YYnyThI9nCDBUWFFb69zWwdBtVICyccrOnpb5NXpRbJVFbXRV4Nwg.png",
+    "displayImage": "//i.namu.wiki/i/zEAJMrB74WBx07QnxbVy3QBgiEMsyj_MwuCAkXnqHLBSWeYtB24rGomN4PQoyBnpzlGWi_FwkP2se-spUIKWlQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "빅토리아 히어로",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "빅토리아 아일랜드 몬스터 100마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/K215ZddfXGPz8LWNJVtHcx5QdngJqeGoz4rzQ5cqxhWl4LrZeynGLQBIvZcNhSVpnHv2p4_9zhjPRePfgnaVUw.png",
+    "displayImage": "//i.namu.wiki/i/XSwUdQLr1mqLgH-BuIoXuIViwcEsMss8b3qVoqAh-WT8Wf1uGE_S33zN6OovcoZhbJ7iNcYVKxjBGNU4Pg0r3Q.png"
+  },
+  {
+    "level": 33,
+    "medalName": "아일랜드 탐험가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "빅토리아 인근 섬 몬스터 45마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/nIqE-D4DtWdwraYVPvCdWIOOIfR_Bsvh2cFCxTnVqRnNre-dKzH4kzhX4ivVPBM3vaVEvUpBImPZoy0rHtcM0g.png",
+    "displayImage": "//i.namu.wiki/i/qQuilQjkl2fSj63vKu_wa0P46AjuCSpY9ZlGH1dGl8E1ZA4Sh3txQQ71ujihUUr1lj_uW9A3Cy94SGGTBWT61g.png"
+  },
+  {
+    "level": 33,
+    "medalName": "에델슈타인의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "에델슈타인 몬스터 50마리 수집",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/1gT2vy7_ljWHjAG1FP8X4D6QROmlZg9LPqR1vVNAw04ORSRl9iGJWn74dSbQlhga2FbIt5ZOuy2QR1BqRDKGPg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "엘나스산맥의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "엘나스 산맥 몬스터 50마리 수집",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-SmlmzU2A4bsSllmRj2P9QbHhBLBCROV8bvFmEnOp9505v8jpoutW5dnhQ8HE2WugSZZ_oelmRoGPfnKysXeEA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "장난감 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "루더스 호수 몬스터 50마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/LjKsTipgJnInsic9EHkvq0k9o7ixxDnHV5QZ4UPP8Ei0ppfFVCdp8Lnfq8ymZhGU88diIensrM2pNTNX0WIP1Q.png",
+    "displayImage": "//i.namu.wiki/i/9cQ1wJXhCl6nY_i2UJYpr6gMcO5Z8B2QJdWiaFFIb0B95626TRk0GK8z-SFXJcpLTfsdQq_vbveQrENJNPomZA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "심해의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "아쿠아로드 몬스터 20마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/R63NWogWwA51XWU-kNzhUQBoHFZO8eUOuscsOrCFP0uC_V6hUEYkOWWurZVySW6yqB6tc7ohMCyBYtPhULqpvA.png",
+    "displayImage": "//i.namu.wiki/i/JYFHGmN504rFziJ_iUEGlH6d1X1h80x4Ssjr1zvHbmVsMg47wI3dne882tIZvCbXHwX3iHG9lXkFS6GYuEID1A.png"
+  },
+  {
+    "level": 33,
+    "medalName": "사막의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "니할 사막 몬스터 40마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/wA09Dw_yMsGD_owdHYYxBKRQ4jei18xLTih_Sj-FrF2P8Dh5g0694I0_0eRgWofKWHaUe7ngsiHeekBuNpNzEA.png",
+    "displayImage": "//i.namu.wiki/i/UaAvktu9VVCZVnqMtxGzydrIMw1cVqWoqZgKKzxI6EOiiPsuQ2UxOyMJRgvL4cu6-8FfKCoVmLSGVnucESov5g.png"
+  },
+  {
+    "level": 33,
+    "medalName": "무릉도원의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "무릉도원 몬스터 35마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/O0Cx8V_NEtPZ_Ytb66lY1uqH7KGM_sljKmfTCLRCEqQJNL4QMyC6R0KZNHzXaPSjL-IXaR9A9LP7eH2ooMfurg.png",
+    "displayImage": "//i.namu.wiki/i/-brPRf5Q1wVEYK_BRfIRE5HWH5GdeOv-9k_2gfNHR_fcN0wfP7taKZOsXBX3slTY9l9WYfMuoLywgUJuKbNT_Q.png"
+  },
+  {
+    "level": 33,
+    "medalName": "미나르숲의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "미나르숲 몬스터 50마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/i9DqwBRcm6yUmrBdFVSmWfoBBObWmCXQxStj3WNTTcoAf40tt4cURcSM8UOhFdadgz5mTNv6Yohogaw9ccYoBg.png",
+    "displayImage": "//i.namu.wiki/i/PDr7xoFlzdqYkSStUR-qPZy9wSq1-MPcsYgTzb8Lgt2ZeZeIAclChXxo7RqquMANRoJ0lpjy-xiM55cGUgvUlw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "신전의 수호자",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "시간의 신전 몬스터 50마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/WBb-b6EBPpqgO6q9Z9ynxfJRnSDVf8buTr1Ex11GjbBT34y-Y-MlmV8r2U4YB-n2nT1o9uX7kQ5LQcPCkS6aXQ.png",
+    "displayImage": "//i.namu.wiki/i/yObajVZSSdoH6k09ohL8AVuj2L0ywBOtO-hAkBfwRSIdM9OLB85pWsQFmY0ZCLq1qFO7XYB8UjE-lweklte5pg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "이계의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "그란디스 몬스터 50마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/yihxQj_-ifHIUeyFrXa4rhtBQajqnLiVkLJh9vjrued-RJsDnveyzAWkpCzsokOcqQ1Fe1Cg8oncq9RnV362sQ.png",
+    "displayImage": "//i.namu.wiki/i/5b3n-GDMeaxdGOeYTHYfvFPUQYurKNVB6cv4IoFrAgMzDWwwtuy_0NDuTVGCxaRWb6pAmDIe4_VBygEz2IGLbQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "아케인리버의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "아케인리버 몬스터 50마리 수집",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/SI63jTNHTN5gIbRDA0I9Swo3hf1lXj12cbhVHw0RkFxMAKs3lsKSm7mkg46inGzNFpmGw4QYiZjUoFqeABe1Hw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "프렌즈의 수집가",
+    "stats": "올스탯 +2, 최대 HP/MP +300, 공/마 +1",
+    "obtainCondition": "프렌즈스토리 몬스터 35마리 수집",
+    "medalIconImage": "//i.namu.wiki/i/D6f_zyIQB-O0VhLoXf41wcc_qmWZehhkUiiv3uCaDjkqPyk0mED67q-Va73NCCKXjoxZ5N4HKN6aVgdQpJBmsA.png",
+    "displayImage": "//i.namu.wiki/i/VwxWJzRRxDDJTHrkt_gqXPxazxcDZ6Dg0VA20uKHZ3ZW9qvGQ5u8v8v3BQK7UPnNOgZRjGo0422BvGkA2Rw0Lw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "하얀 마법사의 추격자",
+    "stats": "올스탯 +4, 최대 HP/MP +160, 방어력 +70",
+    "obtainCondition": "챕터 1 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-HKvhCNwA8-hsdkmmGKoIc61eb9fit2bWq8st2-i8nEXkYRImZmT0z21fCKFteOJz1iT6kNLneZdP_79tk6T9w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "여제 메이커",
+    "stats": "올스탯 +4, 최대 HP/MP +160, 방어력 +80",
+    "obtainCondition": "챕터 2 클리어",
+    "medalIconImage": "//i.namu.wiki/i/7E-6-eO7UzWPUaw9tzAQ_MMhS_mP9J9Z3fbd6Msr4aujlefqDkGdxFdD1i6Zly7UZ9R-R0vXveU0SbsPHu2ORQ.png",
+    "displayImage": "//i.namu.wiki/i/8MJEPNl4YMw8jaEJ5iozXdl-1xXhzSXFVIrFqEoPgcQnYjLVX4nwBJMUIBmji0r-kul-EG7FJ4Zi3mU8a2cbng.png"
+  },
+  {
+    "level": 100,
+    "medalName": "취미는 책읽기",
+    "stats": "올스탯 +4, 최대 HP/MP +175, 공/마 +1, 방어력 +90",
+    "obtainCondition": "챕터 3 클리어",
+    "medalIconImage": "//i.namu.wiki/i/cZnlNuWX7ABIxQAKGTE_MGV82VKgvUpt7vP6ynXuF7L_jrlrfiNS9mPokQ9nQYu9s_5cjyGF7-bw7hQRx8JDCA.png",
+    "displayImage": "//i.namu.wiki/i/omhGseW_xmgVx76DjGhbr6a6WsKMSBJbhojkB8QrsoruPUPeB514_qsUPecg11lh3fqw1PqPo2n1kSJBjUt3PA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "설원의 음유시인",
+    "stats": "올스탯 +4, 최대 HP/MP +170, 방어력 +85",
+    "obtainCondition": "챕터 4 클리어",
+    "medalIconImage": "//i.namu.wiki/i/m3UzMsx-TN-MBsouwvSqpAy3yhXhy-Mw1z-f4286l-kRbm3mqgugBb7rg0tJN_TvcHnJHC-H67jO8UEbqFYzJg.png",
+    "displayImage": "//i.namu.wiki/i/8TinVl6og01_BKP16UP1h-iEJDx2ngdpZvyRnSd-E7F8X0YYuRn0oBXHagyt6_0xtbEbl4T-byUgL8MIKSJ79w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "그림자 연금술사",
+    "stats": "올스탯 +4, 최대 HP/MP +160, 방어력 +85",
+    "obtainCondition": "챕터 5 클리어",
+    "medalIconImage": "//i.namu.wiki/i/LDMzAE4UB62BORPQwvIx3s2TBI-Vge8A7zfY--UKxRsF3ZM11ly7skR9G1maCcXosQWzSFntYGJVzv153HlDAQ.png",
+    "displayImage": "//i.namu.wiki/i/t5EnmFN6BTotU8Y_Qc8qzsYZvywJi_PnAD3zlEfFG34Uj7LZT0yb_C3MpVY5kha8-QtMNKtcUsdE9RdqDJ2Iaw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "샤레니안의 기사",
+    "stats": "올스탯 +4, 최대 HP/MP +170, 방어력 +85",
+    "obtainCondition": "챕터 6 클리어",
+    "medalIconImage": "//i.namu.wiki/i/tZtLaBT965TOtKp2a5n27rf_wOM10o84MP2XPLywVNe-UQerwZOUkBWPXk5JjPju682oot7OKuhq2XgItth_Ow.png",
+    "displayImage": "//i.namu.wiki/i/_pk7axP0GtRXpsigIoVED8rT1cqvV6BJCCJuF9LceqQyOCaGOLKlGxugK89uSujlw7aHLKuapiT1wpkhU-eMNg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "신의 선택을 받은 자",
+    "stats": "올스탯 +4, 최대 HP/MP +170, 방어력 +85",
+    "obtainCondition": "챕터 7 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/UfT6YiZyZ5kflFK_CuV8dr6RATavfyysBAHtlsv2OHzMQaaxAtHJ3OQWmmEq615C5hOawq7MRuqa7_Yd7DbYrQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 30단 점령자",
+    "stats": "올스탯 +3, 최대 HP/MP +300",
+    "obtainCondition": "드림 브레이커 30단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/_XNNqPZTFsBw-ABgTNj5BgziayCew9oK8l2Sl2PTH7OeP9os9eoHV6oUYIfUxom3XQMb6uyqELnvLU2yauvrSQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 40단 점령자",
+    "stats": "올스탯 +4, 최대 HP/MP +400",
+    "obtainCondition": "드림 브레이커 40단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/GoSsBWK3VxeGvsG4DNMLRYfPwPa1mYnpkiP1zP8Bb7YriLA8KnNGe0AjbMYnpXgz5eWNzayCaY8kITRBcrvYRg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 50단 점령자",
+    "stats": "올스탯 +5, 최대 HP/MP +500",
+    "obtainCondition": "드림 브레이커 50단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/AgbjrsH87uaQ54cVoGUPS1jxJMVpKBANwG8td9H8XlwskgwKB45oDvyidFR4uvMc5csuepbeG8kIaMvAbWD1_g.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 60단 점령자",
+    "stats": "올스탯 +6, 최대 HP/MP +600, 공/마 +1",
+    "obtainCondition": "드림 브레이커 60단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/8OWG0G6tBXzRvRTYKSu8umxGyYY97uYlPjuceL41kvYk0X3VU27-fg1ySHa8wZmmCBprb8Tow4QhCvw_ZVcWig.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 70단 점령자",
+    "stats": "올스탯 +7, 최대 HP/MP +700, 공/마 +1",
+    "obtainCondition": "드림 브레이커 70단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/fLs2swySFtlSgl_UWDZUOWDYltoEue6mebUoL6IrX-JXwMBUSeDpgLDhsAJDsXFjfBMHp-9Cn7tjri7SKRKueQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 80단 점령자",
+    "stats": "올스탯 +8, 최대 HP/MP +800, 공/마 +2",
+    "obtainCondition": "드림 브레이커 80단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/os6MOhl_cw_mMiUhSEL9cdD6m0gdZCGs2bqS2ksv7s_BfHPfUJQQGPvhcb1pL4FsoCEnmabmA5GqDRPSrJzPIQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "드림 브레이커 90단 점령자",
+    "stats": "올스탯 +10, 최대 HP/MP +900, 공/마 +2",
+    "obtainCondition": "드림 브레이커 90단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ID-T9KEcz98S9t-GuVzZFsTmrZT3kOOudG3aujJ4zWBAvBvo4ZK7Hw-7r6AJQ9YwNce9g3M4OLyXHVAK4ah2fA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "마스터 드림 브레이커",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +3",
+    "obtainCondition": "드림 브레이커 100단계 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/1fjOFgdX55X6a1l1cTwie52AWEFPlgN_QUbhtZ_Eg8A2eiZQJKDVGGMK2MbpSE7u3GlN-bHwe6wJfL3DZii5yA.png"
+  },
+  {
+    "level": 60,
+    "medalName": "연합의 에이스",
+    "stats": "올스탯 +2, 최대 HP/MP +100, 방어력 +50",
+    "obtainCondition": "블랙헤븐 Act 2 클리어",
+    "medalIconImage": "//i.namu.wiki/i/ccejB19sTd7t6PwyzmNQBKfW79uH9ljKmRm6bVYDZT3dP75Db6tiYxIvbKLHJvuRbwsutYm6mFqGsa11Z3aRBw.png",
+    "displayImage": "//i.namu.wiki/i/IUuWxWK0oMNSMlYXFqjWsq-wEyZerdxhkeQ3Gx2poNekFfYS7fVp5xr0Ufe9jgSOjim_vrgZ5IN7EvTU2fi2bg.png"
+  },
+  {
+    "level": 120,
+    "medalName": "메이플 월드의 구원자",
+    "stats": "올스탯 +7, 최대 HP/MP +475, 공/마 +3, 방어력 +175",
+    "obtainCondition": "블랙헤븐 Act 6 클리어",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/4bW2yw92HFgvK0GBeDLdy9jgHsrmoqDCXA1Um4qBNlgkRriXCuvVqLRZ4ul96lU0sjq2n8hpNJXdS9XR0jrn3w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "와장창 아이스 브레이커",
+    "stats": "올스탯 +4",
+    "obtainCondition": "얼음덩이 100개 깨기 [42]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/2ks1Nq3tg8ZevXl_Gf6BIP3ctVNFDW9hG7vWtDYpXVad4i5laj9BZ-nP7_mjSK8dQUJZevD2AlX4qZJfxeKhqw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "막타는 내꺼야",
+    "stats": "올스탯 +4",
+    "obtainCondition": "에반으로 웨들러 막타 후 새끼거미 해치우기",
+    "medalIconImage": "//i.namu.wiki/i/fLx3Rmb7TIjINeiauMrJ0VC0-pslbH1uYctJXPLY4-YW04CyxJdT_ak-hq8uGGvT8D3-KzbOMhXEuO-lmXo9LA.png",
+    "displayImage": "//i.namu.wiki/i/fREkGyYf05GgJcN1BXC3anlBJ3Yk6lo_mUxVSHByxt0B8nOgX07YQwugT08nV6YeWfKa8uFOTDsA8T_smLZ1Gg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "나도 이젠 영웅",
+    "stats": "올스탯 +4",
+    "obtainCondition": "에반으로 마족 병사 400마리 처치 [43]",
+    "medalIconImage": "//i.namu.wiki/i/HAp__l4q60mS3F2-Ftdgf0imJX3NXe8wljCtV_ubyQtJv0iX6m2iuAXGPMt2xB1EPHKFnSirWI9AY-keMcSUMg.png",
+    "displayImage": "//i.namu.wiki/i/f-ZoU0uWyv3dTyMFuANoP4E2ZYxUyS990YLMVZKzqFKQZEAzp5YD7hIk_GZ8rfgV037zSqjm9Su9sS8fRheMcw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "프리드의 리더십",
+    "stats": "INT +4, LUK +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": "//i.namu.wiki/i/VqbPVJmVL7eRgoRzofXDDBIZo-i2OKw1McoF46nmUFFimNPHtl-T16ZxD44Q8S1l6qI2KOcFTOxoNBRxIpNHLw.png",
+    "displayImage": "//i.namu.wiki/i/Q72HLK5c20WUEVif45CdaC6wZIcs2gZBqI-HlDaGHxS7iyaIPqxNMfXxBfy4JWQvkxo1N9ClURsdbB5PqPflmg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "메르세데스의 추진력",
+    "stats": "STR +4, DEX +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/B5ufUXEQ46SBfV1pfGeWrJfKz2bpeY6I_c3WuJgNvr6prwtCXjar3ON167ibP8gqu1EvhKnN0Q9GVjO0dw55_w.png"
+  },
+  {
+    "level": 100,
+    "medalName": "아란의 행동력",
+    "stats": "STR +4, DEX +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": "//i.namu.wiki/i/ZcM8xlV6PIFsX3Spyag7yocAOYYaVK66ObX-pM2S0ctARFqcTgFpPVxfJGpQfHabStQUFWdlOxVx0XAvoGRY6w.png",
+    "displayImage": "//i.namu.wiki/i/sc8kQxVsjjvp7niGLqh0vHUhh4744vgHGg9JVlK2lcBTsw0F2b0syMPGHL0xxn-h6QvuFsN3G1akBlM7PnVueA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "팬텀의 자유로움",
+    "stats": "DEX +4, LUK +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": "//i.namu.wiki/i/odcrwv21MZvGo4FaGPar_DrtoVa5CZ63Yuy_pC9c2OawYol9XO8qQuoZQ7wZBa22wblWLwW88SESUktkyXN3Wg.png",
+    "displayImage": "//i.namu.wiki/i/1XUXF8L-7GzjWGmEOD5FUFp5ZzYRZg7WPwKpGK6m_w-IpE38t5kU_5XjVi8wdTxhHnSrYJ1b-a9lE_jGP03syQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "은월의 사려깊음",
+    "stats": "STR +4, DEX +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": "//i.namu.wiki/i/D741co5pnoIYQU8yoT5rHgjHzFAArkgCWVo-1_-bjzXidBKky510qLeGVif3OGazd47Az3CRfaUJY7zyvGraCg.png",
+    "displayImage": "//i.namu.wiki/i/8euyltKQpLY_Zr89yUFI50aomOhga4aa_RVk_TxnxPLPd7ot9LK3RmpBNE6M8uVQgujTf4BfE5zeXnfciJV9vg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "루미너스의 집중력",
+    "stats": "INT +4, LUK +4",
+    "obtainCondition": "영웅들과의 대화에서 특정 스크립트 선택",
+    "medalIconImage": "//i.namu.wiki/i/pck0sRrY6L1Z-AXuOeXRImhMYq-Y9TT9YrSE1otaLT-EMbIuziMRoKsNcw4qsmV6sw03dnLfBGCFkwgfEZMC7g.png",
+    "displayImage": "//i.namu.wiki/i/fxcgZZSjCthelmea-2JSrGuyu74Vhc-HgnpRkXbMbQUCBO2Z29XZU62vsX3hYxIlR7I1X6-HnUl460CUOW9T1A.png"
+  },
+  {
+    "level": 100,
+    "medalName": "와장창 항아리 브레이커",
+    "stats": "올스탯 +4",
+    "obtainCondition": "항아리 70개 깨기 [44]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/-JB7-xqlZolgJMJjCgWbsbIcEFLvHIWcRdN8ET9O3RAEucTjUQGJc18aUxv3zy74ntDFlp1mWyBOmlliARFgMA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "내 길을 막지마",
+    "stats": "올스탯 +4",
+    "obtainCondition": "문지기 카푸스 3번 처치 [45]",
+    "medalIconImage": "//i.namu.wiki/i/0oA-IMeXabLmjPxqu39U5nN_zGLKd48Q3AYPq6FqCJDqQH_gJ7TjxZUNzgD8rvC9muevAf0kvLZZdYpMG52c2w.png",
+    "displayImage": "//i.namu.wiki/i/xQOafAzYe3TcGha_DTbVuDZNSR5JOnV9FqnJNR0C9iRcSvqotT-jM5Q5EgZ2xVm3VMK2fbw9N22w8RCn1o_5WA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "정답을 피해간 자",
+    "stats": "올스탯 +4",
+    "obtainCondition": "카푸스의 문제 4번 틀리기 [46]",
+    "medalIconImage": "//i.namu.wiki/i/0YcBTm-AwXDlXYdTzE-Hv7PP8PHxppDyo7A02UzZxrhjhE6VdHQ9TBgbYgCoOF2-ze-WaQrCm8F06EbRiwUHWA.png",
+    "displayImage": "//i.namu.wiki/i/t6dwMJwHMwXEy6noQsAgYM64c-QMJN2c9Ya1aY921xl-OTjT9G8sbne6LjO8gku6kixsx9KFm-w5g-w6PsgUmg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "변장술의 달인",
+    "stats": "올스탯 +4",
+    "obtainCondition": "변장 2회 모두 한 번에 클리어",
+    "medalIconImage": "//i.namu.wiki/i/KckayZnnYPFmPtCEIz-PDzB9Jm77kg3TQjl1uMiKGdVv8diyxFylusc7A901HhX5dgSFZeFyc6V4aEA50mcznw.png",
+    "displayImage": "//i.namu.wiki/i/nIWSFqa4l4XwIZnwcZLv9MugOiZJCACC7dY4zRF8ie7KT9RsuHSEudH3LXA-tRozxXaCcJIFVV30iBh6zelmWQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "미션 파서블",
+    "stats": "올스탯 +4",
+    "obtainCondition": "레이저 피하기 미니게임에서 전원 공급장치를 사용하지 않고 클리어",
+    "medalIconImage": "//i.namu.wiki/i/wdytlQvlZH3D1GX8a5mMyLCDvX3Co0GoEfJgiAto1rTWETAnOrJqNZwy6nmRNUIWjXmGLZ5T7vKH8VZRlvCDUw.png",
+    "displayImage": "//i.namu.wiki/i/C1JuRyQAsznPoAGhvnFmHCxQ7LnSUVw5T0pznp0qUjqjX5DtqgW1hck7oMBacWiVH_ncYhV-fwGp3T8bEkDIsg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "세계수 정복자",
+    "stats": "올스탯 +4",
+    "obtainCondition": "모든 영웅을 한 번 이상 선택해서 데미안 처치 (추정)",
+    "medalIconImage": "//i.namu.wiki/i/RAxf_MV0PjYPHIV0tL7AQNPheRSVJ3Fa9lYkkoW0BfAIwjc2MnNkPrvBIitYAnOkrEgdVJtdEzl3TPWkTLwyJA.png",
+    "displayImage": "//i.namu.wiki/i/sdCUy0gkPOqDX-A2sMWdW1YPzi-mQ0IHlQ4IVjrOzXfwCOQADw9eAKPdXl_c-7l_-duZ0QZqKmmSpUvgfydLPQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "꽃들에게 죽음을",
+    "stats": "올스탯 +4",
+    "obtainCondition": "오염된 꽃 30마리 처치 [47]",
+    "medalIconImage": "//i.namu.wiki/i/Rlxs3KdgiA5baF0CYC02Anrwn1wcqeGKEJ5EMh6IsiZyovWlbFSWEKfm2OESeWMT81-odEIhxLbDXjWLbgQvvA.png",
+    "displayImage": "//i.namu.wiki/i/MMXvhKY4H7_AI7zizJtwTNnTPmiTrSwjNqr1qeMOo2gsMBacbYxKAU9KOrLhsbhjpE3s7L6bZako3lYCsesTuA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "데미안 대적자",
+    "stats": "올스탯 +4",
+    "obtainCondition": "데미안 처치",
+    "medalIconImage": "//i.namu.wiki/i/mWgvOR32Qmgo3lxRzfjLy_jw43gIOe5ODrIY7_Ea6y288MxT53IQWMLKkjnOv8nYAbQAmqRF23ulM7GKa6cNBg.png",
+    "displayImage": "//i.namu.wiki/i/TuWMUE_r5bUorNDq5KQ9aecXBoyjYFrSq0zoJ-KsUorVIZ-rpLe97Wgc1uYidZE5Q1EI5I7FnR4USiQX5LJIEQ.png"
+  },
+  {
+    "level": 33,
+    "medalName": "시그너스의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 시그너스와 통화",
+    "medalIconImage": "//i.namu.wiki/i/wsfI5Ww52CI8hcv71NKyo9w46vjwkQOsJP2tWXtHUJvwbMeMXx_RKsgrw_S_AqZVvI8tpeTpnEa-nwW4HkTxcw.png",
+    "displayImage": "//i.namu.wiki/i/CvLaTD8rBZZSa84RcSLlJ36OykbstMNazwKz9ZPnkwkIpGbaGlE6wHoFRkpu26xZW860y-4v_sTDZBusFhKKWg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "나인하트의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 나인하트와 통화",
+    "medalIconImage": "//i.namu.wiki/i/p8y6ygaCVKoJGcAREymGk281tJ_sPqt1lbQpO4FZUMhukmuWd-tZnGq4OE0dMWfyBu_7kel82E-cdLDaRCeI3g.png",
+    "displayImage": "//i.namu.wiki/i/hkqtTxpEpSmkryjtIuxGMYJyx_FdU7cB9YHutpmbKlLvW55rGSFZ7vXbhA87Ioj2ERqpMEO2bwrGD6D2SOREoA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "오즈의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 오즈와 통화",
+    "medalIconImage": "//i.namu.wiki/i/wDVpGM5O8A26Ula7fgK0PpFdqtg_-SwV96OB15s6Z7e8jOBywzH45s2zDM7Tku92lbFW4io4fhQzbnJHeA_Z2A.png",
+    "displayImage": "//i.namu.wiki/i/rL0wbwDKtVYLJcc4kdbpZSkKKNhVNOiyFnjEeD3Ox-96yPIGB1_nLMEWhhSyawzZV2CogWxgwlHnhwBvRb2GBw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "이리나의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 이리나와 통화",
+    "medalIconImage": "//i.namu.wiki/i/CcPiExVLpzUM80X9l2IhxcOI2pMj44G82KUJlH9d6XhhYHEPeDEcXGPLJpJ0FzK-5vh3TN2m1GRCCumwWux6dA.png",
+    "displayImage": "//i.namu.wiki/i/SsSTL1NhmJeh8eSfJc7jyTU6dBMqRpzVug4lqqbrA0U2-iN8tP1ssNQdRcZRtod_mmy3on8eNp6bpptwPeVCFg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "이카르트의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 이카르트와 통화",
+    "medalIconImage": "//i.namu.wiki/i/SHoIwKjMtS6SVHfy9brcwMrjKMZmTRJlorX_S_KGzvFMPof4f-7-4yYVl50F9B8FC55-gLmIjV6zJt5i-_bPqQ.png",
+    "displayImage": "//i.namu.wiki/i/p4Gw1wJ2UHFA3rM8K2ndf1Fr89fp5VYMFZWjpUt5cr1GfwGFPJ6JWv_FlWIXYES8cnOaLF4Y7RoYKvVMOJjvMg.png"
+  },
+  {
+    "level": 33,
+    "medalName": "호크아이의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 호크아이와 통화",
+    "medalIconImage": "//i.namu.wiki/i/NYPIIsWcH9WV5aAgCEk2tiRnIVD-cNVLzpUmyNa7ueQbOoOF7TBGSy--IekmDaZOG4R-Xsz9o7utDNa6AYQCZg.png",
+    "displayImage": "//i.namu.wiki/i/SBEAF1kXoGlDbhfpqu2k2IlHzEUga8QuRhedbYDCEooyI6rruPMAwU1zJAaqXkFlsDppdAn1K1JGEex8tEpVGA.png"
+  },
+  {
+    "level": 33,
+    "medalName": "미하일의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 미하일과 통화",
+    "medalIconImage": "//i.namu.wiki/i/pxzabQmnJZKNGAiQuTD5wljV1xv_SuX1fkXCtt_YGZcLg_wYpvEYayWJ6QECmgPeLmlr0BpjBHL3T5x0Xa9Yyw.png",
+    "displayImage": "//i.namu.wiki/i/dtbEd_riI-ZV_sQ_xQC_aW-Rm6uzne0s8rT2aRXmahBdcccE-XoU4k7Kr_bqLHY5rq6iREd8JGiA8MJu4Yk4-g.png"
+  },
+  {
+    "level": 33,
+    "medalName": "오르카의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 오르카와 통화",
+    "medalIconImage": "//i.namu.wiki/i/bYz8LHN7D8Jl_HSMGSyto_2GzmI4Mw_RHklaH_9f8uVIcPPFTSmK1LuQoLjUi9vJ_t_YbbfKeQjplDqxyg_DXg.png",
+    "displayImage": "//i.namu.wiki/i/TGqtEyFr8owrY0eFrHG0OWvZwLcEkkSwo3KkU8HLubcMFTZ6kLz0zROsqEddVBxfWJEvpLh1MCWmZHwXtX6u0g.png"
+  },
+  {
+    "level": 33,
+    "medalName": "프란시스의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 프란시스와 통화",
+    "medalIconImage": "//i.namu.wiki/i/P5BXuPxlibcw3CrOxLZQ7dRIqxTL34Fg_FCBWayyk6PaFRoU82xb7AOeIwBu-HCbFyeUNkIhZdyeIww9xSUydQ.png",
+    "displayImage": "//i.namu.wiki/i/XGWkq5XL_pLSmEl6A_MzwiNmA8bjm-1eD_YZ6oF63lZ-Ze7XK0RqaM976BGJ6rTeVhR0A14g3HVmnrmVcDkCRw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "헬레나의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 헬레나와 통화 [2회차]",
+    "medalIconImage": "//i.namu.wiki/i/CymnRib2TEyuXkkN6LQp7AwcNmpTOCPhfTV0HRbxDdpZgf1fmznKB9gYfHv1XEoUPMmRqcUakVXz3zkmA6S8bg.png",
+    "displayImage": "//i.namu.wiki/i/UMnrGWmgJVXqgiZl19biSL3vO5GMNjdCM-_RoN71u1MHiaASFH8p2nxBapod4O7JY5mB-iOmnk48v0-uEvYjmw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "리린의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 리린과 통화 [2회차]",
+    "medalIconImage": "//i.namu.wiki/i/e0n3oxItkRmPZdkU66AlcJTyMHDcGPpx8i3ZrrMbdz5cq-mqWU6yaIbF5h0IL2cGbBKB7AGDGr8Bh_QigJrJTg.png",
+    "displayImage": "//i.namu.wiki/i/0cFPyD3LRMiBpl9BZyA9x1V5X8kgf-Vw5WFayNdKASDIvTXyhm3N0MjlkQA6xg9W0XohBW1_dHZBOjkWgdUVkw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "힐라의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 힐라와 통화 [2회차]",
+    "medalIconImage": "//i.namu.wiki/i/GPRKjd7Ppk18lltfeKKYdWXeg5ovwfpsPOiDjdRy7zmKGqeemupSqrm6qOYVJwX1njeD-FJhbwOYR_AZaBp5Lg.png",
+    "displayImage": "//i.namu.wiki/i/jByK4gQmBCrlABcJLDFT_BwJ2ZvPaYH08S5yUocdvUR9UIZ4KyafO9z4g1-BB4daaID9ngVf40eo3oPndSvqTw.png"
+  },
+  {
+    "level": 33,
+    "medalName": "하얀 교생선생님의 절친",
+    "stats": "올스탯 +2, 최대 HP/MP +300 , 공/마 +1",
+    "obtainCondition": "프렌즈스토리 챕터 5에서 하얀 교생선생님과 통화 [2회차]",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Yg1SypHOTjvI0QoKctPFd2Pw4QkmC_OgxYCJIAq0r7ZM-fGFB3Ydo_hzAVjfUZUi-OhFxmwMCagLLUdglWdmZQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "트리스탄 후계자",
+    "stats": "올스탯 +2",
+    "obtainCondition": "발록 의 부활 저지 200번",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/JWKPqzg6IgRP4JzamB3LlX4HF_BHwZJEs97YO-06uFoNFpCcv6kxhVVrxN7oJLqB3Bre2zEhgRj0aBiw08GbLA.png"
+  },
+  {
+    "level": 120,
+    "medalName": "아스완의 구원자",
+    "stats": "올스탯 +4, 공/마 +1, 방어력 +100, 명중치 +60, 회피치 +60",
+    "obtainCondition": "[하드 힐라] 승리를 향한 마지막 함성: 하드 힐라 처치",
+    "medalIconImage": "//i.namu.wiki/i/yknPHe1n9Gtnrn7LKHLvceyCeLtVQB9Er4xVPFB6fOVWEgR1zEFrKkbvE3azu02byIBhad0x9lSaUDk0FPmw7A.png",
+    "displayImage": "//i.namu.wiki/i/YCRWsQt5Y-Vs-zkFCXgHJE8xXeSLCXLD0j3Syeyu2rhsAxaIg8AoAw3HWlxoNuW2wQUAj-vgsSGHvXM7aqFfjg.png"
+  },
+  {
+    "level": 170,
+    "medalName": "아스완의 불사조",
+    "stats": "올스탯 +5, 공/마 +1, 방어력 +150, 명중치 +60, 회피치 +65",
+    "obtainCondition": "[하드 힐라] 실력있는 아스완 불사 영웅: 한 번도 죽지 않고 하드 힐라 처치",
+    "medalIconImage": "//i.namu.wiki/i/Unp7muHcI-6-fFURdhSmK61lm8ijgVSegNBDZnIvhWZV9hxFZG3TY9YmXqG64dyj4MeIg-GAjWHF2RlZS1OkHQ.png",
+    "displayImage": "//i.namu.wiki/i/ZBCLYX5DoZ9-o65m64iJxHOy_VF6S-3AK-G9ztoEhRJ-DWipJYm-Wqsv73hM_gXe5B3h0kRT_aHRCS8AdeDLLg.png"
+  },
+  {
+    "level": 170,
+    "medalName": "아스완의 빛",
+    "stats": "올스탯 +5, 공/마 +1, 방어력 +170, 명중치 +65, 회피치 +60",
+    "obtainCondition": "[하드 힐라] 속도가 생명인 아스완 민첩 영웅: 7분 안에 하드 힐라 처치",
+    "medalIconImage": "//i.namu.wiki/i/zaEryKPSYzj1a5To-utsDgQ45sSHV_CPyJqCft43jYipqMRcI177Zbz-EpFZCHRw6WGhSqkBAX4vxkyjDenmjw.png",
+    "displayImage": "//i.namu.wiki/i/cSGY4iLX7cU30EYUin5hPeUvcWXD-GKLbJazuRLeF-8erX1whmxguh5f3xZb-R7vqrcQt7IPr9dwOodNtk1qZw.png"
+  },
+  {
+    "level": 170,
+    "medalName": "힐라를 잘 아는자",
+    "stats": "올스탯 +6, 공/마 +2, 방어력 +120, 명중치 +60, 회피치 +60",
+    "obtainCondition": "[하드 힐라] 근성있는 아스완 해방 영웅: 하드 힐라 1회 처치",
+    "medalIconImage": "//i.namu.wiki/i/xJnr8q6dbUG5UW0cCHX5sR4VK7IFGGvc-lJKbYnBgIV9oSWJdiVqsB2zhkdk8ZFI-_a2H_O3VWrm6bWUBgNFJg.png",
+    "displayImage": "//i.namu.wiki/i/m-xCDWk3ZNCfpSgIZ_BRAVi3iRsrWJD4AG-unBC-MOBREtVXZeYNUzoIQAJyvVlyUzSBqWJM8iujRa6El8SJ1A.png"
+  },
+  {
+    "level": 0,
+    "medalName": "타락여제 구원자",
+    "stats": "올스탯 +5, 최대 HP/MP +300, 공/마 +2, 몬스터 방어율 무시 +5%",
+    "obtainCondition": "시그너스 1회 처치 (난이도 무관)",
+    "medalIconImage": "//i.namu.wiki/i/o4kIpeaITvh_aSUwUd61fUcA97b_itE3i5rSmgzflYX0xwzlk9erYN8kzUWtGPYc5hi2YMiUufkrqsv65qTRjg.png",
+    "displayImage": "//i.namu.wiki/i/Fz55KMYRCHRcS9DmoaEFSjZ_BIj-J7kBKVOh0REVzGZg3X5aLY5AB8CO07-TTHHhNvfdGbEYTpL1p085heeMKA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "카오스 반반 킬러",
+    "stats": "몬스터 방어율 무시 +5%",
+    "obtainCondition": "카오스 반반 1회 처치",
+    "medalIconImage": "//i.namu.wiki/i/U4Cmjbbxkh_JAiYGcYE6UfbsL2_f_Hgvl9yCPaDNhBf_2Tb1ycyMJMr5PeZoWFmLNnow4WLJoe-k1RBsdEI2BQ.png",
+    "displayImage": "//i.namu.wiki/i/lY-q0Th_3NyrEXJVCOIRZoMihmN7WOD9lSbUpMGDacdr9irIiQNGXsUm0ncfQbzVXMY-DxltSKBBiGBvKqGXWg.png"
+  },
+  {
+    "level": 0,
+    "medalName": "카오스 피에르 킬러",
+    "stats": "올스탯 +8",
+    "obtainCondition": "카오스 피에르 1회 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/Zz3_bNNnMf8k2Y94my6qYeX5701mM7T0qS-aN-t-9moTcKrGP1pDVMOQ2QiMfsQKKYDymIKRnCxT1ux8465C0Q.png"
+  },
+  {
+    "level": 0,
+    "medalName": "카오스 블러디퀸 킬러",
+    "stats": "공/마 +3",
+    "obtainCondition": "카오스 블러디 퀸 1회 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/3jCDxuoNkqk8Dx-WsXggKYI8GPqe_QDlV0LlaUYBgG_dAntuXhFrD-5eweQT7VvB3vflbiVEzyL7olGN1NYMsA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "카오스 벨룸 킬러",
+    "stats": "보스 몬스터 데미지 +5%",
+    "obtainCondition": "카오스 벨룸 1회 처치",
+    "medalIconImage": "//i.namu.wiki/i/0T9dLIUADptXv9wpiq6bMlWHxRCrzESYAfgVfl35_R3AjXm4Ha6lw0slET5dGYNjrQyvHnWfbLzaCNujJaP-XQ.png",
+    "displayImage": "//i.namu.wiki/i/LBlxuL2SeB4AoWbUg9Nv7y5OAnJ7M699Bp_m9pJel1hTzeNiQmrrM5tbhZ9E_eS0oQ_H89hmpaCZEXGGcd2dmw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스 격파자",
+    "stats": "올스탯 +5, 공/마 +1",
+    "obtainCondition": "우르스 1회 처치",
+    "medalIconImage": "//i.namu.wiki/i/S0kgkXETTKQ6AZGuVZonKUq3Gk9zUa8FWdU0-CrqcmPpfP6YPSpwIBA6YGwhkZr8sJpgPWq9gs3kKktMCHbNbw.png",
+    "displayImage": "//i.namu.wiki/i/f-MQ5qq8A1qRlqvViLGXc6SnxrHQng4FnVQtK70Ysd1uBpPyRsXkUJmOGuxz39FsYAhyRWgKTiS-JZy0gu5KGQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스 격파왕",
+    "stats": "올스탯 +7, 공/마 +7 [53]",
+    "obtainCondition": "우르스 10회 처치",
+    "medalIconImage": "//i.namu.wiki/i/MFXuLqh_3GaCfZX0-NdkzCrF5Kk85N8bPBqJfuBZ7Yueg5qWqhYv-clxHHsgb2o4Af856UwewP0DJPhdEcafhA.png",
+    "displayImage": "//i.namu.wiki/i/VZgJVZW4DCg0Ln9VFoEv_X0Nu16fSqXWaKrDsUHIznwV7Kl27_FfyhAThFuPHs4nk4MNFxMgNsVovV6v4SIntg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "신의 컨트롤 보유자",
+    "stats": "올스탯 +8, 공/마 +8",
+    "obtainCondition": "우르스에게 먹히지 않고, 우르스의 손아귀에 잡히지 않고, 우르스가 뿌리는 흙더미에 갇히지 않고 우르스 SSS 등급 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/VfU8zWReC8xxXJT6T66zPT2R1JJj2QStiJR4BlrIT73EllWHVZV3dLTEkaD041RFQfoUr26Y-EO2E1zOXNpzPQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "근성 하나로 살아가는 자",
+    "stats": "올스탯 +4, 공/마 +2",
+    "obtainCondition": "우르스 100회 이상 도전",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/bEz1RQkcrvymnf93EXYk6YleoXpUHNXExAM6nU8WLvPwLdPsxJgDaFjRQfxhop9Ff7l1vhre-xEMj5fGuUzIEQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스 SSS 획득자",
+    "stats": "올스탯 +3, 공/마 +3",
+    "obtainCondition": "SSS 등급 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/az4YNBinAbP-OokWp8WDwnty5p8bxw6VDTaUFGT5fB7QE5UIv-4H6qD4j3xt3c2z_WXuaqNiWQe1HB9jeXMJGw.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스 SSS 컬렉터",
+    "stats": "올스탯 +7, 공/마 +7",
+    "obtainCondition": "SSS 등급 10회 이상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/dINcQBeRA-3e26JrgDLTl6qAj_tAgXLbVxCC8iiOGRjRKibYClDxju81_XbZVuGCdMPzS98Pev-IAI68SchBFg.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스 SSS 슈퍼 컬렉터",
+    "stats": "올스탯 +8, 공/마 +8",
+    "obtainCondition": "SSS 등급 30회 이상 획득",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/tNzHz3M-_ZhhUgDpQDa_Y8ZrMondBtBlssaH1am2yRx45eYREDUXnkmLCX6_in_UEneszaO1AHnfuyDjy92H4Q.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스의 가글인",
+    "stats": "올스탯 +2, 공/마 +2",
+    "obtainCondition": "우르스의 입속에 100번 이상 들어가기",
+    "medalIconImage": "//i.namu.wiki/i/vNdLElejV7kpI_YvmSm26Vb1Dk8mHlpg5BF-0A8FAFHG2j2HMpiidKon5Gy6anzZDzMmmfH5YtHEXSPlV7r40g.png",
+    "displayImage": "//i.namu.wiki/i/Ag9Vxo3hWlwF8jSwDbgM-WajyHtEoghBXKJpAlG116vCPEJ6fWvDIOz53ynDuRHpsjDeth2XRUuprSMv6BNdDA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "우르스의 악력기",
+    "stats": "올스탯 +2, 공/마 +2",
+    "obtainCondition": "우르스의 손아귀에 100번 이상 잡히기",
+    "medalIconImage": "//i.namu.wiki/i/9B6Q9WOZaEwHqi3LHLG5LdSlGm0ZF0ZD7bH6b_2W92kNlCo38nooRPv0UoPIgLM6BFpWYqJAUe1obW8uFA4LCQ.png",
+    "displayImage": "//i.namu.wiki/i/T-ogJ9YTX333ttnnJOv1jvjCJ3pBelD7L1vyLc0jOFFOG74dSCMaWOc21jswFbUlzSDNrL1w46rFrdpi3VuvAQ.png"
+  },
+  {
+    "level": 100,
+    "medalName": "어시스트의 달인",
+    "stats": "올스탯 +2, 공/마 +2",
+    "obtainCondition": "어시스트 999회 이상",
+    "medalIconImage": "//i.namu.wiki/i/-2Sli6sV-F2FRqcxc9UznH7G9SwN9jJylUZJiwgcylxvpAzyjBn3-Vy43SRzqUH4KshbCDUR1hs6eOe4zc2w8w.png",
+    "displayImage": "//i.namu.wiki/i/9zZrSVv08phU0ZJKm2bjLQV2BwQ951iGPYw8l2RFsRGkjKr9ppxSIjeP76a9eMRG6XAyoi0jV6PTcTR_wH6eow.png"
+  },
+  {
+    "level": 200,
+    "medalName": "악몽의 주인 격파자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +3",
+    "obtainCondition": "하드 루시드 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/dwHypxLZ5l28hihzqRH5R_grn9DJBM67SSLEmKwSE6wU9SlqNU5ZHH9EWmKx7UHVUkWpx68eFHc2ISOkvp_1jQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "진실을 꿰뚫는 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +4",
+    "obtainCondition": "하드 윌 처치",
+    "medalIconImage": "//i.namu.wiki/i/9v2DVm-9xuZxVCe54UbHwmEjCmCWU7lsA0lIuytUwuIdWHT9faee5PogMn86oGScjJNB1-OFz8CQp-gMpfEcsA.png",
+    "displayImage": "//i.namu.wiki/i/TvtGVijYRI-FcUSshLgr7seNyWyYtIzpKjCxydUVgyLuqQOVy8Zv52hEpdr2BSozdNalNyGgde4TZlscq_mq1A.png"
+  },
+  {
+    "level": 200,
+    "medalName": "미궁의 깊이를 아는 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +5",
+    "obtainCondition": "하드 진 힐라 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/wx_fzfHiXVsZ7P4gWu5v3AzVu1O4MotClSPWOVeFdPSjZzC_cgVmvAJ4VUPcB9Mwlsm21VOjBjQhIwad1uzdJQ.png"
+  },
+  {
+    "level": 200,
+    "medalName": "태양과 맞서 싸운 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +6",
+    "obtainCondition": "하드 세렌 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/wxri6ZTcaC_vSvDAvzjM2Lllqql525WXDtLsV_VbxOAtyQqsa_g4VqbwBcwkcH4xV7CzSbsj4SQmHOJnQSiMYA.png"
+  },
+  {
+    "level": 200,
+    "medalName": "감시자를 해방한 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "카오스 감시자 칼로스 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/5PCvdKcLek86eeBOzlp3EIPc2xtx-6OOkbyuDLQ0_ziJUUAtCurmjHZs6n-GDqAuWktX3bjfCx8tamYUE4qlAQ.png"
+  },
+  {
+    "level": 250,
+    "medalName": "불멸의 유산",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +5, 보스 공격 시 데미지 +10%",
+    "obtainCondition": "하드 / 익스트림 최초의 대적자 처치 시 드롭",
+    "medalIconImage": "//i.namu.wiki/i/x0Xwmfy_9oImQa1VggGYA516a_rhYrCCrR1oU2D1dTNO0ceWBrv2Rgnzh489NYTa2SrV8U2vRG5tqUIl_-cCcg.webp",
+    "displayImage": "//i.namu.wiki/i/-yS5o36A5hVA0aC-7iryOA-C9aQTIqCyJjzOz0heu4_jDPRQ8bsOEDvFvq-Cm7PCG0H6SLDldEjP_j0dDmWYYg.webp"
+  },
+  {
+    "level": 200,
+    "medalName": "사계절을 되찾은 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "하드 카링 처치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/T1syopk7lwV5fMWbk5kKGUWXmsugWGS1Z1JxMWw32jdZaAWxnbIhnsRs2F44W7rhfJHDgkhms4KOfApxcBLdXg.png"
+  },
+  {
+    "level": 200,
+    "medalName": "근원을 파헤친 자",
+    "stats": "올스탯 +15, 최대 HP/MP +1000, 공/마 +7",
+    "obtainCondition": "하드 림보 처치",
+    "medalIconImage": "//i.namu.wiki/i/Wor0K2dSwE_OpFAOBRFMnJ88N9ijF8c1uv_EiVfOfsvxuYvaWNDBn-z1XOmjG_WGX5qmWX6ETsUf6E2OWYAcCQ.webp",
+    "displayImage": "//i.namu.wiki/i/zA_4C_fy-c0LtibrIhJRrDddS2jE8Be5bm49uuWpGOhvQ4Gqfd3nKxGFWgVxGAk1hxgYI-0QZ2Gq3kfpcHDDkg.png"
+  },
+  {
+    "level": 70,
+    "medalName": "연합의 일원",
+    "stats": "최대 HP/MP +500",
+    "obtainCondition": "연합의 탄생 퀘스트 완료",
+    "medalIconImage": "//i.namu.wiki/i/5o1X7Y3DYJScu6m9T2kvhBAMPzAfRyiK1BWOHGnG3JeypsBGiWTITB_b0WMJTnE7do76QQdgLHw9_JWhtiPpLQ.png",
+    "displayImage": "//i.namu.wiki/i/I8S1IPtaQIKRGsVbY01VPUS_ODjMDHM-I1tUYW69Zb7xNQsZ2Sn1SBrOlvXJplcmDD2i-EjL1gSjeDAywhhAxg.png"
+  },
+  {
+    "level": 46,
+    "medalName": "영안사",
+    "stats": "최대 MP +33, 방어력 +10",
+    "obtainCondition": "플래툰 크로노스, 마스터 크로노스, 머미독, 레이스, 좀비루팡 444마리 퇴치",
+    "medalIconImage": "//i.namu.wiki/i/gjvr53UxOAaSwpQIuSdBoJbj1XDmqXZYfTc0lMOjAbiZsZDzLpUxTfs3enmNt9pWWLlZ6WPnQcmlSudSqRU8Ag.png",
+    "displayImage": "//i.namu.wiki/i/6qiCEVCQdJGttb2dUiwAI5ex0IN8FwvZOAJfjXoJGXgptnf0CIGpbcRsa8VkmKJsJvPeePq3_0Lt-7s5JsK73g.png"
+  },
+  {
+    "level": 62,
+    "medalName": "음양사",
+    "stats": "올스탯 +1, 최대 MP +55, 방어력 +15",
+    "obtainCondition": "스켈레톤 사병, 스켈레톤 장교, 쿨리 좀비, [★] 마이너 좀비 444마리, 좀비 머쉬맘 [57] 44마리 퇴치",
+    "medalIconImage": "//i.namu.wiki/i/xQBDpdmKtYrVZeO6U8kQ_9o2z54I8uTqAIqkTpWDXRuu-52IjWgpeddVByOyokxra8xUdurLvcyaeRdjbHyOAg.png",
+    "displayImage": "//i.namu.wiki/i/bJzcvygOttMsR9gYbGD0QH_PfMGW9BNyp4xpxJJ4SZtDs8q1-qv4LKTrLsS1NmHC3Yh0CtaGdZf9xXaiKDpsXw.png"
+  },
+  {
+    "level": 75,
+    "medalName": "퇴마사",
+    "stats": "올스탯 +2, 최대 MP +77, 방어력 +20",
+    "obtainCondition": "[★] 소울 테니, [★] 마스터 소울 테니, 사이티, [★] 다크 클라크, [★] 마스터 데스 테니 444마리 퇴치",
+    "medalIconImage": "//i.namu.wiki/i/r92NbZ58xt02tfBsU-LlBGIapisjcuxb3Qc5Dbq6D5BLodlSRhBMZkFojrWV8MnOIacCcfV2LI2i2RNXS7IcVw.png",
+    "displayImage": "//i.namu.wiki/i/9y581kApKu58PV67V0oTawrbgKDx_KxgpAtbB537MGDO71BBy0YwD9ij8jLrA2oPc-9CL-YWxWGYORiCklJJOA.png"
+  },
+  {
+    "level": 100,
+    "medalName": "세인트 엑소시스트",
+    "stats": "올스탯 +3, 최대 MP +99, 방어력 +25",
+    "obtainCondition": "본 피쉬, [★] 팬텀워치, [★] G.팬텀워치, 스켈레곤, 스켈로스 444마리 퇴치",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/QksaummjRrTBOPSruhz5puxT8yqjyl4WxpLAnpznjKiAHhwJmGjmD55_pLKijSfmjZ6sIV5JpfQep1cqS3EU9g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "꿈나무",
+    "stats": "올스탯 +4, 최대 HP/MP +200, 공/마 +2",
+    "obtainCondition": "길라잡이 200레벨 보상",
+    "medalIconImage": "//i.namu.wiki/i/AFq4Xpf1RW8NnPGpQRvYIHUN8Vaq7s5n0pF2f4YW-PHyM-ShTcCH7k6ZEtMJVF5nxQuOZ1lvPvqlasnZA31Psw.png",
+    "displayImage": "//i.namu.wiki/i/JEV3F9ja-rrY1nv1VraImki9S2whmD4d-L3qUrMMXkot3nBSRynSH0QFCLg2I6VnzVLbwzskLKyHQorgm-eHdA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "프리미엄 PC방",
+    "stats": "올스탯 +8, 최대 HP/MP +300, 공/마 +10, 스타포스 +15, ARC +30",
+    "obtainCondition": "PC방에서 접속 (PC방이 아닌 곳에서 재접속 시 소멸)",
+    "medalIconImage": "//i.namu.wiki/i/ght77hilAEJ2WgwsEZhGli9dK6emzi-3i7lRzY7_bqHKzTk6MuhU5KYyEb3E510kTmdtrKPPPJXGEst3Ng8WRw.png",
+    "displayImage": "//i.namu.wiki/i/hZA6GOp-3oPYcozN5xektRXCyP-4Oejs4FRC-yfHWlxolMQxwfRS8biyESCO424oZ7c6vE0GFLr1cyHxy198hA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "본 투 비 골드",
+    "stats": "올스탯 +3, 공/마 +3, 점프력 +5",
+    "obtainCondition": "MVP 골드 달성",
+    "medalIconImage": "//i.namu.wiki/i/qEBd3xIWgdsr10vWCA8p6vfLR52OO2Nsnpg_M7Qfit__eBp2UnINMyvt5UXQoUNN6kAwPAvUeM4ffn_ezTKDNQ.png",
+    "displayImage": "//i.namu.wiki/i/2IvLO19MFkfGemz3YBi3TewZ9TYFXh2r8tFzRi1WdpgESJwPqcSNlkSljdckR-dZQsvqPBONfji-NR5teysWZw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "본 투 비 다이아",
+    "stats": "올스탯 +5, 최대 HP/MP +500, 공/마 +5, 점프력 +7",
+    "obtainCondition": "MVP 다이아 달성",
+    "medalIconImage": "//i.namu.wiki/i/7A8GyLOid4axLlfc_V9UvjohJmxfnaCaYgJXVlaq5UpkxDIWy4edN4VWfH6_1mhwy1NE5d06JI5lWpp5zM3fbQ.png",
+    "displayImage": "//i.namu.wiki/i/IcKky_titeRhFAQ-GjWPHlpo_t7ohQUgKaIvFtvYGbNIlLcH_sH5aQM98gUbex4kPvZSD5cJifNBsa5dsftglw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "본 투 비 레드",
+    "stats": "올스탯 +7, 최대 HP/MP +700, 공/마 +7, 보스 몬스터 데미지 +5%",
+    "obtainCondition": "MVP 레드 달성",
+    "medalIconImage": "//i.namu.wiki/i/w0qIQ3UqudrQSfJDNpyX-gmwAjQo2jJ8MimBLYC9hiiitdq6mxHOb4KVKu3LAJEeYYfucBY2ttRHpkqz3lnF5Q.png",
+    "displayImage": "//i.namu.wiki/i/clyejml-jc_dLUmFGwSrwakonyUH-_tXFNq8YxrNC7D_XRYOJRGhSiyjWvZJWiETIUdhvv57hLq4lpYsror1sA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "본 투 비 블랙",
+    "stats": "올스탯 +7, 최대 HP/MP +700, 공/마 +7, 보스 몬스터 데미지 +5%",
+    "obtainCondition": "MVP 블랙 달성 더미데이터 [59]",
+    "medalIconImage": "//i.namu.wiki/i/vKxa8gtsNnuEvI60je2RU-RPUH6kRSYC00Fx13MGA0UcNPsge0VHBaYO-gjQ4Z192m_s1AYGwbJL68P8Glfw-w.webp",
+    "displayImage": "//i.namu.wiki/i/HTqM0VDXj5JopWduWdUX8Hw94fn6j9n2Bk0WJo7COdLyY7SUlmH5hZI6mPF13KCj53mLjPS14C2CDQ3I7V0oGA.png"
+  },
+  {
+    "level": 0,
+    "medalName": "The Bronze",
+    "stats": "올스탯 +1, 공/마 +1, 최대 HP/MP +50, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 브론즈 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/ta-lHlmLHYojLUTZPU1OI84my2VDxMV-5TErkjPY_jxmpVou3a0KlD-TDCIpH5qteIzkws6mxJeeo1XPXtuShw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "The Silver",
+    "stats": "올스탯 +2, 공/마 +2, 최대 HP/MP +100, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 실버 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/akJ0ZQTtZK6GhzlJPFIMqSsFtIgc84gL5axW_BFrb36MrXvqb2C6aYRUGzFgFBSTo13RvKyGhdKUnXnx6waEew.png"
+  },
+  {
+    "level": 0,
+    "medalName": "The Gold",
+    "stats": "올스탯 +3, 공/마 +3, 최대 HP/MP +150, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 골드 달성",
+    "medalIconImage": "//i.namu.wiki/i/LFcvJKaE2YI2Fe1PKuhawzD2IiEjKzK65KWQCGDDRPZ7GXqjeaA5IAdE6DNWe7p4rkO1zUyqqI_ePiNuduuQ4A.png",
+    "displayImage": "//i.namu.wiki/i/U0qmN7i4G11wvG86hsOdvkZr4ztPL9GsZc_Z7s_kJmpUyUDgp61JusjidD0SMCetp2vAdD4R_6w1vrhxTX3YOQ.png"
+  },
+  {
+    "level": 0,
+    "medalName": "The Diamond",
+    "stats": "올스탯 +5, 공/마 +5, 최대 HP/MP +250, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 다이아 달성",
+    "medalIconImage": null,
+    "displayImage": "//i.namu.wiki/i/tiYMyLSnbnnJpU3UZVAuGZ0Xow95niw91KDJrxQpMtkOzhs1_F_H_iQbo2RyQ6c2LaoN38bWhAHpJeBuLwcdIw.png"
+  },
+  {
+    "level": 0,
+    "medalName": "THE RED",
+    "stats": "올스탯 +7, 최대 HP/MP +350, 공/마 +7, 보스 몬스터 데미지 +5%, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 레드 달성",
+    "medalIconImage": "//i.namu.wiki/i/kNTVfv5h14fU-AO7fwoCAbqegCff-lkYCwzUHcSXJBT7qBQgVR-Tn9EFMCtXjRgisjxavbAXEGhk6nUBvlMjww.png",
+    "displayImage": "//i.namu.wiki/i/q_XnGzgxyhHXjS4T22eYiua_9xQPH6o3evSrl_a9PsvBDqddPk8UxHHbZ-nprgPurXrF7kRwLpBVCe-aeeiV3g.png"
+  },
+  {
+    "level": 0,
+    "medalName": "THE BLACK",
+    "stats": "올스탯 +7, 최대 HP/MP +350, 공/마 +7, 보스 몬스터 데미지 +5%, 훈장 신비의 모루 사용 불가",
+    "obtainCondition": "MVP 블랙 달성",
+    "medalIconImage": "//i.namu.wiki/i/Kq51x2tIT00jTWQ_94SYfZhP4Lsn6nNg31D78ZKNCUYAHcfG4AdP6TaLVIdIGG17OQ22SqXFjBCBeOnNBeWO7g.png",
+    "displayImage": "//i.namu.wiki/i/DbMkGr0jmefeE4rLziP8lEExwvwl69TgeRGx5A6p3QS1ih9QtNrNiITfDKatySw1u3wkC3_g05VsDIxqnSRaEg.webp"
+  }
+]
+

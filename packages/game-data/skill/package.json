@@ -1,0 +1,50 @@
+{
+  "name": "@maple/data-skill",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./fifth": {
+      "types": "./dist/fifth/index.d.ts",
+      "import": "./dist/fifth/index.js",
+      "require": "./dist/fifth/index.cjs"
+    },
+    "./sixth": {
+      "types": "./dist/sixth/index.d.ts",
+      "import": "./dist/sixth/index.js",
+      "require": "./dist/sixth/index.cjs"
+    },
+    "./rule": {
+      "types": "./dist/rule/index.d.ts",
+      "import": "./dist/rule/index.js",
+      "require": "./dist/rule/index.cjs"
+    },
+    "./value": {
+      "types": "./dist/value/index.d.ts",
+      "import": "./dist/value/index.js",
+      "require": "./dist/value/index.cjs"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@maple/data-class": "workspace:*",
+    "@maple/game-data": "workspace:*",
+    "@maple/data-core": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0"
+  }
+}

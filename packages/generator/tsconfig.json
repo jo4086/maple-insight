@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@maple/data-core": ["../game-data/core/dist/index.d.ts"],
+      "@maple/data-equipment": ["../game-data/equipment/dist/index.d.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/.*.ts",
+    "**/.*.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.legacy.ts",
+    "**/*.legacy.tsx",
+    "**/legacy",
+    "**/legacy/**"
+  ]
+}

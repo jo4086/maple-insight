@@ -1,0 +1,10 @@
+{
+  "name": "@maple/api-types-workspace",
+  "private": true,
+  "scripts": {
+    "typecheck": "pnpm -r --filter @maple/api-character --filter @maple/api-ranking --filter @maple/api-union run typecheck",
+    "build": "pnpm -r --filter @maple/api-character --filter @maple/api-ranking --filter @maple/api-union run build",
+    "dev": "pnpm -r --parallel --filter @maple/api-character --filter @maple/api-ranking --filter @maple/api-union run dev",
+    "lint": "pnpm -r --filter @maple/api-character --filter @maple/api-ranking --filter @maple/api-union run lint"
+  }
+}

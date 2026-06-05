@@ -1,0 +1,90 @@
+{
+  "name": "@maple/db",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "pnpm run build:js && pnpm run build:types",
+    "build:js": "tsup",
+    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "prisma:generate": "prisma generate",
+    "lint": "eslint src --ext .ts"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.cjs",
+      "require": "./dist/index.cjs"
+    },
+    "./admin": {
+      "types": "./dist/admin/index.d.ts",
+      "import": "./dist/admin/index.cjs",
+      "require": "./dist/admin/index.cjs"
+    },
+    "./admin/game-skill-query": {
+      "types": "./dist/admin/game-skill-query.repo.d.ts",
+      "import": "./dist/admin/game-skill-query.repo.cjs",
+      "require": "./dist/admin/game-skill-query.repo.cjs"
+    },
+    "./admin/seed-game-data-raw": {
+      "types": "./dist/admin/seed-game-data-raw.repo.d.ts",
+      "import": "./dist/admin/seed-game-data-raw.repo.cjs",
+      "require": "./dist/admin/seed-game-data-raw.repo.cjs"
+    },
+    "./admin/seed-game-data": {
+      "types": "./dist/admin/seed-game-data.repo.d.ts",
+      "import": "./dist/admin/seed-game-data.repo.cjs",
+      "require": "./dist/admin/seed-game-data.repo.cjs"
+    },
+    "./admin/seed-equipment": {
+      "types": "./dist/admin/seed-equipment.repo.d.ts",
+      "import": "./dist/admin/seed-equipment.repo.cjs",
+      "require": "./dist/admin/seed-equipment.repo.cjs"
+    },
+    "./character-group": {
+      "types": "./dist/repositories/character-group.repo.d.ts",
+      "import": "./dist/repositories/character-group.repo.cjs",
+      "require": "./dist/repositories/character-group.repo.cjs"
+    },
+    "./ocid": {
+      "types": "./dist/repositories/ocid.repo.d.ts",
+      "import": "./dist/repositories/ocid.repo.cjs",
+      "require": "./dist/repositories/ocid.repo.cjs"
+    },
+    "./ranking": {
+      "types": "./dist/repositories/ranking-snapshot.repo.d.ts",
+      "import": "./dist/repositories/ranking-snapshot.repo.cjs",
+      "require": "./dist/repositories/ranking-snapshot.repo.cjs"
+    },
+    "./search-history": {
+      "types": "./dist/repositories/search-history.repo.d.ts",
+      "import": "./dist/repositories/search-history.repo.cjs",
+      "require": "./dist/repositories/search-history.repo.cjs"
+    },
+    "./union-ranking": {
+      "types": "./dist/repositories/union-ranking.repo.d.ts",
+      "import": "./dist/repositories/union-ranking.repo.cjs",
+      "require": "./dist/repositories/union-ranking.repo.cjs"
+    }
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "@maple/game-data": "workspace:*",
+    "dotenv": "^17.4.2",
+    "pino": "^10.3.1"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "pino-pretty": "^13.1.3",
+    "prisma": "^6.19.3",
+    "tsup": "^8.5.0",
+    "tsx": "^4.21.0"
+  }
+}

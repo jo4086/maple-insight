@@ -1,22 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
+    "target": "es2021",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {
-      "@maple/types": ["packages/mapleInsight-types/src"]
-    },
-    "jsx": "react-jsx",
-    "types": ["node"],
-
-    /* Linting */
     "strict": true
   }
-  // "include": ["src"],
-  // "exclude": ["node_modules", "dist"]
 }

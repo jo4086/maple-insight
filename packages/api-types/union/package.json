@@ -1,0 +1,45 @@
+{
+  "name": "@maple/api-union",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./union": {
+      "types": "./dist/union/index.d.ts",
+      "import": "./dist/union/index.js",
+      "require": "./dist/union/index.cjs"
+    },
+    "./raider": {
+      "types": "./dist/raider/index.d.ts",
+      "import": "./dist/raider/index.js",
+      "require": "./dist/raider/index.cjs"
+    },
+    "./artifact": {
+      "types": "./dist/artifact/index.d.ts",
+      "import": "./dist/artifact/index.js",
+      "require": "./dist/artifact/index.cjs"
+    },
+    "./champion": {
+      "types": "./dist/champion/index.d.ts",
+      "import": "./dist/champion/index.js",
+      "require": "./dist/champion/index.cjs"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
+    "lint": "eslint src --ext .ts"
+  },
+  "devDependencies": {
+    "esbuild-plugin-alias": "^0.2.1",
+    "tsup": "^8.5.0"
+  }
+}

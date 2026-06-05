@@ -1,0 +1,10 @@
+{
+  "name": "@maple/game-data-workspace",
+  "private": true,
+  "scripts": {
+    "typecheck": "pnpm -r --filter @maple/data-core --filter @maple/data-skill --filter @maple/data-monster --filter @maple/data-symbol --filter @maple/data-force --filter @maple/data-equipment --filter @maple/data-class --filter @maple/item run typecheck",
+    "build": "pnpm -r --filter @maple/data-core --filter @maple/data-skill --filter @maple/data-monster --filter @maple/data-symbol --filter @maple/data-force --filter @maple/data-equipment --filter @maple/data-class --filter @maple/item run build",
+    "dev": "pnpm -r --parallel --filter @maple/data-core --filter @maple/data-skill --filter @maple/data-monster --filter @maple/data-symbol --filter @maple/data-force --filter @maple/data-equipment --filter @maple/data-class --filter @maple/item run dev",
+    "lint": "pnpm -r --filter @maple/data-core --filter @maple/data-skill --filter @maple/data-monster --filter @maple/data-symbol --filter @maple/data-force --filter @maple/data-equipment --filter @maple/data-class --filter @maple/item run lint"
+  }
+}
