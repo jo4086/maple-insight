@@ -1,6 +1,5 @@
-import type { CharacterHyperStat, PresetInfo, HyperStatPreset } from '@maple/types';
-
-import type { HyperStatRaw } from '../types/hyper-stat.raw';
+import type { HyperStatRaw } from '@maple/api-character';
+import type { CharacterHyperStat, PresetInfo, HyperStatPreset } from '@maple/contracts';
 
 import { toNumberSafe } from '@/utils/number';
 

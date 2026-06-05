@@ -1,4 +1,4 @@
-import type { RarityGrade } from '@maple/types';
+import type { RarityGrade } from '@maple/contracts';
 
 export const RARITY_GRADES = ['레어', '에픽', '유니크', '레전드리'] as const;
 

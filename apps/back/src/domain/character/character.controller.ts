@@ -1,9 +1,9 @@
 import { getCachedCharacterLookup, setCachedCharacterLookup } from './character.cache';
-import { CHARACTER_ENDPOINTS } from './character.constants';
+import { CHARACTER_ENDPOINTS, type CharacterEndpoint, type CharacterApiEndpoint } from './character.constants';
 import { CharacterService, getCharacterOCID } from './character.service';
-
-import { createSuccessResponse } from '@/types/api-response';
 import { toCharacterResponse } from './mappers';
+
+import { createSuccessResponse } from '@/types';
 
 function getCharacterClassFromBasic(data: unknown): string | null {
   if (!data || typeof data !== 'object') return null;
@@ -38,14 +38,17 @@ function mergeSkillResults(data: Record<string, unknown>) {
 const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string | null }> = async (req, res, next) => {
   try {
     const { nick, date = null } = req.query;
+
     const cachedLookup = getCachedCharacterLookup(nick);
     const ocid = cachedLookup?.ocid ?? (await getCharacterOCID(nick)).ocid;
 
     const service = new CharacterService(ocid, date, cachedLookup?.characterClass ?? null);
-    const endpoints = [...CHARACTER_ENDPOINTS];
 
-    const shouldFetchBasic = endpoints.includes('basic');
-    const endpointsWithoutBasic = endpoints.filter((endpoint) => endpoint !== 'basic');
+    const requestedEndpoints: CharacterEndpoint[] = [...CHARACTER_ENDPOINTS];
+    const apiEndpoints = expandCompositeEndpoints(requestedEndpoints);
+
+    const shouldFetchBasic = apiEndpoints.includes('basic');
+    const endpointsWithoutBasic = apiEndpoints.filter((endpoint) => endpoint !== 'basic');
 
     let basicData: unknown = null;
 
@@ -64,9 +67,8 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
     const restData = await service.getMultipleWithDelay(requests);
     const rawData = shouldFetchBasic ? { basic: basicData, ...restData } : restData;
     const mergedData = mergeSkillResults(rawData);
-    const data = toCharacterResponse(mergedData);
 
-    console.log(data);
+    const data = toCharacterResponse(mergedData, requestedEndpoints);
 
     return res.status(200).json(createSuccessResponse(data));
   } catch (error) {
@@ -82,4 +84,18 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
 const characterController = { lookup };
 export default characterController;
 
-// export default characterController;
+function expandCompositeEndpoints(endpoints: CharacterEndpoint[]): CharacterApiEndpoint[] {
+  const expanded = new Set<CharacterApiEndpoint>();
+
+  for (const endpoint of endpoints) {
+    if (endpoint === 'equipment') {
+      expanded.add('item-equipment');
+      expanded.add('android-equipment');
+      continue;
+    }
+
+    expanded.add(endpoint);
+  }
+
+  return [...expanded];
+}

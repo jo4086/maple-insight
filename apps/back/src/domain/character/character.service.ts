@@ -2,18 +2,23 @@ import { isAxiosError } from 'axios';
 
 import { nexonBaseApi } from '../../api/baseApi';
 
-import { getSkillGrades, type CharacterEndpoint, type CharacterSkillGrade } from './character.constants';
+import { getSkillGrades, type CharacterApiEndpoint, type CharacterSkillGrade } from './character.constants';
 
 import { createAppError, createExternalApiError } from '@/errors/app-error';
 
-// NOTE: Service layer error code guide
+/**
+ * TODO: 캐시된 닉네임 재조회를 의도적으로 할 시 조회 가능하게
+ *  - [ ] 다만 1분 이내에 의도적 재조회는 원래 데이터를 사용해서 마치 새롭게 조회하는 것 처럼 보여주기 (front)
+ * */
+
+// GUIDE: Service layer error code guide
 // - 400: 잘못된 요청 파라미터가 들어온 경우
 // - 404: 캐릭터 또는 조회 대상 데이터가 존재하지 않는 경우
 // - 502: 넥슨 API 응답이 비정상인 경우
 // - 503: 넥슨 API가 일시적으로 응답할 수 없는 경우
 // - 500: 위 경우로 분류되지 않는 내부 처리 오류
-// 현재 서비스는 상태 코드를 직접 반환하지 않고 Error를 throw 한다.
-// 실제 HTTP statusCode 결정은 컨트롤러 또는 errorHandler에서 처리한다.
+//   현재 서비스는 상태 코드를 직접 반환하지 않고 Error를 throw 한다.
+//   실제 HTTP statusCode 결정은 컨트롤러 또는 errorHandler에서 처리한다.
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -22,14 +27,14 @@ type CharacterRequestParams = {
 };
 
 export type CharacterEndpointRequest =
-  | CharacterEndpoint
+  | CharacterApiEndpoint
   | {
-      endpoint: CharacterEndpoint;
+      endpoint: CharacterApiEndpoint;
       key?: string;
       params?: CharacterRequestParams;
     };
 
-export const getCharacterOCID = async (nick: string) => {
+export const getCharacterOCID = async (nick: string): Promise<{ ocid: string }> => {
   try {
     const response = await nexonBaseApi.get('/id', {
       params: {
@@ -37,15 +42,39 @@ export const getCharacterOCID = async (nick: string) => {
       },
     });
 
-    return response.data;
+    const data = response.data as { ocid?: string };
+
+    if (!data.ocid) {
+      throw createAppError(404, '일치하는 닉네임 검색 결과가 없습니다.');
+    }
+
+    try {
+      await nexonBaseApi.get('/character/basic', {
+        params: {
+          ocid: data.ocid,
+        },
+      });
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 400) {
+        throw createAppError(404, '현재 조회할 수 없는 캐릭터입니다.');
+      }
+
+      throw error;
+    }
+
+    return { ocid: data.ocid };
   } catch (error) {
+    if ((error as AppError)?.statusCode === 404) {
+      throw error;
+    }
+
     if (isAxiosError(error)) {
       console.error('API Request Error: ', error.message);
 
       throw createExternalApiError(
         error.response?.status,
         {
-          400: '캐릭터 조회 요청이 올바르지 않습니다.',
+          400: '일치하는 닉네임 검색 결과가 없습니다.',
           404: '존재하지 않는 캐릭터입니다.',
           429: '외부 API 요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.',
         },
@@ -95,7 +124,7 @@ export class CharacterService {
   }
 
   // NOTE: skill 요청이 포함된 endpoint 목록을 실제 요청 목록으로 확장한다.
-  public async createRequestsWithSkill(endpoints: CharacterEndpoint[]) {
+  public async createRequestsWithSkill(endpoints: CharacterApiEndpoint[]) {
     const requests: CharacterEndpointRequest[] = [];
     const hasBasic = endpoints.includes('basic');
     const endpointsWithoutSkill = endpoints.filter((endpoint) => endpoint !== 'skill');
@@ -126,7 +155,7 @@ export class CharacterService {
     }));
   }
 
-  // NOTE: (현재 미사용) 여러 endpoint를 병렬로 조회한다.
+  // WARN: (현재 미사용) 여러 endpoint를 병렬로 조회한다.
   public async getMultiple(requests: CharacterEndpointRequest[]) {
     const results = await Promise.all(
       requests.map((request) => {
@@ -156,7 +185,7 @@ export class CharacterService {
   }
 
   // NOTE: 실제 넥슨 캐릭터 API를 호출한다.
-  private async fetch(endpoint: CharacterEndpoint, params?: CharacterRequestParams) {
+  private async fetch(endpoint: CharacterApiEndpoint, params?: CharacterRequestParams) {
     const res = await nexonBaseApi.get(`/character/${endpoint}`, {
       params: { ocid: this.ocid, date: this.date, ...params },
     });

@@ -1,6 +1,6 @@
-import type { CharacterStat } from '@maple/types';
+import type { StatRaw } from '@maple/api-character';
+import type { CharacterStat } from '@maple/contracts';
 
-import type { StatRaw } from '../types/stat.raw';
 import { getStatUnit } from '../utils/getStatUnit';
 
 import { toNumberSafe } from '@/utils/number';

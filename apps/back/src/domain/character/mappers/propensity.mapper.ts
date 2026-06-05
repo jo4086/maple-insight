@@ -1,6 +1,5 @@
-import type { CharacterPropensity } from '@maple/types';
-
-import type { PropensityRaw } from '../types/propensity.raw';
+import type { PropensityRaw } from '@maple/api-character';
+import type { CharacterPropensity } from '@maple/contracts';
 
 export function toCharacterPropensity(raw: PropensityRaw): CharacterPropensity {
   return {

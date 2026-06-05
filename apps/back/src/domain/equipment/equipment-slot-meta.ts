@@ -1,5 +1,5 @@
-import type { DisplaySlot, EquipmentCategory, EquipmentSlot } from '@maple/types';
-import { invisibleCategories } from '@maple/types';
+import type { DisplaySlot, EquipmentCategory, EquipmentSlot } from '@maple/contracts';
+import { invisibleCategories } from '@maple/contracts';
 
 type EquipmentSlotMeta = {
   displayName: DisplaySlot;

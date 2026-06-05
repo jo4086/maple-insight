@@ -1,6 +1,5 @@
-import type { CharacterPopularity } from '@maple/types';
-
-import type { PopularityRaw } from '../types/popularity.raw';
+import type { PopularityRaw } from '@maple/api-character';
+import type { CharacterPopularity } from '@maple/contracts';
 
 export function toCharacterPopularity(raw: PopularityRaw): CharacterPopularity {
   return {

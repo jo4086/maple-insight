@@ -1,10 +1,9 @@
-import type { CashItem, CashItemOption, CharacterCashItem, PrismOption } from '@maple/types';
-
-import type { CashRawData } from '../types/cashitem-equipment.raw';
+import type { CashRaw } from '@maple/api-character';
+import type { CashItem, CashItemOption, CharacterCashItem, PrismOption } from '@maple/contracts';
 
 import { toBooleanByFlag } from '@/utils/boolean';
 
-type CashItemRaw = NonNullable<NonNullable<CashRawData['cash_item_equipment_base']>[number]>;
+type CashItemRaw = NonNullable<NonNullable<CashRaw['cash_item_equipment_base']>[number]>;
 type NormalPresetKey = 'cash_item_equipment_preset_1' | 'cash_item_equipment_preset_2' | 'cash_item_equipment_preset_3';
 type AdditionalPresetKey = 'additional_cash_item_equipment_preset_1' | 'additional_cash_item_equipment_preset_2' | 'additional_cash_item_equipment_preset_3';
 
@@ -54,7 +53,7 @@ function toCashItem(raw: CashItemRaw): CashItem {
   };
 }
 
-export function toCharacterCashItem(raw: CashRawData): CharacterCashItem {
+export function toCharacterCashItem(raw: CashRaw): CharacterCashItem {
   const normalPresets = NORMAL_PRESET_KEYS.map((presetKey) => (raw[presetKey] ?? []).map(toCashItem));
 
   const additionalPresets = ADDITIONAL_PRESET_KEYS.map((presetKey) => (raw[presetKey] ?? []).map(toCashItem));

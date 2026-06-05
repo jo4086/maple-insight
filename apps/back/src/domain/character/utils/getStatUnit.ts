@@ -1,4 +1,4 @@
-import type { StatUnit } from '@maple/types';
+import type { StatUnit } from '@maple/contracts';
 
 import { PERCENT_STAT_KEYWORDS, PERCENT_STAT_NAMES } from '../character.constants';
 

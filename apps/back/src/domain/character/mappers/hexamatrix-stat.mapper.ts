@@ -1,6 +1,5 @@
-import type { CharacterHexamatrixStat, HexaStat, HexaStatPreset } from '@maple/types';
-
-import type { HexamatrixStatRaw } from '../types/hexamatrix-stat.raw';
+import type { HexamatrixStatRaw } from '@maple/api-character';
+import type { CharacterHexamatrixStat, HexaStat, HexaStatPreset } from '@maple/contracts';
 
 type HexaStatRawItem = NonNullable<HexamatrixStatRaw['character_hexa_stat_core']>[number];
 

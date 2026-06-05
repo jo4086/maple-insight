@@ -1,6 +1,5 @@
-import type { BeautyState, CharacterBeauty, FaceStyle, HairStyle, SkinStyle } from '@maple/types';
-
-import type { BeautyRaw } from '../types/beauty-equipment.raw';
+import type { BeautyRaw } from '@maple/api-character';
+import type { BeautyState, CharacterBeauty, FaceStyle, HairStyle, SkinStyle } from '@maple/contracts';
 
 import { toBooleanByFlag } from '@/utils/boolean';
 import { toNumberSafe } from '@/utils/number';
@@ -9,7 +8,7 @@ type HairRaw = BeautyRaw['character_hair'];
 type FaceRaw = BeautyRaw['character_face'];
 type SkinRaw = BeautyRaw['character_skin'];
 
-function toHairStyle(raw: HairRaw): HairStyle | null {
+function toHairStyle(raw: HairRaw | null): HairStyle | null {
   if (!raw) return null;
 
   return {
@@ -21,7 +20,7 @@ function toHairStyle(raw: HairRaw): HairStyle | null {
   };
 }
 
-function toFaceStyle(raw: FaceRaw): FaceStyle | null {
+function toFaceStyle(raw: FaceRaw | null): FaceStyle | null {
   if (!raw) return null;
 
   return {
@@ -33,7 +32,7 @@ function toFaceStyle(raw: FaceRaw): FaceStyle | null {
   };
 }
 
-function toSkinStyle(raw: SkinRaw): SkinStyle | null {
+function toSkinStyle(raw: SkinRaw | null): SkinStyle | null {
   if (!raw) return null;
 
   return {
@@ -45,7 +44,7 @@ function toSkinStyle(raw: SkinRaw): SkinStyle | null {
   };
 }
 
-function toBeautyInfo(hair: HairRaw, face: FaceRaw, skin: SkinRaw): BeautyState {
+function toBeautyInfo(hair: HairRaw | null, face: FaceRaw | null, skin: SkinRaw | null): BeautyState {
   return {
     hair: toHairStyle(hair),
     face: toFaceStyle(face),

@@ -1,6 +1,5 @@
-import type { CharacterSpecialRing, RingInfo } from '@maple/types';
-
-import type { RingReserveSkillEquipmentRaw } from '../types/ring-reserve-skill-equipment.raw';
+import type { RingReserveSkillEquipmentRaw } from '@maple/api-character';
+import type { CharacterSpecialRing, RingInfo } from '@maple/contracts';
 
 function toSpecialRing(raw: RingReserveSkillEquipmentRaw): RingInfo {
   return {

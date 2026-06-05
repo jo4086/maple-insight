@@ -1,6 +1,5 @@
-import type { CharacterLinkSkill, EquippedLinkSkill, LinkSkill } from '@maple/types';
-
-import type { LinkSkillRaw } from '../types/link-skill.raw';
+import type { LinkSkillRaw } from '@maple/api-character';
+import type { CharacterLinkSkill, EquippedLinkSkill, LinkSkill } from '@maple/contracts';
 
 type EquippedLinkSkillRaw = NonNullable<LinkSkillRaw['character_link_skill']>[number];
 type LinkSkillPresetRaw = NonNullable<LinkSkillRaw['character_link_skill_preset_1']>[number];

@@ -1,6 +1,5 @@
-import type { CharacterPet, PetAutoSkill, PetEquipment, PetEquipmentOption, PetInfo } from '@maple/types';
-
-import type { PetRaw } from '../types/pet-equipment.raw';
+import type { PetRaw } from '@maple/api-character';
+import type { CharacterPet, PetAutoSkill, PetEquipment, PetEquipmentOption, PetInfo } from '@maple/contracts';
 
 type PetNo = 1 | 2 | 3;
 type PetEquipmentRaw = NonNullable<PetRaw['pet_1_equipment']>;

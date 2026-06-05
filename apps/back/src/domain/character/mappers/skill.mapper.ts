@@ -1,6 +1,5 @@
-import type { CharacterSkill, Skill } from '@maple/types';
-
-import type { SkillRaw } from '../types/skill.raw';
+import type { SkillRaw } from '@maple/api-character';
+import type { CharacterSkill, Skill } from '@maple/contracts';
 
 type SkillItemRaw = NonNullable<SkillRaw['character_skill']>[number];
 

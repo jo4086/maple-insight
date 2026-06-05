@@ -1,6 +1,6 @@
-import type { AbilityInfo, AbilityPreset, CharacterAbility } from '@maple/types';
+import type { AbilityRaw, AbilityPresetRaw, AbilityInfoRaw } from '@maple/api-character';
+import type { AbilityInfo, AbilityPreset, CharacterAbility } from '@maple/contracts';
 
-import type { AbilityRaw, AbilityPresetRaw, AbilityInfoRaw } from '../types/ability.raw';
 import { toRarityGrade } from '../utils/grade';
 
 import { toNumberSafe } from '@/utils/number';

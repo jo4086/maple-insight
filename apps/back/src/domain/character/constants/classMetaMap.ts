@@ -11,10 +11,7 @@ export interface ClassLookupMeta {
   progressionLevel: ProgressionLevel;
 }
 
-function mergeSecondaryGroups(
-  current: ClassLookupMeta['secondaryGroups'],
-  next: ClassLookupMeta['secondaryGroups'],
-): ClassLookupMeta['secondaryGroups'] {
+function mergeSecondaryGroups(current: ClassLookupMeta['secondaryGroups'], next: ClassLookupMeta['secondaryGroups']): ClassLookupMeta['secondaryGroups'] {
   const merged = new Set([...(current ?? []), ...(next ?? [])]);
 
   return merged.size > 0 ? [...merged] : undefined;
@@ -44,10 +41,7 @@ function createClassMetaMap() {
 
           classMetaMap.set(className, {
             ...existing,
-            secondaryGroups: mergeSecondaryGroups(existing.secondaryGroups, [
-              nextMeta.primaryGroup,
-              ...(nextMeta.secondaryGroups ?? []),
-            ]),
+            secondaryGroups: mergeSecondaryGroups(existing.secondaryGroups, [nextMeta.primaryGroup, ...(nextMeta.secondaryGroups ?? [])]),
           });
         }
       }

@@ -1,6 +1,5 @@
-import type { SymbolOption, CharacterSymbol } from '@maple/types';
-
-import type { SymbolRaw } from '../types/symbol-equipment.raw';
+import type { SymbolRaw } from '@maple/api-character';
+import type { SymbolOption, CharacterSymbol } from '@maple/contracts';
 
 import { toNumberSafe } from '@/utils/number';
 

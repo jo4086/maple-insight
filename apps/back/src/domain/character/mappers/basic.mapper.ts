@@ -1,6 +1,5 @@
-import type { CharacterBasic } from '@maple/types';
-
-import type { BasicRaw } from '../types/basic.raw';
+import type { BasicRaw } from '@maple/api-character';
+import type { CharacterBasic } from '@maple/contracts';
 
 import { toBooleanByFlag } from '@/utils/boolean';
 
