@@ -5,7 +5,7 @@ import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), tsconfigPaths()],
+  plugins: [react(), tailwindcss(), tsconfigPaths({ projects: ['tsconfig.app.json', 'tsconfig.node.json'] })],
   test: {
     environment: 'jsdom',
     globals: true,

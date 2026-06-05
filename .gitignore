@@ -1,10 +1,13 @@
 node_modules/
 .vscode
+.turbo/
+.codex
 .env
 dist/
 package-lock.json
-
 .pnpm-debug.log
+coverage
+*.tsbuildinfo
 
 # custom
 .readdy/
@@ -14,8 +17,10 @@ archive/
 ignores/
 csv/
 test/
-.codex
+debug/
+codex/
 unused-dummy-files.txt
+/data/
 
 # typescript dotfills
 **/.*.ts

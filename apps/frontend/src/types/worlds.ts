@@ -38,4 +38,24 @@ export const world_icon_path_map = {
   예티X핑크빈: '/world_icons/yeti_pinkbean.webp',
 } as const;
 
+export const worldIconPathMap = {
+  전체월드: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_1.png',
+  헬리오스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_2.png',
+  에오스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_3.png',
+  오로라: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_4.png',
+  레드: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_5.png',
+  이노시스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_6.png',
+  유니온: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_7.png',
+  스카니아: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_8.png',
+  루나: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_9.png',
+  제니스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_10.png',
+  크로아: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_11.png',
+  베라: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_12.png',
+  엘리시움: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_13.png',
+  아케인: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_14.png',
+  노바: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_15.png',
+  버닝: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_16.png',
+  챌린저스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_20.png',
+} as const;
+
 export type WorldName = keyof typeof world_icon_path_map;

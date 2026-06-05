@@ -8,24 +8,27 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist', 'node_modules', 'build', 'coverage', '*.config.js', 'pnpm-lock.yaml']),
+  globalIgnores([
+    '**/dist/**',
+    '**/node_modules/**',
+    '**/build/**',
+    '**/coverage/**',
+    '**/.turbo/**',
+    '**/generated/**',
+    '**/*.d.ts',
+    '**/*.d.cts',
+    '*.config.js',
+    'pnpm-lock.yaml',
+  ]),
   {
     files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      pluginImport.flatConfigs.recommended,
-      pluginImport.flatConfigs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
+    extends: [js.configs.recommended, tseslint.configs.recommended, pluginImport.flatConfigs.recommended, reactHooks.configs['recommended-latest'], reactRefresh.configs.vite],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
       parser: tseslint.parser,
       parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
         sourceType: 'module',
-        ecmaFeatures: { jsx: true },
       },
     },
     rules: {
@@ -64,29 +67,15 @@ export default defineConfig([
   },
 
   {
-    files: ['apps/back/**/*.ts'],
+    files: ['apps/back/**/*.ts', 'apps/ingestor/**/*.ts', 'packages/**/**/*.ts'],
     languageOptions: {
       globals: globals.node,
     },
   },
 
   {
-    files: ['apps/TEST/**/*.ts'],
-    languageOptions: {
-      globals: globals.node,
-    },
-  },
-  {
-    // COMMENT: TEST
-    files: ['apps/TEST/**/*.ts'],
-    languageOptions: {
-      globals: globals.node,
-    },
-    rules: {},
-  },
-  {
     // COMMENT: Front-End
-    files: ['apps/front/**/*.{ts,tsx}', 'apps/ricemc/**/*.{ts,tsx}'],
+    files: ['apps/frontend/**/*.{ts,tsx}', 'apps/ricemc/**/*.{ts,tsx}'],
     languageOptions: {
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },

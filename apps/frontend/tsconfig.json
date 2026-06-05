@@ -1,12 +1,4 @@
 {
-  // "compilerOptions": {
-  //   "jsx": "react-jsx",
-  //   "allowJs": true,
-  //   "checkJs": false,
-  //   "types": ["node", "react", "react-dom"]
-  // },
   "files": [],
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
-  // "include": ["src", "*.cjs"],
-  // "exclude": ["node_modules", "dist"]
 }
