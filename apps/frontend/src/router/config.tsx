@@ -2,15 +2,20 @@ import type { RouteObject } from 'react-router-dom';
 
 import { Layout, EmptyLayout } from '@/layout';
 import { CharacterLayout } from '@/layout/CharacterLayout';
-import { MainPage, LoginPage, NotFoundPage } from '@/pages';
+import { LoginPage, NotFoundPage, Home } from '@/pages';
+import { AdminHome, AdminImportDetail, AdminImportNew, AdminImports } from '@/pages/admin';
 import { CharacterMainPage } from '@/pages/CharacterPage';
 
 const routes: RouteObject[] = [
   {
     element: <Layout />,
     children: [
-      { element: <MainPage />, path: '/' },
+      { element: <Home />, path: '/' },
       { element: <CharacterLayout />, children: [{ element: <CharacterMainPage />, path: '/character' }] },
+      { element: <AdminHome />, path: '/admin' },
+      { element: <AdminImports />, path: '/admin/imports' },
+      { element: <AdminImportNew />, path: '/admin/imports/new' },
+      { element: <AdminImportDetail />, path: '/admin/imports/:importId' },
     ],
   },
   {
