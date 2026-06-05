@@ -1,0 +1,905 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MdCallSplit, MdClose, MdDeviceHub, MdGridOn, MdOpenWith, MdOutlinePostAdd, MdStickyNote2, MdZoomIn, MdZoomOut } from 'react-icons/md';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import EditorActionMenu from '@/components/EditorActionMenu';
+import { buildPostgresDDL, createEmptyDocument, loadErdDocuments, saveErdDocuments, type ErdColumn, type ErdDocument, type ErdEntity } from '@/features/erd';
+import { estimateEntitySize } from '@/features/utils/entity-metrics';
+import EntityCard from '@@editor/EntityCard';
+
+import { useEditorSession } from '@/features/hooks/useEditorSession';
+import EntityOverviewCard from '@@editor/EntityOverviewCard';
+import EntityPaletteModal from '@@editor/EntityPaletteModal';
+import EntityPropertiesModal from '@@editor/EntityPropertiesModal';
+import RelationCardinalityIcon from '@@editor/RelationCardinalityIcon';
+import type { ViewportMetrics } from '@@editor/ErdMinimap';
+import ErdMinimap from '@@editor/ErdMinimap';
+import { clamp, findEmptyPosition, snapToGrid, type DragState, type PanState } from './canvas/geometry';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, MAX_ZOOM, MIN_ZOOM, MINIMAP_WIDTH } from './constants';
+import { canAutoSaveDocument, createColumn, createEntity, createIncrementedColumnName, sortColumnsByPriority } from './model/document';
+import { persistDocument, saveCurrentDocumentSnapshot } from './persistence/document-storage';
+import { NotFoundPage } from '@/pages';
+
+const ErdEditorPage = () => {
+  const { erdId } = useParams();
+  const navigate = useNavigate();
+  const { registerSaveAction, setCanSave, setIsDirty, setTitle: setEditorTitle, title: editorTitle } = useEditorSession();
+  const [editorDocument, SetEditorDocument] = useState<ErdDocument | null>(null);
+  const [documentStatus, setDocumentStatus] = useState<'loading' | 'ready' | 'missing'>('loading');
+  const [draggingEntityId, setDraggingEntityId] = useState<string | null>(null);
+  const [selectedEntityIds, setSelectedEntityIds] = useState<string[]>([]);
+  const [zoom, setZoom] = useState(1);
+  const [isDdlOpen, setIsDdlOpen] = useState(false);
+  const [entityPanelMode, setEntityPanelMode] = useState<'list' | null>(null);
+  const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
+  const [isMinimapVisible, setIsMinimapVisible] = useState(true);
+  const [entityViewMode, setEntityViewMode] = useState<'detail' | 'overview'>('detail');
+  const [isPropertiesOpen, setIsPropertiesOpen] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [movementMode, setMovementMode] = useState<'free' | 'grid'>('free');
+  const [relationMode, setRelationMode] = useState<'none' | 'non-identifying' | 'identifying'>('none');
+  const [relationCardinality, setRelationCardinality] = useState<'zero-or-many' | 'one' | 'zero-or-one' | 'many' | 'one-or-many' | 'one-only'>('one');
+  const [isRelationPopoverOpen, setIsRelationPopoverOpen] = useState(false);
+  const [viewportMetrics, setViewportMetrics] = useState<ViewportMetrics>({
+    scrollLeft: 0,
+    scrollTop: 0,
+    clientWidth: 0,
+    clientHeight: 0,
+    scrollWidth: CANVAS_WIDTH,
+    scrollHeight: CANVAS_HEIGHT,
+  });
+  const canvasRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const documentRef = useRef<ErdDocument | null>(null);
+  const dragRef = useRef<DragState | null>(null);
+  const panRef = useRef<PanState | null>(null);
+  const savedSnapshotRef = useRef<string | null>(null);
+  const isPersistedRef = useRef(false);
+  const isSyncingTitleRef = useRef(false);
+  const titleRef = useRef('Untitled ERD');
+  const zoomRef = useRef(1);
+  const movementModeRef = useRef<'free' | 'grid'>('free');
+  const documentId = editorDocument?.id ?? null;
+  const documentTitle = editorDocument?.title ?? null;
+
+  useEffect(() => {
+    const documents = loadErdDocuments();
+
+    if (erdId === 'new' || !erdId) {
+      const next = createEmptyDocument();
+      SetEditorDocument(next);
+      setDocumentStatus('ready');
+      documentRef.current = next;
+      isPersistedRef.current = false;
+      savedSnapshotRef.current = null;
+      setSelectedEntityIds([]);
+      return;
+    }
+
+    const found = documents.find((item) => item.id === erdId) ?? null;
+    SetEditorDocument(found);
+    setDocumentStatus(found ? 'ready' : 'missing');
+    documentRef.current = found;
+    isPersistedRef.current = !!found;
+    savedSnapshotRef.current = found ? JSON.stringify(found) : null;
+    setSelectedEntityIds([]);
+  }, [erdId, navigate]);
+
+  useEffect(() => {
+    documentRef.current = editorDocument;
+  }, [editorDocument]);
+
+  useEffect(() => {
+    zoomRef.current = zoom;
+  }, [zoom]);
+
+  useEffect(() => {
+    movementModeRef.current = movementMode;
+  }, [movementMode]);
+
+  useEffect(() => {
+    if (!documentTitle) {
+      isSyncingTitleRef.current = true;
+      titleRef.current = 'Untitled ERD';
+      setEditorTitle('Untitled ERD');
+      return;
+    }
+
+    isSyncingTitleRef.current = true;
+    titleRef.current = documentTitle;
+    setEditorTitle(documentTitle);
+  }, [documentId, documentTitle, setEditorTitle]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) return;
+
+    const syncViewportMetrics = () => {
+      setViewportMetrics({
+        scrollLeft: viewport.scrollLeft,
+        scrollTop: viewport.scrollTop,
+        clientWidth: viewport.clientWidth,
+        clientHeight: viewport.clientHeight,
+        scrollWidth: viewport.scrollWidth,
+        scrollHeight: viewport.scrollHeight,
+      });
+    };
+
+    syncViewportMetrics();
+    viewport.addEventListener('scroll', syncViewportMetrics, { passive: true });
+
+    const observer = new ResizeObserver(syncViewportMetrics);
+    observer.observe(viewport);
+
+    return () => {
+      viewport.removeEventListener('scroll', syncViewportMetrics);
+      observer.disconnect();
+    };
+  }, [zoom, editorDocument]);
+
+  const applyDocument = useCallback((next: ErdDocument, shouldPersist = true) => {
+    documentRef.current = next;
+    SetEditorDocument(next);
+
+    if (!shouldPersist || !isPersistedRef.current || !canAutoSaveDocument(next)) return;
+
+    persistDocument(next);
+    savedSnapshotRef.current = JSON.stringify(next);
+  }, []);
+
+  const saveCurrentDocument = useCallback(() => {
+    const current = documentRef.current;
+    if (!current || !canAutoSaveDocument(current)) return;
+
+    const next = {
+      ...current,
+      updatedAt: new Date().toISOString(),
+    };
+    saveCurrentDocumentSnapshot(next);
+
+    documentRef.current = next;
+    SetEditorDocument(next);
+    isPersistedRef.current = true;
+    savedSnapshotRef.current = JSON.stringify(next);
+
+    if (erdId === 'new' || !erdId) {
+      navigate(`/erd/${next.id}`, { replace: true });
+    }
+  }, [erdId, navigate]);
+
+  const updateDocument = useCallback(
+    (updater: (current: ErdDocument) => ErdDocument, shouldPersist = true) => {
+      const current = documentRef.current;
+
+      if (!current) return;
+
+      applyDocument(
+        {
+          ...updater(current),
+          updatedAt: new Date().toISOString(),
+        },
+        shouldPersist,
+      );
+    },
+    [applyDocument],
+  );
+
+  useEffect(() => {
+    registerSaveAction(() => saveCurrentDocument());
+    return () => registerSaveAction(null);
+  }, [registerSaveAction, saveCurrentDocument]);
+
+  useEffect(() => {
+    if (isSyncingTitleRef.current) {
+      isSyncingTitleRef.current = false;
+      return;
+    }
+    if (!editorDocument) return;
+    if (editorTitle === titleRef.current) return;
+
+    titleRef.current = editorTitle;
+    updateDocument((current) => ({
+      ...current,
+      title: editorTitle,
+    }));
+  }, [editorTitle, editorDocument, updateDocument]);
+
+  useEffect(() => {
+    if (!editorDocument) {
+      setIsDirty(false);
+      setCanSave(false);
+      return;
+    }
+
+    const isMeaningful = canAutoSaveDocument(editorDocument);
+    const isDirty = savedSnapshotRef.current === null ? isMeaningful : savedSnapshotRef.current !== JSON.stringify(editorDocument);
+
+    setIsDirty(isDirty);
+    setCanSave(isMeaningful && isDirty);
+  }, [editorDocument, setCanSave, setIsDirty]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Delete' || selectedEntityIds.length === 0) return;
+
+      const activeTag = window.document.activeElement?.tagName;
+      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+
+      updateDocument((current) => ({
+        ...current,
+        entities: current.entities.filter((entity) => !selectedEntityIds.includes(entity.id)),
+      }));
+      setSelectedEntityIds([]);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedEntityIds, updateDocument]);
+
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      const drag = dragRef.current;
+      const current = documentRef.current;
+      const canvas = canvasRef.current;
+      const pan = panRef.current;
+      const viewport = viewportRef.current;
+
+      if (pan && viewport && pan.pointerId === event.pointerId) {
+        viewport.scrollLeft = pan.startScrollLeft - (event.clientX - pan.startClientX);
+        viewport.scrollTop = pan.startScrollTop - (event.clientY - pan.startClientY);
+        return;
+      }
+
+      if (!drag || !current || !canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const dragged = current.entities.find((entity) => entity.id === drag.anchorEntityId);
+      const entityWidth = dragged?.size.width ?? 0;
+      const entityHeight = dragged?.size.height ?? 0;
+      const scale = zoomRef.current;
+      const rawNextX = clamp((event.clientX - rect.left) / scale - drag.offsetX, 0, CANVAS_WIDTH - entityWidth);
+      const rawNextY = clamp((event.clientY - rect.top) / scale - drag.offsetY, 0, CANVAS_HEIGHT - entityHeight);
+      const nextX = movementModeRef.current === 'grid' ? clamp(snapToGrid(rawNextX), 0, CANVAS_WIDTH - entityWidth) : rawNextX;
+      const nextY = movementModeRef.current === 'grid' ? clamp(snapToGrid(rawNextY), 0, CANVAS_HEIGHT - entityHeight) : rawNextY;
+      const startAnchor = drag.startPositions[drag.anchorEntityId];
+      const deltaX = nextX - startAnchor.x;
+      const deltaY = nextY - startAnchor.y;
+
+      const next: ErdDocument = {
+        ...current,
+        updatedAt: new Date().toISOString(),
+        entities: current.entities.map((entity) => {
+          if (!drag.entityIds.includes(entity.id)) return entity;
+
+          const start = drag.startPositions[entity.id];
+          const width = entity.size.width;
+          const height = entity.size.height;
+
+          return {
+            ...entity,
+            position: {
+              x: clamp(start.x + deltaX, 0, CANVAS_WIDTH - width),
+              y: clamp(start.y + deltaY, 0, CANVAS_HEIGHT - height),
+            },
+          };
+        }),
+      };
+
+      documentRef.current = next;
+      SetEditorDocument(next);
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      const drag = dragRef.current;
+      const current = documentRef.current;
+      const pan = panRef.current;
+
+      if (pan && pan.pointerId === event.pointerId) {
+        panRef.current = null;
+        return;
+      }
+
+      if (!drag || drag.pointerId !== event.pointerId || !current) return;
+
+      dragRef.current = null;
+      setDraggingEntityId(null);
+
+      const documents = loadErdDocuments();
+      saveErdDocuments(documents.map((item) => (item.id === current.id ? current : item)));
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [updateDocument]);
+
+  const ddl = useMemo(() => {
+    if (!editorDocument) return '';
+    return buildPostgresDDL(editorDocument);
+  }, [editorDocument]);
+  if (documentStatus === 'missing') {
+    return <NotFoundPage />;
+  }
+
+  if (documentStatus === 'loading' || !editorDocument) {
+    return (
+      <div className="flex w-full flex-1 flex-col px-5 py-12">
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">문서를 불러오는 중입니다.</div>
+      </div>
+    );
+  }
+
+  const handleAddEntity = () => {
+    updateDocument((current) => ({
+      ...current,
+      entities: (() => {
+        const nextEntity = createEntity(current.entities.length);
+        const estimatedSize = estimateEntitySize(nextEntity);
+
+        return [
+          ...current.entities,
+          {
+            ...nextEntity,
+            size: estimatedSize,
+            position: findEmptyPosition(current.entities, estimatedSize.width, estimatedSize.height),
+          },
+        ];
+      })(),
+    }));
+  };
+
+  const handleAddMemo = () => {
+    updateDocument((current) => ({
+      ...current,
+      memos: [
+        ...current.memos,
+        {
+          id: crypto.randomUUID(),
+          title: 'New Memo',
+          content: '메모 내용을 입력하세요.',
+        },
+      ],
+    }));
+  };
+
+  const updateEntity = (entityId: string, updater: (entity: ErdEntity) => ErdEntity, shouldPersist = true) => {
+    updateDocument(
+      (current) => ({
+        ...current,
+        entities: current.entities.map((entity) => {
+          if (entity.id !== entityId) return entity;
+
+          const nextEntity = updater(entity);
+          return {
+            ...nextEntity,
+            columns: sortColumnsByPriority(nextEntity.columns),
+          };
+        }),
+      }),
+      shouldPersist,
+    );
+  };
+
+  const handleEntityFieldChange = (entityId: string, field: 'name' | 'comment' | 'isUniqueColumnVisible', value: string | boolean) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      [field]: value,
+    }));
+  };
+
+  const handleEntityPositionChange = (entityId: string, x: number, y: number, shouldPersist = true) => {
+    updateEntity(
+      entityId,
+      (entity) => ({
+        ...entity,
+        position: { x, y },
+      }),
+      shouldPersist,
+    );
+  };
+
+  const handleEntitySizeChange = (entityId: string, width: number, height: number) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      size: { width, height },
+    }));
+  };
+
+  const handleEntityDragStart = (entity: ErdEntity, event: React.PointerEvent<HTMLElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const entityIds = selectedEntityIds.includes(entity.id) ? selectedEntityIds : [entity.id];
+    const current = documentRef.current;
+    if (!current) return;
+
+    const startPositions = Object.fromEntries(current.entities.filter((item) => entityIds.includes(item.id)).map((item) => [item.id, { x: item.position.x, y: item.position.y }]));
+
+    dragRef.current = {
+      entityIds,
+      anchorEntityId: entity.id,
+      offsetX: (event.clientX - rect.left) / zoomRef.current - entity.position.x,
+      offsetY: (event.clientY - rect.top) / zoomRef.current - entity.position.y,
+      pointerId: event.pointerId,
+      startPositions,
+    };
+
+    setDraggingEntityId(entity.id);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleCanvasPanStart = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 1) return;
+
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    panRef.current = {
+      pointerId: event.pointerId,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startScrollLeft: viewport.scrollLeft,
+      startScrollTop: viewport.scrollTop,
+    };
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  };
+
+  const handleAddColumn = (entityId: string, keyType: ErdColumn['keyType'] = null) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: [
+        ...entity.columns,
+        (() => {
+          const baseName = keyType === 'pk' ? 'pk' : 'name';
+          const nextName = createIncrementedColumnName(entity.columns, baseName);
+
+          return {
+            ...createColumn(nextName, keyType),
+            isAllowNull: keyType === 'pk',
+            comment: keyType === 'pk' ? 'PRIMARY KEY' : '',
+          };
+        })(),
+      ],
+    }));
+  };
+
+  const handleColumnChange = <K extends keyof ErdColumn>(entityId: string, columnId: string, field: K, value: ErdColumn[K]) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: entity.columns.map((column) => {
+        if (column.id !== columnId) return column;
+
+        const nextColumn = { ...column, [field]: value } as ErdColumn;
+
+        if (field === 'keyType' && value !== 'fk') {
+          nextColumn.relationKeyType = null;
+        }
+
+        return nextColumn;
+      }),
+    }));
+  };
+
+  const handleRemoveColumn = (entityId: string, columnId: string) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: entity.columns.filter((column) => column.id !== columnId),
+    }));
+  };
+
+  const handleMoveColumn = (entityId: string, fromColumnId: string, toColumnId: string) => {
+    updateEntity(entityId, (entity) => {
+      const fromIndex = entity.columns.findIndex((column) => column.id === fromColumnId);
+      const toIndex = entity.columns.findIndex((column) => column.id === toColumnId);
+
+      if (fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) {
+        return entity;
+      }
+
+      const nextColumns = [...entity.columns];
+      const [moved] = nextColumns.splice(fromIndex, 1);
+      nextColumns.splice(toIndex, 0, moved);
+
+      return {
+        ...entity,
+        columns: nextColumns,
+      };
+    });
+  };
+
+  const handleRemoveEntity = (entityId: string) => {
+    updateDocument((current) => ({
+      ...current,
+      entities: current.entities.filter((item) => item.id !== entityId),
+    }));
+    setSelectedEntityIds((prev) => prev.filter((id) => id !== entityId));
+  };
+
+  const focusEntity = (entityId: string) => {
+    const current = documentRef.current;
+    const viewport = viewportRef.current;
+    const entity = current?.entities.find((item) => item.id === entityId);
+
+    if (!entity || !viewport) return;
+
+    const nextLeft = Math.max(0, entity.position.x * zoomRef.current - 80);
+    const nextTop = Math.max(0, entity.position.y * zoomRef.current - 80);
+
+    viewport.scrollTo({
+      left: nextLeft,
+      top: nextTop,
+      behavior: 'smooth',
+    });
+    setSelectedEntityIds([entityId]);
+  };
+
+  const activeEntity = editorDocument.entities.find((entity) => entity.id === selectedEntityIds[0]) ?? null;
+  const activeEntityRelatedNames =
+    activeEntity == null
+      ? []
+      : Array.from(
+          new Set(
+            editorDocument.relations
+              .filter((relation) => relation.fromEntityId === activeEntity.id || relation.toEntityId === activeEntity.id)
+              .map((relation) => (relation.fromEntityId === activeEntity.id ? relation.toEntityId : relation.fromEntityId))
+              .map((entityId) => editorDocument.entities.find((entity) => entity.id === entityId)?.name)
+              .filter((value): value is string => Boolean(value)),
+          ),
+        );
+
+  const moveViewportToCanvasPoint = (ratioX: number, ratioY: number) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const targetLeft = ratioX * viewport.scrollWidth - viewport.clientWidth / 2;
+    const targetTop = ratioY * viewport.scrollHeight - viewport.clientHeight / 2;
+
+    viewport.scrollTo({
+      left: clamp(targetLeft, 0, Math.max(0, viewport.scrollWidth - viewport.clientWidth)),
+      top: clamp(targetTop, 0, Math.max(0, viewport.scrollHeight - viewport.clientHeight)),
+      behavior: 'auto',
+    });
+  };
+
+  return (
+    <>
+      {/* INFO: 에디터 메인 작업 영역 */}
+      <div className="flex min-h-0 min-w-0 w-full flex-1 flex-col gap-2 overflow-hidden px-3 py-2">
+        <section className="flex min-h-0 flex-1 items-stretch gap-2 overflow-hidden">
+          {/* INFO: 왼쪽 사이드 툴바 */}
+          <aside className="flex flex-col items-center rounded-lg border border-slate-200 bg-white py-1 shadow-sm">
+            <ToolbarButton compact label="Add Entity" onClick={handleAddEntity}>
+              <MdOutlinePostAdd size="1.05em" />
+            </ToolbarButton>
+            <ToolbarButton compact label="Add Memo" onClick={handleAddMemo}>
+              <MdStickyNote2 size="1.05em" />
+            </ToolbarButton>
+            <div className="relative">
+              <ToolbarButton active={isRelationPopoverOpen || relationMode !== 'none'} compact label="Relation" onClick={() => setIsRelationPopoverOpen((value) => !value)}>
+                <MdCallSplit size="1.05em" />
+              </ToolbarButton>
+              {isRelationPopoverOpen ? (
+                <div className="absolute left-10 top-0 z-20 flex w-56 flex-col gap-3 rounded-lg border border-slate-200 bg-white p-2 shadow-xl">
+                  <div className="grid grid-cols-2 gap-1">
+                    <button
+                      className={`flex h-8 items-center justify-center gap-1 rounded-md border text-[11px] font-medium ${relationMode === 'non-identifying' ? 'border-sky-300 bg-sky-50 text-sky-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                      onClick={() => setRelationMode('non-identifying')}
+                      type="button"
+                    >
+                      <MdCallSplit size="1.5em" />
+                      <span>Non</span>
+                    </button>
+                    <button
+                      className={`flex h-8 items-center justify-center gap-1 rounded-md border text-[11px] font-medium ${relationMode === 'identifying' ? 'border-sky-300 bg-sky-50 text-sky-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                      onClick={() => setRelationMode('identifying')}
+                      type="button"
+                    >
+                      <MdDeviceHub size="1.5em" />
+                      <span>Ident</span>
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1">
+                    {(['zero-or-many', 'one', 'zero-or-one', 'many', 'one-or-many', 'one-only'] as const).map((type) => (
+                      <button
+                        key={type}
+                        className={`flex h-8 items-center justify-center rounded-md border ${
+                          relationMode === 'none'
+                            ? 'cursor-not-allowed border-slate-200 bg-slate-100 text-slate-300'
+                            : relationCardinality === type
+                              ? 'border-sky-300 bg-sky-50 text-sky-700'
+                              : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                        }`}
+                        disabled={relationMode === 'none'}
+                        onClick={() => setRelationCardinality(type)}
+                        type="button"
+                      >
+                        <RelationCardinalityIcon type={type} />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+            <div className="mt-auto flex flex-col items-center">
+              <ToolbarButton compact label="Zoom Out" onClick={() => setZoom((value) => clamp(Number((value - 0.1).toFixed(2)), MIN_ZOOM, MAX_ZOOM))}>
+                <MdZoomOut size="1.05em" />
+              </ToolbarButton>
+              <ToolbarButton compact label="Zoom In" onClick={() => setZoom((value) => clamp(Number((value + 0.1).toFixed(2)), MIN_ZOOM, MAX_ZOOM))}>
+                <MdZoomIn size="1.05em" />
+              </ToolbarButton>
+              <ToolbarButton active={movementMode === 'free'} compact label="Free Move" onClick={() => setMovementMode('free')}>
+                <MdOpenWith size="1.05em" />
+              </ToolbarButton>
+              <ToolbarButton active={movementMode === 'grid'} compact label="Grid Move" onClick={() => setMovementMode('grid')}>
+                <MdGridOn size="1.05em" />
+              </ToolbarButton>
+              <div className="pt-1 text-[10px] font-semibold text-slate-400">{Math.round(zoom * 100)}%</div>
+            </div>
+          </aside>
+
+          {/* INFO: 메인 캔버스 뷰포트 */}
+          <div className="min-h-0 min-w-0 flex-1 overflow-hidden">
+            <div
+              ref={viewportRef}
+              className="scrollbar-hidden relative h-full min-h-0 w-full overflow-auto rounded-2xl border border-slate-200 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:24px_24px] p-4 shadow-sm"
+              onPointerDown={handleCanvasPanStart}
+              onMouseDown={(event) => {
+                if (event.button === 1) event.preventDefault();
+              }}
+              onAuxClick={(event) => {
+                if (event.button === 1) event.preventDefault();
+              }}
+              style={{ touchAction: 'none' }}
+            >
+              <div className="relative inline-block min-w-max" style={{ width: `${CANVAS_WIDTH * zoom}px`, height: `${CANVAS_HEIGHT * zoom}px` }}>
+                <div
+                  ref={canvasRef}
+                  className="relative origin-top-left"
+                  style={{ width: `${CANVAS_WIDTH}px`, height: `${CANVAS_HEIGHT}px`, transform: `scale(${zoom})` }}
+                  onMouseDown={(event) => {
+                    if (event.target === event.currentTarget) setSelectedEntityIds([]);
+                  }}
+                >
+                  {editorDocument.entities.map((entity) => {
+                    const sharedProps = {
+                      entity,
+                      isDragging: draggingEntityId === entity.id,
+                      isSelected: selectedEntityIds.includes(entity.id),
+                      onDragStart: (event: React.PointerEvent<HTMLElement>) => handleEntityDragStart(entity, event),
+                      onMoveToTop: () => handleEntityPositionChange(entity.id, entity.position.x, entity.position.y),
+                      onSelect: (append: boolean) =>
+                        setSelectedEntityIds((prev) => {
+                          if (append) {
+                            return prev.includes(entity.id) ? prev.filter((id) => id !== entity.id) : [...prev, entity.id];
+                          }
+
+                          return prev.length === 1 && prev[0] === entity.id ? prev : [entity.id];
+                        }),
+                    };
+
+                    if (entityViewMode === 'overview') {
+                      return (
+                        <EntityOverviewCard
+                          key={entity.id}
+                          {...sharedProps}
+                          onAddNormalColumn={() => handleAddColumn(entity.id, null)}
+                          onAddPrimaryColumn={() => handleAddColumn(entity.id, 'pk')}
+                          onOpenPalette={() => {
+                            setSelectedEntityIds([entity.id]);
+                            setIsPaletteOpen(true);
+                          }}
+                          onOpenProperties={() => {
+                            setSelectedEntityIds([entity.id]);
+                            setIsPropertiesOpen(true);
+                          }}
+                          onRemoveEntity={() => handleRemoveEntity(entity.id)}
+                        />
+                      );
+                    }
+
+                    return (
+                      <EntityCard
+                        key={entity.id}
+                        {...sharedProps}
+                        onColumnChange={(columnId, field, value) => handleColumnChange(entity.id, columnId, field, value)}
+                        onEntityFieldChange={(field, value) => handleEntityFieldChange(entity.id, field, value)}
+                        onAddNormalColumn={() => handleAddColumn(entity.id, null)}
+                        onAddPrimaryColumn={() => handleAddColumn(entity.id, 'pk')}
+                        onMoveColumn={(fromColumnId, toColumnId) => handleMoveColumn(entity.id, fromColumnId, toColumnId)}
+                        onOpenPalette={() => {
+                          setSelectedEntityIds([entity.id]);
+                          setIsPaletteOpen(true);
+                        }}
+                        onOpenProperties={() => {
+                          setSelectedEntityIds([entity.id]);
+                          setIsPropertiesOpen(true);
+                        }}
+                        onRemoveEntity={() => handleRemoveEntity(entity.id)}
+                        onRemoveColumn={(columnId) => handleRemoveColumn(entity.id, columnId)}
+                        onResize={handleEntitySizeChange}
+                      />
+                    );
+                  })}
+
+                  {editorDocument.memos.map((memo, index) => (
+                    <div
+                      key={memo.id}
+                      className="absolute rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm"
+                      style={{ left: 40 + (index % 2) * 320, top: 1120 + Math.floor(index / 2) * 180, width: 280 }}
+                    >
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-amber-700">Memo</p>
+                      <h3 className="mb-2 text-lg font-semibold text-slate-950">{memo.title}</h3>
+                      <p className="text-sm leading-6 text-slate-600">{memo.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* INFO: 우측 하단 미니맵 */}
+      {isMinimapVisible ? (
+        <div className="fixed bottom-4 right-4 z-40">
+          <ErdMinimap
+            canvasHeight={CANVAS_HEIGHT}
+            canvasWidth={CANVAS_WIDTH}
+            entities={editorDocument.entities}
+            selectedEntityIds={selectedEntityIds}
+            viewportMetrics={viewportMetrics}
+            width={MINIMAP_WIDTH}
+            zoom={zoom}
+            onNavigate={moveViewportToCanvasPoint}
+          />
+        </div>
+      ) : null}
+      {/* INFO: 우측 상단 엔티티 리스트 패널 */}
+      {entityPanelMode === 'list' ? (
+        <div className="fixed right-[4.75rem] top-16 z-40">
+          <div className="flex max-h-[360px] w-[280px] flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Entities</p>
+                <p className="text-[11px] text-slate-400">{editorDocument.entities.length} items</p>
+              </div>
+              <button
+                className="flex h-7 w-7 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+                onClick={() => setEntityPanelMode(null)}
+                type="button"
+              >
+                <MdClose size="1.05em" />
+              </button>
+            </div>
+            <div className="overflow-auto p-2">
+              <div className="grid gap-1">
+                {editorDocument.entities.map((entity) => (
+                  <div key={entity.id} className="flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5">
+                    <input
+                      className="min-w-0 flex-1 rounded-md border border-transparent bg-transparent px-1 py-1 text-sm font-medium text-slate-700 outline-none focus:border-slate-300 focus:bg-white"
+                      onChange={(event) => handleEntityFieldChange(entity.id, 'name', event.target.value)}
+                      onFocus={() => {
+                        focusEntity(entity.id);
+                      }}
+                      onPointerDown={(event) => {
+                        event.stopPropagation();
+                      }}
+                      placeholder="Untitled Entity"
+                      value={entity.name}
+                    />
+                    <button
+                      className="flex h-7 w-7 items-center justify-center rounded-md text-slate-400 hover:bg-rose-50 hover:text-rose-600"
+                      onClick={() => handleRemoveEntity(entity.id)}
+                      type="button"
+                    >
+                      <RiDeleteBin6Line size="1em" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {/* INFO: 우측 상단 액션 메뉴 */}
+      <div className="fixed right-4 top-16 z-40">
+        <EditorActionMenu
+          isMenuOpen={isActionMenuOpen}
+          isMinimapVisible={isMinimapVisible}
+          isOverviewMode={entityViewMode === 'overview'}
+          onOpenDdl={() => {
+            setIsDdlOpen(true);
+          }}
+          onOpenEntityList={() => {
+            setEntityPanelMode('list');
+          }}
+          onToggleMenu={() => setIsActionMenuOpen((value) => !value)}
+          onToggleMinimap={() => setIsMinimapVisible((value) => !value)}
+          onToggleOverviewMode={() => {
+            setEntityViewMode((value) => (value === 'detail' ? 'overview' : 'detail'));
+          }}
+        />
+      </div>
+      {/* INFO: 선택된 엔티티 속성 모달 */}
+      <EntityPropertiesModal
+        entity={activeEntity}
+        isOpen={isPropertiesOpen}
+        onClose={() => setIsPropertiesOpen(false)}
+        onEntityFieldChange={(field, value) => {
+          if (!activeEntity) return;
+          handleEntityFieldChange(activeEntity.id, field, value);
+        }}
+        relatedEntityNames={activeEntityRelatedNames}
+      />
+      {/* INFO: 선택된 엔티티 색상 팔레트 모달 */}
+      <EntityPaletteModal
+        color={activeEntity?.color ?? '#0f172a'}
+        isOpen={isPaletteOpen}
+        onClose={() => setIsPaletteOpen(false)}
+        onSelectColor={(color) => {
+          if (!activeEntity) return;
+          updateEntity(activeEntity.id, (entity) => ({
+            ...entity,
+            color,
+          }));
+          setIsPaletteOpen(false);
+        }}
+      />
+      {/* INFO: DDL 미리보기 모달 */}
+      {isDdlOpen ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-6">
+          <div className="flex h-[min(78vh,720px)] w-[min(960px,92vw)] flex-col rounded-2xl border border-slate-200 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">DDL Preview</p>
+                <p className="text-sm text-slate-500">{editorDocument.entities.length} entities</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button className="rounded-md border border-slate-200 px-3 py-2 text-xs font-medium text-slate-700" onClick={() => navigator.clipboard.writeText(ddl)}>
+                  Copy DDL
+                </button>
+                <button className="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 text-slate-600" onClick={() => setIsDdlOpen(false)}>
+                  <MdClose size="1.1em" />
+                </button>
+              </div>
+            </div>
+            <pre className="flex-1 overflow-auto bg-slate-950 p-4 text-xs leading-6 text-slate-200">{ddl || '-- No entities yet'}</pre>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+};
+
+function ToolbarButton({
+  children,
+  active = false,
+  compact = false,
+  label,
+  onClick,
+}: React.PropsWithChildren<{ active?: boolean; compact?: boolean; label: string; onClick: () => void }>) {
+  return (
+    <button
+      className={
+        compact
+          ? `flex h-8 w-8 items-center justify-center transition-colors hover:bg-slate-100 hover:text-slate-900 ${active ? 'bg-slate-100 text-slate-900' : 'text-slate-600'}`
+          : 'flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900'
+      }
+      onClick={onClick}
+      title={label}
+      type="button"
+    >
+      {children}
+    </button>
+  );
+}
+
+export default ErdEditorPage;

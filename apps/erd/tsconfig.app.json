@@ -1,0 +1,40 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "composite": true,
+
+    /* Linting */
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@@baseUI": ["src/components/base/index.ts"],
+      "@@baseUI/*": ["src/components/base/*"],
+      "@@editor": ["src/features/editor/index.ts"],
+      "@@editor/*": ["src/features/editor/*"],
+      "@@erd-list": ["src/features/erd-list/index.ts"],
+      "@@erd-list/*": ["src/features/erd-list/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["**/.*.ts", "**/.*.tsx", "**/*.test.ts", "**/*.test.tsx", "**/*.legacy.ts", "**/*.legacy.tsx"]
+}

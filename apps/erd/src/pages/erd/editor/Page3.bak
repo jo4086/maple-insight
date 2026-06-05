@@ -1,0 +1,687 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { buildPostgresDDL, createEmptyDocument, loadErdDocuments, saveErdDocuments, type ErdColumn, type ErdDocument, type ErdEntity } from '@/features/erd';
+import { estimateEntitySize } from '@/features/utils/entity-metrics';
+
+import { useEditorSession } from '@/features/hooks/useEditorSession';
+import { NotFoundPage } from '@/pages';
+import type { ViewportMetrics } from '@@editor/ErdMinimap';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, MAX_ZOOM, MIN_ZOOM, MINIMAP_WIDTH } from './constants';
+import { persistDocument, saveCurrentDocumentSnapshot } from './document-storage';
+import { clamp, findEmptyPosition, snapToGrid, type DragState, type PanState } from './geometry';
+import { canAutoSaveDocument, createColumn, createEntity, createIncrementedColumnName, sortColumnsByPriority } from './model';
+import EditorModals from './sections/EditorModals';
+import MainWorkspace from './sections/MainWorkspace';
+import OverlayPanels from './sections/OverlayPanels';
+
+const ErdEditorPage = () => {
+  const { erdId } = useParams();
+  const navigate = useNavigate();
+  const { registerSaveAction, setCanSave, setIsDirty, setTitle: setEditorTitle, title: editorTitle } = useEditorSession();
+  const [editorDocument, SetEditorDocument] = useState<ErdDocument | null>(null);
+  const [documentStatus, setDocumentStatus] = useState<'loading' | 'ready' | 'missing'>('loading');
+  const [draggingEntityId, setDraggingEntityId] = useState<string | null>(null);
+  const [selectedEntityIds, setSelectedEntityIds] = useState<string[]>([]);
+  const [zoom, setZoom] = useState(1);
+  const [isDdlOpen, setIsDdlOpen] = useState(false);
+  const [entityPanelMode, setEntityPanelMode] = useState<'list' | null>(null);
+  const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
+  const [isMinimapVisible, setIsMinimapVisible] = useState(true);
+  const [entityViewMode, setEntityViewMode] = useState<'detail' | 'overview'>('detail');
+  const [isPropertiesOpen, setIsPropertiesOpen] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [movementMode, setMovementMode] = useState<'free' | 'grid'>('free');
+  const [relationMode, setRelationMode] = useState<'none' | 'non-identifying' | 'identifying'>('none');
+  const [relationCardinality, setRelationCardinality] = useState<'zero-or-many' | 'one' | 'zero-or-one' | 'many' | 'one-or-many' | 'one-only'>('one');
+  const [isRelationPopoverOpen, setIsRelationPopoverOpen] = useState(false);
+  const [viewportMetrics, setViewportMetrics] = useState<ViewportMetrics>({
+    scrollLeft: 0,
+    scrollTop: 0,
+    clientWidth: 0,
+    clientHeight: 0,
+    scrollWidth: CANVAS_WIDTH,
+    scrollHeight: CANVAS_HEIGHT,
+  });
+  const canvasRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const documentRef = useRef<ErdDocument | null>(null);
+  const dragRef = useRef<DragState | null>(null);
+  const panRef = useRef<PanState | null>(null);
+  const savedSnapshotRef = useRef<string | null>(null);
+  const isPersistedRef = useRef(false);
+  const isSyncingTitleRef = useRef(false);
+  const titleRef = useRef('Untitled ERD');
+  const zoomRef = useRef(1);
+  const movementModeRef = useRef<'free' | 'grid'>('free');
+  const documentId = editorDocument?.id ?? null;
+  const documentTitle = editorDocument?.title ?? null;
+
+  useEffect(() => {
+    const documents = loadErdDocuments();
+
+    if (erdId === 'new' || !erdId) {
+      const next = createEmptyDocument();
+      SetEditorDocument(next);
+      setDocumentStatus('ready');
+      documentRef.current = next;
+      isPersistedRef.current = false;
+      savedSnapshotRef.current = null;
+      setSelectedEntityIds([]);
+      return;
+    }
+
+    const found = documents.find((item) => item.id === erdId) ?? null;
+    SetEditorDocument(found);
+    setDocumentStatus(found ? 'ready' : 'missing');
+    documentRef.current = found;
+    isPersistedRef.current = !!found;
+    savedSnapshotRef.current = found ? JSON.stringify(found) : null;
+    setSelectedEntityIds([]);
+  }, [erdId, navigate]);
+
+  useEffect(() => {
+    documentRef.current = editorDocument;
+  }, [editorDocument]);
+
+  useEffect(() => {
+    zoomRef.current = zoom;
+  }, [zoom]);
+
+  useEffect(() => {
+    movementModeRef.current = movementMode;
+  }, [movementMode]);
+
+  useEffect(() => {
+    if (!documentTitle) {
+      isSyncingTitleRef.current = true;
+      titleRef.current = 'Untitled ERD';
+      setEditorTitle('Untitled ERD');
+      return;
+    }
+
+    isSyncingTitleRef.current = true;
+    titleRef.current = documentTitle;
+    setEditorTitle(documentTitle);
+  }, [documentId, documentTitle, setEditorTitle]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+
+    if (!viewport) return;
+
+    const syncViewportMetrics = () => {
+      setViewportMetrics({
+        scrollLeft: viewport.scrollLeft,
+        scrollTop: viewport.scrollTop,
+        clientWidth: viewport.clientWidth,
+        clientHeight: viewport.clientHeight,
+        scrollWidth: viewport.scrollWidth,
+        scrollHeight: viewport.scrollHeight,
+      });
+    };
+
+    syncViewportMetrics();
+    viewport.addEventListener('scroll', syncViewportMetrics, { passive: true });
+
+    const observer = new ResizeObserver(syncViewportMetrics);
+    observer.observe(viewport);
+
+    return () => {
+      viewport.removeEventListener('scroll', syncViewportMetrics);
+      observer.disconnect();
+    };
+  }, [zoom, editorDocument]);
+
+  const applyDocument = useCallback((next: ErdDocument, shouldPersist = true) => {
+    documentRef.current = next;
+    SetEditorDocument(next);
+
+    if (!shouldPersist || !isPersistedRef.current || !canAutoSaveDocument(next)) return;
+
+    persistDocument(next);
+    savedSnapshotRef.current = JSON.stringify(next);
+  }, []);
+
+  const saveCurrentDocument = useCallback(() => {
+    const current = documentRef.current;
+    if (!current || !canAutoSaveDocument(current)) return;
+
+    const next = {
+      ...current,
+      updatedAt: new Date().toISOString(),
+    };
+    saveCurrentDocumentSnapshot(next);
+
+    documentRef.current = next;
+    SetEditorDocument(next);
+    isPersistedRef.current = true;
+    savedSnapshotRef.current = JSON.stringify(next);
+
+    if (erdId === 'new' || !erdId) {
+      navigate(`/erd/${next.id}`, { replace: true });
+    }
+  }, [erdId, navigate]);
+
+  const updateDocument = useCallback(
+    (updater: (current: ErdDocument) => ErdDocument, shouldPersist = true) => {
+      const current = documentRef.current;
+
+      if (!current) return;
+
+      applyDocument(
+        {
+          ...updater(current),
+          updatedAt: new Date().toISOString(),
+        },
+        shouldPersist,
+      );
+    },
+    [applyDocument],
+  );
+
+  useEffect(() => {
+    registerSaveAction(() => saveCurrentDocument());
+    return () => registerSaveAction(null);
+  }, [registerSaveAction, saveCurrentDocument]);
+
+  useEffect(() => {
+    if (isSyncingTitleRef.current) {
+      isSyncingTitleRef.current = false;
+      return;
+    }
+    if (!editorDocument) return;
+    if (editorTitle === titleRef.current) return;
+
+    titleRef.current = editorTitle;
+    updateDocument((current) => ({
+      ...current,
+      title: editorTitle,
+    }));
+  }, [editorTitle, editorDocument, updateDocument]);
+
+  useEffect(() => {
+    if (!editorDocument) {
+      setIsDirty(false);
+      setCanSave(false);
+      return;
+    }
+
+    const isMeaningful = canAutoSaveDocument(editorDocument);
+    const isDirty = savedSnapshotRef.current === null ? isMeaningful : savedSnapshotRef.current !== JSON.stringify(editorDocument);
+
+    setIsDirty(isDirty);
+    setCanSave(isMeaningful && isDirty);
+  }, [editorDocument, setCanSave, setIsDirty]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Delete' || selectedEntityIds.length === 0) return;
+
+      const activeTag = window.document.activeElement?.tagName;
+      if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+
+      updateDocument((current) => ({
+        ...current,
+        entities: current.entities.filter((entity) => !selectedEntityIds.includes(entity.id)),
+      }));
+      setSelectedEntityIds([]);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedEntityIds, updateDocument]);
+
+  useEffect(() => {
+    const handlePointerMove = (event: PointerEvent) => {
+      const drag = dragRef.current;
+      const current = documentRef.current;
+      const canvas = canvasRef.current;
+      const pan = panRef.current;
+      const viewport = viewportRef.current;
+
+      if (pan && viewport && pan.pointerId === event.pointerId) {
+        viewport.scrollLeft = pan.startScrollLeft - (event.clientX - pan.startClientX);
+        viewport.scrollTop = pan.startScrollTop - (event.clientY - pan.startClientY);
+        return;
+      }
+
+      if (!drag || !current || !canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const dragged = current.entities.find((entity) => entity.id === drag.anchorEntityId);
+      const entityWidth = dragged?.size.width ?? 0;
+      const entityHeight = dragged?.size.height ?? 0;
+      const scale = zoomRef.current;
+      const rawNextX = clamp((event.clientX - rect.left) / scale - drag.offsetX, 0, CANVAS_WIDTH - entityWidth);
+      const rawNextY = clamp((event.clientY - rect.top) / scale - drag.offsetY, 0, CANVAS_HEIGHT - entityHeight);
+      const nextX = movementModeRef.current === 'grid' ? clamp(snapToGrid(rawNextX), 0, CANVAS_WIDTH - entityWidth) : rawNextX;
+      const nextY = movementModeRef.current === 'grid' ? clamp(snapToGrid(rawNextY), 0, CANVAS_HEIGHT - entityHeight) : rawNextY;
+      const startAnchor = drag.startPositions[drag.anchorEntityId];
+      const deltaX = nextX - startAnchor.x;
+      const deltaY = nextY - startAnchor.y;
+
+      const next: ErdDocument = {
+        ...current,
+        updatedAt: new Date().toISOString(),
+        entities: current.entities.map((entity) => {
+          if (!drag.entityIds.includes(entity.id)) return entity;
+
+          const start = drag.startPositions[entity.id];
+          const width = entity.size.width;
+          const height = entity.size.height;
+
+          return {
+            ...entity,
+            position: {
+              x: clamp(start.x + deltaX, 0, CANVAS_WIDTH - width),
+              y: clamp(start.y + deltaY, 0, CANVAS_HEIGHT - height),
+            },
+          };
+        }),
+      };
+
+      documentRef.current = next;
+      SetEditorDocument(next);
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      const drag = dragRef.current;
+      const current = documentRef.current;
+      const pan = panRef.current;
+
+      if (pan && pan.pointerId === event.pointerId) {
+        panRef.current = null;
+        return;
+      }
+
+      if (!drag || drag.pointerId !== event.pointerId || !current) return;
+
+      dragRef.current = null;
+      setDraggingEntityId(null);
+
+      const documents = loadErdDocuments();
+      saveErdDocuments(documents.map((item) => (item.id === current.id ? current : item)));
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [updateDocument]);
+
+  const ddl = useMemo(() => {
+    if (!editorDocument) return '';
+    return buildPostgresDDL(editorDocument);
+  }, [editorDocument]);
+  if (documentStatus === 'missing') {
+    return <NotFoundPage />;
+  }
+
+  if (documentStatus === 'loading' || !editorDocument) {
+    return (
+      <div className="flex w-full flex-1 flex-col px-5 py-12">
+        <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">문서를 불러오는 중입니다.</div>
+      </div>
+    );
+  }
+
+  const handleAddEntity = () => {
+    updateDocument((current) => ({
+      ...current,
+      entities: (() => {
+        const nextEntity = createEntity(current.entities.length);
+        const estimatedSize = estimateEntitySize(nextEntity);
+
+        return [
+          ...current.entities,
+          {
+            ...nextEntity,
+            size: estimatedSize,
+            position: findEmptyPosition(current.entities, estimatedSize.width, estimatedSize.height),
+          },
+        ];
+      })(),
+    }));
+  };
+
+  const handleAddMemo = () => {
+    updateDocument((current) => ({
+      ...current,
+      memos: [
+        ...current.memos,
+        {
+          id: crypto.randomUUID(),
+          title: 'New Memo',
+          content: '메모 내용을 입력하세요.',
+        },
+      ],
+    }));
+  };
+
+  const updateEntity = (entityId: string, updater: (entity: ErdEntity) => ErdEntity, shouldPersist = true) => {
+    updateDocument(
+      (current) => ({
+        ...current,
+        entities: current.entities.map((entity) => {
+          if (entity.id !== entityId) return entity;
+
+          const nextEntity = updater(entity);
+          return {
+            ...nextEntity,
+            columns: sortColumnsByPriority(nextEntity.columns),
+          };
+        }),
+      }),
+      shouldPersist,
+    );
+  };
+
+  const handleEntityFieldChange = (entityId: string, field: 'name' | 'comment' | 'isUniqueColumnVisible', value: string | boolean) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      [field]: value,
+    }));
+  };
+
+  const handleEntityPositionChange = (entityId: string, x: number, y: number, shouldPersist = true) => {
+    updateEntity(
+      entityId,
+      (entity) => ({
+        ...entity,
+        position: { x, y },
+      }),
+      shouldPersist,
+    );
+  };
+
+  const handleEntitySizeChange = (entityId: string, width: number, height: number) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      size: { width, height },
+    }));
+  };
+
+  const handleEntityDragStart = (entity: ErdEntity, event: React.PointerEvent<HTMLElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const entityIds = selectedEntityIds.includes(entity.id) ? selectedEntityIds : [entity.id];
+    const current = documentRef.current;
+    if (!current) return;
+
+    const startPositions = Object.fromEntries(current.entities.filter((item) => entityIds.includes(item.id)).map((item) => [item.id, { x: item.position.x, y: item.position.y }]));
+
+    dragRef.current = {
+      entityIds,
+      anchorEntityId: entity.id,
+      offsetX: (event.clientX - rect.left) / zoomRef.current - entity.position.x,
+      offsetY: (event.clientY - rect.top) / zoomRef.current - entity.position.y,
+      pointerId: event.pointerId,
+      startPositions,
+    };
+
+    setDraggingEntityId(entity.id);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleCanvasPanStart = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.button !== 1) return;
+
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    panRef.current = {
+      pointerId: event.pointerId,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startScrollLeft: viewport.scrollLeft,
+      startScrollTop: viewport.scrollTop,
+    };
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  };
+
+  const handleAddColumn = (entityId: string, keyType: ErdColumn['keyType'] = null) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: [
+        ...entity.columns,
+        (() => {
+          const baseName = keyType === 'pk' ? 'pk' : 'name';
+          const nextName = createIncrementedColumnName(entity.columns, baseName);
+
+          return {
+            ...createColumn(nextName, keyType),
+            isAllowNull: keyType === 'pk',
+            comment: keyType === 'pk' ? 'PRIMARY KEY' : '',
+          };
+        })(),
+      ],
+    }));
+  };
+
+  const handleColumnChange = <K extends keyof ErdColumn>(entityId: string, columnId: string, field: K, value: ErdColumn[K]) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: entity.columns.map((column) => {
+        if (column.id !== columnId) return column;
+
+        const nextColumn = { ...column, [field]: value } as ErdColumn;
+
+        if (field === 'keyType' && value !== 'fk') {
+          nextColumn.relationKeyType = null;
+        }
+
+        return nextColumn;
+      }),
+    }));
+  };
+
+  const handleRemoveColumn = (entityId: string, columnId: string) => {
+    updateEntity(entityId, (entity) => ({
+      ...entity,
+      columns: entity.columns.filter((column) => column.id !== columnId),
+    }));
+  };
+
+  const handleMoveColumn = (entityId: string, fromColumnId: string, toColumnId: string) => {
+    updateEntity(entityId, (entity) => {
+      const fromIndex = entity.columns.findIndex((column) => column.id === fromColumnId);
+      const toIndex = entity.columns.findIndex((column) => column.id === toColumnId);
+
+      if (fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) {
+        return entity;
+      }
+
+      const nextColumns = [...entity.columns];
+      const [moved] = nextColumns.splice(fromIndex, 1);
+      nextColumns.splice(toIndex, 0, moved);
+
+      return {
+        ...entity,
+        columns: nextColumns,
+      };
+    });
+  };
+
+  const handleRemoveEntity = (entityId: string) => {
+    updateDocument((current) => ({
+      ...current,
+      entities: current.entities.filter((item) => item.id !== entityId),
+    }));
+    setSelectedEntityIds((prev) => prev.filter((id) => id !== entityId));
+  };
+
+  const focusEntity = (entityId: string) => {
+    const current = documentRef.current;
+    const viewport = viewportRef.current;
+    const entity = current?.entities.find((item) => item.id === entityId);
+
+    if (!entity || !viewport) return;
+
+    const nextLeft = Math.max(0, entity.position.x * zoomRef.current - 80);
+    const nextTop = Math.max(0, entity.position.y * zoomRef.current - 80);
+
+    viewport.scrollTo({
+      left: nextLeft,
+      top: nextTop,
+      behavior: 'smooth',
+    });
+    setSelectedEntityIds([entityId]);
+  };
+
+  const activeEntity = editorDocument.entities.find((entity) => entity.id === selectedEntityIds[0]) ?? null;
+  const activeEntityRelatedNames =
+    activeEntity == null
+      ? []
+      : Array.from(
+          new Set(
+            editorDocument.relations
+              .filter((relation) => relation.fromEntityId === activeEntity.id || relation.toEntityId === activeEntity.id)
+              .map((relation) => (relation.fromEntityId === activeEntity.id ? relation.toEntityId : relation.fromEntityId))
+              .map((entityId) => editorDocument.entities.find((entity) => entity.id === entityId)?.name)
+              .filter((value): value is string => Boolean(value)),
+          ),
+        );
+
+  const moveViewportToCanvasPoint = (ratioX: number, ratioY: number) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const targetLeft = ratioX * viewport.scrollWidth - viewport.clientWidth / 2;
+    const targetTop = ratioY * viewport.scrollHeight - viewport.clientHeight / 2;
+
+    viewport.scrollTo({
+      left: clamp(targetLeft, 0, Math.max(0, viewport.scrollWidth - viewport.clientWidth)),
+      top: clamp(targetTop, 0, Math.max(0, viewport.scrollHeight - viewport.clientHeight)),
+      behavior: 'auto',
+    });
+  };
+
+  return (
+    <>
+      <MainWorkspace
+        canvasHeight={CANVAS_HEIGHT}
+        canvasRef={canvasRef}
+        canvasWidth={CANVAS_WIDTH}
+        draggingEntityId={draggingEntityId}
+        editorDocument={editorDocument}
+        entityViewMode={entityViewMode}
+        isRelationPopoverOpen={isRelationPopoverOpen}
+        movementMode={movementMode}
+        relationCardinality={relationCardinality}
+        relationMode={relationMode}
+        selectedEntityIds={selectedEntityIds}
+        viewportRef={viewportRef}
+        zoom={zoom}
+        onAddColumn={handleAddColumn}
+        onAddEntity={handleAddEntity}
+        onAddMemo={handleAddMemo}
+        onCanvasBackgroundMouseDown={() => setSelectedEntityIds([])}
+        onCanvasPanStart={handleCanvasPanStart}
+        onColumnChange={handleColumnChange}
+        onEntityDragStart={handleEntityDragStart}
+        onEntityFieldChange={handleEntityFieldChange}
+        onEntityMoveToTop={(entityId) =>
+          handleEntityPositionChange(
+            entityId,
+            editorDocument.entities.find((entity) => entity.id === entityId)?.position.x ?? 0,
+            editorDocument.entities.find((entity) => entity.id === entityId)?.position.y ?? 0,
+          )
+        }
+        onEntitySelect={(entityId, append) =>
+          setSelectedEntityIds((prev) => {
+            if (append) {
+              return prev.includes(entityId) ? prev.filter((id) => id !== entityId) : [...prev, entityId];
+            }
+
+            return prev.length === 1 && prev[0] === entityId ? prev : [entityId];
+          })
+        }
+        onMoveColumn={handleMoveColumn}
+        onOpenPalette={(entityId) => {
+          setSelectedEntityIds([entityId]);
+          setIsPaletteOpen(true);
+        }}
+        onOpenProperties={(entityId) => {
+          setSelectedEntityIds([entityId]);
+          setIsPropertiesOpen(true);
+        }}
+        onRelationCardinalitySelect={setRelationCardinality}
+        onRelationModeSelect={setRelationMode}
+        onRemoveColumn={handleRemoveColumn}
+        onRemoveEntity={handleRemoveEntity}
+        onResizeEntity={handleEntitySizeChange}
+        onToggleRelationPopover={() => setIsRelationPopoverOpen((value) => !value)}
+        onViewportAuxClick={(event) => {
+          if (event.button === 1) event.preventDefault();
+        }}
+        onViewportMouseDown={(event) => {
+          if (event.button === 1) event.preventDefault();
+        }}
+        onZoomIn={() => setZoom((value) => clamp(Number((value + 0.1).toFixed(2)), MIN_ZOOM, MAX_ZOOM))}
+        onZoomOut={() => setZoom((value) => clamp(Number((value - 0.1).toFixed(2)), MIN_ZOOM, MAX_ZOOM))}
+        setMovementMode={setMovementMode}
+      />
+      <OverlayPanels
+        canvasHeight={CANVAS_HEIGHT}
+        canvasWidth={CANVAS_WIDTH}
+        editorDocument={editorDocument}
+        entityPanelMode={entityPanelMode}
+        entityViewMode={entityViewMode}
+        isActionMenuOpen={isActionMenuOpen}
+        isMinimapVisible={isMinimapVisible}
+        selectedEntityIds={selectedEntityIds}
+        viewportMetrics={viewportMetrics}
+        width={MINIMAP_WIDTH}
+        zoom={zoom}
+        onCloseEntityPanel={() => setEntityPanelMode(null)}
+        onEntityFieldChange={handleEntityFieldChange}
+        onFocusEntity={focusEntity}
+        onNavigateMinimap={moveViewportToCanvasPoint}
+        onOpenDdl={() => setIsDdlOpen(true)}
+        onOpenEntityList={() => setEntityPanelMode('list')}
+        onRemoveEntity={handleRemoveEntity}
+        onToggleMenu={() => setIsActionMenuOpen((value) => !value)}
+        onToggleMinimap={() => setIsMinimapVisible((value) => !value)}
+        onToggleOverviewMode={() => {
+          setEntityViewMode((value) => (value === 'detail' ? 'overview' : 'detail'));
+        }}
+      />
+      <EditorModals
+        activeEntity={activeEntity}
+        activeEntityRelatedNames={activeEntityRelatedNames}
+        color={activeEntity?.color ?? '#0f172a'}
+        ddl={ddl}
+        entityCount={editorDocument.entities.length}
+        isDdlOpen={isDdlOpen}
+        isPaletteOpen={isPaletteOpen}
+        isPropertiesOpen={isPropertiesOpen}
+        onCloseDdl={() => setIsDdlOpen(false)}
+        onClosePalette={() => setIsPaletteOpen(false)}
+        onCloseProperties={() => setIsPropertiesOpen(false)}
+        onCopyDdl={() => navigator.clipboard.writeText(ddl)}
+        onEntityFieldChange={(field, value) => {
+          if (!activeEntity) return;
+          handleEntityFieldChange(activeEntity.id, field, value);
+        }}
+        onSelectColor={(color) => {
+          if (!activeEntity) return;
+          updateEntity(activeEntity.id, (entity) => ({
+            ...entity,
+            color,
+          }));
+          setIsPaletteOpen(false);
+        }}
+      />
+    </>
+  );
+};
+
+export default ErdEditorPage;

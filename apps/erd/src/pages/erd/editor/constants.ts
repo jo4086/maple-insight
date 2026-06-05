@@ -1,0 +1,9 @@
+export const CANVAS_WIDTH = 5760;
+export const CANVAS_HEIGHT = 4800;
+export const ENTITY_DEFAULT_WIDTH = 420;
+export const ENTITY_DEFAULT_HEIGHT = 240;
+export const ENTITY_GAP = 24;
+export const GRID_STEP = 24;
+export const MIN_ZOOM = 0.5;
+export const MAX_ZOOM = 1.6;
+export const MINIMAP_WIDTH = 220;

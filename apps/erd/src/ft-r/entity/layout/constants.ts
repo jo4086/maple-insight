@@ -1,0 +1,8 @@
+import { GRID_UNIT } from '../../shared'
+
+export const ENTITY_MIN_WIDTH = GRID_UNIT * 30
+export const ENTITY_HEADER_HEIGHT = GRID_UNIT * 7
+export const ENTITY_ROW_HEIGHT = GRID_UNIT * 5
+export const ENTITY_CELL_HORIZONTAL_PADDING = GRID_UNIT * 2
+export const ENTITY_TEXT_CHAR_WIDTH = GRID_UNIT * 1.5
+export const ENTITY_MIN_PORT_OFFSET = GRID_UNIT

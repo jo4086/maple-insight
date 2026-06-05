@@ -1,0 +1,37 @@
+{
+  "name": "@apps/ingestor",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/index.ts",
+    "dev:ranking": "tsx src/jobs/ingest-ranking.ts",
+    "dev:ocids": "tsx src/jobs/ingest-character-details.ts",
+    "dev:characters": "tsx src/jobs/ingest-character-details.ts",
+    "dev:character:one": "tsx src/jobs/ingest-single-character.ts",
+    "dev:groups": "tsx src/jobs/build-character-groups.ts",
+    "dev:sync": "pnpm run dev:ocids && pnpm run dev:groups",
+    "dev:reset": "prisma migrate reset --force",
+    "dev:reset:non-ranking": "tsx src/jobs/reset-non-ranking.ts",
+    "build": "tsx -p tsconfig.json",
+    "start": "tsc -p tsconfig.ts",
+    "crawl:notices": "tsc src/jobs/crawl-notices.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev"
+  },
+  "devDependencies": {
+    "@maple/api-ranking": "workspace:*",
+    "@maple/api-union": "workspace:*",
+    "prisma": "^6.6.0",
+    "pino-pretty": "^13.1.2",
+    "playwright": "^1.59.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "@maple/nexon-contracts": "workspace:*",
+    "@maple/db": "workspace:*",
+    "dotenv": "^17.2.3",
+    "pino": "^10.1.0"
+  }
+}
