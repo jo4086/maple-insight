@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import type { ItemEquipment } from '@maple/contracts';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { CharacterSearchInput } from '@/features/character/components/CharacterSearchInput';
-import { EquipmentContainer } from '@/features/character/components/equipment/EquipmentContainer';
-import { EquipmentGrid } from '@/features/character/components/equipment/EquipmentGrid';
-import { useSearchNick } from '@/features/character/hooks/useSearchNick';
+import { CharacterSearchInput, EquipmentCard, EquipmentContainer, EquipmentGrid, useSearchNick } from '@/features/character';
 
 export const CharacterMainPage = () => {
   const [searchParams] = useSearchParams();
@@ -14,8 +12,12 @@ export const CharacterMainPage = () => {
   const { data, isPending, isError, error } = useSearchNick(nick);
 
   const characterImg = data?.basic.info.imageUrl || '';
-  const equipment = data?.['item-equipment'];
-  const android = data?.['android-equipment'];
+  const equipment = data?.equipment;
+  const defaultPreviewItem = useMemo(
+    () => equipment?.itemEquipment.find((item) => item.slot.replaceAll(' ', '').trim() === '모자' || item.part === '모자') ?? equipment?.itemEquipment[0] ?? null,
+    [equipment],
+  );
+  const [previewItem, setPreviewItem] = useState<ItemEquipment | null>(null);
 
   useEffect(() => {
     if (!data) {
@@ -31,6 +33,10 @@ export const CharacterMainPage = () => {
       window.cancelAnimationFrame(animationFrame);
     };
   }, [data]);
+
+  useEffect(() => {
+    setPreviewItem(defaultPreviewItem);
+  }, [defaultPreviewItem]);
 
   if (isPending && !data) {
     return (
@@ -78,10 +84,19 @@ export const CharacterMainPage = () => {
           </div>
         )}
 
-        {equipment && android && (
-          <EquipmentContainer>
-            <EquipmentGrid characterImg={characterImg} items={equipment.itemEquipment} initialPresetNo={equipment.presetNo} presets={equipment.presets} android={android} />
-          </EquipmentContainer>
+        {equipment && (
+          <div className="grid grid-cols-[repeat(4,minmax(0,1fr))] items-start gap-4">
+            <div className="col-span-1 min-h-[70lvh] min-w-0 w-full bg-red-500/5">1</div>
+            <div className="col-span-1 min-h-[70lvh] min-w-0 w-full bg-yellow-500/5">2</div>
+
+            <div className="col-span-1 grid min-h-[70lvh] min-w-0 w-full justify-items-center bg-green-500/5">
+              <EquipmentContainer>
+                <EquipmentGrid characterImg={characterImg} equipment={equipment} onItemSelect={setPreviewItem} />
+              </EquipmentContainer>
+            </div>
+
+            <div className="col-span-1 grid min-h-[70lvh] min-w-0 w-full justify-items-center bg-blue-500/5">{previewItem && <EquipmentCard item={previewItem} />}</div>
+          </div>
         )}
       </section>
     </div>

@@ -1,14 +1,13 @@
 import type {
   CharacterAbility,
-  CharacterAndroid,
   CharacterBasic,
   CharacterBeauty,
   CharacterCashItem,
   CharacterDojang,
+  CharacterEquipment,
   CharacterHexamatrix,
   CharacterHexamatrixStat,
   CharacterHyperStat,
-  CharacterItem,
   CharacterLinkSkill,
   CharacterOtherStat,
   CharacterPet,
@@ -20,11 +19,11 @@ import type {
   CharacterStat,
   CharacterSymbol,
   CharacterVmatrix,
-} from '@maple/types';
+} from '@maple/contracts';
 
 export interface SearchNickResponse {
   ability: CharacterAbility;
-  'android-equipment': CharacterAndroid;
+  equipment: CharacterEquipment;
   basic: CharacterBasic;
   'beauty-equipment': CharacterBeauty;
   'cashitem-equipment': CharacterCashItem;
@@ -32,7 +31,6 @@ export interface SearchNickResponse {
   hexamatrix: CharacterHexamatrix;
   'hexamatrix-stat': CharacterHexamatrixStat;
   'hyper-stat': CharacterHyperStat;
-  'item-equipment': CharacterItem;
   'link-skill': CharacterLinkSkill;
   'other-stat': CharacterOtherStat;
   'pet-equipment': CharacterPet;

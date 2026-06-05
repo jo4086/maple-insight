@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Container } from '@/components/ui';
-import { CharacterSearchInput } from '@/features/character/components/CharacterSearchInput';
+import { CharacterSearchInput } from '@/features/character';
 
 export const Header = () => {
   const navigate = useNavigate();

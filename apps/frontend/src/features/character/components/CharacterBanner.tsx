@@ -25,15 +25,15 @@ export const CharacterBanner = ({ data }: { data: SearchNickResponse }) => {
 
       <div className="flex h-full">
         <div className="h-full aspect-square border">
-          <div className="bg-[length:170%] bg-center h-full" style={{ backgroundImage: `url(${data.basic.data.imageUrl})` }}></div>
+          <div className="bg-[length:170%] bg-center h-full" style={{ backgroundImage: `url(${data.basic.info.imageUrl})` }}></div>
         </div>
         <div className="border m-2 w-full flex flex-col">
           <ul>
             <li>
-              <Label className="text-lg text-white">{data.basic.data.name}</Label>
+              <Label className="text-lg text-white">{data.basic.info.name}</Label>
             </li>
             <li>
-              <LabelValue label="직업: " value={data.basic.data.class} />
+              <LabelValue label="직업: " value={data.basic.info.class} />
             </li>
           </ul>
         </div>

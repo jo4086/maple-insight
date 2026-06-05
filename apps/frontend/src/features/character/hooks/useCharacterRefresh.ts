@@ -1,6 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
+import { characterQueryKeys } from '../queryKeys';
+
 export function useCharacterRefresh() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
@@ -11,7 +13,7 @@ export function useCharacterRefresh() {
     if (!nick) return;
 
     await queryClient.refetchQueries({
-      queryKey: ['character', 'search', nick],
+      queryKey: characterQueryKeys.search(nick),
       exact: true,
     });
   }
