@@ -6,19 +6,28 @@
   "author": "jo4086",
   "license": "MIT",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "CHOKIDAR_USEPOLLING=true TS_NODE_PROJECT=tsconfig.json ts-node-dev --respawn --files -r tsconfig-paths/register src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "dev": "CHOKIDAR_USEPOLLING=true tsx watch --tsconfig tsconfig.json src/index.ts",
     "dev3": "NODE_OPTIONS='--loader ts-node/esm' ts-node-dev --respawn --files src/index.ts",
     "dev2": "TS_NODE_PROJECT=tsconfig.json ts-node-dev --files src/index.ts",
     "build": "tsup",
     "lint": "eslint .",
     "start": "node dist/index.js",
     "sync:domain-types": "ts-node scripts/sync-domain-types.ts",
+    "debug:compare-union": "ts-node src/domain/character/debug/compare-union.ts",
     "test": "vitest run",
     "test:raw": "vitest run src/domain/character/character.raw.test.ts",
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@maple/db": "workspace:*",
+    "@maple/contracts": "workspace:*",
+    "@maple/nexon-contracts": "workspace:*",
+    "@maple/data-class": "workspace:*",
+    "@maple/data-equipment": "workspace:*",
+    "@maple/generator": "workspace:*",
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
@@ -32,8 +41,8 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@maple/types": "workspace:*",
-    "@maple/utils": "workspace:*",
+    "@maple/api-ranking": "workspace:*",
+    "@maple/api-character": "workspace:*",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -46,6 +55,8 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
-    "vitest": "^4.0.18"
+    "tsx": "^4.21.0",
+    "vitest": "^4.0.18",
+    "typescript": "^5.9.3"
   }
 }

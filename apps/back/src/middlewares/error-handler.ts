@@ -1,4 +1,4 @@
-import type { ApiErrorResponse } from '../types/api-response';
+import type { ApiErrorResponse } from '../types';
 
 type ErrorWithStatus = Partial<AppError> & {
   statusCode?: number;
@@ -7,12 +7,7 @@ type ErrorWithStatus = Partial<AppError> & {
 };
 
 function toErrorResponse(error: ErrorWithStatus): { statusCode: number; body: ApiErrorResponse } {
-  const statusCode =
-    typeof error.statusCode === 'number'
-      ? error.statusCode
-      : typeof error.status === 'string' && !Number.isNaN(Number(error.status))
-        ? Number(error.status)
-        : 500;
+  const statusCode = typeof error.statusCode === 'number' ? error.statusCode : typeof error.status === 'string' && !Number.isNaN(Number(error.status)) ? Number(error.status) : 500;
 
   return {
     statusCode,

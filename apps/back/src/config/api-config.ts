@@ -1,6 +1,6 @@
 import { getValidatedApiKeys } from '../middlewares/validators';
 
-import type { EnvMapType, ApiStructure, Homepage } from './config.type';
+import type { EnvMapType, ApiStructure, Homepage } from './types';
 
 const requiredAPIKeyMap: EnvMapType = {
   nexon: 'NEXON_API_KEY',
@@ -42,14 +42,7 @@ export const nexonApiConfig = createApiConfig({
       stat: {
         secParams: 'ocid',
         endpoint: {
-          character: [
-            'stat',
-            'hyper-stat',
-            'ability',
-            'hexamatrix-stat',
-            'set-effect',
-            'propensity',
-          ],
+          character: ['stat', 'hyper-stat', 'ability', 'hexamatrix-stat', 'set-effect', 'propensity'],
           user: ['union', 'union-raider', 'union-artifact', 'union-champion'],
         },
       },

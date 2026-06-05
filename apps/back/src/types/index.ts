@@ -1,4 +1,1 @@
-type HighlightItem = {
-  text: string;
-  style?: 'effect' | 'condition' | 'requirement' | 'warning' | 'note';
-};
+export * from './api-response';

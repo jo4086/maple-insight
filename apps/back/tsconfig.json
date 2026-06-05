@@ -1,14 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    // "module": "esnext", // 중요: ESM 전용으로 덮어쓰기
-    // "moduleResolution": "bundler", // 중요: MCP Framework ESM 대응
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "outDir": "dist",
     "types": ["node"],
-    "typeRoots": ["./src/types", "./node_modules/@types"],
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
     "paths": {
       "@/*": ["src/*"]
     }
@@ -16,6 +13,6 @@
   "ts-node": {
     "files": true
   },
-  "include": ["**/*.ts", "src"],
-  "exclude": ["node_modules", "dist", "**/.*.ts", "**/.*.tsx", "**/*.test.ts", "**/*.test.tsx", "**/*.legacy.ts", "**/*.legacy.tsx"]
+  "include": ["src/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "**/.*.ts", "**/.*.tsx", "**/*.test.ts", "**/*.test.tsx", "**/*.legacy.ts", "**/*.legacy.tsx", "**/legacy", "**/legacy/**"]
 }
