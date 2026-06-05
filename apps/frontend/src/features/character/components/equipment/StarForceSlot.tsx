@@ -26,39 +26,26 @@ const StarForceRow = ({ limit, filled }: { limit: number; filled: number }) => {
   ];
 
   return (
-    <div className="flex w-[240px] items-center justify-center gap-x-px">
+    <div className="flex w-full max-w-[260px] items-center justify-center gap-x-0">
       {slots.map((slot) => {
         const needsGroupGap = slot.visibleOrder !== null && slot.visibleOrder < visibleCount && slot.visibleOrder % STARFORCE_GROUP_SIZE === 0;
         const gapClass = needsGroupGap ? 'mr-2' : '';
 
         if (slot.type === 'hidden') {
-          return <span key={slot.key} className={`block h-3 w-3 ${gapClass}`} aria-hidden="true" />;
+          return <span key={slot.key} className={`block h-2.5 w-2.5 sm:h-3 sm:w-3 ${gapClass}`} aria-hidden="true" />;
         }
 
         const isFilled = slot.type === 'filled';
-        const starClassName = isFilled ? 'fill-yellow-300 stroke-white/30' : 'fill-gray-500';
+        const starClassName = isFilled ? 'fill-[#ffd800] stroke-white/30' : 'fill-gray-500';
 
         return (
           <span key={slot.key} className={gapClass}>
-            <svg viewBox="0 0 24 24" className={isFilled ? 'size-3' : 'size-3 drop-shadow-[0_0_2px_rgba(150,150,150,0.2)]'}>
+            <svg viewBox="0 0 24 24" className={isFilled ? 'size-2.5 sm:size-3' : 'size-2.5 drop-shadow-[0_0_2px_rgba(150,150,150,0.2)] sm:size-3'}>
               <path
                 d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3
   9.1l6.2-.9L12 2.5z"
                 className={starClassName}
                 strokeWidth={isFilled ? '1' : '0'}
-              />
-            </svg>
-          </span>
-        );
-
-        return (
-          <span key={slot.key} className={gapClass}>
-            <svg viewBox="0 0 24 24" className="size-3">
-              <path
-                d="M12 2.5l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.7l1.1-6.2L3
-  9.1l6.2-.9L12 2.5z"
-                className={slot.type === 'filled' ? 'fill-yellow-300 stroke-white/30' : 'fill-gray-800 stroke-white/1'}
-                strokeWidth="1"
               />
             </svg>
           </span>

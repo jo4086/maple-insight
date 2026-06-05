@@ -57,7 +57,14 @@ export const EquipmentSlot = ({ icon, label, className, potentialOptionGrade, ad
     <div className={twMerge('flex h-full w-full items-center justify-center border rounded-md bg-white/5', borderClass, className)} title={label}>
       {icon ? (
         <div className={twMerge('flex h-12 w-12 items-center justify-center rounded-[5px] bg-black/30', borderClass)}>
-          <img className="max-h-10 max-w-10 object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] select-none" src={icon} alt={label} />
+          <img
+            className="max-h-10 max-w-10 object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] select-none"
+            src={icon}
+            alt={label}
+            referrerPolicy="no-referrer"
+            draggable={false}
+            onDragStart={(event) => event.preventDefault()}
+          />
         </div>
       ) : (
         <div className="h-12 w-12 border rounded-[5px] border-gray-300 bg-gray-300/50" />

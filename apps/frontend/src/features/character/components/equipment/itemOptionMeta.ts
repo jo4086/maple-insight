@@ -1,10 +1,13 @@
-import type { ItemOption } from '@maple/types';
+import type { EquipmentOption } from '@maple/contracts';
 
-export type ItemOptionKey = keyof ItemOption;
+export type ItemOptionKey = keyof EquipmentOption;
 
 export type ScrollInfo = {
-  scrollUpgradableCount?: number;
   scrollUpgrade?: number;
+  scrollFlag?: boolean;
+  scrollUpgradeableCount?: number;
+  scrollResilienceCount?: number;
+  scrollCount?: number;
 };
 
 export type TestInfoKey = ItemOptionKey & ScrollInfo;
@@ -51,4 +54,4 @@ export const optionOrder: ItemOptionKey[] = [
   // 'equipmentLevelDecrease' : 제외값
 ];
 
-export const percentKeys: (keyof ItemOption)[] = ['allStat', 'maxHpRate', 'maxMpRate', 'damage', 'bossDamage', 'ignoreMonsterArmor'];
+export const percentKeys: (keyof EquipmentOption)[] = ['allStat', 'maxHpRate', 'maxMpRate', 'damage', 'bossDamage', 'ignoreMonsterArmor'];

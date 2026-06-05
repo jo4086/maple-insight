@@ -3,5 +3,5 @@ type EquipmentContainerProps = {
 };
 
 export const EquipmentContainer = ({ children }: EquipmentContainerProps) => {
-  return <section className="w-fit rounded-lg border bg-white/5 p-1">{children}</section>;
+  return <section className="w-fit h-fit rounded-lg border bg-white/5 p-1">{children}</section>;
 };

@@ -1,20 +1,16 @@
-import type { MainItemEquipment, PresetItemEquipment, ItemPresets, CharacterAndroid } from '@maple/types';
+import type { CharacterEquipment, ItemEquipment } from '@maple/contracts';
 import { useEffect, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import { EQUIPMENT_LAYOUT } from '../../types/equipment';
+import { EQUIPMENT_LAYOUT } from '@/types/equipment';
 
 import { EquipmentSlot } from './EquipmentSlot';
 
 type EquipmentGridProps = {
   characterImg: string;
-  items: MainItemEquipment[];
-  initialPresetNo?: number;
-  presets: ItemPresets[];
-  android: CharacterAndroid;
+  equipment: CharacterEquipment;
+  onItemSelect?: (item: ItemEquipment) => void;
 };
-
-type EquipmentItem = MainItemEquipment | PresetItemEquipment;
 
 const normalizeEquipmentSlot = (slot: string) => {
   const normalized = slot.replaceAll(' ', '').trim();
@@ -24,43 +20,33 @@ const normalizeEquipmentSlot = (slot: string) => {
   return normalized;
 };
 
-export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, presets, android }: EquipmentGridProps) => {
-  const [selectedPresetNo, setSelectedPresetNo] = useState(initialPresetNo);
+export const EquipmentGrid = ({ characterImg, equipment, onItemSelect }: EquipmentGridProps) => {
+  const [selectedPresetNo, setSelectedPresetNo] = useState(equipment.presetNo);
 
   useEffect(() => {
-    setSelectedPresetNo(initialPresetNo);
-  }, [initialPresetNo]);
+    setSelectedPresetNo(equipment.presetNo);
+  }, [equipment.presetNo]);
 
-  const presetItemsByNo = useMemo(() => {
-    const presetMap = new Map<number, EquipmentItem[]>();
+  const equipmentPresetByNo = useMemo(() => {
+    const presetMap = new Map<number, Pick<CharacterEquipment, 'itemEquipment' | 'androidEquipment'>>();
 
-    presets.forEach((preset) => {
-      presetMap.set(preset.no, preset.info);
+    equipment.presets.forEach((preset) => {
+      presetMap.set(preset.no, preset);
     });
 
-    presetMap.set(initialPresetNo, items);
+    presetMap.set(equipment.presetNo, equipment);
 
     return presetMap;
-  }, [initialPresetNo, items, presets]);
+  }, [equipment]);
 
-  const currentItems = presetItemsByNo.get(selectedPresetNo) ?? [];
+  const currentPreset = equipmentPresetByNo.get(selectedPresetNo) ?? equipment;
+  const currentItems = currentPreset.itemEquipment;
+  const currentAndroid = currentPreset.androidEquipment ?? equipment.androidEquipment;
 
-  const preset1Android = useMemo(() => {
-    if (android.presetNo === 1) return android.equipped;
-    return android.presets.find((preset) => preset.no === 1)?.info ?? null;
-  }, [android]);
-
-  const currentAndroid = useMemo(() => {
-    if (selectedPresetNo === android.presetNo) {
-      return android.equipped ?? preset1Android;
-    }
-
-    const selectedPresetAndroid = android.presets.find((preset) => preset.no === selectedPresetNo)?.info ?? null;
-
-    return selectedPresetAndroid ?? preset1Android;
-  }, [android, preset1Android, selectedPresetNo]);
-
-  const equipmentBySlot = Object.fromEntries(currentItems.map((item) => [normalizeEquipmentSlot(item.slot), item]));
+  const equipmentBySlot = currentItems.reduce<Record<string, ItemEquipment>>((acc, item) => {
+    acc[normalizeEquipmentSlot(item.slot)] = item;
+    return acc;
+  }, {});
 
   return (
     <div className="grid grid-cols-7 grid-rows-6 gap-0.5">
@@ -69,15 +55,20 @@ export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, preset
           return (
             <div
               key={cell.slot}
-              className="rounded-md border border-gray-200 bg-white/5 p-2"
+              className="select-none overflow-hidden rounded-md border border-gray-200 bg-white/5 p-2"
+              draggable={false}
+              onDragStart={(event) => event.preventDefault()}
               style={{
                 gridColumn: `${cell.col} / span ${cell.colSpan ?? 1}`,
                 gridRow: `${cell.row} / span ${cell.rowSpan ?? 1}`,
+                WebkitUserDrag: 'none',
               }}
             >
               <div
-                className={twMerge('h-full w-full origin-center bg-center bg-[length:175%] transition-transform duration-300 ease-out scale-150')}
-                style={{ backgroundImage: `url(${characterImg})` }}
+                className={twMerge('pointer-events-none h-full w-full select-none origin-center bg-center bg-[length:175%] transition-transform duration-300 ease-out scale-150')}
+                draggable={false}
+                onDragStart={(event) => event.preventDefault()}
+                style={{ backgroundImage: `url(${characterImg})`, WebkitUserDrag: 'none' }}
               />
             </div>
           );
@@ -90,23 +81,24 @@ export const EquipmentGrid = ({ characterImg, items, initialPresetNo = 1, preset
         return (
           <div
             key={cell.slot}
+            onClick={() => {
+              if (item) {
+                onItemSelect?.(item);
+              }
+            }}
+            className={item ? 'cursor-pointer' : undefined}
             style={{
               gridColumn: `${cell.col} / span ${cell.colSpan ?? 1}`,
               gridRow: `${cell.row} / span ${cell.rowSpan ?? 1}`,
             }}
           >
-            <EquipmentSlot
-              icon={icon}
-              label={cell.slot}
-              potentialOptionGrade={item?.potentials.potential.grade}
-              additionalPotentialOptionGrade={item?.potentials.additional.grade}
-            />
+            <EquipmentSlot icon={icon} label={cell.slot} potentialOptionGrade={item?.potential.grade} additionalPotentialOptionGrade={item?.additional.grade} />
           </div>
         );
       })}
 
       {[1, 2, 3].map((presetNo) => {
-        const hasPreset = (presetItemsByNo.get(presetNo) ?? []).length > 0;
+        const hasPreset = equipmentPresetByNo.has(presetNo);
 
         return (
           <div
