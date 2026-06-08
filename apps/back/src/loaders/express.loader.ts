@@ -5,12 +5,20 @@ import session from 'express-session';
 import morgan from 'morgan';
 // import path from 'path';
 
-const cookieSecret = process.env.COOKIE_SECRET || 'secret';
 const isProduction = process.env.NODE_ENV === 'production';
+const cookieSecret = process.env.COOKIE_SECRET;
 const frontendOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
+
+function getCookieSecret() {
+  if (!cookieSecret && isProduction) {
+    throw new Error('COOKIE_SECRET is required in production.');
+  }
+
+  return cookieSecret || 'dev-cookie-secret';
+}
 
 function expressLoader(app: Application) {
   if (isProduction) {
@@ -19,7 +27,19 @@ function expressLoader(app: Application) {
 
   app.use(
     cors({
-      origin: frontendOrigins,
+      origin(origin, callback) {
+        if (!origin) {
+          callback(null, true);
+          return;
+        }
+
+        if (frontendOrigins.includes(origin)) {
+          callback(null, true);
+          return;
+        }
+
+        callback(new Error(`Not allowed by CORS: ${origin}`));
+      },
       credentials: true,
     }),
   );
@@ -30,7 +50,7 @@ function expressLoader(app: Application) {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-  app.use(cookieParser(cookieSecret));
+  app.use(cookieParser(getCookieSecret()));
 
   // app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
 
@@ -38,7 +58,8 @@ function expressLoader(app: Application) {
     session({
       resave: false,
       saveUninitialized: false,
-      secret: cookieSecret,
+      secret: getCookieSecret(),
+      proxy: isProduction,
       cookie: {
         httpOnly: true,
         secure: isProduction,
