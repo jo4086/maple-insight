@@ -6,16 +6,22 @@ import { LoginPage, NotFoundPage, Home } from '@/pages';
 import { AdminHome, AdminImportDetail, AdminImportNew, AdminImports } from '@/pages/admin';
 import { CharacterMainPage } from '@/pages/CharacterPage';
 
+const isAdminEnabled = import.meta.env.VITE_ENABLE_ADMIN === 'true';
+
 const routes: RouteObject[] = [
   {
     element: <Layout />,
     children: [
       { element: <Home />, path: '/' },
       { element: <CharacterLayout />, children: [{ element: <CharacterMainPage />, path: '/character' }] },
-      { element: <AdminHome />, path: '/admin' },
-      { element: <AdminImports />, path: '/admin/imports' },
-      { element: <AdminImportNew />, path: '/admin/imports/new' },
-      { element: <AdminImportDetail />, path: '/admin/imports/:importId' },
+      ...(isAdminEnabled
+        ? [
+            { element: <AdminHome />, path: '/admin' },
+            { element: <AdminImports />, path: '/admin/imports' },
+            { element: <AdminImportNew />, path: '/admin/imports/new' },
+            { element: <AdminImportDetail />, path: '/admin/imports/:importId' },
+          ]
+        : []),
     ],
   },
   {

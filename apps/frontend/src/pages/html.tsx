@@ -10,6 +10,8 @@ const notices = [
   { type: '서비스 공지', title: 'Maple Insight 개인 공지 영역입니다.', date: '관리자 작성 예정' },
 ];
 
+const isAdminEnabled = import.meta.env.VITE_ENABLE_ADMIN === 'true';
+
 export const Home = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -25,10 +27,12 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:shrink-0">
-            <LinkButton to="/admin" size="sm" variant="secondary" className="w-full sm:w-auto">
-              관리자
-            </LinkButton>
+          <div className="grid min-w-0 grid-cols-1 gap-2 sm:flex sm:shrink-0">
+            {isAdminEnabled && (
+              <LinkButton to="/admin" size="sm" variant="secondary" className="w-full sm:w-auto">
+                관리자
+              </LinkButton>
+            )}
             <button className="inline-flex h-8 w-full items-center justify-center rounded-md bg-blue-600 px-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:w-auto" type="button" onClick={() => setIsLoginModalOpen(true)}>
               로그인
             </button>
