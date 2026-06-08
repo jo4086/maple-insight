@@ -17,6 +17,7 @@
     "typecheck:pkgs": "pnpm --filter @maple/packages-workspace run typecheck",
     "lint:pkgs": "pnpm --filter @maple/packages-workspace run lint",
     "build:pkgs": "pnpm --filter @maple/packages-workspace run build",
+    "generate": "pnpm --filter @maple/generator run generate",
     "convert:csv-json": "node scripts/convert-csv-to-json.mjs",
     "sync:package-entrypoints": "node scripts/sync-package-entrypoints.mjs"
   },

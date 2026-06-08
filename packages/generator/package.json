@@ -24,6 +24,8 @@
     "build": "tsup",
     "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
     "lint": "eslint src --ext .ts",
+    "pregenerate": "pnpm run build && pnpm --filter @maple/data-potential run build",
+    "generate": "node scripts/generate-class-json.mjs && node scripts/generate-boss-json.mjs && node scripts/generate-game-skills-by-raw-job.mjs && node scripts/generate-taxonomy-affiliation-class.mjs && node scripts/generate-equipment-json.mjs && node scripts/generate-potential-option-grade-json.mjs && node scripts/generate-potential-option-grade-part-json.mjs",
     "generate:class-json": "pnpm run build && node scripts/generate-class-json.mjs",
     "generate:boss-json": "pnpm run build && node scripts/generate-boss-json.mjs",
     "generate:game-skills-by-raw-job": "pnpm run build && node scripts/generate-game-skills-by-raw-job.mjs",
