@@ -32,7 +32,21 @@ deploy_frontend() {
   sudo cp -r "${FRONTEND_DIST_DIR}" "${FRONTEND_DEPLOY_DIR}/"
 }
 
+build_backend_dependencies() {
+  log "Building workspace packages"
+  pnpm --dir "${ROOT_DIR}" build:pkgs
+
+  log "Generating runtime data"
+  pnpm --dir "${ROOT_DIR}" --filter @maple/generator run generate:equipment-json
+  pnpm --dir "${ROOT_DIR}" --filter @maple/generator run generate:potential-option-grade-part-json
+
+  log "Building generator package"
+  pnpm --dir "${ROOT_DIR}" --filter @maple/generator build
+}
+
 deploy_backend() {
+  build_backend_dependencies
+
   log "Building backend"
   pnpm --dir "${ROOT_DIR}" --filter maple-insight-back build
 
