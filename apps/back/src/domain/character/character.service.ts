@@ -20,7 +20,26 @@ import { createAppError, createExternalApiError } from '@/errors/app-error';
 //   현재 서비스는 상태 코드를 직접 반환하지 않고 Error를 throw 한다.
 //   실제 HTTP statusCode 결정은 컨트롤러 또는 errorHandler에서 처리한다.
 
+const isProduction = process.env.NODE_ENV === 'production';
+const DEFAULT_CHARACTER_REQUEST_DELAY_MS = isProduction ? 0 : 300;
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function getCharacterRequestDelayMs() {
+  const rawValue = process.env.CHARACTER_REQUEST_DELAY_MS;
+
+  if (!rawValue) {
+    return DEFAULT_CHARACTER_REQUEST_DELAY_MS;
+  }
+
+  const delayMs = Number(rawValue);
+
+  if (!Number.isFinite(delayMs) || delayMs < 0) {
+    return DEFAULT_CHARACTER_REQUEST_DELAY_MS;
+  }
+
+  return delayMs;
+}
 
 type CharacterRequestParams = {
   character_skill_grade?: CharacterSkillGrade;
@@ -109,15 +128,18 @@ export class CharacterService {
   }
 
   // NOTE: 여러 endpoint를 딜레이를 두고 순차적으로 조회한다.
-  public async getMultipleWithDelay(requests: CharacterEndpointRequest[], delayMs: number = 300) {
+  public async getMultipleWithDelay(requests: CharacterEndpointRequest[], delayMs: number = getCharacterRequestDelayMs()) {
     const results: [string, unknown][] = [];
 
-    for (const request of requests) {
+    for (const [index, request] of requests.entries()) {
       const { key } = this.normalizeRequest(request);
       const data = await this.call(request);
 
       results.push([key, data]);
-      await delay(delayMs);
+
+      if (delayMs > 0 && index < requests.length - 1) {
+        await delay(delayMs);
+      }
     }
 
     return Object.fromEntries(results);
