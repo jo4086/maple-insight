@@ -21,24 +21,31 @@ import { createAppError, createExternalApiError } from '@/errors/app-error';
 //   실제 HTTP statusCode 결정은 컨트롤러 또는 errorHandler에서 처리한다.
 
 const isProduction = process.env.NODE_ENV === 'production';
-const DEFAULT_CHARACTER_REQUEST_DELAY_MS = isProduction ? 0 : 300;
+const DEFAULT_CHARACTER_REQUEST_DELAY_MS = isProduction ? 0 : 0;
+const DEFAULT_CHARACTER_REQUEST_CONCURRENCY = isProduction ? 5 : 5;
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function getCharacterRequestDelayMs() {
-  const rawValue = process.env.CHARACTER_REQUEST_DELAY_MS;
-
+function getNonNegativeInteger(rawValue: string | undefined, fallback: number) {
   if (!rawValue) {
-    return DEFAULT_CHARACTER_REQUEST_DELAY_MS;
+    return fallback;
   }
 
-  const delayMs = Number(rawValue);
+  const value = Number(rawValue);
 
-  if (!Number.isFinite(delayMs) || delayMs < 0) {
-    return DEFAULT_CHARACTER_REQUEST_DELAY_MS;
+  if (!Number.isInteger(value) || value < 0) {
+    return fallback;
   }
 
-  return delayMs;
+  return value;
+}
+
+function getCharacterRequestDelayMs() {
+  return getNonNegativeInteger(process.env.CHARACTER_REQUEST_DELAY_MS, DEFAULT_CHARACTER_REQUEST_DELAY_MS);
+}
+
+function getCharacterRequestConcurrency() {
+  return Math.max(1, getNonNegativeInteger(process.env.CHARACTER_REQUEST_CONCURRENCY, DEFAULT_CHARACTER_REQUEST_CONCURRENCY));
 }
 
 type CharacterRequestParams = {
@@ -127,17 +134,24 @@ export class CharacterService {
     return data;
   }
 
-  // NOTE: 여러 endpoint를 딜레이를 두고 순차적으로 조회한다.
-  public async getMultipleWithDelay(requests: CharacterEndpointRequest[], delayMs: number = getCharacterRequestDelayMs()) {
+  // NOTE: 개발에서는 순차 호출하고, 운영에서는 제한된 개수만 병렬 호출한다.
+  public async getMultipleWithDelay(requests: CharacterEndpointRequest[], delayMs: number = getCharacterRequestDelayMs(), concurrency: number = getCharacterRequestConcurrency()) {
     const results: [string, unknown][] = [];
 
-    for (const [index, request] of requests.entries()) {
-      const { key } = this.normalizeRequest(request);
-      const data = await this.call(request);
+    for (let index = 0; index < requests.length; index += concurrency) {
+      const batch = requests.slice(index, index + concurrency);
+      const batchResults = await Promise.all(
+        batch.map(async (request) => {
+          const { key } = this.normalizeRequest(request);
+          const data = await this.call(request);
 
-      results.push([key, data]);
+          return [key, data] as [string, unknown];
+        }),
+      );
 
-      if (delayMs > 0 && index < requests.length - 1) {
+      results.push(...batchResults);
+
+      if (delayMs > 0 && index + concurrency < requests.length) {
         await delay(delayMs);
       }
     }
