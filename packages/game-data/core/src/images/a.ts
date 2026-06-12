@@ -31,10 +31,3 @@ const worldImages = {
   버닝: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_16.png',
   챌린저스: 'https://ssl.nexon.com/s2/game/maplestory/renewal/common/world_icon/icon_20.png',
 };
-
-const number = ['1', '2'];
-const baseCharacterImageUrl = `https://lwi.nexon.com/maplestory/home/job/char_1.png`;
-
-function a(number: string) {
-  return `https://lwi.nexon.com/maplestory/home/job/char_${number}.png`;
-}
