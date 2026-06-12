@@ -39,8 +39,8 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@maple/data-equipment": "workspace:*",
-    "@maple/game-data": "workspace:*"
+    "@maple/data-core": "workspace:*",
+    "@maple/data-equipment": "workspace:*"
   },
   "devDependencies": {
     "esbuild-plugin-alias": "^0.2.1",

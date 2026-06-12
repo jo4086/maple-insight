@@ -463,12 +463,12 @@ importers:
 
   packages/contracts/domain:
     dependencies:
+      '@maple/data-core':
+        specifier: workspace:*
+        version: link:../../game-data/core
       '@maple/data-equipment':
         specifier: workspace:*
         version: link:../../game-data/equipment
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
