@@ -4,4 +4,3 @@ export * from './taxonomy';
 
 // file
 export * from './grade';
-export * from './class-tree';

@@ -1,4 +1,4 @@
-import type { ClassKey } from '@maple/data-core';
+import type { FinalClassNameKey } from '@maple/data-core';
 
 export const warriorFinalClasses = [
   'hero',
@@ -14,7 +14,7 @@ export const warriorFinalClasses = [
   'zero',
   'adele',
   'len',
-] as const satisfies readonly ClassKey[];
+] as const satisfies readonly FinalClassNameKey[];
 
 // All
 // Medal

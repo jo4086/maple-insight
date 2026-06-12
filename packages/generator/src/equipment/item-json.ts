@@ -3,7 +3,7 @@ import {
   isClassGroup,
   mapClassGroupKey,
   mapClassNameKey,
-  resolveClassNameGroup,
+  resolveClassNameGroups,
 } from '@maple/data-core';
 import type { ClassGroup, ClassGroupKey } from '@maple/data-core';
 import {
@@ -121,18 +121,22 @@ export type GeneratedEquipmentJsonItem = EquipmentStatJson & {
 
 const classGroupKeyToClassGroupMap = Object.fromEntries(Object.entries(classGroupKeyMap).map(([classGroup, key]) => [key, classGroup])) as Record<ClassGroupKey, ClassGroup>;
 
+function resolveSingleClassGroup(classGroups: readonly ClassGroup[]): ClassGroup | undefined {
+  return classGroups.length === 1 ? classGroups[0] : undefined;
+}
+
 function resolveRequiredClassGroup(requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[]): ClassGroup | undefined {
   if (typeof requiredClass === 'string') {
     if (isClassGroup(requiredClass)) {
       return requiredClass;
     }
 
-    return resolveClassNameGroup(requiredClass);
+    return resolveSingleClassGroup(resolveClassNameGroups(requiredClass));
   }
 
   const groups = [...new Set(requiredClass.map((className) => resolveRequiredClassGroup(className)).filter((classGroup): classGroup is ClassGroup => !!classGroup))];
 
-  return groups.length === 1 ? groups[0] : undefined;
+  return resolveSingleClassGroup(groups);
 }
 
 function resolveWeaponClassGroup(classGroup: ClassGroup | readonly ClassGroup[] | null, requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[]): ClassGroup | null {

@@ -1,4 +1,4 @@
-import type { ClassGroup, ClassKey } from '@maple/data-core';
+import type { ClassGroup, FinalClassNameKey } from '@maple/data-core';
 
 import type { EquipmentRequiredClass, WeaponHandType } from '@/types';
 
@@ -108,7 +108,7 @@ export type SubWeaponPartMeta = {
   /** 보조무기 종류 한글 표기 */
   label: string;
   /** 착용 가능 직업 key */
-  requiredClassKeys: readonly ClassKey[];
+  requiredClassKeys: readonly FinalClassNameKey[];
 };
 
 /** 보조무기 종류 메타 작성 입력값 */
@@ -116,7 +116,7 @@ export type SubWeaponPartMetaInput = {
   /** 보조무기 종류 한글 표기 */
   label: string;
   /** 착용 가능 직업 key. 생략하면 빈 배열 */
-  requiredClassKeys?: readonly ClassKey[];
+  requiredClassKeys?: readonly FinalClassNameKey[];
 };
 
 /** 보조무기 종류 메타 맵 builder */

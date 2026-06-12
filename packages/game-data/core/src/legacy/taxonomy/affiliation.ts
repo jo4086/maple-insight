@@ -10,10 +10,13 @@ export const affiliationKeyMap = {
   아니마: 'anima',
 } as const;
 
-export type Affiliation = keyof typeof affiliationKeyMap;
-
 export type AffiliationKey = (typeof affiliationKeyMap)[Affiliation];
 
-export const affiliations = Object.keys(affiliationKeyMap) as Affiliation[];
-
 export const affiliationKeys = Object.values(affiliationKeyMap) as AffiliationKey[];
+
+export const affiliations = ['모험가', '시그너스 기사단', '영웅', '레지스탕스', '노바', '초월자', '프렌즈 월드', '레프', '아니마'] as const;
+export type Affiliation = (typeof affiliations)[number];
+
+export const classLineages = [...affiliations, '데몬'] as const;
+
+export type ClassLineage = (typeof classLineages)[number];

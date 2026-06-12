@@ -1,4 +1,4 @@
-import type { ClassKey } from '@maple/data-core';
+import type { FinalClassNameKey } from '@maple/data-core';
 
 import { createSubWeaponPartMetaBuilder } from './builder';
 
@@ -80,9 +80,9 @@ export const subWeaponItemRequiredClassOverrideMap = {
   '데이모스 워리어 실드': ['hero', 'paladin', 'soul-master'],
   '데이모스 세이지 실드': ['arch-mage-fire-poison', 'arch-mage-ice-lightning', 'bishop'],
   '데이모스 섀도우 실드': ['shadower'],
-} as const satisfies Partial<Record<string, readonly ClassKey[]>>;
+} as const satisfies Partial<Record<string, readonly FinalClassNameKey[]>>;
 
-export const grimoireClassKeys = ['arch-mage-fire-poison', 'arch-mage-ice-lightning', 'bishop'] as const satisfies readonly ClassKey[];
+export const grimoireClassKeys = ['arch-mage-fire-poison', 'arch-mage-ice-lightning', 'bishop'] as const satisfies readonly FinalClassNameKey[];
 
 export const subWeaponItemNamePatternRequiredClassOverrideRules = [
   {
@@ -99,11 +99,11 @@ export const subWeaponItemNamePatternRequiredClassOverrideRules = [
   },
 ] as const satisfies readonly {
   includes: string;
-  requiredClassKeys: readonly ClassKey[];
+  requiredClassKeys: readonly FinalClassNameKey[];
 }[];
 
-export function resolveSubWeaponRequiredClassKeys(part: SubWeaponType, itemName: string): readonly ClassKey[] {
-  const itemClassOverrideMap: Partial<Record<string, readonly ClassKey[]>> = subWeaponItemRequiredClassOverrideMap;
+export function resolveSubWeaponRequiredClassKeys(part: SubWeaponType, itemName: string): readonly FinalClassNameKey[] {
+  const itemClassOverrideMap: Partial<Record<string, readonly FinalClassNameKey[]>> = subWeaponItemRequiredClassOverrideMap;
   const exactOverride = itemClassOverrideMap[itemName];
 
   if (exactOverride) {

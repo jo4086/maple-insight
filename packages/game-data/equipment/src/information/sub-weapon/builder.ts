@@ -1,4 +1,4 @@
-import type { ClassKey } from '@maple/data-core';
+import type { FinalClassNameKey } from '@maple/data-core';
 
 import { createEquipmentStatBuilder } from '@/builder';
 import type { EquipmentStatBuilder } from '@/builder';
@@ -29,7 +29,7 @@ export type SubWeaponVariant = {
   /** 생성 이름 suffix. 생략하면 requiredClass를 suffix로 사용 */
   suffix?: string;
   /** 착용 가능 최종 직업 key */
-  requiredClassKeys?: readonly ClassKey[];
+  requiredClassKeys?: readonly FinalClassNameKey[];
   /** 장비 세트 key override */
   setKey?: EquipmentSet | null;
   /** 착용 요구 레벨 override */
@@ -51,7 +51,7 @@ type SubWeaponMeta<TSubWeaponPart extends SubWeaponType = SubWeaponType> = {
   /** 착용 가능 직업/직업군 */
   requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
   /** 착용 가능 최종 직업 key */
-  requiredClassKeys: readonly ClassKey[];
+  requiredClassKeys: readonly FinalClassNameKey[];
   /** 같은 이름의 보조무기를 직업별 결과 아이템으로 분리해야 할 때 사용하는 variant 목록 */
   variants?: readonly SubWeaponVariant[];
   /** 착용 요구 레벨 */
@@ -73,7 +73,7 @@ type SubWeaponMetaBuilderBase<TSubWeaponPart extends SubWeaponType = SubWeaponTy
   /** 착용 가능 직업/직업군 */
   requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
   /** 착용 가능 최종 직업 key. 생략하면 part/name 규칙으로 자동 계산 */
-  requiredClassKeys?: readonly ClassKey[];
+  requiredClassKeys?: readonly FinalClassNameKey[];
   /** 같은 이름의 보조무기를 직업별 결과 아이템으로 분리해야 할 때 사용하는 variant 목록 */
   variants?: readonly SubWeaponVariant[];
   /** 장비별 강화/옵션 시스템 가능 여부 override */

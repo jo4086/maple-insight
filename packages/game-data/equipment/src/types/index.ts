@@ -1,4 +1,4 @@
-import type { ClassName, ClassGroup } from '@maple/data-core';
+import type { AllClassName, ClassGroup } from '@maple/data-core';
 
 import {
   armorTypes,
@@ -41,7 +41,7 @@ export type EquipmentSet = (typeof equipmentSets)[number];
 export const commonEquipmentRequiredClass = '공용' as const;
 
 /** 장비 착용 가능 직업/직업군 */
-export type EquipmentRequiredClass = ClassName | ClassGroup | typeof commonEquipmentRequiredClass;
+export type EquipmentRequiredClass = AllClassName | ClassGroup | typeof commonEquipmentRequiredClass;
 
 /** 아이템 스탯 옵션 */
 export interface EquipmentOption {

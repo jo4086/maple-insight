@@ -30,3 +30,5 @@ unused-dummy-files.txt
 samples/
 legacy/
 **/legacy/
+!packages/game-data/core/src/legacy/
+!packages/game-data/core/src/legacy/**
