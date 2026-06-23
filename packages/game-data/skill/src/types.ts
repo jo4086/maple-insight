@@ -1,30 +1,6 @@
-export type SkillRawJobCategory =
-  | {
-      kind: 'fifthSkillCore';
-      scope: 'all';
-      desc: string;
-    }
-  | {
-      kind: 'fifthSkillCore';
-      scope: 'classGroup';
-      classGroup: string;
-      desc: string;
-    }
-  | {
-      kind: 'sixthCore';
-      scope: 'all';
-      desc: string;
-    }
-  | {
-      kind: 'sixthSpecialEnhancementCore';
-      scope: 'all';
-      desc: string;
-    }
-  | {
-      kind: 'hexaStat';
-      scope: 'all';
-      desc: string;
-    };
+import type { RawJobCategory } from './raw';
+
+export type SkillRawJobCategory = RawJobCategory;
 
 export type LinearDamagePercent = {
   base: number;

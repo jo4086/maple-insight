@@ -11,7 +11,7 @@ import {
   type AuthenticSymbolName,
   type GrandSymbolName,
   type SymbolName,
-} from '@maple/game-data/symbol';
+} from '@maple/data-symbol';
 
 const ARCANE_MESO_UNIT = 10000;
 const AUTHENTIC_MESO_UNIT = 100000;

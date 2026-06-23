@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "@maple/data-class": "workspace:*",
-    "@maple/game-data": "workspace:*",
     "@maple/data-core": "workspace:*"
   },
   "devDependencies": {

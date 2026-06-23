@@ -1,4 +1,4 @@
-import type { ClassName } from '@maple/game-data/class';
+import type { FinalClassName } from '@maple/data-core';
 
 export const finalClassJobIdMap = {
   히어로: ['000', '100', '110', '111', '112', '114'],
@@ -59,7 +59,7 @@ export const finalClassJobIdMap = {
   렌: ['16002', '16100', '16110', '16111', '16112', '16114'],
   라라: ['16001', '16200', '16210', '16211', '16212', '16214'],
   호영: ['16000', '16400', '16410', '16411', '16412', '16414'],
-} as const satisfies Partial<Record<ClassName, readonly string[]>>;
+} as const satisfies Partial<Record<FinalClassName, readonly string[]>>;
 
 export const finalClassFileNameMap = {
   히어로: 'hero',

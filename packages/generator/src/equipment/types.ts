@@ -1,7 +1,6 @@
-import type { EquipmentClassType } from '@maple/game-data/class';
-import type { EquipmentOption as PkgEquipmentOption } from '@maple/game-data/equipment';
+import type { EquipmentClassType, EquipmentStatOption } from '@maple/data-core';
 
-export type EquipmentOption = Omit<PkgEquipmentOption, 'equipmentLevelDecrease'>;
+export type EquipmentOption = Omit<EquipmentStatOption, 'equipmentLevelDecrease'>;
 
 export type ClassType = Exclude<EquipmentClassType, '제논' | '공용'>;
 

@@ -1,4 +1,4 @@
-import type { ArcaneSymbolName, AuthenticSymbolName, GrandSymbolName } from '@maple/game-data/symbol';
+import type { ArcaneSymbolName, AuthenticSymbolName, GrandSymbolName } from '@maple/data-symbol';
 
 export const arcaneSymbolRegionConstantMap: Record<ArcaneSymbolName, number> = {
   '아케인심볼 : 소멸의 여로': 1,

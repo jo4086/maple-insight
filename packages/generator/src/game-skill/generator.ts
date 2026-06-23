@@ -12,9 +12,9 @@ import {
   sixthLineageClassGroupSkillIdOverrides,
   sixthSpecialEnhancementExtendRules,
   sixthSpecialEnhancementReplaceRules,
+  getClassNamesByJobId,
 } from '@maple/data-skill';
 import { findGameSkillsByJobIds } from '@maple/db/admin';
-import { getClassNamesByJobId } from '@maple/game-data/raw';
 
 import { finalClassSkillContextMap, fifthClassGroupJobIdMap } from './class-skill-context';
 import { categoryJobIdFileNameMap, finalClassJobIdMap } from './job-id-map';

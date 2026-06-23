@@ -31,7 +31,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@maple/game-data": "workspace:*"
+    "@maple/data-core": "workspace:*",
+    "@maple/data-symbol": "workspace:*"
   },
   "devDependencies": {
     "esbuild-plugin-alias": "^0.2.1",

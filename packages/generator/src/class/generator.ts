@@ -1,15 +1,11 @@
 import {
-  archerClassNames,
   classTree,
-  mageClassNames,
-  pirateClassNames,
-  thiefClassNames,
-  warriorClassNames,
+  resolveClassNameGroups,
   type Affiliation,
+  type AllClassName,
   type ClassGroup,
-  type ClassLineage,
-  type ClassName,
-} from '@maple/game-data/class';
+  type Lineage,
+} from '@maple/data-core';
 import {
   affiliationCodeMap,
   classGroupCodeMap,
@@ -25,7 +21,7 @@ import type {
 
 type ClassTreeNode = (typeof classTree)[number]['roots'][number];
 
-const placeholderRootNames = new Set<ClassName>(['초보자', '노블레스', '시티즌']);
+const placeholderRootNames = new Set<AllClassName>(['초보자', '노블레스', '시티즌']);
 const defaultLinearSequence = defaultClassLevelSequence;
 const defaultBranchSequence = [2, 3, 4, 'hyper', 5, 6] as const;
 
@@ -33,37 +29,15 @@ function padTwoDigit(value: number): string {
   return value.toString().padStart(2, '0');
 }
 
-function getClassGroups(className: ClassName): ClassGroup[] {
-  const groups: ClassGroup[] = [];
-
-  if (warriorClassNames.some((candidate) => candidate === className)) {
-    groups.push('전사');
-  }
-
-  if (mageClassNames.some((candidate) => candidate === className)) {
-    groups.push('마법사');
-  }
-
-  if (archerClassNames.some((candidate) => candidate === className)) {
-    groups.push('궁수');
-  }
-
-  if (thiefClassNames.some((candidate) => candidate === className)) {
-    groups.push('도적');
-  }
-
-  if (pirateClassNames.some((candidate) => candidate === className)) {
-    groups.push('해적');
-  }
-
-  return groups;
+function getClassGroups(className: AllClassName): ClassGroup[] {
+  return [...resolveClassNameGroups(className)];
 }
 
-function getPrimaryClassGroup(className: ClassName): ClassGroup | null {
+function getPrimaryClassGroup(className: AllClassName): ClassGroup | null {
   return getClassGroups(className)[0] ?? null;
 }
 
-function getClassLineage(affiliation: Affiliation, className: ClassName): ClassLineage {
+function getClassLineage(affiliation: Affiliation, className: AllClassName): Lineage {
   if (className === '데몬슬레이어' || className === '데몬어벤져') {
     return '데몬';
   }
@@ -73,7 +47,7 @@ function getClassLineage(affiliation: Affiliation, className: ClassName): ClassL
 
 function createGeneratedClass(
   affiliation: Affiliation,
-  className: ClassName,
+  className: AllClassName,
   classGroup: InternalClassGroup[],
   classLevel: ClassLevel,
   suffix: string,
@@ -100,7 +74,7 @@ function createGeneratedClass(
 function appendRepeatedLeafClasses(
   classes: GeneratedClass[],
   affiliation: Affiliation,
-  className: ClassName,
+  className: AllClassName,
   classGroup: ClassGroup[],
   lineIndex: number,
   sequence: readonly ClassLevel[],
@@ -128,7 +102,7 @@ function traverseBranchChain(
   const sequence =
     node.className === '세미듀어러' ? dualBladeClassLevelSequence : defaultBranchSequence;
 
-  const chain: ClassName[] = [];
+  const chain: AllClassName[] = [];
   let currentNode: ClassTreeNode | undefined = node;
 
   while (currentNode) {

@@ -11,7 +11,7 @@ import {
   rawJobCategoryMap,
   rawJobNameMap,
   type RawJobCategory,
-} from '@maple/game-data/raw';
+} from '@maple/data-skill';
 
 const DEFAULT_VERSION = '1.2.424';
 

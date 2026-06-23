@@ -1,4 +1,4 @@
-import { bossSpecJson } from '@maple/game-data';
+import { bossSpecJson } from '@maple/data-monster';
 
 import { prisma } from '@/lib/prisma';
 

@@ -1,4 +1,4 @@
-import type { StatClassType } from '@maple/game-data';
+import type { StatClassType } from '@maple/data-core';
 
 export type CalculateLevelStatInput = {
   level: number;

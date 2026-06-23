@@ -11,9 +11,10 @@ const outputPath = path.join(
   repoRoot,
   'packages',
   'game-data',
-  'src',
   'monster',
-  'boss-spec',
+  'src',
+  'boss',
+  'generated',
   'bossSpec.json',
 );
 

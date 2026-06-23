@@ -2,8 +2,8 @@
   "name": "@maple/packages-workspace",
   "private": true,
   "scripts": {
-    "typecheck": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data --filter @maple/simulator run typecheck",
-    "build": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data --filter @maple/simulator run build",
-    "lint": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data --filter @maple/simulator run lint"
+    "typecheck": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data-workspace --filter @maple/simulator run typecheck",
+    "build": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data-workspace --filter @maple/simulator run build",
+    "lint": "pnpm -r --filter @maple/api-types-workspace --filter @maple/contracts-workspace --filter @maple/db --filter @maple/game-data-workspace --filter @maple/simulator run lint"
   }
 }

@@ -1,4 +1,4 @@
-import { commonSkillGroupCombinations, type CommonSkillGroup } from '@maple/game-data';
+import { commonSkillGroupCombinations, type CommonSkillGroup } from '@maple/data-skill';
 
 export const resolveCommonSkillGroups = (commonGroups: readonly CommonSkillGroup[]): CommonSkillGroup[] => {
   const resolvedGroups = new Set(commonGroups);

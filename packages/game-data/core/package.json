@@ -18,9 +18,7 @@
     "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
     "lint": "eslint src --ext .ts"
   },
-  "dependencies": {
-    "@maple/game-data": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "esbuild-plugin-alias": "^0.2.1",
     "tsup": "^8.5.0"

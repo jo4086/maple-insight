@@ -12,7 +12,7 @@ import {
   type BossPhaseDefenseRateValue,
   type BossPhaseHpValue,
   type BossSpec,
-} from '@maple/game-data/monster';
+} from '@maple/data-monster';
 
 import type { GeneratedBossSpecMap } from './types';
 

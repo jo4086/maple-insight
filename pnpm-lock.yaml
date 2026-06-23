@@ -459,6 +459,18 @@ importers:
         specifier: ^8.5.0
         version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
 
+  packages/bootstrap:
+    devDependencies:
+      esbuild-plugin-alias:
+        specifier: ^0.2.1
+        version: 0.2.1
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+
   packages/contracts: {}
 
   packages/contracts/domain:
@@ -479,9 +491,12 @@ importers:
 
   packages/contracts/internal:
     dependencies:
-      '@maple/game-data':
+      '@maple/data-core':
         specifier: workspace:*
-        version: link:../../game-data-legacy
+        version: link:../../game-data/core
+      '@maple/data-skill':
+        specifier: workspace:*
+        version: link:../../game-data/skill
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -503,12 +518,12 @@ importers:
 
   packages/database/data-admin:
     dependencies:
+      '@maple/data-skill':
+        specifier: workspace:*
+        version: link:../../game-data/skill
       '@maple/db':
         specifier: workspace:*
         version: link:../db
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
       '@prisma/client':
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
@@ -537,9 +552,9 @@ importers:
 
   packages/database/db:
     dependencies:
-      '@maple/game-data':
+      '@maple/data-monster':
         specifier: workspace:*
-        version: link:../../game-data-legacy
+        version: link:../../game-data/monster
       '@prisma/client':
         specifier: ^6.19.3
         version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
@@ -568,20 +583,7 @@ importers:
 
   packages/game-data: {}
 
-  packages/game-data-legacy:
-    devDependencies:
-      esbuild-plugin-alias:
-        specifier: ^0.2.1
-        version: 0.2.1
-      tsup:
-        specifier: ^8.5.0
-        version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
-
   packages/game-data/class:
-    dependencies:
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -591,10 +593,6 @@ importers:
         version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
 
   packages/game-data/core:
-    dependencies:
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -608,9 +606,6 @@ importers:
       '@maple/data-core':
         specifier: workspace:*
         version: link:../core
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       '@maple/data-class':
         specifier: workspace:*
@@ -632,10 +627,6 @@ importers:
         version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
 
   packages/game-data/item:
-    dependencies:
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -674,9 +665,6 @@ importers:
       '@maple/data-core':
         specifier: workspace:*
         version: link:../core
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../../game-data-legacy
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -715,15 +703,15 @@ importers:
       '@maple/data-equipment':
         specifier: workspace:*
         version: link:../game-data/equipment
+      '@maple/data-monster':
+        specifier: workspace:*
+        version: link:../game-data/monster
       '@maple/data-skill':
         specifier: workspace:*
         version: link:../game-data/skill
       '@maple/db':
         specifier: workspace:*
         version: link:../database/db
-      '@maple/game-data':
-        specifier: workspace:*
-        version: link:../game-data-legacy
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -743,9 +731,12 @@ importers:
 
   packages/simulator:
     dependencies:
-      '@maple/game-data':
+      '@maple/data-core':
         specifier: workspace:*
-        version: link:../game-data-legacy
+        version: link:../game-data/core
+      '@maple/data-symbol':
+        specifier: workspace:*
+        version: link:../game-data/symbol
     devDependencies:
       esbuild-plugin-alias:
         specifier: ^0.2.1
@@ -7133,7 +7124,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.18(@types/node@24.9.1)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.32.0)(sass@1.93.2)(tsx@4.21.0)(yaml@2.8.0)
+      vitest: 4.0.18(@types/node@24.11.0)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.32.0)(sass@1.93.2)(tsx@4.21.0)(yaml@2.8.0)
 
   '@vitest/ui@4.0.18(vitest@4.1.4)':
     dependencies:
@@ -8012,21 +8003,9 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1))
     transitivePeerDependencies:
       - supports-color
-
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1)):
-    dependencies:
-      debug: 3.2.7
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
-      eslint: 9.39.4(jiti@2.6.1)
-      eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
 
   eslint-module-utils@2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
@@ -8038,33 +8017,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1)):
+  eslint-module-utils@2.12.1(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
-      '@rtsao/scc': 1.1.0
-      array-includes: 3.1.9
-      array.prototype.findlastindex: 1.2.6
-      array.prototype.flat: 1.3.3
-      array.prototype.flatmap: 1.3.3
       debug: 3.2.7
-      doctrine: 2.1.0
+    optionalDependencies:
       eslint: 9.39.4(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1))
-      hasown: 2.0.2
-      is-core-module: 2.16.1
-      is-glob: 4.0.3
-      minimatch: 3.1.2
-      object.fromentries: 2.0.8
-      object.groupby: 1.0.3
-      object.values: 1.2.1
-      semver: 6.3.1
-      string.prototype.trimend: 1.0.9
-      tsconfig-paths: 3.15.0
-    optionalDependencies:
-      '@typescript-eslint/parser': 8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+      eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.6.1))
     transitivePeerDependencies:
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
       - supports-color
     optional: true
 
@@ -8096,6 +8056,34 @@ snapshots:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
+
+  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.9
+      array.prototype.findlastindex: 1.2.6
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 9.39.4(jiti@2.6.1)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.1(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.4(jiti@2.6.1))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.5
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+    optional: true
 
   eslint-plugin-react-hooks@5.2.0(eslint@9.38.0(jiti@2.6.1)):
     dependencies:

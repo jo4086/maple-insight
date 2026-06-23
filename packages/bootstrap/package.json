@@ -1,5 +1,5 @@
 {
-  "name": "@maple/data-item",
+  "name": "@maple/bootstrap",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -13,6 +13,8 @@
     }
   },
   "scripts": {
+    "generate": "pnpm run generate:core-taxonomy",
+    "generate:core-taxonomy": "tsx src/scripts/generate-core-taxonomy.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsup",
     "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
@@ -21,6 +23,7 @@
   "dependencies": {},
   "devDependencies": {
     "esbuild-plugin-alias": "^0.2.1",
+    "tsx": "^4.21.0",
     "tsup": "^8.5.0"
   }
 }

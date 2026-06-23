@@ -1,4 +1,4 @@
-import type { Affiliation, ClassGroup as PkgClassGroup } from '@maple/game-data';
+import type { Affiliation, ClassGroup as PkgClassGroup } from '@maple/data-core';
 
 export const affiliationCodeMap = {
   모험가: '00',

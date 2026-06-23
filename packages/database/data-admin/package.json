@@ -13,7 +13,7 @@
     "build:js": "tsup",
     "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
-    "preexport:game-skills-by-raw-job": "pnpm --filter @maple/game-data run build && pnpm --filter @maple/db run build",
+    "preexport:game-skills-by-raw-job": "pnpm --filter @maple/data-skill run build && pnpm --filter @maple/db run build",
     "export:game-skills-by-raw-job": "tsx src/export-game-skills-by-raw-job.ts",
     "preseed:boss": "pnpm --filter @maple/db run build",
     "seed:boss": "tsx src/seed-boss.ts",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "@maple/game-data": "workspace:*",
+    "@maple/data-skill": "workspace:*",
     "@maple/db": "workspace:*",
     "dotenv": "^17.4.2",
     "pino": "^10.3.1"

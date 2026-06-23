@@ -29,7 +29,6 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@maple/game-data": "workspace:*",
     "@maple/data-core": "workspace:*"
   },
   "devDependencies": {

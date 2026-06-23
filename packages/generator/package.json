@@ -18,9 +18,9 @@
     }
   },
   "scripts": {
-    "pretypecheck": "pnpm --filter @maple/game-data run build && pnpm --filter @maple/data-class run build && pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
+    "pretypecheck": "pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-monster run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
     "typecheck": "tsc --noEmit",
-    "prebuild": "pnpm --filter @maple/game-data run build && pnpm --filter @maple/data-class run build && pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
+    "prebuild": "pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-monster run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/data-skill run build && pnpm --filter @maple/internal run build && pnpm --filter @maple/db run build",
     "build": "tsup",
     "dev": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --watch",
     "lint": "eslint src --ext .ts",
@@ -37,9 +37,9 @@
   "dependencies": {
     "@maple/data-core": "workspace:*",
     "@maple/data-equipment": "workspace:*",
+    "@maple/data-monster": "workspace:*",
     "@maple/data-skill": "workspace:*",
     "@maple/db": "workspace:*",
-    "@maple/game-data": "workspace:*",
     "dotenv": "^17.4.2"
   },
   "devDependencies": {

@@ -6,3 +6,4 @@ export * from './boss-hp';
 export * from './boss-meta';
 export * from './boss-reward';
 export * from './boss-spec';
+export * from './generated';

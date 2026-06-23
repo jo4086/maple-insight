@@ -76,7 +76,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "@maple/game-data": "workspace:*",
+    "@maple/data-monster": "workspace:*",
     "dotenv": "^17.4.2",
     "pino": "^10.3.1"
   },
