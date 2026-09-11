@@ -22,7 +22,7 @@ export const warriorClassKeyMap = {
 } as const;
 
 export const mageClassKeyMap = {
-  메지션: 'magician',
+  매지션: 'magician',
   '위자드(불,독)': 'wizard-fire-poison',
   '메이지(불,독)': 'mage-fire-poison',
   '아크메이지(불,독)': 'arch-mage-fire-poison',

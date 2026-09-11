@@ -1,9 +1,8 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const rootDir = process.cwd();
-const sourceDir = path.join(rootDir, 'data', '1.2.424');
-const outputDir = path.join(sourceDir, 'json');
+const sourceDir = path.join(rootDir, 'data');
 
 function parseCsv(content) {
   const rows = [];
@@ -72,21 +71,50 @@ function toRecords(rows) {
   );
 }
 
+async function exists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function main() {
-  await mkdir(outputDir, { recursive: true });
+  const entries = await readdir(sourceDir, { withFileTypes: true });
+  const versionDirs = entries.filter((entry) => entry.isDirectory());
 
-  const filenames = await readdir(sourceDir);
-  const csvFilenames = filenames.filter((filename) => filename.endsWith('.csv'));
+  for (const entry of versionDirs) {
+    const versionDir = path.join(sourceDir, entry.name);
+    const outputDir = path.join(versionDir, 'json');
+    const csvDir = path.join(versionDir, 'csv');
+    const filenames = await readdir(versionDir);
+    const csvFilenames = filenames.filter((filename) => filename.endsWith('.csv'));
 
-  for (const filename of csvFilenames) {
-    const sourcePath = path.join(sourceDir, filename);
-    const outputPath = path.join(outputDir, filename.replace(/\.csv$/u, '.json'));
-    const content = await readFile(sourcePath, 'utf8');
-    const rows = parseCsv(content);
-    const records = toRecords(rows);
+    if (csvFilenames.length === 0) {
+      continue;
+    }
 
-    await writeFile(outputPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
-    console.log(`converted ${filename} -> ${path.relative(rootDir, outputPath)}`);
+    await mkdir(outputDir, { recursive: true });
+    await mkdir(csvDir, { recursive: true });
+
+    for (const filename of csvFilenames) {
+      const sourcePath = path.join(versionDir, filename);
+      const outputPath = path.join(outputDir, filename.replace(/\.csv$/u, '.json'));
+      const csvOutputPath = path.join(csvDir, filename);
+      const content = await readFile(sourcePath, 'utf8');
+      const rows = parseCsv(content);
+      const records = toRecords(rows);
+
+      if (await exists(csvOutputPath)) {
+        throw new Error(`CSV output already exists: ${path.relative(rootDir, csvOutputPath)}`);
+      }
+
+      await writeFile(outputPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
+      await rename(sourcePath, csvOutputPath);
+      console.log(`converted ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, outputPath)}`);
+      console.log(`moved ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, csvOutputPath)}`);
+    }
   }
 }
 

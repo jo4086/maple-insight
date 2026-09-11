@@ -21,6 +21,8 @@ debug/
 codex/
 unused-dummy-files.txt
 /data/
+packages/generator/src/generated/
+packages/game-data/skill/src/fifth/temp*.ts
 
 # typescript dotfills
 **/.*.ts

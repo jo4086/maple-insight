@@ -22,7 +22,7 @@ export const warriorClassNames = [
 ] as const;
 
 export const mageClassNames = [
-  '메지션',
+  '매지션',
   '위자드(불,독)',
   '메이지(불,독)',
   '아크메이지(불,독)',
@@ -123,7 +123,7 @@ export const classNames = [
   '에이션트 아처',
   '체이서',
   '패스파인더',
-  '메지션',
+  '매지션',
   '위자드(불,독)',
   '메이지(불,독)',
   '아크메이지(불,독)',
@@ -210,7 +210,7 @@ export const adventurerClassNames = [
   '에이션트 아처',
   '체이서',
   '패스파인더',
-  '메지션',
+  '매지션',
   '위자드(불,독)',
   '메이지(불,독)',
   '아크메이지(불,독)',

@@ -12,7 +12,7 @@ export const adventurerClassKeyMap = {
   "스피어맨": "spearman",
   "버서커": "berserker",
   "다크나이트": "dark-knight",
-  "메지션": "magician",
+  "매지션": "magician",
   "위자드(불,독)": "wizard-fire-poison",
   "메이지(불,독)": "mage-fire-poison",
   "아크메이지(불,독)": "arch-mage-fire-poison",

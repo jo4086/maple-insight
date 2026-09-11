@@ -2,7 +2,7 @@ import {
   fifthAdventurerClassGroupSkillMap,
   fifthClassEnhancementMap,
   fifthClassGroupSkillMap,
-  fifthClassSkillMap,
+  fifthClassSkillCoreMap,
   fifthCommonSkills,
   fifthLineageBlessingSkillMap,
   fifthLineageCommonSkillMap,
@@ -20,7 +20,7 @@ import { finalClassSkillContextMap, fifthClassGroupJobIdMap } from './class-skil
 import { categoryJobIdFileNameMap, finalClassJobIdMap } from './job-id-map';
 import { createSixthClassEnhancementMap } from './sixth-enhancement';
 import { resolveSixthLineageClassGroupSkillRule } from './sixth-lineage-class-group';
-import type { GeneratedRawJobSkillPayload, GeneratedRawSkill } from './types';
+import type { GeneratedClassSkillData, GeneratedRawJobSkillPayload, GeneratedRawSkill, GeneratedSkillLinkedGroups } from './types';
 
 function getTargetJobIds(): string[] {
   return [...new Set([...Object.values(finalClassJobIdMap).flat(), ...Object.keys(categoryJobIdFileNameMap)])].sort((left, right) => Number(left) - Number(right));
@@ -100,9 +100,9 @@ function resolveFifthCommonSkillNames(className: keyof typeof finalClassSkillCon
 
 function resolveFifthClassGroupSkillNames(className: keyof typeof finalClassSkillContextMap): string[] {
   const context = finalClassSkillContextMap[className];
-  const classKey = context.classKey as keyof typeof fifthClassSkillMap;
+  const classKey = context.classKey as keyof typeof fifthClassSkillCoreMap;
 
-  return unique([...collectLinkedSkillNames(fifthClassSkillMap[classKey]), ...(fifthClassGroupSkillMap[context.classGroup] ?? [])]);
+  return unique([...collectLinkedSkillNames(fifthClassSkillCoreMap[classKey]), ...(fifthClassGroupSkillMap[context.classGroup] ?? [])]);
 }
 
 function resolveSixthCommonSkillNames(className: keyof typeof finalClassSkillContextMap): string[] {
@@ -136,8 +136,8 @@ function excludeSkillNames(skills: readonly GeneratedRawSkill[], skillNames: rea
 
 function resolveSixthSpecialEnhancementSkillIds(className: keyof typeof finalClassSkillContextMap): string[] {
   const context = finalClassSkillContextMap[className];
-  const classKey = context.classKey as keyof typeof fifthClassSkillMap;
-  const fifthClassSkillNames = new Set(collectLinkedSkillNames(fifthClassSkillMap[classKey]));
+  const classKey = context.classKey as keyof typeof fifthClassSkillCoreMap;
+  const fifthClassSkillNames = new Set(collectLinkedSkillNames(fifthClassSkillCoreMap[classKey]));
   const extendSkillIds = Object.entries(sixthSpecialEnhancementExtendRules)
     .filter(([skillName]) => fifthClassSkillNames.has(skillName))
     .flatMap(([, rule]) => [rule.enhancementSkillId]);
@@ -171,6 +171,20 @@ function appendGeneratedCommonSkillGroups(
     ...(fifthClassGroupSkillsForClass.length > 0 ? { [fifthClassGroupJobId]: fifthClassGroupSkillsForClass } : {}),
     ...(sixthCommonSkillsForClass.length > 0 ? { '50000': sixthCommonSkillsForClass } : {}),
     ...(sixthSpecialEnhancementSkillsForClass.length > 0 ? { '50006': sixthSpecialEnhancementSkillsForClass } : {}),
+  };
+}
+
+function resolveFifthSkillLinkedGroups(rule: (typeof fifthClassSkillCoreMap)[keyof typeof fifthClassSkillCoreMap] | undefined): GeneratedSkillLinkedGroups['fifthSkill'] {
+  return rule && 'linkedGroups' in rule ? rule.linkedGroups : [];
+}
+
+function resolveGeneratedSkillLinkedGroups(className: keyof typeof finalClassSkillContextMap): GeneratedSkillLinkedGroups {
+  const context = finalClassSkillContextMap[className];
+  const classKey = context.classKey as keyof typeof fifthClassEnhancementMap & keyof typeof fifthClassSkillCoreMap;
+
+  return {
+    fifthEnhancement: fifthClassEnhancementMap[classKey]?.linkedGroups ?? [],
+    fifthSkill: resolveFifthSkillLinkedGroups(fifthClassSkillCoreMap[classKey]),
   };
 }
 
@@ -213,11 +227,12 @@ export async function createGeneratedRawJobSkills(version: string): Promise<Gene
   };
 }
 
-export async function createGeneratedRawSkillGroupsByFinalClass(version: string) {
+export async function createGeneratedRawSkillGroupsByFinalClass(version: string): Promise<Record<string, GeneratedClassSkillData>> {
   const skillsByJobId = await createGeneratedRawSkillMapByJobId(version);
 
   return Object.fromEntries(
     Object.entries(finalClassJobIdMap).map(([className, jobIds]) => {
+      const finalClassName = className as keyof typeof finalClassSkillContextMap;
       const skillGroups = Object.fromEntries(jobIds.map((jobId) => [jobId, skillsByJobId[jobId] ?? []]));
       const filteredSkillGroups = filterZeroJobSkillsByClass(skillGroups, {
         className,
@@ -225,7 +240,13 @@ export async function createGeneratedRawSkillGroupsByFinalClass(version: string)
         additionalAllowedSkillNames: rawCommonZeroSkillNames,
       });
 
-      return [className, appendGeneratedCommonSkillGroups(className as keyof typeof finalClassSkillContextMap, filteredSkillGroups, skillsByJobId)];
+      return [
+        className,
+        {
+          skillGroups: appendGeneratedCommonSkillGroups(finalClassName, filteredSkillGroups, skillsByJobId),
+          linkedGroups: resolveGeneratedSkillLinkedGroups(finalClassName),
+        },
+      ];
     }),
   );
 }

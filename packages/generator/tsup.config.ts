@@ -6,12 +6,10 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
-    'class/index': 'src/class/index.ts',
     'game-skill/index': 'src/game-skill/index.ts',
     'monster/index': 'src/monster/index.ts',
     'taxonomy/index': 'src/taxonomy/index.ts',
     'equipment/index': 'src/equipment/index.ts',
-    'generated/index': 'src/generated/index.ts',
   },
   format: ['esm', 'cjs'],
   dts: true,

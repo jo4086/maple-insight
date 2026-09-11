@@ -37,7 +37,7 @@ export const classTree: AffiliationClassTree[] = [
             ],
           },
           {
-            className: '메지션',
+            className: '매지션',
             classGroup: '마법사',
             children: [
               {
