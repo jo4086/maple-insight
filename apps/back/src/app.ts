@@ -4,8 +4,8 @@ import { initLoaders } from './loaders';
 
 const app: Application = express();
 
-export function App() {
-  initLoaders(app);
+export async function App() {
+  await initLoaders(app);
 }
 
 export default app;

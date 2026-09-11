@@ -3,14 +3,12 @@ import type { Application } from 'express';
 import expressLoader from './express.loader';
 import routerLoader from './router.loader';
 import { errorHandler } from '../middlewares';
+import { connectRedis } from '../lib/redis';
 
-export function initLoaders(app: Application) {
-  try {
-    expressLoader(app);
+export async function initLoaders(app: Application) {
+  await connectRedis();
+  expressLoader(app);
 
-    routerLoader(app);
-    app.use(errorHandler);
-  } catch (error) {
-    console.error('loader error:', error);
-  }
+  routerLoader(app);
+  app.use(errorHandler);
 }
