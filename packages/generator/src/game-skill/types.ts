@@ -26,3 +26,16 @@ export type GeneratedRawJobSkillPayload = {
   skillCount: number;
   groups: GeneratedRawJobSkillGroup[];
 };
+
+export type GeneratedSkillLinkedGroups = {
+  fifthEnhancement: readonly (readonly string[])[];
+  fifthSkill: readonly {
+    source: string;
+    linkedSkills: readonly string[];
+  }[];
+};
+
+export type GeneratedClassSkillData = {
+  skillGroups: Record<string, GeneratedRawSkill[]>;
+  linkedGroups: GeneratedSkillLinkedGroups;
+};

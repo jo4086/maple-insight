@@ -1,2 +1,2 @@
-export * from './core';
+export * from './common-core';
 export * from './enhancement';

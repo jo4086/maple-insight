@@ -77,7 +77,7 @@ export const adventurerClassNameKeyMap = {
   "에이션트 아처": "ancient-archer",
   "체이서": "chaser",
   "패스파인더": "pathfinder",
-  "메지션": "magician",
+  "매지션": "magician",
   "위자드(불,독)": "wizard-fire-poison",
   "메이지(불,독)": "mage-fire-poison",
   "아크메이지(불,독)": "arch-mage-fire-poison",

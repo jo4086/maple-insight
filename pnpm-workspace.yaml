@@ -6,3 +6,5 @@ packages:
   - 'packages/database/*'
   - 'packages/api-types/*'
   - 'packages/contracts/*'
+
+pmOnFail: download

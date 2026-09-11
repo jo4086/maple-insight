@@ -19,12 +19,16 @@ const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const packageDir = path.resolve(currentDir, '..');
 const repoRoot = path.resolve(packageDir, '..', '..');
 
-function toTsModule(entries) {
+function toIndentedJson(value, indent) {
+  return JSON.stringify(value, null, 2).replaceAll('\n', `\n${' '.repeat(indent)}`);
+}
+
+function toTsModule(entries, linkedGroups = {}) {
   const body = entries
-    .map(([jobId, skills]) => `  ${JSON.stringify(jobId)}: ${JSON.stringify(skills, null, 2).replaceAll('\n', '\n  ')}`)
+    .map(([jobId, skills]) => `    ${JSON.stringify(jobId)}: ${toIndentedJson(skills, 4)}`)
     .join(',\n');
 
-  return `export const skillGroups = {\n${body}\n} as const;\n\nexport default skillGroups;\n`;
+  return `export const skillData = {\n  skillGroups: {\n${body}\n  },\n  linkedGroups: ${toIndentedJson(linkedGroups, 2)},\n} as const;\n\nexport default skillData;\n`;
 }
 
 function getVersion() {
@@ -50,11 +54,12 @@ async function main() {
   let fileCount = 0;
   let skillCount = 0;
 
-  for (const [className, skillGroups] of Object.entries(classGroups)) {
+  for (const [className, classSkillData] of Object.entries(classGroups)) {
+    const { skillGroups, linkedGroups } = classSkillData;
     const fileName = finalClassFileNameMap[className] ?? className;
     const outputPath = path.join(outputDir, `${fileName}.ts`);
     const jobIds = getClassOutputJobIds(className, skillGroups);
-    await writeFile(outputPath, toTsModule(jobIds.map((jobId) => [jobId, skillGroups[jobId] ?? []])), 'utf8');
+    await writeFile(outputPath, toTsModule(jobIds.map((jobId) => [jobId, skillGroups[jobId] ?? []]), linkedGroups), 'utf8');
     fileCount += 1;
     skillCount += Object.values(skillGroups).reduce((sum, skills) => sum + skills.length, 0);
   }
