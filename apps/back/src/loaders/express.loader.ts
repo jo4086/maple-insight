@@ -1,8 +1,11 @@
+import { RedisStore } from 'connect-redis';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application } from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
+
+import { redisClient } from '@/lib/redis';
 // import path from 'path';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -56,6 +59,10 @@ function expressLoader(app: Application) {
 
   app.use(
     session({
+      store: new RedisStore({
+        client: redisClient,
+        prefix: 'maple-insight:session:',
+      }),
       resave: false,
       saveUninitialized: false,
       secret: getCookieSecret(),

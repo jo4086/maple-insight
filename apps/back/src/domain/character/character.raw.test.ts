@@ -9,7 +9,7 @@ import { isAxiosError } from 'axios';
 import { describe, expect, it } from 'vitest';
 
 import type { CharacterApiEndpoint, CharacterEndpoint, CharacterSkillGrade } from './character.constants';
-import { CharacterService, getCharacterOCID } from './character.service';
+import { CharacterService, getCharacterOCID } from './services';
 import { toCharacterEquipment } from './mappers/item-equipment.mapper';
 
 type ItemEquipmentDebugPayload = {

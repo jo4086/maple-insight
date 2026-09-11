@@ -1,9 +1,8 @@
 import { isAxiosError } from 'axios';
 
-import { nexonBaseApi } from '../../api/baseApi';
+import { getSkillGrades, type CharacterApiEndpoint, type CharacterSkillGrade } from '../character.constants';
 
-import { getSkillGrades, type CharacterApiEndpoint, type CharacterSkillGrade } from './character.constants';
-
+import { nexonBaseApi } from '@/api/baseApi';
 import { createAppError, createExternalApiError } from '@/errors/app-error';
 
 /**
