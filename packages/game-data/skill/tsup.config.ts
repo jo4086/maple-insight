@@ -10,6 +10,7 @@ export default defineConfig({
     'value/index': 'src/value/index.ts',
     'fifth/index': 'src/fifth/index.ts',
     'sixth/index': 'src/sixth/index.ts',
+    'effect/index': 'src/effect/index.ts',
   },
   format: ['esm', 'cjs'],
   dts: true,

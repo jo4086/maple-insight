@@ -474,6 +474,19 @@ importers:
         specifier: ^4.21.0
         version: 4.21.0
 
+  packages/calculator:
+    dependencies:
+      '@maple/data-core':
+        specifier: workspace:*
+        version: link:../game-data/core
+    devDependencies:
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(@swc/core@1.15.18)(jiti@2.6.1)(postcss@8.5.9)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.0)
+      vitest:
+        specifier: ^4.0.18
+        version: 4.1.4(@types/node@24.12.2)(@vitest/coverage-v8@4.0.18)(@vitest/ui@4.0.18)(jsdom@28.1.0)(vite@8.0.8(@types/node@24.12.2)(esbuild@0.25.5)(jiti@2.6.1)(sass@1.93.2)(tsx@4.21.0)(yaml@2.8.0))
+
   packages/contracts: {}
 
   packages/contracts/domain:

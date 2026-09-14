@@ -30,6 +30,11 @@
       "types": "./dist/value/index.d.ts",
       "import": "./dist/value/index.js",
       "require": "./dist/value/index.cjs"
+    },
+    "./effect": {
+      "types": "./dist/effect/index.d.ts",
+      "import": "./dist/effect/index.js",
+      "require": "./dist/effect/index.cjs"
     }
   },
   "scripts": {
