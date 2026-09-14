@@ -508,3 +508,26 @@ model EquipmentItem {
   @@map("equipment_items")
   @@schema("equipment")
 }
+
+/// INFO:
+/// 장비 잠재능력 옵션 문구를 부위/등급/레벨별로 정규화한 테이블이다.
+/// - @maple/data-potential의 잠재옵션 원천 데이터를 seed로 적재한다.
+/// - kind는 일반 잠재능력(potential)과 에디셔널 잠재능력(additional)을 구분한다.
+/// - optionText는 Nexon 장비 API의 잠재옵션 문구 판별에 사용한다.
+model EquipmentPotentialOptionText {
+  id         BigInt   @id @default(autoincrement())
+  kind       String
+  level      Int
+  part       String
+  grade      String
+  optionText String   @map("option_text")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([kind, level, part, grade, optionText], map: "equipment_potential_option_texts_unique")
+  @@index([kind, level], map: "equipment_potential_option_texts_kind_level_idx")
+  @@index([part], map: "equipment_potential_option_texts_part_idx")
+  @@index([grade], map: "equipment_potential_option_texts_grade_idx")
+  @@map("equipment_potential_option_texts")
+  @@schema("equipment")
+}

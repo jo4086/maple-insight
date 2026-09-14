@@ -11,6 +11,7 @@ export default defineConfig({
     'admin/reset.repo': 'src/admin/reset.repo.ts',
     'admin/seed-boss.repo': 'src/admin/seed-boss.repo.ts',
     'admin/seed-equipment.repo': 'src/admin/seed-equipment.repo.ts',
+    'admin/seed-equipment-potential-option.repo': 'src/admin/seed-equipment-potential-option.repo.ts',
     'admin/seed-game-data.repo': 'src/admin/seed-game-data.repo.ts',
     'admin/seed-game-data-raw.repo': 'src/admin/seed-game-data-raw.repo.ts',
     'repositories/character-group.repo': 'src/repositories/character-group.repo.ts',

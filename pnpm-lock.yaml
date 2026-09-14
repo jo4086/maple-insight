@@ -518,6 +518,9 @@ importers:
 
   packages/database/data-admin:
     dependencies:
+      '@maple/data-potential':
+        specifier: workspace:*
+        version: link:../../game-data/potential
       '@maple/data-skill':
         specifier: workspace:*
         version: link:../../game-data/skill

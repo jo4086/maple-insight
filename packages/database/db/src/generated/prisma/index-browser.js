@@ -358,7 +358,7 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   potentialEnabled: 'potentialEnabled',
   starforceEnabled: 'starforceEnabled',
   scrollUpgradeEnabled: 'scrollUpgradeEnabled',
-  additionalOptionEnabled: 'additionalOptionEnabled',
+  addOptionEnabled: 'addOptionEnabled',
   requiredLevel: 'requiredLevel',
   requiredClass: 'requiredClass',
   classGroup: 'classGroup',
@@ -385,6 +385,17 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   upgradeScroll: 'upgradeScroll',
   exceptionalScroll: 'exceptionalScroll',
   specialRingLevel: 'specialRingLevel',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EquipmentPotentialOptionTextScalarFieldEnum = {
+  id: 'id',
+  kind: 'kind',
+  level: 'level',
+  part: 'part',
+  grade: 'grade',
+  optionText: 'optionText',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -440,7 +451,8 @@ exports.Prisma.ModelName = {
   GameSkillHint: 'GameSkillHint',
   GameSkillLevel: 'GameSkillLevel',
   GameSkillPvpCommon: 'GameSkillPvpCommon',
-  EquipmentItem: 'EquipmentItem'
+  EquipmentItem: 'EquipmentItem',
+  EquipmentPotentialOptionText: 'EquipmentPotentialOptionText'
 };
 
 /**

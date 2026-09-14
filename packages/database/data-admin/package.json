@@ -6,9 +6,9 @@
     "dist"
   ],
   "scripts": {
-    "pretypecheck": "pnpm --filter @maple/db run build",
+    "pretypecheck": "pnpm --filter @maple/data-potential run build && pnpm --filter @maple/db run build",
     "typecheck": "tsc --noEmit",
-    "prebuild": "pnpm --filter @maple/db run build",
+    "prebuild": "pnpm --filter @maple/data-potential run build && pnpm --filter @maple/db run build",
     "build": "pnpm run build:js && pnpm run build:types",
     "build:js": "tsup",
     "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly",
@@ -18,6 +18,8 @@
     "preseed:boss": "pnpm --filter @maple/db run build",
     "seed:boss": "tsx src/seed-boss.ts",
     "seed:equipment": "tsx src/seed-equipment.ts",
+    "preseed:equipment-potential-option": "pnpm --filter @maple/data-potential run build && pnpm --filter @maple/db run build",
+    "seed:equipment-potential-option": "tsx src/seed-equipment-potential-option.ts",
     "preseed:game-data": "pnpm --filter @maple/db run build",
     "seed:game-data": "tsx src/seed-game-data.ts",
     "preseed:game-data-raw": "pnpm --filter @maple/db run build",
@@ -37,6 +39,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "@maple/data-potential": "workspace:*",
     "@maple/data-skill": "workspace:*",
     "@maple/db": "workspace:*",
     "dotenv": "^17.4.2",

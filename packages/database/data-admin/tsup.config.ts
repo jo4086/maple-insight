@@ -9,6 +9,7 @@ export default defineConfig({
     index: 'src/index.ts',
     'seed-boss': 'src/seed-boss.ts',
     'seed-equipment': 'src/seed-equipment.ts',
+    'seed-equipment-potential-option': 'src/seed-equipment-potential-option.ts',
     'seed-game-data': 'src/seed-game-data.ts',
     'seed-game-data-raw': 'src/seed-game-data-raw.ts',
   },
