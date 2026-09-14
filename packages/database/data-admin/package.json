@@ -17,6 +17,7 @@
     "export:game-skills-by-raw-job": "tsx src/export-game-skills-by-raw-job.ts",
     "preseed:boss": "pnpm --filter @maple/db run build",
     "seed:boss": "tsx src/seed-boss.ts",
+    "preseed:equipment": "pnpm --filter @maple/db run build",
     "seed:equipment": "tsx src/seed-equipment.ts",
     "preseed:equipment-potential-option": "pnpm --filter @maple/data-potential run build && pnpm --filter @maple/db run build",
     "seed:equipment-potential-option": "tsx src/seed-equipment-potential-option.ts",

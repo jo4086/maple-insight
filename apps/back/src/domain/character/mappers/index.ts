@@ -70,18 +70,18 @@ function applySkillComposite({ mapped, data, requestedEndpoints }: CompositeMapp
   }));
 }
 
-function applyEquipmentComposite({ mapped, data, requestedEndpoints }: CompositeMapperParams) {
+async function applyEquipmentComposite({ mapped, data, requestedEndpoints }: CompositeMapperParams) {
   if (!requestedEndpoints.includes('equipment')) return;
 
-  mapped.equipment = toCharacterEquipment(data['item-equipment'] as ItemEquipmentRaw, (data['android-equipment'] as AndroidRaw | undefined) ?? null);
+  mapped.equipment = await toCharacterEquipment(data['item-equipment'] as ItemEquipmentRaw, (data['android-equipment'] as AndroidRaw | undefined) ?? null);
 }
 
-const applyCompositeMappers = (params: CompositeMapperParams) => {
+const applyCompositeMappers = async (params: CompositeMapperParams) => {
   applySkillComposite(params);
-  applyEquipmentComposite(params);
+  await applyEquipmentComposite(params);
 };
 
-export function toCharacterResponse(data: CharacterResponseData, requestedEndpoints: CharacterEndpoint[]) {
+export async function toCharacterResponse(data: CharacterResponseData, requestedEndpoints: CharacterEndpoint[]) {
   const mapped: Record<string, unknown> = {};
   const shouldExposeEquipment = requestedEndpoints.includes('equipment');
 
@@ -96,7 +96,7 @@ export function toCharacterResponse(data: CharacterResponseData, requestedEndpoi
     mapped[key] = mapper ? mapper(value) : value;
   }
 
-  applyCompositeMappers({ mapped, data, requestedEndpoints });
+  await applyCompositeMappers({ mapped, data, requestedEndpoints });
 
   return mapped;
 }

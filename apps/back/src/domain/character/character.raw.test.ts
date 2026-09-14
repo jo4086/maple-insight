@@ -182,7 +182,7 @@ async function callEndpointForDebug(service: CharacterService, endpoint: Charact
     const itemEquipmentRaw = await service.call('item-equipment');
     const androidEquipmentRaw = await service.call('android-equipment');
 
-    return toCharacterEquipment(itemEquipmentRaw as ItemEquipmentRaw, androidEquipmentRaw as AndroidRaw);
+    return await toCharacterEquipment(itemEquipmentRaw as ItemEquipmentRaw, androidEquipmentRaw as AndroidRaw);
   }
 
   if (endpoint === 'skill') {

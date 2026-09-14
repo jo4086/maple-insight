@@ -68,7 +68,7 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
     const rawData = shouldFetchBasic ? { basic: basicData, ...restData } : restData;
     const mergedData = mergeSkillResults(rawData);
 
-    const data = toCharacterResponse(mergedData, requestedEndpoints);
+    const data = await toCharacterResponse(mergedData, requestedEndpoints);
 
     return res.status(200).json(createSuccessResponse(data));
   } catch (error) {

@@ -462,6 +462,8 @@ model GameSkillPvpCommon {
 model EquipmentItem {
   id                 BigInt    @id @default(autoincrement())
   name               String
+  normalizedName     String    @map("normalized_name")
+  baseName           String?   @map("base_name")
   category           String
   keywords           String[]
   part               String
@@ -497,10 +499,12 @@ model EquipmentItem {
   upgradeScroll      Int       @default(0) @map("upgrade_scroll")
   exceptionalScroll  Int       @default(0) @map("exceptional_scroll")
   specialRingLevel   Int       @default(0) @map("special_ring_level")
+  grantedSkills      String[]  @default([]) @map("granted_skills")
   createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   @@unique([name])
+  @@unique([normalizedName])
   @@index([category])
   @@index([part])
   @@index([setName])

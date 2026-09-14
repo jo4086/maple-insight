@@ -25356,6 +25356,8 @@ export namespace Prisma {
   export type EquipmentItemMinAggregateOutputType = {
     id: bigint | null
     name: string | null
+    normalizedName: string | null
+    baseName: string | null
     category: string | null
     part: string | null
     setName: string | null
@@ -25396,6 +25398,8 @@ export namespace Prisma {
   export type EquipmentItemMaxAggregateOutputType = {
     id: bigint | null
     name: string | null
+    normalizedName: string | null
+    baseName: string | null
     category: string | null
     part: string | null
     setName: string | null
@@ -25436,6 +25440,8 @@ export namespace Prisma {
   export type EquipmentItemCountAggregateOutputType = {
     id: number
     name: number
+    normalizedName: number
+    baseName: number
     category: number
     keywords: number
     part: number
@@ -25471,6 +25477,7 @@ export namespace Prisma {
     upgradeScroll: number
     exceptionalScroll: number
     specialRingLevel: number
+    grantedSkills: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -25534,6 +25541,8 @@ export namespace Prisma {
   export type EquipmentItemMinAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     part?: true
     setName?: true
@@ -25574,6 +25583,8 @@ export namespace Prisma {
   export type EquipmentItemMaxAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     part?: true
     setName?: true
@@ -25614,6 +25625,8 @@ export namespace Prisma {
   export type EquipmentItemCountAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     keywords?: true
     part?: true
@@ -25649,6 +25662,7 @@ export namespace Prisma {
     upgradeScroll?: true
     exceptionalScroll?: true
     specialRingLevel?: true
+    grantedSkills?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -25743,6 +25757,8 @@ export namespace Prisma {
   export type EquipmentItemGroupByOutputType = {
     id: bigint
     name: string
+    normalizedName: string
+    baseName: string | null
     category: string
     keywords: string[]
     part: string
@@ -25778,6 +25794,7 @@ export namespace Prisma {
     upgradeScroll: number
     exceptionalScroll: number
     specialRingLevel: number
+    grantedSkills: string[]
     createdAt: Date
     updatedAt: Date
     _count: EquipmentItemCountAggregateOutputType | null
@@ -25804,6 +25821,8 @@ export namespace Prisma {
   export type EquipmentItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25839,6 +25858,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25846,6 +25866,8 @@ export namespace Prisma {
   export type EquipmentItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25881,6 +25903,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25888,6 +25911,8 @@ export namespace Prisma {
   export type EquipmentItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25923,6 +25948,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25930,6 +25956,8 @@ export namespace Prisma {
   export type EquipmentItemSelectScalar = {
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25965,11 +25993,12 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
+  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
 
   export type $EquipmentItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EquipmentItem"
@@ -25977,6 +26006,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       name: string
+      normalizedName: string
+      baseName: string | null
       category: string
       keywords: string[]
       part: string
@@ -26012,6 +26043,7 @@ export namespace Prisma {
       upgradeScroll: number
       exceptionalScroll: number
       specialRingLevel: number
+      grantedSkills: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["equipmentItem"]>
@@ -26439,6 +26471,8 @@ export namespace Prisma {
   interface EquipmentItemFieldRefs {
     readonly id: FieldRef<"EquipmentItem", 'BigInt'>
     readonly name: FieldRef<"EquipmentItem", 'String'>
+    readonly normalizedName: FieldRef<"EquipmentItem", 'String'>
+    readonly baseName: FieldRef<"EquipmentItem", 'String'>
     readonly category: FieldRef<"EquipmentItem", 'String'>
     readonly keywords: FieldRef<"EquipmentItem", 'String[]'>
     readonly part: FieldRef<"EquipmentItem", 'String'>
@@ -26474,6 +26508,7 @@ export namespace Prisma {
     readonly upgradeScroll: FieldRef<"EquipmentItem", 'Int'>
     readonly exceptionalScroll: FieldRef<"EquipmentItem", 'Int'>
     readonly specialRingLevel: FieldRef<"EquipmentItem", 'Int'>
+    readonly grantedSkills: FieldRef<"EquipmentItem", 'String[]'>
     readonly createdAt: FieldRef<"EquipmentItem", 'DateTime'>
     readonly updatedAt: FieldRef<"EquipmentItem", 'DateTime'>
   }
@@ -28214,6 +28249,8 @@ export namespace Prisma {
   export const EquipmentItemScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    normalizedName: 'normalizedName',
+    baseName: 'baseName',
     category: 'category',
     keywords: 'keywords',
     part: 'part',
@@ -28249,6 +28286,7 @@ export namespace Prisma {
     upgradeScroll: 'upgradeScroll',
     exceptionalScroll: 'exceptionalScroll',
     specialRingLevel: 'specialRingLevel',
+    grantedSkills: 'grantedSkills',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -29927,6 +29965,8 @@ export namespace Prisma {
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     id?: BigIntFilter<"EquipmentItem"> | bigint | number
     name?: StringFilter<"EquipmentItem"> | string
+    normalizedName?: StringFilter<"EquipmentItem"> | string
+    baseName?: StringNullableFilter<"EquipmentItem"> | string | null
     category?: StringFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringFilter<"EquipmentItem"> | string
@@ -29962,6 +30002,7 @@ export namespace Prisma {
     upgradeScroll?: IntFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntFilter<"EquipmentItem"> | number
     specialRingLevel?: IntFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
   }
@@ -29969,6 +30010,8 @@ export namespace Prisma {
   export type EquipmentItemOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrderInput | SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -30004,6 +30047,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30011,9 +30055,11 @@ export namespace Prisma {
   export type EquipmentItemWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
     name?: string
+    normalizedName?: string
     AND?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     OR?: EquipmentItemWhereInput[]
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
+    baseName?: StringNullableFilter<"EquipmentItem"> | string | null
     category?: StringFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringFilter<"EquipmentItem"> | string
@@ -30049,13 +30095,16 @@ export namespace Prisma {
     upgradeScroll?: IntFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntFilter<"EquipmentItem"> | number
     specialRingLevel?: IntFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
-  }, "id" | "name">
+  }, "id" | "name" | "normalizedName">
 
   export type EquipmentItemOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrderInput | SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -30091,6 +30140,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EquipmentItemCountOrderByAggregateInput
@@ -30106,6 +30156,8 @@ export namespace Prisma {
     NOT?: EquipmentItemScalarWhereWithAggregatesInput | EquipmentItemScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"EquipmentItem"> | bigint | number
     name?: StringWithAggregatesFilter<"EquipmentItem"> | string
+    normalizedName?: StringWithAggregatesFilter<"EquipmentItem"> | string
+    baseName?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
     category?: StringWithAggregatesFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringWithAggregatesFilter<"EquipmentItem"> | string
@@ -30141,6 +30193,7 @@ export namespace Prisma {
     upgradeScroll?: IntWithAggregatesFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntWithAggregatesFilter<"EquipmentItem"> | number
     specialRingLevel?: IntWithAggregatesFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
   }
@@ -31836,6 +31889,8 @@ export namespace Prisma {
   export type EquipmentItemCreateInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -31871,6 +31926,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31878,6 +31934,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedCreateInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -31913,6 +31971,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31920,6 +31979,8 @@ export namespace Prisma {
   export type EquipmentItemUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -31955,6 +32016,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31962,6 +32024,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -31997,6 +32061,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32004,6 +32069,8 @@ export namespace Prisma {
   export type EquipmentItemCreateManyInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -32039,6 +32106,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32046,6 +32114,8 @@ export namespace Prisma {
   export type EquipmentItemUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -32081,6 +32151,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32088,6 +32159,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -32123,6 +32196,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33727,6 +33801,8 @@ export namespace Prisma {
   export type EquipmentItemCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -33762,6 +33838,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -33796,6 +33873,8 @@ export namespace Prisma {
   export type EquipmentItemMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     part?: SortOrder
     setName?: SortOrder
@@ -33836,6 +33915,8 @@ export namespace Prisma {
   export type EquipmentItemMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     part?: SortOrder
     setName?: SortOrder
@@ -34951,6 +35032,10 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type EquipmentItemCreategrantedSkillsInput = {
+    set: string[]
+  }
+
   export type EquipmentItemUpdatekeywordsInput = {
     set?: string[]
     push?: string | string[]
@@ -34958,6 +35043,11 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EquipmentItemUpdategrantedSkillsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {

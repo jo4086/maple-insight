@@ -58,6 +58,11 @@
       "import": "./dist/repositories/character-group.repo.cjs",
       "require": "./dist/repositories/character-group.repo.cjs"
     },
+    "./equipment": {
+      "types": "./dist/repositories/equipment.repo.d.ts",
+      "import": "./dist/repositories/equipment.repo.cjs",
+      "require": "./dist/repositories/equipment.repo.cjs"
+    },
     "./ocid": {
       "types": "./dist/repositories/ocid.repo.d.ts",
       "import": "./dist/repositories/ocid.repo.cjs",

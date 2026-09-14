@@ -15,6 +15,7 @@ export default defineConfig({
     'admin/seed-game-data.repo': 'src/admin/seed-game-data.repo.ts',
     'admin/seed-game-data-raw.repo': 'src/admin/seed-game-data-raw.repo.ts',
     'repositories/character-group.repo': 'src/repositories/character-group.repo.ts',
+    'repositories/equipment.repo': 'src/repositories/equipment.repo.ts',
     'repositories/ocid.repo': 'src/repositories/ocid.repo.ts',
     'repositories/ranking-snapshot.repo': 'src/repositories/ranking-snapshot.repo.ts',
     'repositories/search-history.repo': 'src/repositories/search-history.repo.ts',

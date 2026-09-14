@@ -350,6 +350,8 @@ exports.Prisma.GameSkillPvpCommonScalarFieldEnum = {
 exports.Prisma.EquipmentItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  normalizedName: 'normalizedName',
+  baseName: 'baseName',
   category: 'category',
   keywords: 'keywords',
   part: 'part',
@@ -385,6 +387,7 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   upgradeScroll: 'upgradeScroll',
   exceptionalScroll: 'exceptionalScroll',
   specialRingLevel: 'specialRingLevel',
+  grantedSkills: 'grantedSkills',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
