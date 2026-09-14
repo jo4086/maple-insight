@@ -1,7 +1,8 @@
 import { getCachedCharacterLookup, setCachedCharacterLookup } from './character.cache';
 import { CHARACTER_ENDPOINTS, type CharacterEndpoint, type CharacterApiEndpoint } from './character.constants';
-import { CharacterService, getCharacterOCID } from './character.service';
+import { recordCharacterSearch } from './character.redis';
 import { toCharacterResponse } from './mappers';
+import { resolveCharacterOcid, CharacterService } from './services';
 
 import { createSuccessResponse } from '@/types';
 
@@ -39,8 +40,10 @@ const lookup: AppHandler<object, unknown, unknown, { nick: string; date?: string
   try {
     const { nick, date = null } = req.query;
 
+    await recordCharacterSearch(nick);
+
     const cachedLookup = getCachedCharacterLookup(nick);
-    const ocid = cachedLookup?.ocid ?? (await getCharacterOCID(nick)).ocid;
+    const { ocid } = await resolveCharacterOcid(nick);
 
     const service = new CharacterService(ocid, date, cachedLookup?.characterClass ?? null);
 
