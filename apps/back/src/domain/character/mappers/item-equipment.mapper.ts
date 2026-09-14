@@ -2,17 +2,11 @@ import type { ItemEquipmentRaw, ItemOptionRaw, AndroidRaw } from '@maple/api-cha
 import type { EquipmentSlot, AndroidEquipment, CharacterEquipment, DragonEquipment, ItemEquipment, MedalShape, MechanicEquipment, Title } from '@maple/contracts';
 import type { EquipmentClassType } from '@maple/data-class';
 import { specialRingBaseItemNames } from '@maple/data-equipment';
-import {
-  generatedAccessoryEquipment,
-  generatedAdditionalPotentialOptionTextsByPartGrade,
-  generatedArmorEquipment,
-  generatedPotentialOptionTextsByPartGrade,
-  generatedSubWeaponEquipment,
-  generatedWeaponEquipment,
-} from '@maple/generator/generated';
+import { findEquipmentItemsByNormalizedNames } from '@maple/db/equipment';
 
 import { equipmentSlotMetaMap } from '../../equipment/equipment-slot-meta';
 import { getClassMeta } from '../constants/classMetaMap';
+import equipmentPotentialOptions from '../generated/equipment-potential-options.json';
 import { getMaxStarforceByBaseLevel } from '../utils/getMaxStarforceByBaseLevel';
 
 import { toBooleanByFlag } from '@/utils/boolean';
@@ -59,20 +53,27 @@ const POTENTIAL_GRADE_KEY_MAP = {
 
 type PotentialGradeKey = (typeof POTENTIAL_GRADE_ORDER)[number];
 type PotentialPartGradeMap = Record<string, Record<string, Partial<Record<PotentialGradeKey, readonly string[]>> | undefined> | undefined>;
-type GeneratedEquipmentRow = {
+type EquipmentMetaRow = {
   name: string;
+  normalizedName: string;
   baseName?: string | null;
-  setName: ItemEquipment['setName'];
+  setName: string | null;
   category: string;
   part: string;
-  requiredClass: EquipmentClassType | readonly EquipmentClassType[];
-  classGroup: EquipmentClassType | null;
+  requiredClass: unknown;
+  classGroup: string | null;
   grantedSkills: string[];
   specialRingLevel: number;
   potentialEnabled: boolean;
   starforceEnabled: boolean;
   scrollUpgradeEnabled: boolean;
   addOptionEnabled: boolean;
+};
+
+type EquipmentMetaIndex = {
+  byItemName: ReadonlyMap<string, EquipmentMetaRow>;
+  byNormalizedItemName: ReadonlyMap<string, EquipmentMetaRow>;
+  specialRingByBaseNameAndLevel: ReadonlyMap<string, EquipmentMetaRow>;
 };
 
 const DEFAULT_EQUIPMENT_CAPABILITY = {
@@ -89,33 +90,12 @@ const DISABLED_EQUIPMENT_CAPABILITY = {
   addOptionEnabled: false,
 } as const;
 
-const equipmentMetaByItemName = new Map<string, GeneratedEquipmentRow>(
-  [...generatedArmorEquipment, ...generatedWeaponEquipment, ...generatedAccessoryEquipment, ...generatedSubWeaponEquipment].map((item) => {
-    const { name } = item as GeneratedEquipmentRow;
-
-    return [name, item as GeneratedEquipmentRow];
-  }),
-);
-const equipmentMetaByNormalizedItemName = new Map<string, GeneratedEquipmentRow>(
-  [...generatedArmorEquipment, ...generatedWeaponEquipment, ...generatedAccessoryEquipment, ...generatedSubWeaponEquipment].map((item) => {
-    const { name } = item as GeneratedEquipmentRow;
-
-    return [normalizeEquipmentName(name), item as GeneratedEquipmentRow];
-  }),
-);
-const specialRingMetaByBaseNameAndLevel = new Map<string, GeneratedEquipmentRow>(
-  generatedAccessoryEquipment.flatMap((item) => {
-    const row = item as GeneratedEquipmentRow;
-
-    if (!row.baseName || row.specialRingLevel <= 0) return [];
-
-    return [[createSpecialRingMetaKey(row.baseName, row.specialRingLevel), row]];
-  }),
-);
 const specialRingBaseItemNameSet = new Set<string>(specialRingBaseItemNames.map(normalizeEquipmentName));
 
-const potentialPartGradeMap = generatedPotentialOptionTextsByPartGrade as PotentialPartGradeMap;
-const additionalPotentialPartGradeMap = generatedAdditionalPotentialOptionTextsByPartGrade as PotentialPartGradeMap;
+const { potential: potentialPartGradeMap, additional: additionalPotentialPartGradeMap } = equipmentPotentialOptions as unknown as {
+  potential: PotentialPartGradeMap;
+  additional: PotentialPartGradeMap;
+};
 
 function toEquipmentOption(raw: EquipmentOptionRaw) {
   return {
@@ -150,18 +130,23 @@ function toClassType(characterClass: string | null | undefined): EquipmentClassT
   return '공용';
 }
 
-function toEquipmentClassType(generatedMeta: GeneratedEquipmentRow | null, characterClass: string | null | undefined): EquipmentClassType {
+function toRequiredClasses(value: unknown): readonly EquipmentClassType[] {
+  if (typeof value === 'string') return [value as EquipmentClassType];
+  if (!Array.isArray(value)) return [];
+
+  return value.filter((item): item is EquipmentClassType => typeof item === 'string');
+}
+
+function toEquipmentClassType(generatedMeta: EquipmentMetaRow | null, characterClass: string | null | undefined): EquipmentClassType {
   if (!generatedMeta) return toClassType(characterClass);
 
-  if (typeof generatedMeta.requiredClass === 'string') {
-    return generatedMeta.requiredClass;
+  const requiredClasses = toRequiredClasses(generatedMeta.requiredClass);
+
+  if (requiredClasses.length === 1) {
+    return requiredClasses[0];
   }
 
-  if (generatedMeta.requiredClass.length === 1) {
-    return generatedMeta.requiredClass[0];
-  }
-
-  return generatedMeta.classGroup ?? '공용';
+  return (generatedMeta.classGroup as EquipmentClassType | null) ?? '공용';
 }
 
 function toEquipmentCategory(slot: string | null | undefined): string {
@@ -193,7 +178,7 @@ function toPotentialPartKey(part: string): string {
   return part;
 }
 
-function resolvePotentialPart(raw: ItemRaw, generatedMeta: GeneratedEquipmentRow | null): string {
+function resolvePotentialPart(raw: ItemRaw, generatedMeta: EquipmentMetaRow | null): string {
   if (generatedMeta?.category === '무기') return '무기';
   if (generatedMeta?.category === '보조무기') return '보조무기';
 
@@ -270,28 +255,28 @@ function toPotentialLine({
   };
 }
 
-function toEquipmentGeneratedMetaByName(itemName: string | null | undefined) {
+function toEquipmentGeneratedMetaByName(itemName: string | null | undefined, equipmentMetaIndex: EquipmentMetaIndex) {
   if (!itemName) return null;
 
-  return equipmentMetaByItemName.get(itemName) ?? equipmentMetaByNormalizedItemName.get(normalizeEquipmentName(itemName)) ?? null;
+  return equipmentMetaIndex.byItemName.get(itemName) ?? equipmentMetaIndex.byNormalizedItemName.get(normalizeEquipmentName(itemName)) ?? null;
 }
 
-function toEquipmentGeneratedMeta(raw: Pick<ItemRaw, 'item_name' | 'special_ring_level'>) {
+function toEquipmentGeneratedMeta(raw: Pick<ItemRaw, 'item_name' | 'special_ring_level'>, equipmentMetaIndex: EquipmentMetaIndex) {
   const specialRingLevel = toNumberSafe(raw.special_ring_level, 0);
 
   if (raw.item_name && specialRingLevel > 0 && specialRingBaseItemNameSet.has(normalizeEquipmentName(raw.item_name))) {
-    const specialRingMeta = specialRingMetaByBaseNameAndLevel.get(createSpecialRingMetaKey(raw.item_name, specialRingLevel));
+    const specialRingMeta = equipmentMetaIndex.specialRingByBaseNameAndLevel.get(createSpecialRingMetaKey(raw.item_name, specialRingLevel));
 
     if (specialRingMeta) return specialRingMeta;
   }
 
-  const exactMeta = toEquipmentGeneratedMetaByName(raw.item_name);
+  const exactMeta = toEquipmentGeneratedMetaByName(raw.item_name, equipmentMetaIndex);
 
   if (exactMeta) return exactMeta;
 
   if (!raw.item_name || specialRingLevel <= 0) return null;
 
-  return toEquipmentGeneratedMetaByName(`${raw.item_name} Lv.${specialRingLevel}`);
+  return toEquipmentGeneratedMetaByName(`${raw.item_name} Lv.${specialRingLevel}`, equipmentMetaIndex);
 }
 
 function normalizeEquipmentName(name: string) {
@@ -302,8 +287,47 @@ function createSpecialRingMetaKey(baseName: string, level: number) {
   return `${normalizeEquipmentName(baseName)}:${level}`;
 }
 
-function toEquipmentCapability(raw: ItemRaw) {
-  const generatedMeta = toEquipmentGeneratedMeta(raw);
+function collectEquipmentMetaTargets(raw: ItemEquipmentRaw): Pick<ItemRaw, 'item_name' | 'special_ring_level'>[] {
+  return [
+    ...(raw.item_equipment ?? []),
+    ...(raw.item_equipment_preset_1 ?? []),
+    ...(raw.item_equipment_preset_2 ?? []),
+    ...(raw.item_equipment_preset_3 ?? []),
+    ...(raw.dragon_equipment ?? []),
+    ...(raw.mechanic_equipment ?? []),
+  ];
+}
+
+async function createEquipmentMetaIndex(raw: ItemEquipmentRaw): Promise<EquipmentMetaIndex> {
+  const normalizedNames = collectEquipmentMetaTargets(raw).flatMap((item) => {
+    if (!item.item_name) return [];
+
+    const names = [normalizeEquipmentName(item.item_name)];
+    const specialRingLevel = toNumberSafe(item.special_ring_level, 0);
+
+    if (specialRingLevel > 0) {
+      names.push(normalizeEquipmentName(`${item.item_name} Lv.${specialRingLevel}`));
+    }
+
+    return names;
+  });
+  const rows: EquipmentMetaRow[] = await findEquipmentItemsByNormalizedNames(normalizedNames);
+
+  return {
+    byItemName: new Map(rows.map((row) => [row.name, row])),
+    byNormalizedItemName: new Map(rows.map((row) => [row.normalizedName, row])),
+    specialRingByBaseNameAndLevel: new Map(
+      rows.flatMap((row) => {
+        if (!row.baseName || row.specialRingLevel <= 0) return [];
+
+        return [[createSpecialRingMetaKey(row.baseName, row.specialRingLevel), row] as const];
+      }),
+    ),
+  };
+}
+
+function toEquipmentCapability(raw: ItemRaw, equipmentMetaIndex: EquipmentMetaIndex) {
+  const generatedMeta = toEquipmentGeneratedMeta(raw, equipmentMetaIndex);
   const fallbackCapability = toFallbackEquipmentCapability(raw);
 
   return {
@@ -339,15 +363,15 @@ function toScrollInfo(raw: ItemRaw) {
   };
 }
 
-function toBaseEquipment(raw: ItemRaw, characterClass: string | null | undefined) {
+function toBaseEquipment(raw: ItemRaw, characterClass: string | null | undefined, equipmentMetaIndex: EquipmentMetaIndex) {
   const baseLevel = raw.item_base_option?.base_equipment_level ?? 0;
-  const generatedMeta = toEquipmentGeneratedMeta(raw);
-  const capability = toEquipmentCapability(raw);
+  const generatedMeta = toEquipmentGeneratedMeta(raw, equipmentMetaIndex);
+  const capability = toEquipmentCapability(raw, equipmentMetaIndex);
 
   return {
     baseLevel,
     name: raw.item_name ?? '',
-    setName: generatedMeta?.setName ?? null,
+    setName: (generatedMeta?.setName as ItemEquipment['setName'] | undefined) ?? null,
     grantedSkills: generatedMeta?.grantedSkills ?? [],
     part: raw.item_equipment_part ?? '',
     category: toEquipmentCategory(raw.item_equipment_slot),
@@ -405,11 +429,11 @@ function hasAdditionalPotentialOption(raw: {
   );
 }
 
-function toItemEquipment(raw: MainItemRaw | PresetItemRaw, characterClass: string | null | undefined): ItemEquipment {
+function toItemEquipment(raw: MainItemRaw | PresetItemRaw, characterClass: string | null | undefined, equipmentMetaIndex: EquipmentMetaIndex): ItemEquipment {
   const potentialFlag = 'potential_option_flag' in raw ? toBooleanByFlag(raw.potential_option_flag ?? '0') : hasPotentialOption(raw);
   const additionalFlag = 'additional_potential_option_flag' in raw ? toBooleanByFlag(raw.additional_potential_option_flag ?? '0') : hasAdditionalPotentialOption(raw);
-  const baseEquipment = toBaseEquipment(raw, characterClass);
-  const generatedMeta = toEquipmentGeneratedMeta(raw);
+  const baseEquipment = toBaseEquipment(raw, characterClass, equipmentMetaIndex);
+  const generatedMeta = toEquipmentGeneratedMeta(raw, equipmentMetaIndex);
   const potentialPart = resolvePotentialPart(raw, generatedMeta);
 
   return {
@@ -471,8 +495,12 @@ function toItemEquipment(raw: MainItemRaw | PresetItemRaw, characterClass: strin
   };
 }
 
-function toClassExclusiveEquipment(raw: ClassExclusiveItemRaw, characterClass: string | null | undefined): DragonEquipment | MechanicEquipment {
-  return toBaseEquipment(raw, characterClass);
+function toClassExclusiveEquipment(
+  raw: ClassExclusiveItemRaw,
+  characterClass: string | null | undefined,
+  equipmentMetaIndex: EquipmentMetaIndex,
+): DragonEquipment | MechanicEquipment {
+  return toBaseEquipment(raw, characterClass, equipmentMetaIndex);
 }
 
 function toTitle(raw: ItemEquipmentRaw['title']): Title | null {
@@ -638,17 +666,18 @@ function toAndroidEquipment(
   };
 }
 
-export function toCharacterEquipment(raw: ItemEquipmentRaw, androidRaw?: AndroidRaw | null): CharacterEquipment {
+export async function toCharacterEquipment(raw: ItemEquipmentRaw, androidRaw?: AndroidRaw | null): Promise<CharacterEquipment> {
   const characterClass = raw.character_class;
-  const dragonEquipment = (raw.dragon_equipment ?? []).map((item) => toClassExclusiveEquipment(item, characterClass));
-  const mechanicEquipment = (raw.mechanic_equipment ?? []).map((item) => toClassExclusiveEquipment(item, characterClass));
+  const equipmentMetaIndex = await createEquipmentMetaIndex(raw);
+  const dragonEquipment = (raw.dragon_equipment ?? []).map((item) => toClassExclusiveEquipment(item, characterClass, equipmentMetaIndex));
+  const mechanicEquipment = (raw.mechanic_equipment ?? []).map((item) => toClassExclusiveEquipment(item, characterClass, equipmentMetaIndex));
 
   const presets: CharacterEquipment['presets'] = ITEM_PRESET_KEYS.map((itemPresetKey, index) => {
     const androidPresetKey = ANDROID_PRESET_KEYS[index];
 
     return {
       no: index + 1,
-      itemEquipment: (raw[itemPresetKey] ?? []).map((item) => toItemEquipment(item, characterClass)),
+      itemEquipment: (raw[itemPresetKey] ?? []).map((item) => toItemEquipment(item, characterClass, equipmentMetaIndex)),
       dragonEquipment,
       mechanicEquipment,
       androidEquipment: toAndroidEquipment(androidRaw?.[androidPresetKey] ?? null),
@@ -656,7 +685,7 @@ export function toCharacterEquipment(raw: ItemEquipmentRaw, androidRaw?: Android
   });
 
   return {
-    itemEquipment: (raw.item_equipment ?? []).map((item) => toItemEquipment(item, characterClass)),
+    itemEquipment: (raw.item_equipment ?? []).map((item) => toItemEquipment(item, characterClass, equipmentMetaIndex)),
     dragonEquipment,
     mechanicEquipment,
     androidEquipment: toAndroidEquipment(androidRaw ?? null),

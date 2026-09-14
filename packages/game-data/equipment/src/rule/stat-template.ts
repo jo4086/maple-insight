@@ -102,7 +102,7 @@ export function resolveEquipmentBasicStats({ statTemplate, classGroup }: Resolve
     stats.luk = statTemplate.all;
   }
 
-  if (statTemplate.stat !== undefined) {
+  if (statTemplate.stat !== undefined && statTemplate.stat !== 0) {
     if (!classGroup) {
       throw new Error('classGroup is required when EquipmentGenerationStatTemplate.stat is used');
     }

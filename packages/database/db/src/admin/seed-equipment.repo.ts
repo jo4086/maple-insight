@@ -7,6 +7,7 @@ const DEFAULT_CHUNK_SIZE = 1000;
 
 type EquipmentJsonItem = {
   name: string;
+  baseName: string | null;
   category: string;
   keywords: string[];
   part: string;
@@ -42,6 +43,7 @@ type EquipmentJsonItem = {
   scrollCount: number;
   exceptionalScroll: number;
   specialRingLevel: number;
+  grantedSkills: string[];
 };
 
 export type SeedEquipmentOptions = {
@@ -93,6 +95,8 @@ async function createManyInChunks<T>(items: readonly T[], chunkSize: number, cre
 function toEquipmentItemCreateManyInput(item: EquipmentJsonItem) {
   return {
     name: item.name,
+    normalizedName: item.name.replace(/\s+/g, ''),
+    baseName: item.baseName,
     category: item.category,
     keywords: item.keywords,
     part: item.part,
@@ -128,6 +132,7 @@ function toEquipmentItemCreateManyInput(item: EquipmentJsonItem) {
     upgradeScroll: item.scrollCount,
     exceptionalScroll: item.exceptionalScroll,
     specialRingLevel: item.specialRingLevel,
+    grantedSkills: item.grantedSkills,
   };
 }
 

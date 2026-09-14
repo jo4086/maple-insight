@@ -165,6 +165,15 @@ export type GameSkillPvpCommon = $Result.DefaultSelection<Prisma.$GameSkillPvpCo
  * - keywords는 검색/필터용 key를 유지하고, 그 외 표시 필드는 한글명을 저장한다.
  */
 export type EquipmentItem = $Result.DefaultSelection<Prisma.$EquipmentItemPayload>
+/**
+ * Model EquipmentPotentialOptionText
+ * INFO:
+ * 장비 잠재능력 옵션 문구를 부위/등급/레벨별로 정규화한 테이블이다.
+ * - @maple/data-potential의 잠재옵션 원천 데이터를 seed로 적재한다.
+ * - kind는 일반 잠재능력(potential)과 에디셔널 잠재능력(additional)을 구분한다.
+ * - optionText는 Nexon 장비 API의 잠재옵션 문구 판별에 사용한다.
+ */
+export type EquipmentPotentialOptionText = $Result.DefaultSelection<Prisma.$EquipmentPotentialOptionTextPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -483,6 +492,16 @@ export class PrismaClient<
     * ```
     */
   get equipmentItem(): Prisma.EquipmentItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.equipmentPotentialOptionText`: Exposes CRUD operations for the **EquipmentPotentialOptionText** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EquipmentPotentialOptionTexts
+    * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany()
+    * ```
+    */
+  get equipmentPotentialOptionText(): Prisma.EquipmentPotentialOptionTextDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -943,7 +962,8 @@ export namespace Prisma {
     GameSkillHint: 'GameSkillHint',
     GameSkillLevel: 'GameSkillLevel',
     GameSkillPvpCommon: 'GameSkillPvpCommon',
-    EquipmentItem: 'EquipmentItem'
+    EquipmentItem: 'EquipmentItem',
+    EquipmentPotentialOptionText: 'EquipmentPotentialOptionText'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -962,7 +982,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem"
+      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem" | "equipmentPotentialOptionText"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2446,6 +2466,80 @@ export namespace Prisma {
           }
         }
       }
+      EquipmentPotentialOptionText: {
+        payload: Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>
+        fields: Prisma.EquipmentPotentialOptionTextFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EquipmentPotentialOptionTextFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EquipmentPotentialOptionTextFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          findFirst: {
+            args: Prisma.EquipmentPotentialOptionTextFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EquipmentPotentialOptionTextFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          findMany: {
+            args: Prisma.EquipmentPotentialOptionTextFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>[]
+          }
+          create: {
+            args: Prisma.EquipmentPotentialOptionTextCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          createMany: {
+            args: Prisma.EquipmentPotentialOptionTextCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EquipmentPotentialOptionTextCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>[]
+          }
+          delete: {
+            args: Prisma.EquipmentPotentialOptionTextDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          update: {
+            args: Prisma.EquipmentPotentialOptionTextUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          deleteMany: {
+            args: Prisma.EquipmentPotentialOptionTextDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EquipmentPotentialOptionTextUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EquipmentPotentialOptionTextUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>[]
+          }
+          upsert: {
+            args: Prisma.EquipmentPotentialOptionTextUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EquipmentPotentialOptionTextPayload>
+          }
+          aggregate: {
+            args: Prisma.EquipmentPotentialOptionTextAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEquipmentPotentialOptionText>
+          }
+          groupBy: {
+            args: Prisma.EquipmentPotentialOptionTextGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EquipmentPotentialOptionTextGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EquipmentPotentialOptionTextCountArgs<ExtArgs>
+            result: $Utils.Optional<EquipmentPotentialOptionTextCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2562,6 +2656,7 @@ export namespace Prisma {
     gameSkillLevel?: GameSkillLevelOmit
     gameSkillPvpCommon?: GameSkillPvpCommonOmit
     equipmentItem?: EquipmentItemOmit
+    equipmentPotentialOptionText?: EquipmentPotentialOptionTextOmit
   }
 
   /* Types for Logging */
@@ -25261,6 +25356,8 @@ export namespace Prisma {
   export type EquipmentItemMinAggregateOutputType = {
     id: bigint | null
     name: string | null
+    normalizedName: string | null
+    baseName: string | null
     category: string | null
     part: string | null
     setName: string | null
@@ -25268,7 +25365,7 @@ export namespace Prisma {
     potentialEnabled: boolean | null
     starforceEnabled: boolean | null
     scrollUpgradeEnabled: boolean | null
-    additionalOptionEnabled: boolean | null
+    addOptionEnabled: boolean | null
     requiredLevel: number | null
     classGroup: string | null
     handType: string | null
@@ -25301,6 +25398,8 @@ export namespace Prisma {
   export type EquipmentItemMaxAggregateOutputType = {
     id: bigint | null
     name: string | null
+    normalizedName: string | null
+    baseName: string | null
     category: string | null
     part: string | null
     setName: string | null
@@ -25308,7 +25407,7 @@ export namespace Prisma {
     potentialEnabled: boolean | null
     starforceEnabled: boolean | null
     scrollUpgradeEnabled: boolean | null
-    additionalOptionEnabled: boolean | null
+    addOptionEnabled: boolean | null
     requiredLevel: number | null
     classGroup: string | null
     handType: string | null
@@ -25341,6 +25440,8 @@ export namespace Prisma {
   export type EquipmentItemCountAggregateOutputType = {
     id: number
     name: number
+    normalizedName: number
+    baseName: number
     category: number
     keywords: number
     part: number
@@ -25349,7 +25450,7 @@ export namespace Prisma {
     potentialEnabled: number
     starforceEnabled: number
     scrollUpgradeEnabled: number
-    additionalOptionEnabled: number
+    addOptionEnabled: number
     requiredLevel: number
     requiredClass: number
     classGroup: number
@@ -25376,6 +25477,7 @@ export namespace Prisma {
     upgradeScroll: number
     exceptionalScroll: number
     specialRingLevel: number
+    grantedSkills: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -25439,6 +25541,8 @@ export namespace Prisma {
   export type EquipmentItemMinAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     part?: true
     setName?: true
@@ -25446,7 +25550,7 @@ export namespace Prisma {
     potentialEnabled?: true
     starforceEnabled?: true
     scrollUpgradeEnabled?: true
-    additionalOptionEnabled?: true
+    addOptionEnabled?: true
     requiredLevel?: true
     classGroup?: true
     handType?: true
@@ -25479,6 +25583,8 @@ export namespace Prisma {
   export type EquipmentItemMaxAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     part?: true
     setName?: true
@@ -25486,7 +25592,7 @@ export namespace Prisma {
     potentialEnabled?: true
     starforceEnabled?: true
     scrollUpgradeEnabled?: true
-    additionalOptionEnabled?: true
+    addOptionEnabled?: true
     requiredLevel?: true
     classGroup?: true
     handType?: true
@@ -25519,6 +25625,8 @@ export namespace Prisma {
   export type EquipmentItemCountAggregateInputType = {
     id?: true
     name?: true
+    normalizedName?: true
+    baseName?: true
     category?: true
     keywords?: true
     part?: true
@@ -25527,7 +25635,7 @@ export namespace Prisma {
     potentialEnabled?: true
     starforceEnabled?: true
     scrollUpgradeEnabled?: true
-    additionalOptionEnabled?: true
+    addOptionEnabled?: true
     requiredLevel?: true
     requiredClass?: true
     classGroup?: true
@@ -25554,6 +25662,7 @@ export namespace Prisma {
     upgradeScroll?: true
     exceptionalScroll?: true
     specialRingLevel?: true
+    grantedSkills?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -25648,6 +25757,8 @@ export namespace Prisma {
   export type EquipmentItemGroupByOutputType = {
     id: bigint
     name: string
+    normalizedName: string
+    baseName: string | null
     category: string
     keywords: string[]
     part: string
@@ -25656,7 +25767,7 @@ export namespace Prisma {
     potentialEnabled: boolean
     starforceEnabled: boolean
     scrollUpgradeEnabled: boolean
-    additionalOptionEnabled: boolean
+    addOptionEnabled: boolean
     requiredLevel: number | null
     requiredClass: JsonValue
     classGroup: string | null
@@ -25683,6 +25794,7 @@ export namespace Prisma {
     upgradeScroll: number
     exceptionalScroll: number
     specialRingLevel: number
+    grantedSkills: string[]
     createdAt: Date
     updatedAt: Date
     _count: EquipmentItemCountAggregateOutputType | null
@@ -25709,6 +25821,8 @@ export namespace Prisma {
   export type EquipmentItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25717,7 +25831,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
     classGroup?: boolean
@@ -25744,6 +25858,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25751,6 +25866,8 @@ export namespace Prisma {
   export type EquipmentItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25759,7 +25876,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
     classGroup?: boolean
@@ -25786,6 +25903,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25793,6 +25911,8 @@ export namespace Prisma {
   export type EquipmentItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25801,7 +25921,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
     classGroup?: boolean
@@ -25828,6 +25948,7 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["equipmentItem"]>
@@ -25835,6 +25956,8 @@ export namespace Prisma {
   export type EquipmentItemSelectScalar = {
     id?: boolean
     name?: boolean
+    normalizedName?: boolean
+    baseName?: boolean
     category?: boolean
     keywords?: boolean
     part?: boolean
@@ -25843,7 +25966,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
     classGroup?: boolean
@@ -25870,11 +25993,12 @@ export namespace Prisma {
     upgradeScroll?: boolean
     exceptionalScroll?: boolean
     specialRingLevel?: boolean
+    grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "additionalOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
+  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
 
   export type $EquipmentItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EquipmentItem"
@@ -25882,6 +26006,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       name: string
+      normalizedName: string
+      baseName: string | null
       category: string
       keywords: string[]
       part: string
@@ -25890,7 +26016,7 @@ export namespace Prisma {
       potentialEnabled: boolean
       starforceEnabled: boolean
       scrollUpgradeEnabled: boolean
-      additionalOptionEnabled: boolean
+      addOptionEnabled: boolean
       requiredLevel: number | null
       requiredClass: Prisma.JsonValue
       classGroup: string | null
@@ -25917,6 +26043,7 @@ export namespace Prisma {
       upgradeScroll: number
       exceptionalScroll: number
       specialRingLevel: number
+      grantedSkills: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["equipmentItem"]>
@@ -26344,6 +26471,8 @@ export namespace Prisma {
   interface EquipmentItemFieldRefs {
     readonly id: FieldRef<"EquipmentItem", 'BigInt'>
     readonly name: FieldRef<"EquipmentItem", 'String'>
+    readonly normalizedName: FieldRef<"EquipmentItem", 'String'>
+    readonly baseName: FieldRef<"EquipmentItem", 'String'>
     readonly category: FieldRef<"EquipmentItem", 'String'>
     readonly keywords: FieldRef<"EquipmentItem", 'String[]'>
     readonly part: FieldRef<"EquipmentItem", 'String'>
@@ -26352,7 +26481,7 @@ export namespace Prisma {
     readonly potentialEnabled: FieldRef<"EquipmentItem", 'Boolean'>
     readonly starforceEnabled: FieldRef<"EquipmentItem", 'Boolean'>
     readonly scrollUpgradeEnabled: FieldRef<"EquipmentItem", 'Boolean'>
-    readonly additionalOptionEnabled: FieldRef<"EquipmentItem", 'Boolean'>
+    readonly addOptionEnabled: FieldRef<"EquipmentItem", 'Boolean'>
     readonly requiredLevel: FieldRef<"EquipmentItem", 'Int'>
     readonly requiredClass: FieldRef<"EquipmentItem", 'Json'>
     readonly classGroup: FieldRef<"EquipmentItem", 'String'>
@@ -26379,6 +26508,7 @@ export namespace Prisma {
     readonly upgradeScroll: FieldRef<"EquipmentItem", 'Int'>
     readonly exceptionalScroll: FieldRef<"EquipmentItem", 'Int'>
     readonly specialRingLevel: FieldRef<"EquipmentItem", 'Int'>
+    readonly grantedSkills: FieldRef<"EquipmentItem", 'String[]'>
     readonly createdAt: FieldRef<"EquipmentItem", 'DateTime'>
     readonly updatedAt: FieldRef<"EquipmentItem", 'DateTime'>
   }
@@ -26748,6 +26878,1078 @@ export namespace Prisma {
 
 
   /**
+   * Model EquipmentPotentialOptionText
+   */
+
+  export type AggregateEquipmentPotentialOptionText = {
+    _count: EquipmentPotentialOptionTextCountAggregateOutputType | null
+    _avg: EquipmentPotentialOptionTextAvgAggregateOutputType | null
+    _sum: EquipmentPotentialOptionTextSumAggregateOutputType | null
+    _min: EquipmentPotentialOptionTextMinAggregateOutputType | null
+    _max: EquipmentPotentialOptionTextMaxAggregateOutputType | null
+  }
+
+  export type EquipmentPotentialOptionTextAvgAggregateOutputType = {
+    id: number | null
+    level: number | null
+  }
+
+  export type EquipmentPotentialOptionTextSumAggregateOutputType = {
+    id: bigint | null
+    level: number | null
+  }
+
+  export type EquipmentPotentialOptionTextMinAggregateOutputType = {
+    id: bigint | null
+    kind: string | null
+    level: number | null
+    part: string | null
+    grade: string | null
+    optionText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EquipmentPotentialOptionTextMaxAggregateOutputType = {
+    id: bigint | null
+    kind: string | null
+    level: number | null
+    part: string | null
+    grade: string | null
+    optionText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EquipmentPotentialOptionTextCountAggregateOutputType = {
+    id: number
+    kind: number
+    level: number
+    part: number
+    grade: number
+    optionText: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EquipmentPotentialOptionTextAvgAggregateInputType = {
+    id?: true
+    level?: true
+  }
+
+  export type EquipmentPotentialOptionTextSumAggregateInputType = {
+    id?: true
+    level?: true
+  }
+
+  export type EquipmentPotentialOptionTextMinAggregateInputType = {
+    id?: true
+    kind?: true
+    level?: true
+    part?: true
+    grade?: true
+    optionText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EquipmentPotentialOptionTextMaxAggregateInputType = {
+    id?: true
+    kind?: true
+    level?: true
+    part?: true
+    grade?: true
+    optionText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EquipmentPotentialOptionTextCountAggregateInputType = {
+    id?: true
+    kind?: true
+    level?: true
+    part?: true
+    grade?: true
+    optionText?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EquipmentPotentialOptionTextAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EquipmentPotentialOptionText to aggregate.
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EquipmentPotentialOptionTexts to fetch.
+     */
+    orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EquipmentPotentialOptionTextWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EquipmentPotentialOptionTexts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EquipmentPotentialOptionTexts
+    **/
+    _count?: true | EquipmentPotentialOptionTextCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EquipmentPotentialOptionTextAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EquipmentPotentialOptionTextSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EquipmentPotentialOptionTextMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EquipmentPotentialOptionTextMaxAggregateInputType
+  }
+
+  export type GetEquipmentPotentialOptionTextAggregateType<T extends EquipmentPotentialOptionTextAggregateArgs> = {
+        [P in keyof T & keyof AggregateEquipmentPotentialOptionText]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEquipmentPotentialOptionText[P]>
+      : GetScalarType<T[P], AggregateEquipmentPotentialOptionText[P]>
+  }
+
+
+
+
+  export type EquipmentPotentialOptionTextGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EquipmentPotentialOptionTextWhereInput
+    orderBy?: EquipmentPotentialOptionTextOrderByWithAggregationInput | EquipmentPotentialOptionTextOrderByWithAggregationInput[]
+    by: EquipmentPotentialOptionTextScalarFieldEnum[] | EquipmentPotentialOptionTextScalarFieldEnum
+    having?: EquipmentPotentialOptionTextScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EquipmentPotentialOptionTextCountAggregateInputType | true
+    _avg?: EquipmentPotentialOptionTextAvgAggregateInputType
+    _sum?: EquipmentPotentialOptionTextSumAggregateInputType
+    _min?: EquipmentPotentialOptionTextMinAggregateInputType
+    _max?: EquipmentPotentialOptionTextMaxAggregateInputType
+  }
+
+  export type EquipmentPotentialOptionTextGroupByOutputType = {
+    id: bigint
+    kind: string
+    level: number
+    part: string
+    grade: string
+    optionText: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EquipmentPotentialOptionTextCountAggregateOutputType | null
+    _avg: EquipmentPotentialOptionTextAvgAggregateOutputType | null
+    _sum: EquipmentPotentialOptionTextSumAggregateOutputType | null
+    _min: EquipmentPotentialOptionTextMinAggregateOutputType | null
+    _max: EquipmentPotentialOptionTextMaxAggregateOutputType | null
+  }
+
+  type GetEquipmentPotentialOptionTextGroupByPayload<T extends EquipmentPotentialOptionTextGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EquipmentPotentialOptionTextGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EquipmentPotentialOptionTextGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EquipmentPotentialOptionTextGroupByOutputType[P]>
+            : GetScalarType<T[P], EquipmentPotentialOptionTextGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EquipmentPotentialOptionTextSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    kind?: boolean
+    level?: boolean
+    part?: boolean
+    grade?: boolean
+    optionText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["equipmentPotentialOptionText"]>
+
+  export type EquipmentPotentialOptionTextSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    kind?: boolean
+    level?: boolean
+    part?: boolean
+    grade?: boolean
+    optionText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["equipmentPotentialOptionText"]>
+
+  export type EquipmentPotentialOptionTextSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    kind?: boolean
+    level?: boolean
+    part?: boolean
+    grade?: boolean
+    optionText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["equipmentPotentialOptionText"]>
+
+  export type EquipmentPotentialOptionTextSelectScalar = {
+    id?: boolean
+    kind?: boolean
+    level?: boolean
+    part?: boolean
+    grade?: boolean
+    optionText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EquipmentPotentialOptionTextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "kind" | "level" | "part" | "grade" | "optionText" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentPotentialOptionText"]>
+
+  export type $EquipmentPotentialOptionTextPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EquipmentPotentialOptionText"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      kind: string
+      level: number
+      part: string
+      grade: string
+      optionText: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["equipmentPotentialOptionText"]>
+    composites: {}
+  }
+
+  type EquipmentPotentialOptionTextGetPayload<S extends boolean | null | undefined | EquipmentPotentialOptionTextDefaultArgs> = $Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload, S>
+
+  type EquipmentPotentialOptionTextCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EquipmentPotentialOptionTextFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EquipmentPotentialOptionTextCountAggregateInputType | true
+    }
+
+  export interface EquipmentPotentialOptionTextDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EquipmentPotentialOptionText'], meta: { name: 'EquipmentPotentialOptionText' } }
+    /**
+     * Find zero or one EquipmentPotentialOptionText that matches the filter.
+     * @param {EquipmentPotentialOptionTextFindUniqueArgs} args - Arguments to find a EquipmentPotentialOptionText
+     * @example
+     * // Get one EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EquipmentPotentialOptionTextFindUniqueArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextFindUniqueArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EquipmentPotentialOptionText that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EquipmentPotentialOptionTextFindUniqueOrThrowArgs} args - Arguments to find a EquipmentPotentialOptionText
+     * @example
+     * // Get one EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EquipmentPotentialOptionTextFindUniqueOrThrowArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EquipmentPotentialOptionText that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextFindFirstArgs} args - Arguments to find a EquipmentPotentialOptionText
+     * @example
+     * // Get one EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EquipmentPotentialOptionTextFindFirstArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextFindFirstArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EquipmentPotentialOptionText that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextFindFirstOrThrowArgs} args - Arguments to find a EquipmentPotentialOptionText
+     * @example
+     * // Get one EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EquipmentPotentialOptionTextFindFirstOrThrowArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextFindFirstOrThrowArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EquipmentPotentialOptionTexts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany()
+     * 
+     * // Get first 10 EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EquipmentPotentialOptionTextFindManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EquipmentPotentialOptionText.
+     * @param {EquipmentPotentialOptionTextCreateArgs} args - Arguments to create a EquipmentPotentialOptionText.
+     * @example
+     * // Create one EquipmentPotentialOptionText
+     * const EquipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.create({
+     *   data: {
+     *     // ... data to create a EquipmentPotentialOptionText
+     *   }
+     * })
+     * 
+     */
+    create<T extends EquipmentPotentialOptionTextCreateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextCreateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EquipmentPotentialOptionTexts.
+     * @param {EquipmentPotentialOptionTextCreateManyArgs} args - Arguments to create many EquipmentPotentialOptionTexts.
+     * @example
+     * // Create many EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EquipmentPotentialOptionTextCreateManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EquipmentPotentialOptionTexts and returns the data saved in the database.
+     * @param {EquipmentPotentialOptionTextCreateManyAndReturnArgs} args - Arguments to create many EquipmentPotentialOptionTexts.
+     * @example
+     * // Create many EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EquipmentPotentialOptionTexts and only return the `id`
+     * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EquipmentPotentialOptionTextCreateManyAndReturnArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EquipmentPotentialOptionText.
+     * @param {EquipmentPotentialOptionTextDeleteArgs} args - Arguments to delete one EquipmentPotentialOptionText.
+     * @example
+     * // Delete one EquipmentPotentialOptionText
+     * const EquipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.delete({
+     *   where: {
+     *     // ... filter to delete one EquipmentPotentialOptionText
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EquipmentPotentialOptionTextDeleteArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextDeleteArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EquipmentPotentialOptionText.
+     * @param {EquipmentPotentialOptionTextUpdateArgs} args - Arguments to update one EquipmentPotentialOptionText.
+     * @example
+     * // Update one EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EquipmentPotentialOptionTextUpdateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EquipmentPotentialOptionTexts.
+     * @param {EquipmentPotentialOptionTextDeleteManyArgs} args - Arguments to filter EquipmentPotentialOptionTexts to delete.
+     * @example
+     * // Delete a few EquipmentPotentialOptionTexts
+     * const { count } = await prisma.equipmentPotentialOptionText.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EquipmentPotentialOptionTextDeleteManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EquipmentPotentialOptionTexts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EquipmentPotentialOptionTextUpdateManyArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EquipmentPotentialOptionTexts and returns the data updated in the database.
+     * @param {EquipmentPotentialOptionTextUpdateManyAndReturnArgs} args - Arguments to update many EquipmentPotentialOptionTexts.
+     * @example
+     * // Update many EquipmentPotentialOptionTexts
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EquipmentPotentialOptionTexts and only return the `id`
+     * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EquipmentPotentialOptionTextUpdateManyAndReturnArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EquipmentPotentialOptionText.
+     * @param {EquipmentPotentialOptionTextUpsertArgs} args - Arguments to update or create a EquipmentPotentialOptionText.
+     * @example
+     * // Update or create a EquipmentPotentialOptionText
+     * const equipmentPotentialOptionText = await prisma.equipmentPotentialOptionText.upsert({
+     *   create: {
+     *     // ... data to create a EquipmentPotentialOptionText
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EquipmentPotentialOptionText we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EquipmentPotentialOptionTextUpsertArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpsertArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EquipmentPotentialOptionTexts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextCountArgs} args - Arguments to filter EquipmentPotentialOptionTexts to count.
+     * @example
+     * // Count the number of EquipmentPotentialOptionTexts
+     * const count = await prisma.equipmentPotentialOptionText.count({
+     *   where: {
+     *     // ... the filter for the EquipmentPotentialOptionTexts we want to count
+     *   }
+     * })
+    **/
+    count<T extends EquipmentPotentialOptionTextCountArgs>(
+      args?: Subset<T, EquipmentPotentialOptionTextCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EquipmentPotentialOptionTextCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EquipmentPotentialOptionText.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EquipmentPotentialOptionTextAggregateArgs>(args: Subset<T, EquipmentPotentialOptionTextAggregateArgs>): Prisma.PrismaPromise<GetEquipmentPotentialOptionTextAggregateType<T>>
+
+    /**
+     * Group by EquipmentPotentialOptionText.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EquipmentPotentialOptionTextGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EquipmentPotentialOptionTextGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EquipmentPotentialOptionTextGroupByArgs['orderBy'] }
+        : { orderBy?: EquipmentPotentialOptionTextGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EquipmentPotentialOptionTextGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEquipmentPotentialOptionTextGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EquipmentPotentialOptionText model
+   */
+  readonly fields: EquipmentPotentialOptionTextFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EquipmentPotentialOptionText.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EquipmentPotentialOptionTextClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EquipmentPotentialOptionText model
+   */
+  interface EquipmentPotentialOptionTextFieldRefs {
+    readonly id: FieldRef<"EquipmentPotentialOptionText", 'BigInt'>
+    readonly kind: FieldRef<"EquipmentPotentialOptionText", 'String'>
+    readonly level: FieldRef<"EquipmentPotentialOptionText", 'Int'>
+    readonly part: FieldRef<"EquipmentPotentialOptionText", 'String'>
+    readonly grade: FieldRef<"EquipmentPotentialOptionText", 'String'>
+    readonly optionText: FieldRef<"EquipmentPotentialOptionText", 'String'>
+    readonly createdAt: FieldRef<"EquipmentPotentialOptionText", 'DateTime'>
+    readonly updatedAt: FieldRef<"EquipmentPotentialOptionText", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EquipmentPotentialOptionText findUnique
+   */
+  export type EquipmentPotentialOptionTextFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter, which EquipmentPotentialOptionText to fetch.
+     */
+    where: EquipmentPotentialOptionTextWhereUniqueInput
+  }
+
+  /**
+   * EquipmentPotentialOptionText findUniqueOrThrow
+   */
+  export type EquipmentPotentialOptionTextFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter, which EquipmentPotentialOptionText to fetch.
+     */
+    where: EquipmentPotentialOptionTextWhereUniqueInput
+  }
+
+  /**
+   * EquipmentPotentialOptionText findFirst
+   */
+  export type EquipmentPotentialOptionTextFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter, which EquipmentPotentialOptionText to fetch.
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EquipmentPotentialOptionTexts to fetch.
+     */
+    orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EquipmentPotentialOptionTexts.
+     */
+    cursor?: EquipmentPotentialOptionTextWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EquipmentPotentialOptionTexts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EquipmentPotentialOptionTexts.
+     */
+    distinct?: EquipmentPotentialOptionTextScalarFieldEnum | EquipmentPotentialOptionTextScalarFieldEnum[]
+  }
+
+  /**
+   * EquipmentPotentialOptionText findFirstOrThrow
+   */
+  export type EquipmentPotentialOptionTextFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter, which EquipmentPotentialOptionText to fetch.
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EquipmentPotentialOptionTexts to fetch.
+     */
+    orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EquipmentPotentialOptionTexts.
+     */
+    cursor?: EquipmentPotentialOptionTextWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EquipmentPotentialOptionTexts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EquipmentPotentialOptionTexts.
+     */
+    distinct?: EquipmentPotentialOptionTextScalarFieldEnum | EquipmentPotentialOptionTextScalarFieldEnum[]
+  }
+
+  /**
+   * EquipmentPotentialOptionText findMany
+   */
+  export type EquipmentPotentialOptionTextFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter, which EquipmentPotentialOptionTexts to fetch.
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EquipmentPotentialOptionTexts to fetch.
+     */
+    orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EquipmentPotentialOptionTexts.
+     */
+    cursor?: EquipmentPotentialOptionTextWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EquipmentPotentialOptionTexts.
+     */
+    skip?: number
+    distinct?: EquipmentPotentialOptionTextScalarFieldEnum | EquipmentPotentialOptionTextScalarFieldEnum[]
+  }
+
+  /**
+   * EquipmentPotentialOptionText create
+   */
+  export type EquipmentPotentialOptionTextCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EquipmentPotentialOptionText.
+     */
+    data: XOR<EquipmentPotentialOptionTextCreateInput, EquipmentPotentialOptionTextUncheckedCreateInput>
+  }
+
+  /**
+   * EquipmentPotentialOptionText createMany
+   */
+  export type EquipmentPotentialOptionTextCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EquipmentPotentialOptionTexts.
+     */
+    data: EquipmentPotentialOptionTextCreateManyInput | EquipmentPotentialOptionTextCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EquipmentPotentialOptionText createManyAndReturn
+   */
+  export type EquipmentPotentialOptionTextCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * The data used to create many EquipmentPotentialOptionTexts.
+     */
+    data: EquipmentPotentialOptionTextCreateManyInput | EquipmentPotentialOptionTextCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EquipmentPotentialOptionText update
+   */
+  export type EquipmentPotentialOptionTextUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EquipmentPotentialOptionText.
+     */
+    data: XOR<EquipmentPotentialOptionTextUpdateInput, EquipmentPotentialOptionTextUncheckedUpdateInput>
+    /**
+     * Choose, which EquipmentPotentialOptionText to update.
+     */
+    where: EquipmentPotentialOptionTextWhereUniqueInput
+  }
+
+  /**
+   * EquipmentPotentialOptionText updateMany
+   */
+  export type EquipmentPotentialOptionTextUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EquipmentPotentialOptionTexts.
+     */
+    data: XOR<EquipmentPotentialOptionTextUpdateManyMutationInput, EquipmentPotentialOptionTextUncheckedUpdateManyInput>
+    /**
+     * Filter which EquipmentPotentialOptionTexts to update
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * Limit how many EquipmentPotentialOptionTexts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EquipmentPotentialOptionText updateManyAndReturn
+   */
+  export type EquipmentPotentialOptionTextUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * The data used to update EquipmentPotentialOptionTexts.
+     */
+    data: XOR<EquipmentPotentialOptionTextUpdateManyMutationInput, EquipmentPotentialOptionTextUncheckedUpdateManyInput>
+    /**
+     * Filter which EquipmentPotentialOptionTexts to update
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * Limit how many EquipmentPotentialOptionTexts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EquipmentPotentialOptionText upsert
+   */
+  export type EquipmentPotentialOptionTextUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EquipmentPotentialOptionText to update in case it exists.
+     */
+    where: EquipmentPotentialOptionTextWhereUniqueInput
+    /**
+     * In case the EquipmentPotentialOptionText found by the `where` argument doesn't exist, create a new EquipmentPotentialOptionText with this data.
+     */
+    create: XOR<EquipmentPotentialOptionTextCreateInput, EquipmentPotentialOptionTextUncheckedCreateInput>
+    /**
+     * In case the EquipmentPotentialOptionText was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EquipmentPotentialOptionTextUpdateInput, EquipmentPotentialOptionTextUncheckedUpdateInput>
+  }
+
+  /**
+   * EquipmentPotentialOptionText delete
+   */
+  export type EquipmentPotentialOptionTextDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+    /**
+     * Filter which EquipmentPotentialOptionText to delete.
+     */
+    where: EquipmentPotentialOptionTextWhereUniqueInput
+  }
+
+  /**
+   * EquipmentPotentialOptionText deleteMany
+   */
+  export type EquipmentPotentialOptionTextDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EquipmentPotentialOptionTexts to delete
+     */
+    where?: EquipmentPotentialOptionTextWhereInput
+    /**
+     * Limit how many EquipmentPotentialOptionTexts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EquipmentPotentialOptionText without action
+   */
+  export type EquipmentPotentialOptionTextDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentPotentialOptionText
+     */
+    select?: EquipmentPotentialOptionTextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentPotentialOptionText
+     */
+    omit?: EquipmentPotentialOptionTextOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -27047,6 +28249,8 @@ export namespace Prisma {
   export const EquipmentItemScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    normalizedName: 'normalizedName',
+    baseName: 'baseName',
     category: 'category',
     keywords: 'keywords',
     part: 'part',
@@ -27055,7 +28259,7 @@ export namespace Prisma {
     potentialEnabled: 'potentialEnabled',
     starforceEnabled: 'starforceEnabled',
     scrollUpgradeEnabled: 'scrollUpgradeEnabled',
-    additionalOptionEnabled: 'additionalOptionEnabled',
+    addOptionEnabled: 'addOptionEnabled',
     requiredLevel: 'requiredLevel',
     requiredClass: 'requiredClass',
     classGroup: 'classGroup',
@@ -27082,11 +28286,26 @@ export namespace Prisma {
     upgradeScroll: 'upgradeScroll',
     exceptionalScroll: 'exceptionalScroll',
     specialRingLevel: 'specialRingLevel',
+    grantedSkills: 'grantedSkills',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type EquipmentItemScalarFieldEnum = (typeof EquipmentItemScalarFieldEnum)[keyof typeof EquipmentItemScalarFieldEnum]
+
+
+  export const EquipmentPotentialOptionTextScalarFieldEnum: {
+    id: 'id',
+    kind: 'kind',
+    level: 'level',
+    part: 'part',
+    grade: 'grade',
+    optionText: 'optionText',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EquipmentPotentialOptionTextScalarFieldEnum = (typeof EquipmentPotentialOptionTextScalarFieldEnum)[keyof typeof EquipmentPotentialOptionTextScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28746,6 +29965,8 @@ export namespace Prisma {
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     id?: BigIntFilter<"EquipmentItem"> | bigint | number
     name?: StringFilter<"EquipmentItem"> | string
+    normalizedName?: StringFilter<"EquipmentItem"> | string
+    baseName?: StringNullableFilter<"EquipmentItem"> | string | null
     category?: StringFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringFilter<"EquipmentItem"> | string
@@ -28754,7 +29975,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFilter<"EquipmentItem"> | boolean
     starforceEnabled?: BoolFilter<"EquipmentItem"> | boolean
     scrollUpgradeEnabled?: BoolFilter<"EquipmentItem"> | boolean
-    additionalOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonFilter<"EquipmentItem">
     classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
@@ -28781,6 +30002,7 @@ export namespace Prisma {
     upgradeScroll?: IntFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntFilter<"EquipmentItem"> | number
     specialRingLevel?: IntFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
   }
@@ -28788,6 +30010,8 @@ export namespace Prisma {
   export type EquipmentItemOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrderInput | SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -28796,7 +30020,7 @@ export namespace Prisma {
     potentialEnabled?: SortOrder
     starforceEnabled?: SortOrder
     scrollUpgradeEnabled?: SortOrder
-    additionalOptionEnabled?: SortOrder
+    addOptionEnabled?: SortOrder
     requiredLevel?: SortOrderInput | SortOrder
     requiredClass?: SortOrder
     classGroup?: SortOrderInput | SortOrder
@@ -28823,6 +30047,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -28830,9 +30055,11 @@ export namespace Prisma {
   export type EquipmentItemWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
     name?: string
+    normalizedName?: string
     AND?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     OR?: EquipmentItemWhereInput[]
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
+    baseName?: StringNullableFilter<"EquipmentItem"> | string | null
     category?: StringFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringFilter<"EquipmentItem"> | string
@@ -28841,7 +30068,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFilter<"EquipmentItem"> | boolean
     starforceEnabled?: BoolFilter<"EquipmentItem"> | boolean
     scrollUpgradeEnabled?: BoolFilter<"EquipmentItem"> | boolean
-    additionalOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonFilter<"EquipmentItem">
     classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
@@ -28868,13 +30095,16 @@ export namespace Prisma {
     upgradeScroll?: IntFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntFilter<"EquipmentItem"> | number
     specialRingLevel?: IntFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
-  }, "id" | "name">
+  }, "id" | "name" | "normalizedName">
 
   export type EquipmentItemOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrderInput | SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -28883,7 +30113,7 @@ export namespace Prisma {
     potentialEnabled?: SortOrder
     starforceEnabled?: SortOrder
     scrollUpgradeEnabled?: SortOrder
-    additionalOptionEnabled?: SortOrder
+    addOptionEnabled?: SortOrder
     requiredLevel?: SortOrderInput | SortOrder
     requiredClass?: SortOrder
     classGroup?: SortOrderInput | SortOrder
@@ -28910,6 +30140,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EquipmentItemCountOrderByAggregateInput
@@ -28925,6 +30156,8 @@ export namespace Prisma {
     NOT?: EquipmentItemScalarWhereWithAggregatesInput | EquipmentItemScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"EquipmentItem"> | bigint | number
     name?: StringWithAggregatesFilter<"EquipmentItem"> | string
+    normalizedName?: StringWithAggregatesFilter<"EquipmentItem"> | string
+    baseName?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
     category?: StringWithAggregatesFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
     part?: StringWithAggregatesFilter<"EquipmentItem"> | string
@@ -28933,7 +30166,7 @@ export namespace Prisma {
     potentialEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
     starforceEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
     scrollUpgradeEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
-    additionalOptionEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
+    addOptionEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableWithAggregatesFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonWithAggregatesFilter<"EquipmentItem">
     classGroup?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
@@ -28960,8 +30193,79 @@ export namespace Prisma {
     upgradeScroll?: IntWithAggregatesFilter<"EquipmentItem"> | number
     exceptionalScroll?: IntWithAggregatesFilter<"EquipmentItem"> | number
     specialRingLevel?: IntWithAggregatesFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextWhereInput = {
+    AND?: EquipmentPotentialOptionTextWhereInput | EquipmentPotentialOptionTextWhereInput[]
+    OR?: EquipmentPotentialOptionTextWhereInput[]
+    NOT?: EquipmentPotentialOptionTextWhereInput | EquipmentPotentialOptionTextWhereInput[]
+    id?: BigIntFilter<"EquipmentPotentialOptionText"> | bigint | number
+    kind?: StringFilter<"EquipmentPotentialOptionText"> | string
+    level?: IntFilter<"EquipmentPotentialOptionText"> | number
+    part?: StringFilter<"EquipmentPotentialOptionText"> | string
+    grade?: StringFilter<"EquipmentPotentialOptionText"> | string
+    optionText?: StringFilter<"EquipmentPotentialOptionText"> | string
+    createdAt?: DateTimeFilter<"EquipmentPotentialOptionText"> | Date | string
+    updatedAt?: DateTimeFilter<"EquipmentPotentialOptionText"> | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextOrderByWithRelationInput = {
+    id?: SortOrder
+    kind?: SortOrder
+    level?: SortOrder
+    part?: SortOrder
+    grade?: SortOrder
+    optionText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EquipmentPotentialOptionTextWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    kind_level_part_grade_optionText?: EquipmentPotentialOptionTextKindLevelPartGradeOptionTextCompoundUniqueInput
+    AND?: EquipmentPotentialOptionTextWhereInput | EquipmentPotentialOptionTextWhereInput[]
+    OR?: EquipmentPotentialOptionTextWhereInput[]
+    NOT?: EquipmentPotentialOptionTextWhereInput | EquipmentPotentialOptionTextWhereInput[]
+    kind?: StringFilter<"EquipmentPotentialOptionText"> | string
+    level?: IntFilter<"EquipmentPotentialOptionText"> | number
+    part?: StringFilter<"EquipmentPotentialOptionText"> | string
+    grade?: StringFilter<"EquipmentPotentialOptionText"> | string
+    optionText?: StringFilter<"EquipmentPotentialOptionText"> | string
+    createdAt?: DateTimeFilter<"EquipmentPotentialOptionText"> | Date | string
+    updatedAt?: DateTimeFilter<"EquipmentPotentialOptionText"> | Date | string
+  }, "id" | "kind_level_part_grade_optionText">
+
+  export type EquipmentPotentialOptionTextOrderByWithAggregationInput = {
+    id?: SortOrder
+    kind?: SortOrder
+    level?: SortOrder
+    part?: SortOrder
+    grade?: SortOrder
+    optionText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EquipmentPotentialOptionTextCountOrderByAggregateInput
+    _avg?: EquipmentPotentialOptionTextAvgOrderByAggregateInput
+    _max?: EquipmentPotentialOptionTextMaxOrderByAggregateInput
+    _min?: EquipmentPotentialOptionTextMinOrderByAggregateInput
+    _sum?: EquipmentPotentialOptionTextSumOrderByAggregateInput
+  }
+
+  export type EquipmentPotentialOptionTextScalarWhereWithAggregatesInput = {
+    AND?: EquipmentPotentialOptionTextScalarWhereWithAggregatesInput | EquipmentPotentialOptionTextScalarWhereWithAggregatesInput[]
+    OR?: EquipmentPotentialOptionTextScalarWhereWithAggregatesInput[]
+    NOT?: EquipmentPotentialOptionTextScalarWhereWithAggregatesInput | EquipmentPotentialOptionTextScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"EquipmentPotentialOptionText"> | bigint | number
+    kind?: StringWithAggregatesFilter<"EquipmentPotentialOptionText"> | string
+    level?: IntWithAggregatesFilter<"EquipmentPotentialOptionText"> | number
+    part?: StringWithAggregatesFilter<"EquipmentPotentialOptionText"> | string
+    grade?: StringWithAggregatesFilter<"EquipmentPotentialOptionText"> | string
+    optionText?: StringWithAggregatesFilter<"EquipmentPotentialOptionText"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EquipmentPotentialOptionText"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EquipmentPotentialOptionText"> | Date | string
   }
 
   export type RankingRunCreateInput = {
@@ -30585,6 +31889,8 @@ export namespace Prisma {
   export type EquipmentItemCreateInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -30593,7 +31899,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
     classGroup?: string | null
@@ -30620,6 +31926,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30627,6 +31934,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedCreateInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -30635,7 +31944,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
     classGroup?: string | null
@@ -30662,6 +31971,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30669,6 +31979,8 @@ export namespace Prisma {
   export type EquipmentItemUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -30677,7 +31989,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
     starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
     scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
-    additionalOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30704,6 +32016,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30711,6 +32024,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -30719,7 +32034,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
     starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
     scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
-    additionalOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30746,6 +32061,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30753,6 +32069,8 @@ export namespace Prisma {
   export type EquipmentItemCreateManyInput = {
     id?: bigint | number
     name: string
+    normalizedName: string
+    baseName?: string | null
     category: string
     keywords?: EquipmentItemCreatekeywordsInput | string[]
     part: string
@@ -30761,7 +32079,7 @@ export namespace Prisma {
     potentialEnabled?: boolean
     starforceEnabled?: boolean
     scrollUpgradeEnabled?: boolean
-    additionalOptionEnabled?: boolean
+    addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
     classGroup?: string | null
@@ -30788,6 +32106,7 @@ export namespace Prisma {
     upgradeScroll?: number
     exceptionalScroll?: number
     specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30795,6 +32114,8 @@ export namespace Prisma {
   export type EquipmentItemUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -30803,7 +32124,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
     starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
     scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
-    additionalOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30830,6 +32151,7 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30837,6 +32159,8 @@ export namespace Prisma {
   export type EquipmentItemUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
     category?: StringFieldUpdateOperationsInput | string
     keywords?: EquipmentItemUpdatekeywordsInput | string[]
     part?: StringFieldUpdateOperationsInput | string
@@ -30845,7 +32169,7 @@ export namespace Prisma {
     potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
     starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
     scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
-    additionalOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30872,6 +32196,84 @@ export namespace Prisma {
     upgradeScroll?: IntFieldUpdateOperationsInput | number
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextCreateInput = {
+    id?: bigint | number
+    kind: string
+    level: number
+    part: string
+    grade: string
+    optionText: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentPotentialOptionTextUncheckedCreateInput = {
+    id?: bigint | number
+    kind: string
+    level: number
+    part: string
+    grade: string
+    optionText: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentPotentialOptionTextUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    kind?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    part?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    optionText?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    kind?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    part?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    optionText?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextCreateManyInput = {
+    id?: bigint | number
+    kind: string
+    level: number
+    part: string
+    grade: string
+    optionText: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentPotentialOptionTextUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    kind?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    part?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    optionText?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentPotentialOptionTextUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    kind?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    part?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    optionText?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32399,6 +33801,8 @@ export namespace Prisma {
   export type EquipmentItemCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     keywords?: SortOrder
     part?: SortOrder
@@ -32407,7 +33811,7 @@ export namespace Prisma {
     potentialEnabled?: SortOrder
     starforceEnabled?: SortOrder
     scrollUpgradeEnabled?: SortOrder
-    additionalOptionEnabled?: SortOrder
+    addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
     requiredClass?: SortOrder
     classGroup?: SortOrder
@@ -32434,6 +33838,7 @@ export namespace Prisma {
     upgradeScroll?: SortOrder
     exceptionalScroll?: SortOrder
     specialRingLevel?: SortOrder
+    grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32468,6 +33873,8 @@ export namespace Prisma {
   export type EquipmentItemMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     part?: SortOrder
     setName?: SortOrder
@@ -32475,7 +33882,7 @@ export namespace Prisma {
     potentialEnabled?: SortOrder
     starforceEnabled?: SortOrder
     scrollUpgradeEnabled?: SortOrder
-    additionalOptionEnabled?: SortOrder
+    addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
     classGroup?: SortOrder
     handType?: SortOrder
@@ -32508,6 +33915,8 @@ export namespace Prisma {
   export type EquipmentItemMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    normalizedName?: SortOrder
+    baseName?: SortOrder
     category?: SortOrder
     part?: SortOrder
     setName?: SortOrder
@@ -32515,7 +33924,7 @@ export namespace Prisma {
     potentialEnabled?: SortOrder
     starforceEnabled?: SortOrder
     scrollUpgradeEnabled?: SortOrder
-    additionalOptionEnabled?: SortOrder
+    addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
     classGroup?: SortOrder
     handType?: SortOrder
@@ -32578,6 +33987,57 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EquipmentPotentialOptionTextKindLevelPartGradeOptionTextCompoundUniqueInput = {
+    kind: string
+    level: number
+    part: string
+    grade: string
+    optionText: string
+  }
+
+  export type EquipmentPotentialOptionTextCountOrderByAggregateInput = {
+    id?: SortOrder
+    kind?: SortOrder
+    level?: SortOrder
+    part?: SortOrder
+    grade?: SortOrder
+    optionText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EquipmentPotentialOptionTextAvgOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+  }
+
+  export type EquipmentPotentialOptionTextMaxOrderByAggregateInput = {
+    id?: SortOrder
+    kind?: SortOrder
+    level?: SortOrder
+    part?: SortOrder
+    grade?: SortOrder
+    optionText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EquipmentPotentialOptionTextMinOrderByAggregateInput = {
+    id?: SortOrder
+    kind?: SortOrder
+    level?: SortOrder
+    part?: SortOrder
+    grade?: SortOrder
+    optionText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EquipmentPotentialOptionTextSumOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
   }
 
   export type RankingRawPageCreateNestedManyWithoutRunInput = {
@@ -33572,6 +35032,10 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type EquipmentItemCreategrantedSkillsInput = {
+    set: string[]
+  }
+
   export type EquipmentItemUpdatekeywordsInput = {
     set?: string[]
     push?: string | string[]
@@ -33579,6 +35043,11 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EquipmentItemUpdategrantedSkillsInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {

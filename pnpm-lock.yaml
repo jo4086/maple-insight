@@ -78,9 +78,6 @@ importers:
       '@maple/db':
         specifier: workspace:*
         version: link:../../packages/database/db
-      '@maple/generator':
-        specifier: workspace:*
-        version: link:../../packages/generator
       '@maple/nexon-contracts':
         specifier: workspace:*
         version: link:../../packages/contracts/nexon
@@ -524,6 +521,9 @@ importers:
 
   packages/database/data-admin:
     dependencies:
+      '@maple/data-potential':
+        specifier: workspace:*
+        version: link:../../game-data/potential
       '@maple/data-skill':
         specifier: workspace:*
         version: link:../../game-data/skill

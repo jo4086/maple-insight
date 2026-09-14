@@ -460,51 +460,78 @@ model GameSkillPvpCommon {
 /// - generator/src/generated/equipment/*.json 결과를 적재한다.
 /// - keywords는 검색/필터용 key를 유지하고, 그 외 표시 필드는 한글명을 저장한다.
 model EquipmentItem {
-  id                      BigInt   @id @default(autoincrement())
-  name                    String
-  category                String
-  keywords                String[]
-  part                    String
-  setName                 String?  @map("set_name")
-  luckyFlag               Boolean  @default(false) @map("lucky_flag")
-  potentialEnabled        Boolean  @default(true) @map("potential_enabled")
-  starforceEnabled        Boolean  @default(true) @map("starforce_enabled")
-  scrollUpgradeEnabled    Boolean  @default(true) @map("scroll_upgrade_enabled")
-  additionalOptionEnabled Boolean  @default(true) @map("additional_option_enabled")
-  requiredLevel           Int?     @map("required_level")
-  requiredClass           Json     @map("required_class")
-  classGroup              String?  @map("class_group")
-  handType                String?  @map("hand_type")
-  weaponConstant          Float?   @map("weapon_constant")
-  str                     Int      @default(0)
-  dex                     Int      @default(0)
-  int                     Int      @default(0)
-  luk                     Int      @default(0)
-  maxHp                   Int      @default(0) @map("max_hp")
-  maxMp                   Int      @default(0) @map("max_mp")
-  maxHpRate               Int      @default(0) @map("max_hp_rate")
-  maxMpRate               Int      @default(0) @map("max_mp_rate")
-  attackPower             Int      @default(0) @map("attack_power")
-  magicPower              Int      @default(0) @map("magic_power")
-  armor                   Int      @default(0)
-  bossDamage              Int      @default(0) @map("boss_damage")
-  ignoreMonsterArmor      Int      @default(0) @map("ignore_monster_armor")
-  criRate                 Int      @default(0) @map("cri_rate")
-  criDamage               Int      @default(0) @map("cri_damage")
-  normalDamage            Int      @default(0) @map("normal_damage")
-  speed                   Int      @default(0)
-  jump                    Int      @default(0)
-  upgradeScroll           Int      @default(0) @map("upgrade_scroll")
-  exceptionalScroll       Int      @default(0) @map("exceptional_scroll")
-  specialRingLevel        Int      @default(0) @map("special_ring_level")
-  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt               DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  id                   BigInt   @id @default(autoincrement())
+  name                 String
+  normalizedName       String   @map("normalized_name")
+  baseName             String?  @map("base_name")
+  category             String
+  keywords             String[]
+  part                 String
+  setName              String?  @map("set_name")
+  luckyFlag            Boolean  @default(false) @map("lucky_flag")
+  potentialEnabled     Boolean  @default(true) @map("potential_enabled")
+  starforceEnabled     Boolean  @default(true) @map("starforce_enabled")
+  scrollUpgradeEnabled Boolean  @default(true) @map("scroll_upgrade_enabled")
+  addOptionEnabled     Boolean  @default(true) @map("additional_option_enabled")
+  requiredLevel        Int?     @map("required_level")
+  requiredClass        Json     @map("required_class")
+  classGroup           String?  @map("class_group")
+  handType             String?  @map("hand_type")
+  weaponConstant       Float?   @map("weapon_constant")
+  str                  Int      @default(0)
+  dex                  Int      @default(0)
+  int                  Int      @default(0)
+  luk                  Int      @default(0)
+  maxHp                Int      @default(0) @map("max_hp")
+  maxMp                Int      @default(0) @map("max_mp")
+  maxHpRate            Int      @default(0) @map("max_hp_rate")
+  maxMpRate            Int      @default(0) @map("max_mp_rate")
+  attackPower          Int      @default(0) @map("attack_power")
+  magicPower           Int      @default(0) @map("magic_power")
+  armor                Int      @default(0)
+  bossDamage           Int      @default(0) @map("boss_damage")
+  ignoreMonsterArmor   Int      @default(0) @map("ignore_monster_armor")
+  criRate              Int      @default(0) @map("cri_rate")
+  criDamage            Int      @default(0) @map("cri_damage")
+  normalDamage         Int      @default(0) @map("normal_damage")
+  speed                Int      @default(0)
+  jump                 Int      @default(0)
+  upgradeScroll        Int      @default(0) @map("upgrade_scroll")
+  exceptionalScroll    Int      @default(0) @map("exceptional_scroll")
+  specialRingLevel     Int      @default(0) @map("special_ring_level")
+  grantedSkills        String[] @default([]) @map("granted_skills")
+  createdAt            DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   @@unique([name])
+  @@unique([normalizedName])
   @@index([category])
   @@index([part])
   @@index([setName])
   @@index([classGroup])
   @@map("equipment_items")
+  @@schema("equipment")
+}
+
+/// INFO:
+/// 장비 잠재능력 옵션 문구를 부위/등급/레벨별로 정규화한 테이블이다.
+/// - @maple/data-potential의 잠재옵션 원천 데이터를 seed로 적재한다.
+/// - kind는 일반 잠재능력(potential)과 에디셔널 잠재능력(additional)을 구분한다.
+/// - optionText는 Nexon 장비 API의 잠재옵션 문구 판별에 사용한다.
+model EquipmentPotentialOptionText {
+  id         BigInt   @id @default(autoincrement())
+  kind       String
+  level      Int
+  part       String
+  grade      String
+  optionText String   @map("option_text")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([kind, level, part, grade, optionText], map: "equipment_potential_option_texts_unique")
+  @@index([kind, level], map: "equipment_potential_option_texts_kind_level_idx")
+  @@index([part], map: "equipment_potential_option_texts_part_idx")
+  @@index([grade], map: "equipment_potential_option_texts_grade_idx")
+  @@map("equipment_potential_option_texts")
   @@schema("equipment")
 }
