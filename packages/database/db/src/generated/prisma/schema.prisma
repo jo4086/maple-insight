@@ -303,17 +303,44 @@ model BossPhaseTarget {
 }
 
 /// INFO:
+/// 게임 데이터 묶음의 버전과 업로드 상태를 관리한다.
+/// - 개별 파일이나 정규화 데이터는 이 버전을 참조한다.
+/// - status는 importing/ready/failed 중 하나다.
+model GameDataVersion {
+  version     String            @id
+  major       Int
+  minor       Int
+  patch       Int
+  environment String
+  status      String            @default("importing")
+  releasedOn  DateTime?         @map("released_on") @db.Date
+  completedAt DateTime?         @map("completed_at") @db.Timestamptz(3)
+  createdAt   DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+  rawFiles    GameDataRawFile[]
+  jobs        GameJob[]
+  equipment   EquipmentItem[]
+
+  @@index([status])
+  @@index([environment])
+  @@index([major, minor, patch])
+  @@map("game_data_versions")
+  @@schema("game_data")
+}
+
+/// INFO:
 /// 게임 데이터 원본 JSON 파일 단위 메타 정보다.
 /// - 버전과 파일명 단위로 원본 레코드 묶음을 관리한다.
 /// - 정규화 테이블로 가공하기 전 raw 적재 경계다.
 model GameDataRawFile {
-  id        BigInt              @id @default(autoincrement())
-  version   String
-  fileName  String              @map("file_name")
-  rowCount  Int                 @map("row_count")
-  createdAt DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
-  records   GameDataRawRecord[]
+  id          BigInt              @id @default(autoincrement())
+  version     String
+  fileName    String              @map("file_name")
+  rowCount    Int                 @map("row_count")
+  createdAt   DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+  records     GameDataRawRecord[]
+  dataVersion GameDataVersion     @relation(fields: [version], references: [version], onDelete: Cascade)
 
   @@unique([version, fileName])
   @@index([version])
@@ -344,12 +371,13 @@ model GameDataRawRecord {
 /// 게임 데이터 직업 원본 정규화 테이블이다.
 /// - jobId는 원본 jobID 문자열을 앞자리 0까지 보존한다.
 model GameJob {
-  version   String
-  jobId     String      @map("job_id")
-  jobName   String      @map("job_name")
-  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
-  skills    GameSkill[]
+  version     String
+  jobId       String          @map("job_id")
+  jobName     String          @map("job_name")
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  skills      GameSkill[]
+  dataVersion GameDataVersion @relation(fields: [version], references: [version], onDelete: Cascade)
 
   @@id([version, jobId])
   @@index([jobName])
@@ -460,55 +488,57 @@ model GameSkillPvpCommon {
 /// - generator/src/generated/equipment/*.json 결과를 적재한다.
 /// - keywords는 검색/필터용 key를 유지하고, 그 외 표시 필드는 한글명을 저장한다.
 model EquipmentItem {
-  id                   BigInt   @id @default(autoincrement())
+  id                   BigInt          @id @default(autoincrement())
+  version              String
   name                 String
-  normalizedName       String   @map("normalized_name")
-  baseName             String?  @map("base_name")
+  normalizedName       String          @map("normalized_name")
+  baseName             String?         @map("base_name")
   category             String
   keywords             String[]
   part                 String
-  setName              String?  @map("set_name")
-  luckyFlag            Boolean  @default(false) @map("lucky_flag")
-  potentialEnabled     Boolean  @default(true) @map("potential_enabled")
-  starforceEnabled     Boolean  @default(true) @map("starforce_enabled")
-  scrollUpgradeEnabled Boolean  @default(true) @map("scroll_upgrade_enabled")
-  addOptionEnabled     Boolean  @default(true) @map("additional_option_enabled")
-  requiredLevel        Int?     @map("required_level")
-  requiredClass        Json     @map("required_class")
-  classGroup           String?  @map("class_group")
-  handType             String?  @map("hand_type")
-  weaponConstant       Float?   @map("weapon_constant")
-  str                  Int      @default(0)
-  dex                  Int      @default(0)
-  int                  Int      @default(0)
-  luk                  Int      @default(0)
-  maxHp                Int      @default(0) @map("max_hp")
-  maxMp                Int      @default(0) @map("max_mp")
-  maxHpRate            Int      @default(0) @map("max_hp_rate")
-  maxMpRate            Int      @default(0) @map("max_mp_rate")
-  attackPower          Int      @default(0) @map("attack_power")
-  magicPower           Int      @default(0) @map("magic_power")
-  armor                Int      @default(0)
-  bossDamage           Int      @default(0) @map("boss_damage")
-  ignoreMonsterArmor   Int      @default(0) @map("ignore_monster_armor")
-  criRate              Int      @default(0) @map("cri_rate")
-  criDamage            Int      @default(0) @map("cri_damage")
-  normalDamage         Int      @default(0) @map("normal_damage")
-  speed                Int      @default(0)
-  jump                 Int      @default(0)
-  upgradeScroll        Int      @default(0) @map("upgrade_scroll")
-  exceptionalScroll    Int      @default(0) @map("exceptional_scroll")
-  specialRingLevel     Int      @default(0) @map("special_ring_level")
-  grantedSkills        String[] @default([]) @map("granted_skills")
-  createdAt            DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt            DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  setName              String?         @map("set_name")
+  luckyFlag            Boolean         @default(false) @map("lucky_flag")
+  potentialEnabled     Boolean         @default(true) @map("potential_enabled")
+  starforceEnabled     Boolean         @default(true) @map("starforce_enabled")
+  scrollUpgradeEnabled Boolean         @default(true) @map("scroll_upgrade_enabled")
+  addOptionEnabled     Boolean         @default(true) @map("additional_option_enabled")
+  requiredLevel        Int?            @map("required_level")
+  requiredClass        Json            @map("required_class")
+  classGroup           String?         @map("class_group")
+  handType             String?         @map("hand_type")
+  weaponConstant       Float?          @map("weapon_constant")
+  str                  Int             @default(0)
+  dex                  Int             @default(0)
+  int                  Int             @default(0)
+  luk                  Int             @default(0)
+  maxHp                Int             @default(0) @map("max_hp")
+  maxMp                Int             @default(0) @map("max_mp")
+  maxHpRate            Int             @default(0) @map("max_hp_rate")
+  maxMpRate            Int             @default(0) @map("max_mp_rate")
+  attackPower          Int             @default(0) @map("attack_power")
+  magicPower           Int             @default(0) @map("magic_power")
+  armor                Int             @default(0)
+  bossDamage           Int             @default(0) @map("boss_damage")
+  ignoreMonsterArmor   Int             @default(0) @map("ignore_monster_armor")
+  criRate              Int             @default(0) @map("cri_rate")
+  criDamage            Int             @default(0) @map("cri_damage")
+  normalDamage         Int             @default(0) @map("normal_damage")
+  speed                Int             @default(0)
+  jump                 Int             @default(0)
+  upgradeScroll        Int             @default(0) @map("upgrade_scroll")
+  exceptionalScroll    Int             @default(0) @map("exceptional_scroll")
+  specialRingLevel     Int             @default(0) @map("special_ring_level")
+  grantedSkills        String[]        @default([]) @map("granted_skills")
+  createdAt            DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  dataVersion          GameDataVersion @relation(fields: [version], references: [version], onDelete: Cascade)
 
-  @@unique([name])
-  @@unique([normalizedName])
-  @@index([category])
-  @@index([part])
-  @@index([setName])
-  @@index([classGroup])
+  @@unique([version, name])
+  @@unique([version, normalizedName])
+  @@index([version, category])
+  @@index([version, part])
+  @@index([version, setName])
+  @@index([version, classGroup])
   @@map("equipment_items")
   @@schema("equipment")
 }

@@ -104,6 +104,14 @@ export type BossPhase = $Result.DefaultSelection<Prisma.$BossPhasePayload>
  */
 export type BossPhaseTarget = $Result.DefaultSelection<Prisma.$BossPhaseTargetPayload>
 /**
+ * Model GameDataVersion
+ * INFO:
+ * 게임 데이터 묶음의 버전과 업로드 상태를 관리한다.
+ * - 개별 파일이나 정규화 데이터는 이 버전을 참조한다.
+ * - status는 importing/ready/failed 중 하나다.
+ */
+export type GameDataVersion = $Result.DefaultSelection<Prisma.$GameDataVersionPayload>
+/**
  * Model GameDataRawFile
  * INFO:
  * 게임 데이터 원본 JSON 파일 단위 메타 정보다.
@@ -402,6 +410,16 @@ export class PrismaClient<
     * ```
     */
   get bossPhaseTarget(): Prisma.BossPhaseTargetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gameDataVersion`: Exposes CRUD operations for the **GameDataVersion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GameDataVersions
+    * const gameDataVersions = await prisma.gameDataVersion.findMany()
+    * ```
+    */
+  get gameDataVersion(): Prisma.GameDataVersionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.gameDataRawFile`: Exposes CRUD operations for the **GameDataRawFile** model.
@@ -954,6 +972,7 @@ export namespace Prisma {
     BossDifficulty: 'BossDifficulty',
     BossPhase: 'BossPhase',
     BossPhaseTarget: 'BossPhaseTarget',
+    GameDataVersion: 'GameDataVersion',
     GameDataRawFile: 'GameDataRawFile',
     GameDataRawRecord: 'GameDataRawRecord',
     GameJob: 'GameJob',
@@ -982,7 +1001,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem" | "equipmentPotentialOptionText"
+      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataVersion" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem" | "equipmentPotentialOptionText"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1797,6 +1816,80 @@ export namespace Prisma {
           count: {
             args: Prisma.BossPhaseTargetCountArgs<ExtArgs>
             result: $Utils.Optional<BossPhaseTargetCountAggregateOutputType> | number
+          }
+        }
+      }
+      GameDataVersion: {
+        payload: Prisma.$GameDataVersionPayload<ExtArgs>
+        fields: Prisma.GameDataVersionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GameDataVersionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GameDataVersionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          findFirst: {
+            args: Prisma.GameDataVersionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GameDataVersionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          findMany: {
+            args: Prisma.GameDataVersionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>[]
+          }
+          create: {
+            args: Prisma.GameDataVersionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          createMany: {
+            args: Prisma.GameDataVersionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GameDataVersionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>[]
+          }
+          delete: {
+            args: Prisma.GameDataVersionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          update: {
+            args: Prisma.GameDataVersionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          deleteMany: {
+            args: Prisma.GameDataVersionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GameDataVersionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GameDataVersionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>[]
+          }
+          upsert: {
+            args: Prisma.GameDataVersionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameDataVersionPayload>
+          }
+          aggregate: {
+            args: Prisma.GameDataVersionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGameDataVersion>
+          }
+          groupBy: {
+            args: Prisma.GameDataVersionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GameDataVersionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GameDataVersionCountArgs<ExtArgs>
+            result: $Utils.Optional<GameDataVersionCountAggregateOutputType> | number
           }
         }
       }
@@ -2647,6 +2740,7 @@ export namespace Prisma {
     bossDifficulty?: BossDifficultyOmit
     bossPhase?: BossPhaseOmit
     bossPhaseTarget?: BossPhaseTargetOmit
+    gameDataVersion?: GameDataVersionOmit
     gameDataRawFile?: GameDataRawFileOmit
     gameDataRawRecord?: GameDataRawRecordOmit
     gameJob?: GameJobOmit
@@ -2920,6 +3014,55 @@ export namespace Prisma {
    */
   export type BossPhaseCountOutputTypeCountTargetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BossPhaseTargetWhereInput
+  }
+
+
+  /**
+   * Count Type GameDataVersionCountOutputType
+   */
+
+  export type GameDataVersionCountOutputType = {
+    rawFiles: number
+    jobs: number
+    equipment: number
+  }
+
+  export type GameDataVersionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rawFiles?: boolean | GameDataVersionCountOutputTypeCountRawFilesArgs
+    jobs?: boolean | GameDataVersionCountOutputTypeCountJobsArgs
+    equipment?: boolean | GameDataVersionCountOutputTypeCountEquipmentArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GameDataVersionCountOutputType without action
+   */
+  export type GameDataVersionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersionCountOutputType
+     */
+    select?: GameDataVersionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GameDataVersionCountOutputType without action
+   */
+  export type GameDataVersionCountOutputTypeCountRawFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameDataRawFileWhereInput
+  }
+
+  /**
+   * GameDataVersionCountOutputType without action
+   */
+  export type GameDataVersionCountOutputTypeCountJobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameJobWhereInput
+  }
+
+  /**
+   * GameDataVersionCountOutputType without action
+   */
+  export type GameDataVersionCountOutputTypeCountEquipmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EquipmentItemWhereInput
   }
 
 
@@ -16340,6 +16483,1239 @@ export namespace Prisma {
 
 
   /**
+   * Model GameDataVersion
+   */
+
+  export type AggregateGameDataVersion = {
+    _count: GameDataVersionCountAggregateOutputType | null
+    _avg: GameDataVersionAvgAggregateOutputType | null
+    _sum: GameDataVersionSumAggregateOutputType | null
+    _min: GameDataVersionMinAggregateOutputType | null
+    _max: GameDataVersionMaxAggregateOutputType | null
+  }
+
+  export type GameDataVersionAvgAggregateOutputType = {
+    major: number | null
+    minor: number | null
+    patch: number | null
+  }
+
+  export type GameDataVersionSumAggregateOutputType = {
+    major: number | null
+    minor: number | null
+    patch: number | null
+  }
+
+  export type GameDataVersionMinAggregateOutputType = {
+    version: string | null
+    major: number | null
+    minor: number | null
+    patch: number | null
+    environment: string | null
+    status: string | null
+    releasedOn: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GameDataVersionMaxAggregateOutputType = {
+    version: string | null
+    major: number | null
+    minor: number | null
+    patch: number | null
+    environment: string | null
+    status: string | null
+    releasedOn: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GameDataVersionCountAggregateOutputType = {
+    version: number
+    major: number
+    minor: number
+    patch: number
+    environment: number
+    status: number
+    releasedOn: number
+    completedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GameDataVersionAvgAggregateInputType = {
+    major?: true
+    minor?: true
+    patch?: true
+  }
+
+  export type GameDataVersionSumAggregateInputType = {
+    major?: true
+    minor?: true
+    patch?: true
+  }
+
+  export type GameDataVersionMinAggregateInputType = {
+    version?: true
+    major?: true
+    minor?: true
+    patch?: true
+    environment?: true
+    status?: true
+    releasedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GameDataVersionMaxAggregateInputType = {
+    version?: true
+    major?: true
+    minor?: true
+    patch?: true
+    environment?: true
+    status?: true
+    releasedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GameDataVersionCountAggregateInputType = {
+    version?: true
+    major?: true
+    minor?: true
+    patch?: true
+    environment?: true
+    status?: true
+    releasedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GameDataVersionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GameDataVersion to aggregate.
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GameDataVersions to fetch.
+     */
+    orderBy?: GameDataVersionOrderByWithRelationInput | GameDataVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GameDataVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GameDataVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GameDataVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GameDataVersions
+    **/
+    _count?: true | GameDataVersionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GameDataVersionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GameDataVersionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GameDataVersionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GameDataVersionMaxAggregateInputType
+  }
+
+  export type GetGameDataVersionAggregateType<T extends GameDataVersionAggregateArgs> = {
+        [P in keyof T & keyof AggregateGameDataVersion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGameDataVersion[P]>
+      : GetScalarType<T[P], AggregateGameDataVersion[P]>
+  }
+
+
+
+
+  export type GameDataVersionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameDataVersionWhereInput
+    orderBy?: GameDataVersionOrderByWithAggregationInput | GameDataVersionOrderByWithAggregationInput[]
+    by: GameDataVersionScalarFieldEnum[] | GameDataVersionScalarFieldEnum
+    having?: GameDataVersionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GameDataVersionCountAggregateInputType | true
+    _avg?: GameDataVersionAvgAggregateInputType
+    _sum?: GameDataVersionSumAggregateInputType
+    _min?: GameDataVersionMinAggregateInputType
+    _max?: GameDataVersionMaxAggregateInputType
+  }
+
+  export type GameDataVersionGroupByOutputType = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status: string
+    releasedOn: Date | null
+    completedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GameDataVersionCountAggregateOutputType | null
+    _avg: GameDataVersionAvgAggregateOutputType | null
+    _sum: GameDataVersionSumAggregateOutputType | null
+    _min: GameDataVersionMinAggregateOutputType | null
+    _max: GameDataVersionMaxAggregateOutputType | null
+  }
+
+  type GetGameDataVersionGroupByPayload<T extends GameDataVersionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GameDataVersionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GameDataVersionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GameDataVersionGroupByOutputType[P]>
+            : GetScalarType<T[P], GameDataVersionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GameDataVersionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    version?: boolean
+    major?: boolean
+    minor?: boolean
+    patch?: boolean
+    environment?: boolean
+    status?: boolean
+    releasedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    rawFiles?: boolean | GameDataVersion$rawFilesArgs<ExtArgs>
+    jobs?: boolean | GameDataVersion$jobsArgs<ExtArgs>
+    equipment?: boolean | GameDataVersion$equipmentArgs<ExtArgs>
+    _count?: boolean | GameDataVersionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gameDataVersion"]>
+
+  export type GameDataVersionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    version?: boolean
+    major?: boolean
+    minor?: boolean
+    patch?: boolean
+    environment?: boolean
+    status?: boolean
+    releasedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gameDataVersion"]>
+
+  export type GameDataVersionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    version?: boolean
+    major?: boolean
+    minor?: boolean
+    patch?: boolean
+    environment?: boolean
+    status?: boolean
+    releasedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gameDataVersion"]>
+
+  export type GameDataVersionSelectScalar = {
+    version?: boolean
+    major?: boolean
+    minor?: boolean
+    patch?: boolean
+    environment?: boolean
+    status?: boolean
+    releasedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GameDataVersionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"version" | "major" | "minor" | "patch" | "environment" | "status" | "releasedOn" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["gameDataVersion"]>
+  export type GameDataVersionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rawFiles?: boolean | GameDataVersion$rawFilesArgs<ExtArgs>
+    jobs?: boolean | GameDataVersion$jobsArgs<ExtArgs>
+    equipment?: boolean | GameDataVersion$equipmentArgs<ExtArgs>
+    _count?: boolean | GameDataVersionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GameDataVersionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GameDataVersionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $GameDataVersionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GameDataVersion"
+    objects: {
+      rawFiles: Prisma.$GameDataRawFilePayload<ExtArgs>[]
+      jobs: Prisma.$GameJobPayload<ExtArgs>[]
+      equipment: Prisma.$EquipmentItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      version: string
+      major: number
+      minor: number
+      patch: number
+      environment: string
+      status: string
+      releasedOn: Date | null
+      completedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["gameDataVersion"]>
+    composites: {}
+  }
+
+  type GameDataVersionGetPayload<S extends boolean | null | undefined | GameDataVersionDefaultArgs> = $Result.GetResult<Prisma.$GameDataVersionPayload, S>
+
+  type GameDataVersionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GameDataVersionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GameDataVersionCountAggregateInputType | true
+    }
+
+  export interface GameDataVersionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GameDataVersion'], meta: { name: 'GameDataVersion' } }
+    /**
+     * Find zero or one GameDataVersion that matches the filter.
+     * @param {GameDataVersionFindUniqueArgs} args - Arguments to find a GameDataVersion
+     * @example
+     * // Get one GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GameDataVersionFindUniqueArgs>(args: SelectSubset<T, GameDataVersionFindUniqueArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GameDataVersion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GameDataVersionFindUniqueOrThrowArgs} args - Arguments to find a GameDataVersion
+     * @example
+     * // Get one GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GameDataVersionFindUniqueOrThrowArgs>(args: SelectSubset<T, GameDataVersionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GameDataVersion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionFindFirstArgs} args - Arguments to find a GameDataVersion
+     * @example
+     * // Get one GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GameDataVersionFindFirstArgs>(args?: SelectSubset<T, GameDataVersionFindFirstArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GameDataVersion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionFindFirstOrThrowArgs} args - Arguments to find a GameDataVersion
+     * @example
+     * // Get one GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GameDataVersionFindFirstOrThrowArgs>(args?: SelectSubset<T, GameDataVersionFindFirstOrThrowArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GameDataVersions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GameDataVersions
+     * const gameDataVersions = await prisma.gameDataVersion.findMany()
+     * 
+     * // Get first 10 GameDataVersions
+     * const gameDataVersions = await prisma.gameDataVersion.findMany({ take: 10 })
+     * 
+     * // Only select the `version`
+     * const gameDataVersionWithVersionOnly = await prisma.gameDataVersion.findMany({ select: { version: true } })
+     * 
+     */
+    findMany<T extends GameDataVersionFindManyArgs>(args?: SelectSubset<T, GameDataVersionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GameDataVersion.
+     * @param {GameDataVersionCreateArgs} args - Arguments to create a GameDataVersion.
+     * @example
+     * // Create one GameDataVersion
+     * const GameDataVersion = await prisma.gameDataVersion.create({
+     *   data: {
+     *     // ... data to create a GameDataVersion
+     *   }
+     * })
+     * 
+     */
+    create<T extends GameDataVersionCreateArgs>(args: SelectSubset<T, GameDataVersionCreateArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GameDataVersions.
+     * @param {GameDataVersionCreateManyArgs} args - Arguments to create many GameDataVersions.
+     * @example
+     * // Create many GameDataVersions
+     * const gameDataVersion = await prisma.gameDataVersion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GameDataVersionCreateManyArgs>(args?: SelectSubset<T, GameDataVersionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GameDataVersions and returns the data saved in the database.
+     * @param {GameDataVersionCreateManyAndReturnArgs} args - Arguments to create many GameDataVersions.
+     * @example
+     * // Create many GameDataVersions
+     * const gameDataVersion = await prisma.gameDataVersion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GameDataVersions and only return the `version`
+     * const gameDataVersionWithVersionOnly = await prisma.gameDataVersion.createManyAndReturn({
+     *   select: { version: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GameDataVersionCreateManyAndReturnArgs>(args?: SelectSubset<T, GameDataVersionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GameDataVersion.
+     * @param {GameDataVersionDeleteArgs} args - Arguments to delete one GameDataVersion.
+     * @example
+     * // Delete one GameDataVersion
+     * const GameDataVersion = await prisma.gameDataVersion.delete({
+     *   where: {
+     *     // ... filter to delete one GameDataVersion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GameDataVersionDeleteArgs>(args: SelectSubset<T, GameDataVersionDeleteArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GameDataVersion.
+     * @param {GameDataVersionUpdateArgs} args - Arguments to update one GameDataVersion.
+     * @example
+     * // Update one GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GameDataVersionUpdateArgs>(args: SelectSubset<T, GameDataVersionUpdateArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GameDataVersions.
+     * @param {GameDataVersionDeleteManyArgs} args - Arguments to filter GameDataVersions to delete.
+     * @example
+     * // Delete a few GameDataVersions
+     * const { count } = await prisma.gameDataVersion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GameDataVersionDeleteManyArgs>(args?: SelectSubset<T, GameDataVersionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GameDataVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GameDataVersions
+     * const gameDataVersion = await prisma.gameDataVersion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GameDataVersionUpdateManyArgs>(args: SelectSubset<T, GameDataVersionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GameDataVersions and returns the data updated in the database.
+     * @param {GameDataVersionUpdateManyAndReturnArgs} args - Arguments to update many GameDataVersions.
+     * @example
+     * // Update many GameDataVersions
+     * const gameDataVersion = await prisma.gameDataVersion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GameDataVersions and only return the `version`
+     * const gameDataVersionWithVersionOnly = await prisma.gameDataVersion.updateManyAndReturn({
+     *   select: { version: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GameDataVersionUpdateManyAndReturnArgs>(args: SelectSubset<T, GameDataVersionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GameDataVersion.
+     * @param {GameDataVersionUpsertArgs} args - Arguments to update or create a GameDataVersion.
+     * @example
+     * // Update or create a GameDataVersion
+     * const gameDataVersion = await prisma.gameDataVersion.upsert({
+     *   create: {
+     *     // ... data to create a GameDataVersion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GameDataVersion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GameDataVersionUpsertArgs>(args: SelectSubset<T, GameDataVersionUpsertArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GameDataVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionCountArgs} args - Arguments to filter GameDataVersions to count.
+     * @example
+     * // Count the number of GameDataVersions
+     * const count = await prisma.gameDataVersion.count({
+     *   where: {
+     *     // ... the filter for the GameDataVersions we want to count
+     *   }
+     * })
+    **/
+    count<T extends GameDataVersionCountArgs>(
+      args?: Subset<T, GameDataVersionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GameDataVersionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GameDataVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GameDataVersionAggregateArgs>(args: Subset<T, GameDataVersionAggregateArgs>): Prisma.PrismaPromise<GetGameDataVersionAggregateType<T>>
+
+    /**
+     * Group by GameDataVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameDataVersionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GameDataVersionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GameDataVersionGroupByArgs['orderBy'] }
+        : { orderBy?: GameDataVersionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GameDataVersionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGameDataVersionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GameDataVersion model
+   */
+  readonly fields: GameDataVersionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GameDataVersion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GameDataVersionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    rawFiles<T extends GameDataVersion$rawFilesArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersion$rawFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameDataRawFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    jobs<T extends GameDataVersion$jobsArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersion$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    equipment<T extends GameDataVersion$equipmentArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersion$equipmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GameDataVersion model
+   */
+  interface GameDataVersionFieldRefs {
+    readonly version: FieldRef<"GameDataVersion", 'String'>
+    readonly major: FieldRef<"GameDataVersion", 'Int'>
+    readonly minor: FieldRef<"GameDataVersion", 'Int'>
+    readonly patch: FieldRef<"GameDataVersion", 'Int'>
+    readonly environment: FieldRef<"GameDataVersion", 'String'>
+    readonly status: FieldRef<"GameDataVersion", 'String'>
+    readonly releasedOn: FieldRef<"GameDataVersion", 'DateTime'>
+    readonly completedAt: FieldRef<"GameDataVersion", 'DateTime'>
+    readonly createdAt: FieldRef<"GameDataVersion", 'DateTime'>
+    readonly updatedAt: FieldRef<"GameDataVersion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GameDataVersion findUnique
+   */
+  export type GameDataVersionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which GameDataVersion to fetch.
+     */
+    where: GameDataVersionWhereUniqueInput
+  }
+
+  /**
+   * GameDataVersion findUniqueOrThrow
+   */
+  export type GameDataVersionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which GameDataVersion to fetch.
+     */
+    where: GameDataVersionWhereUniqueInput
+  }
+
+  /**
+   * GameDataVersion findFirst
+   */
+  export type GameDataVersionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which GameDataVersion to fetch.
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GameDataVersions to fetch.
+     */
+    orderBy?: GameDataVersionOrderByWithRelationInput | GameDataVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GameDataVersions.
+     */
+    cursor?: GameDataVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GameDataVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GameDataVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GameDataVersions.
+     */
+    distinct?: GameDataVersionScalarFieldEnum | GameDataVersionScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion findFirstOrThrow
+   */
+  export type GameDataVersionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which GameDataVersion to fetch.
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GameDataVersions to fetch.
+     */
+    orderBy?: GameDataVersionOrderByWithRelationInput | GameDataVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GameDataVersions.
+     */
+    cursor?: GameDataVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GameDataVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GameDataVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GameDataVersions.
+     */
+    distinct?: GameDataVersionScalarFieldEnum | GameDataVersionScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion findMany
+   */
+  export type GameDataVersionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter, which GameDataVersions to fetch.
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GameDataVersions to fetch.
+     */
+    orderBy?: GameDataVersionOrderByWithRelationInput | GameDataVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GameDataVersions.
+     */
+    cursor?: GameDataVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GameDataVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GameDataVersions.
+     */
+    skip?: number
+    distinct?: GameDataVersionScalarFieldEnum | GameDataVersionScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion create
+   */
+  export type GameDataVersionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GameDataVersion.
+     */
+    data: XOR<GameDataVersionCreateInput, GameDataVersionUncheckedCreateInput>
+  }
+
+  /**
+   * GameDataVersion createMany
+   */
+  export type GameDataVersionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GameDataVersions.
+     */
+    data: GameDataVersionCreateManyInput | GameDataVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GameDataVersion createManyAndReturn
+   */
+  export type GameDataVersionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * The data used to create many GameDataVersions.
+     */
+    data: GameDataVersionCreateManyInput | GameDataVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GameDataVersion update
+   */
+  export type GameDataVersionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GameDataVersion.
+     */
+    data: XOR<GameDataVersionUpdateInput, GameDataVersionUncheckedUpdateInput>
+    /**
+     * Choose, which GameDataVersion to update.
+     */
+    where: GameDataVersionWhereUniqueInput
+  }
+
+  /**
+   * GameDataVersion updateMany
+   */
+  export type GameDataVersionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GameDataVersions.
+     */
+    data: XOR<GameDataVersionUpdateManyMutationInput, GameDataVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which GameDataVersions to update
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * Limit how many GameDataVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GameDataVersion updateManyAndReturn
+   */
+  export type GameDataVersionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * The data used to update GameDataVersions.
+     */
+    data: XOR<GameDataVersionUpdateManyMutationInput, GameDataVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which GameDataVersions to update
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * Limit how many GameDataVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GameDataVersion upsert
+   */
+  export type GameDataVersionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GameDataVersion to update in case it exists.
+     */
+    where: GameDataVersionWhereUniqueInput
+    /**
+     * In case the GameDataVersion found by the `where` argument doesn't exist, create a new GameDataVersion with this data.
+     */
+    create: XOR<GameDataVersionCreateInput, GameDataVersionUncheckedCreateInput>
+    /**
+     * In case the GameDataVersion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GameDataVersionUpdateInput, GameDataVersionUncheckedUpdateInput>
+  }
+
+  /**
+   * GameDataVersion delete
+   */
+  export type GameDataVersionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+    /**
+     * Filter which GameDataVersion to delete.
+     */
+    where: GameDataVersionWhereUniqueInput
+  }
+
+  /**
+   * GameDataVersion deleteMany
+   */
+  export type GameDataVersionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GameDataVersions to delete
+     */
+    where?: GameDataVersionWhereInput
+    /**
+     * Limit how many GameDataVersions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GameDataVersion.rawFiles
+   */
+  export type GameDataVersion$rawFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataRawFile
+     */
+    select?: GameDataRawFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataRawFile
+     */
+    omit?: GameDataRawFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataRawFileInclude<ExtArgs> | null
+    where?: GameDataRawFileWhereInput
+    orderBy?: GameDataRawFileOrderByWithRelationInput | GameDataRawFileOrderByWithRelationInput[]
+    cursor?: GameDataRawFileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GameDataRawFileScalarFieldEnum | GameDataRawFileScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion.jobs
+   */
+  export type GameDataVersion$jobsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameJob
+     */
+    select?: GameJobSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameJob
+     */
+    omit?: GameJobOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameJobInclude<ExtArgs> | null
+    where?: GameJobWhereInput
+    orderBy?: GameJobOrderByWithRelationInput | GameJobOrderByWithRelationInput[]
+    cursor?: GameJobWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GameJobScalarFieldEnum | GameJobScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion.equipment
+   */
+  export type GameDataVersion$equipmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentItem
+     */
+    select?: EquipmentItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentItem
+     */
+    omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    where?: EquipmentItemWhereInput
+    orderBy?: EquipmentItemOrderByWithRelationInput | EquipmentItemOrderByWithRelationInput[]
+    cursor?: EquipmentItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EquipmentItemScalarFieldEnum | EquipmentItemScalarFieldEnum[]
+  }
+
+  /**
+   * GameDataVersion without action
+   */
+  export type GameDataVersionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GameDataVersion
+     */
+    select?: GameDataVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GameDataVersion
+     */
+    omit?: GameDataVersionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataVersionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model GameDataRawFile
    */
 
@@ -16550,6 +17926,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     records?: boolean | GameDataRawFile$recordsArgs<ExtArgs>
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
     _count?: boolean | GameDataRawFileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameDataRawFile"]>
 
@@ -16560,6 +17937,7 @@ export namespace Prisma {
     rowCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameDataRawFile"]>
 
   export type GameDataRawFileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16569,6 +17947,7 @@ export namespace Prisma {
     rowCount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameDataRawFile"]>
 
   export type GameDataRawFileSelectScalar = {
@@ -16583,15 +17962,21 @@ export namespace Prisma {
   export type GameDataRawFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "fileName" | "rowCount" | "createdAt" | "updatedAt", ExtArgs["result"]["gameDataRawFile"]>
   export type GameDataRawFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     records?: boolean | GameDataRawFile$recordsArgs<ExtArgs>
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
     _count?: boolean | GameDataRawFileCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type GameDataRawFileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type GameDataRawFileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GameDataRawFileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
+  export type GameDataRawFileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
 
   export type $GameDataRawFilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GameDataRawFile"
     objects: {
       records: Prisma.$GameDataRawRecordPayload<ExtArgs>[]
+      dataVersion: Prisma.$GameDataVersionPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -16995,6 +18380,7 @@ export namespace Prisma {
   export interface Prisma__GameDataRawFileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     records<T extends GameDataRawFile$recordsArgs<ExtArgs> = {}>(args?: Subset<T, GameDataRawFile$recordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameDataRawRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dataVersion<T extends GameDataVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersionDefaultArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17279,6 +18665,10 @@ export namespace Prisma {
      */
     data: GameDataRawFileCreateManyInput | GameDataRawFileCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataRawFileIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -17349,6 +18739,10 @@ export namespace Prisma {
      * Limit how many GameDataRawFiles to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameDataRawFileIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -18734,6 +20128,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     skills?: boolean | GameJob$skillsArgs<ExtArgs>
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
     _count?: boolean | GameJobCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameJob"]>
 
@@ -18743,6 +20138,7 @@ export namespace Prisma {
     jobName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameJob"]>
 
   export type GameJobSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18751,6 +20147,7 @@ export namespace Prisma {
     jobName?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gameJob"]>
 
   export type GameJobSelectScalar = {
@@ -18764,15 +20161,21 @@ export namespace Prisma {
   export type GameJobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"version" | "jobId" | "jobName" | "createdAt" | "updatedAt", ExtArgs["result"]["gameJob"]>
   export type GameJobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     skills?: boolean | GameJob$skillsArgs<ExtArgs>
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
     _count?: boolean | GameJobCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type GameJobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type GameJobIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GameJobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
+  export type GameJobIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
 
   export type $GameJobPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GameJob"
     objects: {
       skills: Prisma.$GameSkillPayload<ExtArgs>[]
+      dataVersion: Prisma.$GameDataVersionPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       version: string
@@ -19175,6 +20578,7 @@ export namespace Prisma {
   export interface Prisma__GameJobClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     skills<T extends GameJob$skillsArgs<ExtArgs> = {}>(args?: Subset<T, GameJob$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dataVersion<T extends GameDataVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersionDefaultArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19458,6 +20862,10 @@ export namespace Prisma {
      */
     data: GameJobCreateManyInput | GameJobCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameJobIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -19528,6 +20936,10 @@ export namespace Prisma {
      * Limit how many GameJobs to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameJobIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -25355,6 +26767,7 @@ export namespace Prisma {
 
   export type EquipmentItemMinAggregateOutputType = {
     id: bigint | null
+    version: string | null
     name: string | null
     normalizedName: string | null
     baseName: string | null
@@ -25397,6 +26810,7 @@ export namespace Prisma {
 
   export type EquipmentItemMaxAggregateOutputType = {
     id: bigint | null
+    version: string | null
     name: string | null
     normalizedName: string | null
     baseName: string | null
@@ -25439,6 +26853,7 @@ export namespace Prisma {
 
   export type EquipmentItemCountAggregateOutputType = {
     id: number
+    version: number
     name: number
     normalizedName: number
     baseName: number
@@ -25540,6 +26955,7 @@ export namespace Prisma {
 
   export type EquipmentItemMinAggregateInputType = {
     id?: true
+    version?: true
     name?: true
     normalizedName?: true
     baseName?: true
@@ -25582,6 +26998,7 @@ export namespace Prisma {
 
   export type EquipmentItemMaxAggregateInputType = {
     id?: true
+    version?: true
     name?: true
     normalizedName?: true
     baseName?: true
@@ -25624,6 +27041,7 @@ export namespace Prisma {
 
   export type EquipmentItemCountAggregateInputType = {
     id?: true
+    version?: true
     name?: true
     normalizedName?: true
     baseName?: true
@@ -25756,6 +27174,7 @@ export namespace Prisma {
 
   export type EquipmentItemGroupByOutputType = {
     id: bigint
+    version: string
     name: string
     normalizedName: string
     baseName: string | null
@@ -25820,6 +27239,7 @@ export namespace Prisma {
 
   export type EquipmentItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    version?: boolean
     name?: boolean
     normalizedName?: boolean
     baseName?: boolean
@@ -25861,10 +27281,12 @@ export namespace Prisma {
     grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    version?: boolean
     name?: boolean
     normalizedName?: boolean
     baseName?: boolean
@@ -25906,10 +27328,12 @@ export namespace Prisma {
     grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    version?: boolean
     name?: boolean
     normalizedName?: boolean
     baseName?: boolean
@@ -25951,10 +27375,12 @@ export namespace Prisma {
     grantedSkills?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectScalar = {
     id?: boolean
+    version?: boolean
     name?: boolean
     normalizedName?: boolean
     baseName?: boolean
@@ -25998,13 +27424,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
+  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
+  export type EquipmentItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
+  export type EquipmentItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
+  export type EquipmentItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+  }
 
   export type $EquipmentItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EquipmentItem"
-    objects: {}
+    objects: {
+      dataVersion: Prisma.$GameDataVersionPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
+      version: string
       name: string
       normalizedName: string
       baseName: string | null
@@ -26440,6 +27878,7 @@ export namespace Prisma {
    */
   export interface Prisma__EquipmentItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    dataVersion<T extends GameDataVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersionDefaultArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26470,6 +27909,7 @@ export namespace Prisma {
    */
   interface EquipmentItemFieldRefs {
     readonly id: FieldRef<"EquipmentItem", 'BigInt'>
+    readonly version: FieldRef<"EquipmentItem", 'String'>
     readonly name: FieldRef<"EquipmentItem", 'String'>
     readonly normalizedName: FieldRef<"EquipmentItem", 'String'>
     readonly baseName: FieldRef<"EquipmentItem", 'String'>
@@ -26528,6 +27968,10 @@ export namespace Prisma {
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    /**
      * Filter, which EquipmentItem to fetch.
      */
     where: EquipmentItemWhereUniqueInput
@@ -26546,6 +27990,10 @@ export namespace Prisma {
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    /**
      * Filter, which EquipmentItem to fetch.
      */
     where: EquipmentItemWhereUniqueInput
@@ -26563,6 +28011,10 @@ export namespace Prisma {
      * Omit specific fields from the EquipmentItem
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
     /**
      * Filter, which EquipmentItem to fetch.
      */
@@ -26612,6 +28064,10 @@ export namespace Prisma {
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    /**
      * Filter, which EquipmentItem to fetch.
      */
     where?: EquipmentItemWhereInput
@@ -26660,6 +28116,10 @@ export namespace Prisma {
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    /**
      * Filter, which EquipmentItems to fetch.
      */
     where?: EquipmentItemWhereInput
@@ -26703,6 +28163,10 @@ export namespace Prisma {
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    /**
      * The data needed to create a EquipmentItem.
      */
     data: XOR<EquipmentItemCreateInput, EquipmentItemUncheckedCreateInput>
@@ -26736,6 +28200,10 @@ export namespace Prisma {
      */
     data: EquipmentItemCreateManyInput | EquipmentItemCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -26750,6 +28218,10 @@ export namespace Prisma {
      * Omit specific fields from the EquipmentItem
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
     /**
      * The data needed to update a EquipmentItem.
      */
@@ -26802,6 +28274,10 @@ export namespace Prisma {
      * Limit how many EquipmentItems to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -26816,6 +28292,10 @@ export namespace Prisma {
      * Omit specific fields from the EquipmentItem
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
     /**
      * The filter to search for the EquipmentItem to update in case it exists.
      */
@@ -26842,6 +28322,10 @@ export namespace Prisma {
      * Omit specific fields from the EquipmentItem
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
     /**
      * Filter which EquipmentItem to delete.
      */
@@ -26874,6 +28358,10 @@ export namespace Prisma {
      * Omit specific fields from the EquipmentItem
      */
     omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
   }
 
 
@@ -28143,6 +29631,22 @@ export namespace Prisma {
   export type BossPhaseTargetScalarFieldEnum = (typeof BossPhaseTargetScalarFieldEnum)[keyof typeof BossPhaseTargetScalarFieldEnum]
 
 
+  export const GameDataVersionScalarFieldEnum: {
+    version: 'version',
+    major: 'major',
+    minor: 'minor',
+    patch: 'patch',
+    environment: 'environment',
+    status: 'status',
+    releasedOn: 'releasedOn',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GameDataVersionScalarFieldEnum = (typeof GameDataVersionScalarFieldEnum)[keyof typeof GameDataVersionScalarFieldEnum]
+
+
   export const GameDataRawFileScalarFieldEnum: {
     id: 'id',
     version: 'version',
@@ -28248,6 +29752,7 @@ export namespace Prisma {
 
   export const EquipmentItemScalarFieldEnum: {
     id: 'id',
+    version: 'version',
     name: 'name',
     normalizedName: 'normalizedName',
     baseName: 'baseName',
@@ -29416,6 +30921,94 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"BossPhaseTarget"> | Date | string
   }
 
+  export type GameDataVersionWhereInput = {
+    AND?: GameDataVersionWhereInput | GameDataVersionWhereInput[]
+    OR?: GameDataVersionWhereInput[]
+    NOT?: GameDataVersionWhereInput | GameDataVersionWhereInput[]
+    version?: StringFilter<"GameDataVersion"> | string
+    major?: IntFilter<"GameDataVersion"> | number
+    minor?: IntFilter<"GameDataVersion"> | number
+    patch?: IntFilter<"GameDataVersion"> | number
+    environment?: StringFilter<"GameDataVersion"> | string
+    status?: StringFilter<"GameDataVersion"> | string
+    releasedOn?: DateTimeNullableFilter<"GameDataVersion"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"GameDataVersion"> | Date | string | null
+    createdAt?: DateTimeFilter<"GameDataVersion"> | Date | string
+    updatedAt?: DateTimeFilter<"GameDataVersion"> | Date | string
+    rawFiles?: GameDataRawFileListRelationFilter
+    jobs?: GameJobListRelationFilter
+    equipment?: EquipmentItemListRelationFilter
+  }
+
+  export type GameDataVersionOrderByWithRelationInput = {
+    version?: SortOrder
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+    environment?: SortOrder
+    status?: SortOrder
+    releasedOn?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    rawFiles?: GameDataRawFileOrderByRelationAggregateInput
+    jobs?: GameJobOrderByRelationAggregateInput
+    equipment?: EquipmentItemOrderByRelationAggregateInput
+  }
+
+  export type GameDataVersionWhereUniqueInput = Prisma.AtLeast<{
+    version?: string
+    AND?: GameDataVersionWhereInput | GameDataVersionWhereInput[]
+    OR?: GameDataVersionWhereInput[]
+    NOT?: GameDataVersionWhereInput | GameDataVersionWhereInput[]
+    major?: IntFilter<"GameDataVersion"> | number
+    minor?: IntFilter<"GameDataVersion"> | number
+    patch?: IntFilter<"GameDataVersion"> | number
+    environment?: StringFilter<"GameDataVersion"> | string
+    status?: StringFilter<"GameDataVersion"> | string
+    releasedOn?: DateTimeNullableFilter<"GameDataVersion"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"GameDataVersion"> | Date | string | null
+    createdAt?: DateTimeFilter<"GameDataVersion"> | Date | string
+    updatedAt?: DateTimeFilter<"GameDataVersion"> | Date | string
+    rawFiles?: GameDataRawFileListRelationFilter
+    jobs?: GameJobListRelationFilter
+    equipment?: EquipmentItemListRelationFilter
+  }, "version">
+
+  export type GameDataVersionOrderByWithAggregationInput = {
+    version?: SortOrder
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+    environment?: SortOrder
+    status?: SortOrder
+    releasedOn?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GameDataVersionCountOrderByAggregateInput
+    _avg?: GameDataVersionAvgOrderByAggregateInput
+    _max?: GameDataVersionMaxOrderByAggregateInput
+    _min?: GameDataVersionMinOrderByAggregateInput
+    _sum?: GameDataVersionSumOrderByAggregateInput
+  }
+
+  export type GameDataVersionScalarWhereWithAggregatesInput = {
+    AND?: GameDataVersionScalarWhereWithAggregatesInput | GameDataVersionScalarWhereWithAggregatesInput[]
+    OR?: GameDataVersionScalarWhereWithAggregatesInput[]
+    NOT?: GameDataVersionScalarWhereWithAggregatesInput | GameDataVersionScalarWhereWithAggregatesInput[]
+    version?: StringWithAggregatesFilter<"GameDataVersion"> | string
+    major?: IntWithAggregatesFilter<"GameDataVersion"> | number
+    minor?: IntWithAggregatesFilter<"GameDataVersion"> | number
+    patch?: IntWithAggregatesFilter<"GameDataVersion"> | number
+    environment?: StringWithAggregatesFilter<"GameDataVersion"> | string
+    status?: StringWithAggregatesFilter<"GameDataVersion"> | string
+    releasedOn?: DateTimeNullableWithAggregatesFilter<"GameDataVersion"> | Date | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"GameDataVersion"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"GameDataVersion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GameDataVersion"> | Date | string
+  }
+
   export type GameDataRawFileWhereInput = {
     AND?: GameDataRawFileWhereInput | GameDataRawFileWhereInput[]
     OR?: GameDataRawFileWhereInput[]
@@ -29427,6 +31020,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
     updatedAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
     records?: GameDataRawRecordListRelationFilter
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
   }
 
   export type GameDataRawFileOrderByWithRelationInput = {
@@ -29437,6 +31031,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     records?: GameDataRawRecordOrderByRelationAggregateInput
+    dataVersion?: GameDataVersionOrderByWithRelationInput
   }
 
   export type GameDataRawFileWhereUniqueInput = Prisma.AtLeast<{
@@ -29451,6 +31046,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
     updatedAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
     records?: GameDataRawRecordListRelationFilter
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
   }, "id" | "version_fileName">
 
   export type GameDataRawFileOrderByWithAggregationInput = {
@@ -29552,6 +31148,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GameJob"> | Date | string
     updatedAt?: DateTimeFilter<"GameJob"> | Date | string
     skills?: GameSkillListRelationFilter
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
   }
 
   export type GameJobOrderByWithRelationInput = {
@@ -29561,6 +31158,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     skills?: GameSkillOrderByRelationAggregateInput
+    dataVersion?: GameDataVersionOrderByWithRelationInput
   }
 
   export type GameJobWhereUniqueInput = Prisma.AtLeast<{
@@ -29574,6 +31172,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GameJob"> | Date | string
     updatedAt?: DateTimeFilter<"GameJob"> | Date | string
     skills?: GameSkillListRelationFilter
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
   }, "version_jobId">
 
   export type GameJobOrderByWithAggregationInput = {
@@ -29964,6 +31563,7 @@ export namespace Prisma {
     OR?: EquipmentItemWhereInput[]
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     id?: BigIntFilter<"EquipmentItem"> | bigint | number
+    version?: StringFilter<"EquipmentItem"> | string
     name?: StringFilter<"EquipmentItem"> | string
     normalizedName?: StringFilter<"EquipmentItem"> | string
     baseName?: StringNullableFilter<"EquipmentItem"> | string | null
@@ -30005,10 +31605,12 @@ export namespace Prisma {
     grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
   }
 
   export type EquipmentItemOrderByWithRelationInput = {
     id?: SortOrder
+    version?: SortOrder
     name?: SortOrder
     normalizedName?: SortOrder
     baseName?: SortOrderInput | SortOrder
@@ -30050,15 +31652,19 @@ export namespace Prisma {
     grantedSkills?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    dataVersion?: GameDataVersionOrderByWithRelationInput
   }
 
   export type EquipmentItemWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    name?: string
-    normalizedName?: string
+    version_name?: EquipmentItemVersionNameCompoundUniqueInput
+    version_normalizedName?: EquipmentItemVersionNormalizedNameCompoundUniqueInput
     AND?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
     OR?: EquipmentItemWhereInput[]
     NOT?: EquipmentItemWhereInput | EquipmentItemWhereInput[]
+    version?: StringFilter<"EquipmentItem"> | string
+    name?: StringFilter<"EquipmentItem"> | string
+    normalizedName?: StringFilter<"EquipmentItem"> | string
     baseName?: StringNullableFilter<"EquipmentItem"> | string | null
     category?: StringFilter<"EquipmentItem"> | string
     keywords?: StringNullableListFilter<"EquipmentItem">
@@ -30098,10 +31704,12 @@ export namespace Prisma {
     grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
-  }, "id" | "name" | "normalizedName">
+    dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
+  }, "id" | "version_name" | "version_normalizedName">
 
   export type EquipmentItemOrderByWithAggregationInput = {
     id?: SortOrder
+    version?: SortOrder
     name?: SortOrder
     normalizedName?: SortOrder
     baseName?: SortOrderInput | SortOrder
@@ -30155,6 +31763,7 @@ export namespace Prisma {
     OR?: EquipmentItemScalarWhereWithAggregatesInput[]
     NOT?: EquipmentItemScalarWhereWithAggregatesInput | EquipmentItemScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"EquipmentItem"> | bigint | number
+    version?: StringWithAggregatesFilter<"EquipmentItem"> | string
     name?: StringWithAggregatesFilter<"EquipmentItem"> | string
     normalizedName?: StringWithAggregatesFilter<"EquipmentItem"> | string
     baseName?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
@@ -31330,14 +32939,117 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GameDataVersionCreateInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileCreateNestedManyWithoutDataVersionInput
+    jobs?: GameJobCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionUncheckedCreateInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileUncheckedCreateNestedManyWithoutDataVersionInput
+    jobs?: GameJobUncheckedCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemUncheckedCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionUpdateInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUpdateManyWithoutDataVersionNestedInput
+    jobs?: GameJobUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type GameDataVersionUncheckedUpdateInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUncheckedUpdateManyWithoutDataVersionNestedInput
+    jobs?: GameJobUncheckedUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUncheckedUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type GameDataVersionCreateManyInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GameDataVersionUpdateManyMutationInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GameDataVersionUncheckedUpdateManyInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type GameDataRawFileCreateInput = {
     id?: bigint | number
-    version: string
     fileName: string
     rowCount: number
     createdAt?: Date | string
     updatedAt?: Date | string
     records?: GameDataRawRecordCreateNestedManyWithoutFileInput
+    dataVersion: GameDataVersionCreateNestedOneWithoutRawFilesInput
   }
 
   export type GameDataRawFileUncheckedCreateInput = {
@@ -31352,12 +33064,12 @@ export namespace Prisma {
 
   export type GameDataRawFileUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    version?: StringFieldUpdateOperationsInput | string
     fileName?: StringFieldUpdateOperationsInput | string
     rowCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     records?: GameDataRawRecordUpdateManyWithoutFileNestedInput
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutRawFilesNestedInput
   }
 
   export type GameDataRawFileUncheckedUpdateInput = {
@@ -31381,7 +33093,6 @@ export namespace Prisma {
 
   export type GameDataRawFileUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    version?: StringFieldUpdateOperationsInput | string
     fileName?: StringFieldUpdateOperationsInput | string
     rowCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31460,12 +33171,12 @@ export namespace Prisma {
   }
 
   export type GameJobCreateInput = {
-    version: string
     jobId: string
     jobName: string
     createdAt?: Date | string
     updatedAt?: Date | string
     skills?: GameSkillCreateNestedManyWithoutJobInput
+    dataVersion: GameDataVersionCreateNestedOneWithoutJobsInput
   }
 
   export type GameJobUncheckedCreateInput = {
@@ -31478,12 +33189,12 @@ export namespace Prisma {
   }
 
   export type GameJobUpdateInput = {
-    version?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     jobName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     skills?: GameSkillUpdateManyWithoutJobNestedInput
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutJobsNestedInput
   }
 
   export type GameJobUncheckedUpdateInput = {
@@ -31504,7 +33215,6 @@ export namespace Prisma {
   }
 
   export type GameJobUpdateManyMutationInput = {
-    version?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     jobName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31929,10 +33639,12 @@ export namespace Prisma {
     grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    dataVersion: GameDataVersionCreateNestedOneWithoutEquipmentInput
   }
 
   export type EquipmentItemUncheckedCreateInput = {
     id?: bigint | number
+    version: string
     name: string
     normalizedName: string
     baseName?: string | null
@@ -32019,10 +33731,12 @@ export namespace Prisma {
     grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutEquipmentNestedInput
   }
 
   export type EquipmentItemUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    version?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     normalizedName?: StringFieldUpdateOperationsInput | string
     baseName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32068,6 +33782,7 @@ export namespace Prisma {
 
   export type EquipmentItemCreateManyInput = {
     id?: bigint | number
+    version: string
     name: string
     normalizedName: string
     baseName?: string | null
@@ -32158,6 +33873,7 @@ export namespace Prisma {
 
   export type EquipmentItemUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    version?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     normalizedName?: StringFieldUpdateOperationsInput | string
     baseName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33393,10 +35109,96 @@ export namespace Prisma {
     defenseRate?: SortOrder
   }
 
+  export type GameDataRawFileListRelationFilter = {
+    every?: GameDataRawFileWhereInput
+    some?: GameDataRawFileWhereInput
+    none?: GameDataRawFileWhereInput
+  }
+
+  export type GameJobListRelationFilter = {
+    every?: GameJobWhereInput
+    some?: GameJobWhereInput
+    none?: GameJobWhereInput
+  }
+
+  export type EquipmentItemListRelationFilter = {
+    every?: EquipmentItemWhereInput
+    some?: EquipmentItemWhereInput
+    none?: EquipmentItemWhereInput
+  }
+
+  export type GameDataRawFileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GameJobOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EquipmentItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GameDataVersionCountOrderByAggregateInput = {
+    version?: SortOrder
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+    environment?: SortOrder
+    status?: SortOrder
+    releasedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GameDataVersionAvgOrderByAggregateInput = {
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+  }
+
+  export type GameDataVersionMaxOrderByAggregateInput = {
+    version?: SortOrder
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+    environment?: SortOrder
+    status?: SortOrder
+    releasedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GameDataVersionMinOrderByAggregateInput = {
+    version?: SortOrder
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+    environment?: SortOrder
+    status?: SortOrder
+    releasedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GameDataVersionSumOrderByAggregateInput = {
+    major?: SortOrder
+    minor?: SortOrder
+    patch?: SortOrder
+  }
+
   export type GameDataRawRecordListRelationFilter = {
     every?: GameDataRawRecordWhereInput
     some?: GameDataRawRecordWhereInput
     none?: GameDataRawRecordWhereInput
+  }
+
+  export type GameDataVersionScalarRelationFilter = {
+    is?: GameDataVersionWhereInput
+    isNot?: GameDataVersionWhereInput
   }
 
   export type GameDataRawRecordOrderByRelationAggregateInput = {
@@ -33798,8 +35600,19 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EquipmentItemVersionNameCompoundUniqueInput = {
+    version: string
+    name: string
+  }
+
+  export type EquipmentItemVersionNormalizedNameCompoundUniqueInput = {
+    version: string
+    normalizedName: string
+  }
+
   export type EquipmentItemCountOrderByAggregateInput = {
     id?: SortOrder
+    version?: SortOrder
     name?: SortOrder
     normalizedName?: SortOrder
     baseName?: SortOrder
@@ -33872,6 +35685,7 @@ export namespace Prisma {
 
   export type EquipmentItemMaxOrderByAggregateInput = {
     id?: SortOrder
+    version?: SortOrder
     name?: SortOrder
     normalizedName?: SortOrder
     baseName?: SortOrder
@@ -33914,6 +35728,7 @@ export namespace Prisma {
 
   export type EquipmentItemMinOrderByAggregateInput = {
     id?: SortOrder
+    version?: SortOrder
     name?: SortOrder
     normalizedName?: SortOrder
     baseName?: SortOrder
@@ -34702,11 +36517,143 @@ export namespace Prisma {
     update?: XOR<XOR<BossPhaseUpdateToOneWithWhereWithoutTargetsInput, BossPhaseUpdateWithoutTargetsInput>, BossPhaseUncheckedUpdateWithoutTargetsInput>
   }
 
+  export type GameDataRawFileCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput> | GameDataRawFileCreateWithoutDataVersionInput[] | GameDataRawFileUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameDataRawFileCreateOrConnectWithoutDataVersionInput | GameDataRawFileCreateOrConnectWithoutDataVersionInput[]
+    createMany?: GameDataRawFileCreateManyDataVersionInputEnvelope
+    connect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+  }
+
+  export type GameJobCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput> | GameJobCreateWithoutDataVersionInput[] | GameJobUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameJobCreateOrConnectWithoutDataVersionInput | GameJobCreateOrConnectWithoutDataVersionInput[]
+    createMany?: GameJobCreateManyDataVersionInputEnvelope
+    connect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+  }
+
+  export type EquipmentItemCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput> | EquipmentItemCreateWithoutDataVersionInput[] | EquipmentItemUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutDataVersionInput | EquipmentItemCreateOrConnectWithoutDataVersionInput[]
+    createMany?: EquipmentItemCreateManyDataVersionInputEnvelope
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+  }
+
+  export type GameDataRawFileUncheckedCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput> | GameDataRawFileCreateWithoutDataVersionInput[] | GameDataRawFileUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameDataRawFileCreateOrConnectWithoutDataVersionInput | GameDataRawFileCreateOrConnectWithoutDataVersionInput[]
+    createMany?: GameDataRawFileCreateManyDataVersionInputEnvelope
+    connect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+  }
+
+  export type GameJobUncheckedCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput> | GameJobCreateWithoutDataVersionInput[] | GameJobUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameJobCreateOrConnectWithoutDataVersionInput | GameJobCreateOrConnectWithoutDataVersionInput[]
+    createMany?: GameJobCreateManyDataVersionInputEnvelope
+    connect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+  }
+
+  export type EquipmentItemUncheckedCreateNestedManyWithoutDataVersionInput = {
+    create?: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput> | EquipmentItemCreateWithoutDataVersionInput[] | EquipmentItemUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutDataVersionInput | EquipmentItemCreateOrConnectWithoutDataVersionInput[]
+    createMany?: EquipmentItemCreateManyDataVersionInputEnvelope
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+  }
+
+  export type GameDataRawFileUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput> | GameDataRawFileCreateWithoutDataVersionInput[] | GameDataRawFileUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameDataRawFileCreateOrConnectWithoutDataVersionInput | GameDataRawFileCreateOrConnectWithoutDataVersionInput[]
+    upsert?: GameDataRawFileUpsertWithWhereUniqueWithoutDataVersionInput | GameDataRawFileUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: GameDataRawFileCreateManyDataVersionInputEnvelope
+    set?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    disconnect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    delete?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    connect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    update?: GameDataRawFileUpdateWithWhereUniqueWithoutDataVersionInput | GameDataRawFileUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: GameDataRawFileUpdateManyWithWhereWithoutDataVersionInput | GameDataRawFileUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: GameDataRawFileScalarWhereInput | GameDataRawFileScalarWhereInput[]
+  }
+
+  export type GameJobUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput> | GameJobCreateWithoutDataVersionInput[] | GameJobUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameJobCreateOrConnectWithoutDataVersionInput | GameJobCreateOrConnectWithoutDataVersionInput[]
+    upsert?: GameJobUpsertWithWhereUniqueWithoutDataVersionInput | GameJobUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: GameJobCreateManyDataVersionInputEnvelope
+    set?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    disconnect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    delete?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    connect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    update?: GameJobUpdateWithWhereUniqueWithoutDataVersionInput | GameJobUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: GameJobUpdateManyWithWhereWithoutDataVersionInput | GameJobUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: GameJobScalarWhereInput | GameJobScalarWhereInput[]
+  }
+
+  export type EquipmentItemUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput> | EquipmentItemCreateWithoutDataVersionInput[] | EquipmentItemUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutDataVersionInput | EquipmentItemCreateOrConnectWithoutDataVersionInput[]
+    upsert?: EquipmentItemUpsertWithWhereUniqueWithoutDataVersionInput | EquipmentItemUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: EquipmentItemCreateManyDataVersionInputEnvelope
+    set?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    disconnect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    delete?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    update?: EquipmentItemUpdateWithWhereUniqueWithoutDataVersionInput | EquipmentItemUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: EquipmentItemUpdateManyWithWhereWithoutDataVersionInput | EquipmentItemUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
+  }
+
+  export type GameDataRawFileUncheckedUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput> | GameDataRawFileCreateWithoutDataVersionInput[] | GameDataRawFileUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameDataRawFileCreateOrConnectWithoutDataVersionInput | GameDataRawFileCreateOrConnectWithoutDataVersionInput[]
+    upsert?: GameDataRawFileUpsertWithWhereUniqueWithoutDataVersionInput | GameDataRawFileUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: GameDataRawFileCreateManyDataVersionInputEnvelope
+    set?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    disconnect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    delete?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    connect?: GameDataRawFileWhereUniqueInput | GameDataRawFileWhereUniqueInput[]
+    update?: GameDataRawFileUpdateWithWhereUniqueWithoutDataVersionInput | GameDataRawFileUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: GameDataRawFileUpdateManyWithWhereWithoutDataVersionInput | GameDataRawFileUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: GameDataRawFileScalarWhereInput | GameDataRawFileScalarWhereInput[]
+  }
+
+  export type GameJobUncheckedUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput> | GameJobCreateWithoutDataVersionInput[] | GameJobUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: GameJobCreateOrConnectWithoutDataVersionInput | GameJobCreateOrConnectWithoutDataVersionInput[]
+    upsert?: GameJobUpsertWithWhereUniqueWithoutDataVersionInput | GameJobUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: GameJobCreateManyDataVersionInputEnvelope
+    set?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    disconnect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    delete?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    connect?: GameJobWhereUniqueInput | GameJobWhereUniqueInput[]
+    update?: GameJobUpdateWithWhereUniqueWithoutDataVersionInput | GameJobUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: GameJobUpdateManyWithWhereWithoutDataVersionInput | GameJobUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: GameJobScalarWhereInput | GameJobScalarWhereInput[]
+  }
+
+  export type EquipmentItemUncheckedUpdateManyWithoutDataVersionNestedInput = {
+    create?: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput> | EquipmentItemCreateWithoutDataVersionInput[] | EquipmentItemUncheckedCreateWithoutDataVersionInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutDataVersionInput | EquipmentItemCreateOrConnectWithoutDataVersionInput[]
+    upsert?: EquipmentItemUpsertWithWhereUniqueWithoutDataVersionInput | EquipmentItemUpsertWithWhereUniqueWithoutDataVersionInput[]
+    createMany?: EquipmentItemCreateManyDataVersionInputEnvelope
+    set?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    disconnect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    delete?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    update?: EquipmentItemUpdateWithWhereUniqueWithoutDataVersionInput | EquipmentItemUpdateWithWhereUniqueWithoutDataVersionInput[]
+    updateMany?: EquipmentItemUpdateManyWithWhereWithoutDataVersionInput | EquipmentItemUpdateManyWithWhereWithoutDataVersionInput[]
+    deleteMany?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
+  }
+
   export type GameDataRawRecordCreateNestedManyWithoutFileInput = {
     create?: XOR<GameDataRawRecordCreateWithoutFileInput, GameDataRawRecordUncheckedCreateWithoutFileInput> | GameDataRawRecordCreateWithoutFileInput[] | GameDataRawRecordUncheckedCreateWithoutFileInput[]
     connectOrCreate?: GameDataRawRecordCreateOrConnectWithoutFileInput | GameDataRawRecordCreateOrConnectWithoutFileInput[]
     createMany?: GameDataRawRecordCreateManyFileInputEnvelope
     connect?: GameDataRawRecordWhereUniqueInput | GameDataRawRecordWhereUniqueInput[]
+  }
+
+  export type GameDataVersionCreateNestedOneWithoutRawFilesInput = {
+    create?: XOR<GameDataVersionCreateWithoutRawFilesInput, GameDataVersionUncheckedCreateWithoutRawFilesInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutRawFilesInput
+    connect?: GameDataVersionWhereUniqueInput
   }
 
   export type GameDataRawRecordUncheckedCreateNestedManyWithoutFileInput = {
@@ -34728,6 +36675,14 @@ export namespace Prisma {
     update?: GameDataRawRecordUpdateWithWhereUniqueWithoutFileInput | GameDataRawRecordUpdateWithWhereUniqueWithoutFileInput[]
     updateMany?: GameDataRawRecordUpdateManyWithWhereWithoutFileInput | GameDataRawRecordUpdateManyWithWhereWithoutFileInput[]
     deleteMany?: GameDataRawRecordScalarWhereInput | GameDataRawRecordScalarWhereInput[]
+  }
+
+  export type GameDataVersionUpdateOneRequiredWithoutRawFilesNestedInput = {
+    create?: XOR<GameDataVersionCreateWithoutRawFilesInput, GameDataVersionUncheckedCreateWithoutRawFilesInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutRawFilesInput
+    upsert?: GameDataVersionUpsertWithoutRawFilesInput
+    connect?: GameDataVersionWhereUniqueInput
+    update?: XOR<XOR<GameDataVersionUpdateToOneWithWhereWithoutRawFilesInput, GameDataVersionUpdateWithoutRawFilesInput>, GameDataVersionUncheckedUpdateWithoutRawFilesInput>
   }
 
   export type GameDataRawRecordUncheckedUpdateManyWithoutFileNestedInput = {
@@ -34765,6 +36720,12 @@ export namespace Prisma {
     connect?: GameSkillWhereUniqueInput | GameSkillWhereUniqueInput[]
   }
 
+  export type GameDataVersionCreateNestedOneWithoutJobsInput = {
+    create?: XOR<GameDataVersionCreateWithoutJobsInput, GameDataVersionUncheckedCreateWithoutJobsInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutJobsInput
+    connect?: GameDataVersionWhereUniqueInput
+  }
+
   export type GameSkillUncheckedCreateNestedManyWithoutJobInput = {
     create?: XOR<GameSkillCreateWithoutJobInput, GameSkillUncheckedCreateWithoutJobInput> | GameSkillCreateWithoutJobInput[] | GameSkillUncheckedCreateWithoutJobInput[]
     connectOrCreate?: GameSkillCreateOrConnectWithoutJobInput | GameSkillCreateOrConnectWithoutJobInput[]
@@ -34784,6 +36745,14 @@ export namespace Prisma {
     update?: GameSkillUpdateWithWhereUniqueWithoutJobInput | GameSkillUpdateWithWhereUniqueWithoutJobInput[]
     updateMany?: GameSkillUpdateManyWithWhereWithoutJobInput | GameSkillUpdateManyWithWhereWithoutJobInput[]
     deleteMany?: GameSkillScalarWhereInput | GameSkillScalarWhereInput[]
+  }
+
+  export type GameDataVersionUpdateOneRequiredWithoutJobsNestedInput = {
+    create?: XOR<GameDataVersionCreateWithoutJobsInput, GameDataVersionUncheckedCreateWithoutJobsInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutJobsInput
+    upsert?: GameDataVersionUpsertWithoutJobsInput
+    connect?: GameDataVersionWhereUniqueInput
+    update?: XOR<XOR<GameDataVersionUpdateToOneWithWhereWithoutJobsInput, GameDataVersionUpdateWithoutJobsInput>, GameDataVersionUncheckedUpdateWithoutJobsInput>
   }
 
   export type GameSkillUncheckedUpdateManyWithoutJobNestedInput = {
@@ -35036,6 +37005,12 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type GameDataVersionCreateNestedOneWithoutEquipmentInput = {
+    create?: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutEquipmentInput
+    connect?: GameDataVersionWhereUniqueInput
+  }
+
   export type EquipmentItemUpdatekeywordsInput = {
     set?: string[]
     push?: string | string[]
@@ -35048,6 +37023,14 @@ export namespace Prisma {
   export type EquipmentItemUpdategrantedSkillsInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type GameDataVersionUpdateOneRequiredWithoutEquipmentNestedInput = {
+    create?: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
+    connectOrCreate?: GameDataVersionCreateOrConnectWithoutEquipmentInput
+    upsert?: GameDataVersionUpsertWithoutEquipmentInput
+    connect?: GameDataVersionWhereUniqueInput
+    update?: XOR<XOR<GameDataVersionUpdateToOneWithWhereWithoutEquipmentInput, GameDataVersionUpdateWithoutEquipmentInput>, GameDataVersionUncheckedUpdateWithoutEquipmentInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -36965,6 +38948,280 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GameDataRawFileCreateWithoutDataVersionInput = {
+    id?: bigint | number
+    fileName: string
+    rowCount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    records?: GameDataRawRecordCreateNestedManyWithoutFileInput
+  }
+
+  export type GameDataRawFileUncheckedCreateWithoutDataVersionInput = {
+    id?: bigint | number
+    fileName: string
+    rowCount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    records?: GameDataRawRecordUncheckedCreateNestedManyWithoutFileInput
+  }
+
+  export type GameDataRawFileCreateOrConnectWithoutDataVersionInput = {
+    where: GameDataRawFileWhereUniqueInput
+    create: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type GameDataRawFileCreateManyDataVersionInputEnvelope = {
+    data: GameDataRawFileCreateManyDataVersionInput | GameDataRawFileCreateManyDataVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GameJobCreateWithoutDataVersionInput = {
+    jobId: string
+    jobName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    skills?: GameSkillCreateNestedManyWithoutJobInput
+  }
+
+  export type GameJobUncheckedCreateWithoutDataVersionInput = {
+    jobId: string
+    jobName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    skills?: GameSkillUncheckedCreateNestedManyWithoutJobInput
+  }
+
+  export type GameJobCreateOrConnectWithoutDataVersionInput = {
+    where: GameJobWhereUniqueInput
+    create: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type GameJobCreateManyDataVersionInputEnvelope = {
+    data: GameJobCreateManyDataVersionInput | GameJobCreateManyDataVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EquipmentItemCreateWithoutDataVersionInput = {
+    id?: bigint | number
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentItemUncheckedCreateWithoutDataVersionInput = {
+    id?: bigint | number
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentItemCreateOrConnectWithoutDataVersionInput = {
+    where: EquipmentItemWhereUniqueInput
+    create: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type EquipmentItemCreateManyDataVersionInputEnvelope = {
+    data: EquipmentItemCreateManyDataVersionInput | EquipmentItemCreateManyDataVersionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GameDataRawFileUpsertWithWhereUniqueWithoutDataVersionInput = {
+    where: GameDataRawFileWhereUniqueInput
+    update: XOR<GameDataRawFileUpdateWithoutDataVersionInput, GameDataRawFileUncheckedUpdateWithoutDataVersionInput>
+    create: XOR<GameDataRawFileCreateWithoutDataVersionInput, GameDataRawFileUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type GameDataRawFileUpdateWithWhereUniqueWithoutDataVersionInput = {
+    where: GameDataRawFileWhereUniqueInput
+    data: XOR<GameDataRawFileUpdateWithoutDataVersionInput, GameDataRawFileUncheckedUpdateWithoutDataVersionInput>
+  }
+
+  export type GameDataRawFileUpdateManyWithWhereWithoutDataVersionInput = {
+    where: GameDataRawFileScalarWhereInput
+    data: XOR<GameDataRawFileUpdateManyMutationInput, GameDataRawFileUncheckedUpdateManyWithoutDataVersionInput>
+  }
+
+  export type GameDataRawFileScalarWhereInput = {
+    AND?: GameDataRawFileScalarWhereInput | GameDataRawFileScalarWhereInput[]
+    OR?: GameDataRawFileScalarWhereInput[]
+    NOT?: GameDataRawFileScalarWhereInput | GameDataRawFileScalarWhereInput[]
+    id?: BigIntFilter<"GameDataRawFile"> | bigint | number
+    version?: StringFilter<"GameDataRawFile"> | string
+    fileName?: StringFilter<"GameDataRawFile"> | string
+    rowCount?: IntFilter<"GameDataRawFile"> | number
+    createdAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
+    updatedAt?: DateTimeFilter<"GameDataRawFile"> | Date | string
+  }
+
+  export type GameJobUpsertWithWhereUniqueWithoutDataVersionInput = {
+    where: GameJobWhereUniqueInput
+    update: XOR<GameJobUpdateWithoutDataVersionInput, GameJobUncheckedUpdateWithoutDataVersionInput>
+    create: XOR<GameJobCreateWithoutDataVersionInput, GameJobUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type GameJobUpdateWithWhereUniqueWithoutDataVersionInput = {
+    where: GameJobWhereUniqueInput
+    data: XOR<GameJobUpdateWithoutDataVersionInput, GameJobUncheckedUpdateWithoutDataVersionInput>
+  }
+
+  export type GameJobUpdateManyWithWhereWithoutDataVersionInput = {
+    where: GameJobScalarWhereInput
+    data: XOR<GameJobUpdateManyMutationInput, GameJobUncheckedUpdateManyWithoutDataVersionInput>
+  }
+
+  export type GameJobScalarWhereInput = {
+    AND?: GameJobScalarWhereInput | GameJobScalarWhereInput[]
+    OR?: GameJobScalarWhereInput[]
+    NOT?: GameJobScalarWhereInput | GameJobScalarWhereInput[]
+    version?: StringFilter<"GameJob"> | string
+    jobId?: StringFilter<"GameJob"> | string
+    jobName?: StringFilter<"GameJob"> | string
+    createdAt?: DateTimeFilter<"GameJob"> | Date | string
+    updatedAt?: DateTimeFilter<"GameJob"> | Date | string
+  }
+
+  export type EquipmentItemUpsertWithWhereUniqueWithoutDataVersionInput = {
+    where: EquipmentItemWhereUniqueInput
+    update: XOR<EquipmentItemUpdateWithoutDataVersionInput, EquipmentItemUncheckedUpdateWithoutDataVersionInput>
+    create: XOR<EquipmentItemCreateWithoutDataVersionInput, EquipmentItemUncheckedCreateWithoutDataVersionInput>
+  }
+
+  export type EquipmentItemUpdateWithWhereUniqueWithoutDataVersionInput = {
+    where: EquipmentItemWhereUniqueInput
+    data: XOR<EquipmentItemUpdateWithoutDataVersionInput, EquipmentItemUncheckedUpdateWithoutDataVersionInput>
+  }
+
+  export type EquipmentItemUpdateManyWithWhereWithoutDataVersionInput = {
+    where: EquipmentItemScalarWhereInput
+    data: XOR<EquipmentItemUpdateManyMutationInput, EquipmentItemUncheckedUpdateManyWithoutDataVersionInput>
+  }
+
+  export type EquipmentItemScalarWhereInput = {
+    AND?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
+    OR?: EquipmentItemScalarWhereInput[]
+    NOT?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
+    id?: BigIntFilter<"EquipmentItem"> | bigint | number
+    version?: StringFilter<"EquipmentItem"> | string
+    name?: StringFilter<"EquipmentItem"> | string
+    normalizedName?: StringFilter<"EquipmentItem"> | string
+    baseName?: StringNullableFilter<"EquipmentItem"> | string | null
+    category?: StringFilter<"EquipmentItem"> | string
+    keywords?: StringNullableListFilter<"EquipmentItem">
+    part?: StringFilter<"EquipmentItem"> | string
+    setName?: StringNullableFilter<"EquipmentItem"> | string | null
+    luckyFlag?: BoolFilter<"EquipmentItem"> | boolean
+    potentialEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    starforceEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    scrollUpgradeEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
+    requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
+    requiredClass?: JsonFilter<"EquipmentItem">
+    classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
+    handType?: StringNullableFilter<"EquipmentItem"> | string | null
+    weaponConstant?: FloatNullableFilter<"EquipmentItem"> | number | null
+    str?: IntFilter<"EquipmentItem"> | number
+    dex?: IntFilter<"EquipmentItem"> | number
+    int?: IntFilter<"EquipmentItem"> | number
+    luk?: IntFilter<"EquipmentItem"> | number
+    maxHp?: IntFilter<"EquipmentItem"> | number
+    maxMp?: IntFilter<"EquipmentItem"> | number
+    maxHpRate?: IntFilter<"EquipmentItem"> | number
+    maxMpRate?: IntFilter<"EquipmentItem"> | number
+    attackPower?: IntFilter<"EquipmentItem"> | number
+    magicPower?: IntFilter<"EquipmentItem"> | number
+    armor?: IntFilter<"EquipmentItem"> | number
+    bossDamage?: IntFilter<"EquipmentItem"> | number
+    ignoreMonsterArmor?: IntFilter<"EquipmentItem"> | number
+    criRate?: IntFilter<"EquipmentItem"> | number
+    criDamage?: IntFilter<"EquipmentItem"> | number
+    normalDamage?: IntFilter<"EquipmentItem"> | number
+    speed?: IntFilter<"EquipmentItem"> | number
+    jump?: IntFilter<"EquipmentItem"> | number
+    upgradeScroll?: IntFilter<"EquipmentItem"> | number
+    exceptionalScroll?: IntFilter<"EquipmentItem"> | number
+    specialRingLevel?: IntFilter<"EquipmentItem"> | number
+    grantedSkills?: StringNullableListFilter<"EquipmentItem">
+    createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
+    updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
+  }
+
   export type GameDataRawRecordCreateWithoutFileInput = {
     id?: bigint | number
     rowIndex: number
@@ -36989,6 +39246,41 @@ export namespace Prisma {
   export type GameDataRawRecordCreateManyFileInputEnvelope = {
     data: GameDataRawRecordCreateManyFileInput | GameDataRawRecordCreateManyFileInput[]
     skipDuplicates?: boolean
+  }
+
+  export type GameDataVersionCreateWithoutRawFilesInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    jobs?: GameJobCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionUncheckedCreateWithoutRawFilesInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    jobs?: GameJobUncheckedCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemUncheckedCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionCreateOrConnectWithoutRawFilesInput = {
+    where: GameDataVersionWhereUniqueInput
+    create: XOR<GameDataVersionCreateWithoutRawFilesInput, GameDataVersionUncheckedCreateWithoutRawFilesInput>
   }
 
   export type GameDataRawRecordUpsertWithWhereUniqueWithoutFileInput = {
@@ -37019,13 +39311,54 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"GameDataRawRecord"> | Date | string
   }
 
+  export type GameDataVersionUpsertWithoutRawFilesInput = {
+    update: XOR<GameDataVersionUpdateWithoutRawFilesInput, GameDataVersionUncheckedUpdateWithoutRawFilesInput>
+    create: XOR<GameDataVersionCreateWithoutRawFilesInput, GameDataVersionUncheckedCreateWithoutRawFilesInput>
+    where?: GameDataVersionWhereInput
+  }
+
+  export type GameDataVersionUpdateToOneWithWhereWithoutRawFilesInput = {
+    where?: GameDataVersionWhereInput
+    data: XOR<GameDataVersionUpdateWithoutRawFilesInput, GameDataVersionUncheckedUpdateWithoutRawFilesInput>
+  }
+
+  export type GameDataVersionUpdateWithoutRawFilesInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    jobs?: GameJobUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type GameDataVersionUncheckedUpdateWithoutRawFilesInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    jobs?: GameJobUncheckedUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUncheckedUpdateManyWithoutDataVersionNestedInput
+  }
+
   export type GameDataRawFileCreateWithoutRecordsInput = {
     id?: bigint | number
-    version: string
     fileName: string
     rowCount: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    dataVersion: GameDataVersionCreateNestedOneWithoutRawFilesInput
   }
 
   export type GameDataRawFileUncheckedCreateWithoutRecordsInput = {
@@ -37055,11 +39388,11 @@ export namespace Prisma {
 
   export type GameDataRawFileUpdateWithoutRecordsInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    version?: StringFieldUpdateOperationsInput | string
     fileName?: StringFieldUpdateOperationsInput | string
     rowCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutRawFilesNestedInput
   }
 
   export type GameDataRawFileUncheckedUpdateWithoutRecordsInput = {
@@ -37117,6 +39450,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GameDataVersionCreateWithoutJobsInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionUncheckedCreateWithoutJobsInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileUncheckedCreateNestedManyWithoutDataVersionInput
+    equipment?: EquipmentItemUncheckedCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionCreateOrConnectWithoutJobsInput = {
+    where: GameDataVersionWhereUniqueInput
+    create: XOR<GameDataVersionCreateWithoutJobsInput, GameDataVersionUncheckedCreateWithoutJobsInput>
+  }
+
   export type GameSkillUpsertWithWhereUniqueWithoutJobInput = {
     where: GameSkillWhereUniqueInput
     update: XOR<GameSkillUpdateWithoutJobInput, GameSkillUncheckedUpdateWithoutJobInput>
@@ -37152,12 +39520,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"GameSkill"> | Date | string
   }
 
+  export type GameDataVersionUpsertWithoutJobsInput = {
+    update: XOR<GameDataVersionUpdateWithoutJobsInput, GameDataVersionUncheckedUpdateWithoutJobsInput>
+    create: XOR<GameDataVersionCreateWithoutJobsInput, GameDataVersionUncheckedCreateWithoutJobsInput>
+    where?: GameDataVersionWhereInput
+  }
+
+  export type GameDataVersionUpdateToOneWithWhereWithoutJobsInput = {
+    where?: GameDataVersionWhereInput
+    data: XOR<GameDataVersionUpdateWithoutJobsInput, GameDataVersionUncheckedUpdateWithoutJobsInput>
+  }
+
+  export type GameDataVersionUpdateWithoutJobsInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type GameDataVersionUncheckedUpdateWithoutJobsInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUncheckedUpdateManyWithoutDataVersionNestedInput
+    equipment?: EquipmentItemUncheckedUpdateManyWithoutDataVersionNestedInput
+  }
+
   export type GameJobCreateWithoutSkillsInput = {
-    version: string
     jobId: string
     jobName: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dataVersion: GameDataVersionCreateNestedOneWithoutJobsInput
   }
 
   export type GameJobUncheckedCreateWithoutSkillsInput = {
@@ -37278,11 +39687,11 @@ export namespace Prisma {
   }
 
   export type GameJobUpdateWithoutSkillsInput = {
-    version?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     jobName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutJobsNestedInput
   }
 
   export type GameJobUncheckedUpdateWithoutSkillsInput = {
@@ -37764,6 +40173,82 @@ export namespace Prisma {
     common?: GameSkillCommonUncheckedUpdateManyWithoutSkillNestedInput
     hint?: GameSkillHintUncheckedUpdateOneWithoutSkillNestedInput
     levels?: GameSkillLevelUncheckedUpdateManyWithoutSkillNestedInput
+  }
+
+  export type GameDataVersionCreateWithoutEquipmentInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileCreateNestedManyWithoutDataVersionInput
+    jobs?: GameJobCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionUncheckedCreateWithoutEquipmentInput = {
+    version: string
+    major: number
+    minor: number
+    patch: number
+    environment: string
+    status?: string
+    releasedOn?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawFiles?: GameDataRawFileUncheckedCreateNestedManyWithoutDataVersionInput
+    jobs?: GameJobUncheckedCreateNestedManyWithoutDataVersionInput
+  }
+
+  export type GameDataVersionCreateOrConnectWithoutEquipmentInput = {
+    where: GameDataVersionWhereUniqueInput
+    create: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
+  }
+
+  export type GameDataVersionUpsertWithoutEquipmentInput = {
+    update: XOR<GameDataVersionUpdateWithoutEquipmentInput, GameDataVersionUncheckedUpdateWithoutEquipmentInput>
+    create: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
+    where?: GameDataVersionWhereInput
+  }
+
+  export type GameDataVersionUpdateToOneWithWhereWithoutEquipmentInput = {
+    where?: GameDataVersionWhereInput
+    data: XOR<GameDataVersionUpdateWithoutEquipmentInput, GameDataVersionUncheckedUpdateWithoutEquipmentInput>
+  }
+
+  export type GameDataVersionUpdateWithoutEquipmentInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUpdateManyWithoutDataVersionNestedInput
+    jobs?: GameJobUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type GameDataVersionUncheckedUpdateWithoutEquipmentInput = {
+    version?: StringFieldUpdateOperationsInput | string
+    major?: IntFieldUpdateOperationsInput | number
+    minor?: IntFieldUpdateOperationsInput | number
+    patch?: IntFieldUpdateOperationsInput | number
+    environment?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    releasedOn?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawFiles?: GameDataRawFileUncheckedUpdateManyWithoutDataVersionNestedInput
+    jobs?: GameJobUncheckedUpdateManyWithoutDataVersionNestedInput
   }
 
   export type RankingRawPageCreateManyRunInput = {
@@ -38256,6 +40741,250 @@ export namespace Prisma {
     requiredForce?: NullableIntFieldUpdateOperationsInput | number | null
     hp?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     defenseRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GameDataRawFileCreateManyDataVersionInput = {
+    id?: bigint | number
+    fileName: string
+    rowCount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GameJobCreateManyDataVersionInput = {
+    jobId: string
+    jobName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentItemCreateManyDataVersionInput = {
+    id?: bigint | number
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GameDataRawFileUpdateWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    rowCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    records?: GameDataRawRecordUpdateManyWithoutFileNestedInput
+  }
+
+  export type GameDataRawFileUncheckedUpdateWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    rowCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    records?: GameDataRawRecordUncheckedUpdateManyWithoutFileNestedInput
+  }
+
+  export type GameDataRawFileUncheckedUpdateManyWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    fileName?: StringFieldUpdateOperationsInput | string
+    rowCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GameJobUpdateWithoutDataVersionInput = {
+    jobId?: StringFieldUpdateOperationsInput | string
+    jobName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    skills?: GameSkillUpdateManyWithoutJobNestedInput
+  }
+
+  export type GameJobUncheckedUpdateWithoutDataVersionInput = {
+    jobId?: StringFieldUpdateOperationsInput | string
+    jobName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    skills?: GameSkillUncheckedUpdateManyWithoutJobNestedInput
+  }
+
+  export type GameJobUncheckedUpdateManyWithoutDataVersionInput = {
+    jobId?: StringFieldUpdateOperationsInput | string
+    jobName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemUpdateWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemUncheckedUpdateWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemUncheckedUpdateManyWithoutDataVersionInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

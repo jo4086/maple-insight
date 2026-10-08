@@ -110,7 +110,7 @@ export const classJobStages = [0, 1, 1.5, 2, 2.5, 3, 4, 6] as const;
 
 현재 동작:
 
-- `data/<version>/` 바로 아래 `.csv` 파일을 탐색한다.
+- `data/<environment>/<version>/` 바로 아래 `.csv` 파일을 탐색한다.
 - `json/` 폴더를 만들고 JSON 변환 결과를 저장한다.
 - `csv/` 폴더를 만들고 원본 CSV 파일을 이동한다.
 - 같은 이름의 CSV가 이미 `csv/` 안에 있으면 덮어쓰지 않고 에러를 낸다.
@@ -118,14 +118,14 @@ export const classJobStages = [0, 1, 1.5, 2, 2.5, 3, 4, 6] as const;
 예시:
 
 ```txt
-data/1.2.425/ms_skill.csv
+data/production/1.2.425/ms_skill.csv
 ```
 
 실행 후:
 
 ```txt
-data/1.2.425/json/ms_skill.json
-data/1.2.425/csv/ms_skill.csv
+data/production/1.2.425/json/ms_skill.json
+data/production/1.2.425/csv/ms_skill.csv
 ```
 
 ## Temporary Analysis Files

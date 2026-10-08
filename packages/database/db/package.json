@@ -33,10 +33,25 @@
       "import": "./dist/admin/game-skill-query.repo.cjs",
       "require": "./dist/admin/game-skill-query.repo.cjs"
     },
+    "./admin/game-data-version": {
+      "types": "./dist/admin/game-data-version.repo.d.ts",
+      "import": "./dist/admin/game-data-version.repo.cjs",
+      "require": "./dist/admin/game-data-version.repo.cjs"
+    },
+    "./game-data-version": {
+      "types": "./dist/domain/game-data-version.d.ts",
+      "import": "./dist/domain/game-data-version.cjs",
+      "require": "./dist/domain/game-data-version.cjs"
+    },
     "./admin/seed-game-data-raw": {
       "types": "./dist/admin/seed-game-data-raw.repo.d.ts",
       "import": "./dist/admin/seed-game-data-raw.repo.cjs",
       "require": "./dist/admin/seed-game-data-raw.repo.cjs"
+    },
+    "./admin/seed-game-data-bundle": {
+      "types": "./dist/admin/seed-game-data-bundle.repo.d.ts",
+      "import": "./dist/admin/seed-game-data-bundle.repo.cjs",
+      "require": "./dist/admin/seed-game-data-bundle.repo.cjs"
     },
     "./admin/seed-game-data": {
       "types": "./dist/admin/seed-game-data.repo.d.ts",

@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { ensureGameDataVersion } from './game-data-version.repo';
+
 import { prisma } from '@/lib/prisma';
 
 const DEFAULT_CHUNK_SIZE = 1000;
@@ -47,6 +49,8 @@ type EquipmentJsonItem = {
 };
 
 export type SeedEquipmentOptions = {
+  /** 게임 데이터 버전. 예: 1.2.424 */
+  version: string;
   /** generator/src/generated/equipment 같은 JSON 파일 디렉터리 */
   dir: string;
   /** createMany chunk 크기 */
@@ -54,6 +58,7 @@ export type SeedEquipmentOptions = {
 };
 
 export type SeedEquipmentResult = {
+  version: string;
   weapon: number;
   armor: number;
   accessory: number;
@@ -92,8 +97,9 @@ async function createManyInChunks<T>(items: readonly T[], chunkSize: number, cre
   }
 }
 
-function toEquipmentItemCreateManyInput(item: EquipmentJsonItem) {
+function toEquipmentItemCreateManyInput(item: EquipmentJsonItem, version: string) {
   return {
+    version,
     name: item.name,
     normalizedName: item.name.replace(/\s+/g, ''),
     baseName: item.baseName,
@@ -147,16 +153,18 @@ export async function seedEquipment(options: SeedEquipmentOptions): Promise<Seed
   const items = [...weapon, ...armor, ...accessory, ...subWeapon];
 
   await prisma.$transaction(async (tx) => {
-    await tx.equipmentItem.deleteMany();
+    await ensureGameDataVersion(tx, options.version);
+    await tx.equipmentItem.deleteMany({ where: { version: options.version } });
 
     await createManyInChunks(
-      items.map((item) => toEquipmentItemCreateManyInput(item)),
+      items.map((item) => toEquipmentItemCreateManyInput(item, options.version)),
       chunkSize,
       (data) => tx.equipmentItem.createMany({ data }),
     );
   });
 
   return {
+    version: options.version,
     weapon: weapon.length,
     armor: armor.length,
     accessory: accessory.length,
