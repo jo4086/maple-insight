@@ -1,0 +1,29 @@
+@layer components {
+  .page-eyebrow {
+    @apply text-caption font-bold tracking-eyebrow text-app-accent;
+  }
+
+  .page-title {
+    @apply my-2 text-page-title font-bold tracking-page-title;
+  }
+
+  .page-description {
+    @apply m-0 text-body text-app-muted;
+  }
+
+  .section-title {
+    @apply mb-1 text-section-title font-bold;
+  }
+
+  .section-description {
+    @apply m-0 text-body text-app-muted;
+  }
+
+  .field-label {
+    @apply text-caption font-semibold text-app-muted;
+  }
+
+  .action-primary {
+    @apply min-h-[38px] rounded-lg bg-app-accent px-4 text-body font-bold text-app-accent-contrast hover:bg-app-accent-hover disabled:cursor-not-allowed disabled:opacity-60;
+  }
+}

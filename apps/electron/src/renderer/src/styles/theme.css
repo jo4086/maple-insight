@@ -1,0 +1,74 @@
+@theme {
+  --color-app-bg: #0b0f14;
+  --color-app-surface: #10171f;
+  --color-app-surface-2: #151e28;
+  --color-app-surface-hover: #1a2530;
+  --color-app-sidebar: #0d1219;
+  --color-app-header: #0b0f14f2;
+  --color-app-input: #0d141b;
+  --color-app-border: #2b3948;
+  --color-app-border-strong: #3a4c5f;
+  --color-app-muted: #9aa8ba;
+  --color-app-subtle: #7f8ea2;
+  --color-app-text: #e7edf4;
+  --color-app-accent: #55e6b0;
+  --color-app-accent-hover: #70edbd;
+  --color-app-accent-contrast: #07120f;
+  --color-app-accent-bg: #163128;
+  --color-app-accent-border: #356d55;
+  --color-app-info: #9ed2ff;
+  --color-app-info-bg: #14283a;
+  --color-app-info-border: #4779a8;
+  --color-app-warning: #e8c778;
+  --color-app-warning-bg: #2b2415;
+  --color-app-warning-border: #9a7d42;
+  --color-app-danger: #ffadb4;
+  --color-app-danger-bg: #321b20;
+  --color-app-danger-border: #78444a;
+  --color-app-dim: #667588;
+
+  --text-page-title: 29px;
+  --text-section-title: 15px;
+  --text-body: 12px;
+  --text-small: 11px;
+  --text-caption: 10px;
+  --text-micro: 9px;
+
+  --tracking-page-title: -0.045em;
+  --tracking-eyebrow: 0.19em;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-app-bg: #f4f7fa;
+  --color-app-surface: #ffffff;
+  --color-app-surface-2: #edf2f6;
+  --color-app-surface-hover: #e3ebf1;
+  --color-app-sidebar: #eaf0f5;
+  --color-app-header: #f8fafcf2;
+  --color-app-input: #ffffff;
+  --color-app-border: #c6d1dc;
+  --color-app-border-strong: #9eafbf;
+  --color-app-muted: #526477;
+  --color-app-subtle: #687b8e;
+  --color-app-text: #172331;
+  --color-app-accent: #087f5b;
+  --color-app-accent-hover: #0a9067;
+  --color-app-accent-contrast: #ffffff;
+  --color-app-accent-bg: #d9f2e8;
+  --color-app-accent-border: #71b99f;
+  --color-app-info: #145f9c;
+  --color-app-info-bg: #e0effc;
+  --color-app-info-border: #75a9d3;
+  --color-app-warning: #73530e;
+  --color-app-warning-bg: #fff4d6;
+  --color-app-warning-border: #c8a655;
+  --color-app-danger: #a12b3a;
+  --color-app-danger-bg: #fde8eb;
+  --color-app-danger-border: #d28b95;
+  --color-app-dim: #738396;
+}
