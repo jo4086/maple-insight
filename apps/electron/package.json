@@ -1,0 +1,52 @@
+{
+  "name": "@apps/electron",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Maple Insight game data administration desktop application",
+  "main": "./out/main/index.js",
+  "author": "jo4086",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint --cache .",
+    "test": "vitest run",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "pnpm run typecheck:node && pnpm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "pnpm run typecheck && electron-vite build",
+    "screenshot:playwright": "pnpm run build && node scripts/capture-playwright.mjs",
+    "postinstall": "electron-builder install-app-deps",
+    "build:unpack": "pnpm run build && electron-builder --dir",
+    "build:win": "pnpm run build && electron-builder --win",
+    "build:mac": "electron-vite build && electron-builder --mac",
+    "build:linux": "electron-vite build && electron-builder --linux"
+  },
+  "dependencies": {
+    "@electron-toolkit/utils": "^4.0.0",
+    "@maple/db": "workspace:*",
+    "@typesafe-ai/sdk": "^0.6.0",
+    "csv-parse": "^7.0.3",
+    "dotenv": "^17.4.2",
+    "stream-json": "^3.7.0"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/node": "^22.19.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "electron": "^39.2.6",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^5.0.0",
+    "playwright": "^1.59.1",
+    "prettier": "^3.7.4",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6",
+    "vitest": "^4.1.4"
+  }
+}

@@ -8,7 +8,7 @@
 
 **관련 파일**:
 
-- eslint.config.js: **speard**가 가능한 오브젝트들과 불가능한 **객체 배열 또는 스트링형**들이 다루는 key의 잘못된 설정으로 인한 오류로 `extends <- spread 가능 객체` / `rules <- spread 불가능 객체배열 및 문자열` 을 구분하고 중복된 선언들 및 관심사에 대해 정리를 하였음\
+- eslint.config.mjs: **speard**가 가능한 오브젝트들과 불가능한 **객체 배열 또는 스트링형**들이 다루는 key의 잘못된 설정으로 인한 오류로 `extends <- spread 가능 객체` / `rules <- spread 불가능 객체배열 및 문자열` 을 구분하고 중복된 선언들 및 관심사에 대해 정리를 하였음\
   (**global**, **front**, **back**, **package**, **ignore**)
 - apps/front/tsconfig.json
 - apps/front/tsconfig.app.json
