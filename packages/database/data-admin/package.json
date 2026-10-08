@@ -25,6 +25,8 @@
     "seed:game-data": "tsx src/seed-game-data.ts",
     "preseed:game-data-raw": "pnpm --filter @maple/db run build",
     "seed:game-data-raw": "tsx src/seed-game-data-raw.ts",
+    "preseed:game-data-bundle": "pnpm --filter @maple/db run build",
+    "seed:game-data-bundle": "tsx src/seed-game-data-bundle.ts",
     "prisma:generate": "prisma generate",
     "lint": "eslint src --ext .ts"
   },

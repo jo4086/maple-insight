@@ -5,13 +5,9 @@ import path from 'node:path';
 
 import { disconnectDb } from '@maple/db';
 import { findGameSkillsByJobIds } from '@maple/db/admin';
-import {
-  getClassNamesByJobId,
-  getRawJobCategoryByJobId,
-  rawJobCategoryMap,
-  rawJobNameMap,
-  type RawJobCategory,
-} from '@maple/data-skill';
+import { getClassNamesByJobId, getRawJobCategoryByJobId, rawJobCategoryMap, rawJobNameMap, type RawJobCategory } from '@maple/data-skill';
+
+import { getGameDataGeneratedDirectory } from './game-data-path';
 
 const DEFAULT_VERSION = '1.2.424';
 
@@ -40,16 +36,11 @@ function getVersion(): string {
 }
 
 function getOutputPath(version: string): string {
-  return (
-    process.env.GAME_DATA_SKILL_BY_JOB_OUTPUT ??
-    path.resolve(process.cwd(), '../../..', 'data', version, 'generated', 'skills-by-raw-job.json')
-  );
+  return process.env.GAME_DATA_SKILL_BY_JOB_OUTPUT ?? path.join(getGameDataGeneratedDirectory(version), 'skills-by-raw-job.json');
 }
 
 function getTargetJobIds(): string[] {
-  return [...new Set([...Object.keys(rawJobNameMap), ...Object.keys(rawJobCategoryMap)])].sort(
-    (left, right) => Number(left) - Number(right),
-  );
+  return [...new Set([...Object.keys(rawJobNameMap), ...Object.keys(rawJobCategoryMap)])].sort((left, right) => Number(left) - Number(right));
 }
 
 async function main(): Promise<void> {

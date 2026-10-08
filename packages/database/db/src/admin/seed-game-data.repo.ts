@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { ensureGameDataVersion } from './game-data-version.repo';
+
 import { prisma } from '@/lib/prisma';
 
 const DEFAULT_CHUNK_SIZE = 1000;
@@ -119,11 +121,7 @@ function boolString(value: unknown): boolean | undefined {
   return undefined;
 }
 
-async function createManyInChunks<T>(
-  items: readonly T[],
-  chunkSize: number,
-  createMany: (items: T[]) => Promise<unknown>,
-): Promise<void> {
+async function createManyInChunks<T>(items: readonly T[], chunkSize: number, createMany: (items: T[]) => Promise<unknown>): Promise<void> {
   for (const rowChunk of chunk(items, chunkSize)) {
     await createMany(rowChunk);
   }
@@ -142,6 +140,8 @@ export async function seedGameData(options: SeedGameDataOptions): Promise<SeedGa
 
   await prisma.$transaction(
     async (tx) => {
+      await ensureGameDataVersion(tx, options.version);
+
       await tx.gameSkillPvpCommon.deleteMany({ where: { version: options.version } });
       await tx.gameSkillLevel.deleteMany({ where: { version: options.version } });
       await tx.gameSkillHint.deleteMany({ where: { version: options.version } });

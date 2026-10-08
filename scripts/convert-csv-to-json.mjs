@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const rootDir = process.cwd();
 const sourceDir = path.join(rootDir, 'data');
+const environments = ['test', 'production'];
 
 function parseCsv(content) {
   const rows = [];
@@ -66,9 +67,7 @@ function toRecords(rows) {
   const [headerRow, ...dataRows] = rows;
   const headers = headerRow.map((header) => header.replace(/^\uFEFF/, ''));
 
-  return dataRows.map((dataRow) =>
-    Object.fromEntries(headers.map((header, index) => [header, dataRow[index] ?? ''])),
-  );
+  return dataRows.map((dataRow) => Object.fromEntries(headers.map((header, index) => [header, dataRow[index] ?? ''])));
 }
 
 async function exists(filePath) {
@@ -81,39 +80,44 @@ async function exists(filePath) {
 }
 
 async function main() {
-  const entries = await readdir(sourceDir, { withFileTypes: true });
-  const versionDirs = entries.filter((entry) => entry.isDirectory());
+  for (const environment of environments) {
+    const environmentDir = path.join(sourceDir, environment);
+    if (!(await exists(environmentDir))) continue;
 
-  for (const entry of versionDirs) {
-    const versionDir = path.join(sourceDir, entry.name);
-    const outputDir = path.join(versionDir, 'json');
-    const csvDir = path.join(versionDir, 'csv');
-    const filenames = await readdir(versionDir);
-    const csvFilenames = filenames.filter((filename) => filename.endsWith('.csv'));
+    const entries = await readdir(environmentDir, { withFileTypes: true });
+    const versionDirs = entries.filter((entry) => entry.isDirectory());
 
-    if (csvFilenames.length === 0) {
-      continue;
-    }
+    for (const entry of versionDirs) {
+      const versionDir = path.join(environmentDir, entry.name);
+      const outputDir = path.join(versionDir, 'json');
+      const csvDir = path.join(versionDir, 'csv');
+      const filenames = await readdir(versionDir);
+      const csvFilenames = filenames.filter((filename) => filename.endsWith('.csv'));
 
-    await mkdir(outputDir, { recursive: true });
-    await mkdir(csvDir, { recursive: true });
-
-    for (const filename of csvFilenames) {
-      const sourcePath = path.join(versionDir, filename);
-      const outputPath = path.join(outputDir, filename.replace(/\.csv$/u, '.json'));
-      const csvOutputPath = path.join(csvDir, filename);
-      const content = await readFile(sourcePath, 'utf8');
-      const rows = parseCsv(content);
-      const records = toRecords(rows);
-
-      if (await exists(csvOutputPath)) {
-        throw new Error(`CSV output already exists: ${path.relative(rootDir, csvOutputPath)}`);
+      if (csvFilenames.length === 0) {
+        continue;
       }
 
-      await writeFile(outputPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
-      await rename(sourcePath, csvOutputPath);
-      console.log(`converted ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, outputPath)}`);
-      console.log(`moved ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, csvOutputPath)}`);
+      await mkdir(outputDir, { recursive: true });
+      await mkdir(csvDir, { recursive: true });
+
+      for (const filename of csvFilenames) {
+        const sourcePath = path.join(versionDir, filename);
+        const outputPath = path.join(outputDir, filename.replace(/\.csv$/u, '.json'));
+        const csvOutputPath = path.join(csvDir, filename);
+        const content = await readFile(sourcePath, 'utf8');
+        const rows = parseCsv(content);
+        const records = toRecords(rows);
+
+        if (await exists(csvOutputPath)) {
+          throw new Error(`CSV output already exists: ${path.relative(rootDir, csvOutputPath)}`);
+        }
+
+        await writeFile(outputPath, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
+        await rename(sourcePath, csvOutputPath);
+        console.log(`converted ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, outputPath)}`);
+        console.log(`moved ${path.relative(rootDir, sourcePath)} -> ${path.relative(rootDir, csvOutputPath)}`);
+      }
     }
   }
 }

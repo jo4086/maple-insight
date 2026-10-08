@@ -268,6 +268,19 @@ exports.Prisma.BossPhaseTargetScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GameDataVersionScalarFieldEnum = {
+  version: 'version',
+  major: 'major',
+  minor: 'minor',
+  patch: 'patch',
+  environment: 'environment',
+  status: 'status',
+  releasedOn: 'releasedOn',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.GameDataRawFileScalarFieldEnum = {
   id: 'id',
   version: 'version',
@@ -349,6 +362,7 @@ exports.Prisma.GameSkillPvpCommonScalarFieldEnum = {
 
 exports.Prisma.EquipmentItemScalarFieldEnum = {
   id: 'id',
+  version: 'version',
   name: 'name',
   normalizedName: 'normalizedName',
   baseName: 'baseName',
@@ -446,6 +460,7 @@ exports.Prisma.ModelName = {
   BossDifficulty: 'BossDifficulty',
   BossPhase: 'BossPhase',
   BossPhaseTarget: 'BossPhaseTarget',
+  GameDataVersion: 'GameDataVersion',
   GameDataRawFile: 'GameDataRawFile',
   GameDataRawRecord: 'GameDataRawRecord',
   GameJob: 'GameJob',

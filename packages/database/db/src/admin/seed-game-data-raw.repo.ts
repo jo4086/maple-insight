@@ -1,6 +1,8 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { ensureGameDataVersion } from './game-data-version.repo';
+
 import type { Prisma } from '@/generated/prisma';
 import { prisma } from '@/lib/prisma';
 
@@ -74,6 +76,8 @@ export async function seedGameDataRaw(options: SeedGameDataRawOptions): Promise<
 
   await prisma.$transaction(
     async (tx) => {
+      await ensureGameDataVersion(tx, options.version);
+
       for (const fileName of fileNames) {
         const filePath = path.join(options.dir, fileName);
         const records = await readJsonArray(filePath);

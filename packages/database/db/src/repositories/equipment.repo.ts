@@ -1,12 +1,24 @@
 import { prisma } from '@/lib/prisma';
 
-export async function findEquipmentItemsByNormalizedNames(normalizedNames: readonly string[]) {
+export async function findEquipmentItemsByNormalizedNames(normalizedNames: readonly string[], version?: string) {
   const names = [...new Set(normalizedNames)];
 
   if (names.length === 0) return [];
 
+  const dataVersion = await prisma.gameDataVersion.findFirst({
+    where: {
+      status: 'ready',
+      ...(version ? { version } : {}),
+    },
+    orderBy: [{ major: 'desc' }, { minor: 'desc' }, { patch: 'desc' }],
+    select: { version: true },
+  });
+
+  if (!dataVersion) return [];
+
   return prisma.equipmentItem.findMany({
     where: {
+      version: dataVersion.version,
       normalizedName: { in: names },
     },
     select: {
