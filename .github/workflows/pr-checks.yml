@@ -1,0 +1,63 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check whitespace errors
+        run: git diff --check HEAD^1 HEAD
+
+      - name: Find changed source files
+        id: sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="$RUNNER_TEMP/eslint-files"
+          : > "$files"
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              *.js|*.jsx|*.ts|*.tsx|*.mjs|*.cjs|*.mts|*.cts)
+                printf '%s\0' "$file" >> "$files"
+                ;;
+            esac
+          done < <(git diff --name-only -z --diff-filter=ACMR HEAD^1 HEAD)
+          if [ -s "$files" ]; then
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.sources.outputs.has_files == 'true'
+        with:
+          node-version: 24
+
+      - name: Enable pnpm
+        if: steps.sources.outputs.has_files == 'true'
+        run: |
+          corepack enable
+          corepack install --global pnpm@10.33.0
+
+      - name: Install dependencies
+        if: steps.sources.outputs.has_files == 'true'
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Lint changed source files
+        if: steps.sources.outputs.has_files == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=()
+          while IFS= read -r -d '' file; do
+            files+=("$file")
+          done < "$RUNNER_TEMP/eslint-files"
+          pnpm exec eslint -- "${files[@]}"
