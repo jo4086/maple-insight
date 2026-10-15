@@ -21,13 +21,50 @@ describe('version selection', () => {
     })
   })
 
-  it('preserves valid selections during a normal refresh', () => {
-    const selection = {
+  it('restores a saved version when no current selection exists', () => {
+    expect(
+      resolveVersionSelection(
+        ['1.2.419', '1.2.418'],
+        { versions: [], currentVersion: '', compareVersion: '' },
+        undefined,
+        '1.2.418'
+      )
+    ).toEqual({
+      versions: ['1.2.419', '1.2.418'],
+      currentVersion: '1.2.418',
+      compareVersion: '1.2.419'
+    })
+  })
+
+  it('falls back when a saved version is no longer registered', () => {
+    expect(
+      resolveVersionSelection(
+        ['1.2.419', '1.2.418'],
+        { versions: [], currentVersion: '', compareVersion: '' },
+        undefined,
+        '1.2.417'
+      )
+    ).toEqual({
       versions: ['1.2.419', '1.2.418'],
       currentVersion: '1.2.419',
       compareVersion: '1.2.418'
+    })
+  })
+
+  it('keeps an explicit changed selection on a later refresh', () => {
+    const afterExplicitChange = {
+      versions: ['1.2.419', '1.2.418'],
+      currentVersion: '1.2.418',
+      compareVersion: '1.2.419'
     }
 
-    expect(resolveVersionSelection(selection.versions, selection)).toEqual(selection)
+    expect(
+      resolveVersionSelection(
+        afterExplicitChange.versions,
+        afterExplicitChange,
+        undefined,
+        '1.2.419'
+      )
+    ).toEqual(afterExplicitChange)
   })
 })

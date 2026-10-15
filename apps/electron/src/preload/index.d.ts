@@ -35,6 +35,13 @@ type MapleAdminApi = {
     listener: (progress: DataDirectoryConversionProgress) => void
   ) => () => void
   listDataVersions: () => Promise<string[]>
+  listRegisteredDataVersions: () => Promise<RegisteredDataVersion[]>
+  listComparableFiles: (request: ListComparableFilesRequest) => Promise<string[]>
+  compareRawData: (request: CompareRawDataRequest) => Promise<RawDataComparison>
+  saveRawDataDiff: (
+    request: SaveRawDataDiffRequest
+  ) => Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }>
+  openRawDataDiff: (request: CompareRawDataRequest) => Promise<RawDataComparison | null>
   validateDataVersion: (request: DataValidationRequest) => Promise<DataValidationRunResult>
   cancelDataValidation: (sessionId: string) => Promise<boolean>
   updateDataValidationWarning: (
@@ -61,7 +68,14 @@ import type {
   DataFileConversionRequest,
   DataFileConversionResult
 } from '../shared/data-import'
+import type {
+  CompareRawDataRequest,
+  ListComparableFilesRequest,
+  RawDataComparison,
+  SaveRawDataDiffRequest
+} from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
+import type { RegisteredDataVersion } from '../shared/data-versions'
 import type {
   DataValidationProgress,
   DataValidationRequest,

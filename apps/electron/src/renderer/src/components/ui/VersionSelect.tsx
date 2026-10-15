@@ -1,3 +1,5 @@
+import { ArrowIcon } from './ArrowIcon'
+
 export function VersionSelect({
   label,
   value,
@@ -18,19 +20,25 @@ export function VersionSelect({
       <span className={compact ? 'text-micro font-semibold text-app-muted' : 'field-label'}>
         {label}
       </span>
-      <select
-        className={`rounded-lg border border-app-border-strong bg-app-input px-3 font-mono font-semibold text-app-text outline-none focus:border-app-accent ${compact ? 'h-8 w-[106px] text-caption' : 'h-10 pr-9 text-xs'}`}
-        value={value}
-        disabled={versions.length === 0}
-        onChange={(event) => onChange(event.target.value)}
-      >
-        {versions.length === 0 && <option value="">버전 없음</option>}
-        {versions.map((version) => (
-          <option key={version} value={version} disabled={version === excludedVersion}>
-            {version}
-          </option>
-        ))}
-      </select>
+      <span className={compact ? 'relative w-[106px]' : 'relative'}>
+        <select
+          className={`w-full appearance-none rounded-lg border border-app-border-strong bg-app-input px-3 pr-9 font-mono font-semibold text-app-text outline-none focus:border-app-accent ${compact ? 'h-8 text-caption' : 'h-10 text-xs'}`}
+          value={value}
+          disabled={versions.length === 0}
+          onChange={(event) => onChange(event.target.value)}
+        >
+          {versions.length === 0 && <option value="">버전 없음</option>}
+          {versions.map((version) => (
+            <option key={version} value={version} disabled={version === excludedVersion}>
+              {version}
+            </option>
+          ))}
+        </select>
+        <ArrowIcon
+          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-app-accent"
+          direction="down"
+        />
+      </span>
     </label>
   )
 }

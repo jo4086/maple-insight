@@ -4,6 +4,15 @@ import { navigation, type View } from '../../features/navigation/model'
 import { StatusDot } from '../ui/StatusDot'
 import { VersionSelect } from '../ui/VersionSelect'
 
+function viewLabel(view: View): string | undefined {
+  return (
+    navigation.find((item) => 'id' in item && item.id === view)?.label ??
+    navigation
+      .flatMap((item) => ('children' in item ? item.children : []))
+      .find((item) => item.id === view)?.label
+  )
+}
+
 export function AppShell({
   view,
   currentVersion,
@@ -42,14 +51,58 @@ export function AppShell({
           </div>
         </div>
 
-        <nav className="grid gap-1">
+        <nav aria-label="주 탐색" className="grid gap-1">
           {navigation.map((item) => {
+            if ('children' in item) {
+              const active = item.children.some((child) => child.id === view)
+
+              return (
+                <div key={item.label}>
+                  <button
+                    aria-current={view === 'version-list' ? 'page' : undefined}
+                    className={`flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                    type="button"
+                    onClick={() => onNavigate('version-list')}
+                  >
+                    <span
+                      className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
+                    >
+                      {item.icon}
+                    </span>
+                    <span>{item.label}</span>
+                  </button>
+                  <div
+                    aria-label="버전 하위 탐색"
+                    className="ml-8 grid gap-1 border-l border-app-border pl-3"
+                  >
+                    {item.children.map((child) => {
+                      const childActive = view === child.id
+
+                      return (
+                        <button
+                          aria-current={childActive ? 'page' : undefined}
+                          className={`rounded-lg border-0 px-3 py-2 text-left text-[11px] font-semibold transition-colors ${childActive ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                          key={child.id}
+                          type="button"
+                          onClick={() => onNavigate(child.id)}
+                        >
+                          {child.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            }
+
             const active = view === item.id
 
             return (
               <button
+                aria-current={active ? 'page' : undefined}
                 className={`flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
                 key={item.id}
+                type="button"
                 onClick={() => onNavigate(item.id)}
               >
                 <span
@@ -76,7 +129,7 @@ export function AppShell({
 
       <main className="col-start-2 min-w-0 max-[767px]:col-start-auto">
         <div className="sticky top-0 z-5 flex h-[65px] items-center justify-between border-b border-app-border bg-app-header px-[34px] text-[11px] text-app-muted backdrop-blur-xl max-[767px]:h-auto max-[767px]:flex-col max-[767px]:items-stretch max-[767px]:gap-3 max-[767px]:px-4 max-[767px]:py-3">
-          <span>{navigation.find((item) => item.id === view)?.label}</span>
+          <span>{viewLabel(view)}</span>
           <div className="flex items-center gap-[18px] max-[767px]:flex-wrap max-[767px]:gap-2">
             <button
               className="h-8 rounded-lg border border-app-border-strong bg-app-input px-3 text-[10px] font-semibold text-app-muted hover:border-app-accent hover:text-app-accent disabled:cursor-wait disabled:opacity-60"

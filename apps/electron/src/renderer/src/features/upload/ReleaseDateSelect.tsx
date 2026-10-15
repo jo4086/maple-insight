@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import { ArrowIcon } from '../../components/ui/ArrowIcon'
+
 import {
   getReleaseDateDayCount,
   parseReleaseDate,
@@ -68,12 +70,10 @@ export function ReleaseDateSelect({
                 </option>
               ))}
             </select>
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-base font-bold text-app-accent"
-            >
-              ▾
-            </span>
+            <ArrowIcon
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-app-accent"
+              direction="down"
+            />
           </span>
         ))}
         <button

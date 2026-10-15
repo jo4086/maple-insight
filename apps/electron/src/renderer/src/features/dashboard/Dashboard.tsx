@@ -1,3 +1,4 @@
+import { ArrowIcon } from '../../components/ui/ArrowIcon'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { StatusDot } from '../../components/ui/StatusDot'
 import { VersionSelect } from '../../components/ui/VersionSelect'
@@ -39,7 +40,7 @@ export function Dashboard({
             현재 버전은 모든 데이터 탭에 적용되고, 비교 버전은 diff 기준으로 사용됩니다.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 max-[640px]:flex-col max-[640px]:items-stretch">
           <VersionSelect
             label="비교 버전"
             value={compareVersion}
@@ -47,7 +48,12 @@ export function Dashboard({
             excludedVersion={currentVersion}
             onChange={changeCompareVersion}
           />
-          <span className="text-[16px] text-app-accent">→</span>
+          <span className="grid place-items-center self-end pb-2.5 text-app-accent max-[640px]:hidden">
+            <ArrowIcon className="h-5 w-5" direction="right" />
+          </span>
+          <span className="hidden place-items-center text-app-accent max-[640px]:grid">
+            <ArrowIcon className="h-5 w-5" direction="down" />
+          </span>
           <VersionSelect
             label="현재 버전"
             value={currentVersion}
@@ -96,7 +102,10 @@ export function Dashboard({
             </span>
             <strong className="text-small font-semibold text-app-text">{label}</strong>
             {index < workflow.length - 1 && (
-              <i className="absolute top-1.5 -right-1 text-[13px] text-app-subtle not-italic">→</i>
+              <ArrowIcon
+                className="absolute top-1.5 -right-1 h-4 w-4 text-app-subtle"
+                direction="right"
+              />
             )}
           </div>
         ))}
@@ -115,7 +124,13 @@ export function Dashboard({
             <QuickAction
               badge="DIFF"
               title="버전 차이 비교"
-              detail={`${compareVersion} → ${currentVersion}`}
+              detail={
+                <span className="inline-flex items-center gap-1">
+                  {compareVersion}
+                  <ArrowIcon className="h-3.5 w-3.5" direction="right" />
+                  {currentVersion}
+                </span>
+              }
               onClick={() => onNavigate('compare')}
             />
             <QuickAction
@@ -131,7 +146,17 @@ export function Dashboard({
           <div className="grid gap-1.5">
             <StatusRow label="Electron 보안 경계" state="done" detail="완료" />
             <StatusRow label="버전 컨텍스트" state="done" detail="완료" />
-            <StatusRow label="CSV → JSON 변환" state="progress" detail="다음 단계" />
+            <StatusRow
+              label={
+                <span className="inline-flex items-center gap-1">
+                  CSV
+                  <ArrowIcon className="h-3.5 w-3.5" direction="right" />
+                  JSON 변환
+                </span>
+              }
+              state="progress"
+              detail="다음 단계"
+            />
             <StatusRow label="DB dry-run 및 승인" state="waiting" detail="대기" />
           </div>
         </section>
@@ -189,7 +214,7 @@ function QuickAction({
 }: {
   badge: string
   title: string
-  detail: string
+  detail: React.ReactNode
   onClick: () => void
 }): React.JSX.Element {
   return (
@@ -204,7 +229,7 @@ function QuickAction({
         <strong className="block text-small font-semibold">{title}</strong>
         <small className="mt-1 block text-caption text-app-muted">{detail}</small>
       </span>
-      <em className="text-[12px] text-app-subtle not-italic">→</em>
+      <ArrowIcon className="h-4 w-4 text-app-subtle" direction="right" />
     </button>
   )
 }
@@ -214,7 +239,7 @@ function StatusRow({
   state,
   detail
 }: {
-  label: string
+  label: React.ReactNode
   state: 'done' | 'progress' | 'waiting'
   detail: string
 }): React.JSX.Element {

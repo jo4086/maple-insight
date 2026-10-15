@@ -22,6 +22,13 @@ import type {
   DataValidationReportUpdate,
   DataValidationWarningAcknowledgementRequest
 } from '../shared/data-validation'
+import type { RegisteredDataVersion } from '../shared/data-versions'
+import type {
+  CompareRawDataRequest,
+  ListComparableFilesRequest,
+  RawDataComparison,
+  SaveRawDataDiffRequest
+} from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
 
 import { convertDataFile, DataFileConversionError } from './services/data-conversion'
@@ -40,6 +47,12 @@ import {
   markGameDataVersionImportFailed,
   registerGameDataVersionImport
 } from './services/game-data-version-registration'
+import {
+  compareRawData,
+  listComparableRawDataFiles,
+  openRawDataDiff,
+  saveRawDataDiff
+} from './services/raw-data-diff-service'
 import { isSelectableGameDataVersionStatus } from './services/selectable-game-data-version'
 import { classifyDataFile, type DataFileClassification } from './services/typesafe'
 
@@ -52,6 +65,11 @@ const DATA_FILE_CONVERSION_PROGRESS_CHANNEL = 'data-file:convert:progress'
 const CONVERT_DATA_DIRECTORY_CHANNEL = 'data-directory:convert'
 const DATA_DIRECTORY_CONVERSION_PROGRESS_CHANNEL = 'data-directory:convert:progress'
 const LIST_DATA_VERSIONS_CHANNEL = 'data-version:list'
+const LIST_REGISTERED_DATA_VERSIONS_CHANNEL = 'data-version:list-registered'
+const LIST_COMPARABLE_RAW_DATA_FILES_CHANNEL = 'raw-data-diff:list-comparable-files'
+const COMPARE_RAW_DATA_CHANNEL = 'raw-data-diff:compare'
+const SAVE_RAW_DATA_DIFF_CHANNEL = 'raw-data-diff:save'
+const OPEN_RAW_DATA_DIFF_CHANNEL = 'raw-data-diff:open'
 const VALIDATE_DATA_VERSION_CHANNEL = 'data-validation:run'
 const CANCEL_DATA_VALIDATION_CHANNEL = 'data-validation:cancel'
 const UPDATE_DATA_VALIDATION_WARNING_CHANNEL = 'data-validation:warning:update'
@@ -153,16 +171,32 @@ async function captureWindowScreenshot(window: BrowserWindow): Promise<Screensho
   return { path: outputPath, capturedAt }
 }
 
-async function listDataVersions(): Promise<string[]> {
+async function listRegisteredDataVersions(): Promise<RegisteredDataVersion[]> {
   try {
     const { findGameDataVersions } = await import('@maple/db/admin/game-data-version')
     const versions = await findGameDataVersions()
     return versions
       .filter(({ status }) => isSelectableGameDataVersionStatus(status))
-      .map(({ version }) => version)
+      .map(({ version, environment, releasedOn, createdAt, status }) => {
+        if (environment !== 'test' && environment !== 'production')
+          throw new Error(`Unsupported data environment: ${environment}`)
+        if (status !== 'ready' && status !== 'importing')
+          throw new Error(`Unsupported data version status: ${status}`)
+        return {
+          version,
+          environment,
+          releasedOn: releasedOn?.toISOString() ?? null,
+          createdAt: createdAt.toISOString(),
+          status
+        }
+      })
   } catch {
     throw new Error('DB 버전 목록을 불러오지 못했습니다. DB 실행 상태와 DATABASE_URL을 확인하세요.')
   }
+}
+
+async function listDataVersions(): Promise<string[]> {
+  return (await listRegisteredDataVersions()).map(({ version }) => version)
 }
 
 async function readDataFilePreview(filePath: string): Promise<string> {
@@ -219,10 +253,57 @@ function isDataValidationRequest(value: unknown): value is DataValidationRequest
   )
 }
 
+function isRawDataDiffRequest(value: unknown): value is CompareRawDataRequest {
+  if (!value || typeof value !== 'object') return false
+  const request = value as Partial<CompareRawDataRequest>
+  return (
+    typeof request.baseVersion === 'string' &&
+    /^\d+\.\d+\.\d+$/.test(request.baseVersion) &&
+    typeof request.compareVersion === 'string' &&
+    /^\d+\.\d+\.\d+$/.test(request.compareVersion) &&
+    request.baseVersion !== request.compareVersion &&
+    typeof request.filename === 'string' &&
+    [
+      'ms_job.json',
+      'ms_skill.json',
+      'ms_skillH.json',
+      'ms_skillCommon.json',
+      'ms_skillLevel.json'
+    ].includes(request.filename)
+  )
+}
+
+function isListComparableRawDataFilesRequest(value: unknown): value is ListComparableFilesRequest {
+  if (!value || typeof value !== 'object') return false
+  const request = value as Partial<ListComparableFilesRequest>
+  return (
+    typeof request.baseVersion === 'string' &&
+    /^\d+\.\d+\.\d+$/.test(request.baseVersion) &&
+    typeof request.compareVersion === 'string' &&
+    /^\d+\.\d+\.\d+$/.test(request.compareVersion) &&
+    request.baseVersion !== request.compareVersion
+  )
+}
+
+function isSaveRawDataDiffRequest(value: unknown): value is SaveRawDataDiffRequest {
+  if (!isRawDataDiffRequest(value)) return false
+  const request = value as Partial<SaveRawDataDiffRequest>
+  return (
+    typeof request.inputHash === 'string' &&
+    /^[a-f0-9]{64}$/.test(request.inputHash) &&
+    (request.replaceExisting === undefined || typeof request.replaceExisting === 'boolean')
+  )
+}
+
 function hasUnsafeReasonCharacter(value: string): boolean {
   return Array.from(value).some((character) => {
     const code = character.charCodeAt(0)
-    return (code >= 0 && code <= 8) || (code >= 11 && code <= 12) || (code >= 14 && code <= 31) || code === 127
+    return (
+      (code >= 0 && code <= 8) ||
+      (code >= 11 && code <= 12) ||
+      (code >= 14 && code <= 31) ||
+      code === 127
+    )
   })
 }
 
@@ -479,9 +560,8 @@ app.whenReady().then(() => {
       let versionImportStarted = false
 
       try {
-        const { parseGameDataReleaseDate, resolveGameDataVersion } = await import(
-          '@maple/db/game-data-version'
-        )
+        const { parseGameDataReleaseDate, resolveGameDataVersion } =
+          await import('@maple/db/game-data-version')
         const version = resolveGameDataVersion(request.targetVersion)
         if (request.releasedOn) parseGameDataReleaseDate(request.releasedOn)
         const summary = await convertDataDirectory({
@@ -670,7 +750,45 @@ app.whenReady().then(() => {
     return true
   })
 
+  ipcMain.handle(
+    LIST_COMPARABLE_RAW_DATA_FILES_CHANNEL,
+    async (_, request: unknown): Promise<string[]> => {
+      if (!isListComparableRawDataFilesRequest(request))
+        throw new Error('Raw data diff request format is invalid')
+      return listComparableRawDataFiles(resolveManagedDataRoot(), request)
+    }
+  )
+
+  ipcMain.handle(
+    COMPARE_RAW_DATA_CHANNEL,
+    async (_, request: unknown): Promise<RawDataComparison> => {
+      if (!isRawDataDiffRequest(request)) throw new Error('Raw data diff request format is invalid')
+      return compareRawData(resolveManagedDataRoot(), request)
+    }
+  )
+
+  ipcMain.handle(
+    SAVE_RAW_DATA_DIFF_CHANNEL,
+    async (
+      _,
+      request: unknown
+    ): Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }> => {
+      if (!isSaveRawDataDiffRequest(request))
+        throw new Error('Raw data diff request format is invalid')
+      return saveRawDataDiff(resolveManagedDataRoot(), request)
+    }
+  )
+
+  ipcMain.handle(
+    OPEN_RAW_DATA_DIFF_CHANNEL,
+    async (_, request: unknown): Promise<RawDataComparison | null> => {
+      if (!isRawDataDiffRequest(request)) throw new Error('Raw data diff request format is invalid')
+      return openRawDataDiff(resolveManagedDataRoot(), request)
+    }
+  )
+
   ipcMain.handle(LIST_DATA_VERSIONS_CHANNEL, listDataVersions)
+  ipcMain.handle(LIST_REGISTERED_DATA_VERSIONS_CHANNEL, listRegisteredDataVersions)
 
   createWindow()
 

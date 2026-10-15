@@ -9,6 +9,7 @@ import { OperationsView } from '../features/operations/OperationsView'
 import { formatLocalDate } from '../features/upload/release-date'
 import { UploadView } from '../features/upload/UploadView'
 import { useVersionSelection } from '../features/version/model'
+import { VersionListView } from '../features/version/VersionListView'
 import { getErrorMessage } from '../shared/lib/error-message'
 import type {
   DataDirectoryConversionProgress,
@@ -271,6 +272,13 @@ function App(): React.JSX.Element {
           onOpen={openDataDirectory}
           onConvert={convertDirectory}
           onCancelConversion={cancelConversion}
+        />
+      )}
+      {view === 'version-list' && (
+        <VersionListView
+          currentVersion={version.currentVersion}
+          registeredVersions={version.registeredVersions}
+          versionStatus={version.versionStatus}
         />
       )}
       {view === 'compare' && <CompareView {...version} />}
