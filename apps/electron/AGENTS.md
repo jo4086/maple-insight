@@ -18,21 +18,22 @@
 
 다음 문서를 참조한다.
 
-- docs/SPEC.md
-- docs/ROADMAP.md
-- docs/GOAL.md
-- docs/REVIEW.md
+- docs/SPEC/README.md 및 연결된 요구사항 문서
+- docs/ROADMAP.md 및 단계별 상세 문서
+- docs/GOAL/README.md 및 현재 Phase 목표 문서
+- docs/REVIEW.md 및 단계별 검증 기록
+- docs/ARCHITECTURE.md
 
 ## 4. Execution
 
 1. 기존 코드를 분석한다.
-2. GOAL.md에서 현재 작업을 확인한다.
-3. SPEC.md를 준수한다.
-4. ROADMAP.md의 작업 의존성을 확인한다.
+2. docs/GOAL/README.md에서 현재 Phase를 확인하고 해당 목표 문서를 읽는다.
+3. docs/SPEC/README.md에서 해당 요구사항 문서를 찾아 준수한다.
+4. docs/ROADMAP.md에서 작업 의존성과 상세 문서를 확인한다.
 5. 필요한 기능을 구현한다.
 6. 테스트 및 검증을 수행한다.
-7. REVIEW.md에 검증 결과를 기록한다.
-8. 검증을 통과하면 GOAL.md를 갱신한다.
+7. docs/REVIEW.md에서 해당 검증 기록 문서를 찾아 결과를 기록한다.
+8. 검증을 통과하면 해당 Phase 목표와 docs/GOAL/README.md의 상태를 갱신한다.
 
 ## 5. Constraints
 
