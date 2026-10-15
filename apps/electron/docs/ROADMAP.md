@@ -10,7 +10,7 @@
 
 | 단계 | 목표 문서 | 상태 |
 | --- | --- | --- |
-| [Phase 2](#phase-02) | [현재 목표](./GOAL/Phase02.md) | 진행 중 |
+| [Phase 2](#phase-02) | [검증 목표](./GOAL/Phase02.md) | 완료 |
 | [Phase 3](#phase-03) | [버전 비교](./GOAL/Phase03.md) | 대기 |
 | [Phase 4](#phase-04) | [직업·스킬·장비 편집](./GOAL/Phase04.md) | 대기 |
 | [Phase 5](#phase-05) | [DB dry-run 및 반영](./GOAL/Phase05.md) | 대기 |
@@ -71,7 +71,7 @@ Jev는 Phase 0에서 연결 기반을 마련하고, 각 단계에서 의미 기�
 <a id="phase-02"></a>
 ## Phase 02 — 검증 및 작업본
 
-**진행 중.** [상세 범위](./ROADMAP/Phase02.md) · [현재 목표](./GOAL/Phase02.md)
+**완료.** [상세 범위](./ROADMAP/Phase02.md) · [검증 목표](./GOAL/Phase02.md) · [검증 기록](./REVIEW/Phase02.md)
 
 <a id="phase-03"></a>
 ## Phase 03 — 버전 비교

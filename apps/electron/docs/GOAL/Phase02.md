@@ -2,19 +2,19 @@
 
 ## 1. 관리 원칙
 
-- 이 문서에는 현재 진행할 목표 하나만 둔다. 후속 단계의 계획은 [Phase03](./Phase03.md) ~ [Phase06](./Phase06.md)에 둔다.
+- 이 문서는 Phase 02 목표와 완료 검증 기록을 보존한다. 후속 단계 계획은 [Phase03](./Phase03.md) ~ [Phase06](./Phase06.md)에 둔다.
 - 범위가 바뀌면 구현 전에 [SPEC](../SPEC/README.md)와 [ROADMAP](../ROADMAP.md)를 먼저 검토한다.
 - 체크 항목은 구현과 검증이 모두 끝난 경우에만 완료 처리한다.
 - 검증 결과와 남은 위험은 [REVIEW](../REVIEW.md)에 기록한다.
 - 완료된 목표는 REVIEW 기록과 함께 이력으로 남기고 다음 목표로 교체한다.
 
-## 2. 현재 목표
+## 2. Phase 02 목표
 
 | 항목      | 내용                                             |
 | --------- | ------------------------------------------------ |
 | 목표 ID   | `EL-G002`                                        |
 | 이름      | 검증 및 작업본 기반 구축                         |
-| 상태      | 진행 중                                          |
+| 상태      | 완료                                             |
 | Roadmap   | [Phase 2 상세 범위](../ROADMAP/Phase02.md)                                          |
 | 선행 조건 | EL-G001 완료, 변환 결과와 manifest의 안정된 계약 |
 
@@ -90,6 +90,7 @@
 - [x] 오류와 경고 집계 구현
 - [x] 경고 확인 및 예외 사유 반영 구현
 - [x] publish 가능 상태 계산 구현
+- [x] raw `commonValue: ''` 허용 및 누락·비문자열 오류 validation 구현 (직업 목록 UI, 시스템 직업 분류, job enrichment·publish 선택은 Phase 4 범위)
 - [x] 취소와 실패 시 부분 작업본 정리
 
 ### C. 작업본 저장
@@ -119,10 +120,10 @@ UI 동작을 검증했다. 이는 실제 Electron/native IPC 검증을 뜻하지
 - [x] 경고 확인과 예외 사유 테스트
 - [x] 결정론적 작업본 생성 테스트
 - [x] 취소 및 실패 정리 테스트
-- [ ] 실제 production 대용량 입력의 renderer 응답성 및 취소 검증
-- [ ] 실제 Electron/native IPC에서 run/progress/cancel과 경고 저장 검증
-- [ ] class 외 도메인 미지원 차단과 향후 validator coverage 검증
-- [ ] 검증 실행 이력의 식별자·입력 해시·시각·상태·처리 건수·issue 요약과 비밀값 제외 검증 (`LOG-006`)
+- [x] 실제 production 대용량 입력의 renderer 응답성 및 취소 검증
+- [x] 실제 Electron/native IPC에서 run/progress/cancel과 경고 저장 검증
+- [x] class 외 도메인 미지원 차단과 지원하는 파일별 validator coverage 검증
+- [x] 검증 실행 이력의 식별자·입력 해시·시각·상태·처리 건수·issue 요약과 비밀값 제외 검증 (`LOG-006`)
 
 ## 8. 완료 조건
 
@@ -134,10 +135,10 @@ UI 동작을 검증했다. 이는 실제 Electron/native IPC 검증을 뜻하지
 - [x] Jev 결과가 결정론적 validation을 대체하지 않는다.
 - [x] node/web typecheck, 테스트, lint와 production build가 통과한다.
 - [x] 검증 결과와 잔여 위험이 [REVIEW](../REVIEW.md)에 기록되어 있다.
-- [ ] 실제 Electron/native IPC 검증이 [SPEC §12.8](../SPEC/05-platform-status.md)을 충족한다.
-- [ ] production 크기 입력 응답성·취소 검증이 [SPEC §12.9](../SPEC/05-platform-status.md)를 충족한다.
-- [ ] class 외 도메인 차단·coverage 검증이 [SPEC §12.10](../SPEC/05-platform-status.md)을 충족한다.
-- [ ] 검증 실행 이력이 `LOG-006`의 필드·비밀값 제외 조건을 충족한다.
+- [x] 실제 Electron/native IPC 검증이 [SPEC §12.8](../SPEC/05-platform-status.md)을 충족한다.
+- [x] production 크기 입력 응답성·취소 검증이 [SPEC §12.9](../SPEC/05-platform-status.md)를 충족한다.
+- [x] 미지원 도메인 차단·지원 파일별 coverage 검증이 [SPEC §12.10](../SPEC/05-platform-status.md)을 충족한다.
+- [x] 검증 실행 이력이 `LOG-006`의 필드·비밀값 제외 조건을 충족한다.
 
 ## 9. 현재 기준선
 
@@ -153,7 +154,7 @@ UI 동작을 검증했다. 이는 실제 Electron/native IPC 검증을 뜻하지
 - CSV 파일마다 도메인과 필드 구조가 달라 validator 경계가 불명확해질 수 있다.
 - 작업본 전체 복사는 대용량 버전에서 저장 공간을 과도하게 사용할 수 있다.
 - 정규화가 원본 의미를 바꾸지 않는다는 기준을 도메인별로 정의해야 한다.
-- 경고 확인·예외 사유는 report와 workspace manifest에 저장한다. 두 파일의 저장·복구가 모두 실패할 때의 불일치 처리와 이후 작업 이력 연결은 남았다.
+- report와 workspace manifest 갱신이 중단되면 경고 변경을 차단하고 재검증으로 작업본을 복구한다. 여러 운영 프로세스의 동일 데이터 루트 동시 쓰기와 앱 재시작 후 편집 세션 복구는 이후 단계의 범위다.
 
 ## 11. 후속 계획 경계
 
@@ -161,5 +162,4 @@ UI 동작을 검증했다. 이는 실제 Electron/native IPC 검증을 뜻하지
   [Phase 05 — DB 반영](./Phase05.md), [Phase 06 — 생성](./Phase06.md)은 계획 문서다.
   단계별 범위는 [ROADMAP](../ROADMAP.md), 요구사항은 [SPEC](../SPEC/README.md), 저장 경계는 [아키텍처](../ARCHITECTURE.md)에 연결한다.
 - 이 후속 계획은 `EL-G002`의 상태와 완료 체크를 바꾸지 않는다.
-- 실제 Electron IPC와 대용량 데이터 검증, class 외 validator coverage가 남아 있으므로 현재 목표는
-  계속 진행 중이다.
+- 실제 Electron IPC, production 크기 입력과 지원하는 여섯 파일 검증 결과는 [REVIEW](../REVIEW/Phase02.md)에 기록했다. 새 파일·도메인은 validator가 없으면 오류로 차단하며 별도 범위로 추가한다.

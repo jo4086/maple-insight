@@ -1,6 +1,6 @@
 # Phase 03 — 버전별 원본 JSON 비교
 
-**상태: 대기.** 현재 목표는 [Phase 02](./Phase02.md)다. Phase 02 검증이 완료되고 [REVIEW](../REVIEW.md)에 기록된 뒤 착수한다. 이 문서의 체크박스는 계획이며 완료 표시가 아니다.
+**상태: 대기.** [Phase 02](./Phase02.md)는 검증을 마쳤다. 이 문서는 다음 단계 계획이며 아직 착수하지 않았고, 체크박스는 완료 표시가 아니다.
 
 관련 문서:
 - [ROADMAP — Phase 3 상세 범위](../ROADMAP/Phase03.md) · [단계 목록](../ROADMAP.md#phase-03)

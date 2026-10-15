@@ -91,3 +91,32 @@ UI, 실제 도메인 validator와 대용량 검증을 완료하기 전에는 종
 - 다음 테스트는 실제 Electron에서 native IPC run/progress/cancel과 경고 저장을 확인하고, 실제 대용량 데이터와 지원하지 않는 파일에서 publish 상태와 renderer 응답성을 검증한다.
 
 Phase 2는 진행 중이다. 위 미검증 항목과 전체 도메인 coverage가 남아 완료로 선언하지 않는다.
+
+## 7. EL-G002 완료 검증 (2026-10-15)
+
+§5~6은 당시의 중간 기록으로 유지한다. 이번 판정은 아래 새 구현과 실행 결과에만 근거한다.
+
+- `ms_job.json` 및 `ms_skill.json`, `ms_skillH.json`, `ms_skillCommon.json`, `ms_skillLevel.json`, `ms_skillPVPCommon.json`의 파일별 검증을 연결했다. PVP 제외는 Phase 3 **버전 비교**에만 적용한다. 알 수 없는 파일·도메인은 여전히 오류로 차단한다.
+- 큰 스킬·직업 파일은 1,024레코드 단위로 검증하며 이벤트 루프에 제어권을 돌려 취소 요청을 받는다. JSON 읽기와 레코드 복제도 취소 가능하며 원본 JSON은 변경하지 않는다.
+- 실제 파싱 건수와 변환 manifest 건수가 다르면 검증을 실패 처리한다. 보고서 저장 직전 취소도 성공으로 기록하지 않는다.
+- report와 workspace manifest의 중단된 갱신은 경고 수정을 차단하고, 재검증 시 불변 변환 결과에서 새 작업본을 만든다. 안전한 실행 이력은 작업본 교체와 분리해 보존한다.
+- 실행 이력에는 ID, 가능한 경우 전체 입력 해시, 시작·종료 시각, 성공·실패·취소 상태, 처리 건수와 issue 집계만 기록한다. 작업본 생성 전 입력을 읽을 수 없으면 해시를 꾸며 기록하지 않고 `null`로 표시한다.
+
+### 검증 결과
+
+| 확인 | 결과 |
+| --- | --- |
+| Electron Vitest | 통과: 15개 파일, 95개 테스트; 도메인·읽기/검증/저장 직전 취소·이력·건수 불일치·복구 포함 |
+| Node/Web typecheck, Electron ESLint, production build | 통과 |
+| 실제 Electron + Playwright (모의 preload 없음) | 통과: 검증 진행, 경고 확인·해제 및 재검증 복원, 실제 취소 결과, 버전 전환 |
+| production `1.2.419` 원본 6개 파일 | 254,206레코드 검증; `ready`, `publishable=true`, 오류 0, 경고 0; PVP를 포함한 여섯 파일 지원 |
+| 데스크톱 1480×920·모바일 390×844 | 통과: 공통 화면 6곳 탐색, 버전 유지, 가로 넘침 없음 |
+| 문서 링크·공백 | 단계별 목표와 REVIEW 기록 확인; `git diff --check` 통과 |
+
+- raw `commonValue: ''`는 두 common schema에서 허용한다. 누락 또는 문자열이 아닌 값은 계속 오류다.
+- Phase 04의 직업 목록, 숫자 문자열 `800000` 이상 시스템 직업 분류, 수동 제외는 아직 미구현 계획이다. raw `jobID` `800000`은 유지한다.
+- [Phase 03](../GOAL/Phase03.md)은 대기 상태다. DB dry-run·publish와 Phase 3 diff는 아직 구현하지 않았다.
+
+### 판정
+
+[Phase 02 목표](../GOAL/Phase02.md)의 검증·작업본 범위는 완료했다. 새 도메인 validator, 여러 앱 프로세스의 동일 데이터 루트 동시 쓰기, 앱 재시작 후 편집 세션 복구는 완료 범위 밖이며 미지원 데이터는 차단한다. [Phase 03](../GOAL/Phase03.md)은 **대기** 상태로 두고 착수하지 않는다.

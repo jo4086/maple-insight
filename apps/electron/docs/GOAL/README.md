@@ -1,12 +1,12 @@
 # Electron Phase 목표 및 진행 상태
 
-현재 목표: **[Phase 02 — 검증 및 작업본](./Phase02.md), 진행 중**. Phase 00·01은 기존 검증 기록을 기준으로 완료했으며, Phase 03 이후는 계획만 작성했다.
+현재 완료 단계: **[Phase 02 — 검증 및 작업본](./Phase02.md)**. `commonValue` 빈 문자열 허용과 누락·비문자열 오류는 Phase 02 validation 완료 범위다. 다음 단계 [Phase 03 — 버전 비교](./Phase03.md)는 대기 중이며 착수하지 않았다.
 
 | 단계 | 상태 | 목표 | 검증 근거 |
 | --- | --- | --- | --- |
 | Phase 00 — 기반 | 완료 | [ROADMAP](../ROADMAP.md#phase-00) | [REVIEW](../REVIEW.md) |
 | Phase 01 — 가져오기 | 완료 | [ROADMAP](../ROADMAP.md#phase-01) | [REVIEW](../REVIEW.md) |
-| Phase 02 — 검증 | 진행 중 | [Phase02](./Phase02.md) | [REVIEW](../REVIEW.md) |
+| Phase 02 — 검증 | 완료 | [Phase02](./Phase02.md) | [검증 기록](../REVIEW/Phase02.md) |
 | Phase 03 — 비교 | 대기 | [Phase03](./Phase03.md) | 검증 전 |
 | Phase 04 — 편집 | 대기 | [Phase04](./Phase04.md) | 검증 전 |
 | Phase 05 — DB 반영 | 대기 | [Phase05](./Phase05.md) | 검증 전 |

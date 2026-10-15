@@ -8,4 +8,4 @@
 | Phase 02 — 작업본·검증 진행 기록 | [Phase02](./REVIEW/Phase02.md) |
 | Phase 03~06 설계 및 문서 분리 점검 | [Planning](./REVIEW/Planning.md) |
 
-현재 Phase 02는 **진행 중**이며 이후 기능의 구현 검증은 아직 없다. [진행 상태](./GOAL/README.md)를 따른다. 이전 날짜의 기록에 적힌 `SPEC.md`, `GOAL.md` 등은 당시 파일 이름이다.
+Phase 02는 **완료**했고 Phase 03은 **대기 중**이다. Phase 03 이후 기능의 구현 검증은 아직 없다. [진행 상태](./GOAL/README.md)를 따른다. 이전 날짜의 기록에 적힌 `SPEC.md`, `GOAL.md` 등은 당시 파일 이름이다.

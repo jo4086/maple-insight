@@ -88,7 +88,7 @@ Renderer
 
 ### 12.10 Phase 2 도메인 coverage 수용 기준
 
-class 외 미지원 도메인은 publish 가능 상태가 되지 않음을 확인하고, 새 validator마다 fixture coverage를 기록한다. Phase 2는 완료되지 않았다.
+미지원 도메인은 publish 가능 상태가 되지 않음을 확인하고, 지원하는 새 validator마다 fixture coverage를 기록한다. Phase 2의 실행 검증은 [REVIEW](../REVIEW/Phase02.md)에 남긴다.
 
 ## 13. 완료 기준
 
@@ -125,17 +125,19 @@ class 외 미지원 도메인은 publish 가능 상태가 되지 않음을 확�
 - main/preload의 Jev 파일 유형 분류 서비스 (폴더 가져오기 UI에서는 미사용)
 - `GameDataVersion` 및 버전 연관 DB 구조
 - 버전 묶음 seed의 importing/ready/failed 처리 기반
+- Phase 2 검증 작업본, class 및 5개 skill 원본 파일과 PVP 공통 파일의 도메인 검증, 경고 확인·실행 이력 저장, 진행·취소 IPC와 결과 UI
+- 실제 Electron/native IPC에서 production 크기 입력 검증·취소·재검증 확인 ([REVIEW](../REVIEW/Phase02.md))
 
 ### 부분 구현
 
 - 버전 비교 화면과 도메인 관리 화면은 UI 골격만 존재
 - DB 및 타입 작업 화면은 작업 항목만 표시
-- 데이터 업로드의 실제 DB 반영은 연결되지 않음; Phase 2 class 검증과 결과 UI는 일부 연결됨
+- 데이터 업로드의 실제 도메인 DB 반영은 연결되지 않음 (Phase 2 검증은 DB publish가 아님)
 - 작업 상태는 일부 정적 표시이며 실제 실행 상태와 연결되지 않음
 
 ### 미구현
 
-- class 외 도메인 validator coverage와 실제 Electron/native IPC 및 production 크기 응답성 검증
+- 장비·몬스터 등 현재 변환 묶음에 없는 도메인의 validator (미등록 도메인은 publish 불가 오류)
 - 버전 diff 계산과 상세 표시
 - 장비 및 직업 CRUD 작업본
 - dry-run, 승인, publish UI

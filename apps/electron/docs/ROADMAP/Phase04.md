@@ -14,6 +14,7 @@
 - 참조 관계 검증
 - 작업본 변경 이력
 - 삭제 예약과 복원
+- 시스템 직업 분류와 jobID별 선택·제외·재포함 override
 
 ### 관련 요구사항
 
@@ -33,7 +34,9 @@
 
 새 raw `jobID`·`jobName`에 영어 이름, 무기 유형, 한손/양손, 무기 상수·속도, 보조 무기, 주·부 스탯, 계열·소속을 수동 보강한다. 새 `jobID`에 스킬을 붙이고 링크, 1~4차, 하이퍼, 패시브, 5차, 6차와 active/passive/buff/summon을 관리한다. Skill·SkillH·SkillCommon·SkillLevel을 연결해 툴팁·수식을 정적 검사한다.
 
-- [ ] raw JSON 불변성과 앞자리 0 보존을 fixture로 검증한다.
+- [ ] raw JSON 불변성, 앞자리 0, 빈 `commonValue`, 누락·비문자열 `commonValue` 오류를 fixture로 검증한다.
+- [ ] 정상 사용자 1~5자리 숫자 jobID와 숫자값이 `800000` 이상인 시스템 직업을 raw·validation에 보존한다. Phase 3 불변 raw diff는 시스템 분류·선택 override와 독립적으로 raw 레코드를 보존한다. 시스템 직업은 전체 관리자/raw 토글에는 표시하고 기본 사용자 목록·job enrichment·publish 선택에서는 제외한다.
+- [ ] 일반 직업의 jobID별 수동 제외·재포함을 시스템 분류와 분리해 사유·이력과 함께 versioned workbench에 저장하고 재열기에서 되돌릴 수 있음을 검증한다. 수동 재포함은 시스템 분류를 해제하지 않고 raw도 수정·삭제하지 않는다.
 - [ ] Formula Grammar v1의 실제 raw 예제, 한도, parse-only 결과와 unsupported·invalid fixture를 검증한다. tooltip은 raw `#c공격키#`·`#c7레벨 : ...` 서식, `#cooltime`·존재하는 `#mpCon` 값 후보, 없는 `#missingValue` 참조를 각각 검증한다.
 - [ ] PVP common은 이 연결 범위에서 제외한다.
 - [ ] version·validation 입력 hash·change-set ID를 가진 edit workbench manifest와 job·skill 레코드 lifecycle을 fixture로 검증한다.
@@ -56,4 +59,4 @@
 - [ ] 여러 스크린샷의 출처와 수정 이력을 검증한다.
 - [ ] 같은 field의 충돌 후보, rejection, accepted 뒤 수동 override, 동의 만료, 동의 없는 외부 전송 거부, hash 변경 승인 무효화, 실패 publish 뒤 workbench 보존을 fixture로 검증한다.
 
-기존 잠재옵션, 직업 1.5차·2.5차, 참조 관계, 삭제 예약·복원 종료 조건도 유지한다. 스킬 유형 하위 탭은 미구현이다.
+기존 잠재옵션, 직업 1.5차·2.5차, 참조 관계, 삭제 예약·복원 종료 조건도 유지한다. 직업 목록 UI가 없으므로 시스템 직업 분류·override UI도 미구현이다. 스킬 유형 하위 탭은 미구현이다.

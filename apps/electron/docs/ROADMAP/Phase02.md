@@ -1,6 +1,6 @@
 ## 7. Phase 2 - 검증 및 작업본
 
-**상태: 진행 중**
+**상태: 완료**
 
 ### 목표
 
@@ -24,13 +24,13 @@
 
 ### 종료 조건
 
-- [ ] 공통 오류와 도메인 오류가 동일한 결과 계약으로 표시된다.
-- [ ] 오류가 있는 작업본은 다음 반영 단계로 이동할 수 없다.
-- [ ] 경고 확인 여부와 사유를 저장할 수 있다.
-- [ ] 원본, 변환 결과, 작업본을 구분하여 조회할 수 있다.
-- [ ] Jev 결과가 결정론적 validation을 대체하지 않는다.
-- [ ] 검증 실행 이력의 입력 해시·시각·상태·건수·issue 요약과 비밀값 제외를 확인한다 (`LOG-006`).
+- [x] 공통 오류와 도메인 오류가 동일한 결과 계약으로 표시된다.
+- [x] 오류가 있는 작업본은 다음 반영 단계로 이동할 수 없다.
+- [x] 경고 확인 여부와 사유를 저장할 수 있다.
+- [x] 원본, 변환 결과, 작업본을 구분하여 조회할 수 있다.
+- [x] Jev 결과가 결정론적 validation을 대체하지 않는다.
+- [x] 검증 실행 이력의 입력 해시·시각·상태·건수·issue 요약과 비밀값 제외를 확인한다 (`LOG-006`).
 
-### 현재 검증 경계 (EL-G002)
+### 검증 경계 (EL-G002)
 
-서비스·mock-preload UI 검증 기록은 [REVIEW §6](../REVIEW/Phase02.md)을 따른다. 실제 Electron/native IPC run/progress/cancel·경고 저장, production 크기 renderer 응답성·취소, class 외 미지원 도메인의 publish 차단·validator coverage, report·workspace manifest 저장 실패 복구가 남았다.
+[REVIEW §7](../REVIEW/Phase02.md)에 실제 Electron/native IPC, production 크기 6개 파일과 취소, 미지원 도메인 차단, 실행 이력과 중단된 report·manifest 저장 복구를 기록했다. 등록되지 않은 새 도메인은 오류로 차단하고, 확장 시 별도 validator를 추가한다.
