@@ -15,6 +15,11 @@ import type {
   DataDirectoryConversionResult,
   DataDirectoryInfo
 } from '../shared/types/data-file'
+import type {
+  DataValidationProgress,
+  DataValidationRunResult,
+  DataValidationWarningAcknowledgementRequest
+} from '../shared/types/data-validation'
 
 function App(): React.JSX.Element {
   const [theme, setTheme] = useState<'dark' | 'light'>(() =>
@@ -33,15 +38,37 @@ function App(): React.JSX.Element {
   const [error, setError] = useState('')
   const [screenshotMessage, setScreenshotMessage] = useState('')
   const [isCapturingScreenshot, setIsCapturingScreenshot] = useState(false)
+  const [activeValidationId, setActiveValidationId] = useState<string | null>(null)
+  const [activeValidationVersion, setActiveValidationVersion] = useState<string | null>(null)
+  const activeValidationIdRef = useRef<string | null>(null)
+  const [validationProgress, setValidationProgress] = useState<DataValidationProgress | null>(null)
+  const [validationResult, setValidationResult] = useState<DataValidationRunResult | null>(null)
   const version = useVersionSelection(setError)
+  const currentVersionRef = useRef(version.currentVersion)
   const importTargetVersion =
     directory && /^\d+\.\d+\.\d+$/.test(directory.name) ? directory.name : version.currentVersion
+
+  useEffect(() => {
+    currentVersionRef.current = version.currentVersion
+    setValidationProgress(null)
+    setValidationResult(null)
+  }, [version.currentVersion])
 
   useEffect(
     () =>
       window.api.onDataDirectoryConversionProgress((progress) => {
         if (progress.sessionId === activeConversionIdRef.current) {
           setConversionProgress(progress)
+        }
+      }),
+    []
+  )
+
+  useEffect(
+    () =>
+      window.api.onDataValidationProgress((progress) => {
+        if (progress.sessionId === activeValidationIdRef.current) {
+          setValidationProgress(progress)
         }
       }),
     []
@@ -113,6 +140,67 @@ function App(): React.JSX.Element {
   const cancelConversion = async (): Promise<void> => {
     if (!activeConversionId) return
     await window.api.cancelDataFileConversion(activeConversionId)
+  }
+
+  const validateCurrentVersion = async (): Promise<void> => {
+    if (!version.currentVersion || activeValidationIdRef.current) return
+
+    const sessionId = crypto.randomUUID()
+    const validationVersion = version.currentVersion
+    activeValidationIdRef.current = sessionId
+    setActiveValidationId(sessionId)
+    setActiveValidationVersion(validationVersion)
+    setValidationProgress(null)
+    setValidationResult(null)
+    setError('')
+
+    try {
+      const result = await window.api.validateDataVersion({
+        sessionId,
+        version: validationVersion,
+        conflictPolicy: 'reuse'
+      })
+      if (
+        activeValidationIdRef.current === sessionId &&
+        currentVersionRef.current === validationVersion
+      ) {
+        setValidationResult(result)
+      }
+    } catch (caught) {
+      if (currentVersionRef.current === validationVersion) setError(getErrorMessage(caught))
+    } finally {
+      if (activeValidationIdRef.current === sessionId) {
+        activeValidationIdRef.current = null
+        setActiveValidationId(null)
+        setActiveValidationVersion(null)
+      }
+    }
+  }
+
+  const cancelValidation = async (): Promise<void> => {
+    if (!activeValidationId) return
+    await window.api.cancelDataValidation(activeValidationId)
+  }
+
+  const updateValidationWarning = async (
+    request: Omit<DataValidationWarningAcknowledgementRequest, 'version'>
+  ): Promise<void> => {
+    if (!version.currentVersion || activeValidationIdRef.current) return
+
+    try {
+      setError('')
+      const validation = await window.api.updateDataValidationWarning({
+        ...request,
+        version: version.currentVersion
+      })
+      setValidationResult((current) =>
+        current?.status === 'success' && current.validation.version === version.currentVersion
+          ? { ...current, validation: { ...current.validation, ...validation } }
+          : current
+      )
+    } catch (caught) {
+      setError(getErrorMessage(caught))
+    }
   }
 
   const captureScreenshot = async (): Promise<void> => {
@@ -202,7 +290,18 @@ function App(): React.JSX.Element {
           onCurrentVersionChange={version.changeCurrentVersion}
         />
       )}
-      {view === 'operations' && <OperationsView currentVersion={version.currentVersion} />}
+      {view === 'operations' && (
+        <OperationsView
+          currentVersion={version.currentVersion}
+          isValidating={activeValidationId !== null}
+          activeValidationVersion={activeValidationVersion}
+          validationProgress={validationProgress}
+          validationResult={validationResult}
+          onValidate={validateCurrentVersion}
+          onCancelValidation={cancelValidation}
+          onUpdateWarning={updateValidationWarning}
+        />
+      )}
     </AppShell>
   )
 }

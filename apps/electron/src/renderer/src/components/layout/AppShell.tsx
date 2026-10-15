@@ -28,8 +28,8 @@ export function AppShell({
   children: ReactNode
 }): React.JSX.Element {
   return (
-    <div className="grid min-h-screen grid-cols-[244px_1fr]">
-      <aside className="fixed inset-y-0 left-0 z-10 flex w-[244px] flex-col border-r border-app-border bg-app-sidebar px-[17px] py-7">
+    <div className="grid min-h-screen grid-cols-[244px_1fr] max-[767px]:grid-cols-1">
+      <aside className="fixed inset-y-0 left-0 z-10 flex w-[244px] flex-col border-r border-app-border bg-app-sidebar px-[17px] py-7 max-[767px]:static max-[767px]:w-full max-[767px]:border-r-0 max-[767px]:border-b">
         <div className="flex items-center gap-3 px-2.5 pb-8">
           <div className="grid h-[38px] w-[38px] place-items-center rounded-xl bg-app-accent text-[13px] font-extrabold text-app-accent-contrast">
             MI
@@ -74,10 +74,10 @@ export function AppShell({
         </div>
       </aside>
 
-      <main className="col-start-2 min-w-0">
-        <div className="sticky top-0 z-5 flex h-[65px] items-center justify-between border-b border-app-border bg-app-header px-[34px] text-[11px] text-app-muted backdrop-blur-xl">
+      <main className="col-start-2 min-w-0 max-[767px]:col-start-auto">
+        <div className="sticky top-0 z-5 flex h-[65px] items-center justify-between border-b border-app-border bg-app-header px-[34px] text-[11px] text-app-muted backdrop-blur-xl max-[767px]:h-auto max-[767px]:flex-col max-[767px]:items-stretch max-[767px]:gap-3 max-[767px]:px-4 max-[767px]:py-3">
           <span>{navigation.find((item) => item.id === view)?.label}</span>
-          <div className="flex items-center gap-[18px]">
+          <div className="flex items-center gap-[18px] max-[767px]:flex-wrap max-[767px]:gap-2">
             <button
               className="h-8 rounded-lg border border-app-border-strong bg-app-input px-3 text-[10px] font-semibold text-app-muted hover:border-app-accent hover:text-app-accent disabled:cursor-wait disabled:opacity-60"
               disabled={isCapturingScreenshot}

@@ -35,6 +35,12 @@ type MapleAdminApi = {
     listener: (progress: DataDirectoryConversionProgress) => void
   ) => () => void
   listDataVersions: () => Promise<string[]>
+  validateDataVersion: (request: DataValidationRequest) => Promise<DataValidationRunResult>
+  cancelDataValidation: (sessionId: string) => Promise<boolean>
+  updateDataValidationWarning: (
+    request: DataValidationWarningAcknowledgementRequest
+  ) => Promise<DataValidationReportUpdate>
+  onDataValidationProgress: (listener: (progress: DataValidationProgress) => void) => () => void
   captureScreenshot: () => Promise<ScreenshotCaptureResult>
   onScreenshotCaptured: (listener: (event: ScreenshotCaptureEvent) => void) => () => void
 }
@@ -56,3 +62,10 @@ import type {
   DataFileConversionResult
 } from '../shared/data-import'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
+import type {
+  DataValidationProgress,
+  DataValidationRequest,
+  DataValidationRunResult,
+  DataValidationReportUpdate,
+  DataValidationWarningAcknowledgementRequest
+} from '../shared/data-validation'

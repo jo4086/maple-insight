@@ -6,6 +6,13 @@ import type {
   DataFileConversionProgress,
   DataFileConversionRequest
 } from '../shared/data-import'
+import type {
+  DataValidationProgress,
+  DataValidationRequest,
+  DataValidationRunResult,
+  DataValidationReportUpdate,
+  DataValidationWarningAcknowledgementRequest
+} from '../shared/data-validation'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
 
 const api = {
@@ -41,6 +48,22 @@ const api = {
     return () => ipcRenderer.removeListener('data-directory:convert:progress', handler)
   },
   listDataVersions: () => ipcRenderer.invoke('data-version:list'),
+  validateDataVersion: (request: DataValidationRequest): Promise<DataValidationRunResult> =>
+    ipcRenderer.invoke('data-validation:run', request),
+  cancelDataValidation: (sessionId: string): Promise<boolean> =>
+    ipcRenderer.invoke('data-validation:cancel', sessionId),
+  updateDataValidationWarning: (
+    request: DataValidationWarningAcknowledgementRequest
+  ): Promise<DataValidationReportUpdate> => ipcRenderer.invoke('data-validation:warning:update', request),
+  onDataValidationProgress: (
+    listener: (progress: DataValidationProgress) => void
+  ): (() => void) => {
+    const handler = (_event: Electron.IpcRendererEvent, progress: DataValidationProgress): void =>
+      listener(progress)
+
+    ipcRenderer.on('data-validation:progress', handler)
+    return () => ipcRenderer.removeListener('data-validation:progress', handler)
+  },
   captureScreenshot: (): Promise<ScreenshotCaptureResult> =>
     ipcRenderer.invoke('screenshot:capture'),
   onScreenshotCaptured: (listener: (event: ScreenshotCaptureEvent) => void): (() => void) => {
