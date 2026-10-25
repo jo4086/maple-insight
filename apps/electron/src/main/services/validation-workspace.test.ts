@@ -36,6 +36,41 @@ afterEach(async () => {
 })
 
 describe('validation workspace', () => {
+  it('uses isolated copy paths and rejects unsupported environments', async () => {
+    const dataRoot = await createDataRoot()
+    const source = join(dataRoot, 'production', '1.2.419')
+    const destination = join(dataRoot, 'copy', '1.2.600')
+    await mkdir(join(destination, 'json'), { recursive: true })
+    await writeFile(
+      join(destination, 'json', 'jobs.json'),
+      await readFile(join(source, 'json', 'jobs.json'))
+    )
+    await writeFile(
+      join(destination, 'manifest.json'),
+      JSON.stringify({
+        version: '1.2.600',
+        environment: 'copy',
+        files: [{ output: 'json/jobs.json', records: 1 }]
+      })
+    )
+    const workspace = await createValidationWorkspace({
+      dataRoot,
+      sessionId: randomUUID(),
+      version: '1.2.600',
+      environment: 'copy'
+    })
+    expect(workspace.directory).toBe(join(dataRoot, '.workspaces', 'copy', '1.2.600'))
+    expect(workspace.manifest).toMatchObject({ environment: 'copy', status: 'pending' })
+    await expect(
+      createValidationWorkspace({
+        dataRoot,
+        sessionId: randomUUID(),
+        version: '1.2.600',
+        environment: '../production' as 'copy'
+      })
+    ).rejects.toThrow('Invalid validation environment')
+  })
+
   it('creates a deterministic working copy outside the converted version directory', async () => {
     const dataRoot = await createDataRoot()
     const created = await createValidationWorkspace({

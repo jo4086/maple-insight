@@ -19,7 +19,7 @@ export type VersionContextValue = {
   versionStatus: 'loading' | 'ready' | 'error'
   changeCurrentVersion: (version: string) => void
   changeCompareVersion: (version: string) => void
-  refreshVersions: (preferredCurrentVersion?: string) => Promise<void>
+  refreshVersions: (preferredCurrentVersion?: string, propagateError?: boolean) => Promise<void>
 }
 
 export function resolveVersionSelection(
@@ -44,7 +44,7 @@ export function resolveVersionSelection(
     availableVersions.includes(previous.compareVersion) &&
     previous.compareVersion !== currentVersion
       ? previous.compareVersion
-      : (availableVersions.find((version) => version !== currentVersion) ?? currentVersion)
+      : ''
 
   return { versions: availableVersions, currentVersion, compareVersion }
 }
@@ -85,7 +85,7 @@ export function useVersionSelection(onError: (message: string) => void): Version
   }, [])
 
   const refreshVersions = useCallback(
-    async (preferredCurrentVersion?: string): Promise<void> => {
+    async (preferredCurrentVersion?: string, propagateError = false): Promise<void> => {
       const refreshId = ++refreshCount.current
       const selectionChangeCountAtStart = selectionChangeCount.current
       setVersionStatus('loading')
@@ -118,6 +118,7 @@ export function useVersionSelection(onError: (message: string) => void): Version
         if (refreshId !== refreshCount.current) return
         setVersionStatus('error')
         onError(getErrorMessage(caught))
+        if (propagateError) throw caught
       }
     },
     [onError, updateSelection]
@@ -137,10 +138,7 @@ export function useVersionSelection(onError: (message: string) => void): Version
     updateSelection({
       ...previous,
       currentVersion: version,
-      compareVersion:
-        version === previous.compareVersion
-          ? (previous.versions.find((candidate) => candidate !== version) ?? version)
-          : previous.compareVersion
+      compareVersion: version === previous.compareVersion ? '' : previous.compareVersion
     })
   }
 
@@ -150,7 +148,15 @@ export function useVersionSelection(onError: (message: string) => void): Version
     versionStatus,
     changeCurrentVersion,
     changeCompareVersion: (compareVersion) => {
-      updateSelection({ ...selectionRef.current, compareVersion })
+      const previous = selectionRef.current
+      if (
+        compareVersion !== '' &&
+        (!previous.versions.includes(compareVersion) || compareVersion === previous.currentVersion)
+      ) {
+        return
+      }
+
+      updateSelection({ ...previous, compareVersion })
     },
     refreshVersions
   }

@@ -22,7 +22,12 @@ import type {
   DataValidationReportUpdate,
   DataValidationWarningAcknowledgementRequest
 } from '../shared/data-validation'
-import type { RegisteredDataVersion } from '../shared/data-versions'
+import type {
+  CopyDataVersionRequest,
+  DeleteDataVersionRequest,
+  RegisteredDataVersion,
+  UpdateDataVersionReleaseDateRequest
+} from '../shared/data-versions'
 import type {
   CompareRawDataRequest,
   ListComparableFilesRequest,
@@ -55,6 +60,12 @@ import {
 } from './services/raw-data-diff-service'
 import { isSelectableGameDataVersionStatus } from './services/selectable-game-data-version'
 import { classifyDataFile, type DataFileClassification } from './services/typesafe'
+import {
+  cleanupIncompleteVersionCopyFiles,
+  commitVersionCopyFiles,
+  prepareVersionCopyFiles,
+  rollbackVersionCopyFiles
+} from './services/version-copy-files'
 
 const OPEN_DATA_FILE_CHANNEL = 'data-file:open'
 const OPEN_DATA_DIRECTORY_CHANNEL = 'data-directory:open'
@@ -64,6 +75,9 @@ const CANCEL_DATA_FILE_CONVERSION_CHANNEL = 'data-file:convert:cancel'
 const DATA_FILE_CONVERSION_PROGRESS_CHANNEL = 'data-file:convert:progress'
 const CONVERT_DATA_DIRECTORY_CHANNEL = 'data-directory:convert'
 const DATA_DIRECTORY_CONVERSION_PROGRESS_CHANNEL = 'data-directory:convert:progress'
+const UPDATE_DATA_VERSION_RELEASE_DATE_CHANNEL = 'data-version:update-release-date'
+const COPY_DATA_VERSION_CHANNEL = 'data-version:copy'
+const DELETE_DATA_VERSION_CHANNEL = 'data-version:delete'
 const LIST_DATA_VERSIONS_CHANNEL = 'data-version:list'
 const LIST_REGISTERED_DATA_VERSIONS_CHANNEL = 'data-version:list-registered'
 const LIST_COMPARABLE_RAW_DATA_FILES_CHANNEL = 'raw-data-diff:list-comparable-files'
@@ -83,6 +97,62 @@ const selectedDataDirectoryPaths = new Set<string>()
 const activeConversions = new Map<string, AbortController>()
 const activeValidations = new Map<string, AbortController>()
 const activeValidationVersions = new Set<string>()
+const activeVersionCopies = new Set<string>()
+let versionMutation = Promise.resolve()
+
+async function serializeVersionMutation<T>(operation: () => Promise<T>): Promise<T> {
+  const result = versionMutation.then(operation)
+  versionMutation = result.then(
+    () => undefined,
+    () => undefined
+  )
+  return result
+}
+
+function isVersion(value: unknown): value is string {
+  return (
+    typeof value === 'string' &&
+    /^\d+\.\d+\.\d+$/.test(value) &&
+    value.split('.').every((part) => Number.isSafeInteger(Number(part))) &&
+    value ===
+      value
+        .split('.')
+        .map((part) => String(Number(part)))
+        .join('.')
+  )
+}
+
+function isObject(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
+
+async function findVisibleVersion(version: string) {
+  const { findGameDataVersions } = await import('@maple/db/admin/game-data-version')
+  const row = (await findGameDataVersions()).find((item) => item.version === version)
+  if (
+    !row ||
+    !isSelectableGameDataVersionStatus(row.status) ||
+    !['test', 'production', 'copy'].includes(row.environment)
+  )
+    throw new Error(`Game data version is not available: ${version}`)
+  return row
+}
+
+async function resolveVisibleVersion(
+  version: string
+): Promise<{ version: string; environment: string }> {
+  const row = await findVisibleVersion(version)
+  return { version: row.version, environment: row.environment }
+}
+
+async function resolveValidationEnvironment(
+  version: string
+): Promise<'test' | 'production' | 'copy'> {
+  const row = await findVisibleVersion(version)
+  if (row.environment !== 'test' && row.environment !== 'production' && row.environment !== 'copy')
+    throw new Error(`Unsupported data environment: ${row.environment}`)
+  return row.environment
+}
 
 type DataFileInfo = {
   name: string
@@ -178,7 +248,7 @@ async function listRegisteredDataVersions(): Promise<RegisteredDataVersion[]> {
     return versions
       .filter(({ status }) => isSelectableGameDataVersionStatus(status))
       .map(({ version, environment, releasedOn, createdAt, status }) => {
-        if (environment !== 'test' && environment !== 'production')
+        if (environment !== 'test' && environment !== 'production' && environment !== 'copy')
           throw new Error(`Unsupported data environment: ${environment}`)
         if (status !== 'ready' && status !== 'importing')
           throw new Error(`Unsupported data version status: ${status}`)
@@ -397,7 +467,20 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+const hasSingleInstanceLock = app.requestSingleInstanceLock()
+if (!hasSingleInstanceLock) app.quit()
+if (hasSingleInstanceLock)
+  app.on('second-instance', () => {
+    const window = BrowserWindow.getAllWindows()[0]
+    if (window) {
+      if (window.isMinimized()) window.restore()
+      window.focus()
+    }
+  })
+
 app.whenReady().then(() => {
+  if (!hasSingleInstanceLock) return
+
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.maple-insight.data-studio')
 
@@ -664,7 +747,11 @@ app.whenReady().then(() => {
       }
 
       const key = conversionKey(event.sender.id, request.sessionId)
-      if (activeValidations.has(key) || activeValidationVersions.has(request.version)) {
+      if (
+        activeValidations.has(key) ||
+        activeValidationVersions.has(request.version) ||
+        activeVersionCopies.has(request.version)
+      ) {
         throw new Error('이미 실행 중인 데이터 검증 버전입니다.')
       }
 
@@ -675,13 +762,12 @@ app.whenReady().then(() => {
       event.sender.once('destroyed', abortWhenRendererCloses)
 
       try {
-        const { resolveGameDataVersion } = await import('@maple/db/game-data-version')
-        const version = resolveGameDataVersion(request.version)
+        const environment = await resolveValidationEnvironment(request.version)
         const validation = await validateDataVersion({
           dataRoot: resolveManagedDataRoot(),
           sessionId: request.sessionId,
           version: request.version,
-          environment: version.environment,
+          environment,
           conflictPolicy: request.conflictPolicy,
           signal: controller.signal,
           onProgress: (progress: DataValidationProgress) => {
@@ -718,18 +804,20 @@ app.whenReady().then(() => {
       if (!isWarningAcknowledgementRequest(request)) {
         throw new Error('경고 확인 요청 형식이 올바르지 않습니다.')
       }
-      if (activeValidationVersions.has(request.version)) {
+      if (
+        activeValidationVersions.has(request.version) ||
+        activeVersionCopies.has(request.version)
+      ) {
         throw new Error('현재 버전 검증이 끝난 뒤 경고를 확인하세요.')
       }
 
       activeValidationVersions.add(request.version)
       try {
-        const { resolveGameDataVersion } = await import('@maple/db/game-data-version')
-        const version = resolveGameDataVersion(request.version)
+        const environment = await resolveValidationEnvironment(request.version)
         return await updateValidationWarningAcknowledgement({
           dataRoot: resolveManagedDataRoot(),
           version: request.version,
-          environment: version.environment,
+          environment,
           issueId: request.issueId,
           acknowledged: request.acknowledged,
           ...(request.exceptionReason ? { exceptionReason: request.exceptionReason.trim() } : {})
@@ -755,7 +843,7 @@ app.whenReady().then(() => {
     async (_, request: unknown): Promise<string[]> => {
       if (!isListComparableRawDataFilesRequest(request))
         throw new Error('Raw data diff request format is invalid')
-      return listComparableRawDataFiles(resolveManagedDataRoot(), request)
+      return listComparableRawDataFiles(resolveManagedDataRoot(), request, resolveVisibleVersion)
     }
   )
 
@@ -763,7 +851,7 @@ app.whenReady().then(() => {
     COMPARE_RAW_DATA_CHANNEL,
     async (_, request: unknown): Promise<RawDataComparison> => {
       if (!isRawDataDiffRequest(request)) throw new Error('Raw data diff request format is invalid')
-      return compareRawData(resolveManagedDataRoot(), request)
+      return compareRawData(resolveManagedDataRoot(), request, resolveVisibleVersion)
     }
   )
 
@@ -775,7 +863,7 @@ app.whenReady().then(() => {
     ): Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }> => {
       if (!isSaveRawDataDiffRequest(request))
         throw new Error('Raw data diff request format is invalid')
-      return saveRawDataDiff(resolveManagedDataRoot(), request)
+      return saveRawDataDiff(resolveManagedDataRoot(), request, resolveVisibleVersion)
     }
   )
 
@@ -783,9 +871,112 @@ app.whenReady().then(() => {
     OPEN_RAW_DATA_DIFF_CHANNEL,
     async (_, request: unknown): Promise<RawDataComparison | null> => {
       if (!isRawDataDiffRequest(request)) throw new Error('Raw data diff request format is invalid')
-      return openRawDataDiff(resolveManagedDataRoot(), request)
+      return openRawDataDiff(resolveManagedDataRoot(), request, resolveVisibleVersion)
     }
   )
+
+  ipcMain.handle(
+    UPDATE_DATA_VERSION_RELEASE_DATE_CHANNEL,
+    async (_, request: unknown): Promise<void> => {
+      if (
+        !isObject(request) ||
+        !isVersion(request.version) ||
+        !(request.releasedOn === null || typeof request.releasedOn === 'string')
+      )
+        throw new Error('Invalid release date request')
+      const input = request as UpdateDataVersionReleaseDateRequest
+      const { parseGameDataReleaseDate } = await import('@maple/db/game-data-version')
+      if (input.releasedOn !== null) parseGameDataReleaseDate(input.releasedOn)
+      return serializeVersionMutation(async () => {
+        await findVisibleVersion(input.version)
+        const { updateGameDataVersionReleasedOn } =
+          await import('@maple/db/admin/game-data-version')
+        await updateGameDataVersionReleasedOn(input.version, input.releasedOn)
+      })
+    }
+  )
+
+  ipcMain.handle(DELETE_DATA_VERSION_CHANNEL, async (_, request: unknown): Promise<void> => {
+    if (
+      !isObject(request) ||
+      !isVersion(request.version) ||
+      request.confirmationVersion !== request.version
+    )
+      throw new Error('Invalid version deletion confirmation')
+    const input = request as DeleteDataVersionRequest
+    return serializeVersionMutation(async () => {
+      await findVisibleVersion(input.version)
+      if (activeValidationVersions.has(input.version))
+        throw new Error('Version validation is active')
+      const { softDeleteGameDataVersion } = await import('@maple/db/admin/game-data-version')
+      await softDeleteGameDataVersion(input.version)
+    })
+  })
+
+  ipcMain.handle(COPY_DATA_VERSION_CHANNEL, async (_, request: unknown): Promise<void> => {
+    if (
+      !isObject(request) ||
+      !isVersion(request.sourceVersion) ||
+      !isVersion(request.targetVersion) ||
+      request.sourceVersion === request.targetVersion
+    )
+      throw new Error('Invalid version copy request')
+    const input = request as CopyDataVersionRequest
+    return serializeVersionMutation(async () => {
+      const source = await findVisibleVersion(input.sourceVersion)
+      if (source.status !== 'ready' || activeValidationVersions.has(input.sourceVersion))
+        throw new Error('Source version must be ready and inactive')
+      activeVersionCopies.add(input.sourceVersion)
+      try {
+        const {
+          cloneGameDataVersion,
+          finalizeGameDataVersionCopy,
+          findGameDataVersions,
+          resetIncompleteGameDataVersionCopy
+        } = await import('@maple/db/admin/game-data-version')
+        const copying = (await findGameDataVersions('copying')).find(
+          ({ version }) => version === input.targetVersion
+        )
+        if (copying) {
+          if (copying.environment !== 'copy')
+            throw new Error('Version copy target is not a copy environment')
+          await cleanupIncompleteVersionCopyFiles(resolveManagedDataRoot(), input.targetVersion)
+          await resetIncompleteGameDataVersionCopy(input.targetVersion)
+        } else {
+          const existing = (await findGameDataVersions()).some(
+            ({ version }) => version === input.targetVersion
+          )
+          if (existing) throw new Error('Version copy target already exists')
+        }
+        const prepared = await prepareVersionCopyFiles({
+          dataRoot: resolveManagedDataRoot(),
+          sourceVersion: input.sourceVersion,
+          sourceEnvironment: source.environment as 'test' | 'production' | 'copy',
+          targetVersion: input.targetVersion
+        })
+        let cloned = false
+        try {
+          await cloneGameDataVersion(input.sourceVersion, input.targetVersion)
+          cloned = true
+          await commitVersionCopyFiles(prepared)
+          await finalizeGameDataVersionCopy(input.targetVersion)
+        } catch (error) {
+          try {
+            await rollbackVersionCopyFiles(prepared)
+            if (cloned) await resetIncompleteGameDataVersionCopy(input.targetVersion)
+          } catch (cleanupError) {
+            throw new AggregateError(
+              [error, cleanupError],
+              'Version copy failed and cleanup incomplete'
+            )
+          }
+          throw error
+        }
+      } finally {
+        activeVersionCopies.delete(input.sourceVersion)
+      }
+    })
+  })
 
   ipcMain.handle(LIST_DATA_VERSIONS_CHANNEL, listDataVersions)
   ipcMain.handle(LIST_REGISTERED_DATA_VERSIONS_CHANNEL, listRegisteredDataVersions)

@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { chmod, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
@@ -43,6 +44,21 @@ async function writeRaw(
   )
 }
 
+function hashStoredResult(result: unknown): string {
+  return createHash('sha256')
+    .update(
+      JSON.stringify(result, (_, value) => {
+        if (!value || typeof value !== 'object' || Array.isArray(value)) return value
+        return Object.fromEntries(
+          Object.entries(value as Record<string, unknown>).sort(([left], [right]) =>
+            left < right ? -1 : left > right ? 1 : 0
+          )
+        )
+      })
+    )
+    .digest('hex')
+}
+
 afterEach(async () => {
   await Promise.all(roots.splice(0).map((root) => rm(root, { recursive: true, force: true })))
 })
@@ -66,6 +82,30 @@ describe('raw data diff service', () => {
     await expect(
       compareRawData(root, { baseVersion, compareVersion, filename })
     ).resolves.toMatchObject({ filename, add: [changed], delete: [base], modify: [] })
+  })
+
+  it('reads copy files from stored environment regardless of patch', async () => {
+    const root = await createRoot()
+    const copyVersion = '1.2.600'
+    await mkdir(join(root, 'copy', copyVersion, 'json'), { recursive: true })
+    await writeRaw(root, baseVersion, 'ms_job.json', [{ jobID: '1' }])
+    await writeFile(join(root, 'copy', copyVersion, 'json', 'ms_job.json'), '[{"jobID":"2"}]')
+    const resolveVersion = async (
+      version: string
+    ): Promise<{ version: string; environment: string }> => ({
+      version,
+      environment: version === copyVersion ? 'copy' : 'production'
+    })
+    await expect(
+      compareRawData(
+        root,
+        { baseVersion, compareVersion: copyVersion, filename: 'ms_job.json' },
+        resolveVersion
+      )
+    ).resolves.toMatchObject({ add: [{ jobID: '2' }], delete: [{ jobID: '1' }] })
+    await expect(
+      listComparableRawDataFiles(root, { baseVersion, compareVersion: copyVersion }, resolveVersion)
+    ).resolves.toEqual(['ms_job.json'])
   })
 
   it('lists shared allowlisted files when other allowlisted files are missing', async () => {
@@ -173,6 +213,69 @@ describe('raw data diff service', () => {
 
     await writeRaw(root, compareVersion, 'ms_job.json', [{ jobID: '1', name: 'newer' }])
     await expect(openRawDataDiff(root, compared)).resolves.toEqual(compared)
+  })
+
+  it('reopens complete records, accepts legacy records, and validates optional snapshots', async () => {
+    const root = await createRoot()
+    const before = {
+      jobID: '1',
+      unchanged: { nested: { label: 'same' }, values: [1, null] },
+      removed: 'value',
+      nullable: null
+    }
+    const after = {
+      jobID: '1',
+      unchanged: { values: [1, null], nested: { label: 'same' } },
+      added: null
+    }
+    await writeRaw(root, baseVersion, 'ms_job.json', [before])
+    await writeRaw(root, compareVersion, 'ms_job.json', [after])
+    const compared = await compareRawData(root, {
+      baseVersion,
+      compareVersion,
+      filename: 'ms_job.json'
+    })
+    expect(compared.modify[0]).toMatchObject({ before, after })
+
+    await saveRawDataDiff(root, compared)
+    await expect(openRawDataDiff(root, compared)).resolves.toEqual(compared)
+
+    const storedPath = join(root, 'diff', `${baseVersion}_to_${compareVersion}`, 'ms_job.json')
+    const complete = JSON.parse(await readFile(storedPath, 'utf8'))
+    const legacy = structuredClone(complete)
+    for (const modified of legacy.modify) {
+      delete modified.before
+      delete modified.after
+    }
+    delete legacy.resultHash
+    legacy.resultHash = hashStoredResult(legacy)
+    await writeFile(storedPath, `${JSON.stringify(legacy)}\n`, 'utf8')
+    await expect(openRawDataDiff(root, compared)).resolves.toEqual({
+      ...compared,
+      modify: compared.modify.map((record) => ({
+        identity: record.identity,
+        fields: record.fields
+      }))
+    })
+
+    const invalidArtifacts = [
+      { ...structuredClone(legacy), modify: [{ ...legacy.modify[0], before }] },
+      { ...structuredClone(legacy), modify: [{ ...legacy.modify[0], after }] },
+      {
+        ...structuredClone(complete),
+        modify: [{ ...complete.modify[0], identity: { jobID: 'other' } }]
+      },
+      {
+        ...structuredClone(complete),
+        modify: [{ ...complete.modify[0], fields: [] }]
+      }
+    ]
+    for (const invalid of invalidArtifacts) {
+      delete invalid.resultHash
+      invalid.resultHash = hashStoredResult(invalid)
+      await writeFile(storedPath, `${JSON.stringify(invalid)}\n`, 'utf8')
+      await expect(openRawDataDiff(root, compared)).rejects.toThrow('Invalid saved raw data diff')
+    }
   })
 
   it('keeps existing artifact when explicit repair write fails', async () => {

@@ -13,7 +13,7 @@ export type CreateValidationWorkspaceOptions = {
   dataRoot: string
   sessionId: string
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   conflictPolicy?: ValidationWorkspaceConflictPolicy
   signal?: AbortSignal
 }
@@ -131,6 +131,9 @@ export async function createValidationWorkspace(
   options: CreateValidationWorkspaceOptions
 ): Promise<ValidationWorkspace> {
   validateIdentity(options.sessionId, options.version)
+  if (!['test', 'production', 'copy'].includes(options.environment)) {
+    throw new Error('Invalid validation environment')
+  }
   options.signal?.throwIfAborted()
 
   const versionDirectory = join(options.dataRoot, options.environment, options.version)

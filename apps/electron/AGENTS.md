@@ -23,6 +23,7 @@
 - docs/GOAL/README.md 및 현재 Phase 목표 문서
 - docs/REVIEW.md 및 단계별 검증 기록
 - docs/ARCHITECTURE.md
+- 독립 요청과 작은 개선은 docs/REQUESTS/README.md 및 해당 요청 문서
 
 ## 4. Execution
 

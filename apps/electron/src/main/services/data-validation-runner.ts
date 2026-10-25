@@ -30,7 +30,7 @@ export type ValidateDataVersionOptions = {
   dataRoot: string
   sessionId: string
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   conflictPolicy?: ValidationWorkspaceConflictPolicy
   signal?: AbortSignal
   onProgress?: (progress: DataValidationProgress) => void
@@ -60,7 +60,7 @@ class ValidationStateInconsistentError extends Error {}
 export type UpdateValidationWarningAcknowledgementOptions = {
   dataRoot: string
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   issueId: string
   acknowledged: boolean
   exceptionReason?: string
@@ -382,6 +382,12 @@ function progress(
 export async function validateDataVersion(
   options: ValidateDataVersionOptions
 ): Promise<DataValidationSummary> {
+  if (!/^\d+\.\d+\.\d+$/.test(options.version)) {
+    throw new Error('Invalid game data version')
+  }
+  if (!['test', 'production', 'copy'].includes(options.environment)) {
+    throw new Error('Invalid validation environment')
+  }
   const startedAt = new Date().toISOString()
   const runHistoryPath = validationRunHistoryPath(options)
   let workspace: Awaited<ReturnType<typeof createValidationWorkspace>> | undefined
@@ -506,6 +512,12 @@ export async function validateDataVersion(
 export async function updateValidationWarningAcknowledgement(
   options: UpdateValidationWarningAcknowledgementOptions
 ): Promise<DataValidationReportUpdate> {
+  if (
+    !/^\d+\.\d+\.\d+$/.test(options.version) ||
+    !['test', 'production', 'copy'].includes(options.environment)
+  ) {
+    throw new Error('Invalid validation identity')
+  }
   const workspacePath = join(options.dataRoot, '.workspaces', options.environment, options.version)
   const reportPath = join(workspacePath, 'validation.json')
   const manifestPath = join(workspacePath, 'workspace.json')

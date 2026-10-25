@@ -13,7 +13,12 @@ import type {
   DataValidationReportUpdate,
   DataValidationWarningAcknowledgementRequest
 } from '../shared/data-validation'
-import type { RegisteredDataVersion } from '../shared/data-versions'
+import type {
+  CopyDataVersionRequest,
+  DeleteDataVersionRequest,
+  RegisteredDataVersion,
+  UpdateDataVersionReleaseDateRequest
+} from '../shared/data-versions'
 import type {
   CompareRawDataRequest,
   ListComparableFilesRequest,
@@ -57,6 +62,12 @@ const api = {
   listDataVersions: (): Promise<string[]> => ipcRenderer.invoke('data-version:list'),
   listRegisteredDataVersions: (): Promise<RegisteredDataVersion[]> =>
     ipcRenderer.invoke('data-version:list-registered'),
+  updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:update-release-date', request),
+  copyDataVersion: (request: CopyDataVersionRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:copy', request),
+  deleteDataVersion: (request: DeleteDataVersionRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:delete', request),
   listComparableFiles: (request: ListComparableFilesRequest): Promise<string[]> =>
     ipcRenderer.invoke('raw-data-diff:list-comparable-files', request),
   compareRawData: (request: CompareRawDataRequest): Promise<RawDataComparison> =>

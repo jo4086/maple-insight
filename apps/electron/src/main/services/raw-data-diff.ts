@@ -20,6 +20,8 @@ export type RawDataFieldChange = {
 export type RawDataModifiedRecord = {
   readonly identity: Readonly<Record<string, string>>
   readonly fields: readonly RawDataFieldChange[]
+  readonly before?: RawDataRecord
+  readonly after?: RawDataRecord
 }
 
 export type RawDataDiff = {
@@ -235,7 +237,9 @@ export function diffRawData(
     if (changed.length > 0) {
       modify.push({
         identity: Object.fromEntries(fields.map((field) => [field, before.identity[field]])),
-        fields: changed
+        fields: changed,
+        before: before.record,
+        after: after.record
       })
     }
   }

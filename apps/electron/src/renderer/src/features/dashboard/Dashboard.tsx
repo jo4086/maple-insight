@@ -1,5 +1,5 @@
-import { ArrowIcon } from '../../components/ui/ArrowIcon'
-import { PageHeader } from '../../components/ui/PageHeader'
+import { ArrowRight, ArrowUpRight, ChevronRight } from 'lucide-react'
+
 import { StatusDot } from '../../components/ui/StatusDot'
 import { VersionSelect } from '../../components/ui/VersionSelect'
 import type { View } from '../navigation/model'
@@ -21,17 +21,6 @@ export function Dashboard({
 }: VersionContextValue & { onNavigate: (view: View) => void }): React.JSX.Element {
   return (
     <>
-      <PageHeader
-        eyebrow="DATA OPERATIONS"
-        title="게임 데이터 작업 공간"
-        description="원본 수집부터 변경 검수와 DB 반영까지 하나의 흐름으로 관리합니다."
-        action={
-          <button className="action-primary" onClick={() => onNavigate('upload')}>
-            새 데이터 가져오기
-          </button>
-        }
-      />
-
       <section className="mb-3.5 flex items-center justify-between gap-8 rounded-[10px] border border-app-accent-border bg-linear-to-r from-app-accent-bg to-app-surface p-5 max-[1200px]:flex-col max-[1200px]:items-start">
         <div>
           <span className="page-eyebrow">VERSION CONTEXT</span>
@@ -48,11 +37,11 @@ export function Dashboard({
             excludedVersion={currentVersion}
             onChange={changeCompareVersion}
           />
-          <span className="grid place-items-center self-end pb-2.5 text-app-accent max-[640px]:hidden">
-            <ArrowIcon className="h-5 w-5" direction="right" />
+          <span className="grid place-items-center self-end pb-2.5 text-app-muted max-[640px]:hidden">
+            <ArrowRight size={18} strokeWidth={1.75} />
           </span>
-          <span className="hidden place-items-center text-app-accent max-[640px]:grid">
-            <ArrowIcon className="h-5 w-5" direction="down" />
+          <span className="hidden place-items-center text-app-muted max-[640px]:grid">
+            <ArrowRight className="rotate-90" size={18} strokeWidth={1.75} />
           </span>
           <VersionSelect
             label="현재 버전"
@@ -60,6 +49,12 @@ export function Dashboard({
             versions={versions}
             onChange={changeCurrentVersion}
           />
+          <button
+            className="action-primary self-end max-[640px]:self-stretch"
+            onClick={() => onNavigate('upload')}
+          >
+            새 데이터 가져오기
+          </button>
         </div>
       </section>
 
@@ -102,9 +97,10 @@ export function Dashboard({
             </span>
             <strong className="text-small font-semibold text-app-text">{label}</strong>
             {index < workflow.length - 1 && (
-              <ArrowIcon
-                className="absolute top-1.5 -right-1 h-4 w-4 text-app-subtle"
-                direction="right"
+              <ChevronRight
+                className="absolute top-1.5 -right-2 text-app-muted"
+                size={16}
+                strokeWidth={1.75}
               />
             )}
           </div>
@@ -127,7 +123,7 @@ export function Dashboard({
               detail={
                 <span className="inline-flex items-center gap-1">
                   {compareVersion}
-                  <ArrowIcon className="h-3.5 w-3.5" direction="right" />
+                  <ArrowRight className="text-app-muted" size={14} strokeWidth={1.75} />
                   {currentVersion}
                 </span>
               }
@@ -150,7 +146,7 @@ export function Dashboard({
               label={
                 <span className="inline-flex items-center gap-1">
                   CSV
-                  <ArrowIcon className="h-3.5 w-3.5" direction="right" />
+                  <ArrowRight className="text-app-muted" size={14} strokeWidth={1.75} />
                   JSON 변환
                 </span>
               }
@@ -219,7 +215,7 @@ function QuickAction({
 }): React.JSX.Element {
   return (
     <button
-      className="grid grid-cols-[43px_1fr_auto] items-center gap-3 rounded-lg border-0 bg-app-surface-2 p-3 text-left text-app-text hover:bg-app-surface-hover"
+      className="group grid grid-cols-[43px_1fr_18px] items-center gap-3 rounded-lg border-0 bg-app-surface-2 p-3 text-left text-app-text hover:bg-app-surface-hover"
       onClick={onClick}
     >
       <b className="grid h-[31px] w-[35px] place-items-center rounded-md bg-app-accent-bg font-mono text-micro text-app-accent">
@@ -229,7 +225,11 @@ function QuickAction({
         <strong className="block text-small font-semibold">{title}</strong>
         <small className="mt-1 block text-caption text-app-muted">{detail}</small>
       </span>
-      <ArrowIcon className="h-4 w-4 text-app-subtle" direction="right" />
+      <ArrowUpRight
+        className="text-app-muted transition-colors group-hover:text-app-text group-focus-visible:text-app-text"
+        size={18}
+        strokeWidth={1.75}
+      />
     </button>
   )
 }

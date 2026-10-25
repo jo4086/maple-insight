@@ -49,7 +49,7 @@ export type ValidationIssueDraft = Omit<
 
 export type DataValidatorInput = {
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   file: string
   domain?: ValidationDataDomain
   records: readonly DataRecord[]
@@ -103,7 +103,7 @@ export type ValidationWorkspaceFile = {
 export type ValidationWorkspaceManifest = {
   schemaVersion: 1
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   status: ValidationWorkspaceStatus
   input: {
     manifest: string
@@ -146,7 +146,7 @@ export type ValidationReportFile = {
 export type DataValidationSummary = {
   sessionId: string
   version: string
-  environment: 'test' | 'production'
+  environment: 'test' | 'production' | 'copy'
   workspacePath: string
   status: DataValidationResult['status']
   publishable: boolean

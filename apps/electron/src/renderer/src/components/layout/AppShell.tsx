@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
 
 import { navigation, type View } from '../../features/navigation/model'
 import { StatusDot } from '../ui/StatusDot'
@@ -14,6 +15,7 @@ function viewLabel(view: View): string | undefined {
 }
 
 export function AppShell({
+  layout,
   view,
   currentVersion,
   versions,
@@ -25,6 +27,7 @@ export function AppShell({
   onToggleTheme,
   children
 }: {
+  layout: 'default' | 'workspace'
   view: View
   currentVersion: string
   versions: string[]
@@ -36,6 +39,10 @@ export function AppShell({
   onToggleTheme: () => void
   children: ReactNode
 }): React.JSX.Element {
+  const [versionExpanded, setVersionExpanded] = useState(
+    () => view === 'version-list' || view === 'compare'
+  )
+
   return (
     <div className="grid min-h-screen grid-cols-[244px_1fr] max-[767px]:grid-cols-1">
       <aside className="fixed inset-y-0 left-0 z-10 flex w-[244px] flex-col border-r border-app-border bg-app-sidebar px-[17px] py-7 max-[767px]:static max-[767px]:w-full max-[767px]:border-r-0 max-[767px]:border-b">
@@ -59,10 +66,11 @@ export function AppShell({
               return (
                 <div key={item.label}>
                   <button
-                    aria-current={view === 'version-list' ? 'page' : undefined}
-                    className={`flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                    aria-controls="version-navigation-children"
+                    aria-expanded={versionExpanded}
+                    className={`group flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
                     type="button"
-                    onClick={() => onNavigate('version-list')}
+                    onClick={() => setVersionExpanded((expanded) => !expanded)}
                   >
                     <span
                       className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
@@ -70,10 +78,18 @@ export function AppShell({
                       {item.icon}
                     </span>
                     <span>{item.label}</span>
+                    <span className="ml-auto grid h-4 w-4 shrink-0 place-items-center text-app-muted transition-colors group-hover:text-app-text group-focus-visible:text-app-text">
+                      {versionExpanded ? (
+                        <ChevronUp size={16} strokeWidth={1.75} />
+                      ) : (
+                        <ChevronDown size={16} strokeWidth={1.75} />
+                      )}
+                    </span>
                   </button>
                   <div
                     aria-label="버전 하위 탐색"
-                    className="ml-8 grid gap-1 border-l border-app-border pl-3"
+                    className={`ml-8 gap-1 border-l border-app-border pl-3 ${versionExpanded ? 'grid' : 'hidden'}`}
+                    id="version-navigation-children"
                   >
                     {item.children.map((child) => {
                       const childActive = view === child.id
@@ -166,7 +182,13 @@ export function AppShell({
             </div>
           </div>
         </div>
-        <div className="mx-auto max-w-[1240px] px-[42px] pt-[42px] pb-[76px] max-[1200px]:px-7">
+        <div
+          className={
+            layout === 'workspace'
+              ? 'h-[calc(100vh-65px)] min-h-0 w-full overflow-auto max-[767px]:h-auto max-[767px]:overflow-visible'
+              : 'mx-auto max-w-[1240px] px-[42px] pt-[42px] pb-[76px] max-[1200px]:px-7'
+          }
+        >
           {children}
         </div>
       </main>

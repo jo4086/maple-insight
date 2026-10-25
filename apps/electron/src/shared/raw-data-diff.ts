@@ -20,6 +20,8 @@ export type RawDataFieldChange = {
 export type RawDataModifiedRecord = {
   readonly identity: Readonly<Record<string, string>>
   readonly fields: readonly RawDataFieldChange[]
+  readonly before?: RawDataRecord
+  readonly after?: RawDataRecord
 }
 
 export type RawDataComparison = {

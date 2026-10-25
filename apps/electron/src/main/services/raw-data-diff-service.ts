@@ -32,7 +32,7 @@ function assertVersion(version: unknown, name: string): { version: string; envir
   if (typeof version !== 'string' || !/^\d+\.\d+\.\d+$/.test(version)) {
     throw new Error(`Invalid ${name}`)
   }
-  return resolveGameDataVersion(version)
+  return { version, environment: resolveGameDataVersion(version).environment }
 }
 
 function assertFilename(
@@ -43,14 +43,32 @@ function assertFilename(
   }
 }
 
-function assertRequestVersions(request: ListComparableFilesRequest): {
-  base: { version: string; environment: string }
-  compare: { version: string; environment: string }
-} {
-  const base = assertVersion(request.baseVersion, 'baseVersion')
-  const compare = assertVersion(request.compareVersion, 'compareVersion')
-  if (base.version === compare.version)
+type VersionLocation = { version: string; environment: string }
+type ResolveVersion = (version: string) => Promise<VersionLocation>
+
+async function assertRequestVersions(
+  request: ListComparableFilesRequest,
+  resolveVersion?: ResolveVersion
+): Promise<{ base: VersionLocation; compare: VersionLocation }> {
+  if (typeof request.baseVersion !== 'string' || !/^\d+\.\d+\.\d+$/.test(request.baseVersion))
+    throw new Error('Invalid baseVersion')
+  if (typeof request.compareVersion !== 'string' || !/^\d+\.\d+\.\d+$/.test(request.compareVersion))
+    throw new Error('Invalid compareVersion')
+  if (request.baseVersion === request.compareVersion)
     throw new Error('baseVersion and compareVersion must differ')
+  const base = resolveVersion
+    ? await resolveVersion(request.baseVersion)
+    : assertVersion(request.baseVersion, 'baseVersion')
+  const compare = resolveVersion
+    ? await resolveVersion(request.compareVersion)
+    : assertVersion(request.compareVersion, 'compareVersion')
+  if (
+    !['test', 'production', 'copy'].includes(base.environment) ||
+    !['test', 'production', 'copy'].includes(compare.environment) ||
+    base.version !== request.baseVersion ||
+    compare.version !== request.compareVersion
+  )
+    throw new Error('Invalid data version environment')
   return { base, compare }
 }
 
@@ -148,9 +166,10 @@ function hashInputs(base: Buffer, compare: Buffer): string {
 
 async function compare(
   dataRoot: string,
-  request: CompareRawDataRequest
+  request: CompareRawDataRequest,
+  resolveVersion?: ResolveVersion
 ): Promise<RawDataComparison> {
-  const { base, compare: compareVersion } = assertRequestVersions(request)
+  const { base, compare: compareVersion } = await assertRequestVersions(request, resolveVersion)
   assertFilename(request.filename)
   const baseDirectory = versionJsonDirectory(dataRoot, base.environment, base.version)
   const compareDirectory = versionJsonDirectory(
@@ -207,7 +226,12 @@ function isFieldValue(value: unknown): value is RawDataFieldValue {
 
 function isModifiedRecord(value: unknown): value is RawDataModifiedRecord {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
-  const record = value as { identity?: unknown; fields?: unknown }
+  const record = value as {
+    identity?: unknown
+    fields?: unknown
+    before?: unknown
+    after?: unknown
+  }
   return (
     Boolean(record.identity) &&
     typeof record.identity === 'object' &&
@@ -215,6 +239,8 @@ function isModifiedRecord(value: unknown): value is RawDataModifiedRecord {
     Object.values(record.identity as Record<string, unknown>).every(
       (item) => typeof item === 'string'
     ) &&
+    Object.hasOwn(record, 'before') === Object.hasOwn(record, 'after') &&
+    (!Object.hasOwn(record, 'before') || (isRecord(record.before) && isRecord(record.after))) &&
     Array.isArray(record.fields) &&
     record.fields.every((field): field is RawDataFieldChange => {
       if (!field || typeof field !== 'object') return false
@@ -228,19 +254,35 @@ function isModifiedRecord(value: unknown): value is RawDataModifiedRecord {
   )
 }
 
-function hashResult(result: RawDataComparison): string {
-  return createHash('sha256')
-    .update(
-      JSON.stringify(result, (_, value) => {
-        if (!value || typeof value !== 'object' || Array.isArray(value)) return value
-        return Object.fromEntries(
-          Object.entries(value as Record<string, unknown>).sort(([left], [right]) =>
-            left < right ? -1 : left > right ? 1 : 0
-          )
-        )
-      })
+function canonicalJson(value: unknown): string {
+  return JSON.stringify(value, (_, item) => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) return item
+    return Object.fromEntries(
+      Object.entries(item as Record<string, unknown>).sort(([left], [right]) =>
+        left < right ? -1 : left > right ? 1 : 0
+      )
     )
-    .digest('hex')
+  })
+}
+
+function hasConsistentSnapshots(filename: string, record: RawDataModifiedRecord): boolean {
+  if (!record.before || !record.after) return true
+  try {
+    const snapshotDiff = diffRawData(filename, [record.before], [record.after])
+    return (
+      snapshotDiff.add.length === 0 &&
+      snapshotDiff.delete.length === 0 &&
+      snapshotDiff.modify.length === 1 &&
+      canonicalJson(snapshotDiff.modify[0].identity) === canonicalJson(record.identity) &&
+      canonicalJson(snapshotDiff.modify[0].fields) === canonicalJson(record.fields)
+    )
+  } catch {
+    return false
+  }
+}
+
+function hashResult(result: RawDataComparison): string {
+  return createHash('sha256').update(canonicalJson(result)).digest('hex')
 }
 
 function assertStoredComparison(
@@ -265,6 +307,9 @@ function assertStoredComparison(
     typeof stored.resultHash !== 'string' ||
     !/^[a-f0-9]{64}$/.test(stored.resultHash)
   ) {
+    throw new Error('Invalid saved raw data diff')
+  }
+  if (!stored.modify.every((record) => hasConsistentSnapshots(expected.filename, record))) {
     throw new Error('Invalid saved raw data diff')
   }
   const result: RawDataComparison = {
@@ -322,9 +367,10 @@ async function withWriteLock<T>(path: string, operation: () => Promise<T>): Prom
 
 export async function listComparableRawDataFiles(
   dataRoot: string,
-  request: ListComparableFilesRequest
+  request: ListComparableFilesRequest,
+  resolveVersion?: ResolveVersion
 ): Promise<string[]> {
-  const { base, compare } = assertRequestVersions(request)
+  const { base, compare } = await assertRequestVersions(request, resolveVersion)
   const baseDirectory = versionJsonDirectory(dataRoot, base.environment, base.version)
   const compareDirectory = versionJsonDirectory(dataRoot, compare.environment, compare.version)
   await assertDirectory(dataRoot, baseDirectory)
@@ -365,14 +411,16 @@ export async function listComparableRawDataFiles(
 
 export async function compareRawData(
   dataRoot: string,
-  request: CompareRawDataRequest
+  request: CompareRawDataRequest,
+  resolveVersion?: ResolveVersion
 ): Promise<RawDataComparison> {
-  return compare(dataRoot, request)
+  return compare(dataRoot, request, resolveVersion)
 }
 
 export async function saveRawDataDiff(
   dataRoot: string,
-  request: SaveRawDataDiffRequest
+  request: SaveRawDataDiffRequest,
+  resolveVersion?: ResolveVersion
 ): Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }> {
   if (typeof request.inputHash !== 'string' || !/^[a-f0-9]{64}$/.test(request.inputHash)) {
     throw new Error('Invalid inputHash')
@@ -380,7 +428,7 @@ export async function saveRawDataDiff(
   if (request.replaceExisting !== undefined && typeof request.replaceExisting !== 'boolean') {
     throw new Error('Invalid replaceExisting')
   }
-  const result = await compare(dataRoot, request)
+  const result = await compare(dataRoot, request, resolveVersion)
   if (request.inputHash !== result.inputHash) throw new Error('Raw data input hash is stale')
   const path = outputPath(dataRoot, result.baseVersion, result.compareVersion, result.filename)
 
@@ -425,9 +473,10 @@ export async function saveRawDataDiff(
 
 export async function openRawDataDiff(
   dataRoot: string,
-  request: CompareRawDataRequest
+  request: CompareRawDataRequest,
+  resolveVersion?: ResolveVersion
 ): Promise<RawDataComparison | null> {
-  assertRequestVersions(request)
+  await assertRequestVersions(request, resolveVersion)
   assertFilename(request.filename)
   return readStoredComparison(dataRoot, request)
 }

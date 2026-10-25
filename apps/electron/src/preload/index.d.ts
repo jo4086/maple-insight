@@ -36,6 +36,9 @@ type MapleAdminApi = {
   ) => () => void
   listDataVersions: () => Promise<string[]>
   listRegisteredDataVersions: () => Promise<RegisteredDataVersion[]>
+  updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest) => Promise<void>
+  copyDataVersion: (request: CopyDataVersionRequest) => Promise<void>
+  deleteDataVersion: (request: DeleteDataVersionRequest) => Promise<void>
   listComparableFiles: (request: ListComparableFilesRequest) => Promise<string[]>
   compareRawData: (request: CompareRawDataRequest) => Promise<RawDataComparison>
   saveRawDataDiff: (
@@ -75,7 +78,12 @@ import type {
   SaveRawDataDiffRequest
 } from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
-import type { RegisteredDataVersion } from '../shared/data-versions'
+import type {
+  CopyDataVersionRequest,
+  DeleteDataVersionRequest,
+  RegisteredDataVersion,
+  UpdateDataVersionReleaseDateRequest
+} from '../shared/data-versions'
 import type {
   DataValidationProgress,
   DataValidationRequest,

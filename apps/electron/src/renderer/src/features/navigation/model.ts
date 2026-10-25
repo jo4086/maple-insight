@@ -9,7 +9,7 @@ export const navigation: NavigationItem[] = [
   { id: 'overview', label: '대시보드', icon: '01' },
   { id: 'upload', label: '데이터 업로드', icon: '02' },
   {
-    label: '버전',
+    label: '버전 관리',
     icon: '03',
     children: [
       { id: 'version-list', label: '리스트' },

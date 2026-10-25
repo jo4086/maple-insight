@@ -47,7 +47,9 @@ describe('raw data diff', () => {
               before: { kind: 'value', value: 1 },
               after: { kind: 'value', value: 2 }
             }
-          ]
+          ],
+          before: modified,
+          after: { jobID: '00003', jobName: 'after', rank: 2 }
         }
       ],
       delete: [deleted]
@@ -84,13 +86,21 @@ describe('raw data diff', () => {
     })
   })
 
-  it('represents missing fields separately from null', () => {
-    const result = diffRawData(
-      'ms_job.json',
-      [{ jobID: '00001', removed: 'value', nullable: null }],
-      [{ jobID: '00001', added: null }]
-    )
+  it('keeps complete nested records while representing missing fields separately from null', () => {
+    const before = {
+      jobID: '00001',
+      unchanged: { nested: { label: 'same' }, values: [1, null] },
+      removed: 'value',
+      nullable: null
+    }
+    const after = {
+      jobID: '00001',
+      unchanged: { values: [1, null], nested: { label: 'same' } },
+      added: null
+    }
+    const result = diffRawData('ms_job.json', [before], [after])
 
+    expect(result.modify[0]).toMatchObject({ before, after })
     expect(result.modify[0].fields).toEqual([
       {
         field: 'added',

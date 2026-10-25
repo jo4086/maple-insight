@@ -12,4 +12,6 @@
 | Phase 05 — DB 반영  | 대기 | [Phase05](./Phase05.md)           | 검증 전                           |
 | Phase 06 — 생성     | 대기 | [Phase06](./Phase06.md)           | 검증 전                           |
 
+[요청 목표](../REQUESTS/README.md)는 기존 Phase 03 완료 기록과 별개이며 수용 검증 전에는 완료로 두지 않는다.
+
 단계 완료는 구현과 검증을 모두 마친 뒤에만 표시한다. 결과는 [REVIEW](../REVIEW.md)에 기록한다. 요구사항은 [SPEC](../SPEC/README.md), 단계별 순서는 [ROADMAP](../ROADMAP.md), 설계는 [아키텍처](../ARCHITECTURE.md)를 따른다.

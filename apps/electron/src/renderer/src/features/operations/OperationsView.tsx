@@ -1,4 +1,3 @@
-import { PageHeader } from '../../components/ui/PageHeader'
 import type {
   DataValidationProgress,
   DataValidationRunResult,
@@ -47,11 +46,6 @@ export function OperationsView({
 
   return (
     <>
-      <PageHeader
-        eyebrow={`OPERATIONS · ${currentVersion}`}
-        title="DB · 타입 작업"
-        description="검증 결과를 확인한 뒤 현재 버전의 DB seed와 타입 생성을 실행합니다."
-      />
       <section className="mb-4 rounded-[9px] border border-app-border bg-app-surface p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -66,7 +60,11 @@ export function OperationsView({
               검증 취소
             </button>
           ) : (
-            <button className="action-primary" disabled={!currentVersion || isValidating} onClick={onValidate}>
+            <button
+              className="action-primary"
+              disabled={!currentVersion || isValidating}
+              onClick={onValidate}
+            >
               현재 버전 검증
             </button>
           )}
@@ -158,7 +156,9 @@ export function OperationsView({
                           {'before' in issue.value && (
                             <div>이전: {formatValue(issue.value.before)}</div>
                           )}
-                          {'after' in issue.value && <div>이후: {formatValue(issue.value.after)}</div>}
+                          {'after' in issue.value && (
+                            <div>이후: {formatValue(issue.value.after)}</div>
+                          )}
                         </div>
                       )}
                       {issue.severity === 'warning' && (

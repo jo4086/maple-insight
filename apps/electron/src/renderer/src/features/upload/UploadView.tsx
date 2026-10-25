@@ -1,4 +1,3 @@
-import { PageHeader } from '../../components/ui/PageHeader'
 import { formatBytes } from '../../shared/lib/format-bytes'
 import type {
   DataDirectoryConversionProgress,
@@ -33,11 +32,6 @@ export function UploadView({
 }): React.JSX.Element {
   return (
     <>
-      <PageHeader
-        eyebrow={`IMPORT · ${targetVersion}`}
-        title="새 데이터 가져오기"
-        description={`선택한 폴더의 CSV 파일을 ${targetVersion} 버전 작업본으로 변환합니다.`}
-      />
       <section
         className={`flex min-h-[330px] flex-col items-center justify-center rounded-xl border border-dashed p-11 text-center ${directory ? 'border-app-accent-border' : 'border-app-border-strong'} bg-[radial-gradient(circle_at_50%_45%,var(--color-app-accent-bg),var(--color-app-surface)_58%)]`}
       >

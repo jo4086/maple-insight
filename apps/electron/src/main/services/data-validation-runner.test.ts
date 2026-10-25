@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 
@@ -64,6 +64,46 @@ afterEach(async () => {
 })
 
 describe('data validation runner', () => {
+  it('validates a copied version from its copy directory without changing the source', async () => {
+    const dataRoot = await createDataRoot([{ jobID: '000', jobName: '모험의 기술' }])
+    const source = join(dataRoot, 'production', '1.2.419')
+    const copied = join(dataRoot, 'copy', '1.2.600')
+    await cp(source, copied, { recursive: true })
+    const manifestPath = join(copied, 'manifest.json')
+    const converted = JSON.parse(await readFile(manifestPath, 'utf8'))
+    await writeFile(
+      manifestPath,
+      JSON.stringify({ ...converted, version: '1.2.600', environment: 'copy' })
+    )
+
+    const result = await validateDataVersion({
+      dataRoot,
+      sessionId: randomUUID(),
+      version: '1.2.600',
+      environment: 'copy'
+    })
+    const workspacePath = join(dataRoot, '.workspaces', 'copy', '1.2.600')
+    expect(result.workspacePath).toBe(workspacePath)
+    expect(result).toMatchObject({ environment: 'copy', status: 'ready' })
+    expect(JSON.parse(await readFile(join(workspacePath, 'workspace.json'), 'utf8'))).toMatchObject(
+      {
+        version: '1.2.600',
+        environment: 'copy',
+        status: 'ready'
+      }
+    )
+    expect(
+      JSON.parse(await readFile(join(workspacePath, 'validation.json'), 'utf8'))
+    ).toMatchObject({
+      environment: 'copy',
+      status: 'ready'
+    })
+    expect(await readFile(join(source, 'manifest.json'), 'utf8')).not.toContain('1.2.600')
+    expect(await readFile(join(copied, 'json', 'ms_job.json'), 'utf8')).toBe(
+      await readFile(join(source, 'json', 'ms_job.json'), 'utf8')
+    )
+  })
+
   it('creates a workspace, validates class data and persists the report', async () => {
     const dataRoot = await createDataRoot([{ jobID: '000', jobName: '모험의 기술' }])
     const onProgress = vi.fn()

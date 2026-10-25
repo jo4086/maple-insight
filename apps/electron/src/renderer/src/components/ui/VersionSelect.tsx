@@ -1,4 +1,4 @@
-import { ArrowIcon } from './ArrowIcon'
+import { ChevronDown } from 'lucide-react'
 
 export function VersionSelect({
   label,
@@ -20,7 +20,7 @@ export function VersionSelect({
       <span className={compact ? 'text-micro font-semibold text-app-muted' : 'field-label'}>
         {label}
       </span>
-      <span className={compact ? 'relative w-[106px]' : 'relative'}>
+      <span className={compact ? 'group relative w-[106px]' : 'group relative'}>
         <select
           className={`w-full appearance-none rounded-lg border border-app-border-strong bg-app-input px-3 pr-9 font-mono font-semibold text-app-text outline-none focus:border-app-accent ${compact ? 'h-8 text-caption' : 'h-10 text-xs'}`}
           value={value}
@@ -28,15 +28,21 @@ export function VersionSelect({
           onChange={(event) => onChange(event.target.value)}
         >
           {versions.length === 0 && <option value="">버전 없음</option>}
+          {versions.length > 0 && value === '' && (
+            <option value="" disabled>
+              버전 선택
+            </option>
+          )}
           {versions.map((version) => (
             <option key={version} value={version} disabled={version === excludedVersion}>
               {version}
             </option>
           ))}
         </select>
-        <ArrowIcon
-          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-app-accent"
-          direction="down"
+        <ChevronDown
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-app-muted group-hover:text-app-text group-focus-within:text-app-text"
+          size={16}
+          strokeWidth={1.75}
         />
       </span>
     </label>

@@ -94,24 +94,34 @@ Maple Insight Data Studio는 게임 데이터 원본을 수집하고 버전별�
 - `APP-006` `SHOULD`: 현재 Electron 화면을 수동 또는 Playwright로 캡처하고 촬영 방식별 디렉터리에 저장할 수 있어야 한다.
 - `APP-007` `SHOULD`: 다크·라이트 테마를 전환할 수 있고 선택값을 앱 재시작 후에도 유지해야 한다.
 - `APP-008` `MUST`: 본문과 보조 텍스트는 각 테마 배경에서 읽을 수 있는 대비를 유지해야 한다.
-- `APP-009` `MUST`: sidebar에는 부모 항목 `버전`과 자식 항목 `리스트`, `비교`를 제공해야 한다.
-- `APP-010` `MUST`: 대시보드의 비교 방향 화살표는 두 버전 사이에서 세로 중앙에 배치해야 한다.
-- `APP-011` `MUST`: 앱이 제어하는 화살표 glyph는 충분히 굵고 잘 보여야 한다. select 화살표도 native control로 강제할 수 없는 환경을 제외하고 같은 기준을 적용해야 한다.
+- `APP-009` `MUST`: sidebar에는 접고 펼칠 수 있는 부모 항목 `버전 관리`와 자식 항목 `리스트`, `비교`를 제공해야 한다.
 
+<a id="icon-semantics"></a>
+- `APP-010` `MUST`: 대시보드의 비교 방향 화살표는 두 버전 사이에서 세로 중앙에 배치해야 한다.
+- `APP-011` `MUST`: 앱이 제어하는 방향 아이콘은 Lucide의 `ChevronRight`, `ArrowRight`, `ArrowUpRight`, `ExternalLink`, `ChevronDown`, `ChevronUp`, `ArrowLeft`, `ArrowLeftRight`만 의미에 맞게 사용하고 `strokeWidth={1.75}`와 크기 `14`, `16`, `18`, `20`만 사용해야 한다. 기본색은 muted이고 hover·keyboard focus에서 대비를 높인다. 아이콘과 label은 고정 영역을 유지하고 아이콘 전용 control은 접근 가능한 이름을 제공하여 상태 변화에도 layout shift가 없어야 한다. 이 기준은 기존의 포괄적인 "굵은 glyph" 기준을 대체하며 이벤트 처리와 데이터 계약은 변경하지 않는다. 세부 의미와 검증 조건은 [아이콘 의미 정책 요청](../REQUESTS/icon-semantics.md)을 따른다.
+
+<a id="spec-version-management"></a>
 ### 8.2 데이터 버전 관리
 
 - `VER-001` `MUST`: 버전은 `major.minor.patch` 형식으로 식별해야 한다.
 - `VER-002` `MUST`: 앱은 DB에 등록된 `ready`, `importing` 버전을 선택 목록에 표시하고
-  `failed` 버전은 제외해야 한다.
+  `copying`, `failed`, `deleted` 버전은 제외해야 한다.
 - `VER-003` `MUST`: 현재 버전 변경 시 모든 도메인 조회와 편집 컨텍스트가 함께 변경되어야 한다.
 - `VER-004` `MUST`: 비교 버전은 버전 비교 화면의 기준으로 사용해야 한다.
 - `VER-005` `SHOULD`: 두 개 이상의 버전이 있을 때 현재 버전과 비교 버전은 달라야 한다.
-- `VER-006` `MUST`: 버전 적재 상태는 최소 `importing`, `ready`, `failed`를 지원해야 한다.
+- `VER-006` `MUST`: 버전 적재 상태는 최소 `copying`, `importing`, `ready`, `failed`, `deleted`를 지원해야 한다. `copying`은 복제 중에만 사용하는 숨김 상태다.
 - `VER-007` `MUST`: 필수 데이터가 모두 검증되기 전에는 버전을 `ready`로 전환하지 않아야 한다.
 - `VER-008` `SHOULD`: 버전별 생성 시각, 완료 시각, 마지막 변경 시각을 표시해야 한다.
 - `VER-009` `SHOULD`: 버전 삭제 전 참조 데이터와 삭제 범위를 표시하고 별도 승인을 받아야 한다.
-- `VER-010` `MUST`: patch `100~299`는 test, `300~499`는 production 환경으로 자동 분류해야 한다.
+- `VER-010` `MUST`: 일반 가져오기의 patch `100~299`는 test, `300~499`는 production 환경으로 자동 분류해야 한다. 명시적 전체 복제 대상만 이 분류의 예외로 `copy` 환경을 사용한다.
 - `VER-011` `MUST`: 게임사 업데이트 날짜와 시스템 등록 시각을 별도 필드로 관리해야 한다.
-- `VER-012` `MUST`: `버전 > 리스트`는 DB 등록 `ready`, `importing` 버전만 표시하고 `failed`는 제외한다. 각 행은 버전, 게임 출시일 `releasedOn`(nullable이며 없으면 명시적으로 `미등록`), 앱 등록 시각 `createdAt`, test/production 환경과 상태를 표시한다.
-- `VER-013` `MUST`: 현재 버전 선택은 앱 재시작 뒤에도 유지하되, 시작 시 목록에 존재하고 검증된 버전만 복원한다. 저장값이 없거나 삭제·제외되었으면 유효한 fallback을 선택한다.
+- `VER-012` `MUST`: `버전 관리 > 리스트`는 DB 등록 `ready`, `importing` 버전만 표시하고 `copying`, `failed`, `deleted`는 제외한다. 각 행은 버전, 게임 출시일 `releasedOn`(nullable이며 없으면 명시적으로 `미등록`), 앱 등록 시각 `createdAt`, test/production/copy 환경과 상태를 표시한다.
+- `VER-013` `MUST`: 현재 버전 선택은 앱 재시작 뒤에도 유지하되, 시작 시 목록에 존재하고 검증된 버전만 복원한다. 저장값이 없거나 `deleted`·제외되었으면 유효한 fallback을 선택한다.
 - `VER-014` `MUST`: DB 등록 버전 목록은 관리 JSON 파일 존재 여부로 필터링하지 않는다. 원본 JSON과 diff 결과 경로 해석은 같은 승인 데이터 루트 경계를 지켜야 한다.
+
+- `VER-015` `MUST`: `버전 관리` 부모는 `리스트`·`비교` 자식 탐색을 접고 펼칠 수 있어야 한다.
+- `VER-016` `MUST`: 리스트의 nullable `releasedOn`은 행에서 직접 편집·저장할 수 있어야 한다. 유효한 달력 날짜 또는 `null`을 받고 실패 시 기존 값을 유지한다.
+- `VER-017` `MUST`: 기존 버전의 전체 버전 소유 DB 데이터와 관리 파일을 새 고유 semver로 복제한다. 대상 환경은 patch 자동 분류 예외인 `copy`이고 원본 버전·파일은 변경하지 않는다. 대상 충돌은 덮어쓰지 않으며 부분 실패는 원자적으로 롤백하거나 복구 가능 상태로 남긴다. 버전 소유 관리 파일과 검증 작업본의 입력·메타데이터는 복제하되 기존 검증 결과는 재사용하지 않는다. 두 버전의 공유 diff 산출물은 새 버전의 비교 결과가 아니므로 제외한다.
+- `VER-018` `MUST`: 명시적 확인 뒤 버전 상태만 `deleted`로 변경한다. DB 데이터와 관리 파일은 보존하며 `deleted` 버전은 활성 리스트·현재 버전 선택에서 제외한다.
+- `VER-019` `MUST`: 복제본은 `copying` 상태에서 목록에 숨기고 파일 복제 완료 뒤 `importing`으로 바꾼다. `copy` 환경 검증은 가능하지만 검증 성공만으로 DB `ready`로 자동 전환하지 않는다. 필수 적재·검증과 별도 완료 경로 전에는 `ready`가 될 수 없다. `copy`는 환경 값이고 `copying`·`importing`·`ready`·`failed`·`deleted`는 상태 값으로 서로 구분한다. 상세 범위·검증 기준은 [독립 요청](../REQUESTS/version-management.md)을 따른다.
+- `VER-020` `MUST`: `VER-016`의 날짜 수정과 `VER-017`·`VER-018`의 복제·삭제 작업은 고정 폭 영역에 정렬된 아이콘 전용 버튼을 사용해야 한다. 날짜 편집기는 table·행의 위치나 크기를 바꾸지 않는 overlay로 열리고 Enter 또는 저장 버튼으로 저장하며 Escape 또는 취소 버튼으로 취소해야 한다. 각 아이콘은 hover와 keyboard focus에서 접근 가능한 이름을 표시해야 한다. 이 요구사항은 표시·상호작용만 변경하며 기존 데이터·IPC 계약은 변경하지 않는다.

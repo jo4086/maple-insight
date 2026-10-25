@@ -9,6 +9,8 @@
 - [05 — 아키텍처, 보안, 비기능, 화면, 완료 기준, 구현 상태, 관련 문서 (§9~§15)](./05-platform-status.md)
 - [06 — Phase 3~6 추가 요구사항과 미검증 fixture (§16)](./06-phase-03-06.md)
 
+버전 관리 추가 요구사항은 [§8.2](./01-foundation.md#spec-version-management)와 [요청](../REQUESTS/README.md)을 함께 참조한다.
+
 ## 기존 명시적 앵커
 
 - `spec-diff-base` → [§8.6](./03-diff-edit.md#spec-diff-base)

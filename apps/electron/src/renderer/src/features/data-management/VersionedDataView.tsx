@@ -1,5 +1,4 @@
 import { EmptyState } from '../../components/ui/EmptyState'
-import { PageHeader } from '../../components/ui/PageHeader'
 import { VersionSelect } from '../../components/ui/VersionSelect'
 
 export function VersionedDataView({
@@ -15,25 +14,18 @@ export function VersionedDataView({
 }): React.JSX.Element {
   const isEquipment = kind === 'equipment'
   const title = isEquipment ? '장비 데이터' : '직업 데이터'
-  const description = isEquipment
-    ? '장비와 잠재옵션을 검색하고 선택한 버전의 작업본을 관리합니다.'
-    : '직업 코드와 계열, 전직 차수를 선택한 버전을 기준으로 관리합니다.'
 
   return (
     <>
-      <PageHeader
-        eyebrow={`${isEquipment ? 'EQUIPMENT' : 'CLASS'} · ${currentVersion}`}
-        title={title}
-        description={description}
-        action={
-          <VersionSelect
-            label="표시 버전"
-            value={currentVersion}
-            versions={versions}
-            onChange={onCurrentVersionChange}
-          />
-        }
-      />
+      <div className="mb-3 flex justify-end">
+        <VersionSelect
+          compact
+          label="표시 버전"
+          value={currentVersion}
+          versions={versions}
+          onChange={onCurrentVersionChange}
+        />
+      </div>
       <section className="flex items-center justify-between gap-8 rounded-md border-l-[3px] border-app-accent bg-app-accent-bg px-5 py-4">
         <div>
           <span className="block text-caption text-app-muted">현재 데이터 컨텍스트</span>
