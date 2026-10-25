@@ -6,6 +6,25 @@ import type {
   DataFileConversionProgress,
   DataFileConversionRequest
 } from '../shared/data-import'
+import type {
+  DataValidationProgress,
+  DataValidationRequest,
+  DataValidationRunResult,
+  DataValidationReportUpdate,
+  DataValidationWarningAcknowledgementRequest
+} from '../shared/data-validation'
+import type {
+  CopyDataVersionRequest,
+  DeleteDataVersionRequest,
+  RegisteredDataVersion,
+  UpdateDataVersionReleaseDateRequest
+} from '../shared/data-versions'
+import type {
+  CompareRawDataRequest,
+  ListComparableFilesRequest,
+  RawDataComparison,
+  SaveRawDataDiffRequest
+} from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
 
 const api = {
@@ -40,7 +59,42 @@ const api = {
     ipcRenderer.on('data-directory:convert:progress', handler)
     return () => ipcRenderer.removeListener('data-directory:convert:progress', handler)
   },
-  listDataVersions: () => ipcRenderer.invoke('data-version:list'),
+  listDataVersions: (): Promise<string[]> => ipcRenderer.invoke('data-version:list'),
+  listRegisteredDataVersions: (): Promise<RegisteredDataVersion[]> =>
+    ipcRenderer.invoke('data-version:list-registered'),
+  updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:update-release-date', request),
+  copyDataVersion: (request: CopyDataVersionRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:copy', request),
+  deleteDataVersion: (request: DeleteDataVersionRequest): Promise<void> =>
+    ipcRenderer.invoke('data-version:delete', request),
+  listComparableFiles: (request: ListComparableFilesRequest): Promise<string[]> =>
+    ipcRenderer.invoke('raw-data-diff:list-comparable-files', request),
+  compareRawData: (request: CompareRawDataRequest): Promise<RawDataComparison> =>
+    ipcRenderer.invoke('raw-data-diff:compare', request),
+  saveRawDataDiff: (
+    request: SaveRawDataDiffRequest
+  ): Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }> =>
+    ipcRenderer.invoke('raw-data-diff:save', request),
+  openRawDataDiff: (request: CompareRawDataRequest): Promise<RawDataComparison | null> =>
+    ipcRenderer.invoke('raw-data-diff:open', request),
+  validateDataVersion: (request: DataValidationRequest): Promise<DataValidationRunResult> =>
+    ipcRenderer.invoke('data-validation:run', request),
+  cancelDataValidation: (sessionId: string): Promise<boolean> =>
+    ipcRenderer.invoke('data-validation:cancel', sessionId),
+  updateDataValidationWarning: (
+    request: DataValidationWarningAcknowledgementRequest
+  ): Promise<DataValidationReportUpdate> =>
+    ipcRenderer.invoke('data-validation:warning:update', request),
+  onDataValidationProgress: (
+    listener: (progress: DataValidationProgress) => void
+  ): (() => void) => {
+    const handler = (_event: Electron.IpcRendererEvent, progress: DataValidationProgress): void =>
+      listener(progress)
+
+    ipcRenderer.on('data-validation:progress', handler)
+    return () => ipcRenderer.removeListener('data-validation:progress', handler)
+  },
   captureScreenshot: (): Promise<ScreenshotCaptureResult> =>
     ipcRenderer.invoke('screenshot:capture'),
   onScreenshotCaptured: (listener: (event: ScreenshotCaptureEvent) => void): (() => void) => {

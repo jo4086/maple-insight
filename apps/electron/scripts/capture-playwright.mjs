@@ -13,11 +13,14 @@ const outputDirectory = path.join(repositoryRoot, 'screenshots', 'playwright', '
 const viewLabels = {
   overview: '대시보드',
   upload: '데이터 업로드',
-  compare: '버전 비교',
+  'version-list': '리스트',
+  compare: '비교',
   equipment: '장비 데이터',
   class: '직업 데이터',
   operations: 'DB · 타입 작업'
 }
+
+const viewsWithoutPageTitle = new Set(['overview', 'upload', 'equipment', 'class', 'operations'])
 
 function getTargetViews() {
   if (process.argv.includes('--all')) return Object.keys(viewLabels)
@@ -63,10 +66,10 @@ async function launchElectron(profileDirectory, environment = {}) {
   })
 }
 
-async function getFirstWindow(electronApp) {
+async function getFirstWindow(electronApp, mobile) {
   const page = await electronApp.firstWindow()
   await page.waitForLoadState('domcontentloaded')
-  await page.setViewportSize({ width: 1480, height: 920 })
+  await page.setViewportSize(mobile ? { width: 390, height: 844 } : { width: 1480, height: 920 })
   return page
 }
 
@@ -78,6 +81,106 @@ async function applyTheme(page, theme) {
   await page.waitForFunction((expectedTheme) => {
     return document.documentElement.dataset.theme === expectedTheme
   }, theme)
+}
+
+async function navigateToView(page, view) {
+  const navigation = page.getByRole('navigation', { name: '주 탐색' })
+  const nestedView = view === 'version-list' || view === 'compare'
+  if (nestedView) {
+    const versionNavigation = navigation.getByRole('button', { name: /버전 관리/ })
+    if ((await versionNavigation.getAttribute('aria-expanded')) !== 'true') {
+      await versionNavigation.click()
+    }
+  }
+
+  const navigationButton = navigation.getByRole('button', {
+    name: viewLabels[view],
+    exact: nestedView
+  })
+  await navigationButton.click()
+  await page.waitForFunction(
+    ({ label }) =>
+      [...document.querySelectorAll('button')].some(
+        (button) =>
+          button.textContent?.trim().endsWith(label) &&
+          button.getAttribute('aria-current') === 'page'
+      ),
+    { label: viewLabels[view] }
+  )
+}
+
+async function verifyView(page, view, mobile) {
+  if (viewsWithoutPageTitle.has(view)) {
+    const pageTitleCount = await page.locator('.page-title').count()
+    if (pageTitleCount !== 0) {
+      throw new Error(`${view} 화면에 큰 페이지 제목이 남아 있습니다.`)
+    }
+  }
+
+  if (view === 'version-list') {
+    await page.waitForFunction(() => {
+      const content = document.body.textContent ?? ''
+      return content.includes('등록 버전') || content.includes('버전 목록을 불러오지 못했습니다.')
+    })
+
+    const loadFailed = await page
+      .getByText('버전 목록을 불러오지 못했습니다.', { exact: true })
+      .count()
+    if (loadFailed === 0) {
+      await page.getByRole('heading', { name: '등록 버전', exact: true, level: 1 }).waitFor()
+    }
+  }
+
+  if (view === 'compare') {
+    const comparison = page
+      .getByRole('heading', { name: '비교', exact: true })
+      .locator('xpath=../../..')
+    const rightPanel = page.getByRole('heading', { name: '필터', exact: true }).locator('..')
+    const [comparisonCount, rightPanelCount] = await Promise.all([
+      comparison.count(),
+      rightPanel.count()
+    ])
+    const [borderBottomWidth, borderRightWidth] = await Promise.all([
+      comparisonCount > 0
+        ? comparison.evaluate((element) => getComputedStyle(element).borderBottomWidth)
+        : null,
+      rightPanelCount > 0
+        ? rightPanel.evaluate((element) => getComputedStyle(element).borderRightWidth)
+        : null
+    ])
+
+    if (borderBottomWidth === '0px' || borderRightWidth === '0px') {
+      throw new Error('비교 화면 패널 border 너비가 맞지 않습니다.')
+    }
+
+    if (!mobile) {
+      const [comparisonBox, rightPanelBox, documentSize] = await Promise.all([
+        comparison.boundingBox(),
+        rightPanel.boundingBox(),
+        page.evaluate(() => ({
+          width: document.documentElement.clientWidth,
+          height: document.documentElement.clientHeight
+        }))
+      ])
+
+      if (!comparisonBox || !rightPanelBox) {
+        throw new Error('비교 화면 geometry를 측정할 수 없습니다.')
+      }
+
+      const comparisonRight = comparisonBox.x + comparisonBox.width
+      const comparisonBottom = comparisonBox.y + comparisonBox.height
+      const rightPanelRight = rightPanelBox.x + rightPanelBox.width
+      const rightPanelBottom = rightPanelBox.y + rightPanelBox.height
+      if (
+        Math.abs(comparisonRight - documentSize.width) > 1 ||
+        Math.abs(comparisonBottom - documentSize.height) > 1 ||
+        Math.abs(rightPanelRight - comparisonRight) > 1 ||
+        Math.abs(rightPanelBottom - comparisonBottom) > 1
+      ) {
+        throw new Error('비교 화면의 오른쪽 또는 아래쪽 border geometry가 맞지 않습니다.')
+      }
+    }
+  }
 }
 
 async function createCancellationFixture(profileDirectory) {
@@ -146,6 +249,7 @@ async function main() {
   config({ path: path.join(repositoryRoot, 'packages', 'database', 'db', '.env') })
   await mkdir(outputDirectory, { recursive: true })
   const targetTheme = getTargetTheme()
+  const mobile = process.argv.includes('--mobile')
   const verifyThemePersistence = process.argv.includes('--verify-theme-persistence')
   const simulateDatabaseFailure = process.argv.includes('--simulate-db-failure')
   const verifyCancellation = process.argv.includes('--verify-cancellation')
@@ -168,7 +272,7 @@ async function main() {
 
   try {
     electronApp = await launchElectron(profileDirectory, launchEnvironment)
-    let page = await getFirstWindow(electronApp)
+    let page = await getFirstWindow(electronApp, mobile)
 
     if (simulateDatabaseFailure) {
       const errorNotice = page.getByRole('alert')
@@ -191,7 +295,7 @@ async function main() {
     if (targetTheme && verifyThemePersistence) {
       await electronApp.close()
       electronApp = await launchElectron(profileDirectory, launchEnvironment)
-      page = await getFirstWindow(electronApp)
+      page = await getFirstWindow(electronApp, mobile)
 
       const persistedTheme = await page.locator('html').getAttribute('data-theme')
       if (persistedTheme !== targetTheme) {
@@ -202,11 +306,14 @@ async function main() {
 
     const timestamp = createTimestamp()
     for (const view of getTargetViews()) {
-      if (view !== 'overview') {
-        await page.getByRole('button', { name: viewLabels[view] }).click()
-      }
+      await navigateToView(page, view)
+      await verifyView(page, view, mobile)
 
-      const labels = [targetTheme ?? 'current', simulateDatabaseFailure ? 'db-failure' : null]
+      const labels = [
+        targetTheme ?? 'current',
+        simulateDatabaseFailure ? 'db-failure' : null,
+        mobile ? 'mobile' : null
+      ]
         .filter(Boolean)
         .join('-')
       const outputPath = path.join(outputDirectory, `${timestamp}-${labels}-${view}.png`)

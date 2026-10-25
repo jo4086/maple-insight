@@ -1,4 +1,5 @@
-import { PageHeader } from '../../components/ui/PageHeader'
+import { ArrowRight, ArrowUpRight, ChevronRight } from 'lucide-react'
+
 import { StatusDot } from '../../components/ui/StatusDot'
 import { VersionSelect } from '../../components/ui/VersionSelect'
 import type { View } from '../navigation/model'
@@ -20,17 +21,6 @@ export function Dashboard({
 }: VersionContextValue & { onNavigate: (view: View) => void }): React.JSX.Element {
   return (
     <>
-      <PageHeader
-        eyebrow="DATA OPERATIONS"
-        title="게임 데이터 작업 공간"
-        description="원본 수집부터 변경 검수와 DB 반영까지 하나의 흐름으로 관리합니다."
-        action={
-          <button className="action-primary" onClick={() => onNavigate('upload')}>
-            새 데이터 가져오기
-          </button>
-        }
-      />
-
       <section className="mb-3.5 flex items-center justify-between gap-8 rounded-[10px] border border-app-accent-border bg-linear-to-r from-app-accent-bg to-app-surface p-5 max-[1200px]:flex-col max-[1200px]:items-start">
         <div>
           <span className="page-eyebrow">VERSION CONTEXT</span>
@@ -39,7 +29,7 @@ export function Dashboard({
             현재 버전은 모든 데이터 탭에 적용되고, 비교 버전은 diff 기준으로 사용됩니다.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 max-[640px]:flex-col max-[640px]:items-stretch">
           <VersionSelect
             label="비교 버전"
             value={compareVersion}
@@ -47,13 +37,24 @@ export function Dashboard({
             excludedVersion={currentVersion}
             onChange={changeCompareVersion}
           />
-          <span className="text-[16px] text-app-accent">→</span>
+          <span className="grid place-items-center self-end pb-2.5 text-app-muted max-[640px]:hidden">
+            <ArrowRight size={18} strokeWidth={1.75} />
+          </span>
+          <span className="hidden place-items-center text-app-muted max-[640px]:grid">
+            <ArrowRight className="rotate-90" size={18} strokeWidth={1.75} />
+          </span>
           <VersionSelect
             label="현재 버전"
             value={currentVersion}
             versions={versions}
             onChange={changeCurrentVersion}
           />
+          <button
+            className="action-primary self-end max-[640px]:self-stretch"
+            onClick={() => onNavigate('upload')}
+          >
+            새 데이터 가져오기
+          </button>
         </div>
       </section>
 
@@ -96,7 +97,11 @@ export function Dashboard({
             </span>
             <strong className="text-small font-semibold text-app-text">{label}</strong>
             {index < workflow.length - 1 && (
-              <i className="absolute top-1.5 -right-1 text-[13px] text-app-subtle not-italic">→</i>
+              <ChevronRight
+                className="absolute top-1.5 -right-2 text-app-muted"
+                size={16}
+                strokeWidth={1.75}
+              />
             )}
           </div>
         ))}
@@ -115,7 +120,13 @@ export function Dashboard({
             <QuickAction
               badge="DIFF"
               title="버전 차이 비교"
-              detail={`${compareVersion} → ${currentVersion}`}
+              detail={
+                <span className="inline-flex items-center gap-1">
+                  {compareVersion}
+                  <ArrowRight className="text-app-muted" size={14} strokeWidth={1.75} />
+                  {currentVersion}
+                </span>
+              }
               onClick={() => onNavigate('compare')}
             />
             <QuickAction
@@ -131,7 +142,17 @@ export function Dashboard({
           <div className="grid gap-1.5">
             <StatusRow label="Electron 보안 경계" state="done" detail="완료" />
             <StatusRow label="버전 컨텍스트" state="done" detail="완료" />
-            <StatusRow label="CSV → JSON 변환" state="progress" detail="다음 단계" />
+            <StatusRow
+              label={
+                <span className="inline-flex items-center gap-1">
+                  CSV
+                  <ArrowRight className="text-app-muted" size={14} strokeWidth={1.75} />
+                  JSON 변환
+                </span>
+              }
+              state="progress"
+              detail="다음 단계"
+            />
             <StatusRow label="DB dry-run 및 승인" state="waiting" detail="대기" />
           </div>
         </section>
@@ -189,12 +210,12 @@ function QuickAction({
 }: {
   badge: string
   title: string
-  detail: string
+  detail: React.ReactNode
   onClick: () => void
 }): React.JSX.Element {
   return (
     <button
-      className="grid grid-cols-[43px_1fr_auto] items-center gap-3 rounded-lg border-0 bg-app-surface-2 p-3 text-left text-app-text hover:bg-app-surface-hover"
+      className="group grid grid-cols-[43px_1fr_18px] items-center gap-3 rounded-lg border-0 bg-app-surface-2 p-3 text-left text-app-text hover:bg-app-surface-hover"
       onClick={onClick}
     >
       <b className="grid h-[31px] w-[35px] place-items-center rounded-md bg-app-accent-bg font-mono text-micro text-app-accent">
@@ -204,7 +225,11 @@ function QuickAction({
         <strong className="block text-small font-semibold">{title}</strong>
         <small className="mt-1 block text-caption text-app-muted">{detail}</small>
       </span>
-      <em className="text-[12px] text-app-subtle not-italic">→</em>
+      <ArrowUpRight
+        className="text-app-muted transition-colors group-hover:text-app-text group-focus-visible:text-app-text"
+        size={18}
+        strokeWidth={1.75}
+      />
     </button>
   )
 }
@@ -214,7 +239,7 @@ function StatusRow({
   state,
   detail
 }: {
-  label: string
+  label: React.ReactNode
   state: 'done' | 'progress' | 'waiting'
   detail: string
 }): React.JSX.Element {

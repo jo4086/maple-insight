@@ -7,7 +7,7 @@ describe('selectable game data versions', () => {
     expect(isSelectableGameDataVersionStatus(status)).toBe(true)
   })
 
-  it('excludes failed versions', () => {
-    expect(isSelectableGameDataVersionStatus('failed')).toBe(false)
+  it.each(['failed', 'copying', 'deleted'] as const)('excludes %s versions', (status) => {
+    expect(isSelectableGameDataVersionStatus(status)).toBe(false)
   })
 })

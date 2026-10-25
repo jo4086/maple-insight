@@ -26,4 +26,8 @@
   .action-primary {
     @apply min-h-[38px] rounded-lg bg-app-accent px-4 text-body font-bold text-app-accent-contrast hover:bg-app-accent-hover disabled:cursor-not-allowed disabled:opacity-60;
   }
+
+  .action-secondary {
+    @apply min-h-[38px] rounded-lg border border-app-border-strong bg-app-input px-4 text-body font-bold text-app-text hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60;
+  }
 }

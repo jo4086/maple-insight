@@ -1,3 +1,4 @@
+import { ChevronDown } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 
 import {
@@ -52,7 +53,7 @@ export function ReleaseDateSelect({
     <div className="grid gap-2">
       <div className="grid grid-cols-[1.25fr_1fr_1fr_auto] gap-2">
         {options.map(({ part, label, values, suffix }) => (
-          <span className="relative" key={part}>
+          <span className="group relative" key={part}>
             <select
               aria-label={label}
               className="h-10 w-full appearance-none rounded-lg border border-app-border-strong bg-app-input px-3 pr-8 font-mono text-body font-semibold text-app-text outline-none focus:border-app-accent disabled:cursor-not-allowed disabled:opacity-60"
@@ -68,12 +69,11 @@ export function ReleaseDateSelect({
                 </option>
               ))}
             </select>
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-base font-bold text-app-accent"
-            >
-              ▾
-            </span>
+            <ChevronDown
+              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-app-muted group-hover:text-app-text group-focus-within:text-app-text"
+              size={16}
+              strokeWidth={1.75}
+            />
           </span>
         ))}
         <button

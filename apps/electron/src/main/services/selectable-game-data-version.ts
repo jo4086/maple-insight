@@ -1,5 +1,6 @@
-export type SelectableGameDataVersionStatus = 'importing' | 'ready' | 'failed'
-export type VisibleGameDataVersionStatus = Exclude<SelectableGameDataVersionStatus, 'failed'>
+export type SelectableGameDataVersionStatus =
+  'importing' | 'ready' | 'failed' | 'copying' | 'deleted'
+export type VisibleGameDataVersionStatus = 'importing' | 'ready'
 
 export function isSelectableGameDataVersionStatus(
   status: string

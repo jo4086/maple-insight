@@ -1,184 +1,73 @@
 # Maple Insight Data Studio Review
 
-## 1. 검증 원칙
+## 화면 헤더·비교 레이아웃 정리 검증 (2026-10-25)
 
-- 구현 여부와 검증 완료 여부를 구분한다.
-- 실행 결과나 코드 근거가 없는 항목은 완료로 기록하지 않는다.
-- 외부 서비스 호출, GUI 조작 등 자동 검증하지 못한 항목은 수동 검증으로 남긴다.
-- 실패와 경고는 숨기지 않고 다음 작업에 필요한 조치와 함께 기록한다.
+- [독립 요청](./REQUESTS/page-header-layout.md#review)에 따라 대시보드·업로드·장비·직업·작업 화면의 큰 본문 헤더를 제거하고 버전 리스트 헤더는 유지했다. 비교 화면은 필터 오른쪽 세로 구분선을 표시하고 16px 하단 여백을 제거했다. 기존 Phase 03 완료 상태는 변경하지 않았다.
+- Node/Web `tsc`, 대상 ESLint·Prettier와 `electron-vite build`가 모두 exit 0이었다.
+- native `verify-comparison-workspace-playwright.mjs`가 exit 0이었다. selector, filter, 반응형 dark/light와 navigation을 확인했다.
+- native `capture-playwright.mjs --all`과 `--all --mobile`이 모두 exit 0이었다. 데스크톱 비교 화면의 구분선·하단 여백 assertion을 확인했고 데스크톱 `screenshots/playwright/electron/2026-10-25T06-51-24-698Z-current-{overview,upload,version-list,compare,equipment,class,operations}.png`와 모바일 `screenshots/playwright/electron/2026-10-25T06-56-08-389Z-current-mobile-{overview,upload,version-list,compare,equipment,class,operations}.png`를 캡처했다.
+- `verify-version-ui-playwright.mjs`는 과거 비교 제목 `버전 비교` 대기 중 timeout(exit 1)이었다. 버전 리스트·비교 이동은 위 native 검증에서 확인했으나 이 오래된 스크립트의 후속 비교 흐름은 재검증하지 않았다.
+- 브라우저 도구를 사용할 수 없어 native Electron Playwright를 사용했다. 비교 script assertion과 전체 화면 캡처 외 다른 route의 추가 상호작용은 검증하지 않았다.
 
-## 2. Phase 0 기반 검증
+## 렌더러 구조 리팩터링 (2026-10-23)
 
-### 검증 정보
+`App.tsx`의 화면 전환, 업로드, 검증, 버전 작업, 스크린샷과 테마 책임을 렌더러의 routes/pages/layouts/features/app으로 분리했다. 기존 화면 컴포넌트와 비교 결과의 화면 이동 후 유지 방식을 보존했다. React Router v7 메모리 라우터를 사용해 기존 URL 비노출 동작을 유지한다. Electron Main Process 코드는 이번 작업에서 수정하지 않았다.
 
-| 항목   | 내용                                                            |
-| ------ | --------------------------------------------------------------- |
-| 검증일 | 2026-10-06                                                      |
-| 브랜치 | `electron`                                                      |
-| 범위   | Electron 셸, 버전 조회, 파일 선택 경계, Jev 연결, renderer 보안 |
-| 결과   | 기반 검증 통과, 실제 Jev 성공 호출은 명시적 실행 전까지 보류    |
+- 검증: Node/Web TypeScript 검사, 렌더러 ESLint, 변경 파일 Prettier 검사, Vitest 21개 파일·167개 테스트, production `electron-vite build` 통과.
+- 당시 제한: 구조 리팩터링 자체의 native Electron 수동 화면 검증은 실행하지 않았다. 이후 통합 비교 작업공간의 native 검증은 아래 별도 기록에서 실행했다. 통합 `typecheck` 스크립트는 로컬 pnpm v12와 프로젝트 설정 v10의 버전 충돌로 실행되지 않아 같은 두 TypeScript 명령을 직접 실행했다.
 
-### 자동 검증 결과
+## 통합 비교 작업공간 screenshot refinement 검증 (2026-10-24)
 
-| 검증                      | 결과 | 근거                                                                 |
-| ------------------------- | ---- | -------------------------------------------------------------------- |
-| Node typecheck            | 통과 | `tsc --noEmit -p apps/electron/tsconfig.node.json --composite false` |
-| Web typecheck             | 통과 | `tsc --noEmit -p apps/electron/tsconfig.web.json --composite false`  |
-| ESLint                    | 통과 | main, preload, renderer 전체 검사                                    |
-| Production build          | 통과 | main, preload, renderer 번들 생성                                    |
-| 문서 및 소스 whitespace   | 통과 | `git diff --check -- apps/electron JEV_GUIDE.md`                     |
-| renderer 비밀값 노출      | 통과 | renderer 출력에서 `TYPESAFE_API_KEY`, `DATABASE_URL` 미검출          |
-| renderer 서버 의존성 노출 | 통과 | renderer 출력에서 `@typesafe-ai/sdk`, `@maple/db` 미검출             |
-| DB ready 버전 조회        | 통과 | 로컬 DB에서 `1.2.424` 조회                                           |
-| Jev API 키 누락 실패      | 통과 | 키가 없을 때 SDK가 요청 전 오류를 반환하며 프로세스가 종료되지 않음  |
-| IPC 파일 경로 제한        | 통과 | native dialog 선택 경로 집합과 문자열 타입을 main process에서 확인   |
-| BrowserWindow 보안 옵션   | 통과 | context isolation, sandbox 활성화, node integration 비활성화         |
+- `electron-request-3.png` 기준대로 모든 수정 카드가 단일 outline container와 반응형 before·after JSON box 두 개를 표시했다. 전체 snapshot에서는 변경되지 않은 문맥을 모두 유지하고 중첩된 변경 leaf 값만 강조했으며, 그 밖의 값은 중립 표시했다.
+- snapshot이 없는 legacy 산출물은 확인 가능한 최선의 identity와 변경 필드별 이전·이후 값만 같은 두 box에 표시했다. 추가·삭제 카드 표시는 바뀌지 않았다.
+- main·IPC·storage, 비교 알고리즘, diff 저장 형식, 선택적 snapshot, identity, 입력 hash와 저장·충돌 정책은 변경하지 않았다.
+- Node/Web TypeScript, 전체 Electron ESLint, Prettier, Vitest 21개 파일·182개 테스트와 `electron-vite` production build가 모두 exit 0이었다.
+- native `verify-comparison-workspace-playwright.mjs`가 exit 0이었다. desktop 1480×920과 mobile 390px 폭에서 각각 두 box의 가로·세로 배치를 확인했다.
+- 스크린샷: `screenshots/playwright/electron/comparison-workspace-desktop.png`, `screenshots/playwright/electron/comparison-workspace-mobile.png`.
+- 아래 field-row 형식과 이전 refinement 검증은 당시 이력으로 유지한다. MemoryRouter의 legacy `/compare-results` 직접 native 진입 제한도 그대로다.
 
-### 확인된 빌드 결과
+## 통합 비교 작업공간 후속 refinement 검증 (2026-10-24)
 
-```text
-main:     out/main/index.js
-preload:  out/preload/index.js
-renderer: out/renderer/index.html 및 assets
-```
+- 원인은 파일명별 처리가 아니라 선택적 `before`·`after` snapshot과 legacy 변경 필드에 따른 renderer 분기였다. 모든 수정 카드를 원본 identity와 변경 필드별 이전·이후 값을 보여 주는 필드 중심 형식으로 통합했다. 추가·삭제의 전체 레코드 표시는 유지했다.
+- 저장 결과 자동 열기 성공 notice `저장된 비교 결과를 열었습니다.`는 표시하지 않고 조회 실패 등 오류와 저장 충돌 표시는 유지했다. main·IPC·storage, diff 저장 형식, identity, 비교 알고리즘과 저장 정책은 변경하지 않았다.
+- Node/Web TypeScript, Electron ESLint, Prettier, Vitest 21개 파일·180개 테스트와 production build가 모두 exit 0이었다.
+- native `verify-comparison-workspace-playwright.mjs`가 exit 0이었다. `ms_job.json`·`ms_skill.json` 수정 카드, 추가·삭제 전체 레코드, 변경 유형 필터, 검색, 상단 페이지 이동, 성공 notice 부재, 오류와 충돌 표시를 확인했다.
+- 스크린샷: `screenshots/playwright/electron/comparison-workspace-desktop.png`.
+- 아래 이전 refinement와 2026-10-23의 수정 전후 전체 JSON 검증 날짜는 당시 이력으로 유지한다. MemoryRouter의 legacy `/compare-results` 직접 native 진입 제한도 그대로다.
 
-### GUI 검증 결과
+## 통합 비교 작업공간 refinement 검증 (2026-10-24)
 
-- [x] Electron 개발 앱이 실제 창으로 실행된다.
-- [x] DB 연결 성공 시 ready/importing 버전이 버전 선택기에 표시된다.
-- [x] DB 연결 실패 시 오류가 표시되고 앱 창은 유지된다.
-- [x] native dialog에서 버전 폴더를 선택하고 CSV 목록과 메타데이터를 확인한다.
-- [x] 폴더 선택 취소 시 기존 상태가 손상되지 않는다.
-- [ ] 실제 TypeSafe API 키로 Jev 파일 분류를 한 번 실행한다.
-- [x] Jev 호출 실패 후에도 파일 선택과 로컬 변환 기능을 사용할 수 있다.
+- Node/Web `tsc`, 전체 Electron ESLint, Prettier, Vitest 21개 파일·178개 테스트와 production build가 모두 exit 0이었다.
+- native script가 exit 0이었다. 초기 기준 버전·파일 dropdown 미선택과 batch 비활성화, 저장 결과 자동 열기, 선택 변경 초기화, 저장 결과 없음, 지연 응답 race 차단을 확인했다.
+- desktop/mobile screenshot과 dark/light를 확인했다. 다섯 파일 batch와 충돌 처리, 파일 전환 뒤 충돌 유지, 지연된 교체 완료 뒤 Cancel 숨김을 확인했다.
+- legacy `/compare-results` 직접 native 진입만 미검증이며 새 UI 변경 범위 밖이다. 2026-10-23 기록과 기존 Phase 03 이력은 그대로 유지한다.
 
-### 잔여 위험
+## 통합 비교 작업공간 (2026-10-23)
 
-1. 실제 Jev API 요청은 비용과 외부 전송이 발생하므로 자동 실행하지 않았다.
-2. native dialog 동작은 GUI 세션에서 수동 확인해야 한다.
-3. 현재 `pnpm --version`이 일부 에이전트 세션에서 응답 없이 정지한다.
-4. pnpm 정지로 인해 검증은 설치된 `tsc`, `eslint`, `electron-vite` 바이너리를 직접 실행했다.
-5. ESLint 실행 시 루트 `package.json`의 module type 관련 성능 경고가 발생하지만 lint 오류는 없다.
+- Node/Web `tsc`, Electron ESLint, Vitest 21개 파일·173개 테스트, `electron-vite build`가 모두 exit 0이었다.
+- native `verify-comparison-workspace-playwright.mjs`가 exit 0이었다. 1480×920과 390×844 viewport에서 다섯 저장 산출물, 파일 전환, 검색·필터, 상·하단 페이지 이동, 수정 전후 전체 JSON과 중첩 변경 강조를 확인했다.
+- 왼쪽 파일 목록과 가운데 결과 body의 독립 스크롤, dashboard·버전 리스트 이동 후 결과 유지, 같은 입력 산출물 재사용을 확인했다.
+- 한 파일 누락 시 나머지 네 파일 저장과 실패 파일 산출물 부재를 확인했다. 다른 hash 충돌은 승인 전 보존, 취소, 승인 교체를 확인했고 malformed 산출물의 파일별 승인 요구는 Vitest로 확인했다.
+- 스크린샷: `screenshots/playwright/electron/comparison-workspace-desktop.png`(1480×920), `screenshots/playwright/electron/comparison-workspace-mobile.png`(390×844 viewport, 실제 full-page PNG 375px 폭).
+- 제한: MemoryRouter의 legacy `/compare-results` 직접 진입은 native Electron에서 실행하지 못했다. redirect route 설정과 build만 확인했으므로 요청 전체는 부분 검증이다. 상세 기록은 [통합 비교 작업공간 요청](./REQUESTS/comparison-workspace.md#review)을 따른다.
 
-### 판정
+검증 원칙: 구현과 검증을 구분하고, 근거 없는 항목은 완료로 기록하지 않는다. 실행하지 못한 GUI·외부 호출은 미검증으로 남긴다. 실패와 경고는 다음 조치와 함께 기록한다.
 
-Phase 0의 종료 조건은 충족됐다. 실제 TypeSafe API를 사용하는 Jev 성공 호출은 비용과 외부
-전송이 발생하고 사용자의 명시적 요청이 필요하므로 완료 조건과 분리한 운영 검증으로 남긴다.
+| 범위                                            | 검증 기록                                                                                           |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Phase 00·01 — 앱 기반, 가져오기·변환, 초기 감사 | [Phase00-01](./REVIEW/Phase00-01.md)                                                                |
+| Phase 02 — 작업본·검증 진행 기록                | [Phase02](./REVIEW/Phase02.md)                                                                      |
+| Phase 03 — raw JSON 버전 비교                   | [Phase03](./REVIEW/Phase03.md)                                                                      |
+| Phase 03~06 설계 및 문서 분리 점검              | [Planning](./REVIEW/Planning.md)                                                                    |
+| 아이콘 의미 정책 요청                           | [현재 UI 범위 검증 완료](./REQUESTS/icon-semantics.md#review)                                       |
+| 버전 비교 결과 화면 개선 요청                   | [주요 UI 검증 완료](./REQUESTS/version-comparison-results.md#review)                                |
+| 통합 비교 작업공간 요청                         | [screenshot refinement 검증 완료·legacy route 확인 대기](./REQUESTS/comparison-workspace.md#review) |
+| 화면 헤더·비교 레이아웃 정리 요청               | [검증 완료](./REQUESTS/page-header-layout.md#review)                                                |
 
-## 3. EL-G001 검증 기록
+[버전 관리 요청의 부분 검증](./REQUESTS/version-management.md#review): Electron build와 Vitest 20개 파일·157개 테스트가 통과했다. native Electron 데스크톱 1480px·모바일 390px에서 날짜 유무 두 행의 overlay, 위치 불변, hover·focus·Escape와 버튼 SVG label을 검증했다. 폐기 가능한 PostgreSQL DB의 native IPC에서는 Enter 날짜 저장·비우기와 복제·삭제 회귀 검증을 통과한 뒤 임시 DB를 폐기했다. 실제 프로세스 강제 종료 복구·대량 DB 복제·복제본 native validation 및 `ready` 전환은 미검증이다. 기존 Phase 03 완료 기록과 구분한다.
 
-현재 목표인 파일 가져오기 및 변환 기반 구축의 검증 결과를 이 절에 누적한다.
+[아이콘 의미 정책 검증](./REQUESTS/icon-semantics.md#review)은 2026-10-15 현재 UI 범위에서 완료했다. build, Vitest 20개 파일·157개 테스트, lint와 native Electron `verify-version-ui`·`verify-diff`가 통과했다. desktop 1480px·mobile 390px의 light·dark에서 아이콘 geometry, hover·focus, select keyboard, 탐색·비교 흐름을 확인했다. 임시 PostgreSQL version-mutations 검증 뒤 DB를 폐기했다. 현재 UI에 없는 외부 링크·새 창, 뒤로가기, swap action은 아이콘 정책만 유지하며 사용 인스턴스 검증을 주장하지 않는다. 버전 관리 요청 상태는 별도로 진행 중이다.
 
-### 현재 상태
+[버전 비교 결과 화면 개선 검증](./REQUESTS/version-comparison-results.md#review)은 2026-10-15 주요 UI 흐름을 통과했으며 일부 오류 경로 검증이 남았다. Electron build와 lint가 exit 0이었고 Vitest 21개 파일·167개 테스트가 통과했다. native Electron `verify-diff-playwright.mjs`는 desktop 1480px·mobile 390px에서 직접 상세 진입의 빈 상태와 `버전 비교로 이동` CTA, 개요의 `전체 결과 자세히`, 상세 검색·필터·10개 단위 페이지 이동·저장, 긴 문서 스크롤 중 control 접근을 확인했다. dashboard와 리스트를 다녀와도 같은 결과가 유지됐고 IPC 비교 호출 counter는 증가하지 않았다. 버전·파일 선택 변경은 결과를 지우며 프로세스 재시작은 메모리를 초기화한다. 저장 결과 조회 실패와 일반 저장 실패의 오류 표시·같은 입력 컨텍스트 결과 유지는 미검증이다. `verify-version-ui-playwright.mjs`도 통과했다. 기존 수동 `View` 라우팅을 유지했고 디스크 영속 상태나 새 dependency를 추가하지 않았다. 기존 Phase 03 완료 상태는 변경하지 않았다.
 
-- 상태: 완료
-- 구현 범위: 폴더 탐색, 다중 CSV 스트림 변환, NDJSON 작업본, IPC 진행/취소, 결과 UI
-- 다음 검증 대상: Phase 2 validation 및 작업본 계약
-
-### 구현 결과
-
-- 변환 계약은 main, preload, renderer가 함께 사용하는 `src/shared/data-import.ts`에 정의했다.
-- CSV는 `csv-parse`, JSON 최상위 배열은 `stream-json`으로 전체 파일 로딩 없이 처리한다.
-- UTF-8 바이트열, CSV 헤더 중복, 열 개수, 따옴표, JSON 구조와 객체 레코드를 검증한다.
-- 원본 SHA-256을 계산하고 파일별 작업본을 세션의 `files/<relativePath>.ndjson`에 저장한다.
-- 선택한 폴더를 재귀 탐색하며 CSV만 정렬해 포함하고 심볼릭 링크는 따라가지 않는다.
-- 여러 CSV는 하나의 세션으로 처리하며 하나라도 실패하거나 취소되면 전체 세션을 정리한다.
-- 폴더 가져오기는 결정론적 CSV 탐색과 변환만 수행하며 Jev 외부 호출에 의존하지 않는다.
-- 폴더명의 버전을 로컬 변환 대상으로 사용하므로 DB ready 목록에 없는 새 버전도 변환할 수 있다.
-- 변환 성공 시 원본 CSV와 JSON 배열, manifest를 `data/<environment>/<version>`에 영구 보관한다.
-- test와 production은 동일한 파일 수명 정책을 사용하며 환경만 버전 patch 범위로 구분한다.
-- 게임사 업데이트 날짜는 선택 사항이며 미입력 시 manifest와 DB에 `null`로 기록한다.
-- 폴더 선택 시 업데이트 날짜를 오늘로 초기화하고 연·월·일 목록에서 마우스와 키보드로 변경할 수 있다.
-- native dialog에서 선택한 경로만 변환 IPC에서 허용하고 대상 버전 형식과 환경을 main process에서 검증한다.
-- 진행 상태는 IPC event로 전달하고 취소 요청은 renderer별 세션에 한정한다.
-- 성공 요약, 미리보기, 실패 위치와 취소 상태를 업로드 화면에 표시한다.
-- 앱 상단 버튼과 `Ctrl+Shift+S`는 스크롤 전체 페이지를 `screenshots/manual/electron`, 자동 캡처는 `screenshots/playwright/electron`에 저장한다.
-- 최소 글자 크기 토큰을 9px로 올리고 본문, 보조 문구, 사이드바와 상단바 글자를 각각 1px 확대했다.
-- 다크·라이트 테마를 의미 기반 색상 토큰으로 구성하고 선택값을 `localStorage`에 유지한다.
-- 다크 모드 보조 텍스트를 밝게 조정하고 라이트 모드에는 별도 텍스트·표면·상태 대비를 적용한다.
-- 버전 선택 목록은 `ready`와 `importing`을 표시하고 `failed`를 제외한다.
-- 폴더 변환 성공 후 목록을 다시 조회하여 새 버전을 현재 작업 버전으로 선택한다.
-
-### 자동 검증 결과
-
-| 검증               | 결과 | 근거                                                              |
-| ------------------ | ---- | ----------------------------------------------------------------- |
-| 단위 테스트        | 통과 | Vitest 48개 테스트                                                |
-| 정상 입력          | 통과 | CSV 및 JSON 객체 배열을 동일한 레코드/NDJSON 구조로 변환          |
-| 문자열 ID          | 통과 | CSV ID `000`, `100` 보존                                          |
-| 입력 오류          | 통과 | 빈 파일, 열 불일치, 따옴표, 헤더 중복, JSON 구문/구조, UTF-8 오류 |
-| 원본 불변성        | 통과 | 내용, 크기, 수정 시각 유지                                        |
-| 결정론             | 통과 | 동일 입력의 SHA-256과 작업본 내용 일치                            |
-| 대용량 입력        | 통과 | CSV 25,000개 레코드 스트림 변환 및 출력 건수 확인                 |
-| 취소 정리          | 통과 | 처리 중 취소 후 세션 작업 디렉터리 제거 확인                      |
-| 세션 충돌          | 통과 | 같은 세션 ID의 기존 작업 결과 보존 확인                           |
-| 폴더 탐색          | 통과 | 중첩 CSV 정렬, JSON 제외, 심볼릭 링크 무시                        |
-| 폴더 배치          | 통과 | 상대 경로 보존, 파일/레코드 집계, 실패 및 취소 시 전체 정리       |
-| 환경별 경로        | 통과 | production과 test 버전을 각각 환경 하위 디렉터리에 저장           |
-| 실제 데이터 탐색   | 통과 | `data/production/1.2.419`의 CSV 6개와 27,332,459바이트 확인       |
-| 실제 데이터 변환   | 통과 | `data/production/1.2.419` CSV 6개, 254,206레코드 변환, 제외 0건   |
-| Node/Web typecheck | 통과 | 양쪽 TypeScript 프로젝트 오류 없음                                |
-| ESLint             | 통과 | Electron 앱 전체 lint 오류 없음                                   |
-| Production build   | 통과 | main, preload, renderer 번들 생성                                 |
-| renderer 경계      | 통과 | DB/TypeSafe 의존성과 비밀 환경변수 문자열 미검출                  |
-| 버전 선택 정책     | 통과 | importing/ready 포함, failed 제외 및 새 버전 선택 단위 테스트     |
-| DB 등록 경계       | 통과 | 버전, 출시일 등록과 실패 상태 전환 호출 테스트                    |
-| Playwright 화면    | 통과 | Electron 6개 화면의 다크·라이트 전체 페이지 캡처                  |
-| 테마 유지          | 통과 | 격리 프로필에서 라이트 전환 후 앱 재실행 시 선택값 유지           |
-| DB 조회 실패       | 통과 | 오류 안내, 버전 없음 상태와 앱 프로세스 유지 확인                 |
-| 변환 취소          | 통과 | 10만 레코드 진행 중 취소, 취소 결과와 재시도 버튼 복구            |
-| DB 등록 실패       | 통과 | 원본 보존, 부분 표준 디렉터리 정리와 재시도 상태 확인             |
-
-### 수동 검증 필요
-
-- [x] 앱 상단 스크린샷 버튼이 현재 화면을 `screenshots/manual/electron`에 저장하는지 확인한다.
-- [x] Playwright가 지정 화면을 `screenshots/playwright/electron`에 저장하는지 확인한다.
-- [x] 다크·라이트 모드에서 본문, 보조 문구, 입력 필드와 상태 메시지의 대비를 확인한다.
-- [x] 선택한 테마가 앱 재시작 후에도 유지되는지 확인한다.
-- [x] 변환된 `1.2.419`가 현재 버전과 버전 비교 선택기에 표시되는지 확인한다.
-- [x] Electron 창에서 버전 폴더 선택, CSV 목록과 파일별 결과를 확인한다.
-- [x] 실제 대용량 파일 변환 중 화면이 응답 가능한지 확인한다.
-- [x] 변환 중 취소 버튼으로 작업이 종료되고 재시도할 수 있는지 확인한다.
-- [x] DB 연결 실패가 구조화된 오류로 표시되고 앱과 기존 버전이 유지되는지 확인한다.
-
-### 잔여 위험
-
-1. 폴더 배치는 레코드별 부분 성공이 아닌 전체 성공/실패 방식이므로 성공 시 제외 건수는 항상 0이다.
-2. 폴더 입력은 CSV만 처리하고 UTF-8로 제한한다. 단일 JSON 변환 서비스는 내부에 유지된다.
-3. 작업 디렉터리의 만료와 앱 재시작 후 복구 정책은 아직 없다.
-4. 파일 해시는 기록하지만 같은 버전의 중복 원본 감지는 아직 구현하지 않았다.
-5. DB에는 `importing` 버전 메타데이터만 등록하며 도메인 데이터 적재와 `ready` 전환은 아직 연결되지 않았다.
-6. 실제 TypeSafe API를 사용하는 Jev 성공 호출은 비용과 외부 전송 때문에 자동 실행하지 않는다.
-
-### 판정
-
-EL-G001의 구현과 자동·GUI 통합 검증을 완료했다. Roadmap Phase 1을 `완료`로 전환하고
-다음 목표는 Phase 2의 validation 및 작업본 계약으로 이동한다.
-
-## 4. 초기 기반 감사
-
-### 검토 정보
-
-| 항목   | 내용                                                       |
-| ------ | ---------------------------------------------------------- |
-| 검토일 | 2026-10-08                                                 |
-| 범위   | `SPEC.md`, `ROADMAP.md`, `GOAL.md`, `REVIEW.md`, 현재 소스 |
-| 판정   | Phase 0과 Phase 1 완료, Phase 2 시작 가능                  |
-
-### 확인된 기반
-
-- Electron, React, Vite, TailwindCSS와 main/preload/renderer 경계가 구성되어 있다.
-- 버전 폴더 선택부터 CSV 탐색, JSON 변환, 표준 경로 저장과 importing 버전 등록까지 연결되어 있다.
-- ready/importing 버전 선택, 변환 후 목록 갱신, 다크·라이트 테마와 스크린샷 기반이 구현되어 있다.
-- `data/production/1.2.419`에서 CSV 6개, JSON 6개와 manifest 산출물을 확인했다.
-- Vitest 48개, node/web typecheck, ESLint와 production build가 통과한다.
-
-### 운영 검증으로 남은 항목
-
-1. 실제 TypeSafe API 키를 사용한 Jev 성공 호출
-2. Windows 패키징 및 설치 환경 실행
-
-### 다음 단계 판정
-
-Phase 0과 Phase 1을 완료 처리하고 `GOAL.md`를 Phase 2의 검증 및 작업본 구축으로
-교체한다. 버전 diff와 장비·직업 CRUD는 검증된 작업본 계약 이후에 진행한다.
+Phase 02와 Phase 03의 기존 검증은 **완료**했다. Phase 03은 Node/Web typecheck, production build, ESLint, Prettier와 production·React dev StrictMode native Electron Playwright를 통과했다. 독립 검토 보완 뒤 자동 검사는 18 Vitest 파일·124개 테스트, build, Node/Web typecheck와 ESLint를 통과했다. 해당 보완의 native 최종 실행도 통과했다. 현재 DB에 `failed`·test 행이 없어 해당 native 표시는 미검증이다. native script 범위, 다섯 파일 fixture 근거와 대량 성능은 [Phase03](./REVIEW/Phase03.md)에 분리 기록했다. [진행 상태](./GOAL/README.md)를 따른다. 이전 날짜 기록의 `SPEC.md`, `GOAL.md` 등은 당시 파일 이름이다.

@@ -35,6 +35,22 @@ type MapleAdminApi = {
     listener: (progress: DataDirectoryConversionProgress) => void
   ) => () => void
   listDataVersions: () => Promise<string[]>
+  listRegisteredDataVersions: () => Promise<RegisteredDataVersion[]>
+  updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest) => Promise<void>
+  copyDataVersion: (request: CopyDataVersionRequest) => Promise<void>
+  deleteDataVersion: (request: DeleteDataVersionRequest) => Promise<void>
+  listComparableFiles: (request: ListComparableFilesRequest) => Promise<string[]>
+  compareRawData: (request: CompareRawDataRequest) => Promise<RawDataComparison>
+  saveRawDataDiff: (
+    request: SaveRawDataDiffRequest
+  ) => Promise<{ status: 'created' | 'reused' | 'replaced'; result: RawDataComparison }>
+  openRawDataDiff: (request: CompareRawDataRequest) => Promise<RawDataComparison | null>
+  validateDataVersion: (request: DataValidationRequest) => Promise<DataValidationRunResult>
+  cancelDataValidation: (sessionId: string) => Promise<boolean>
+  updateDataValidationWarning: (
+    request: DataValidationWarningAcknowledgementRequest
+  ) => Promise<DataValidationReportUpdate>
+  onDataValidationProgress: (listener: (progress: DataValidationProgress) => void) => () => void
   captureScreenshot: () => Promise<ScreenshotCaptureResult>
   onScreenshotCaptured: (listener: (event: ScreenshotCaptureEvent) => void) => () => void
 }
@@ -55,4 +71,23 @@ import type {
   DataFileConversionRequest,
   DataFileConversionResult
 } from '../shared/data-import'
+import type {
+  CompareRawDataRequest,
+  ListComparableFilesRequest,
+  RawDataComparison,
+  SaveRawDataDiffRequest
+} from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
+import type {
+  CopyDataVersionRequest,
+  DeleteDataVersionRequest,
+  RegisteredDataVersion,
+  UpdateDataVersionReleaseDateRequest
+} from '../shared/data-versions'
+import type {
+  DataValidationProgress,
+  DataValidationRequest,
+  DataValidationRunResult,
+  DataValidationReportUpdate,
+  DataValidationWarningAcknowledgementRequest
+} from '../shared/data-validation'
