@@ -11,6 +11,10 @@
 | [Renderer App 책임 분리](./renderer-app-refactoring.md)     | 진행 중 (자동 검증 완료)               | React Router v7 도입과 App·라우트·기능 상태 분리                      | [`APP-001`~`APP-009`](../SPEC/01-foundation.md)                          | [적용 범위](./renderer-app-refactoring.md#roadmap)   | [native 확인 대기](./renderer-app-refactoring.md#goal) | [자동 검증](./renderer-app-refactoring.md#review)   |
 | [화면 헤더·비교 레이아웃 정리](./page-header-layout.md)     | 완료 (2026-10-25)                      | 다섯 화면 본문 헤더 제거와 비교 화면 구분선·하단 여백 정리            | [`APP-001`·`APP-005`·`APP-006`](../SPEC/01-foundation.md)                | [범위와 의존성](./page-header-layout.md#roadmap)     | [검증 완료](./page-header-layout.md#goal)              | [검증 기록](./page-header-layout.md#review)         |
 
+## 추가 기능 제안
+
+- [넥슨 Open API 명세 변경 감지](../../../../docs/electron/nexon-open-api-spec-monitoring.md): 앱 실행 시 공식 명세 변경을 감지·알림·검토하는 신규 기능 제안(`REQ001`). 구현과 검증은 아직 진행하지 않았다.
+
 ## 관리 규칙
 
 - 독립 요청과 작은 개선도 `REQUESTS`에 기록하고 관련 [SPEC](../SPEC/README.md)을 참조한다.
