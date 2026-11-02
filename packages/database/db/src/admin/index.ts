@@ -8,3 +8,4 @@ export * from './seed-equipment-potential-option.repo';
 export * from './seed-game-data.repo';
 export * from './seed-game-data-raw.repo';
 export * from './seed-game-data-bundle.repo';
+export * from './seed-weapon-types.repo';

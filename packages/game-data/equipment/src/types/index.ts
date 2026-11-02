@@ -19,6 +19,7 @@ import { subWeaponTypes, warriorFinalClasses } from './sub-weapon';
 export * from './equipment';
 export * from './set';
 export * from './sub-weapon';
+export { resolveWeaponTypeConstant, type WeaponTypeRecord } from './weapon_type';
 
 export type WeaponHandType = (typeof weaponHandTypes)[number];
 export type WeaponType = (typeof weaponTypes)[number];
