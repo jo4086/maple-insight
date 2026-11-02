@@ -15,6 +15,18 @@
 
 Electron의 독립 요청과 작은 개선은 `apps/electron/docs/REQUESTS/README.md`에서 관리한다. 기존 Phase의 완료 기록과 요청의 검증 상태를 혼동하지 않는다.
 
+공통 패키지도 각 패키지의 책임 범위에 따라 개발 문서를 관리한다.
+
+Database 관련 문서는 다음 위치에서 관리한다.
+
+packages/database/db/docs/
+
+packages/database/data-admin/docs/ (필요한 경우)
+
+Database 작업에는 packages/database/AGENTS.md를 적용한다.
+
+공통 설계 문서는 주 담당 패키지에서 관리하고, 다른 패키지는 링크로 참조한다.
+
 ## Working Rules
 
 1. 작업을 시작하기 전에 담당 앱의 문서를 확인한다.
