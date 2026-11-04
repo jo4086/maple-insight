@@ -29348,7 +29348,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"WeaponType", 'DateTime'>
     readonly updatedAt: FieldRef<"WeaponType", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -29417,31 +29417,31 @@ export namespace Prisma {
     where?: WeaponTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of WeaponTypes to fetch.
      */
     orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for WeaponTypes.
      */
     cursor?: WeaponTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` WeaponTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` WeaponTypes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of WeaponTypes.
      */
     distinct?: WeaponTypeScalarFieldEnum | WeaponTypeScalarFieldEnum[]
@@ -29469,31 +29469,31 @@ export namespace Prisma {
     where?: WeaponTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of WeaponTypes to fetch.
      */
     orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for WeaponTypes.
      */
     cursor?: WeaponTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` WeaponTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` WeaponTypes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of WeaponTypes.
      */
     distinct?: WeaponTypeScalarFieldEnum | WeaponTypeScalarFieldEnum[]
@@ -29521,25 +29521,25 @@ export namespace Prisma {
     where?: WeaponTypeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of WeaponTypes to fetch.
      */
     orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing WeaponTypes.
      */
     cursor?: WeaponTypeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` WeaponTypes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` WeaponTypes.
      */
     skip?: number
@@ -29885,55 +29885,55 @@ export namespace Prisma {
     where?: EquipmentPotentialOptionTextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of EquipmentPotentialOptionTexts to fetch.
      */
     orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: EquipmentPotentialOptionTextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` EquipmentPotentialOptionTexts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned EquipmentPotentialOptionTexts
     **/
     _count?: true | EquipmentPotentialOptionTextCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: EquipmentPotentialOptionTextAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: EquipmentPotentialOptionTextSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: EquipmentPotentialOptionTextMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: EquipmentPotentialOptionTextMaxAggregateInputType
@@ -30131,13 +30131,13 @@ export namespace Prisma {
      * @example
      * // Get all EquipmentPotentialOptionTexts
      * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany()
-     * 
+     *
      * // Get first 10 EquipmentPotentialOptionTexts
      * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends EquipmentPotentialOptionTextFindManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -30151,7 +30151,7 @@ export namespace Prisma {
      *     // ... data to create a EquipmentPotentialOptionText
      *   }
      * })
-     * 
+     *
      */
     create<T extends EquipmentPotentialOptionTextCreateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextCreateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -30165,7 +30165,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends EquipmentPotentialOptionTextCreateManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -30179,7 +30179,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many EquipmentPotentialOptionTexts and only return the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.createManyAndReturn({
      *   select: { id: true },
@@ -30189,7 +30189,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends EquipmentPotentialOptionTextCreateManyAndReturnArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -30203,7 +30203,7 @@ export namespace Prisma {
      *     // ... filter to delete one EquipmentPotentialOptionText
      *   }
      * })
-     * 
+     *
      */
     delete<T extends EquipmentPotentialOptionTextDeleteArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextDeleteArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -30220,7 +30220,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends EquipmentPotentialOptionTextUpdateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -30234,7 +30234,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends EquipmentPotentialOptionTextDeleteManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -30253,7 +30253,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends EquipmentPotentialOptionTextUpdateManyArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -30270,7 +30270,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more EquipmentPotentialOptionTexts and only return the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.updateManyAndReturn({
      *   select: { id: true },
@@ -30283,7 +30283,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends EquipmentPotentialOptionTextUpdateManyAndReturnArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -30372,7 +30372,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends EquipmentPotentialOptionTextGroupByArgs,
@@ -31396,14 +31396,14 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
+
 
 
   /**
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
+
   /**
    * Deep Input Types
    */
