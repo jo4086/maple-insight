@@ -27,6 +27,8 @@ Prisma Schema, 트랜잭션, 저장 순서, 버전 상태와 중복 처리의 �
 | [`src/seed-game-data-raw.ts`](./src/seed-game-data-raw.ts)                           | 디렉터리의 원본 JSON 전체 보존                     |
 | [`src/seed-game-data.ts`](./src/seed-game-data.ts)                                   | 직업·스킬 JSON 정규화 Seed 실행                    |
 | [`src/seed-game-data-bundle.ts`](./src/seed-game-data-bundle.ts)                     | raw, 정규화 게임 데이터, 장비를 순서대로 등록      |
+| [`src/seed-weapon-types-loader.ts`](./src/seed-weapon-types-loader.ts)               | 36행 무기 타입 JSON 입력 파일 로드                  |
+| [`src/seed-weapon-types.ts`](./src/seed-weapon-types.ts)                             | 무기 타입 Seed 실행                                |
 | [`src/export-game-skills-by-raw-job.ts`](./src/export-game-skills-by-raw-job.ts)     | DB 스킬을 raw 직업 기준 JSON으로 export            |
 | [`tsup.config.ts`](./tsup.config.ts)                                                 | CommonJS 빌드 진입점 설정                          |
 
@@ -48,6 +50,7 @@ DB 연결에는 Prisma Schema가 요구하는 `DATABASE_URL`이 필요하다. �
 - 게임 JSON: 저장소 루트의 `data/{environment}/{version}/json`
 - 장비 JSON: 저장소 루트의 `packages/generator/src/generated/equipment`
 - 직업별 스킬 export: 저장소 루트의 `data/{environment}/{version}/generated/skills-by-raw-job.json`
+- 무기 타입 JSON: `packages/game-data/equipment/data/weapon-types.json`
 
 `GAME_DATA_JSON_DIR`은 게임 JSON 입력 경로를, `EQUIPMENT_JSON_DIR`은 장비 입력 경로를 바꾼다. `GAME_DATA_SKILL_BY_JOB_OUTPUT`은 export 파일 경로를 바꾼다. 상대 경로 계산이 `process.cwd()`를 기준으로 하므로 아래 패키지 스크립트 사용을 권장한다.
 
@@ -75,6 +78,7 @@ DB 연결에는 Prisma Schema가 요구하는 `DATABASE_URL`이 필요하다. �
 | `seed:game-data-raw`              | 입력 디렉터리의 `.json` 파일을 이름순으로 저장                                                                          | 버전, 파일 수, 레코드 수, 파일별 건수 |
 | `seed:game-data`                  | `ms_job.json`, `ms_skill.json`, `ms_skillCommon.json`, `ms_skillH.json`, `ms_skillLevel.json`, `ms_skillPVPCommon.json` | 버전과 파일 종류별 행 수              |
 | `seed:game-data-bundle`           | raw, 정규화 게임 데이터, 장비 Seed 연속 실행                                                                            | 세 Seed 결과를 포함한 객체            |
+| `seed:weapon-types`              | 카르타 포함 36행 `weapon-types.json`; 버전 입력 없음                                                                     | inserted·skipped 건수                 |
 | `export:game-skills-by-raw-job`   | 버전별 스킬 조회 후 raw 직업 ID 그룹 JSON 작성                                                                          | 버전, 직업 수, 스킬 수, 출력 경로     |
 
 패키지 루트 export `@maple/data-admin`은 [`src/index.ts`](./src/index.ts)에 export가 없어 현재 공개 심벌이 없다. `bin` 진입점도 없다. `build:js`의 tsup 진입점에는 `seed-game-data-bundle.ts`가 포함되지 않지만, `seed:game-data-bundle` 스크립트는 `tsx`로 원본 TypeScript를 직접 실행한다.
@@ -94,11 +98,17 @@ Seed는 DB를 변경하므로 실행 전 대상 `DATABASE_URL`, 버전, 입력 �
 ```bash
 pnpm --filter @maple/data-admin seed:game-data -- 1.2.424
 pnpm --filter @maple/data-admin seed:equipment -- 1.2.424
+# DB 변경 명령: 대상과 현재 행을 확인한 뒤 실행
+pnpm --filter @maple/data-admin seed:weapon-types
 pnpm --filter @maple/data-admin seed:game-data-bundle -- 1.2.424
 pnpm --filter @maple/data-admin export:game-skills-by-raw-job -- 1.2.424
 ```
 
 각 명령의 `pre<명령>` 스크립트가 필요한 workspace 패키지를 먼저 빌드한다. 게임 데이터·장비·export 명령은 결과 건수만 출력하며 dry-run 옵션은 제공하지 않는다.
+
+`seed:weapon-types`도 dry-run이 아니다. 현재 원천은 카르타를 포함한 36행이며 dedicated job ID는 비어 있다. 같은 `(category, normalizedPart)`의 기존 행과 값이 다르면 충돌로 중단해야 하며 자동 덮어쓰기를 허용하지 않는다.
+
+사용자가 migration을 독립적으로 적용한 뒤 read-only status에서 18개 migration이 모두 적용된 상태를 확인했다. 최초 seed 전 count는 `0`이었다. 첫 시도는 nullable JSON의 bundled `Prisma.DbNull`이 JSON `{}`로 저장되어 PostgreSQL `23514`로 rollback되었고 count는 `0`을 유지했다. Repository가 필드를 omit해 SQL `NULL`을 저장하도록 수정되고 집중 테스트 5개와 typecheck가 통과한 뒤, 사용자 승인 아래 이 명령을 재실행해 `inserted: 36`, `skipped: 0`을 확인했다. 36행의 원천값 일치와 SQL `NULL` override 32행, 한손둔기 hero `1.34`·paladin `1.24`를 read-only로 검증했다. Assistant는 migration을 적용하지 않았다. Seed 재실행, FK/backfill과 그 밖의 DB 불변식은 검증하지 않았다.
 
 ## Related Packages
 

@@ -17,12 +17,13 @@
 ## Structure
 
 - [`prisma/schema.prisma`](./prisma/schema.prisma): PostgreSQL datasource, Prisma generator, 모델과 관계
-- [`docs/REQUIREMENTS/weapon-types-requirements.md`](./docs/REQUIREMENTS/weapon-types-requirements.md): 승인된 `REQ001` 요구사항 원본
-- [`docs/SPEC/weapon-types.md`](./docs/SPEC/weapon-types.md): `REQ001-01` 수용 조건
+- [`docs/REQUIREMENTS/REQ001.md`](./docs/REQUIREMENTS/REQ001.md): `REQ001` 요구사항
+- [`docs/SPEC/REQ001/weapon-types.md`](./docs/SPEC/REQ001/weapon-types.md): `REQ001-01` 무기 타입 명세
 - [`docs/ROADMAP.md`](./docs/ROADMAP.md): 무기 타입 Phase와 상태
-- [`docs/GOAL/weapon-types.md`](./docs/GOAL/weapon-types.md): 현재 설계 검토 Phase의 산출물과 종료 조건
-- [`docs/REQUESTS/weapon-types.md`](./docs/REQUESTS/weapon-types.md): 구현된 전역 `equipment.weapon_types` 구조, seed 경계와 미완료 item 연결 상태
-- [`docs/REVIEW.md`](./docs/REVIEW.md): 실행한 검증과 DB 미적용 상태 기록
+- [`docs/GOAL/REQ001/Phase02.md`](./docs/GOAL/REQ001/Phase02.md): `REQ001-P02` 목표와 종료 조건
+- [`docs/REQUESTS/REQ001/weapon-types.md`](./docs/REQUESTS/REQ001/weapon-types.md): 무기 타입 관련 사용자 결정
+- [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md): 현재 구현된 DB 단위와 패키지 경계
+- [`docs/REVIEW.md`](./docs/REVIEW.md): 실행한 검증, 사용자 migration 적용 확인과 최초 seed 기록
 - [`prisma/migrations/`](./prisma/migrations/): 스키마 분리와 모델 변경의 SQL 이력
 - [`src/lib/prisma.ts`](./src/lib/prisma.ts): 공유 Prisma Client와 종료 함수
 - [`src/repositories/`](./src/repositories/): 일반 애플리케이션의 조회·저장 API
@@ -110,6 +111,26 @@ pnpm --filter @maple/db run dev
 - `dev`는 watch build입니다.
 - [`src/admin/game-data-version.repo.test.ts`](./src/admin/game-data-version.repo.test.ts)는 Node test 기반 단위 테스트지만, 현재 패키지에는 `test` script가 없습니다.
 - 패키지에는 migration 생성·적용·reset script가 없습니다. 데이터베이스를 변경하는 Prisma 명령은 별도 승인과 실행 절차 없이 사용하지 않습니다.
+
+### Manual migration (USER only)
+
+대상 DB와 일치하는 백업을 확보하고 적용 대상 승인을 받은 사용자가 저장소 루트에서만 실행합니다. 먼저 SQL을 검토합니다.
+
+- 아이템 연결 SQL: [`20261102000000_link_equipment_weapon_types/migration.sql`](./prisma/migrations/20261102000000_link_equipment_weapon_types/migration.sql)
+- 공격속도 컬럼 제거 이력 SQL: [`20261103000000_remove_weapon_type_attack_speed/migration.sql`](./prisma/migrations/20261103000000_remove_weapon_type_attack_speed/migration.sql). 이후 복원 migration이 뒤따르지만 deploy는 pending migration 전체를 순서대로 적용합니다.
+- 무기상수 예외 교체 SQL: [`20261104000000_replace_hero_weapon_constant_with_overrides/migration.sql`](./prisma/migrations/20261104000000_replace_hero_weapon_constant_with_overrides/migration.sql). 기존 non-null 히어로 값을 JSONB 배열로 옮긴 뒤 구 컬럼을 제거합니다. 과거 도끼 값도 보존하므로 현재 36행 원천과의 처리 방침을 별도 확인해야 합니다.
+- 공격속도 복원 SQL: [`20261105000000_restore_weapon_type_attack_speed/migration.sql`](./prisma/migrations/20261105000000_restore_weapon_type_attack_speed/migration.sql). nullable `attack_speed SMALLINT`를 다시 추가하고 주무기는 `NULL` 또는 `1..8`, 보조무기는 `NULL`만 허용하도록 CHECK를 재작성합니다. 기존 행의 값은 채우지 않습니다.
+
+```bash
+pnpm --filter @maple/db exec prisma migrate status
+pnpm --filter @maple/db exec prisma migrate deploy
+```
+
+`migrate deploy`는 특정 파일만 선택하지 않고 모든 pending migration을 순서대로 적용합니다. 현재 대상 DB에는 사용자가 migration을 독립적으로 적용했습니다. Read-only `prisma migrate status`는 exit `0`으로 `localhost:5432/maple_ingestor`의 `app`, `equipment`, `game_data`, `ranking` schema에서 18개 migration이 모두 적용된 최신 상태를 보고했습니다. Assistant는 `migrate deploy`를 실행하지 않았습니다.
+
+최초 weapon type seed 전 read-only count는 `0`이었습니다. 첫 시도는 bundled `Prisma.DbNull`이 nullable JSON에 SQL `NULL` 대신 JSON `{}`로 직렬화되어 PostgreSQL `23514` CHECK 오류로 실패했고 transaction rollback 뒤 count도 `0`이었습니다. DB repository가 DB default 없는 nullable JSON 필드를 omit하도록 수정되고 집중 테스트 5개와 typecheck가 통과한 뒤, 사용자 승인 아래 `pnpm --filter @maple/data-admin run seed:weapon-types`를 재실행해 36행을 삽입하고 0행을 skip했습니다.
+
+Read-only 사후 검증에서 36행의 unique key와 part, 공격속도, 기본 decimal, override pair가 원천 JSON과 일치했습니다. SQL `NULL` override는 32행이었고 한손둔기는 hero `1.34`, paladin `1.24`였습니다. Seed 재실행의 멱등성, FK/backfill과 그 밖의 DB 불변식은 검증하지 않았습니다. 이 기록에서 `prisma db push`와 `prisma migrate reset`도 실행하지 않았습니다.
 
 ## Related Packages
 
