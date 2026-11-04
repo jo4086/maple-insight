@@ -4,7 +4,7 @@ import { createEquipmentStatBuilder } from '@/builder';
 import type { EquipmentStatBuilder } from '@/builder';
 import type { EquipmentCapabilityOverride, EquipmentGenerationStatInput, EquipmentGenerationStatTemplate } from '@/rule';
 import { resolveSubWeaponRequiredClassKeys } from '@/rule/weapon';
-import type { EquipmentRequiredClass, EquipmentSet, SubWeaponType } from '@/types';
+import type { EquipmentRequiredClass, EquipmentRequiredClassOverride, EquipmentSet, SubWeaponType } from '@/types';
 
 /**
  * src/information/sub-weapon/builder.ts
@@ -48,8 +48,10 @@ type SubWeaponMeta<TSubWeaponPart extends SubWeaponType = SubWeaponType> = {
   part: TSubWeaponPart | null;
   /** 장비 세트 key. 세트가 없으면 null */
   setKey: EquipmentSet | null;
-  /** 착용 가능 직업/직업군 */
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  /** 최종 착용 가능 직업/직업군 */
+  requiredClass: EquipmentRequiredClassOverride;
+  /** 보조무기 타입 기본값을 완전히 대체하는 아이템별 조건 */
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   /** 착용 가능 최종 직업 key */
   requiredClassKeys: readonly FinalClassNameKey[];
   /** 같은 이름의 보조무기를 직업별 결과 아이템으로 분리해야 할 때 사용하는 variant 목록 */
@@ -123,18 +125,31 @@ export function createSubWeaponMetaBuilder<TName extends string, const TSubWeapo
   return createEquipmentStatBuilder<TName, SubWeaponItemOverride, SubWeaponItemMeta<TSubWeaponPart>, TUsed>({
     map,
     createValue: (name, override = {}) => {
-      const { capability: capabilityOverride, grantedSkills, part, requiredClass, requiredClassKeys, requiredLevel, setKey, variants, ...statOverride } = override;
+      const {
+        capability: capabilityOverride,
+        grantedSkills,
+        part,
+        requiredClass,
+        requiredClassOverride,
+        requiredClassKeys,
+        requiredLevel,
+        setKey,
+        variants,
+        ...statOverride
+      } = override;
       const capability = {
         ...baseCapability,
         ...capabilityOverride,
       };
       const resolvedPart = (part ?? basePart) as TSubWeaponPart | null;
+      const itemRequiredClassOverride = requiredClassOverride ?? requiredClass;
 
       return {
         category: 'subWeapon',
         part: resolvedPart,
         setKey: setKey ?? baseSetKey,
-        requiredClass: requiredClass ?? baseRequiredClass,
+        requiredClass: itemRequiredClassOverride ?? baseRequiredClass,
+        ...(itemRequiredClassOverride !== undefined ? { requiredClassOverride: itemRequiredClassOverride } : {}),
         requiredClassKeys: requiredClassKeys ?? baseRequiredClassKeys ?? (resolvedPart ? resolveSubWeaponRequiredClassKeys(resolvedPart, name) : []),
         ...((variants ?? baseVariants) ? { variants: variants ?? baseVariants } : {}),
         requiredLevel: requiredLevel ?? baseRequiredLevel,

@@ -212,10 +212,19 @@ export async function cloneGameDataVersionInTransaction(tx: Prisma.TransactionCl
       where: { version: sourceVersion }, orderBy: [{ id: 'asc' }], take: cloneBatchSize,
       ...(cursor ? { cursor: { id: cursor.id }, skip: 1 } : {}),
     }),
-    (rows) => tx.equipmentItem.createMany({ data: rows.map(({ id: _id, requiredClass, ...item }) => ({
-        ...item, version: targetVersion,
+    (rows) => tx.equipmentItem.createMany({ data: rows.map((row) => {
+      const { id: _id, requiredClass, requiredClassOverride, ...item } = row as typeof row & {
+        requiredClassOverride?: Prisma.JsonValue | null;
+      };
+      return {
+        ...item,
+        version: targetVersion,
         requiredClass: requiredClass === null ? Prisma.JsonNull : requiredClass as Prisma.InputJsonValue,
-      })) }),
+        requiredClassOverride: requiredClassOverride == null
+          ? Prisma.DbNull
+          : requiredClassOverride as Prisma.InputJsonValue,
+      };
+    }) }),
   );
 
 }

@@ -3,6 +3,8 @@ import { seedEquipment, type SeedEquipmentResult } from './seed-equipment.repo';
 import { seedGameDataRaw, type SeedGameDataRawResult } from './seed-game-data-raw.repo';
 import { seedGameData, type SeedGameDataResult } from './seed-game-data.repo';
 
+import { prisma } from '@/lib/prisma';
+
 export type SeedGameDataBundleOptions = {
   version: string;
   gameDataDir: string;
@@ -17,7 +19,18 @@ export type SeedGameDataBundleResult = {
   equipment: SeedEquipmentResult;
 };
 
+export function assertGameDataBundleSeedVersion(version: string, existingStatus: string | null): void {
+  if (existingStatus !== null && existingStatus !== 'importing') {
+    throw new Error(`Game data bundle seed refuses existing game data version: ${version}`);
+  }
+}
+
 export async function seedGameDataBundle(options: SeedGameDataBundleOptions): Promise<SeedGameDataBundleResult> {
+  const existingVersion = await prisma.gameDataVersion.findUnique({
+    where: { version: options.version },
+    select: { status: true },
+  });
+  assertGameDataBundleSeedVersion(options.version, existingVersion?.status ?? null);
   await startGameDataVersionImport(options.version);
 
   try {
@@ -35,6 +48,7 @@ export async function seedGameDataBundle(options: SeedGameDataBundleOptions): Pr
       version: options.version,
       dir: options.equipmentDir,
       chunkSize: options.chunkSize,
+      importInProgress: true,
     });
 
     await completeGameDataVersionImport(options.version);

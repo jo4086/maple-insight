@@ -488,51 +488,54 @@ model GameSkillPvpCommon {
 /// - generator/src/generated/equipment/*.json 결과를 적재한다.
 /// - keywords는 검색/필터용 key를 유지하고, 그 외 표시 필드는 한글명을 저장한다.
 model EquipmentItem {
-  id                   BigInt          @id @default(autoincrement())
-  version              String
-  name                 String
-  normalizedName       String          @map("normalized_name")
-  baseName             String?         @map("base_name")
-  category             String
-  keywords             String[]
-  part                 String
-  setName              String?         @map("set_name")
-  luckyFlag            Boolean         @default(false) @map("lucky_flag")
-  potentialEnabled     Boolean         @default(true) @map("potential_enabled")
-  starforceEnabled     Boolean         @default(true) @map("starforce_enabled")
-  scrollUpgradeEnabled Boolean         @default(true) @map("scroll_upgrade_enabled")
-  addOptionEnabled     Boolean         @default(true) @map("additional_option_enabled")
-  requiredLevel        Int?            @map("required_level")
-  requiredClass        Json            @map("required_class")
-  classGroup           String?         @map("class_group")
-  handType             String?         @map("hand_type")
-  weaponConstant       Float?          @map("weapon_constant")
-  weaponSpeed          Int?            @map("weapon_speed") @db.SmallInt
-  str                  Int             @default(0)
-  dex                  Int             @default(0)
-  int                  Int             @default(0)
-  luk                  Int             @default(0)
-  maxHp                Int             @default(0) @map("max_hp")
-  maxMp                Int             @default(0) @map("max_mp")
-  maxHpRate            Int             @default(0) @map("max_hp_rate")
-  maxMpRate            Int             @default(0) @map("max_mp_rate")
-  attackPower          Int             @default(0) @map("attack_power")
-  magicPower           Int             @default(0) @map("magic_power")
-  armor                Int             @default(0)
-  bossDamage           Int             @default(0) @map("boss_damage")
-  ignoreMonsterArmor   Int             @default(0) @map("ignore_monster_armor")
-  criRate              Int             @default(0) @map("cri_rate")
-  criDamage            Int             @default(0) @map("cri_damage")
-  normalDamage         Int             @default(0) @map("normal_damage")
-  speed                Int             @default(0)
-  jump                 Int             @default(0)
-  upgradeScroll        Int             @default(0) @map("upgrade_scroll")
-  exceptionalScroll    Int             @default(0) @map("exceptional_scroll")
-  specialRingLevel     Int             @default(0) @map("special_ring_level")
-  grantedSkills        String[]        @default([]) @map("granted_skills")
-  createdAt            DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt            DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
-  dataVersion          GameDataVersion @relation(fields: [version], references: [version], onDelete: Cascade)
+  id                    BigInt          @id @default(autoincrement())
+  version               String
+  name                  String
+  normalizedName        String          @map("normalized_name")
+  baseName              String?         @map("base_name")
+  category              String
+  keywords              String[]
+  part                  String
+  setName               String?         @map("set_name")
+  luckyFlag             Boolean         @default(false) @map("lucky_flag")
+  potentialEnabled      Boolean         @default(true) @map("potential_enabled")
+  starforceEnabled      Boolean         @default(true) @map("starforce_enabled")
+  scrollUpgradeEnabled  Boolean         @default(true) @map("scroll_upgrade_enabled")
+  addOptionEnabled      Boolean         @default(true) @map("additional_option_enabled")
+  requiredLevel         Int?            @map("required_level")
+  requiredClass         Json            @map("required_class")
+  requiredClassOverride Json?           @map("required_class_override")
+  weaponTypeId          BigInt?         @map("weapon_type_id")
+  classGroup            String?         @map("class_group")
+  handType              String?         @map("hand_type")
+  weaponConstant        Float?          @map("weapon_constant")
+  weaponSpeed           Int?            @map("weapon_speed") @db.SmallInt
+  str                   Int             @default(0)
+  dex                   Int             @default(0)
+  int                   Int             @default(0)
+  luk                   Int             @default(0)
+  maxHp                 Int             @default(0) @map("max_hp")
+  maxMp                 Int             @default(0) @map("max_mp")
+  maxHpRate             Int             @default(0) @map("max_hp_rate")
+  maxMpRate             Int             @default(0) @map("max_mp_rate")
+  attackPower           Int             @default(0) @map("attack_power")
+  magicPower            Int             @default(0) @map("magic_power")
+  armor                 Int             @default(0)
+  bossDamage            Int             @default(0) @map("boss_damage")
+  ignoreMonsterArmor    Int             @default(0) @map("ignore_monster_armor")
+  criRate               Int             @default(0) @map("cri_rate")
+  criDamage             Int             @default(0) @map("cri_damage")
+  normalDamage          Int             @default(0) @map("normal_damage")
+  speed                 Int             @default(0)
+  jump                  Int             @default(0)
+  upgradeScroll         Int             @default(0) @map("upgrade_scroll")
+  exceptionalScroll     Int             @default(0) @map("exceptional_scroll")
+  specialRingLevel      Int             @default(0) @map("special_ring_level")
+  grantedSkills         String[]        @default([]) @map("granted_skills")
+  createdAt             DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt             DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  dataVersion           GameDataVersion @relation(fields: [version], references: [version], onDelete: Cascade)
+  weaponType            WeaponType?     @relation(fields: [weaponTypeId], references: [id], onDelete: Restrict)
 
   @@unique([version, name])
   @@unique([version, normalizedName])
@@ -540,6 +543,7 @@ model EquipmentItem {
   @@index([version, part])
   @@index([version, setName])
   @@index([version, classGroup])
+  @@index([weaponTypeId], map: "equipment_items_weapon_type_id_idx")
   @@map("equipment_items")
   @@schema("equipment")
 }
@@ -549,20 +553,21 @@ model EquipmentItem {
 /// - availabilityMode에 따라 classGroupKeys와 allowedJobIds 중 하나만 활성화된다.
 /// - 주무기 전용 필드의 필수 여부와 값 범위는 DB CHECK로 제한한다.
 model WeaponType {
-  id                 BigInt   @id @default(autoincrement())
-  part               String
-  normalizedPart     String   @map("normalized_part")
-  category           String
-  classGroupKeys     String[] @default([]) @map("class_group_keys")
-  allowedJobIds      String[] @default([]) @map("allowed_job_ids")
-  availabilityMode   String   @map("availability_mode")
-  isDedicated        Boolean  @map("is_dedicated")
-  handType           String?  @map("hand_type")
-  weaponConstant     Decimal? @map("weapon_constant") @db.Decimal(8, 4)
-  heroWeaponConstant Decimal? @map("hero_weapon_constant") @db.Decimal(8, 4)
-  attackSpeed        Int?     @map("attack_speed") @db.SmallInt
-  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt          DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  id                      BigInt          @id @default(autoincrement())
+  part                    String
+  normalizedPart          String          @map("normalized_part")
+  category                String
+  classGroupKeys          String[]        @default([]) @map("class_group_keys")
+  allowedJobIds           String[]        @default([]) @map("allowed_job_ids")
+  availabilityMode        String          @map("availability_mode")
+  isDedicated             Boolean         @map("is_dedicated")
+  handType                String?         @map("hand_type")
+  weaponConstant          Decimal?        @map("weapon_constant") @db.Decimal(8, 4)
+  weaponConstantOverrides Json?           @map("weapon_constant_overrides")
+  attackSpeed             Int?            @map("attack_speed") @db.SmallInt
+  createdAt               DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  equipmentItems          EquipmentItem[]
 
   @@unique([category, normalizedPart], map: "weapon_types_category_normalized_part_key")
   @@map("weapon_types")

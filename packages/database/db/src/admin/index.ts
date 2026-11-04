@@ -1,3 +1,4 @@
+export * from './backfill-equipment-weapon-types.repo';
 export * from './game-skill-query.repo';
 export * from './game-data-version.repo';
 export * from '../domain/game-data-version';

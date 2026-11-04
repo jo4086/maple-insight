@@ -377,6 +377,8 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   addOptionEnabled: 'addOptionEnabled',
   requiredLevel: 'requiredLevel',
   requiredClass: 'requiredClass',
+  requiredClassOverride: 'requiredClassOverride',
+  weaponTypeId: 'weaponTypeId',
   classGroup: 'classGroup',
   handType: 'handType',
   weaponConstant: 'weaponConstant',
@@ -418,7 +420,7 @@ exports.Prisma.WeaponTypeScalarFieldEnum = {
   isDedicated: 'isDedicated',
   handType: 'handType',
   weaponConstant: 'weaponConstant',
-  heroWeaponConstant: 'heroWeaponConstant',
+  weaponConstantOverrides: 'weaponConstantOverrides',
   attackSpeed: 'attackSpeed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

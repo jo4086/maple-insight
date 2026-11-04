@@ -44,6 +44,9 @@ export const commonEquipmentRequiredClass = '공용' as const;
 /** 장비 착용 가능 직업/직업군 */
 export type EquipmentRequiredClass = AllClassName | ClassGroup | typeof commonEquipmentRequiredClass;
 
+/** 아이템별 착용 가능 직업/직업군 대체 조건 */
+export type EquipmentRequiredClassOverride = EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+
 /** 아이템 스탯 옵션 */
 export interface EquipmentOption {
   /** 힘 */

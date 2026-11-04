@@ -27,7 +27,7 @@
     "seed:game-data-raw": "tsx src/seed-game-data-raw.ts",
     "preseed:game-data-bundle": "pnpm --filter @maple/db run build",
     "seed:game-data-bundle": "tsx src/seed-game-data-bundle.ts",
-    "preseed:weapon-types": "pnpm --filter @maple/data-core run build && pnpm --filter @maple/data-equipment run build && pnpm --filter @maple/db run build",
+    "preseed:weapon-types": "pnpm --filter @maple/db run build",
     "seed:weapon-types": "tsx src/seed-weapon-types.ts",
     "prisma:generate": "prisma generate",
     "lint": "eslint src --ext .ts"

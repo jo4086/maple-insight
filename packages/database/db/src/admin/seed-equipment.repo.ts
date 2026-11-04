@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { ensureGameDataVersion } from './game-data-version.repo';
 
+import { Prisma } from '@/generated/prisma';
 import { prisma } from '@/lib/prisma';
 
 const DEFAULT_CHUNK_SIZE = 1000;
@@ -21,6 +22,7 @@ type EquipmentJsonItem = {
   addOptionEnabled: boolean;
   requiredLevel: number | null;
   requiredClass: string | readonly string[];
+  requiredClassOverride?: string | readonly string[] | null;
   classGroup: string | null;
   handType: string | null;
   weaponConstant: number | null;
@@ -55,6 +57,8 @@ export type SeedEquipmentOptions = {
   dir: string;
   /** createMany chunk 크기 */
   chunkSize?: number;
+  /** bundle이 이미 시작한 importing 버전에만 추가 적재를 허용한다. */
+  importInProgress?: boolean;
 };
 
 export type SeedEquipmentResult = {
@@ -64,6 +68,23 @@ export type SeedEquipmentResult = {
   accessory: number;
   subWeapon: number;
   total: number;
+};
+
+type WeaponTypeCatalogRow = {
+  id: bigint;
+  category: string;
+  normalizedPart: string;
+  availabilityMode: string;
+  classGroupKeys: readonly string[];
+  allowedJobIds: readonly string[];
+};
+
+const legacyClassGroupLabels: Readonly<Record<string, string>> = {
+  warrior: '전사',
+  archer: '궁수',
+  mage: '마법사',
+  thief: '도적',
+  pirate: '해적',
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -97,7 +118,122 @@ async function createManyInChunks<T>(items: readonly T[], chunkSize: number, cre
   }
 }
 
-function toEquipmentItemCreateManyInput(item: EquipmentJsonItem, version: string) {
+function catalogKey(category: string, normalizedPart: string): string {
+  return `${category}\u0000${normalizedPart}`;
+}
+
+function mapEquipmentCategoryLabel(category: string): 'weapon' | 'subWeapon' | null {
+  if (category === '무기') return 'weapon';
+  if (category === '보조무기') return 'subWeapon';
+  return null;
+}
+
+export function validateEquipmentSeedItem(item: EquipmentJsonItem): void {
+  if (!['무기', '방어구', '장신구', '기타', '엠블렘/파워소스', '보조무기'].includes(item.category)) {
+    throw new Error(`Unsupported equipment category: ${item.category}`);
+  }
+  if (typeof item.part !== 'string' || item.part.trim().length === 0) {
+    throw new Error(`Invalid equipment part: ${item.name}`);
+  }
+
+  const value = item.requiredClassOverride;
+  if (value === undefined || value === null) return;
+  if (mapEquipmentCategoryLabel(item.category) === null) {
+    throw new Error(`requiredClassOverride is unsupported for ${item.category}: ${item.name}`);
+  }
+  const values = typeof value === 'string' ? [value] : value;
+  if (
+    !Array.isArray(values) ||
+    values.length === 0 ||
+    values.some((entry) => typeof entry !== 'string' || entry.length === 0 || entry.trim() !== entry) ||
+    new Set(values).size !== values.length
+  ) {
+    throw new Error(`Invalid requiredClassOverride: ${item.name}`);
+  }
+  if (Array.isArray(value) && value.includes('공용')) {
+    throw new Error(`Invalid requiredClassOverride: ${item.name}`);
+  }
+}
+
+function hasEqualRequiredClass(
+  left: string | readonly string[],
+  right: string | readonly string[],
+): boolean {
+  if (typeof left === 'string' || typeof right === 'string') return left === right;
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function validateMatchedPrimaryWeapon(item: EquipmentJsonItem, row: WeaponTypeCatalogRow): void {
+  if (item.requiredClassOverride !== undefined && item.requiredClassOverride !== null) {
+    if (hasEqualRequiredClass(item.requiredClassOverride, item.requiredClass)) return;
+    throw new Error(`requiredClassOverride does not match requiredClass: ${item.name}`);
+  }
+
+  const expected = row.availabilityMode === 'common'
+    && row.classGroupKeys.length === 0
+    && row.allowedJobIds.length === 0
+    ? '공용'
+    : row.availabilityMode === 'class_groups'
+      && row.classGroupKeys.length === 1
+      && row.allowedJobIds.length === 0
+      ? legacyClassGroupLabels[row.classGroupKeys[0] ?? '']
+      : undefined;
+  if (expected !== undefined && item.requiredClass === expected) return;
+  throw new Error(`requiredClass does not match weapon type availability: ${item.name}`);
+}
+
+export function matchEquipmentWeaponTypes(
+  items: readonly EquipmentJsonItem[],
+  catalog: readonly WeaponTypeCatalogRow[],
+): Map<EquipmentJsonItem, bigint> {
+  const byKey = new Map<string, WeaponTypeCatalogRow>();
+  for (const row of catalog) {
+    if ((row.category !== 'weapon' && row.category !== 'subWeapon') || row.normalizedPart.trim().length === 0) {
+      throw new Error(`Invalid weapon type catalog key: ${row.category}/${row.normalizedPart}`);
+    }
+    const key = catalogKey(row.category, row.normalizedPart);
+    if (byKey.has(key)) throw new Error(`Duplicate weapon type catalog key: ${row.category}/${row.normalizedPart}`);
+    byKey.set(key, row);
+  }
+
+  const matches = new Map<EquipmentJsonItem, bigint>();
+  const unsupported = new Set<string>();
+  const hasSubWeaponCatalog = catalog.some((row) => row.category === 'subWeapon');
+  for (const item of items) {
+    validateEquipmentSeedItem(item);
+    const category = mapEquipmentCategoryLabel(item.category);
+    if (category === null) continue;
+    const normalizedPart = item.part.replace(/\s+/g, '');
+    const row = byKey.get(catalogKey(category, normalizedPart));
+    if (row === undefined) {
+      if (category === 'weapon' || hasSubWeaponCatalog) unsupported.add(`${category}/${normalizedPart}`);
+    } else {
+      if (category === 'weapon') validateMatchedPrimaryWeapon(item, row);
+      matches.set(item, row.id);
+    }
+  }
+  if (unsupported.size > 0) {
+    throw new Error(`Unsupported weapon type catalog matches: ${[...unsupported].sort().join(', ')}`);
+  }
+  return matches;
+}
+
+export function assertEquipmentSeedVersion(
+  version: string,
+  existingStatus: string | null,
+  importInProgress: boolean,
+): 'create' | 'continue' {
+  if (existingStatus !== null) {
+    if (!importInProgress || existingStatus !== 'importing') {
+      throw new Error(`Equipment seed refuses existing game data version: ${version}`);
+    }
+    return 'continue';
+  }
+  if (importInProgress) throw new Error(`Equipment seed requires importing game data version: ${version}`);
+  return 'create';
+}
+
+export function toEquipmentItemCreateManyInput(item: EquipmentJsonItem, version: string, weaponTypeId: bigint | null) {
   return {
     version,
     name: item.name,
@@ -114,6 +250,10 @@ function toEquipmentItemCreateManyInput(item: EquipmentJsonItem, version: string
     addOptionEnabled: item.addOptionEnabled,
     requiredLevel: item.requiredLevel,
     requiredClass: item.requiredClass,
+    ...(item.requiredClassOverride == null
+      ? {}
+      : { requiredClassOverride: item.requiredClassOverride as Prisma.InputJsonValue }),
+    weaponTypeId,
     classGroup: item.classGroup,
     handType: item.handType,
     weaponConstant: item.weaponConstant,
@@ -151,13 +291,38 @@ export async function seedEquipment(options: SeedEquipmentOptions): Promise<Seed
     readJsonArray<EquipmentJsonItem>(path.join(options.dir, 'subWeapon.json')),
   ]);
   const items = [...weapon, ...armor, ...accessory, ...subWeapon];
+  items.forEach(validateEquipmentSeedItem);
 
   await prisma.$transaction(async (tx) => {
-    await ensureGameDataVersion(tx, options.version);
-    await tx.equipmentItem.deleteMany({ where: { version: options.version } });
+    const existingVersion = await tx.gameDataVersion.findUnique({
+      where: { version: options.version },
+      select: { status: true },
+    });
+    const versionAction = assertEquipmentSeedVersion(
+      options.version,
+      existingVersion?.status ?? null,
+      options.importInProgress === true,
+    );
+    const weaponTypeCatalog = await tx.weaponType.findMany({
+      select: {
+        id: true,
+        category: true,
+        normalizedPart: true,
+        availabilityMode: true,
+        classGroupKeys: true,
+        allowedJobIds: true,
+      },
+    });
+    const weaponTypeMatches = matchEquipmentWeaponTypes(items, weaponTypeCatalog);
 
+    if (versionAction === 'create') await ensureGameDataVersion(tx, options.version);
+    await tx.equipmentItem.deleteMany({ where: { version: options.version } });
     await createManyInChunks(
-      items.map((item) => toEquipmentItemCreateManyInput(item, options.version)),
+      items.map((item) => toEquipmentItemCreateManyInput(
+        item,
+        options.version,
+        weaponTypeMatches.get(item) ?? null,
+      )),
       chunkSize,
       (data) => tx.equipmentItem.createMany({ data }),
     );
