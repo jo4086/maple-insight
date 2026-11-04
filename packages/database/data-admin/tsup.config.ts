@@ -12,6 +12,7 @@ export default defineConfig({
     'seed-equipment-potential-option': 'src/seed-equipment-potential-option.ts',
     'seed-game-data': 'src/seed-game-data.ts',
     'seed-game-data-raw': 'src/seed-game-data-raw.ts',
+    'seed-weapon-types': 'src/seed-weapon-types.ts',
   },
   format: ['cjs'],
   dts: false,

@@ -29,7 +29,14 @@ function transaction(status = 'ready', collision = false) {
   };
   for (const name of ownedModels) {
     tx[name] = {
-      findMany: async ({ cursor }: { cursor?: unknown }) => cursor ? [] : [{ id: 30n, version: sourceVersion, jobId: '01', skillId: '02', name: 'item' }],
+      findMany: async ({ cursor }: { cursor?: unknown }) => cursor ? [] : [{
+        id: 30n,
+        version: sourceVersion,
+        jobId: '01',
+        skillId: '02',
+        name: 'item',
+        ...(name === 'equipmentItem' ? { requiredClass: '전사', requiredClassOverride: ['100'], weaponTypeId: 7n } : {}),
+      }],
       createMany: async ({ data }: { data: unknown }) => { (created[name] ??= []).push(data); },
     };
   }
@@ -48,6 +55,15 @@ test('clone copies every owned table and remaps raw file identity without markin
     assert.equal(rows[0][0].version, targetVersion, name);
     assert.equal(rows[0][0].id, name === 'equipmentItem' ? undefined : 30n, name);
   }
+  assert.deepEqual((created.equipmentItem as Record<string, unknown>[][])[0][0], {
+    version: targetVersion,
+    jobId: '01',
+    skillId: '02',
+    name: 'item',
+    requiredClass: '전사',
+    requiredClassOverride: ['100'],
+    weaponTypeId: 7n,
+  });
 });
 
 test('release date and soft delete use guarded updates without cascading', async () => {

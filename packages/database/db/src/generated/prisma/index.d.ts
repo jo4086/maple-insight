@@ -174,6 +174,14 @@ export type GameSkillPvpCommon = $Result.DefaultSelection<Prisma.$GameSkillPvpCo
  */
 export type EquipmentItem = $Result.DefaultSelection<Prisma.$EquipmentItemPayload>
 /**
+ * Model WeaponType
+ * INFO:
+ * 버전과 무관하게 공유하는 무기 타입 카탈로그다.
+ * - availabilityMode에 따라 classGroupKeys와 allowedJobIds 중 하나만 활성화된다.
+ * - 주무기 전용 필드의 필수 여부와 값 범위는 DB CHECK로 제한한다.
+ */
+export type WeaponType = $Result.DefaultSelection<Prisma.$WeaponTypePayload>
+/**
  * Model EquipmentPotentialOptionText
  * INFO:
  * 장비 잠재능력 옵션 문구를 부위/등급/레벨별로 정규화한 테이블이다.
@@ -510,6 +518,16 @@ export class PrismaClient<
     * ```
     */
   get equipmentItem(): Prisma.EquipmentItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.weaponType`: Exposes CRUD operations for the **WeaponType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WeaponTypes
+    * const weaponTypes = await prisma.weaponType.findMany()
+    * ```
+    */
+  get weaponType(): Prisma.WeaponTypeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.equipmentPotentialOptionText`: Exposes CRUD operations for the **EquipmentPotentialOptionText** model.
@@ -982,6 +1000,7 @@ export namespace Prisma {
     GameSkillLevel: 'GameSkillLevel',
     GameSkillPvpCommon: 'GameSkillPvpCommon',
     EquipmentItem: 'EquipmentItem',
+    WeaponType: 'WeaponType',
     EquipmentPotentialOptionText: 'EquipmentPotentialOptionText'
   };
 
@@ -1001,7 +1020,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataVersion" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem" | "equipmentPotentialOptionText"
+      modelProps: "rankingRun" | "rankingRawPage" | "rankingOcidCursor" | "ocid" | "searchHistory" | "unionRanking" | "characterGroup" | "characterGroupMember" | "bossDifficulty" | "bossPhase" | "bossPhaseTarget" | "gameDataVersion" | "gameDataRawFile" | "gameDataRawRecord" | "gameJob" | "gameSkill" | "gameSkillCommon" | "gameSkillHint" | "gameSkillLevel" | "gameSkillPvpCommon" | "equipmentItem" | "weaponType" | "equipmentPotentialOptionText"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2559,6 +2578,80 @@ export namespace Prisma {
           }
         }
       }
+      WeaponType: {
+        payload: Prisma.$WeaponTypePayload<ExtArgs>
+        fields: Prisma.WeaponTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WeaponTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WeaponTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          findFirst: {
+            args: Prisma.WeaponTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WeaponTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          findMany: {
+            args: Prisma.WeaponTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>[]
+          }
+          create: {
+            args: Prisma.WeaponTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          createMany: {
+            args: Prisma.WeaponTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WeaponTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>[]
+          }
+          delete: {
+            args: Prisma.WeaponTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          update: {
+            args: Prisma.WeaponTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.WeaponTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WeaponTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WeaponTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.WeaponTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeaponTypePayload>
+          }
+          aggregate: {
+            args: Prisma.WeaponTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWeaponType>
+          }
+          groupBy: {
+            args: Prisma.WeaponTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WeaponTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WeaponTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<WeaponTypeCountAggregateOutputType> | number
+          }
+        }
+      }
       EquipmentPotentialOptionText: {
         payload: Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>
         fields: Prisma.EquipmentPotentialOptionTextFieldRefs
@@ -2750,6 +2843,7 @@ export namespace Prisma {
     gameSkillLevel?: GameSkillLevelOmit
     gameSkillPvpCommon?: GameSkillPvpCommonOmit
     equipmentItem?: EquipmentItemOmit
+    weaponType?: WeaponTypeOmit
     equipmentPotentialOptionText?: EquipmentPotentialOptionTextOmit
   }
 
@@ -3174,6 +3268,37 @@ export namespace Prisma {
    */
   export type GameSkillCountOutputTypeCountPvpCommonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GameSkillPvpCommonWhereInput
+  }
+
+
+  /**
+   * Count Type WeaponTypeCountOutputType
+   */
+
+  export type WeaponTypeCountOutputType = {
+    equipmentItems: number
+  }
+
+  export type WeaponTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    equipmentItems?: boolean | WeaponTypeCountOutputTypeCountEquipmentItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WeaponTypeCountOutputType without action
+   */
+  export type WeaponTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponTypeCountOutputType
+     */
+    select?: WeaponTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WeaponTypeCountOutputType without action
+   */
+  export type WeaponTypeCountOutputTypeCountEquipmentItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EquipmentItemWhereInput
   }
 
 
@@ -26714,7 +26839,9 @@ export namespace Prisma {
   export type EquipmentItemAvgAggregateOutputType = {
     id: number | null
     requiredLevel: number | null
+    weaponTypeId: number | null
     weaponConstant: number | null
+    weaponSpeed: number | null
     str: number | null
     dex: number | null
     int: number | null
@@ -26741,7 +26868,9 @@ export namespace Prisma {
   export type EquipmentItemSumAggregateOutputType = {
     id: bigint | null
     requiredLevel: number | null
+    weaponTypeId: bigint | null
     weaponConstant: number | null
+    weaponSpeed: number | null
     str: number | null
     dex: number | null
     int: number | null
@@ -26780,9 +26909,11 @@ export namespace Prisma {
     scrollUpgradeEnabled: boolean | null
     addOptionEnabled: boolean | null
     requiredLevel: number | null
+    weaponTypeId: bigint | null
     classGroup: string | null
     handType: string | null
     weaponConstant: number | null
+    weaponSpeed: number | null
     str: number | null
     dex: number | null
     int: number | null
@@ -26823,9 +26954,11 @@ export namespace Prisma {
     scrollUpgradeEnabled: boolean | null
     addOptionEnabled: boolean | null
     requiredLevel: number | null
+    weaponTypeId: bigint | null
     classGroup: string | null
     handType: string | null
     weaponConstant: number | null
+    weaponSpeed: number | null
     str: number | null
     dex: number | null
     int: number | null
@@ -26868,9 +27001,12 @@ export namespace Prisma {
     addOptionEnabled: number
     requiredLevel: number
     requiredClass: number
+    requiredClassOverride: number
+    weaponTypeId: number
     classGroup: number
     handType: number
     weaponConstant: number
+    weaponSpeed: number
     str: number
     dex: number
     int: number
@@ -26902,7 +27038,9 @@ export namespace Prisma {
   export type EquipmentItemAvgAggregateInputType = {
     id?: true
     requiredLevel?: true
+    weaponTypeId?: true
     weaponConstant?: true
+    weaponSpeed?: true
     str?: true
     dex?: true
     int?: true
@@ -26929,7 +27067,9 @@ export namespace Prisma {
   export type EquipmentItemSumAggregateInputType = {
     id?: true
     requiredLevel?: true
+    weaponTypeId?: true
     weaponConstant?: true
+    weaponSpeed?: true
     str?: true
     dex?: true
     int?: true
@@ -26968,9 +27108,11 @@ export namespace Prisma {
     scrollUpgradeEnabled?: true
     addOptionEnabled?: true
     requiredLevel?: true
+    weaponTypeId?: true
     classGroup?: true
     handType?: true
     weaponConstant?: true
+    weaponSpeed?: true
     str?: true
     dex?: true
     int?: true
@@ -27011,9 +27153,11 @@ export namespace Prisma {
     scrollUpgradeEnabled?: true
     addOptionEnabled?: true
     requiredLevel?: true
+    weaponTypeId?: true
     classGroup?: true
     handType?: true
     weaponConstant?: true
+    weaponSpeed?: true
     str?: true
     dex?: true
     int?: true
@@ -27056,9 +27200,12 @@ export namespace Prisma {
     addOptionEnabled?: true
     requiredLevel?: true
     requiredClass?: true
+    requiredClassOverride?: true
+    weaponTypeId?: true
     classGroup?: true
     handType?: true
     weaponConstant?: true
+    weaponSpeed?: true
     str?: true
     dex?: true
     int?: true
@@ -27189,9 +27336,12 @@ export namespace Prisma {
     addOptionEnabled: boolean
     requiredLevel: number | null
     requiredClass: JsonValue
+    requiredClassOverride: JsonValue | null
+    weaponTypeId: bigint | null
     classGroup: string | null
     handType: string | null
     weaponConstant: number | null
+    weaponSpeed: number | null
     str: number
     dex: number
     int: number
@@ -27254,9 +27404,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
+    requiredClassOverride?: boolean
+    weaponTypeId?: boolean
     classGroup?: boolean
     handType?: boolean
     weaponConstant?: boolean
+    weaponSpeed?: boolean
     str?: boolean
     dex?: boolean
     int?: boolean
@@ -27282,6 +27435,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -27301,9 +27455,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
+    requiredClassOverride?: boolean
+    weaponTypeId?: boolean
     classGroup?: boolean
     handType?: boolean
     weaponConstant?: boolean
+    weaponSpeed?: boolean
     str?: boolean
     dex?: boolean
     int?: boolean
@@ -27329,6 +27486,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -27348,9 +27506,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
+    requiredClassOverride?: boolean
+    weaponTypeId?: boolean
     classGroup?: boolean
     handType?: boolean
     weaponConstant?: boolean
+    weaponSpeed?: boolean
     str?: boolean
     dex?: boolean
     int?: boolean
@@ -27376,6 +27537,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }, ExtArgs["result"]["equipmentItem"]>
 
   export type EquipmentItemSelectScalar = {
@@ -27395,9 +27557,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: boolean
     requiredClass?: boolean
+    requiredClassOverride?: boolean
+    weaponTypeId?: boolean
     classGroup?: boolean
     handType?: boolean
     weaponConstant?: boolean
+    weaponSpeed?: boolean
     str?: boolean
     dex?: boolean
     int?: boolean
@@ -27424,21 +27589,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "classGroup" | "handType" | "weaponConstant" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
+  export type EquipmentItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "name" | "normalizedName" | "baseName" | "category" | "keywords" | "part" | "setName" | "luckyFlag" | "potentialEnabled" | "starforceEnabled" | "scrollUpgradeEnabled" | "addOptionEnabled" | "requiredLevel" | "requiredClass" | "requiredClassOverride" | "weaponTypeId" | "classGroup" | "handType" | "weaponConstant" | "weaponSpeed" | "str" | "dex" | "int" | "luk" | "maxHp" | "maxMp" | "maxHpRate" | "maxMpRate" | "attackPower" | "magicPower" | "armor" | "bossDamage" | "ignoreMonsterArmor" | "criRate" | "criDamage" | "normalDamage" | "speed" | "jump" | "upgradeScroll" | "exceptionalScroll" | "specialRingLevel" | "grantedSkills" | "createdAt" | "updatedAt", ExtArgs["result"]["equipmentItem"]>
   export type EquipmentItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }
   export type EquipmentItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }
   export type EquipmentItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dataVersion?: boolean | GameDataVersionDefaultArgs<ExtArgs>
+    weaponType?: boolean | EquipmentItem$weaponTypeArgs<ExtArgs>
   }
 
   export type $EquipmentItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EquipmentItem"
     objects: {
       dataVersion: Prisma.$GameDataVersionPayload<ExtArgs>
+      weaponType: Prisma.$WeaponTypePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -27457,9 +27626,12 @@ export namespace Prisma {
       addOptionEnabled: boolean
       requiredLevel: number | null
       requiredClass: Prisma.JsonValue
+      requiredClassOverride: Prisma.JsonValue | null
+      weaponTypeId: bigint | null
       classGroup: string | null
       handType: string | null
       weaponConstant: number | null
+      weaponSpeed: number | null
       str: number
       dex: number
       int: number
@@ -27879,6 +28051,7 @@ export namespace Prisma {
   export interface Prisma__EquipmentItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     dataVersion<T extends GameDataVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDataVersionDefaultArgs<ExtArgs>>): Prisma__GameDataVersionClient<$Result.GetResult<Prisma.$GameDataVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    weaponType<T extends EquipmentItem$weaponTypeArgs<ExtArgs> = {}>(args?: Subset<T, EquipmentItem$weaponTypeArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27924,9 +28097,12 @@ export namespace Prisma {
     readonly addOptionEnabled: FieldRef<"EquipmentItem", 'Boolean'>
     readonly requiredLevel: FieldRef<"EquipmentItem", 'Int'>
     readonly requiredClass: FieldRef<"EquipmentItem", 'Json'>
+    readonly requiredClassOverride: FieldRef<"EquipmentItem", 'Json'>
+    readonly weaponTypeId: FieldRef<"EquipmentItem", 'BigInt'>
     readonly classGroup: FieldRef<"EquipmentItem", 'String'>
     readonly handType: FieldRef<"EquipmentItem", 'String'>
     readonly weaponConstant: FieldRef<"EquipmentItem", 'Float'>
+    readonly weaponSpeed: FieldRef<"EquipmentItem", 'Int'>
     readonly str: FieldRef<"EquipmentItem", 'Int'>
     readonly dex: FieldRef<"EquipmentItem", 'Int'>
     readonly int: FieldRef<"EquipmentItem", 'Int'>
@@ -28347,6 +28523,25 @@ export namespace Prisma {
   }
 
   /**
+   * EquipmentItem.weaponType
+   */
+  export type EquipmentItem$weaponTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    where?: WeaponTypeWhereInput
+  }
+
+  /**
    * EquipmentItem without action
    */
   export type EquipmentItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28362,6 +28557,1223 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EquipmentItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WeaponType
+   */
+
+  export type AggregateWeaponType = {
+    _count: WeaponTypeCountAggregateOutputType | null
+    _avg: WeaponTypeAvgAggregateOutputType | null
+    _sum: WeaponTypeSumAggregateOutputType | null
+    _min: WeaponTypeMinAggregateOutputType | null
+    _max: WeaponTypeMaxAggregateOutputType | null
+  }
+
+  export type WeaponTypeAvgAggregateOutputType = {
+    id: number | null
+    weaponConstant: Decimal | null
+    attackSpeed: number | null
+  }
+
+  export type WeaponTypeSumAggregateOutputType = {
+    id: bigint | null
+    weaponConstant: Decimal | null
+    attackSpeed: number | null
+  }
+
+  export type WeaponTypeMinAggregateOutputType = {
+    id: bigint | null
+    part: string | null
+    normalizedPart: string | null
+    category: string | null
+    availabilityMode: string | null
+    isDedicated: boolean | null
+    handType: string | null
+    weaponConstant: Decimal | null
+    attackSpeed: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeaponTypeMaxAggregateOutputType = {
+    id: bigint | null
+    part: string | null
+    normalizedPart: string | null
+    category: string | null
+    availabilityMode: string | null
+    isDedicated: boolean | null
+    handType: string | null
+    weaponConstant: Decimal | null
+    attackSpeed: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeaponTypeCountAggregateOutputType = {
+    id: number
+    part: number
+    normalizedPart: number
+    category: number
+    classGroupKeys: number
+    allowedJobIds: number
+    availabilityMode: number
+    isDedicated: number
+    handType: number
+    weaponConstant: number
+    weaponConstantOverrides: number
+    attackSpeed: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WeaponTypeAvgAggregateInputType = {
+    id?: true
+    weaponConstant?: true
+    attackSpeed?: true
+  }
+
+  export type WeaponTypeSumAggregateInputType = {
+    id?: true
+    weaponConstant?: true
+    attackSpeed?: true
+  }
+
+  export type WeaponTypeMinAggregateInputType = {
+    id?: true
+    part?: true
+    normalizedPart?: true
+    category?: true
+    availabilityMode?: true
+    isDedicated?: true
+    handType?: true
+    weaponConstant?: true
+    attackSpeed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeaponTypeMaxAggregateInputType = {
+    id?: true
+    part?: true
+    normalizedPart?: true
+    category?: true
+    availabilityMode?: true
+    isDedicated?: true
+    handType?: true
+    weaponConstant?: true
+    attackSpeed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeaponTypeCountAggregateInputType = {
+    id?: true
+    part?: true
+    normalizedPart?: true
+    category?: true
+    classGroupKeys?: true
+    allowedJobIds?: true
+    availabilityMode?: true
+    isDedicated?: true
+    handType?: true
+    weaponConstant?: true
+    weaponConstantOverrides?: true
+    attackSpeed?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WeaponTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeaponType to aggregate.
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeaponTypes to fetch.
+     */
+    orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WeaponTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeaponTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeaponTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WeaponTypes
+    **/
+    _count?: true | WeaponTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WeaponTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WeaponTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WeaponTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WeaponTypeMaxAggregateInputType
+  }
+
+  export type GetWeaponTypeAggregateType<T extends WeaponTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateWeaponType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWeaponType[P]>
+      : GetScalarType<T[P], AggregateWeaponType[P]>
+  }
+
+
+
+
+  export type WeaponTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeaponTypeWhereInput
+    orderBy?: WeaponTypeOrderByWithAggregationInput | WeaponTypeOrderByWithAggregationInput[]
+    by: WeaponTypeScalarFieldEnum[] | WeaponTypeScalarFieldEnum
+    having?: WeaponTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WeaponTypeCountAggregateInputType | true
+    _avg?: WeaponTypeAvgAggregateInputType
+    _sum?: WeaponTypeSumAggregateInputType
+    _min?: WeaponTypeMinAggregateInputType
+    _max?: WeaponTypeMaxAggregateInputType
+  }
+
+  export type WeaponTypeGroupByOutputType = {
+    id: bigint
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys: string[]
+    allowedJobIds: string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType: string | null
+    weaponConstant: Decimal | null
+    weaponConstantOverrides: JsonValue | null
+    attackSpeed: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WeaponTypeCountAggregateOutputType | null
+    _avg: WeaponTypeAvgAggregateOutputType | null
+    _sum: WeaponTypeSumAggregateOutputType | null
+    _min: WeaponTypeMinAggregateOutputType | null
+    _max: WeaponTypeMaxAggregateOutputType | null
+  }
+
+  type GetWeaponTypeGroupByPayload<T extends WeaponTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WeaponTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WeaponTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WeaponTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], WeaponTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WeaponTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    part?: boolean
+    normalizedPart?: boolean
+    category?: boolean
+    classGroupKeys?: boolean
+    allowedJobIds?: boolean
+    availabilityMode?: boolean
+    isDedicated?: boolean
+    handType?: boolean
+    weaponConstant?: boolean
+    weaponConstantOverrides?: boolean
+    attackSpeed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    equipmentItems?: boolean | WeaponType$equipmentItemsArgs<ExtArgs>
+    _count?: boolean | WeaponTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["weaponType"]>
+
+  export type WeaponTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    part?: boolean
+    normalizedPart?: boolean
+    category?: boolean
+    classGroupKeys?: boolean
+    allowedJobIds?: boolean
+    availabilityMode?: boolean
+    isDedicated?: boolean
+    handType?: boolean
+    weaponConstant?: boolean
+    weaponConstantOverrides?: boolean
+    attackSpeed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["weaponType"]>
+
+  export type WeaponTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    part?: boolean
+    normalizedPart?: boolean
+    category?: boolean
+    classGroupKeys?: boolean
+    allowedJobIds?: boolean
+    availabilityMode?: boolean
+    isDedicated?: boolean
+    handType?: boolean
+    weaponConstant?: boolean
+    weaponConstantOverrides?: boolean
+    attackSpeed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["weaponType"]>
+
+  export type WeaponTypeSelectScalar = {
+    id?: boolean
+    part?: boolean
+    normalizedPart?: boolean
+    category?: boolean
+    classGroupKeys?: boolean
+    allowedJobIds?: boolean
+    availabilityMode?: boolean
+    isDedicated?: boolean
+    handType?: boolean
+    weaponConstant?: boolean
+    weaponConstantOverrides?: boolean
+    attackSpeed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WeaponTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "part" | "normalizedPart" | "category" | "classGroupKeys" | "allowedJobIds" | "availabilityMode" | "isDedicated" | "handType" | "weaponConstant" | "weaponConstantOverrides" | "attackSpeed" | "createdAt" | "updatedAt", ExtArgs["result"]["weaponType"]>
+  export type WeaponTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    equipmentItems?: boolean | WeaponType$equipmentItemsArgs<ExtArgs>
+    _count?: boolean | WeaponTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WeaponTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type WeaponTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $WeaponTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WeaponType"
+    objects: {
+      equipmentItems: Prisma.$EquipmentItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      part: string
+      normalizedPart: string
+      category: string
+      classGroupKeys: string[]
+      allowedJobIds: string[]
+      availabilityMode: string
+      isDedicated: boolean
+      handType: string | null
+      weaponConstant: Prisma.Decimal | null
+      weaponConstantOverrides: Prisma.JsonValue | null
+      attackSpeed: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["weaponType"]>
+    composites: {}
+  }
+
+  type WeaponTypeGetPayload<S extends boolean | null | undefined | WeaponTypeDefaultArgs> = $Result.GetResult<Prisma.$WeaponTypePayload, S>
+
+  type WeaponTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WeaponTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WeaponTypeCountAggregateInputType | true
+    }
+
+  export interface WeaponTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WeaponType'], meta: { name: 'WeaponType' } }
+    /**
+     * Find zero or one WeaponType that matches the filter.
+     * @param {WeaponTypeFindUniqueArgs} args - Arguments to find a WeaponType
+     * @example
+     * // Get one WeaponType
+     * const weaponType = await prisma.weaponType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WeaponTypeFindUniqueArgs>(args: SelectSubset<T, WeaponTypeFindUniqueArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WeaponType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WeaponTypeFindUniqueOrThrowArgs} args - Arguments to find a WeaponType
+     * @example
+     * // Get one WeaponType
+     * const weaponType = await prisma.weaponType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WeaponTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, WeaponTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeaponType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeFindFirstArgs} args - Arguments to find a WeaponType
+     * @example
+     * // Get one WeaponType
+     * const weaponType = await prisma.weaponType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WeaponTypeFindFirstArgs>(args?: SelectSubset<T, WeaponTypeFindFirstArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeaponType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeFindFirstOrThrowArgs} args - Arguments to find a WeaponType
+     * @example
+     * // Get one WeaponType
+     * const weaponType = await prisma.weaponType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WeaponTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, WeaponTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WeaponTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WeaponTypes
+     * const weaponTypes = await prisma.weaponType.findMany()
+     * 
+     * // Get first 10 WeaponTypes
+     * const weaponTypes = await prisma.weaponType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const weaponTypeWithIdOnly = await prisma.weaponType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WeaponTypeFindManyArgs>(args?: SelectSubset<T, WeaponTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WeaponType.
+     * @param {WeaponTypeCreateArgs} args - Arguments to create a WeaponType.
+     * @example
+     * // Create one WeaponType
+     * const WeaponType = await prisma.weaponType.create({
+     *   data: {
+     *     // ... data to create a WeaponType
+     *   }
+     * })
+     * 
+     */
+    create<T extends WeaponTypeCreateArgs>(args: SelectSubset<T, WeaponTypeCreateArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WeaponTypes.
+     * @param {WeaponTypeCreateManyArgs} args - Arguments to create many WeaponTypes.
+     * @example
+     * // Create many WeaponTypes
+     * const weaponType = await prisma.weaponType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WeaponTypeCreateManyArgs>(args?: SelectSubset<T, WeaponTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WeaponTypes and returns the data saved in the database.
+     * @param {WeaponTypeCreateManyAndReturnArgs} args - Arguments to create many WeaponTypes.
+     * @example
+     * // Create many WeaponTypes
+     * const weaponType = await prisma.weaponType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WeaponTypes and only return the `id`
+     * const weaponTypeWithIdOnly = await prisma.weaponType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WeaponTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, WeaponTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WeaponType.
+     * @param {WeaponTypeDeleteArgs} args - Arguments to delete one WeaponType.
+     * @example
+     * // Delete one WeaponType
+     * const WeaponType = await prisma.weaponType.delete({
+     *   where: {
+     *     // ... filter to delete one WeaponType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WeaponTypeDeleteArgs>(args: SelectSubset<T, WeaponTypeDeleteArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WeaponType.
+     * @param {WeaponTypeUpdateArgs} args - Arguments to update one WeaponType.
+     * @example
+     * // Update one WeaponType
+     * const weaponType = await prisma.weaponType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WeaponTypeUpdateArgs>(args: SelectSubset<T, WeaponTypeUpdateArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WeaponTypes.
+     * @param {WeaponTypeDeleteManyArgs} args - Arguments to filter WeaponTypes to delete.
+     * @example
+     * // Delete a few WeaponTypes
+     * const { count } = await prisma.weaponType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WeaponTypeDeleteManyArgs>(args?: SelectSubset<T, WeaponTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeaponTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WeaponTypes
+     * const weaponType = await prisma.weaponType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WeaponTypeUpdateManyArgs>(args: SelectSubset<T, WeaponTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeaponTypes and returns the data updated in the database.
+     * @param {WeaponTypeUpdateManyAndReturnArgs} args - Arguments to update many WeaponTypes.
+     * @example
+     * // Update many WeaponTypes
+     * const weaponType = await prisma.weaponType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WeaponTypes and only return the `id`
+     * const weaponTypeWithIdOnly = await prisma.weaponType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WeaponTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, WeaponTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WeaponType.
+     * @param {WeaponTypeUpsertArgs} args - Arguments to update or create a WeaponType.
+     * @example
+     * // Update or create a WeaponType
+     * const weaponType = await prisma.weaponType.upsert({
+     *   create: {
+     *     // ... data to create a WeaponType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WeaponType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WeaponTypeUpsertArgs>(args: SelectSubset<T, WeaponTypeUpsertArgs<ExtArgs>>): Prisma__WeaponTypeClient<$Result.GetResult<Prisma.$WeaponTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WeaponTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeCountArgs} args - Arguments to filter WeaponTypes to count.
+     * @example
+     * // Count the number of WeaponTypes
+     * const count = await prisma.weaponType.count({
+     *   where: {
+     *     // ... the filter for the WeaponTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends WeaponTypeCountArgs>(
+      args?: Subset<T, WeaponTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WeaponTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WeaponType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WeaponTypeAggregateArgs>(args: Subset<T, WeaponTypeAggregateArgs>): Prisma.PrismaPromise<GetWeaponTypeAggregateType<T>>
+
+    /**
+     * Group by WeaponType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeaponTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WeaponTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WeaponTypeGroupByArgs['orderBy'] }
+        : { orderBy?: WeaponTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WeaponTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeaponTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WeaponType model
+   */
+  readonly fields: WeaponTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WeaponType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WeaponTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    equipmentItems<T extends WeaponType$equipmentItemsArgs<ExtArgs> = {}>(args?: Subset<T, WeaponType$equipmentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WeaponType model
+   */
+  interface WeaponTypeFieldRefs {
+    readonly id: FieldRef<"WeaponType", 'BigInt'>
+    readonly part: FieldRef<"WeaponType", 'String'>
+    readonly normalizedPart: FieldRef<"WeaponType", 'String'>
+    readonly category: FieldRef<"WeaponType", 'String'>
+    readonly classGroupKeys: FieldRef<"WeaponType", 'String[]'>
+    readonly allowedJobIds: FieldRef<"WeaponType", 'String[]'>
+    readonly availabilityMode: FieldRef<"WeaponType", 'String'>
+    readonly isDedicated: FieldRef<"WeaponType", 'Boolean'>
+    readonly handType: FieldRef<"WeaponType", 'String'>
+    readonly weaponConstant: FieldRef<"WeaponType", 'Decimal'>
+    readonly weaponConstantOverrides: FieldRef<"WeaponType", 'Json'>
+    readonly attackSpeed: FieldRef<"WeaponType", 'Int'>
+    readonly createdAt: FieldRef<"WeaponType", 'DateTime'>
+    readonly updatedAt: FieldRef<"WeaponType", 'DateTime'>
+  }
+
+
+  // Custom InputTypes
+  /**
+   * WeaponType findUnique
+   */
+  export type WeaponTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which WeaponType to fetch.
+     */
+    where: WeaponTypeWhereUniqueInput
+  }
+
+  /**
+   * WeaponType findUniqueOrThrow
+   */
+  export type WeaponTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which WeaponType to fetch.
+     */
+    where: WeaponTypeWhereUniqueInput
+  }
+
+  /**
+   * WeaponType findFirst
+   */
+  export type WeaponTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which WeaponType to fetch.
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WeaponTypes to fetch.
+     */
+    orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for WeaponTypes.
+     */
+    cursor?: WeaponTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WeaponTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WeaponTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of WeaponTypes.
+     */
+    distinct?: WeaponTypeScalarFieldEnum | WeaponTypeScalarFieldEnum[]
+  }
+
+  /**
+   * WeaponType findFirstOrThrow
+   */
+  export type WeaponTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which WeaponType to fetch.
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WeaponTypes to fetch.
+     */
+    orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for WeaponTypes.
+     */
+    cursor?: WeaponTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WeaponTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WeaponTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of WeaponTypes.
+     */
+    distinct?: WeaponTypeScalarFieldEnum | WeaponTypeScalarFieldEnum[]
+  }
+
+  /**
+   * WeaponType findMany
+   */
+  export type WeaponTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which WeaponTypes to fetch.
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WeaponTypes to fetch.
+     */
+    orderBy?: WeaponTypeOrderByWithRelationInput | WeaponTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing WeaponTypes.
+     */
+    cursor?: WeaponTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WeaponTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WeaponTypes.
+     */
+    skip?: number
+    distinct?: WeaponTypeScalarFieldEnum | WeaponTypeScalarFieldEnum[]
+  }
+
+  /**
+   * WeaponType create
+   */
+  export type WeaponTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WeaponType.
+     */
+    data: XOR<WeaponTypeCreateInput, WeaponTypeUncheckedCreateInput>
+  }
+
+  /**
+   * WeaponType createMany
+   */
+  export type WeaponTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WeaponTypes.
+     */
+    data: WeaponTypeCreateManyInput | WeaponTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WeaponType createManyAndReturn
+   */
+  export type WeaponTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many WeaponTypes.
+     */
+    data: WeaponTypeCreateManyInput | WeaponTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WeaponType update
+   */
+  export type WeaponTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WeaponType.
+     */
+    data: XOR<WeaponTypeUpdateInput, WeaponTypeUncheckedUpdateInput>
+    /**
+     * Choose, which WeaponType to update.
+     */
+    where: WeaponTypeWhereUniqueInput
+  }
+
+  /**
+   * WeaponType updateMany
+   */
+  export type WeaponTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WeaponTypes.
+     */
+    data: XOR<WeaponTypeUpdateManyMutationInput, WeaponTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which WeaponTypes to update
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * Limit how many WeaponTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeaponType updateManyAndReturn
+   */
+  export type WeaponTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update WeaponTypes.
+     */
+    data: XOR<WeaponTypeUpdateManyMutationInput, WeaponTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which WeaponTypes to update
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * Limit how many WeaponTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeaponType upsert
+   */
+  export type WeaponTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WeaponType to update in case it exists.
+     */
+    where: WeaponTypeWhereUniqueInput
+    /**
+     * In case the WeaponType found by the `where` argument doesn't exist, create a new WeaponType with this data.
+     */
+    create: XOR<WeaponTypeCreateInput, WeaponTypeUncheckedCreateInput>
+    /**
+     * In case the WeaponType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WeaponTypeUpdateInput, WeaponTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * WeaponType delete
+   */
+  export type WeaponTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
+    /**
+     * Filter which WeaponType to delete.
+     */
+    where: WeaponTypeWhereUniqueInput
+  }
+
+  /**
+   * WeaponType deleteMany
+   */
+  export type WeaponTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeaponTypes to delete
+     */
+    where?: WeaponTypeWhereInput
+    /**
+     * Limit how many WeaponTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeaponType.equipmentItems
+   */
+  export type WeaponType$equipmentItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EquipmentItem
+     */
+    select?: EquipmentItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EquipmentItem
+     */
+    omit?: EquipmentItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EquipmentItemInclude<ExtArgs> | null
+    where?: EquipmentItemWhereInput
+    orderBy?: EquipmentItemOrderByWithRelationInput | EquipmentItemOrderByWithRelationInput[]
+    cursor?: EquipmentItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EquipmentItemScalarFieldEnum | EquipmentItemScalarFieldEnum[]
+  }
+
+  /**
+   * WeaponType without action
+   */
+  export type WeaponTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeaponType
+     */
+    select?: WeaponTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeaponType
+     */
+    omit?: WeaponTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeaponTypeInclude<ExtArgs> | null
   }
 
 
@@ -28473,55 +29885,55 @@ export namespace Prisma {
     where?: EquipmentPotentialOptionTextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of EquipmentPotentialOptionTexts to fetch.
      */
     orderBy?: EquipmentPotentialOptionTextOrderByWithRelationInput | EquipmentPotentialOptionTextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: EquipmentPotentialOptionTextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` EquipmentPotentialOptionTexts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` EquipmentPotentialOptionTexts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned EquipmentPotentialOptionTexts
     **/
     _count?: true | EquipmentPotentialOptionTextCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: EquipmentPotentialOptionTextAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: EquipmentPotentialOptionTextSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: EquipmentPotentialOptionTextMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: EquipmentPotentialOptionTextMaxAggregateInputType
@@ -28719,13 +30131,13 @@ export namespace Prisma {
      * @example
      * // Get all EquipmentPotentialOptionTexts
      * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany()
-     * 
+     *
      * // Get first 10 EquipmentPotentialOptionTexts
      * const equipmentPotentialOptionTexts = await prisma.equipmentPotentialOptionText.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.findMany({ select: { id: true } })
-     * 
+     *
      */
     findMany<T extends EquipmentPotentialOptionTextFindManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -28739,7 +30151,7 @@ export namespace Prisma {
      *     // ... data to create a EquipmentPotentialOptionText
      *   }
      * })
-     * 
+     *
      */
     create<T extends EquipmentPotentialOptionTextCreateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextCreateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28753,7 +30165,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends EquipmentPotentialOptionTextCreateManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28767,7 +30179,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many EquipmentPotentialOptionTexts and only return the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.createManyAndReturn({
      *   select: { id: true },
@@ -28777,7 +30189,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends EquipmentPotentialOptionTextCreateManyAndReturnArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -28791,7 +30203,7 @@ export namespace Prisma {
      *     // ... filter to delete one EquipmentPotentialOptionText
      *   }
      * })
-     * 
+     *
      */
     delete<T extends EquipmentPotentialOptionTextDeleteArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextDeleteArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28808,7 +30220,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends EquipmentPotentialOptionTextUpdateArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateArgs<ExtArgs>>): Prisma__EquipmentPotentialOptionTextClient<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -28822,7 +30234,7 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends EquipmentPotentialOptionTextDeleteManyArgs>(args?: SelectSubset<T, EquipmentPotentialOptionTextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28841,7 +30253,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends EquipmentPotentialOptionTextUpdateManyArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -28858,7 +30270,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more EquipmentPotentialOptionTexts and only return the `id`
      * const equipmentPotentialOptionTextWithIdOnly = await prisma.equipmentPotentialOptionText.updateManyAndReturn({
      *   select: { id: true },
@@ -28871,7 +30283,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends EquipmentPotentialOptionTextUpdateManyAndReturnArgs>(args: SelectSubset<T, EquipmentPotentialOptionTextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EquipmentPotentialOptionTextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -28960,7 +30372,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends EquipmentPotentialOptionTextGroupByArgs,
@@ -29767,9 +31179,12 @@ export namespace Prisma {
     addOptionEnabled: 'addOptionEnabled',
     requiredLevel: 'requiredLevel',
     requiredClass: 'requiredClass',
+    requiredClassOverride: 'requiredClassOverride',
+    weaponTypeId: 'weaponTypeId',
     classGroup: 'classGroup',
     handType: 'handType',
     weaponConstant: 'weaponConstant',
+    weaponSpeed: 'weaponSpeed',
     str: 'str',
     dex: 'dex',
     int: 'int',
@@ -29797,6 +31212,26 @@ export namespace Prisma {
   };
 
   export type EquipmentItemScalarFieldEnum = (typeof EquipmentItemScalarFieldEnum)[keyof typeof EquipmentItemScalarFieldEnum]
+
+
+  export const WeaponTypeScalarFieldEnum: {
+    id: 'id',
+    part: 'part',
+    normalizedPart: 'normalizedPart',
+    category: 'category',
+    classGroupKeys: 'classGroupKeys',
+    allowedJobIds: 'allowedJobIds',
+    availabilityMode: 'availabilityMode',
+    isDedicated: 'isDedicated',
+    handType: 'handType',
+    weaponConstant: 'weaponConstant',
+    weaponConstantOverrides: 'weaponConstantOverrides',
+    attackSpeed: 'attackSpeed',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WeaponTypeScalarFieldEnum = (typeof WeaponTypeScalarFieldEnum)[keyof typeof WeaponTypeScalarFieldEnum]
 
 
   export const EquipmentPotentialOptionTextScalarFieldEnum: {
@@ -29955,6 +31390,20 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+
   /**
    * Deep Input Types
    */
@@ -31578,9 +33027,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonFilter<"EquipmentItem">
+    requiredClassOverride?: JsonNullableFilter<"EquipmentItem">
+    weaponTypeId?: BigIntNullableFilter<"EquipmentItem"> | bigint | number | null
     classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
     handType?: StringNullableFilter<"EquipmentItem"> | string | null
     weaponConstant?: FloatNullableFilter<"EquipmentItem"> | number | null
+    weaponSpeed?: IntNullableFilter<"EquipmentItem"> | number | null
     str?: IntFilter<"EquipmentItem"> | number
     dex?: IntFilter<"EquipmentItem"> | number
     int?: IntFilter<"EquipmentItem"> | number
@@ -31606,6 +33058,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
+    weaponType?: XOR<WeaponTypeNullableScalarRelationFilter, WeaponTypeWhereInput> | null
   }
 
   export type EquipmentItemOrderByWithRelationInput = {
@@ -31625,9 +33078,12 @@ export namespace Prisma {
     addOptionEnabled?: SortOrder
     requiredLevel?: SortOrderInput | SortOrder
     requiredClass?: SortOrder
+    requiredClassOverride?: SortOrderInput | SortOrder
+    weaponTypeId?: SortOrderInput | SortOrder
     classGroup?: SortOrderInput | SortOrder
     handType?: SortOrderInput | SortOrder
     weaponConstant?: SortOrderInput | SortOrder
+    weaponSpeed?: SortOrderInput | SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -31653,6 +33109,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     dataVersion?: GameDataVersionOrderByWithRelationInput
+    weaponType?: WeaponTypeOrderByWithRelationInput
   }
 
   export type EquipmentItemWhereUniqueInput = Prisma.AtLeast<{
@@ -31677,9 +33134,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonFilter<"EquipmentItem">
+    requiredClassOverride?: JsonNullableFilter<"EquipmentItem">
+    weaponTypeId?: BigIntNullableFilter<"EquipmentItem"> | bigint | number | null
     classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
     handType?: StringNullableFilter<"EquipmentItem"> | string | null
     weaponConstant?: FloatNullableFilter<"EquipmentItem"> | number | null
+    weaponSpeed?: IntNullableFilter<"EquipmentItem"> | number | null
     str?: IntFilter<"EquipmentItem"> | number
     dex?: IntFilter<"EquipmentItem"> | number
     int?: IntFilter<"EquipmentItem"> | number
@@ -31705,6 +33165,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeFilter<"EquipmentItem"> | Date | string
     dataVersion?: XOR<GameDataVersionScalarRelationFilter, GameDataVersionWhereInput>
+    weaponType?: XOR<WeaponTypeNullableScalarRelationFilter, WeaponTypeWhereInput> | null
   }, "id" | "version_name" | "version_normalizedName">
 
   export type EquipmentItemOrderByWithAggregationInput = {
@@ -31724,9 +33185,12 @@ export namespace Prisma {
     addOptionEnabled?: SortOrder
     requiredLevel?: SortOrderInput | SortOrder
     requiredClass?: SortOrder
+    requiredClassOverride?: SortOrderInput | SortOrder
+    weaponTypeId?: SortOrderInput | SortOrder
     classGroup?: SortOrderInput | SortOrder
     handType?: SortOrderInput | SortOrder
     weaponConstant?: SortOrderInput | SortOrder
+    weaponSpeed?: SortOrderInput | SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -31778,9 +33242,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolWithAggregatesFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableWithAggregatesFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonWithAggregatesFilter<"EquipmentItem">
+    requiredClassOverride?: JsonNullableWithAggregatesFilter<"EquipmentItem">
+    weaponTypeId?: BigIntNullableWithAggregatesFilter<"EquipmentItem"> | bigint | number | null
     classGroup?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
     handType?: StringNullableWithAggregatesFilter<"EquipmentItem"> | string | null
     weaponConstant?: FloatNullableWithAggregatesFilter<"EquipmentItem"> | number | null
+    weaponSpeed?: IntNullableWithAggregatesFilter<"EquipmentItem"> | number | null
     str?: IntWithAggregatesFilter<"EquipmentItem"> | number
     dex?: IntWithAggregatesFilter<"EquipmentItem"> | number
     int?: IntWithAggregatesFilter<"EquipmentItem"> | number
@@ -31805,6 +33272,109 @@ export namespace Prisma {
     grantedSkills?: StringNullableListFilter<"EquipmentItem">
     createdAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EquipmentItem"> | Date | string
+  }
+
+  export type WeaponTypeWhereInput = {
+    AND?: WeaponTypeWhereInput | WeaponTypeWhereInput[]
+    OR?: WeaponTypeWhereInput[]
+    NOT?: WeaponTypeWhereInput | WeaponTypeWhereInput[]
+    id?: BigIntFilter<"WeaponType"> | bigint | number
+    part?: StringFilter<"WeaponType"> | string
+    normalizedPart?: StringFilter<"WeaponType"> | string
+    category?: StringFilter<"WeaponType"> | string
+    classGroupKeys?: StringNullableListFilter<"WeaponType">
+    allowedJobIds?: StringNullableListFilter<"WeaponType">
+    availabilityMode?: StringFilter<"WeaponType"> | string
+    isDedicated?: BoolFilter<"WeaponType"> | boolean
+    handType?: StringNullableFilter<"WeaponType"> | string | null
+    weaponConstant?: DecimalNullableFilter<"WeaponType"> | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: JsonNullableFilter<"WeaponType">
+    attackSpeed?: IntNullableFilter<"WeaponType"> | number | null
+    createdAt?: DateTimeFilter<"WeaponType"> | Date | string
+    updatedAt?: DateTimeFilter<"WeaponType"> | Date | string
+    equipmentItems?: EquipmentItemListRelationFilter
+  }
+
+  export type WeaponTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    part?: SortOrder
+    normalizedPart?: SortOrder
+    category?: SortOrder
+    classGroupKeys?: SortOrder
+    allowedJobIds?: SortOrder
+    availabilityMode?: SortOrder
+    isDedicated?: SortOrder
+    handType?: SortOrderInput | SortOrder
+    weaponConstant?: SortOrderInput | SortOrder
+    weaponConstantOverrides?: SortOrderInput | SortOrder
+    attackSpeed?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    equipmentItems?: EquipmentItemOrderByRelationAggregateInput
+  }
+
+  export type WeaponTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    category_normalizedPart?: WeaponTypeCategoryNormalizedPartCompoundUniqueInput
+    AND?: WeaponTypeWhereInput | WeaponTypeWhereInput[]
+    OR?: WeaponTypeWhereInput[]
+    NOT?: WeaponTypeWhereInput | WeaponTypeWhereInput[]
+    part?: StringFilter<"WeaponType"> | string
+    normalizedPart?: StringFilter<"WeaponType"> | string
+    category?: StringFilter<"WeaponType"> | string
+    classGroupKeys?: StringNullableListFilter<"WeaponType">
+    allowedJobIds?: StringNullableListFilter<"WeaponType">
+    availabilityMode?: StringFilter<"WeaponType"> | string
+    isDedicated?: BoolFilter<"WeaponType"> | boolean
+    handType?: StringNullableFilter<"WeaponType"> | string | null
+    weaponConstant?: DecimalNullableFilter<"WeaponType"> | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: JsonNullableFilter<"WeaponType">
+    attackSpeed?: IntNullableFilter<"WeaponType"> | number | null
+    createdAt?: DateTimeFilter<"WeaponType"> | Date | string
+    updatedAt?: DateTimeFilter<"WeaponType"> | Date | string
+    equipmentItems?: EquipmentItemListRelationFilter
+  }, "id" | "category_normalizedPart">
+
+  export type WeaponTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    part?: SortOrder
+    normalizedPart?: SortOrder
+    category?: SortOrder
+    classGroupKeys?: SortOrder
+    allowedJobIds?: SortOrder
+    availabilityMode?: SortOrder
+    isDedicated?: SortOrder
+    handType?: SortOrderInput | SortOrder
+    weaponConstant?: SortOrderInput | SortOrder
+    weaponConstantOverrides?: SortOrderInput | SortOrder
+    attackSpeed?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WeaponTypeCountOrderByAggregateInput
+    _avg?: WeaponTypeAvgOrderByAggregateInput
+    _max?: WeaponTypeMaxOrderByAggregateInput
+    _min?: WeaponTypeMinOrderByAggregateInput
+    _sum?: WeaponTypeSumOrderByAggregateInput
+  }
+
+  export type WeaponTypeScalarWhereWithAggregatesInput = {
+    AND?: WeaponTypeScalarWhereWithAggregatesInput | WeaponTypeScalarWhereWithAggregatesInput[]
+    OR?: WeaponTypeScalarWhereWithAggregatesInput[]
+    NOT?: WeaponTypeScalarWhereWithAggregatesInput | WeaponTypeScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"WeaponType"> | bigint | number
+    part?: StringWithAggregatesFilter<"WeaponType"> | string
+    normalizedPart?: StringWithAggregatesFilter<"WeaponType"> | string
+    category?: StringWithAggregatesFilter<"WeaponType"> | string
+    classGroupKeys?: StringNullableListFilter<"WeaponType">
+    allowedJobIds?: StringNullableListFilter<"WeaponType">
+    availabilityMode?: StringWithAggregatesFilter<"WeaponType"> | string
+    isDedicated?: BoolWithAggregatesFilter<"WeaponType"> | boolean
+    handType?: StringNullableWithAggregatesFilter<"WeaponType"> | string | null
+    weaponConstant?: DecimalNullableWithAggregatesFilter<"WeaponType"> | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: JsonNullableWithAggregatesFilter<"WeaponType">
+    attackSpeed?: IntNullableWithAggregatesFilter<"WeaponType"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"WeaponType"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WeaponType"> | Date | string
   }
 
   export type EquipmentPotentialOptionTextWhereInput = {
@@ -33612,9 +35182,11 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -33640,6 +35212,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dataVersion: GameDataVersionCreateNestedOneWithoutEquipmentInput
+    weaponType?: WeaponTypeCreateNestedOneWithoutEquipmentItemsInput
   }
 
   export type EquipmentItemUncheckedCreateInput = {
@@ -33659,9 +35232,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: bigint | number | null
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -33704,9 +35280,11 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -33732,6 +35310,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dataVersion?: GameDataVersionUpdateOneRequiredWithoutEquipmentNestedInput
+    weaponType?: WeaponTypeUpdateOneWithoutEquipmentItemsNestedInput
   }
 
   export type EquipmentItemUncheckedUpdateInput = {
@@ -33751,9 +35330,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -33797,9 +35379,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: bigint | number | null
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -33842,9 +35427,11 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -33888,9 +35475,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -33913,6 +35503,129 @@ export namespace Prisma {
     exceptionalScroll?: IntFieldUpdateOperationsInput | number
     specialRingLevel?: IntFieldUpdateOperationsInput | number
     grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeaponTypeCreateInput = {
+    id?: bigint | number
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys?: WeaponTypeCreateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeCreateallowedJobIdsInput | string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType?: string | null
+    weaponConstant?: Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    equipmentItems?: EquipmentItemCreateNestedManyWithoutWeaponTypeInput
+  }
+
+  export type WeaponTypeUncheckedCreateInput = {
+    id?: bigint | number
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys?: WeaponTypeCreateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeCreateallowedJobIdsInput | string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType?: string | null
+    weaponConstant?: Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    equipmentItems?: EquipmentItemUncheckedCreateNestedManyWithoutWeaponTypeInput
+  }
+
+  export type WeaponTypeUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    equipmentItems?: EquipmentItemUpdateManyWithoutWeaponTypeNestedInput
+  }
+
+  export type WeaponTypeUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    equipmentItems?: EquipmentItemUncheckedUpdateManyWithoutWeaponTypeNestedInput
+  }
+
+  export type WeaponTypeCreateManyInput = {
+    id?: bigint | number
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys?: WeaponTypeCreateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeCreateallowedJobIdsInput | string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType?: string | null
+    weaponConstant?: Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeaponTypeUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeaponTypeUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35600,6 +37313,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type WeaponTypeNullableScalarRelationFilter = {
+    is?: WeaponTypeWhereInput | null
+    isNot?: WeaponTypeWhereInput | null
+  }
+
   export type EquipmentItemVersionNameCompoundUniqueInput = {
     version: string
     name: string
@@ -35627,9 +37345,12 @@ export namespace Prisma {
     addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
     requiredClass?: SortOrder
+    requiredClassOverride?: SortOrder
+    weaponTypeId?: SortOrder
     classGroup?: SortOrder
     handType?: SortOrder
     weaponConstant?: SortOrder
+    weaponSpeed?: SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -35659,7 +37380,9 @@ export namespace Prisma {
   export type EquipmentItemAvgOrderByAggregateInput = {
     id?: SortOrder
     requiredLevel?: SortOrder
+    weaponTypeId?: SortOrder
     weaponConstant?: SortOrder
+    weaponSpeed?: SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -35698,9 +37421,11 @@ export namespace Prisma {
     scrollUpgradeEnabled?: SortOrder
     addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
+    weaponTypeId?: SortOrder
     classGroup?: SortOrder
     handType?: SortOrder
     weaponConstant?: SortOrder
+    weaponSpeed?: SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -35741,9 +37466,11 @@ export namespace Prisma {
     scrollUpgradeEnabled?: SortOrder
     addOptionEnabled?: SortOrder
     requiredLevel?: SortOrder
+    weaponTypeId?: SortOrder
     classGroup?: SortOrder
     handType?: SortOrder
     weaponConstant?: SortOrder
+    weaponSpeed?: SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -35772,7 +37499,9 @@ export namespace Prisma {
   export type EquipmentItemSumOrderByAggregateInput = {
     id?: SortOrder
     requiredLevel?: SortOrder
+    weaponTypeId?: SortOrder
     weaponConstant?: SortOrder
+    weaponSpeed?: SortOrder
     str?: SortOrder
     dex?: SortOrder
     int?: SortOrder
@@ -35802,6 +37531,95 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type WeaponTypeCategoryNormalizedPartCompoundUniqueInput = {
+    category: string
+    normalizedPart: string
+  }
+
+  export type WeaponTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    part?: SortOrder
+    normalizedPart?: SortOrder
+    category?: SortOrder
+    classGroupKeys?: SortOrder
+    allowedJobIds?: SortOrder
+    availabilityMode?: SortOrder
+    isDedicated?: SortOrder
+    handType?: SortOrder
+    weaponConstant?: SortOrder
+    weaponConstantOverrides?: SortOrder
+    attackSpeed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeaponTypeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    weaponConstant?: SortOrder
+    attackSpeed?: SortOrder
+  }
+
+  export type WeaponTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    part?: SortOrder
+    normalizedPart?: SortOrder
+    category?: SortOrder
+    availabilityMode?: SortOrder
+    isDedicated?: SortOrder
+    handType?: SortOrder
+    weaponConstant?: SortOrder
+    attackSpeed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeaponTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    part?: SortOrder
+    normalizedPart?: SortOrder
+    category?: SortOrder
+    availabilityMode?: SortOrder
+    isDedicated?: SortOrder
+    handType?: SortOrder
+    weaponConstant?: SortOrder
+    attackSpeed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeaponTypeSumOrderByAggregateInput = {
+    id?: SortOrder
+    weaponConstant?: SortOrder
+    attackSpeed?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type EquipmentPotentialOptionTextKindLevelPartGradeOptionTextCompoundUniqueInput = {
@@ -37011,6 +38829,12 @@ export namespace Prisma {
     connect?: GameDataVersionWhereUniqueInput
   }
 
+  export type WeaponTypeCreateNestedOneWithoutEquipmentItemsInput = {
+    create?: XOR<WeaponTypeCreateWithoutEquipmentItemsInput, WeaponTypeUncheckedCreateWithoutEquipmentItemsInput>
+    connectOrCreate?: WeaponTypeCreateOrConnectWithoutEquipmentItemsInput
+    connect?: WeaponTypeWhereUniqueInput
+  }
+
   export type EquipmentItemUpdatekeywordsInput = {
     set?: string[]
     push?: string | string[]
@@ -37031,6 +38855,84 @@ export namespace Prisma {
     upsert?: GameDataVersionUpsertWithoutEquipmentInput
     connect?: GameDataVersionWhereUniqueInput
     update?: XOR<XOR<GameDataVersionUpdateToOneWithWhereWithoutEquipmentInput, GameDataVersionUpdateWithoutEquipmentInput>, GameDataVersionUncheckedUpdateWithoutEquipmentInput>
+  }
+
+  export type WeaponTypeUpdateOneWithoutEquipmentItemsNestedInput = {
+    create?: XOR<WeaponTypeCreateWithoutEquipmentItemsInput, WeaponTypeUncheckedCreateWithoutEquipmentItemsInput>
+    connectOrCreate?: WeaponTypeCreateOrConnectWithoutEquipmentItemsInput
+    upsert?: WeaponTypeUpsertWithoutEquipmentItemsInput
+    disconnect?: WeaponTypeWhereInput | boolean
+    delete?: WeaponTypeWhereInput | boolean
+    connect?: WeaponTypeWhereUniqueInput
+    update?: XOR<XOR<WeaponTypeUpdateToOneWithWhereWithoutEquipmentItemsInput, WeaponTypeUpdateWithoutEquipmentItemsInput>, WeaponTypeUncheckedUpdateWithoutEquipmentItemsInput>
+  }
+
+  export type WeaponTypeCreateclassGroupKeysInput = {
+    set: string[]
+  }
+
+  export type WeaponTypeCreateallowedJobIdsInput = {
+    set: string[]
+  }
+
+  export type EquipmentItemCreateNestedManyWithoutWeaponTypeInput = {
+    create?: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput> | EquipmentItemCreateWithoutWeaponTypeInput[] | EquipmentItemUncheckedCreateWithoutWeaponTypeInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutWeaponTypeInput | EquipmentItemCreateOrConnectWithoutWeaponTypeInput[]
+    createMany?: EquipmentItemCreateManyWeaponTypeInputEnvelope
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+  }
+
+  export type EquipmentItemUncheckedCreateNestedManyWithoutWeaponTypeInput = {
+    create?: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput> | EquipmentItemCreateWithoutWeaponTypeInput[] | EquipmentItemUncheckedCreateWithoutWeaponTypeInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutWeaponTypeInput | EquipmentItemCreateOrConnectWithoutWeaponTypeInput[]
+    createMany?: EquipmentItemCreateManyWeaponTypeInputEnvelope
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+  }
+
+  export type WeaponTypeUpdateclassGroupKeysInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type WeaponTypeUpdateallowedJobIdsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type EquipmentItemUpdateManyWithoutWeaponTypeNestedInput = {
+    create?: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput> | EquipmentItemCreateWithoutWeaponTypeInput[] | EquipmentItemUncheckedCreateWithoutWeaponTypeInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutWeaponTypeInput | EquipmentItemCreateOrConnectWithoutWeaponTypeInput[]
+    upsert?: EquipmentItemUpsertWithWhereUniqueWithoutWeaponTypeInput | EquipmentItemUpsertWithWhereUniqueWithoutWeaponTypeInput[]
+    createMany?: EquipmentItemCreateManyWeaponTypeInputEnvelope
+    set?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    disconnect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    delete?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    update?: EquipmentItemUpdateWithWhereUniqueWithoutWeaponTypeInput | EquipmentItemUpdateWithWhereUniqueWithoutWeaponTypeInput[]
+    updateMany?: EquipmentItemUpdateManyWithWhereWithoutWeaponTypeInput | EquipmentItemUpdateManyWithWhereWithoutWeaponTypeInput[]
+    deleteMany?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
+  }
+
+  export type EquipmentItemUncheckedUpdateManyWithoutWeaponTypeNestedInput = {
+    create?: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput> | EquipmentItemCreateWithoutWeaponTypeInput[] | EquipmentItemUncheckedCreateWithoutWeaponTypeInput[]
+    connectOrCreate?: EquipmentItemCreateOrConnectWithoutWeaponTypeInput | EquipmentItemCreateOrConnectWithoutWeaponTypeInput[]
+    upsert?: EquipmentItemUpsertWithWhereUniqueWithoutWeaponTypeInput | EquipmentItemUpsertWithWhereUniqueWithoutWeaponTypeInput[]
+    createMany?: EquipmentItemCreateManyWeaponTypeInputEnvelope
+    set?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    disconnect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    delete?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    connect?: EquipmentItemWhereUniqueInput | EquipmentItemWhereUniqueInput[]
+    update?: EquipmentItemUpdateWithWhereUniqueWithoutWeaponTypeInput | EquipmentItemUpdateWithWhereUniqueWithoutWeaponTypeInput[]
+    updateMany?: EquipmentItemUpdateManyWithWhereWithoutWeaponTypeInput | EquipmentItemUpdateManyWithWhereWithoutWeaponTypeInput[]
+    deleteMany?: EquipmentItemScalarWhereInput | EquipmentItemScalarWhereInput[]
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -37361,6 +39263,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type RankingRawPageCreateWithoutRunInput = {
@@ -39018,9 +40947,11 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -39045,6 +40976,7 @@ export namespace Prisma {
     grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    weaponType?: WeaponTypeCreateNestedOneWithoutEquipmentItemsInput
   }
 
   export type EquipmentItemUncheckedCreateWithoutDataVersionInput = {
@@ -39063,9 +40995,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: bigint | number | null
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -39193,9 +41128,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFilter<"EquipmentItem"> | boolean
     requiredLevel?: IntNullableFilter<"EquipmentItem"> | number | null
     requiredClass?: JsonFilter<"EquipmentItem">
+    requiredClassOverride?: JsonNullableFilter<"EquipmentItem">
+    weaponTypeId?: BigIntNullableFilter<"EquipmentItem"> | bigint | number | null
     classGroup?: StringNullableFilter<"EquipmentItem"> | string | null
     handType?: StringNullableFilter<"EquipmentItem"> | string | null
     weaponConstant?: FloatNullableFilter<"EquipmentItem"> | number | null
+    weaponSpeed?: IntNullableFilter<"EquipmentItem"> | number | null
     str?: IntFilter<"EquipmentItem"> | number
     dex?: IntFilter<"EquipmentItem"> | number
     int?: IntFilter<"EquipmentItem"> | number
@@ -40210,6 +42148,45 @@ export namespace Prisma {
     create: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
   }
 
+  export type WeaponTypeCreateWithoutEquipmentItemsInput = {
+    id?: bigint | number
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys?: WeaponTypeCreateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeCreateallowedJobIdsInput | string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType?: string | null
+    weaponConstant?: Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeaponTypeUncheckedCreateWithoutEquipmentItemsInput = {
+    id?: bigint | number
+    part: string
+    normalizedPart: string
+    category: string
+    classGroupKeys?: WeaponTypeCreateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeCreateallowedJobIdsInput | string[]
+    availabilityMode: string
+    isDedicated: boolean
+    handType?: string | null
+    weaponConstant?: Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeaponTypeCreateOrConnectWithoutEquipmentItemsInput = {
+    where: WeaponTypeWhereUniqueInput
+    create: XOR<WeaponTypeCreateWithoutEquipmentItemsInput, WeaponTypeUncheckedCreateWithoutEquipmentItemsInput>
+  }
+
   export type GameDataVersionUpsertWithoutEquipmentInput = {
     update: XOR<GameDataVersionUpdateWithoutEquipmentInput, GameDataVersionUncheckedUpdateWithoutEquipmentInput>
     create: XOR<GameDataVersionCreateWithoutEquipmentInput, GameDataVersionUncheckedCreateWithoutEquipmentInput>
@@ -40249,6 +42226,173 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     rawFiles?: GameDataRawFileUncheckedUpdateManyWithoutDataVersionNestedInput
     jobs?: GameJobUncheckedUpdateManyWithoutDataVersionNestedInput
+  }
+
+  export type WeaponTypeUpsertWithoutEquipmentItemsInput = {
+    update: XOR<WeaponTypeUpdateWithoutEquipmentItemsInput, WeaponTypeUncheckedUpdateWithoutEquipmentItemsInput>
+    create: XOR<WeaponTypeCreateWithoutEquipmentItemsInput, WeaponTypeUncheckedCreateWithoutEquipmentItemsInput>
+    where?: WeaponTypeWhereInput
+  }
+
+  export type WeaponTypeUpdateToOneWithWhereWithoutEquipmentItemsInput = {
+    where?: WeaponTypeWhereInput
+    data: XOR<WeaponTypeUpdateWithoutEquipmentItemsInput, WeaponTypeUncheckedUpdateWithoutEquipmentItemsInput>
+  }
+
+  export type WeaponTypeUpdateWithoutEquipmentItemsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeaponTypeUncheckedUpdateWithoutEquipmentItemsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    part?: StringFieldUpdateOperationsInput | string
+    normalizedPart?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    classGroupKeys?: WeaponTypeUpdateclassGroupKeysInput | string[]
+    allowedJobIds?: WeaponTypeUpdateallowedJobIdsInput | string[]
+    availabilityMode?: StringFieldUpdateOperationsInput | string
+    isDedicated?: BoolFieldUpdateOperationsInput | boolean
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    weaponConstantOverrides?: NullableJsonNullValueInput | InputJsonValue
+    attackSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemCreateWithoutWeaponTypeInput = {
+    id?: bigint | number
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    weaponSpeed?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dataVersion: GameDataVersionCreateNestedOneWithoutEquipmentInput
+  }
+
+  export type EquipmentItemUncheckedCreateWithoutWeaponTypeInput = {
+    id?: bigint | number
+    version: string
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    weaponSpeed?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentItemCreateOrConnectWithoutWeaponTypeInput = {
+    where: EquipmentItemWhereUniqueInput
+    create: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput>
+  }
+
+  export type EquipmentItemCreateManyWeaponTypeInputEnvelope = {
+    data: EquipmentItemCreateManyWeaponTypeInput | EquipmentItemCreateManyWeaponTypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EquipmentItemUpsertWithWhereUniqueWithoutWeaponTypeInput = {
+    where: EquipmentItemWhereUniqueInput
+    update: XOR<EquipmentItemUpdateWithoutWeaponTypeInput, EquipmentItemUncheckedUpdateWithoutWeaponTypeInput>
+    create: XOR<EquipmentItemCreateWithoutWeaponTypeInput, EquipmentItemUncheckedCreateWithoutWeaponTypeInput>
+  }
+
+  export type EquipmentItemUpdateWithWhereUniqueWithoutWeaponTypeInput = {
+    where: EquipmentItemWhereUniqueInput
+    data: XOR<EquipmentItemUpdateWithoutWeaponTypeInput, EquipmentItemUncheckedUpdateWithoutWeaponTypeInput>
+  }
+
+  export type EquipmentItemUpdateManyWithWhereWithoutWeaponTypeInput = {
+    where: EquipmentItemScalarWhereInput
+    data: XOR<EquipmentItemUpdateManyMutationInput, EquipmentItemUncheckedUpdateManyWithoutWeaponTypeInput>
   }
 
   export type RankingRawPageCreateManyRunInput = {
@@ -40776,9 +42920,12 @@ export namespace Prisma {
     addOptionEnabled?: boolean
     requiredLevel?: number | null
     requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: bigint | number | null
     classGroup?: string | null
     handType?: string | null
     weaponConstant?: number | null
+    weaponSpeed?: number | null
     str?: number
     dex?: number
     int?: number
@@ -40870,9 +43017,11 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -40897,6 +43046,7 @@ export namespace Prisma {
     grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    weaponType?: WeaponTypeUpdateOneWithoutEquipmentItemsNestedInput
   }
 
   export type EquipmentItemUncheckedUpdateWithoutDataVersionInput = {
@@ -40915,9 +43065,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -40960,9 +43113,12 @@ export namespace Prisma {
     addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
     requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
     requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    weaponTypeId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     classGroup?: NullableStringFieldUpdateOperationsInput | string | null
     handType?: NullableStringFieldUpdateOperationsInput | string | null
     weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
     str?: IntFieldUpdateOperationsInput | number
     dex?: IntFieldUpdateOperationsInput | number
     int?: IntFieldUpdateOperationsInput | number
@@ -41159,6 +43315,198 @@ export namespace Prisma {
     commonName?: StringFieldUpdateOperationsInput | string
     commonValue?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemCreateManyWeaponTypeInput = {
+    id?: bigint | number
+    version: string
+    name: string
+    normalizedName: string
+    baseName?: string | null
+    category: string
+    keywords?: EquipmentItemCreatekeywordsInput | string[]
+    part: string
+    setName?: string | null
+    luckyFlag?: boolean
+    potentialEnabled?: boolean
+    starforceEnabled?: boolean
+    scrollUpgradeEnabled?: boolean
+    addOptionEnabled?: boolean
+    requiredLevel?: number | null
+    requiredClass: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: string | null
+    handType?: string | null
+    weaponConstant?: number | null
+    weaponSpeed?: number | null
+    str?: number
+    dex?: number
+    int?: number
+    luk?: number
+    maxHp?: number
+    maxMp?: number
+    maxHpRate?: number
+    maxMpRate?: number
+    attackPower?: number
+    magicPower?: number
+    armor?: number
+    bossDamage?: number
+    ignoreMonsterArmor?: number
+    criRate?: number
+    criDamage?: number
+    normalDamage?: number
+    speed?: number
+    jump?: number
+    upgradeScroll?: number
+    exceptionalScroll?: number
+    specialRingLevel?: number
+    grantedSkills?: EquipmentItemCreategrantedSkillsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EquipmentItemUpdateWithoutWeaponTypeInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataVersion?: GameDataVersionUpdateOneRequiredWithoutEquipmentNestedInput
+  }
+
+  export type EquipmentItemUncheckedUpdateWithoutWeaponTypeInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    version?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EquipmentItemUncheckedUpdateManyWithoutWeaponTypeInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    version?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    normalizedName?: StringFieldUpdateOperationsInput | string
+    baseName?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
+    keywords?: EquipmentItemUpdatekeywordsInput | string[]
+    part?: StringFieldUpdateOperationsInput | string
+    setName?: NullableStringFieldUpdateOperationsInput | string | null
+    luckyFlag?: BoolFieldUpdateOperationsInput | boolean
+    potentialEnabled?: BoolFieldUpdateOperationsInput | boolean
+    starforceEnabled?: BoolFieldUpdateOperationsInput | boolean
+    scrollUpgradeEnabled?: BoolFieldUpdateOperationsInput | boolean
+    addOptionEnabled?: BoolFieldUpdateOperationsInput | boolean
+    requiredLevel?: NullableIntFieldUpdateOperationsInput | number | null
+    requiredClass?: JsonNullValueInput | InputJsonValue
+    requiredClassOverride?: NullableJsonNullValueInput | InputJsonValue
+    classGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    handType?: NullableStringFieldUpdateOperationsInput | string | null
+    weaponConstant?: NullableFloatFieldUpdateOperationsInput | number | null
+    weaponSpeed?: NullableIntFieldUpdateOperationsInput | number | null
+    str?: IntFieldUpdateOperationsInput | number
+    dex?: IntFieldUpdateOperationsInput | number
+    int?: IntFieldUpdateOperationsInput | number
+    luk?: IntFieldUpdateOperationsInput | number
+    maxHp?: IntFieldUpdateOperationsInput | number
+    maxMp?: IntFieldUpdateOperationsInput | number
+    maxHpRate?: IntFieldUpdateOperationsInput | number
+    maxMpRate?: IntFieldUpdateOperationsInput | number
+    attackPower?: IntFieldUpdateOperationsInput | number
+    magicPower?: IntFieldUpdateOperationsInput | number
+    armor?: IntFieldUpdateOperationsInput | number
+    bossDamage?: IntFieldUpdateOperationsInput | number
+    ignoreMonsterArmor?: IntFieldUpdateOperationsInput | number
+    criRate?: IntFieldUpdateOperationsInput | number
+    criDamage?: IntFieldUpdateOperationsInput | number
+    normalDamage?: IntFieldUpdateOperationsInput | number
+    speed?: IntFieldUpdateOperationsInput | number
+    jump?: IntFieldUpdateOperationsInput | number
+    upgradeScroll?: IntFieldUpdateOperationsInput | number
+    exceptionalScroll?: IntFieldUpdateOperationsInput | number
+    specialRingLevel?: IntFieldUpdateOperationsInput | number
+    grantedSkills?: EquipmentItemUpdategrantedSkillsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

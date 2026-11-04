@@ -118,4 +118,5 @@ pnpm build
 
 - [Architecture](./docs/Architecture.md)
 - [dev-log](./docs/dev-log.md)
+- [메이플스토리 NEXON Open API 문서 링크](./docs/nexon-maplestory-open-api.md)
 - [Project Retrospective](./docs/Technical_Insights_on_Driving_a_Service_to_Completion%28korean%29.md)

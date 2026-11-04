@@ -211,7 +211,7 @@ export const weaponConstantMap: WeaponTypeConstantMap = {
   wand: 1.2,
   espLimiter: 1.2,
   magicGauntlet: 1.2,
-  shiningRod: 2,
+  shiningRod: 1.2,
 
   oneHandedSword: 1.24,
 
@@ -287,9 +287,9 @@ export function resolveWeaponRequiredClass(meta: WeaponPartMeta): WeaponPartMeta
 export const weaponConstantOverrideMap = {
   히어로: {
     한손검: 1.34,
-    한손도끼: 1.34,
+    한손둔기: 1.34,
     두손검: 1.44,
-    두손도끼: 1.44,
+    두손둔기: 1.44,
   },
   팔라딘: {
     한손둔기: 1.24,

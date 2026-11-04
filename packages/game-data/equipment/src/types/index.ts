@@ -19,6 +19,7 @@ import { subWeaponTypes, warriorFinalClasses } from './sub-weapon';
 export * from './equipment';
 export * from './set';
 export * from './sub-weapon';
+export { resolveWeaponTypeConstant, type WeaponTypeRecord } from './weapon_type';
 
 export type WeaponHandType = (typeof weaponHandTypes)[number];
 export type WeaponType = (typeof weaponTypes)[number];
@@ -42,6 +43,9 @@ export const commonEquipmentRequiredClass = '공용' as const;
 
 /** 장비 착용 가능 직업/직업군 */
 export type EquipmentRequiredClass = AllClassName | ClassGroup | typeof commonEquipmentRequiredClass;
+
+/** 아이템별 착용 가능 직업/직업군 대체 조건 */
+export type EquipmentRequiredClassOverride = EquipmentRequiredClass | readonly EquipmentRequiredClass[];
 
 /** 아이템 스탯 옵션 */
 export interface EquipmentOption {

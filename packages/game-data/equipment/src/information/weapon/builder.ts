@@ -1,6 +1,6 @@
 import type { EquipmentCapabilityOverride, EquipmentGenerationStatInput, EquipmentGenerationStatTemplate } from '@/rule';
 import { resolveWeaponRequiredClass, weaponTypeMetaMap } from '@/rule/weapon';
-import type { EquipmentRequiredClass, EquipmentSet, WeaponHandType, WeaponType } from '@/types';
+import type { EquipmentRequiredClassOverride, EquipmentSet, WeaponHandType, WeaponType } from '@/types';
 
 /**
  * src/information/weapon/builder.ts
@@ -26,8 +26,10 @@ type WeaponMeta<TWeaponType extends WeaponType = WeaponType> = {
   part: TWeaponType;
   /** 장비 세트 key */
   setKey: EquipmentSet | null;
-  /** 착용 가능 직업/직업군 */
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  /** 최종 착용 가능 직업/직업군 */
+  requiredClass: EquipmentRequiredClassOverride;
+  /** 무기 타입 기본값을 완전히 대체하는 아이템별 조건 */
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   /** 착용 요구 레벨 */
   requiredLevel: number;
   /** 럭키 아이템 여부 */
@@ -49,7 +51,7 @@ type WeaponMetaBuilderBaseInput = {
 };
 
 /** 무기 메타 작성 시 예외로 직접 override할 수 있는 입력값 */
-type WeaponMetaInput = Partial<Pick<WeaponMeta, 'setKey' | 'luckyFlag' | 'grantedSkills'>>;
+type WeaponMetaInput = Partial<Pick<WeaponMeta, 'setKey' | 'luckyFlag' | 'grantedSkills' | 'requiredClassOverride'>>;
 
 /** 무기 메타 맵을 단계적으로 작성하는 builder */
 type WeaponMetaBuilder<TName extends string, TUsed extends TName> = {
@@ -84,21 +86,26 @@ export function createWeaponMetaBuilder<TName extends string, TUsed extends TNam
   } satisfies Required<WeaponMetaBuilderBaseInput>;
 
   return {
-    add: (name, weaponType, meta = {}) =>
-      createWeaponMetaBuilder<TName, TUsed | typeof name>(defaultMeta, {
+    add: (name, weaponType, meta = {}) => {
+      const typeMeta = weaponTypeMetaMap[weaponType];
+      const requiredClassOverride = meta.requiredClassOverride ?? typeMeta.requiredClass ?? undefined;
+
+      return createWeaponMetaBuilder<TName, TUsed | typeof name>(defaultMeta, {
         ...map,
         [name]: {
           ...meta,
           category: 'weapon',
           part: weaponType,
           setKey: meta.setKey ?? defaultMeta.setKey,
-          handType: weaponTypeMetaMap[weaponType].handType,
-          requiredClass: resolveWeaponRequiredClass(weaponTypeMetaMap[weaponType]),
+          handType: typeMeta.handType,
+          requiredClass: requiredClassOverride ?? resolveWeaponRequiredClass(typeMeta),
+          ...(requiredClassOverride !== undefined ? { requiredClassOverride } : {}),
           requiredLevel: defaultMeta.requiredLevel,
           luckyFlag: meta.luckyFlag ?? defaultMeta.luckyFlag,
           grantedSkills: meta.grantedSkills ?? defaultMeta.grantedSkills,
         },
-      }),
+      });
+    },
     done: () => map,
     doneStrict: (() => map) as WeaponMetaBuilder<TName, TUsed>['doneStrict'],
   };

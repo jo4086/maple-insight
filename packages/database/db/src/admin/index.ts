@@ -1,3 +1,4 @@
+export * from './backfill-equipment-weapon-types.repo';
 export * from './game-skill-query.repo';
 export * from './game-data-version.repo';
 export * from '../domain/game-data-version';
@@ -8,3 +9,4 @@ export * from './seed-equipment-potential-option.repo';
 export * from './seed-game-data.repo';
 export * from './seed-game-data-raw.repo';
 export * from './seed-game-data-bundle.repo';
+export * from './seed-weapon-types.repo';

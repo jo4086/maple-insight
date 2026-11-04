@@ -377,9 +377,12 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   addOptionEnabled: 'addOptionEnabled',
   requiredLevel: 'requiredLevel',
   requiredClass: 'requiredClass',
+  requiredClassOverride: 'requiredClassOverride',
+  weaponTypeId: 'weaponTypeId',
   classGroup: 'classGroup',
   handType: 'handType',
   weaponConstant: 'weaponConstant',
+  weaponSpeed: 'weaponSpeed',
   str: 'str',
   dex: 'dex',
   int: 'int',
@@ -402,6 +405,23 @@ exports.Prisma.EquipmentItemScalarFieldEnum = {
   exceptionalScroll: 'exceptionalScroll',
   specialRingLevel: 'specialRingLevel',
   grantedSkills: 'grantedSkills',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WeaponTypeScalarFieldEnum = {
+  id: 'id',
+  part: 'part',
+  normalizedPart: 'normalizedPart',
+  category: 'category',
+  classGroupKeys: 'classGroupKeys',
+  allowedJobIds: 'allowedJobIds',
+  availabilityMode: 'availabilityMode',
+  isDedicated: 'isDedicated',
+  handType: 'handType',
+  weaponConstant: 'weaponConstant',
+  weaponConstantOverrides: 'weaponConstantOverrides',
+  attackSpeed: 'attackSpeed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -470,6 +490,7 @@ exports.Prisma.ModelName = {
   GameSkillLevel: 'GameSkillLevel',
   GameSkillPvpCommon: 'GameSkillPvpCommon',
   EquipmentItem: 'EquipmentItem',
+  WeaponType: 'WeaponType',
   EquipmentPotentialOptionText: 'EquipmentPotentialOptionText'
 };
 

@@ -53,6 +53,7 @@ import {
   weaponTypeMetaMap,
   type EquipmentGenerationStatTemplate,
   type EquipmentRequiredClass,
+  type EquipmentRequiredClassOverride,
   type EquipmentSet,
   type EquipmentCategory,
   type EquipmentCategoryLabel,
@@ -112,7 +113,8 @@ export type GeneratedEquipmentJsonItem = EquipmentStatJson & {
   scrollUpgradeEnabled: boolean;
   addOptionEnabled: boolean;
   requiredLevel: number | null;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride | null;
   classGroup: ClassGroup | null;
   handType: WeaponHandTypeLabel | null;
   weaponConstant: number | null;
@@ -154,12 +156,14 @@ function resolveWeaponClassGroup(classGroup: ClassGroup | readonly ClassGroup[] 
 function createWeaponClassGroupVariants(input: {
   name: string;
   classGroup: ClassGroup | readonly ClassGroup[] | null;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   weaponConstant: number;
 }): readonly {
   name: string;
   part?: SubWeaponType;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   classGroup: ClassGroup | null;
   weaponConstant: number;
 }[] {
@@ -168,6 +172,7 @@ function createWeaponClassGroupVariants(input: {
       {
         name: input.name,
         requiredClass: input.requiredClass,
+        ...(input.requiredClassOverride !== undefined ? { requiredClassOverride: input.requiredClassOverride } : {}),
         classGroup: resolveWeaponClassGroup(input.classGroup, input.requiredClass),
         weaponConstant: input.weaponConstant,
       },
@@ -177,6 +182,7 @@ function createWeaponClassGroupVariants(input: {
   return input.classGroup.map((classGroup) => ({
     name: `${input.name}(${classGroup})`,
     requiredClass: input.requiredClass,
+    ...(input.requiredClassOverride !== undefined ? { requiredClassOverride: input.requiredClassOverride } : {}),
     classGroup,
     weaponConstant: input.weaponConstant,
   }));
@@ -188,6 +194,7 @@ function createWeaponConstantOverrideVariants(input: {
 }): readonly {
   name: string;
   requiredClass: EquipmentRequiredClass;
+  requiredClassOverride: EquipmentRequiredClass;
   classGroup: ClassGroup | null;
   weaponConstant: number;
 }[] {
@@ -202,6 +209,7 @@ function createWeaponConstantOverrideVariants(input: {
       {
         name: `${input.name}(${requiredClass})`,
         requiredClass: requiredClass as EquipmentRequiredClass,
+        requiredClassOverride: requiredClass as EquipmentRequiredClass,
         classGroup: resolveRequiredClassGroup(requiredClass as EquipmentRequiredClass) ?? null,
         weaponConstant,
       },
@@ -294,7 +302,8 @@ function createEquipmentJsonItem(input: {
   setKey: EquipmentSet | null;
   luckyFlag?: boolean;
   requiredLevel?: number | null;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride | null;
   classGroup?: ClassGroup | null;
   handType?: WeaponHandType | null;
   weaponConstant?: number | null;
@@ -330,6 +339,7 @@ function createEquipmentJsonItem(input: {
     addOptionEnabled: capability.addOptionEnabled,
     requiredLevel: input.requiredLevel ?? null,
     requiredClass: input.requiredClass,
+    ...(input.requiredClassOverride !== undefined ? { requiredClassOverride: input.requiredClassOverride } : {}),
     classGroup,
     handType: resolveHandTypeLabel(input.handType),
     weaponConstant: input.weaponConstant ?? null,
@@ -340,12 +350,14 @@ function createEquipmentJsonItem(input: {
 
 function createRequiredClassVariants(input: {
   name: string;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   variants?: readonly EquipmentRequiredClassVariant[];
 }): readonly {
   name: string;
   part?: SubWeaponType;
-  requiredClass: EquipmentRequiredClass | readonly EquipmentRequiredClass[];
+  requiredClass: EquipmentRequiredClassOverride;
+  requiredClassOverride?: EquipmentRequiredClassOverride;
   requiredLevel?: number;
   setKey?: EquipmentSet | null;
   grantedSkills?: readonly string[];
@@ -356,6 +368,7 @@ function createRequiredClassVariants(input: {
       {
         name: input.name,
         requiredClass: input.requiredClass,
+        ...(input.requiredClassOverride !== undefined ? { requiredClassOverride: input.requiredClassOverride } : {}),
       },
     ];
   }
@@ -367,6 +380,7 @@ function createRequiredClassVariants(input: {
       name: `${input.name}(${suffix})`,
       part,
       requiredClass,
+      requiredClassOverride: requiredClass,
       requiredLevel,
       setKey,
       grantedSkills,
@@ -396,6 +410,7 @@ export function createWeaponEquipmentJson(): GeneratedEquipmentJsonItem[] {
           name,
           classGroup: weaponTypeMeta.classGroup,
           requiredClass: meta.requiredClass,
+          requiredClassOverride: meta.requiredClassOverride,
           weaponConstant: weaponTypeMeta.weaponConstant,
         }),
         ...createWeaponConstantOverrideVariants({
@@ -413,6 +428,7 @@ export function createWeaponEquipmentJson(): GeneratedEquipmentJsonItem[] {
         luckyFlag: meta.luckyFlag,
         requiredLevel: meta.requiredLevel,
         requiredClass: variant.requiredClass,
+        ...(variant.requiredClassOverride !== undefined ? { requiredClassOverride: variant.requiredClassOverride } : {}),
         classGroup: variant.classGroup,
         handType: meta.handType,
         weaponConstant: variant.weaponConstant,
@@ -488,6 +504,7 @@ export function createSubWeaponEquipmentJson(): GeneratedEquipmentJsonItem[] {
     const variants = createRequiredClassVariants({
       name,
       requiredClass: stat.requiredClass,
+      requiredClassOverride: stat.requiredClassOverride,
       variants: statVariants,
     });
 
@@ -505,6 +522,7 @@ export function createSubWeaponEquipmentJson(): GeneratedEquipmentJsonItem[] {
         setKey: variant.setKey ?? stat.setKey,
         requiredLevel: variant.requiredLevel ?? stat.requiredLevel,
         requiredClass: variant.requiredClass,
+        ...(variant.requiredClassOverride !== undefined ? { requiredClassOverride: variant.requiredClassOverride } : {}),
         grantedSkills: variant.grantedSkills ?? stat.grantedSkills,
         statTemplate: {
           ...stat,
