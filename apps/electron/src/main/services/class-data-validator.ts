@@ -1,3 +1,5 @@
+import { classifyJobId } from '@maple/data-core'
+
 import type { DataValidator, ValidationIssueDraft } from '../../shared/data-validation'
 
 const classFields = new Set(['jobID', 'jobName'])
@@ -22,7 +24,7 @@ export const classDataValidator: DataValidator = {
       const jobId = record.jobID
       const jobName = record.jobName
 
-      if (typeof jobId !== 'string' || !/^\d+$/.test(jobId)) {
+      if (typeof jobId !== 'string') {
         issues.push({
           severity: 'error',
           code: 'INVALID_JOB_ID',
@@ -31,17 +33,87 @@ export const classDataValidator: DataValidator = {
           value: { before: jobId }
         })
       } else {
-        const firstRecord = seenJobIds.get(jobId)
-        if (firstRecord !== undefined) {
+        const classification = classifyJobId(jobId)
+
+        if (classification.kind === 'invalid') {
           issues.push({
             severity: 'error',
-            code: 'DUPLICATE_JOB_ID',
-            message: `jobID ${jobId}가 레코드 ${firstRecord}와 중복됩니다.`,
+            code: 'INVALID_JOB_ID',
+            message: 'jobID는 5자리 이하의 숫자 문자열 또는 6자리 시스템 ID여야 합니다.',
             location: { record: index, field: 'jobID' },
             value: { before: jobId }
           })
-        } else {
-          seenJobIds.set(jobId, index)
+        } else if (classification.kind === 'unknown') {
+          issues.push({
+            severity: 'warning',
+            code: 'UNCLASSIFIED_JOB_ID',
+            message: `jobID ${jobId}는 알려진 직업 분류에 속하지 않습니다.`,
+            location: { record: index, field: 'jobID' },
+            value: { before: jobId }
+          })
+        } else if (classification.kind === 'dummy') {
+          issues.push({
+            severity: 'warning',
+            code: 'DUMMY_JOB_ID',
+            message: `jobID ${jobId}는 사용하지 않는 더미 직업 코드입니다.`,
+            location: { record: index, field: 'jobID' },
+            value: { before: jobId }
+          })
+        } else if (classification.kind === 'skillGroup') {
+          issues.push({
+            severity: 'warning',
+            code: 'SKILL_GROUP_JOB_ID',
+            message: `jobID ${jobId}는 직업이 아닌 스킬 그룹 코드입니다.`,
+            location: { record: index, field: 'jobID' },
+            value: { before: jobId }
+          })
+        } else if (classification.kind === 'system') {
+          issues.push({
+            severity: 'warning',
+            code: 'SYSTEM_JOB_ID',
+            message: `jobID ${jobId}는 6자리 시스템 ID입니다.`,
+            location: { record: index, field: 'jobID' },
+            value: { before: jobId }
+          })
+        } else if (classification.ambiguous) {
+          const classNames = classification.matches.map((match) => match.className).join(', ')
+          issues.push({
+            severity: 'warning',
+            code: 'AMBIGUOUS_JOB_ID',
+            message: `jobID ${jobId}는 여러 직업과 일치합니다: ${classNames}.`,
+            location: { record: index, field: 'jobID' },
+            value: { before: jobId }
+          })
+        }
+
+        if (
+          classification.kind === 'job' &&
+          classification.stage === 6 &&
+          classification.matches.some((match) => match.classKey === 'evan') &&
+          jobName === ''
+        ) {
+          issues.push({
+            severity: 'warning',
+            code: 'EMPTY_EVAN_SIXTH_JOB_NAME',
+            message: '에반 6차 직업의 빈 jobName을 원본 값으로 유지합니다.',
+            location: { record: index, field: 'jobName' },
+            value: { before: jobName }
+          })
+        }
+
+        if (/^\d+$/.test(jobId)) {
+          const firstRecord = seenJobIds.get(jobId)
+          if (firstRecord !== undefined) {
+            issues.push({
+              severity: 'error',
+              code: 'DUPLICATE_JOB_ID',
+              message: `jobID ${jobId}가 레코드 ${firstRecord}와 중복됩니다.`,
+              location: { record: index, field: 'jobID' },
+              value: { before: jobId }
+            })
+          } else {
+            seenJobIds.set(jobId, index)
+          }
         }
       }
 
