@@ -1,5 +1,24 @@
 # Maple Insight Data Studio Review
 
+## 직업 데이터 탭 UI 보완 검증 (2026-11-07)
+
+- [독립 요청 검증 기록](./REQUESTS/job-data-tab.md#review--ui-보완-검증-2026-11-07)에 직업 상세 고정 편집 행·안쪽 select, 페이지 shell 여백 제거와 내부 여백, 사이드바 직업 정보·편집기 accordion/picker, 활성 빈 탭, 넓어진 checkbox OR/AND 필터·reset 구분선·숨긴 직업 scrollbar, 얇은 전역 scrollbar를 기록했다.
+- navbar bell에는 스크린샷 성공·오류 알림이 누적되며 일반 push도 사용할 수 있다. 성공 banner는 표시하지 않는다.
+- Web typecheck, 대상 Vitest 11개, production `electron-vite build`, ESLint·Prettier가 통과했다. Playwright Chromium 모의 renderer 검증은 desktop 1480×920·mobile 390×844에서 필터, 탭, 편집·저장·이동 경고, editor route, 스크린샷 알림과 route/theme 회귀를 확인했다. 스크린샷은 `screenshots/playwright/electron/job-data-e2e-{desktop,mobile}.png`에 보관한다.
+- native Electron screenshot IPC, 실제 screenshot PNG 저장과 실제 DB 연동은 검증하지 않았다. 모의 capture만 확인했으며 Phase 04·REQ002 완료 근거로 사용하지 않는다.
+
+## 직업코드 공유 분류 규칙 연동 (2026-11-05)
+
+- [`@maple/data-core` 목표와 검토 기록](../../../packages/game-data/core/docs/REVIEW/REQ001/Phase01.md)에 따른 직업코드 분류기를 Electron 직업 원본 검증기에 연결했다. 알려진 직업·더미·미분류·스킬 그룹·시스템 ID·모호한 ID를 구분하고 에반 `2220`의 빈 이름을 경고한다. 원본과 DB는 쓰지 않는다.
+- Core 분류기 5개 테스트, Core/Electron Node 타입 검사, Electron 23개 파일·202개 테스트와 production build가 통과했다. Chromium 모의 데이터로 desktop 1480×920·mobile 390×844에서 검증 결과 경고·확인·직업 화면 왕복을 확인했다.
+- 실제 원본 데이터셋에서 새 경고의 수와 기존 검증 상태 영향, native Electron과 실제 DB 검증은 수행하지 않았다.
+
+## 직업 데이터 탭 복구 초안 (2026-11-05)
+
+- [독립 요청](./REQUESTS/job-data-tab.md#review--부분-검증)에 버전별 직업 화면·인라인 일괄 적용·전체 편집·신규 직업 알림·무기 유형 후보와 파일 복구 초안을 기록했다. 실제 DB 직업·무기 transaction과 Phase 4 작업본 연계는 별도 설계·승인 대기다.
+- Electron Node/Web 및 database TypeScript 검사, Electron production build, Vitest 23개 파일·201개 테스트가 통과했다. Playwright Chromium renderer에서 모의 데이터를 사용해 desktop 1480×920·mobile 390×844의 조회·편집·저장·경고·재진입·오류와 인접 화면 이동을 확인했다.
+- 실제 DB 연결용 `DATABASE_URL`이 없어 native Electron과 실제 DB IPC·재시작 검증은 수행하지 못했다. 스크린샷은 `screenshots/playwright/electron/job-data-e2e-{desktop,mobile}.png`에 보관하고 Git에 포함하지 않는다.
+
 ## 화면 헤더·비교 레이아웃 정리 검증 (2026-10-25)
 
 - [독립 요청](./REQUESTS/page-header-layout.md#review)에 따라 대시보드·업로드·장비·직업·작업 화면의 큰 본문 헤더를 제거하고 버전 리스트 헤더는 유지했다. 비교 화면은 필터 오른쪽 세로 구분선을 표시하고 16px 하단 여백을 제거했다. 기존 Phase 03 완료 상태는 변경하지 않았다.

@@ -1,6 +1,6 @@
 # Electron 요청
 
-독립 요청과 작은 개선 요청을 모두 이 목차에서 관리한다. Phase 03 완료·검증 기록을 새 요청의 완료 근거로 사용하지 않는다.
+독립 요청과 작은 개선 요청을 이 목차에서 관리한다. 신규 기능은 [REQUIREMENTS](../REQUIREMENTS/README.md)에서 관리한다. Phase 03 완료·검증 기록을 새 요청의 완료 근거로 사용하지 않는다.
 
 | 요청                                                        | 상태                                   | 요약                                                                  | SPEC                                                                     | ROADMAP                                              | GOAL                                                   | REVIEW                                              |
 | ----------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------- |
@@ -10,6 +10,7 @@
 | [아이콘 의미 정책](./icon-semantics.md)                     | 완료 (2026-10-15)                      | 현재 UI 방향 아이콘의 의미·표시·접근성 기준                           | [`APP-010`·`APP-011`](../SPEC/01-foundation.md#icon-semantics)           | [적용 결과](./icon-semantics.md#roadmap)             | [현재 UI 범위 완료](./icon-semantics.md#goal)          | [검증 완료](./icon-semantics.md#review)             |
 | [Renderer App 책임 분리](./renderer-app-refactoring.md)     | 진행 중 (자동 검증 완료)               | React Router v7 도입과 App·라우트·기능 상태 분리                      | [`APP-001`~`APP-009`](../SPEC/01-foundation.md)                          | [적용 범위](./renderer-app-refactoring.md#roadmap)   | [native 확인 대기](./renderer-app-refactoring.md#goal) | [자동 검증](./renderer-app-refactoring.md#review)   |
 | [화면 헤더·비교 레이아웃 정리](./page-header-layout.md)     | 완료 (2026-10-25)                      | 다섯 화면 본문 헤더 제거와 비교 화면 구분선·하단 여백 정리            | [`APP-001`·`APP-005`·`APP-006`](../SPEC/01-foundation.md)                | [범위와 의존성](./page-header-layout.md#roadmap)     | [검증 완료](./page-header-layout.md#goal)              | [검증 기록](./page-header-layout.md#review)         |
+| [직업 데이터 탭 복구 초안](./job-data-tab.md)               | 구현 중 (자동 테스트 완료·native 대기) | 직업 기본 정보 편집, 복구 자동 저장, 저장된 diff 알림, 무기 유형 후보 | [Phase 4 직업·스킬](../SPEC/06-phase-03-06.md#spec-phase-04-jobs)        | [후속 DB 목표](./job-data-tab.md#후속-db-목표)       | [남은 작업](./job-data-tab.md#남은-작업)               | [부분 검증](./job-data-tab.md#review--부분-검증)    |
 
 ## 추가 기능 제안
 
@@ -17,7 +18,7 @@
 
 ## 관리 규칙
 
-- 독립 요청과 작은 개선도 `REQUESTS`에 기록하고 관련 [SPEC](../SPEC/README.md)을 참조한다.
+- 독립 요청과 작은 개선은 `REQUESTS`에 기록하고 관련 [SPEC](../SPEC/README.md)을 참조한다. 향후 신규 기능은 [REQUIREMENTS](../REQUIREMENTS/README.md)에 REQ로 등록한다.
 - 요청이 기존 사양을 변경하면 요청 문서의 변경 이력과 해당 SPEC을 함께 갱신한다.
 - Phase 의존성과 선행 작업, 타 앱·공통 패키지 영향은 요청의 ROADMAP에 먼저 분석한다. 다른 앱의 GOAL을 임의로 완료 처리하지 않는다.
 - 변경 완료는 요청 GOAL을 갱신하고 관련 범위를 재검증해 REVIEW에 결과를 기록한 뒤에만 표시한다. 기존 Phase의 완료 상태는 별도로 유지한다.
