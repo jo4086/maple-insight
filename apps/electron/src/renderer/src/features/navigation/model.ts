@@ -1,5 +1,12 @@
 export type View =
-  'overview' | 'upload' | 'version-list' | 'compare' | 'equipment' | 'class' | 'operations'
+  | 'overview'
+  | 'upload'
+  | 'version-list'
+  | 'compare'
+  | 'equipment'
+  | 'class'
+  | 'class-editor'
+  | 'operations'
 
 export type NavigationItem =
   | { id: View; label: string; icon: string }
@@ -17,6 +24,13 @@ export const navigation: NavigationItem[] = [
     ]
   },
   { id: 'equipment', label: '장비 데이터', icon: '04' },
-  { id: 'class', label: '직업 데이터', icon: '05' },
+  {
+    label: '직업 데이터',
+    icon: '05',
+    children: [
+      { id: 'class', label: '직업 정보' },
+      { id: 'class-editor', label: '에디터' }
+    ]
+  },
   { id: 'operations', label: 'DB · 타입 작업', icon: '06' }
 ]

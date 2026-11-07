@@ -28,6 +28,7 @@ import type {
   RegisteredDataVersion,
   UpdateDataVersionReleaseDateRequest
 } from '../shared/data-versions'
+import type { JobDataSnapshot, JobDraft, SaveJobDraftRequest } from '../shared/job-data'
 import type {
   CompareRawDataRequest,
   ListComparableFilesRequest,
@@ -52,6 +53,7 @@ import {
   markGameDataVersionImportFailed,
   registerGameDataVersionImport
 } from './services/game-data-version-registration'
+import { listJobData, saveJobDraft } from './services/job-data'
 import {
   compareRawData,
   listComparableRawDataFiles,
@@ -80,6 +82,8 @@ const COPY_DATA_VERSION_CHANNEL = 'data-version:copy'
 const DELETE_DATA_VERSION_CHANNEL = 'data-version:delete'
 const LIST_DATA_VERSIONS_CHANNEL = 'data-version:list'
 const LIST_REGISTERED_DATA_VERSIONS_CHANNEL = 'data-version:list-registered'
+const LIST_JOB_DATA_CHANNEL = 'job-data:list'
+const SAVE_JOB_DRAFT_CHANNEL = 'job-data:draft:save'
 const LIST_COMPARABLE_RAW_DATA_FILES_CHANNEL = 'raw-data-diff:list-comparable-files'
 const COMPARE_RAW_DATA_CHANNEL = 'raw-data-diff:compare'
 const SAVE_RAW_DATA_DIFF_CHANNEL = 'raw-data-diff:save'
@@ -977,6 +981,35 @@ app.whenReady().then(() => {
       }
     })
   })
+
+  ipcMain.handle(
+    LIST_JOB_DATA_CHANNEL,
+    async (_, version: unknown): Promise<JobDataSnapshot> => {
+      if (typeof version !== 'string' || !isVersion(version))
+        throw new Error('Invalid job data version')
+      const environment = await resolveValidationEnvironment(version)
+      return listJobData({ dataRoot: resolveManagedDataRoot(), environment, version })
+    }
+  )
+
+  ipcMain.handle(
+    SAVE_JOB_DRAFT_CHANNEL,
+    async (_, request: unknown): Promise<JobDraft> => {
+      if (
+        !isObject(request) ||
+        !isVersion(request.version) ||
+        !isObject(request.draft) ||
+        Object.keys(request).some((key) => key !== 'version' && key !== 'draft')
+      )
+        throw new Error('Invalid save job draft request')
+      const input = request as SaveJobDraftRequest
+      const environment = await resolveValidationEnvironment(input.version)
+      return saveJobDraft(
+        { dataRoot: resolveManagedDataRoot(), environment, version: input.version },
+        input
+      )
+    }
+  )
 
   ipcMain.handle(LIST_DATA_VERSIONS_CHANNEL, listDataVersions)
   ipcMain.handle(LIST_REGISTERED_DATA_VERSIONS_CHANNEL, listRegisteredDataVersions)

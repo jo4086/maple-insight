@@ -6,20 +6,40 @@ import { ComparePage } from '../pages/WorkspacePages'
 import { viewFromPath, viewPaths } from '../routes/paths'
 
 export function WorkspaceLayout(): React.JSX.Element {
-  const { version, screenshot, appearance, error, setError } = useWorkspace()
+  const { version, notifications, screenshot, appearance, navigationGuard, error, setError } =
+    useWorkspace()
   const navigate = useNavigate()
   const view = viewFromPath(useLocation().pathname)
+  const navigateWithGuard = (path: string): void => {
+    if (!navigationGuard || window.confirm(navigationGuard)) navigate(path)
+  }
 
   return (
     <AppShell
-      layout={view === 'compare' ? 'workspace' : 'default'}
+      layout={
+        view === 'compare'
+          ? 'workspace'
+          : view === 'class' || view === 'class-editor'
+            ? 'document'
+            : 'default'
+      }
       view={view}
       currentVersion={version.currentVersion}
       versions={version.versions}
-      onNavigate={(nextView) => navigate(viewPaths[nextView])}
-      onCurrentVersionChange={version.changeCurrentVersion}
+      onNavigate={(nextView) => navigateWithGuard(viewPaths[nextView])}
+      onCurrentVersionChange={(nextVersion) => {
+        if (!navigationGuard || window.confirm(navigationGuard))
+          version.changeCurrentVersion(nextVersion)
+      }}
       onCaptureScreenshot={screenshot.capture}
       isCapturingScreenshot={screenshot.isCapturing}
+      notifications={notifications.items}
+      unreadNotificationCount={notifications.unreadCount}
+      isNotificationsOpen={notifications.isOpen}
+      onToggleNotifications={notifications.toggle}
+      onCloseNotifications={notifications.close}
+      onDismissNotification={notifications.dismiss}
+      onClearNotifications={notifications.clear}
       theme={appearance.theme}
       onToggleTheme={appearance.toggleTheme}
     >
@@ -30,17 +50,6 @@ export function WorkspaceLayout(): React.JSX.Element {
         >
           {error}
           <button className="border-0 bg-transparent text-inherit" onClick={() => setError('')}>
-            ×
-          </button>
-        </div>
-      )}
-      {screenshot.message && (
-        <div className="mb-5 flex items-center justify-between gap-4 rounded-lg border border-app-accent-border bg-app-accent-bg px-3.5 py-3 text-small text-app-accent">
-          <span className="truncate">{screenshot.message}</span>
-          <button
-            className="border-0 bg-transparent text-inherit"
-            onClick={() => screenshot.setMessage('')}
-          >
             ×
           </button>
         </div>

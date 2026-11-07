@@ -7,10 +7,12 @@ export const viewPaths: Record<View, string> = {
   compare: '/compare',
   equipment: '/equipment',
   class: '/class',
+  'class-editor': '/class/editor',
   operations: '/operations'
 }
 
 export function viewFromPath(pathname: string): View {
+  if (pathname === '/class/editor' || pathname.startsWith('/class/edit/')) return 'class-editor'
   return (Object.entries(viewPaths).find(([, path]) => path === pathname)?.[0] ??
     'overview') as View
 }

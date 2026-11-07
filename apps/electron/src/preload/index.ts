@@ -19,6 +19,7 @@ import type {
   RegisteredDataVersion,
   UpdateDataVersionReleaseDateRequest
 } from '../shared/data-versions'
+import type { JobDataSnapshot, JobDraft, SaveJobDraftRequest } from '../shared/job-data'
 import type {
   CompareRawDataRequest,
   ListComparableFilesRequest,
@@ -60,6 +61,10 @@ const api = {
     return () => ipcRenderer.removeListener('data-directory:convert:progress', handler)
   },
   listDataVersions: (): Promise<string[]> => ipcRenderer.invoke('data-version:list'),
+  listJobData: (version: string): Promise<JobDataSnapshot> =>
+    ipcRenderer.invoke('job-data:list', version),
+  saveJobDraft: (request: SaveJobDraftRequest): Promise<JobDraft> =>
+    ipcRenderer.invoke('job-data:draft:save', request),
   listRegisteredDataVersions: (): Promise<RegisteredDataVersion[]> =>
     ipcRenderer.invoke('data-version:list-registered'),
   updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest): Promise<void> =>
