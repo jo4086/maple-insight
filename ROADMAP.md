@@ -6,8 +6,10 @@
 
 ```text
 Electron Phase 2 validation·작업본 완료
-  -> Phase 3 버전 diff
-  -> Phase 4 작업본 편집
+  -> Phase 3 버전 diff 완료
+  -> Phase 4 작업본 편집 진행 중
+     -> Main process 구조 재정리 (다음 작업 최우선)
+     -> 남은 Phase 4 기능
   -> Phase 5 DB dry-run·명시 승인 publish
   -> Phase 6 타입·정적 데이터 생성
   -> 신뢰된 게임 데이터 소비 기능
@@ -24,32 +26,36 @@ Electron Phase 2 validation·작업본 완료
   -> 보스 시뮬레이션
 ```
 
-Electron Phase 2는 현재 최우선 경로다. Phase 0·1은 검증됐지만, Phase 2는 미커밋 변경과 미완료 UI·검증 항목 때문에 미검증이다. Phase 3부터 6까지는 순차 의존하며, 성공 publish로 ready가 된 버전만 생성과 신뢰된 게임 데이터 소비 기능의 입력이 된다. 캐릭터 계약과 frontend API UI는 Electron과 독립적으로 병행할 수 있고, 실제 API 표시는 Electron publish에 막히지 않는다. 다만 버전 게임 데이터에 의존하는 기능은 publish 뒤에 진행한다. 수집 이력은 파이프라인 스케줄과 품질 검증 뒤다. 시뮬레이션은 신뢰된 데이터 뒤다.
+Electron Phase 02와 Phase 03은 앱 소유 목표와 검증 기록에 따라 완료됐다. 현재 마일스톤은 [Phase 04 편집 작업본](apps/electron/docs/GOAL/Phase04.md)이며 앱 소유 [단계 상태](apps/electron/docs/GOAL/README.md)에서는 진행 중 (작업본·직업 복구 선택 복사 부분 구현)이다. 다음 작업 지시에서는 남은 Phase 04 기능보다 [Main process 구조 재정리](apps/electron/docs/REQUESTS/main-process-architecture.md)를 먼저 구현·검증한다. Phase 04 완료는 아직 선언하지 않으며 Phase 05·06은 후속 순차 의존성을 유지한다. 성공 publish로 ready가 된 버전만 생성과 신뢰된 게임 데이터 소비 기능의 입력이 된다. 캐릭터 계약과 frontend API UI는 Electron과 독립적으로 병행할 수 있고, 실제 API 표시는 Electron publish에 막히지 않는다. 다만 버전 게임 데이터에 의존하는 기능은 publish 뒤에 진행한다. 수집 이력은 파이프라인 스케줄과 품질 검증 뒤다. 시뮬레이션은 신뢰된 데이터 뒤다.
 
 ## 마일스톤
 
-### M1. Electron Phase 2 검증 및 작업본
+### M1. Electron Phase 2 검증과 Phase 3 버전 비교
 
-현재 목표는 `apps/electron/docs/GOAL.md`의 `EL-G002`다.
+**완료.** Phase 02 검증 및 작업본 기반과 Phase 03 버전 비교는 앱 소유 문서의 종료 검증을 마쳤다.
 
-- validation 작업본 IPC와 UI를 완료한다.
-- 파일·레코드·필드 issue, 정규화 전후 값, 경고 확인과 예외 사유, publish 가능 상태를 검증한다.
-- 실제 흐름과 대용량 입력에서 renderer 응답성을 검증한다.
+- Phase 02: [목표](apps/electron/docs/GOAL/Phase02.md) · [최종 검증](apps/electron/docs/REVIEW/Phase02.md#7-el-g002-완료-검증-2026-10-15)
+- Phase 03: [목표](apps/electron/docs/GOAL/Phase03.md) · [검증 기록](apps/electron/docs/REVIEW/Phase03.md)
+- Phase 03의 `failed` 제외와 test 환경 표시는 코드·자동 테스트 범위지만 현재 DB 행 부재로 native 화면 검증이 남았다. 기존 완료 판정은 유지한다.
 
 종료 확인:
 
-- [ ] Electron `docs/GOAL.md`의 Phase 2 미완료 항목과 완료 조건을 검증 근거로 닫는다.
-- [ ] Electron `docs/REVIEW.md`에 최신 검증 결과와 잔여 위험을 기록한다.
-- [ ] Phase 2 변경 기준 node/web typecheck, 테스트, lint와 production build가 통과한다.
+- [x] Phase 02 validation 작업본과 publish 가능 상태를 검증했다.
+- [x] Phase 02 node/web typecheck, 테스트, lint, production build와 native 흐름을 검증했다.
+- [x] Phase 03 diff의 추가·수정·삭제, 저장·재열기와 native 흐름을 검증했다.
 
-### M2. Electron 버전 데이터 반영과 생성
+### M2. Electron Phase 4 편집과 후속 반영·생성
 
-- Phase 3 diff, Phase 4 작업본 편집, Phase 5 dry-run·명시 승인 publish, Phase 6 생성기를 순서대로 완료한다.
+현재 마일스톤은 [Phase 04 편집 작업본](apps/electron/docs/GOAL/Phase04.md)이며 진행 중 (작업본·직업 복구 선택 복사 부분 구현)이다. edit workbench supersession은 집중 테스트 36개로 검증했고 직업 복구 미리보기·명시적 단일 직업 metadata 복사 IPC/UI도 부분 검증했다. native Electron IPC·실제 DB는 미검증이고 기존 에디터의 새 workbench 읽기·쓰기 전환은 미구현이므로 Phase 04 완료를 선언하지 않는다. 다음 작업은 [Main process 구조 재정리](apps/electron/docs/REQUESTS/main-process-architecture.md)를 문서 기준선 → 서비스 이동 → IPC 추출 → app/window/runtime 분리 순서로 수행하고 각 단계를 독립 검증한다. 이후 남은 Phase 04 기능을 재개한다. Phase 05 dry-run·명시 승인 publish와 Phase 06 생성은 Phase 04 완료 뒤 진행한다.
+
+- Main process 구조 재정리에서 preload·shared·renderer 계약과 기존 기능 동작을 유지한다.
+- 구조 재정리 뒤 기존 에디터의 읽기·쓰기를 새 workbench로 전환하고 native Electron IPC·실제 DB 흐름을 검증한다.
+- `newWeaponTypes`·전직 연결 등 복구 초안의 도메인별 필드를 설계·승인된 mapping으로 보강하고 Phase 4a~4c를 완료한다.
+- Phase 05 dry-run·명시 승인 publish와 Phase 06 생성기를 순서대로 완료한다.
 - publish 성공으로 ready가 된 버전만 생성과 버전 게임 데이터 의존 기능의 입력으로 사용한다.
 
 종료 확인:
 
-- [ ] diff가 추가·수정·삭제를 안정 식별자로 표시한다.
 - [ ] 작업본 편집은 검증된 작업본에서만 수행하고 변경 이력을 diff에 반영한다.
 - [ ] dry-run은 DB를 변경하지 않고, 승인 없는 publish는 실행되지 않으며, publish 실패는 부분 DB 반영을 남기지 않는다.
 - [ ] ready 버전에서 생성한 결과를 검토할 수 있다.
@@ -94,4 +100,4 @@ Electron과 병행한다. 실제 API 표시 작업은 Electron publish의 선행
 - Frontend: `apps/frontend/docs/react-query-guide.md`
 - Back: `apps/back/docs/api-normalization-roadmap.md`, `apps/back/roadmap.md`
 - Ingestor: `apps/ingestor/docs/db-structure.md`, `apps/ingestor/docs/grouping-rules.md`
-- Electron: `apps/electron/docs/SPEC.md`, `apps/electron/docs/ROADMAP.md`, `apps/electron/docs/GOAL.md`, `apps/electron/docs/REVIEW.md`
+- Electron: [SPEC](apps/electron/docs/SPEC/README.md), [ROADMAP](apps/electron/docs/ROADMAP.md), [GOAL](apps/electron/docs/GOAL/README.md), [Phase 04](apps/electron/docs/GOAL/Phase04.md), [REVIEW](apps/electron/docs/REVIEW.md)

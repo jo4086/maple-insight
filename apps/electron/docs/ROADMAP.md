@@ -8,13 +8,13 @@
 - 현재 작업과 완료 조건: [GOAL](./GOAL/README.md)
 - 구현과 검증 결과: [REVIEW](./REVIEW.md)
 
-| 단계                 | 목표 문서                                  | 상태 |
-| -------------------- | ------------------------------------------ | ---- |
-| [Phase 2](#phase-02) | [검증 목표](./GOAL/Phase02.md)             | 완료 |
-| [Phase 3](#phase-03) | [버전 비교](./GOAL/Phase03.md)             | 완료 |
-| [Phase 4](#phase-04) | [직업·스킬·장비 편집](./GOAL/Phase04.md)   | 대기 |
-| [Phase 5](#phase-05) | [DB dry-run 및 반영](./GOAL/Phase05.md)    | 대기 |
-| [Phase 6](#phase-06) | [타입·정적 데이터 생성](./GOAL/Phase06.md) | 대기 |
+| 단계                 | 목표 문서                                  | 상태                                           |
+| -------------------- | ------------------------------------------ | ---------------------------------------------- |
+| [Phase 2](#phase-02) | [검증 목표](./GOAL/Phase02.md)             | 완료                                           |
+| [Phase 3](#phase-03) | [버전 비교](./GOAL/Phase03.md)             | 완료                                           |
+| [Phase 4](#phase-04) | [직업·스킬·장비 편집](./GOAL/Phase04.md)   | 진행 중 (작업본·직업 복구 선택 복사 부분 구현) |
+| [Phase 5](#phase-05) | [DB dry-run 및 반영](./GOAL/Phase05.md)    | 대기                                           |
+| [Phase 6](#phase-06) | [타입·정적 데이터 생성](./GOAL/Phase06.md) | 대기                                           |
 
 ### REQ 기능 단계
 
@@ -89,7 +89,7 @@ Jev는 Phase 0에서 연결 기반을 마련하고, 각 단계에서 의미 기�
 
 ## Phase 04 — 직업·스킬·장비 편집
 
-**대기.** [상세 범위](./ROADMAP/Phase04.md) · [목표](./GOAL/Phase04.md)
+**진행 중 (작업본·직업 복구 선택 복사 부분 구현).** edit workbench supersession을 집중 테스트 36개로 검증했고 직업 복구 미리보기·명시적 단일 직업 metadata 복사 IPC/UI도 부분 검증했다. native Electron IPC·실제 DB는 미검증이고 기존 에디터의 새 workbench 읽기·쓰기 전환과 Phase 4a~4c는 미구현이다. [상세 범위](./ROADMAP/Phase04.md) · [목표](./GOAL/Phase04.md)
 
 <a id="phase-05"></a>
 
