@@ -2,22 +2,30 @@ import { ChevronDown, ChevronRight, Pencil, Search } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
 
-import type { JobDataSnapshot, JobDraft, JobSummary } from '../../../../shared/job-data'
+import type {
+  JobDataSnapshot,
+  JobDraft,
+  JobSummary,
+  WeaponTypeOption
+} from '../../../../shared/job-data'
 import { getErrorMessage } from '../../shared/lib/error-message'
 
 import {
   emptyJobDraft,
   emptyJobFilters,
+  fallbackJobs,
+  filterJobGroups,
   filterJobs,
   jobDraftChanged,
   jobEditPath,
-  jobsWithDrafts,
   newJobsFromComparison,
   olderVersions,
   shouldConfirmInlineNavigation,
+  weaponOptionLabel,
   type JobFilters,
   type NewJobNotice
 } from './job-model'
+import { JobStatPicker } from './JobStatPicker'
 import { useNavigationWarning } from './use-navigation-warning'
 
 type JobApi = typeof window.api & {
@@ -39,7 +47,31 @@ const inlineFields: { key: keyof JobDraft; label: string }[] = [
 ]
 
 function savedDraft(snapshot: JobDataSnapshot, job: JobSummary): JobDraft {
-  return snapshot.drafts.find((draft) => draft.jobId === job.jobId) ?? emptyJobDraft(job)
+  const sourceJob = snapshot.jobs.find((candidate) => candidate.jobId === job.jobId) ?? job
+  const classKey = snapshot.jobGroups.find(
+    ({ representativeJobId }) => representativeJobId === job.jobId
+  )?.classKey
+  return (
+    snapshot.drafts.find((draft) => draft.jobId === job.jobId) ?? emptyJobDraft(sourceJob, classKey)
+  )
+}
+
+function weaponLabels(keys: string[], options: WeaponTypeOption[]): string {
+  if (!keys.length) return '미입력'
+  return keys
+    .map((key) =>
+      weaponOptionLabel(
+        options.find((option) => option.key === key) ?? {
+          key,
+          category: 'weapon',
+          part: key,
+          classGroupKeys: [],
+          handType: null,
+          weaponConstant: null
+        }
+      )
+    )
+    .join(', ')
 }
 
 export function JobDataView({
@@ -78,6 +110,8 @@ export function JobDataView({
     let active = true
     setSnapshot(null)
     setSelectedId('')
+    setFilters(emptyJobFilters())
+    setActiveTab('기본 정보')
     setEditing(null)
     setEditBaseline(null)
     setError('')
@@ -86,8 +120,13 @@ export function JobDataView({
       .listJobData(version)
       .then((next) => {
         if (!active) return
+        const groups = next.jobGroups ?? []
         setSnapshot(next)
-        setSelectedId(jobsWithDrafts(next.jobs, next.drafts)[0]?.jobId ?? '')
+        setSelectedId(
+          groups[0]?.representativeJobId ??
+            fallbackJobs(next.jobs, groups, next.drafts)[0]?.jobId ??
+            ''
+        )
       })
       .catch((caught: unknown) => {
         if (active) setError(getErrorMessage(caught))
@@ -100,7 +139,10 @@ export function JobDataView({
 
   useEffect(() => {
     let active = true
+    setNotices([])
     setNoticeError('')
+    setNoticeOpen(false)
+    setExpandedNoticeJob('')
     const candidates = olderVersions(version, versions)
     void Promise.allSettled(
       candidates.map(async (baseVersion): Promise<NewJobNotice | null> => {
@@ -133,17 +175,30 @@ export function JobDataView({
     }
   }, [version, versions])
 
-  const allJobs = useMemo(
-    () => jobsWithDrafts(snapshot?.jobs ?? [], snapshot?.drafts ?? []),
-    [snapshot]
+  const groups = useMemo(() => snapshot?.jobGroups ?? [], [snapshot])
+  const fallback = useMemo(
+    () => fallbackJobs(snapshot?.jobs ?? [], groups, snapshot?.drafts ?? []),
+    [groups, snapshot]
   )
-  const filteredJobs = useMemo(
-    () => filterJobs(allJobs, snapshot?.drafts ?? [], filters),
-    [allJobs, filters, snapshot?.drafts]
+  const filteredGroups = useMemo(
+    () => filterJobGroups(groups, snapshot?.drafts ?? [], filters),
+    [filters, groups, snapshot?.drafts]
   )
-  const selectedJob = allJobs.find((job) => job.jobId === selectedId) ?? null
+  const filteredFallback = useMemo(
+    () => filterJobs(fallback, snapshot?.drafts ?? [], filters),
+    [fallback, filters, snapshot?.drafts]
+  )
+  const selectedGroup = groups.find((group) => group.representativeJobId === selectedId) ?? null
+  const selectedJob = selectedGroup
+    ? {
+        jobId: selectedGroup.representativeJobId,
+        jobName: selectedGroup.representativeName
+      }
+    : (fallback.find((job) => job.jobId === selectedId) ?? null)
   const currentDraft =
     editing ?? (snapshot && selectedJob ? savedDraft(snapshot, selectedJob) : null)
+  const weaponTypes =
+    snapshot && currentDraft ? [...snapshot.weaponTypes, ...currentDraft.newWeaponTypes] : []
   const activeNotice = notices.find((notice) => notice.baseVersion === noticeVersion)
 
   const beginInlineEdit = (): void => {
@@ -213,7 +268,7 @@ export function JobDataView({
         )}
         {snapshot && selectedJob && currentDraft && (
           <>
-            <header className="mb-7 flex items-center gap-3">
+            <header className="mb-5 flex items-center gap-3">
               <div>
                 <p className="m-0 text-caption font-semibold text-app-accent">JOB DETAIL</p>
                 <h1 className="my-1 text-page-title font-bold tracking-page-title">
@@ -231,13 +286,13 @@ export function JobDataView({
             </header>
             <nav
               aria-label="직업 상세 탭"
-              className="mb-3 flex gap-7 border-b border-app-border text-small font-semibold text-app-muted"
+              className="mb-2 flex gap-5 overflow-x-auto border-b border-app-border text-small font-semibold text-app-muted"
               role="tablist"
             >
               {detailTabs.map((tab) => (
                 <button
                   aria-selected={activeTab === tab}
-                  className={`border-x-0 border-t-0 bg-transparent px-2 py-3 font-inherit ${activeTab === tab ? 'border-b-2 border-app-accent text-app-text' : 'border-b-2 border-transparent text-app-muted'}`}
+                  className={`shrink-0 border-x-0 border-t-0 bg-transparent px-2 py-2 font-inherit ${activeTab === tab ? 'border-b-2 border-app-accent text-app-text' : 'border-b-2 border-transparent text-app-muted'}`}
                   key={tab}
                   role="tab"
                   type="button"
@@ -250,63 +305,99 @@ export function JobDataView({
             {activeTab === '기본 정보' && (
               <>
                 <dl className="m-0 divide-y divide-app-border text-body">
-                  <div className="grid h-14 grid-cols-[150px_minmax(0,1fr)] items-center">
+                  <div className="grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center py-1 max-[600px]:grid-cols-[105px_minmax(0,1fr)]">
                     <dt className="text-app-muted">jobID</dt>
                     <dd className="m-0 font-mono">{selectedJob.jobId}</dd>
                   </div>
-                  <div className="grid h-14 grid-cols-[150px_minmax(0,1fr)] items-center">
-                    <dt className="text-app-muted">직업 이름</dt>
-                    <dd className="m-0">{selectedJob.jobName}</dd>
+                  <div className="grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center py-1 max-[600px]:grid-cols-[105px_minmax(0,1fr)]">
+                    <dt className="text-app-muted">
+                      {selectedGroup ? '원본 직업 이름' : '직업 이름'}
+                    </dt>
+                    <dd className="m-0">{currentDraft.jobName}</dd>
                   </div>
-                  {inlineFields.map(({ key, label }) => (
-                    <div
-                      className="grid h-14 grid-cols-[150px_minmax(0,1fr)] items-center"
-                      key={key}
-                    >
-                      <dt className="text-app-muted">{label}</dt>
-                      <dd className="m-0 min-w-0">
-                        {editing ? (
-                          key === 'classGroup' || key === 'affiliation' ? (
-                            <div className="relative w-full max-w-[360px]">
-                              <select
+                  {inlineFields.map(({ key, label }) => {
+                    const statField = key === 'mainStat' || key === 'subStat'
+                    return (
+                      <div
+                        className={`grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center max-[600px]:grid-cols-[105px_minmax(0,1fr)] ${statField ? 'py-1' : ''}`}
+                        key={key}
+                      >
+                        <dt className="text-app-muted">
+                          {key === 'subStat' ? '부스탯 (선택)' : label}
+                        </dt>
+                        <dd className="m-0 min-w-0">
+                          {statField ? (
+                            <JobStatPicker
+                              disabled={!editing || saving}
+                              label={label}
+                              value={String(currentDraft[key])}
+                              onChange={(value) =>
+                                setEditing((current) =>
+                                  current ? { ...current, [key]: value } : current
+                                )
+                              }
+                            />
+                          ) : editing ? (
+                            key === 'classGroup' || key === 'affiliation' ? (
+                              <div
+                                className={`relative w-full ${key === 'classGroup' ? 'max-w-[180px]' : 'max-w-[220px]'}`}
+                              >
+                                <select
+                                  aria-label={label}
+                                  className="h-8 w-full appearance-none rounded-md border border-app-border-strong bg-app-input pr-9 pl-3 text-body"
+                                  disabled={saving}
+                                  value={String(editing[key])}
+                                  onChange={(event) =>
+                                    setEditing({ ...editing, [key]: event.target.value })
+                                  }
+                                >
+                                  <option value="">선택</option>
+                                  {(key === 'classGroup' ? classGroups : affiliations).map(
+                                    (option) => (
+                                      <option key={option}>{option}</option>
+                                    )
+                                  )}
+                                </select>
+                                <ChevronDown
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-app-muted"
+                                  size={15}
+                                />
+                              </div>
+                            ) : (
+                              <input
                                 aria-label={label}
-                                className="h-9 w-full appearance-none rounded-md border border-app-border-strong bg-app-input pr-10 pl-3 text-body"
+                                className="h-8 w-full max-w-[300px] rounded-md border border-app-border-strong bg-app-input px-3 text-body"
                                 disabled={saving}
                                 value={String(editing[key])}
                                 onChange={(event) =>
                                   setEditing({ ...editing, [key]: event.target.value })
                                 }
-                              >
-                                <option value="">선택</option>
-                                {(key === 'classGroup' ? classGroups : affiliations).map(
-                                  (option) => (
-                                    <option key={option}>{option}</option>
-                                  )
-                                )}
-                              </select>
-                              <ChevronDown
-                                aria-hidden="true"
-                                className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-app-muted"
-                                size={15}
                               />
-                            </div>
+                            )
                           ) : (
-                            <input
-                              aria-label={label}
-                              className="h-9 w-full max-w-[360px] rounded-md border border-app-border-strong bg-app-input px-3 text-body"
-                              disabled={saving}
-                              value={String(editing[key])}
-                              onChange={(event) =>
-                                setEditing({ ...editing, [key]: event.target.value })
-                              }
-                            />
-                          )
-                        ) : (
-                          <span>{String(currentDraft[key]) || '미입력'}</span>
-                        )}
-                      </dd>
-                    </div>
-                  ))}
+                            <span>{String(currentDraft[key]) || '미입력'}</span>
+                          )}
+                        </dd>
+                      </div>
+                    )
+                  })}
+                  <div className="grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center py-1 max-[600px]:grid-cols-[105px_minmax(0,1fr)]">
+                    <dt className="text-app-muted">종족</dt>
+                    <dd className="m-0 min-w-0">미등록</dd>
+                  </div>
+                  <div className="grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center py-1 max-[600px]:grid-cols-[105px_minmax(0,1fr)]">
+                    <dt className="text-app-muted">주무기</dt>
+                    <dd className="m-0 min-w-0 break-words">
+                      {weaponLabels(currentDraft.primaryWeapons, weaponTypes)}
+                    </dd>
+                  </div>
+                  <div className="grid min-h-11 grid-cols-[140px_minmax(0,1fr)] items-center py-1 max-[600px]:grid-cols-[105px_minmax(0,1fr)]">
+                    <dt className="text-app-muted">보조무기</dt>
+                    <dd className="m-0 min-w-0 break-words">
+                      {weaponLabels(currentDraft.secondaryWeapons, weaponTypes)}
+                    </dd>
+                  </div>
                 </dl>
                 {!editing && (
                   <button className="action-secondary mt-5" type="button" onClick={beginInlineEdit}>
@@ -314,6 +405,66 @@ export function JobDataView({
                   </button>
                 )}
               </>
+            )}
+            {activeTab === '전직 정보' && (
+              <section aria-label="전직 정보" className="mt-5">
+                {selectedGroup ? (
+                  <>
+                    <div className="overflow-hidden rounded-lg border border-app-border">
+                      <div className="grid grid-cols-[80px_minmax(100px,140px)_minmax(0,1fr)_100px] gap-3 border-b border-app-border bg-app-surface-2 px-4 py-3 text-caption font-semibold text-app-muted max-[700px]:grid-cols-[60px_90px_minmax(0,1fr)]">
+                        <span>차수</span>
+                        <span>jobID</span>
+                        <span>이름</span>
+                        <span className="max-[700px]:hidden">검토</span>
+                      </div>
+                      {selectedGroup.advancements.map((advancement) => {
+                        const isRepresentativeFourthStage =
+                          advancement.stage === 4 &&
+                          advancement.jobId === selectedGroup.representativeJobId
+
+                        return (
+                          <div
+                            className={`grid grid-cols-[80px_minmax(100px,140px)_minmax(0,1fr)_100px] items-center gap-3 border-b border-app-border px-4 py-3 text-body last:border-b-0 max-[700px]:grid-cols-[60px_90px_minmax(0,1fr)] ${isRepresentativeFourthStage ? 'shadow-[inset_2px_0_0_var(--color-app-accent)]' : ''}`}
+                            key={`${advancement.stage}-${advancement.jobId}`}
+                          >
+                            <strong>
+                              {advancement.stage}차
+                              {isRepresentativeFourthStage && (
+                                <span className="sr-only"> 대표 4차 전직</span>
+                              )}
+                            </strong>
+                            <code className="text-app-muted">{advancement.jobId}</code>
+                            <span>
+                              <span className="mr-2 text-caption text-app-muted">원본 이름</span>
+                              {advancement.jobName}
+                              {advancement.requiresReview && (
+                                <span className="ml-2 rounded-full border border-app-warning-border bg-app-warning-bg px-2 py-1 text-micro font-semibold text-app-warning min-[701px]:hidden">
+                                  검토 필요
+                                </span>
+                              )}
+                            </span>
+                            <span className="max-[700px]:hidden">
+                              {advancement.requiresReview && (
+                                <span className="rounded-full border border-app-warning-border bg-app-warning-bg px-2 py-1 text-micro font-semibold text-app-warning">
+                                  검토 필요
+                                </span>
+                              )}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <p className="mt-3 text-small text-app-muted">
+                      5차 전직은 별도 jobID가 없습니다.
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-body text-app-muted">연결된 전직 정보가 없습니다.</p>
+                )}
+              </section>
+            )}
+            {activeTab !== '기본 정보' && activeTab !== '전직 정보' && (
+              <div aria-label={`${activeTab} 빈 화면`} className="min-h-40" />
             )}
           </>
         )}
@@ -380,24 +531,66 @@ export function JobDataView({
             <Search className="absolute top-3 right-3 text-app-muted" size={15} />
           </label>
         </div>
-        <div className="mt-4 grid max-h-[420px] grid-cols-2 gap-2 overflow-y-auto pr-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {filteredJobs.map((job) => (
-            <button
-              aria-pressed={selectedId === job.jobId}
-              className={`min-h-10 rounded-md border px-3 text-left text-small font-semibold ${selectedId === job.jobId ? 'border-app-accent bg-app-accent-bg text-app-text' : 'border-app-border bg-app-surface text-app-muted hover:border-app-border-strong'}`}
-              key={job.jobId}
-              type="button"
-              onClick={() => {
-                if (confirmInlineNavigation()) {
-                  setEditing(null)
-                  setEditBaseline(null)
-                  setSelectedId(job.jobId)
-                }
-              }}
-            >
-              {job.jobName}
-            </button>
-          ))}
+        <div className="mt-4 max-h-[420px] overflow-y-auto pr-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <section aria-labelledby="grouped-job-heading">
+            <h3 className="mb-2 text-caption font-semibold text-app-muted" id="grouped-job-heading">
+              대표 직업
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              {filteredGroups.map((group) => (
+                <button
+                  aria-pressed={selectedId === group.representativeJobId}
+                  className={`min-h-14 rounded-md border px-3 py-2 text-left ${selectedId === group.representativeJobId ? 'border-app-accent bg-app-accent-bg text-app-text' : 'border-app-border bg-app-surface text-app-muted hover:border-app-border-strong'}`}
+                  key={group.representativeJobId}
+                  type="button"
+                  onClick={() => {
+                    if (confirmInlineNavigation()) {
+                      setEditing(null)
+                      setEditBaseline(null)
+                      setSelectedId(group.representativeJobId)
+                    }
+                  }}
+                >
+                  <strong className="block text-small">{group.representativeName}</strong>
+                  <span className="mt-1 block font-mono text-micro text-app-muted">
+                    {group.representativeJobId}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
+          {filteredFallback.length > 0 && (
+            <section aria-labelledby="fallback-job-heading" className="mt-5">
+              <h3
+                className="mb-2 border-t border-app-border pt-4 text-caption font-semibold text-app-muted"
+                id="fallback-job-heading"
+              >
+                기타 · 복구 초안
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                {filteredFallback.map((job) => (
+                  <button
+                    aria-pressed={selectedId === job.jobId}
+                    className={`min-h-12 rounded-md border px-3 py-2 text-left ${selectedId === job.jobId ? 'border-app-accent bg-app-accent-bg text-app-text' : 'border-app-border bg-app-surface text-app-muted hover:border-app-border-strong'}`}
+                    key={job.jobId}
+                    type="button"
+                    onClick={() => {
+                      if (confirmInlineNavigation()) {
+                        setEditing(null)
+                        setEditBaseline(null)
+                        setSelectedId(job.jobId)
+                      }
+                    }}
+                  >
+                    <strong className="block text-small">{job.jobName}</strong>
+                    <span className="mt-1 block font-mono text-micro text-app-muted">
+                      {job.jobId}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </aside>
 

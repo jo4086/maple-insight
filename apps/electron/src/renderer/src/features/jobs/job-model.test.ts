@@ -1,16 +1,20 @@
 import { describe, expect, it } from 'vitest'
 
-import type { JobDraft, NewWeaponType } from '../../../../shared/job-data'
+import type { JobDraft, JobGroup, NewWeaponType } from '../../../../shared/job-data'
 import type { RawDataComparison } from '../../../../shared/raw-data-diff'
 
 import {
+  emptyJobDraft,
   emptyJobFilters,
+  fallbackJobs,
+  filterJobGroups,
   filterJobs,
   jobEditPath,
   jobsWithDrafts,
   mergeSavedDraft,
   newJobsFromComparison,
   olderVersions,
+  prefillEnglishName,
   shouldConfirmInlineNavigation,
   validateJobDraft,
   validateNewWeaponType,
@@ -30,6 +34,17 @@ const draft: JobDraft = {
   secondaryWeapons: [],
   newWeaponTypes: [],
   revision: 1
+}
+
+const heroGroup: JobGroup = {
+  classKey: 'hero',
+  representativeJobId: '112',
+  representativeName: '히어로 DB',
+  advancements: [
+    { jobId: '100', jobName: '검사 DB', stage: 1, requiresReview: false },
+    { jobId: '110', jobName: '파이터 DB', stage: 2, requiresReview: false },
+    { jobId: '112', jobName: '히어로 DB', stage: 4, requiresReview: false }
+  ]
 }
 
 describe('job model', () => {
@@ -84,6 +99,220 @@ describe('job model', () => {
     expect(filterJobs(jobs, drafts, { ...emptyJobFilters(), search: 'hero' })).toEqual([jobs[0]])
     expect(filterJobs(jobs, drafts, { ...emptyJobFilters(), search: '0200' })).toEqual([jobs[1]])
     expect(filterJobs(jobs, drafts, emptyJobFilters())).toEqual(jobs)
+  })
+
+  it('searches grouped jobs by every DB advancement and the representative draft', () => {
+    const representativeDraft = {
+      ...draft,
+      jobId: '112',
+      jobName: '복구 초안 이름',
+      englishName: 'Hero Draft'
+    }
+
+    expect(
+      filterJobGroups([heroGroup], [representativeDraft], {
+        ...emptyJobFilters(),
+        search: '110'
+      })
+    ).toEqual([heroGroup])
+    expect(
+      filterJobGroups([heroGroup], [representativeDraft], {
+        ...emptyJobFilters(),
+        search: '검사 DB'
+      })
+    ).toEqual([heroGroup])
+    expect(
+      filterJobGroups([heroGroup], [representativeDraft], {
+        ...emptyJobFilters(),
+        search: '히어로 DB'
+      })
+    ).toEqual([heroGroup])
+    expect(
+      filterJobGroups([heroGroup], [representativeDraft], {
+        ...emptyJobFilters(),
+        search: 'Hero Draft'
+      })
+    ).toEqual([heroGroup])
+    expect(
+      filterJobGroups([heroGroup], [representativeDraft], {
+        classGroups: ['마법사'],
+        affiliations: [],
+        search: '히어로 DB'
+      })
+    ).toEqual([])
+  })
+
+  it('filters DB-backed groups from representative classification and lets drafts override it', () => {
+    const xenonGroup: JobGroup = {
+      classKey: 'xenon',
+      representativeJobId: '3614',
+      representativeName: '제논 DB',
+      advancements: [{ jobId: '3614', jobName: '제논 DB', stage: 4, requiresReview: false }]
+    }
+
+    expect(
+      filterJobGroups([heroGroup], [], {
+        classGroups: ['마법사', '전사'],
+        affiliations: ['노바', '모험가'],
+        search: ''
+      })
+    ).toEqual([heroGroup])
+    expect(
+      filterJobGroups([heroGroup], [], {
+        classGroups: ['마법사'],
+        affiliations: ['모험가'],
+        search: ''
+      })
+    ).toEqual([])
+    expect(
+      filterJobGroups([heroGroup], [], {
+        classGroups: ['전사'],
+        affiliations: ['노바'],
+        search: ''
+      })
+    ).toEqual([])
+
+    const overriddenHero = {
+      ...draft,
+      jobId: heroGroup.representativeJobId,
+      classGroup: '마법사',
+      affiliation: '노바'
+    }
+    expect(
+      filterJobGroups([heroGroup], [overriddenHero], {
+        classGroups: ['전사'],
+        affiliations: ['모험가'],
+        search: ''
+      })
+    ).toEqual([])
+    expect(
+      filterJobGroups([heroGroup], [overriddenHero], {
+        classGroups: ['마법사'],
+        affiliations: ['노바'],
+        search: ''
+      })
+    ).toEqual([heroGroup])
+
+    expect(
+      filterJobGroups([xenonGroup], [], {
+        classGroups: ['전사', '해적'],
+        affiliations: ['레지스탕스'],
+        search: ''
+      })
+    ).toEqual([xenonGroup])
+    expect(
+      filterJobGroups([xenonGroup], [], {
+        classGroups: ['도적'],
+        affiliations: ['레지스탕스'],
+        search: ''
+      })
+    ).toEqual([xenonGroup])
+  })
+
+  it('normalizes Mikhail affiliation while preserving ordinary group filters', () => {
+    const mikhailGroup: JobGroup = {
+      classKey: 'mikhail',
+      representativeJobId: '5112',
+      representativeName: '미하일',
+      advancements: [{ jobId: '5112', jobName: '미하일', stage: 4, requiresReview: false }]
+    }
+    const soulMasterGroup: JobGroup = {
+      classKey: 'soul-master',
+      representativeJobId: '1112',
+      representativeName: '소울마스터',
+      advancements: [{ jobId: '1112', jobName: '소울마스터', stage: 4, requiresReview: false }]
+    }
+    const groups = [mikhailGroup, soulMasterGroup, heroGroup]
+    const cygnusFilters = {
+      classGroups: ['전사'],
+      affiliations: ['시그너스 기사단'],
+      search: ''
+    }
+
+    expect(filterJobGroups(groups, [], cygnusFilters)).toEqual([mikhailGroup, soulMasterGroup])
+    expect(
+      filterJobGroups(groups, [], {
+        classGroups: ['전사'],
+        affiliations: ['모험가'],
+        search: ''
+      })
+    ).toEqual([heroGroup])
+
+    const staleMikhailDraft = {
+      ...draft,
+      jobId: mikhailGroup.representativeJobId,
+      jobName: '미하일',
+      englishName: 'Mikhail',
+      affiliation: '노바'
+    }
+    expect(filterJobGroups(groups, [staleMikhailDraft], cygnusFilters)).toEqual([
+      mikhailGroup,
+      soulMasterGroup
+    ])
+    expect(
+      filterJobGroups(groups, [staleMikhailDraft], {
+        ...emptyJobFilters(),
+        affiliations: ['노바']
+      })
+    ).toEqual([])
+    expect(
+      filterJobGroups(groups, [staleMikhailDraft], {
+        ...cygnusFilters,
+        search: 'Mikhail'
+      })
+    ).toEqual([mikhailGroup])
+  })
+
+  it('keeps ungrouped DB jobs and nonrepresentative drafts in fallback access', () => {
+    expect(
+      fallbackJobs(
+        [
+          ...heroGroup.advancements.map(({ jobId, jobName }) => ({ jobId, jobName })),
+          { jobId: '30000', jobName: '미분류 DB' }
+        ],
+        [heroGroup],
+        [
+          { ...draft, jobId: '110', jobName: '레거시 파이터 초안' },
+          { ...draft, jobId: '99999', jobName: '초안 전용' },
+          { ...draft, jobId: '112', jobName: '대표 초안' }
+        ]
+      )
+    ).toEqual([
+      { jobId: '30000', jobName: '미분류 DB' },
+      { jobId: '110', jobName: '레거시 파이터 초안' },
+      { jobId: '99999', jobName: '초안 전용' }
+    ])
+  })
+
+  it('validates canonical multi-stat values and allows Xenon without a secondary stat', () => {
+    expect(
+      validateJobDraft({
+        ...draft,
+        jobId: '3612',
+        mainStat: 'STR, DEX, LUK',
+        subStat: ''
+      })
+    ).toEqual([])
+    expect(validateJobDraft({ ...draft, mainStat: 'DEX', subStat: 'STR' })).toEqual([])
+    expect(validateJobDraft({ ...draft, mainStat: '' })).toContain('주스탯을 입력하세요.')
+  })
+
+  it.each([
+    ['unknown stat', { mainStat: 'HP' }],
+    ['duplicate stat', { mainStat: 'STR, STR' }],
+    ['malformed stat', { subStat: 'DEX,,STR' }]
+  ])('rejects %s tokens', (_label, overrides) => {
+    expect(validateJobDraft({ ...draft, ...overrides })).not.toEqual([])
+  })
+
+  it('prefills readable English from known internal class keys only', () => {
+    expect(
+      emptyJobDraft({ jobId: '212', jobName: '아크메이지' }, 'arch-mage-fire-poison').englishName
+    ).toBe('Arch Mage Fire Poison')
+    expect(emptyJobDraft({ jobId: '99999', jobName: '미분류' }, 'unknown-class').englishName).toBe(
+      ''
+    )
+    expect(prefillEnglishName('Custom English', 'hero')).toBe('Custom English')
   })
 
   it('preserves valid leading-zero and system IDs while rejecting invalid IDs', () => {

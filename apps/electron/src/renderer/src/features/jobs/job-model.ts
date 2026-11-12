@@ -1,8 +1,12 @@
-import type {
-  JobDraft,
-  JobSummary,
-  NewWeaponType,
-  WeaponTypeOption
+import { allClassKeys, classifyJobId } from '@maple/data-core'
+
+import {
+  parseJobStats,
+  type JobDraft,
+  type JobGroup,
+  type JobSummary,
+  type NewWeaponType,
+  type WeaponTypeOption
 } from '../../../../shared/job-data'
 import type { RawDataComparison, RawDataRecord } from '../../../../shared/raw-data-diff'
 
@@ -69,10 +73,20 @@ export function olderVersions(current: string, versions: string[]): string[] {
     .sort((left, right) => right.localeCompare(left, undefined, { numeric: true }))
 }
 
-export const emptyJobDraft = (job: JobSummary): JobDraft => ({
+const knownClassKeys = new Set<string>(allClassKeys)
+
+export function prefillEnglishName(englishName: string, classKey?: string): string {
+  if (englishName || !classKey || !knownClassKeys.has(classKey)) return englishName
+  return classKey
+    .split('-')
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(' ')
+}
+
+export const emptyJobDraft = (job: JobSummary, classKey?: string): JobDraft => ({
   jobId: job.jobId,
   jobName: job.jobName,
-  englishName: '',
+  englishName: prefillEnglishName('', classKey),
   classGroup: '',
   affiliation: '',
   mainStat: '',
@@ -82,6 +96,71 @@ export const emptyJobDraft = (job: JobSummary): JobDraft => ({
   newWeaponTypes: [],
   revision: 0
 })
+
+function matchesDraftFilters(draft: JobDraft | undefined, filters: JobFilters): boolean {
+  const matchesClass =
+    filters.classGroups.length === 0 ||
+    (draft ? filters.classGroups.includes(draft.classGroup) : false)
+  const matchesAffiliation =
+    filters.affiliations.length === 0 ||
+    (draft ? filters.affiliations.includes(draft.affiliation) : false)
+  return matchesClass && matchesAffiliation
+}
+
+const classGroupLabels = {
+  novice: '초보자',
+  warrior: '전사',
+  mage: '마법사',
+  archer: '궁수',
+  thief: '도적',
+  pirate: '해적'
+} as const
+
+const affiliationLabels = new Set([
+  '모험가',
+  '시그너스 기사단',
+  '영웅',
+  '레지스탕스',
+  '노바',
+  '레프',
+  '아니마'
+])
+
+function matchesGroupFilters(
+  representativeJobId: string,
+  draft: JobDraft | undefined,
+  filters: JobFilters
+): boolean {
+  const isMikhail = representativeJobId === '5112'
+  if (draft) {
+    return matchesDraftFilters(
+      isMikhail ? { ...draft, affiliation: '시그너스 기사단' } : draft,
+      filters
+    )
+  }
+
+  const classification = classifyJobId(representativeJobId)
+  if (classification.kind !== 'job') return matchesDraftFilters(undefined, filters)
+
+  const classGroups = classification.classGroup
+    ? (Array.isArray(classification.classGroup)
+        ? classification.classGroup
+        : [classification.classGroup]
+      ).map((classGroup) => classGroupLabels[classGroup])
+    : []
+  const affiliation = isMikhail
+    ? '시그너스 기사단'
+    : affiliationLabels.has(classification.prefixLabel)
+      ? classification.prefixLabel
+      : undefined
+  const matchesClass =
+    filters.classGroups.length === 0 ||
+    classGroups.some((classGroup) => filters.classGroups.includes(classGroup))
+  const matchesAffiliation =
+    filters.affiliations.length === 0 ||
+    (affiliation ? filters.affiliations.includes(affiliation) : false)
+  return matchesClass && matchesAffiliation
+}
 
 export function filterJobs(
   jobs: JobSummary[],
@@ -98,14 +177,55 @@ export function filterJobs(
       job.jobId.toLocaleLowerCase().includes(query) ||
       job.jobName.toLocaleLowerCase().includes(query) ||
       draft?.englishName.toLocaleLowerCase().includes(query)
-    const matchesClass =
-      filters.classGroups.length === 0 ||
-      (draft ? filters.classGroups.includes(draft.classGroup) : false)
-    const matchesAffiliation =
-      filters.affiliations.length === 0 ||
-      (draft ? filters.affiliations.includes(draft.affiliation) : false)
-    return Boolean(matchesSearch && matchesClass && matchesAffiliation)
+    return Boolean(matchesSearch && matchesDraftFilters(draft, filters))
   })
+}
+
+export function filterJobGroups(
+  groups: JobGroup[],
+  drafts: JobDraft[],
+  filters: JobFilters
+): JobGroup[] {
+  const draftsById = new Map(drafts.map((draft) => [draft.jobId, draft]))
+  const query = filters.search.trim().toLocaleLowerCase()
+
+  return groups.filter((group) => {
+    const representativeDraft = draftsById.get(group.representativeJobId)
+    const matchesSearch =
+      !query ||
+      group.representativeName.toLocaleLowerCase().includes(query) ||
+      representativeDraft?.englishName.toLocaleLowerCase().includes(query) ||
+      group.advancements.some(
+        (job) =>
+          job.jobId.toLocaleLowerCase().includes(query) ||
+          job.jobName.toLocaleLowerCase().includes(query)
+      )
+    return Boolean(
+      matchesSearch && matchesGroupFilters(group.representativeJobId, representativeDraft, filters)
+    )
+  })
+}
+
+export function fallbackJobs(
+  jobs: JobSummary[],
+  groups: JobGroup[],
+  drafts: JobDraft[]
+): JobSummary[] {
+  const representedJobIds = new Set(
+    groups.flatMap((group) => group.advancements.map((job) => job.jobId))
+  )
+  const representativeJobIds = new Set(groups.map((group) => group.representativeJobId))
+  const byId = new Map(
+    jobs.filter((job) => !representedJobIds.has(job.jobId)).map((job) => [job.jobId, job])
+  )
+
+  for (const draft of drafts) {
+    if (!representativeJobIds.has(draft.jobId) && !byId.has(draft.jobId)) {
+      byId.set(draft.jobId, { jobId: draft.jobId, jobName: draft.jobName })
+    }
+  }
+
+  return [...byId.values()]
 }
 
 export function validateJobDraft(draft: JobDraft): string[] {
@@ -120,7 +240,10 @@ export function validateJobDraft(draft: JobDraft): string[] {
   if (!draft.classGroup.trim()) errors.push('직업군을 선택하세요.')
   if (!draft.affiliation.trim()) errors.push('소속을 선택하세요.')
   if (!draft.mainStat.trim()) errors.push('주스탯을 입력하세요.')
-  if (!draft.subStat.trim()) errors.push('부스탯을 입력하세요.')
+  else if (parseJobStats(draft.mainStat) === null)
+    errors.push('주스탯은 STR, LUK, INT, DEX를 중복 없이 입력하세요.')
+  if (parseJobStats(draft.subStat) === null)
+    errors.push('부스탯은 STR, LUK, INT, DEX를 중복 없이 입력하세요.')
   return errors
 }
 
