@@ -19,7 +19,14 @@ import type {
   RegisteredDataVersion,
   UpdateDataVersionReleaseDateRequest
 } from '../shared/data-versions'
-import type { JobDataSnapshot, JobDraft, SaveJobDraftRequest } from '../shared/job-data'
+import type {
+  CopySelectedJobDraftRecoveryRequest,
+  CopySelectedJobDraftRecoveryResult,
+  JobDataSnapshot,
+  JobDraft,
+  JobDraftRecoveryPreview,
+  SaveJobDraftRequest
+} from '../shared/job-data'
 import type {
   CompareRawDataRequest,
   ListComparableFilesRequest,
@@ -63,6 +70,12 @@ const api = {
   listDataVersions: (): Promise<string[]> => ipcRenderer.invoke('data-version:list'),
   listJobData: (version: string): Promise<JobDataSnapshot> =>
     ipcRenderer.invoke('job-data:list', version),
+  previewJobDraftRecovery: (version: string): Promise<JobDraftRecoveryPreview> =>
+    ipcRenderer.invoke('job-data:draft-recovery:preview', version),
+  copySelectedJobDraftRecovery: (
+    request: CopySelectedJobDraftRecoveryRequest
+  ): Promise<CopySelectedJobDraftRecoveryResult> =>
+    ipcRenderer.invoke('job-data:draft-recovery:copy-selected', request),
   saveJobDraft: (request: SaveJobDraftRequest): Promise<JobDraft> =>
     ipcRenderer.invoke('job-data:draft:save', request),
   listRegisteredDataVersions: (): Promise<RegisteredDataVersion[]> =>

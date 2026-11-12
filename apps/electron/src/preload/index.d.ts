@@ -36,6 +36,10 @@ type MapleAdminApi = {
   ) => () => void
   listDataVersions: () => Promise<string[]>
   listJobData: (version: string) => Promise<JobDataSnapshot>
+  previewJobDraftRecovery: (version: string) => Promise<JobDraftRecoveryPreview>
+  copySelectedJobDraftRecovery: (
+    request: CopySelectedJobDraftRecoveryRequest
+  ) => Promise<CopySelectedJobDraftRecoveryResult>
   saveJobDraft: (request: SaveJobDraftRequest) => Promise<JobDraft>
   listRegisteredDataVersions: () => Promise<RegisteredDataVersion[]>
   updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest) => Promise<void>
@@ -79,7 +83,14 @@ import type {
   RawDataComparison,
   SaveRawDataDiffRequest
 } from '../shared/raw-data-diff'
-import type { JobDataSnapshot, JobDraft, SaveJobDraftRequest } from '../shared/job-data'
+import type {
+  CopySelectedJobDraftRecoveryRequest,
+  CopySelectedJobDraftRecoveryResult,
+  JobDataSnapshot,
+  JobDraft,
+  JobDraftRecoveryPreview,
+  SaveJobDraftRequest
+} from '../shared/job-data'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
 import type {
   CopyDataVersionRequest,

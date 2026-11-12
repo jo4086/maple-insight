@@ -1,17 +1,37 @@
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path'
 
-import type {
-  JobDataSnapshot,
-  JobDraft,
-  JobSummary,
-  NewWeaponType,
-  SaveJobDraftRequest,
-  WeaponTypeOption
+import {
+  affiliations,
+  allClassKeyMap,
+  classTree,
+  classifyJobId,
+  type ClassGroup,
+  type ClassTreeNode
+} from '@maple/data-core'
+
+import {
+  formatJobStats,
+  parseJobStats,
+  type JobDataSnapshot,
+  type JobDraft,
+  type JobDraftRecoveryPreview,
+  type JobGroup,
+  type JobSummary,
+  type NewWeaponType,
+  type SaveJobDraftRequest,
+  type WeaponTypeOption
 } from '../../shared/job-data'
 
-type DatabaseWeaponType = {
+import {
+  openOrCreateEditWorkbench,
+  readJobMetadataRecords,
+  saveRecoveredJobMetadataFirstRevision,
+  type JobMetadataRecord
+} from './edit-workbench'
+
+export type DatabaseWeaponType = {
   id: bigint
   category: string
   part: string
@@ -21,7 +41,7 @@ type DatabaseWeaponType = {
   weaponConstant: { toString(): string } | null
 }
 
-type JobDataRepository = {
+export type JobDataRepository = {
   findGameJobsByVersion(version: string): Promise<JobSummary[]>
   findGlobalWeaponTypes(): Promise<DatabaseWeaponType[]>
 }
@@ -31,6 +51,13 @@ type JobDataOptions = {
   environment: 'test' | 'production' | 'copy'
   version: string
   repository?: JobDataRepository
+}
+
+export type CopySelectedJobDraftRecoveryRequest = {
+  version: string
+  recoveryId: string
+  sourceSha256: string
+  jobId: string
 }
 
 const draftMutations = new Map<string, Promise<void>>()
@@ -47,6 +74,7 @@ const DRAFT_FIELDS = [
   'newWeaponTypes',
   'revision'
 ] as const
+const OPTIONAL_DRAFT_FIELDS = ['advancementJobIds'] as const
 const NEW_WEAPON_TYPE_FIELDS = [
   'key',
   'category',
@@ -66,11 +94,23 @@ function hasExactFields(value: Record<string, unknown>, fields: readonly string[
   return keys.length === fields.length && keys.every((key) => fields.includes(key))
 }
 
+function hasDraftFields(value: Record<string, unknown>): boolean {
+  const keys = Object.keys(value)
+  return (
+    DRAFT_FIELDS.every((field) => keys.includes(field)) &&
+    keys.every((key) =>
+      ([...DRAFT_FIELDS, ...OPTIONAL_DRAFT_FIELDS] as readonly string[]).includes(key)
+    )
+  )
+}
+
 function isVersion(value: string): boolean {
   return /^\d+\.\d+\.\d+$/.test(value)
 }
 
 function assertContext(options: JobDataOptions): void {
+  if (typeof options.dataRoot !== 'string' || options.dataRoot.trim().length === 0)
+    throw new Error('Invalid job data root')
   if (!isVersion(options.version)) throw new Error('Invalid job data version')
   if (!['test', 'production', 'copy'].includes(options.environment))
     throw new Error('Invalid job data environment')
@@ -132,12 +172,16 @@ async function ensureDraftDirectory(dataRoot: string, path: string): Promise<voi
 }
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const SHA256_PATTERN = /^[a-f0-9]{64}$/
+const JOB_ID_PATTERN = /^\d{1,5}$/
 
 async function readRecoveryId(options: JobDataOptions): Promise<string | null> {
   const path = recoveryLocatorPath(options)
   await assertNoSymlinks(options.dataRoot, path, true)
   try {
-    const parsed: unknown = JSON.parse(await readFile(path, 'utf8'))
+    const source = await readFile(path, 'utf8')
+    await assertNoSymlinks(options.dataRoot, path, false)
+    const parsed: unknown = JSON.parse(source)
     if (
       !isObject(parsed) ||
       !hasExactFields(parsed, ['recoveryId']) ||
@@ -169,14 +213,18 @@ async function writeRecoveryId(options: JobDataOptions, recoveryId: string): Pro
   }
 }
 
-async function readDrafts(dataRoot: string, path: string): Promise<unknown[]> {
+type ReadDraftsResult = { drafts: unknown[]; sourceBytes: Buffer | null }
+
+async function readDrafts(dataRoot: string, path: string): Promise<ReadDraftsResult> {
   await assertNoSymlinks(dataRoot, path, true)
   try {
-    const parsed: unknown = JSON.parse(await readFile(path, 'utf8'))
+    const sourceBytes = await readFile(path)
+    await assertNoSymlinks(dataRoot, path, false)
+    const parsed: unknown = JSON.parse(sourceBytes.toString('utf8'))
     if (!Array.isArray(parsed)) throw new Error('Job draft file must contain an array')
-    return parsed
+    return { drafts: parsed, sourceBytes }
   } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return []
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return { drafts: [], sourceBytes: null }
     if (error instanceof SyntaxError) throw new Error('Job draft file contains invalid JSON')
     throw error
   }
@@ -269,13 +317,28 @@ function weaponIdentity(category: string, part: string): string {
   return `${category}:${normalizedPart(part)}`
 }
 
+function validateAdvancementJobIds(value: unknown): string[] {
+  const jobIds = assertStringArray(value, 'advancementJobIds', 20)
+  for (const jobId of jobIds) {
+    if (!/^\d{1,5}$/.test(jobId)) throw new Error('Advancement job IDs must contain 1 to 5 digits')
+    const classification = classifyJobId(jobId)
+    if (
+      classification.kind === 'system' ||
+      classification.kind === 'dummy' ||
+      classification.kind === 'skillGroup' ||
+      classification.kind === 'invalid'
+    )
+      throw new Error(`Invalid advancement job ID: ${jobId}`)
+  }
+  return jobIds
+}
+
 function validateDraft(
   value: unknown,
   catalog: WeaponTypeOption[],
-  options: { allowCatalogCandidateConflict?: boolean } = {}
+  options: { allowCatalogCandidateConflict?: boolean; validateStats?: boolean } = {}
 ): JobDraft {
-  if (!isObject(value) || !hasExactFields(value, DRAFT_FIELDS))
-    throw new Error('Invalid job draft fields')
+  if (!isObject(value) || !hasDraftFields(value)) throw new Error('Invalid job draft fields')
   const jobId = assertString(value.jobId, 'jobId', 20, true)
   if (!/^\d+$/.test(jobId)) throw new Error('Job ID must be numeric')
   if (Number(jobId) >= 800000) throw new Error('System job drafts are excluded')
@@ -317,17 +380,28 @@ function validateDraft(
   if (secondaryWeapons.some((key) => !secondaryKeys.has(key)))
     throw new Error('Secondary weapons must reference subWeapon category keys')
 
+  const mainStat = assertString(value.mainStat, 'mainStat', 40)
+  const subStat = assertString(value.subStat, 'subStat', 40)
+  const parsedMainStat = options.validateStats ? parseJobStats(mainStat) : undefined
+  const parsedSubStat = options.validateStats ? parseJobStats(subStat) : undefined
+  if (parsedMainStat === null || parsedMainStat?.length === 0)
+    throw new Error('Invalid job draft field: mainStat')
+  if (parsedSubStat === null) throw new Error('Invalid job draft field: subStat')
+
   return {
     jobId,
     jobName: assertString(value.jobName, 'jobName', 100, true),
     englishName: assertString(value.englishName, 'englishName', 100),
     classGroup: assertString(value.classGroup, 'classGroup', 100),
     affiliation: assertString(value.affiliation, 'affiliation', 100),
-    mainStat: assertString(value.mainStat, 'mainStat', 40),
-    subStat: assertString(value.subStat, 'subStat', 40),
+    mainStat: parsedMainStat === undefined ? mainStat : formatJobStats(parsedMainStat),
+    subStat: parsedSubStat === undefined ? subStat : formatJobStats(parsedSubStat),
     primaryWeapons,
     secondaryWeapons,
     newWeaponTypes,
+    ...('advancementJobIds' in value
+      ? { advancementJobIds: validateAdvancementJobIds(value.advancementJobIds) }
+      : {}),
     revision: value.revision as number
   }
 }
@@ -366,6 +440,106 @@ async function loadData(options: JobDataOptions): Promise<{
   }
 }
 
+function canonicalTaxonomyJobs(jobs: JobSummary[]): JobSummary[] {
+  const canonicalByNormalizedId = new Map<string, JobSummary>()
+  for (const job of jobs) {
+    const classification = classifyJobId(job.jobId)
+    if (!('normalizedJobId' in classification)) continue
+    const current = canonicalByNormalizedId.get(classification.normalizedJobId)
+    if (
+      current === undefined ||
+      job.jobId.length < current.jobId.length ||
+      (job.jobId.length === current.jobId.length && job.jobId.localeCompare(current.jobId) < 0)
+    )
+      canonicalByNormalizedId.set(classification.normalizedJobId, job)
+  }
+  return [...canonicalByNormalizedId.values()]
+}
+
+const DISPLAY_CLASS_GROUPS = [
+  '전사',
+  '마법사',
+  '궁수',
+  '도적',
+  '해적'
+] as const satisfies readonly ClassGroup[]
+
+type JobDisplayOrder = {
+  affiliation: number
+  classGroup: number
+}
+
+const jobDisplayOrder = new Map<string, JobDisplayOrder>()
+
+for (const { affiliation, roots } of classTree) {
+  const visit = (
+    node: ClassTreeNode,
+    inheritedClassGroup?: ClassGroup | readonly ClassGroup[]
+  ): void => {
+    const classGroup = node.classGroup ?? inheritedClassGroup
+    const classGroups = classGroup === undefined ? [] : [classGroup].flat()
+    jobDisplayOrder.set(allClassKeyMap[node.className], {
+      affiliation: affiliations.indexOf(affiliation),
+      classGroup: Math.min(
+        ...classGroups.map((value) => DISPLAY_CLASS_GROUPS.indexOf(value)),
+        DISPLAY_CLASS_GROUPS.length
+      )
+    })
+    node.children?.forEach((child) => visit(child, classGroup))
+  }
+  roots.forEach((root) => visit(root))
+}
+
+function compareJobGroups(left: JobGroup, right: JobGroup): number {
+  const leftOrder = jobDisplayOrder.get(left.classKey)
+  const rightOrder = jobDisplayOrder.get(right.classKey)
+  return (
+    (leftOrder?.affiliation ?? affiliations.length) -
+      (rightOrder?.affiliation ?? affiliations.length) ||
+    (leftOrder?.classGroup ?? DISPLAY_CLASS_GROUPS.length) -
+      (rightOrder?.classGroup ?? DISPLAY_CLASS_GROUPS.length) ||
+    Number(left.representativeJobId) - Number(right.representativeJobId) ||
+    left.representativeJobId.localeCompare(right.representativeJobId) ||
+    left.classKey.localeCompare(right.classKey)
+  )
+}
+
+function groupJobs(jobs: JobSummary[]): JobGroup[] {
+  const classified = canonicalTaxonomyJobs(jobs).map((job) => ({
+    job,
+    classification: classifyJobId(job.jobId)
+  }))
+  const groups: JobGroup[] = []
+
+  for (const { job: representative, classification } of classified) {
+    if (classification.kind !== 'job') continue
+    for (const finalMatch of classification.matches.filter(({ stage }) => stage === 4)) {
+      const advancements = classified.flatMap(({ job, classification: candidate }) => {
+        if (candidate.kind !== 'job') return []
+        return candidate.matches
+          .filter(({ classKey }) => classKey === finalMatch.classKey)
+          .map((match) => ({
+            jobId: job.jobId,
+            jobName: job.jobName,
+            stage: match.stage,
+            requiresReview: candidate.ambiguous
+          }))
+      })
+      advancements.sort(
+        (left, right) => left.stage - right.stage || left.jobId.localeCompare(right.jobId)
+      )
+      groups.push({
+        classKey: finalMatch.classKey,
+        representativeJobId: representative.jobId,
+        representativeName: finalMatch.className,
+        advancements
+      })
+    }
+  }
+
+  return groups.sort(compareJobGroups)
+}
+
 export async function listJobData(options: JobDataOptions): Promise<JobDataSnapshot> {
   assertContext(options)
   const { jobs, weaponTypes } = await loadData(options)
@@ -373,14 +547,203 @@ export async function listJobData(options: JobDataOptions): Promise<JobDataSnaps
   const drafts =
     recoveryId === null
       ? []
-      : (await readDrafts(options.dataRoot, recoveryDraftPath(options, recoveryId))).map((draft) =>
-          validateDraft(draft, weaponTypes, { allowCatalogCandidateConflict: true })
+      : (await readDrafts(options.dataRoot, recoveryDraftPath(options, recoveryId))).drafts.map(
+          (draft) => validateDraft(draft, weaponTypes, { allowCatalogCandidateConflict: true })
         )
   return {
     jobs,
+    jobGroups: groupJobs(jobs),
     weaponTypes,
     drafts: drafts.sort((left, right) => left.jobId.localeCompare(right.jobId))
   }
+}
+
+export async function previewJobDraftRecovery(
+  options: JobDataOptions
+): Promise<JobDraftRecoveryPreview> {
+  assertContext(options)
+  const recoveryId = await readRecoveryId(options)
+  if (recoveryId === null) return { recoveryId: null, sourceSha256: null, drafts: [] }
+
+  const path = recoveryDraftPath(options, recoveryId)
+  const source = await readDrafts(options.dataRoot, path)
+  if (source.sourceBytes === null) throw new Error('Job draft recovery source is missing')
+
+  const { weaponTypes } = await loadData(options)
+  const drafts = source.drafts.map((draft) =>
+    validateDraft(draft, weaponTypes, {
+      allowCatalogCandidateConflict: true,
+      validateStats: true
+    })
+  )
+  const jobIds = new Set<string>()
+  for (const draft of drafts) {
+    if (jobIds.has(draft.jobId)) throw new Error(`Duplicate job draft ID: ${draft.jobId}`)
+    jobIds.add(draft.jobId)
+  }
+  const unchangedRecoveryId = await readRecoveryId(options)
+  const unchangedSource = await readDrafts(options.dataRoot, path)
+  if (
+    unchangedRecoveryId !== recoveryId ||
+    unchangedSource.sourceBytes === null ||
+    !source.sourceBytes.equals(unchangedSource.sourceBytes)
+  )
+    throw new Error('Job draft recovery source changed while reading')
+
+  return {
+    recoveryId,
+    sourceSha256: createHash('sha256').update(source.sourceBytes).digest('hex'),
+    drafts: drafts
+      .map((draft) => {
+        const selectedKeys = new Set([...draft.primaryWeapons, ...draft.secondaryWeapons])
+        const blockingNewWeaponTypeKeys = draft.newWeaponTypes
+          .map(({ key }) => key)
+          .filter((key) => selectedKeys.has(key))
+        return {
+          jobId: draft.jobId,
+          jobName: draft.jobName,
+          revision: draft.revision,
+          proposedAfter: {
+            englishName: draft.englishName,
+            classGroup: draft.classGroup,
+            affiliation: draft.affiliation,
+            mainStat: draft.mainStat,
+            subStat: draft.subStat,
+            primaryWeapons: draft.primaryWeapons,
+            secondaryWeapons: draft.secondaryWeapons
+          },
+          excluded: {
+            jobName: draft.jobName,
+            newWeaponTypes: draft.newWeaponTypes,
+            advancementJobIds: {
+              present: draft.advancementJobIds !== undefined,
+              value: draft.advancementJobIds ?? null
+            }
+          },
+          blockedForCopy: blockingNewWeaponTypeKeys.length > 0,
+          blockingNewWeaponTypeKeys
+        }
+      })
+      .sort((left, right) => left.jobId.localeCompare(right.jobId))
+  }
+}
+
+function assertCopySelectedJobDraftRecoveryRequest(
+  options: JobDataOptions,
+  request: unknown
+): asserts request is CopySelectedJobDraftRecoveryRequest {
+  if (
+    !isObject(request) ||
+    !hasExactFields(request, ['version', 'recoveryId', 'sourceSha256', 'jobId'])
+  )
+    throw new Error('Invalid copy job draft recovery request')
+  if (typeof request.version !== 'string' || !isVersion(request.version))
+    throw new Error('Invalid copy job draft recovery version')
+  if (request.version !== options.version) throw new Error('Job draft recovery version mismatch')
+  if (typeof request.recoveryId !== 'string' || !UUID_PATTERN.test(request.recoveryId))
+    throw new Error('Invalid copy job draft recovery recoveryId')
+  if (typeof request.sourceSha256 !== 'string' || !SHA256_PATTERN.test(request.sourceSha256))
+    throw new Error('Invalid copy job draft recovery sourceSha256')
+  if (typeof request.jobId !== 'string' || !JOB_ID_PATTERN.test(request.jobId))
+    throw new Error('Invalid copy job draft recovery jobId')
+}
+
+function recoverySourceMatchesRequest(
+  record: JobMetadataRecord,
+  options: JobDataOptions,
+  request: CopySelectedJobDraftRecoveryRequest
+): boolean {
+  const source = record.recoveryCopy?.source
+  return (
+    source !== undefined &&
+    source.environment === options.environment &&
+    source.version === request.version &&
+    source.recoveryId === request.recoveryId &&
+    source.sourceSha256 === request.sourceSha256 &&
+    source.jobId === request.jobId
+  )
+}
+
+function localCreatorId(): string {
+  return process.platform === 'linux' && typeof process.getuid === 'function'
+    ? `uid:${process.getuid()}`
+    : 'local-operator'
+}
+
+export async function copySelectedJobDraftRecovery(
+  options: JobDataOptions,
+  request: CopySelectedJobDraftRecoveryRequest
+): Promise<{ record: JobMetadataRecord; changeSetId: string }> {
+  assertContext(options)
+  assertCopySelectedJobDraftRecoveryRequest(options, request)
+
+  // This in-process lock does not prevent recovery edits by another process.
+  return serializeDraftMutation(recoveryLocatorPath(options), async () => {
+    const workbenchOptions = {
+      dataRoot: options.dataRoot,
+      environment: options.environment,
+      version: options.version,
+      creatorLocalId: localCreatorId()
+    }
+    const workbench = await openOrCreateEditWorkbench(workbenchOptions)
+    const target = {
+      ...workbenchOptions,
+      changeSetId: workbench.manifest.changeSetId,
+      jobID: request.jobId
+    }
+    const existing = await readJobMetadataRecords(target)
+    if (existing.history.length > 0) {
+      const first = existing.history[0]
+      if (!recoverySourceMatchesRequest(first, options, request))
+        throw new Error('Job draft recovery target already exists')
+      return { record: first, changeSetId: workbench.manifest.changeSetId }
+    }
+
+    const preview = await previewJobDraftRecovery(options)
+    if (preview.recoveryId !== request.recoveryId || preview.sourceSha256 !== request.sourceSha256)
+      throw new Error('Job draft recovery source does not match request')
+    const selected = preview.drafts.filter(({ jobId }) => jobId === request.jobId)
+    if (selected.length !== 1) throw new Error('Selected job draft recovery was not found')
+    if (selected[0].blockedForCopy)
+      throw new Error('Selected job draft recovery references a new weapon type')
+
+    const record = await saveRecoveredJobMetadataFirstRevision({
+      ...target,
+      expectedRevision: 0,
+      after: selected[0].proposedAfter,
+      provenance: {
+        source: {
+          environment: options.environment,
+          version: options.version,
+          recoveryId: request.recoveryId,
+          sourceSha256: request.sourceSha256,
+          jobId: selected[0].jobId,
+          revision: selected[0].revision
+        },
+        excluded: selected[0].excluded,
+        target: {
+          validationWorkspaceManifestSha256: workbench.manifest.validationWorkspaceManifestSha256,
+          rawInputSha256: workbench.manifest.rawInputSha256
+        }
+      },
+      expectedValidationWorkspaceManifestSha256:
+        workbench.manifest.validationWorkspaceManifestSha256,
+      expectedRawInputSha256: workbench.manifest.rawInputSha256,
+      INTERNAL_beforeFirstRevisionPublish: async () => {
+        const current = await previewJobDraftRecovery(options)
+        const currentSelected = current.drafts.filter(({ jobId }) => jobId === request.jobId)
+        if (
+          current.recoveryId !== request.recoveryId ||
+          current.sourceSha256 !== request.sourceSha256 ||
+          currentSelected.length !== 1 ||
+          currentSelected[0].jobId !== selected[0].jobId ||
+          currentSelected[0].revision !== selected[0].revision
+        )
+          throw new Error('Job draft recovery source changed before copy')
+      }
+    })
+    return { record, changeSetId: workbench.manifest.changeSetId }
+  })
 }
 
 async function atomicWriteDrafts(
@@ -419,6 +782,31 @@ async function serializeDraftMutation<T>(path: string, operation: () => Promise<
   }
 }
 
+function validateAdvancementGroup(draft: JobDraft, jobs: JobSummary[]): void {
+  if (draft.advancementJobIds === undefined) return
+
+  const representativeGroups = groupJobs(jobs).filter(
+    ({ representativeJobId }) => representativeJobId === draft.jobId
+  )
+  if (representativeGroups.length === 0) {
+    if (draft.advancementJobIds.length !== 1 || draft.advancementJobIds[0] !== draft.jobId)
+      throw new Error('Nonrepresentative job drafts may only link their own job ID')
+    return
+  }
+
+  const matchesCanonicalGroup = representativeGroups.some((group) => {
+    const groupJobIds = new Set(group.advancements.map(({ jobId }) => jobId))
+    return (
+      draft.advancementJobIds!.includes(draft.jobId) &&
+      draft.advancementJobIds!.every((jobId) => groupJobIds.has(jobId))
+    )
+  })
+  if (!matchesCanonicalGroup)
+    throw new Error(
+      'Representative advancement job IDs must include the owning job and one canonical job group'
+    )
+}
+
 export async function saveJobDraft(
   options: JobDataOptions,
   request: SaveJobDraftRequest
@@ -428,8 +816,9 @@ export async function saveJobDraft(
     throw new Error('Invalid save job draft request')
   if (request.version !== options.version) throw new Error('Job draft version mismatch')
 
-  const { weaponTypes } = await loadData(options)
-  const requested = validateDraft(request.draft, weaponTypes)
+  const { jobs, weaponTypes } = await loadData(options)
+  const requested = validateDraft(request.draft, weaponTypes, { validateStats: true })
+  validateAdvancementGroup(requested, jobs)
   const locatorPath = recoveryLocatorPath(options)
   return serializeDraftMutation(locatorPath, async () => {
     const existingRecoveryId = await readRecoveryId(options)
@@ -438,7 +827,7 @@ export async function saveJobDraft(
     const drafts =
       existingRecoveryId === null
         ? []
-        : (await readDrafts(options.dataRoot, path)).map((draft) =>
+        : (await readDrafts(options.dataRoot, path)).drafts.map((draft) =>
             validateDraft(draft, weaponTypes, { allowCatalogCandidateConflict: true })
           )
     const otherCandidates = drafts
