@@ -1,6 +1,6 @@
 ## 9. Phase 4 - 도메인 편집
 
-**상태: 대기** · [상세 목표](../GOAL/Phase04.md) · [SPEC](../SPEC/06-phase-03-06.md#spec-phase-04-jobs) · [아키텍처](../ARCHITECTURE.md#architecture-phase-04)
+**상태: 진행 중 (기초 저장 및 EWB-005 일부)** · [상세 목표](../GOAL/Phase04.md) · [SPEC](../SPEC/06-phase-03-06.md#spec-phase-04-jobs) · [아키텍처](../ARCHITECTURE.md#architecture-phase-04)
 
 ### 목표
 

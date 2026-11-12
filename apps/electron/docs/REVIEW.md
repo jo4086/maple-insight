@@ -1,5 +1,84 @@
 # Maple Insight Data Studio Review
 
+## Phase 04 복구 초안 선택 복사 부분 구현·검증 (2026-11-13)
+
+- `직업 데이터 → 에디터`의 읽기 전용 복구 미리보기에서 직업별 명시적 `선택 직업 복사`를 제공한다. 일괄 복사는 없으며 확인 화면에 제외되는 `jobName`·`newWeaponTypes`·`advancementJobIds`를 나열한 뒤 선택값만 Phase 04 작업본의 변경 불가능한 첫 metadata revision으로 복사한다.
+- `.job-draft-recovery` 원본은 보존한다. 복사 record에는 provenance인 source recovery ID·원본 SHA256, target hash들, 제외 필드와 결과를 남긴다. 새 무기 후보를 참조하는 선택은 차단하고 stale source·target을 거부하며, 동일 요청 재시도는 멱등이다. 실패 뒤 버튼은 새로고침 전까지 다시 실행할 수 없고 처리 중·성공 뒤 반복 클릭도 비활성화한다.
+- 기존 에디터 저장은 계속 기존 복구 저장소에 기록하며 새 workbench를 읽지 않는다. DB publish와 일괄 이관은 없다. 집중 Vitest 68개(`job-data` 32개, `edit-workbench` 36개), Electron production build·Node/Web typecheck, 대상 ESLint·Prettier가 통과했다.
+- Chromium 모의 스크립트는 desktop 1480×920·mobile 390×844에서 취소·stale·성공·차단·버전 route·의도하지 않은 쓰기 없음 흐름을 확인하고 exit 0이었다. 스크린샷 `screenshots/playwright/electron/job-recovery-preview-e2e-{desktop,mobile}.png`는 Git 제외 상태다. native Electron IPC·실제 DB는 미검증이다. 첫 revision 게시 직전에 복구 원본을 재확인하지만, 비협조적 외부 프로세스가 재확인 후 파일을 교체하는 경합은 원자적으로 차단하지 못한다. Phase 04는 미완료, 체크박스는 그대로다.
+
+## Phase 04 복구 초안 읽기 전용 UI 부분 체크포인트 (2026-11-12)
+
+- `직업 데이터 → 에디터` 헤더 근처의 접힌 안내를 열면 복구 검토를 지연 조회해 원본 `recoveryId`·SHA256, 직업별 제안·제외 필드와 무기 후보 참조 차단 사유를 읽기 전용으로 표시한다. IPC/preload도 preview 조회만 제공하며 오류·재시도·빈 상태·버전 전환 race를 처리한다.
+- 선택·복사 action과 새 edit workbench 쓰기는 아직 없고 기존 로컬 복구 원본은 변경하지 않는다. 집중 Vitest 51개(`job-data` 24개, `edit-workbench` 27개), Electron production build·Node/Web typecheck, 대상 lint·Prettier와 Chromium 모의 스크립트가 exit 0이었다.
+- Chromium 모의 브라우저는 desktop 1480×920·mobile 390×844에서 열기·새로고침·오류·빈 상태·stale 응답·버전 전환과 직업 상세 왕복을 확인했다. 스크린샷 `screenshots/playwright/electron/job-recovery-preview-e2e-{desktop,mobile}.png`는 Git 제외 상태다. native Electron IPC와 실제 DB·복구 데이터는 미검증이며 Phase 04는 미완료, 체크박스는 그대로다.
+
+## Phase 04 복구 초안 읽기 전용 사전검사 부분 검증 (2026-11-12)
+
+- `job-data.ts`의 내부 `previewJobDraftRecovery`는 현재 무기 catalog·스탯 제약으로 복구 초안을 검증하고, `recoveryId`, 정확한 원본 파일의 SHA256, 원본 `jobId`·`jobName`·`revision`과 제안 metadata를 반환한다. `jobName`·`newWeaponTypes`·`advancementJobIds`는 명시적으로 제외하며, 초안 무기 후보 참조는 향후 복사 차단 대상으로 표시한다.
+- 중복 직업 ID는 거부하되 선행 0이 있는 ID는 서로 다른 문자열로 취급한다. malformed·symlink·읽는 동안 바뀐 원본도 거부하고 복구 저장소는 변경하지 않는다. UI·IPC·복사·새 workbench 쓰기·DB 쓰기는 없으며 Phase 04는 미완료다.
+- 제공된 검증 근거는 `job-data` 24개와 `edit-workbench` 27개를 합친 Vitest 51개, Electron production build·Node/Web typecheck, 범위 지정 ESLint·Prettier와 `git diff --check`가 모두 exit 0이다. 실제 DB·native Electron은 검증하지 않았다.
+
+## Phase 04 직업 변경 이력 내부 저장 부분 검증 (2026-11-12)
+
+- 현재 작업본에 `jobID`별 직업 메타데이터 변경을 UUID record와 증가 revision의 변경 불가능한 파일로 저장하고 재열 수 있다. 기존 revision 해시와 예상 revision을 검사하며 보류 중인 임시 파일은 보존하고 건너뛴다. 입력 변경 후 이전 `superseded` 작업본은 읽기 전용으로 조회할 수 있고 새 작업본은 빈 상태로 시작한다.
+- Linux에서 파일·디렉터리 동기화를 거친 뒤 성공을 반환한다. 집중 Vitest 27개, Electron production build·Node/Web 타입 검사 및 대상 ESLint·Prettier가 exit 0이었다. 실제 강제 종료·전원 손실 및 다른 운영체제의 동기화 내구성은 검증하지 않았다.
+- 기존 로컬 복구 초안의 **검토 뒤 선택 복사**는 방향만 확정했다. 복사 화면, 원본 provenance 검증, 무기 후보·전직 연결의 도메인별 변환, IPC·UI·DB 연동은 아직 없다. Phase 04 완료 조건은 열어 둔다.
+
+## Phase 04 EWB-005 저장 안전성 부분 체크포인트 (2026-11-12)
+
+- 내부 edit workbench 서비스는 같은 검증 입력 hash의 UUID change-set을 재열고, 입력 hash가 바뀌면 이전 change-set을 `superseded`로 보존한 뒤 이를 부모로 하는 새 change-set을 만든다.
+- supersession 도중 중단되어도 이전 `superseded` tip을 유지하며 다음 열기에서 child 생성을 마칠 수 있다. 완료되지 않은 staging directory는 보존하되 열기 대상에서는 무시한다.
+- live·malformed·dead lock은 모두 fail closed한다. path rename race가 live owner를 축출할 수 있어 lock을 자동 회수하지 않는다. dead lock도 모든 앱 프로세스를 닫은 뒤 수동 조사하고 backup 위치로 옮겨야 하며, 파괴적 자동 정리는 하지 않는다.
+- 최초 저장 경계의 집중 Vitest 20개와 Electron production build·Node/Web 타입 검사, 대상 ESLint·Prettier가 exit 0이었다. 이후 Linux 디렉터리 fsync와 직업 변경 이력을 추가했으며 위 별도 기록을 따른다. 실제 프로세스 강제 종료·전원 손실 및 적대적 동시 경로 교체는 미검증이다. 기존 복구 초안 migration, IPC·UI 연동은 아직 없으며 Phase 04 완료 체크리스트는 변경하지 않는다.
+
+## Phase 04 기초 저장 경계 부분 검증 (2026-11-09)
+
+- `apps/electron/src/main/services/edit-workbench.ts`와 `apps/electron/src/main/services/edit-workbench.test.ts`의 내부 미연결 서비스는 ready 검증 작업본에서 빈 UUID manifest를 생성하고 재열며, validation report·marker·converted manifest와 목록화된 JSON hash를 확인한다. symlink와 생성 뒤 입력이 바뀐 충돌은 거부한다.
+- 집중 Vitest 12개와 Electron production build·Node/Web 타입 검사, 대상 ESLint·Prettier가 통과했다. publish, 기존 복구 초안 migration, IPC·UI, 이전 change-set supersession·recovery, 실제 DB는 구현하거나 검증하지 않았다.
+- 프로세스 crash는 exclusive lock을 남겨 수동 검토가 필요할 수 있다. 적대적 동시 행위자의 path ancestor race를 완전히 막지 못하며 directory rename은 power-loss durable하지 않다.
+- 다음 작업은 EWB-005 supersession과 crash recovery, revision history·records, 복구 초안 migration 설계이며 storage가 안전해진 뒤 UI를 연결한다. Phase 04 수용 항목은 완료 처리하지 않는다.
+
+## 직업 정보·에디터 UI 부분 검증 (2026-11-09)
+
+- 직업 정보는 선택한 주무기·보조무기 key를 catalog와 초안 후보의 표시명으로 해석하고 빈 값은 `미입력`으로 표시한다. 종족은 현재 DB·`JobDraft`·taxonomy에 직업별 authoritative source가 없어 `미등록`으로 표시한다.
+- 에디터 행은 `jobID` → `직업명` → `원본 직업명` → `직업 영문명` → `직업군` → `소속` → `주스탯` → `부스탯` 순서다. desktop/mobile label 폭은 112px/88px, 입력 높이는 32px이며 control별 최대 폭을 유지한다. 저장은 최초 진입·재열기·원상 복구·성공 뒤와 저장 중 비활성화되고, 편집 뒤와 실패 재시도 때 활성화된다.
+- Chromium 모의 script 전체 실행은 exit 0이었다. desktop 1480×920·mobile 390×844에서 인접 상세·에디터 route와 저장·no-op·autosave·오류 흐름을 확인했다. 스크린샷은 Git ignored 상태로 `screenshots/playwright/electron`에 저장했다. Vitest 23개 파일·222개 테스트와 Electron production build·Node/Web 타입 검사, 변경 파일 ESLint·Prettier가 통과했다.
+- 실제 DB·native Electron 통합은 검증하지 않았으며 Phase 04 완료로 표시하지 않는다. 상세 기록은 [직업 데이터 탭 요청](./REQUESTS/job-data-tab.md#review--정보에디터-ui-부분-검증-2026-11-09)을 따른다.
+
+## 시그너스 필터·대표 4차 전직 accent 검증 (2026-11-08)
+
+- `node apps/electron/scripts/verify-job-data-playwright.mjs`는 exit 0이었다. 시그너스 기사단 순서에 4차 대표 jobID `5112` 미하일 전직 트리를 추가하고, 저장 초안의 소속을 의도적으로 오래된 `노바`로 두었다. `직업 정보`의 `시그너스 기사단` 필터에서 미하일이 표시·선택되고 히어로·배틀메이지가 제외됐으며, 필터 해제 뒤 미하일과 비시그너스 대표가 다시 함께 표시됨을 확인했다.
+- desktop 1480×920과 mobile 390×844의 dark/light 조합 모두에서 미하일 4차 대표 행의 inset box-shadow를 실제 computed style로 확인했다. shadow color는 dark `rgb(85, 230, 176)`, light `rgb(8, 127, 91)`였고 CSS accent computed color와 일치했다. 3차·4차 차수 텍스트 bounding box의 x 좌표 차이는 각 조합에서 `0px`여서 accent가 내용을 밀지 않았다.
+- Electron production build·Node/Web typecheck와 Vitest 23개 파일·222개 테스트, Playwright script Prettier, `git diff --check`, `node --check`가 exit 0이었다. 모의 renderer와 localStorage만 검증했으며 실제 DB·native Electron IPC는 검증하지 않았다. Phase 상태는 변경하지 않았다.
+
+## 직업 스탯·무기 선택기 및 표시 계약 검증 (2026-11-08)
+
+- `node apps/electron/scripts/verify-job-data-playwright.mjs`는 exit 0이었다. Chromium 모의 renderer에서 text input 대신 `주스탯`·`부스탯` fieldset의 추가·제거 button과 선택 chip을 사용했다. `STR`, `LUK`, `INT`, `DEX` 네 선택지, 히어로의 `STR, DEX` 복수 주스탯과 `DEX, STR` 복수 부스탯, 인라인 저장·재열기를 확인했다. 선택한 값의 추가 button이 사라져 중복 선택할 수 없음도 확인했다.
+- 제논은 `STR, DEX, LUK` 주스탯과 빈 부스탯을 불러와 저장·reload한 뒤 같은 chip 순서와 빈 값을 확인했다. `DEX` 제거와 재추가도 fieldset에서 확인하고 저장했다. 신규 렌은 알려지지 않은 신규 직업으로 영문 이름이 비어 있었고 입력 전 임의 기본값이 없었다. 새 작업본에서 `INT` 주스탯과 `LUK` 부스탯을 선택해 저장·reload했다.
+- 작업본이 없는 팔라딘의 영문 기본값 `Paladin`은 내부 영문 `classKey`에서 생성됨을 확인했다. 기존 복구 초안의 `Legacy Hero`는 그대로 유지됐다. 이 생성값은 내부 key의 단어를 읽기 좋게 변환한 값이며, 검수된 메이플스토리 공식 영문 번역 목록이 아니다.
+- 4차 대표 전직 행은 왼쪽 accent border와 screen-reader용 대표 설명을 유지하면서 보이는 `대표 이름`을 중복 출력하지 않았다. DB 원본 이름 `최상급 흑마법`은 상세와 편집기에서 유지됐다.
+- 주무기 선택기는 검색 입력 전 `+ 추가하기`로 한손검(`sword`)·스태프(`staff`) 후보를 즉시 표시하고 보조무기 `medallion`을 제외했다. key 입력 검색, 결과 없음, 선택 뒤 chip과 `+ 추가하기` 복귀, Escape 닫기, chip 제거를 확인했다. 보조무기도 category 후보 즉시 표시·검색·선택·제거를 확인했다. `새 무기 등록` toggle과 기존 등록·저장 흐름도 유지됐다.
+- desktop 1480×920 dark와 mobile 390×844 light에서 route/theme, 가로 overflow 부재, fieldset·label 접근성 assertion이 통과했다. `screenshots/playwright/electron/job-data-e2e-{desktop,mobile}.png`와 `job-editor-e2e-{desktop,mobile}.png`를 새로 생성해 직접 확인했다. desktop/mobile에서 선택 chip, picker button, 전직 행과 레이아웃 잘림이 없었다. 이미지는 Git ignored 상태로 유지한다.
+- `pnpm --dir apps/electron run build`, `pnpm --dir apps/electron test`(23개 파일·221개 테스트), 변경 파일 ESLint·Prettier와 `git diff --check`가 exit 0이었다. 실제 DB, native Electron IPC, 운영 데이터 저장은 검증하지 않았다. 모의 renderer와 localStorage 저장만 확인했으며 Phase 04·REQ002 완료 근거로 사용하지 않는다.
+
+## 직업 표시 순서 검증 (2026-11-08)
+
+- `@maple/data-core`의 `affiliations`·`classTree`를 기준으로 소속, 전사·마법사·궁수·도적·해적, 대표 직업 숫자 ID 순서를 적용했다. focused service test 14개가 exit 0이었고 interleaved 소속·직업군, classKey와 다른 순서, 시그너스 미하일, 도적 우선 제논과 공유 시민 ID의 개별 계열 유지를 확인했다.
+- Electron Node/Web typecheck, 변경 파일 ESLint·Prettier가 exit 0이었다. Chromium 모의 renderer script가 exit 0이었고 desktop 1480×920·mobile 390×844에서 직업 목록과 에디터의 같은 대표 순서, 탐색·검색·필터 흐름을 확인했다.
+- 실제 DB, native Electron IPC와 미매핑 taxonomy 데이터는 검증하지 않았다.
+
+## 직업 taxonomy 대표명·DB 원본명 표시 부분 검증 (2026-11-08)
+
+- [직업 taxonomy 표시 데이터 계약](./REQUESTS/job-taxonomy-display-contract.md#review--부분-검증-2026-11-08)의 단계 A 일부를 구현했다. 3212의 DB 원본명 `최상급 흑마법`은 유지하고 대표명 `배틀메이지`를 표시하며, 112·212 대표 선택도 테스트했다. 모든 단계의 별도 typed field, `missing-stage-4`, 미래 단일 소스·generator·승인 절차·DB 백업은 미구현이다.
+- Node/Web typecheck, Vitest 23개 파일·210개 테스트, 변경 source lint, production build와 Chromium 모의 renderer desktop/mobile assertion은 통과했다. Playwright script Prettier는 수정 뒤 재검사에서 통과했다. 실제 DB와 native Electron IPC는 `DATABASE_URL` 부재로 미검증이다.
+
+## 직업 전직 대표 이름·연결 검증 (2026-11-08)
+
+- [직업 데이터 요청 기록](./REQUESTS/job-data-tab.md#review--전직-대표-이름트리-연결-검증-2026-11-08)에 현재 버전 `GameJob` 행과 공유 분류기로 만든 4차 대표 직업·전직 트리, 에디터의 단일 복구 초안 ID 연결과 기존 초안 호환을 기록했다. 실제 DB 관계는 변경하지 않았다.
+- Node/Web 타입 검사, Electron 전체 23개 파일·210개 테스트, 변경 source ESLint와 production build가 통과했다. Chromium 모의 renderer에서 desktop 1480×920·mobile 390×844의 대표 목록·전직 단계·ID·이름·연결·재열기·필터·기존 경로를 확인했다. Playwright script Prettier는 수정 뒤 재검사에서 통과했다.
+- `DATABASE_URL`이 없어 실제 DB·native Electron IPC·복구 파일 재시작 검증은 수행하지 않았다. Phase 04·REQ002 완료 근거가 아니다.
+
 ## 직업 데이터 탭 UI 보완 검증 (2026-11-07)
 
 - [독립 요청 검증 기록](./REQUESTS/job-data-tab.md#review--ui-보완-검증-2026-11-07)에 직업 상세 고정 편집 행·안쪽 select, 페이지 shell 여백 제거와 내부 여백, 사이드바 직업 정보·편집기 accordion/picker, 활성 빈 탭, 넓어진 checkbox OR/AND 필터·reset 구분선·숨긴 직업 scrollbar, 얇은 전역 scrollbar를 기록했다.
