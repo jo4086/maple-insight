@@ -21,6 +21,7 @@ test('default lookup selects ready 1.2.419 when 1.2.424 is deleted and maps avai
       {
         name: 'Inherited',
         normalizedName: 'inherited',
+        category: '무기',
         requiredClass: '전사',
         requiredClassOverride: null,
         weaponTypeId: 1n,
@@ -31,6 +32,7 @@ test('default lookup selects ready 1.2.419 when 1.2.424 is deleted and maps avai
       {
         name: 'Overridden',
         normalizedName: 'overridden',
+        category: '무기',
         requiredClass: '전사',
         requiredClassOverride: ['히어로', '팔라딘'],
         weaponTypeId: 2n,
@@ -39,8 +41,20 @@ test('default lookup selects ready 1.2.419 when 1.2.424 is deleted and maps avai
         allowedJobIds: [],
       },
       {
+        name: 'Linked Subweapon',
+        normalizedName: 'linked-subweapon',
+        category: '보조무기',
+        requiredClass: '아란',
+        requiredClassOverride: null,
+        weaponTypeId: 3n,
+        availabilityMode: 'common',
+        classGroupKeys: [],
+        allowedJobIds: [],
+      },
+      {
         name: 'Legacy',
         normalizedName: 'legacy',
+        category: '방어구',
         requiredClass: ['전사', '궁수'],
         requiredClassOverride: null,
         weaponTypeId: null,
@@ -52,20 +66,26 @@ test('default lookup selects ready 1.2.419 when 1.2.424 is deleted and maps avai
   }) as typeof originalQueryRaw;
 
   try {
-    assert.deepEqual(await findEquipmentAvailabilityByNormalizedNames([
-      'inherited', 'overridden', 'legacy', 'inherited',
-    ]), [
+    assert.deepEqual(await findEquipmentAvailabilityByNormalizedNames(['inherited', 'overridden', 'linked-subweapon', 'legacy', 'inherited']), [
       {
         name: 'Inherited',
         normalizedName: 'inherited',
         effectiveAvailability: {
-          source: 'weapon_type', mode: 'class_groups', classGroupKeys: ['warrior'], allowedJobIds: [],
+          source: 'weapon_type',
+          mode: 'class_groups',
+          classGroupKeys: ['warrior'],
+          allowedJobIds: [],
         },
       },
       {
         name: 'Overridden',
         normalizedName: 'overridden',
         effectiveAvailability: { source: 'item_override', requiredClass: ['히어로', '팔라딘'] },
+      },
+      {
+        name: 'Linked Subweapon',
+        normalizedName: 'linked-subweapon',
+        effectiveAvailability: { source: 'legacy', requiredClass: '아란' },
       },
       {
         name: 'Legacy',

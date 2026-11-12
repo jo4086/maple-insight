@@ -7,7 +7,7 @@
 | `REQ001-P01` | 설계 정합성 검토와 승인 | [`REQ001` 명세](./SPEC/REQ001/weapon-types.md) | 완료 |
 | [`REQ001-P02`](./GOAL/REQ001/Phase02.md) | 연결, 공격속도, 아이템별 착용·무기상수 예외 계약, 회귀 테스트와 필요한 migration 파일 작성 | `REQ001-P01` 승인과 2026-11-03 정정 | 진행 중 |
 | `REQ001-P03` | 별도 승인 후 migration 적용과 실제 DB 제약 검증 | `REQ001-P02` 검증 | 진행 중: 제약 확인, 실제 링크·backfill 미실행 |
-| `REQ001-P04` | 36행 seed와 기존 행 충돌 방침 확인, 별도 승인 후 실행·재실행 검증 | `REQ001-P03`, 별도 사용자 확인 | 진행 중: weapon type 최초 실행 완료, equipment 재seed·재실행 미검증 |
+| `REQ001-P04` | 타입 원천과 기존 행 충돌 방침 확인, 별도 승인 후 실행·재실행 검증 | `REQ001-P03`, 별도 사용자 확인 | 진행 중: 과거 주무기 36행 최초 실행 완료, 현재 77개 후보 미실행 |
 | `REQ001-P05` | 소비자 경로와 기존 정적 계산 호환성 확인 및 최종 검증 | `REQ001-P02`~`REQ001-P04` | 대기: dedicated 데이터 출처·호환성 미확정 |
 
 ## Phase 경계
@@ -31,6 +31,10 @@ Migration 적용 승인을 별도로 확인한 뒤 대상 DB 제약과 기존 �
 ### REQ001-P05
 
 DB 소비자 경로와 기존 정적 계산의 호환성을 검증한다. Dedicated 무기의 데이터 출처와 기존 정적 계산 호환성을 확정하고 직업별 JSONB 예외의 동등성을 확인하기 전 정적 계산 경로를 제거하지 않는다.
+
+현재 소스 원천은 역사적으로 실행·검증한 주무기 36행에 보조무기 41행 후보를 더한 총 77행이다. `weapon_types` schema는 유지하고 보조무기에 직업별 값을 넣지 않는다. 보조무기의 `availabilityMode: common`은 필수 placeholder이며, 직업 DB 승인 전 연결된 보조무기는 item의 기존 `requiredClass`로 fallback한다. `ballast` 대신 canonical `seonchu`를 사용하고 아란·호영의 아이템별 metadata는 유지한다.
+
+이 소스 변경으로 migration·seed·backfill을 실행하거나 기존 DB 행을 갱신하지 않았다. DB의 마지막 확인 상태는 주무기 36행·보조무기 0행이다. 실제 seed·backfill은 별도 승인이 필요하고 기존 ready 버전 equipment 재seed는 안전하지 않다. Phase 상태는 변경하지 않는다.
 
 각 Phase는 [`REVIEW.md`](./REVIEW.md)에 종료 조건의 검증 근거가 기록된 뒤에만 완료로 변경한다.
 

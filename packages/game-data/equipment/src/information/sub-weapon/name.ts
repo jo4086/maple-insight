@@ -44,7 +44,7 @@ export const forceShieldNames = ['극한의 포스실드', '이볼빙 극한의 
 
 export const controllerNames = ['옥타코어 컨트롤러', '이볼빙 옥타코어 컨트롤러', '블랙 옥타코어 컨트롤러', '메이플 트레져 컨트롤러'] as const;
 
-export const ballastNames = ['천룡추', '이볼빙 천룡추', '블랙 천룡추', '메이플 트레져 천룡추'] as const;
+export const aranSeonchuNames = ['천룡추', '이볼빙 천룡추', '블랙 천룡추', '메이플 트레져 천룡추'] as const;
 
 export const documentNames = ['드래곤마스터의 유산', '이볼빙 드래곤마스터의 유산', '블랙 드래곤마스터의 유산', '메이플 트레져의 유산'] as const;
 
@@ -233,7 +233,7 @@ export const subWeaponNames = [
   ...magnumNames,
   ...forceShieldNames,
   ...controllerNames,
-  ...ballastNames,
+  ...aranSeonchuNames,
   ...documentNames,
   ...orbNames,
   ...magicArrowNames,
@@ -283,7 +283,7 @@ export type ArrowheadName = (typeof arrowheadNames)[number];
 export type MagnumName = (typeof magnumNames)[number];
 export type ForceShieldName = (typeof forceShieldNames)[number];
 export type ControllerName = (typeof controllerNames)[number];
-export type BallastName = (typeof ballastNames)[number];
+export type AranSeonchuName = (typeof aranSeonchuNames)[number];
 export type DocumentName = (typeof documentNames)[number];
 export type OrbName = (typeof orbNames)[number];
 export type MagicArrowName = (typeof magicArrowNames)[number];

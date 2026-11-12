@@ -22,7 +22,7 @@ import type {
   SoulShieldName,
   ThumbRingName,
   WristBandName,
-  BallastName,
+  AranSeonchuName,
   DocumentName,
   OrbName,
   MagicArrowName,
@@ -360,9 +360,10 @@ export const controllerMetaMap = createSubWeaponMetaBuilder<ControllerName>({
   .add('메이플 트레져 컨트롤러', { requiredLevel: 110, all: 3, maxMp: 450, armor: 390 })
   .doneStrict();
 
-export const ballastMetaMap = createSubWeaponMetaBuilder<BallastName>({
-  part: 'ballast',
+export const aranSeonchuMetaMap = createSubWeaponMetaBuilder<AranSeonchuName>({
+  part: 'seonchu',
   requiredClass: '아란',
+  requiredClassKeys: ['aran'],
   requiredLevel: 100,
 })
   .add('천룡추', base.normal)
@@ -705,7 +706,7 @@ export const astraMetaMap = createSubWeaponMetaBuilder<AstraName>(
     maxDf: 110,
   })
   .add('아스트라 데카코어 컨트롤러', { requiredClass: '제논', part: 'controller', stat: 0, all: 10, maxHp: 1000, maxMp: 1000 })
-  .add('아스트라 백호추', { requiredClass: '아란', part: 'ballast' })
+  .add('아스트라 백호추', { requiredClass: '아란', requiredClassKeys: ['aran'], part: 'seonchu' })
   .add('아스트라 오브', { requiredClass: '루미너스', part: 'orb' })
   .add('아스트라 마법 화살', { requiredClass: '메르세데스', part: 'magicArrow' })
   .add('아스트라 카르트', { requiredClass: '팬텀', part: 'card' })
@@ -746,7 +747,7 @@ export const subWeaponItemMetaMap = {
   ...magnumMetaMap,
   ...forceShieldMetaMap,
   ...controllerMetaMap,
-  ...ballastMetaMap,
+  ...aranSeonchuMetaMap,
   ...documentMetaMap,
   ...orbMetaMap,
   ...magicArrowMetaMap,

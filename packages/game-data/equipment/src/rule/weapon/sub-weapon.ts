@@ -45,7 +45,6 @@ export const subWeaponPartMetaMap = createSubWeaponPartMetaBuilder(subWeaponType
   .add('weaponTransmitter', { label: '무기 전송장치', requiredClassKeys: ['cadena'] })
   .add('magicWing', { label: '매직 윙', requiredClassKeys: ['illium'] })
   .add('pass', { label: '패스', requiredClassKeys: ['ark'] })
-  .add('ballast', { label: '선추', requiredClassKeys: ['hoyoung'] })
 
   .add('bracelet', { label: '브레이슬릿', requiredClassKeys: ['adele'] })
   .add('forceShield', { label: '포스실드', requiredClassKeys: ['demon-slayer', 'demon-avenger'] })
