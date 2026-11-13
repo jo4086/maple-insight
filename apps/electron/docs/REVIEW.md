@@ -1,5 +1,17 @@
 # Maple Insight Data Studio Review
 
+## Main process 구조 재정리 구현 완료·부분 검증 (2026-11-13)
+
+- [요청 문서](./REQUESTS/main-process-architecture.md#review--구현-완료부분-검증-2026-11-13)에 따라 1,098줄 `index.ts`의 서비스, IPC와 app/window/runtime 책임을 분리하고 60줄 bootstrap으로 정리했다. Phase 04 완료 상태는 변경하지 않았다.
+- 기준선 typecheck, test(24개 파일·272개 테스트), lint, build와 `git diff --check`는 exit 0이었다. broad Prettier는 기존 style issue 14개로 exit 1이었다.
+- Stage 2 서비스 이동의 typecheck, test(24개 파일·272개 테스트), lint, build와 `git diff --check`는 exit 0이었고 이동된 경로의 broad Prettier에는 기존 issue 11개가 남았다.
+- Stage 3 IPC 추출 중 네 차례의 typecheck와 test가 통과했다. 최종 lint, build, 변경 범위 Prettier와 `git diff --check`는 exit 0이었다. lint warning 10개는 Stage 4에서 수정했다.
+- Stage 4 app/window/runtime 분리 뒤 전체 typecheck, test(24개 파일·272개 테스트), lint, build, 변경 범위 Prettier와 `git diff --check`가 모두 exit 0이었다. 독립 대조에서도 channel 상수 27개와 unique invoke handler 23개가 유지됐다.
+- inline Playwright native Electron smoke는 exit 0이었다. startup, preload, 잘못된 입력 guard 3개, 존재하지 않는 session 취소, screenshot IPC와 dashboard/upload navigation을 확인했다. mocked browser 직업 상호작용도 desktop/mobile에서 통과했다.
+- 기존 native `capture-playwright.mjs --all`은 overview, upload, version-list, compare, equipment screenshot 저장 뒤 class navigation의 `waitForFunction`(`aria-current=page`) timeout으로 exit 1이었다. 원인은 selector가 accordion인 `직업 데이터`에 `aria-current=page`를 기대한 불일치다. 실제 상태는 `직업 데이터`가 `aria-expanded=true`·`aria-current=null`이고 child `직업 정보`가 `aria-current=page`다.
+- 후속 inline native Playwright는 `직업 데이터` accordion을 연 뒤 `직업 정보` child를 클릭하고 operations까지 이동해 각 실제 route의 `aria-current=page`를 확인했으며 exit 0이었다. class/operations 실제 route 상호작용은 검증했지만 capture 이미지는 완료되지 않았다. screenshot script 코드는 변경하지 않았다. 기존 이력은 유지한다.
+- credential-backed DB copy/rollback, 실제 conversion·validation cancellation과 sender 종료 cleanup, macOS `activate`, packaged app smoke는 미검증이다. 따라서 runtime 재활성화, handler 전체 의미, rollback·배타성·경로 안전 조건과 전체 사용자 동작은 완료로 판정하지 않는다.
+
 ## Phase 04 복구 초안 선택 복사 부분 구현·검증 (2026-11-13)
 
 - `직업 데이터 → 에디터`의 읽기 전용 복구 미리보기에서 직업별 명시적 `선택 직업 복사`를 제공한다. 일괄 복사는 없으며 확인 화면에 제외되는 `jobName`·`newWeaponTypes`·`advancementJobIds`를 나열한 뒤 선택값만 Phase 04 작업본의 변경 불가능한 첫 metadata revision으로 복사한다.
@@ -151,16 +163,17 @@
 
 검증 원칙: 구현과 검증을 구분하고, 근거 없는 항목은 완료로 기록하지 않는다. 실행하지 못한 GUI·외부 호출은 미검증으로 남긴다. 실패와 경고는 다음 조치와 함께 기록한다.
 
-| 범위                                            | 검증 기록                                                                                           |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Phase 00·01 — 앱 기반, 가져오기·변환, 초기 감사 | [Phase00-01](./REVIEW/Phase00-01.md)                                                                |
-| Phase 02 — 작업본·검증 진행 기록                | [Phase02](./REVIEW/Phase02.md)                                                                      |
-| Phase 03 — raw JSON 버전 비교                   | [Phase03](./REVIEW/Phase03.md)                                                                      |
-| Phase 03~06 설계 및 문서 분리 점검              | [Planning](./REVIEW/Planning.md)                                                                    |
-| 아이콘 의미 정책 요청                           | [현재 UI 범위 검증 완료](./REQUESTS/icon-semantics.md#review)                                       |
-| 버전 비교 결과 화면 개선 요청                   | [주요 UI 검증 완료](./REQUESTS/version-comparison-results.md#review)                                |
-| 통합 비교 작업공간 요청                         | [screenshot refinement 검증 완료·legacy route 확인 대기](./REQUESTS/comparison-workspace.md#review) |
-| 화면 헤더·비교 레이아웃 정리 요청               | [검증 완료](./REQUESTS/page-header-layout.md#review)                                                |
+| 범위                                            | 검증 기록                                                                                            |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Phase 00·01 — 앱 기반, 가져오기·변환, 초기 감사 | [Phase00-01](./REVIEW/Phase00-01.md)                                                                 |
+| Phase 02 — 작업본·검증 진행 기록                | [Phase02](./REVIEW/Phase02.md)                                                                       |
+| Phase 03 — raw JSON 버전 비교                   | [Phase03](./REVIEW/Phase03.md)                                                                       |
+| Phase 03~06 설계 및 문서 분리 점검              | [Planning](./REVIEW/Planning.md)                                                                     |
+| Main process 구조 재정리 요청                   | [구현 완료·부분 검증](./REQUESTS/main-process-architecture.md#review--구현-완료부분-검증-2026-11-13) |
+| 아이콘 의미 정책 요청                           | [현재 UI 범위 검증 완료](./REQUESTS/icon-semantics.md#review)                                        |
+| 버전 비교 결과 화면 개선 요청                   | [주요 UI 검증 완료](./REQUESTS/version-comparison-results.md#review)                                 |
+| 통합 비교 작업공간 요청                         | [screenshot refinement 검증 완료·legacy route 확인 대기](./REQUESTS/comparison-workspace.md#review)  |
+| 화면 헤더·비교 레이아웃 정리 요청               | [검증 완료](./REQUESTS/page-header-layout.md#review)                                                 |
 
 [버전 관리 요청의 부분 검증](./REQUESTS/version-management.md#review): Electron build와 Vitest 20개 파일·157개 테스트가 통과했다. native Electron 데스크톱 1480px·모바일 390px에서 날짜 유무 두 행의 overlay, 위치 불변, hover·focus·Escape와 버튼 SVG label을 검증했다. 폐기 가능한 PostgreSQL DB의 native IPC에서는 Enter 날짜 저장·비우기와 복제·삭제 회귀 검증을 통과한 뒤 임시 DB를 폐기했다. 실제 프로세스 강제 종료 복구·대량 DB 복제·복제본 native validation 및 `ready` 전환은 미검증이다. 기존 Phase 03 완료 기록과 구분한다.
 
