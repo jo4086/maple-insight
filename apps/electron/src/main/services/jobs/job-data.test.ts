@@ -5,9 +5,9 @@ import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
 
-import type { JobDraft } from '../../shared/job-data'
+import type { JobDraft } from '../../../shared/job-data'
+import { openOrCreateEditWorkbench, saveJobMetadataRecord } from '../workbench/edit-workbench'
 
-import { openOrCreateEditWorkbench, saveJobMetadataRecord } from './edit-workbench'
 import {
   copySelectedJobDraftRecovery,
   listJobData,

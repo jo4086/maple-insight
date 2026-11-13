@@ -1,6 +1,6 @@
 import { classifyJobId } from '@maple/data-core'
 
-import type { DataValidator, ValidationIssueDraft } from '../../shared/data-validation'
+import type { DataValidator, ValidationIssueDraft } from '../../../shared/data-validation'
 
 const classFields = new Set(['jobID', 'jobName'])
 const validationChunkSize = 1024

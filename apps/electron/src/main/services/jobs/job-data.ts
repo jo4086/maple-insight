@@ -22,14 +22,13 @@ import {
   type NewWeaponType,
   type SaveJobDraftRequest,
   type WeaponTypeOption
-} from '../../shared/job-data'
-
+} from '../../../shared/job-data'
 import {
   openOrCreateEditWorkbench,
   readJobMetadataRecords,
   saveRecoveredJobMetadataFirstRevision,
   type JobMetadataRecord
-} from './edit-workbench'
+} from '../workbench/edit-workbench'
 
 export type DatabaseWeaponType = {
   id: bigint

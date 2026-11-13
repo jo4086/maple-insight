@@ -1,6 +1,6 @@
 import { basename, extname } from 'node:path'
 
-import type { ValidationDataDomain } from '../../shared/data-validation'
+import type { ValidationDataDomain } from '../../../shared/data-validation'
 
 export const skillValidationFileNames = [
   'ms_skill.json',

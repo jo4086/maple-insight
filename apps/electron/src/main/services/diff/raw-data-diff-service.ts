@@ -14,7 +14,7 @@ import type {
   RawDataRecord,
   RawDataValue,
   SaveRawDataDiffRequest
-} from '../../shared/raw-data-diff'
+} from '../../../shared/raw-data-diff'
 
 import { diffRawData } from './raw-data-diff'
 

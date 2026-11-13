@@ -1,9 +1,9 @@
-import type { DataRecord } from '../../shared/data-import'
+import type { DataRecord } from '../../../shared/data-import'
 import type {
   DataValidator,
   DataValidatorInput,
   ValidationIssueDraft
-} from '../../shared/data-validation'
+} from '../../../shared/data-validation'
 
 import { resolveSkillValidationFileName, type SkillValidationFileName } from './validation-domain'
 

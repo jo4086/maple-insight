@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import type { DataValidator } from '../../shared/data-validation'
+import type { DataValidator } from '../../../shared/data-validation'
 
 import { DomainValidatorRegistry, runDataValidation } from './data-validation'
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import type { DataRecord } from '../../shared/data-import'
+import type { DataRecord } from '../../../shared/data-import'
 
 import { DomainValidatorRegistry, runDataValidation } from './data-validation'
 import { resolveSkillDataValidator, skillDataValidatorsByFileName } from './skill-data-validator'

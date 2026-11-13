@@ -6,7 +6,7 @@ import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
 
-import type { DataFileConversionSummary } from '../../shared/data-import'
+import type { DataFileConversionSummary } from '../../../shared/data-import'
 
 import { convertDataFile } from './data-conversion'
 

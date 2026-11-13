@@ -5,7 +5,7 @@ import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
 
-import type { DataDirectoryConversionSummary } from '../../shared/data-import'
+import type { DataDirectoryConversionSummary } from '../../../shared/data-import'
 
 import { commitDataVersionWorkspace, prepareDataVersionWorkspace } from './data-version-workspace'
 

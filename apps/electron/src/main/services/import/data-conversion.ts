@@ -15,7 +15,7 @@ import type {
   DataFileConversionSummary,
   DataFileFormat,
   DataRecord
-} from '../../shared/data-import'
+} from '../../../shared/data-import'
 
 const PREVIEW_RECORD_LIMIT = 20
 const VERSION_PATTERN = /^\d+\.\d+\.\d+$/

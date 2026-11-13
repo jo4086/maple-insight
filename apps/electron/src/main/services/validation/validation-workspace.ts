@@ -5,7 +5,7 @@ import { dirname, extname, join, relative } from 'node:path'
 import { Transform, Writable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 
-import type { ValidationWorkspaceManifest } from '../../shared/data-validation'
+import type { ValidationWorkspaceManifest } from '../../../shared/data-validation'
 
 export type ValidationWorkspaceConflictPolicy = 'error' | 'reuse' | 'replace'
 

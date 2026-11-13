@@ -9,7 +9,7 @@ import type {
   DataDirectoryFileInfo,
   DataDirectoryInfo,
   DataFileConversionSummary
-} from '../../shared/data-import'
+} from '../../../shared/data-import'
 
 import {
   convertDataFile,

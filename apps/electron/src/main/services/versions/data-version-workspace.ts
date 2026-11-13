@@ -4,7 +4,7 @@ import { access, copyFile, mkdir, rename, rm, writeFile } from 'node:fs/promises
 import { dirname, join, resolve } from 'node:path'
 import { createInterface } from 'node:readline'
 
-import type { DataDirectoryConversionSummary } from '../../shared/data-import'
+import type { DataDirectoryConversionSummary } from '../../../shared/data-import'
 
 export type PreparedDataVersionWorkspace = {
   stagingDirectory: string

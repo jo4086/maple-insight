@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 
-import type { DataRecord } from '../../shared/data-import'
+import type { DataRecord } from '../../../shared/data-import'
 import type {
   DataValidationResult,
   DataValidator,
@@ -11,7 +11,7 @@ import type {
   ValidationIssueAcknowledgement,
   ValidationIssueDraft,
   ValidationSource
-} from '../../shared/data-validation'
+} from '../../../shared/data-validation'
 
 export class DomainValidatorRegistry {
   readonly #validators = new Map<string, DataValidator[]>()

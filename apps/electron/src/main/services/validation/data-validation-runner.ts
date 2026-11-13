@@ -5,7 +5,7 @@ import { pipeline } from 'node:stream/promises'
 
 import { streamArray } from 'stream-json/streamers/stream-array.js'
 
-import type { DataRecord } from '../../shared/data-import'
+import type { DataRecord } from '../../../shared/data-import'
 import type {
   DataValidationProgress,
   DataValidationReportUpdate,
@@ -15,7 +15,7 @@ import type {
   ValidationReportFile,
   ValidationSummary,
   ValidationWorkspaceManifest
-} from '../../shared/data-validation'
+} from '../../../shared/data-validation'
 
 import { classDataValidator } from './class-data-validator'
 import { DomainValidatorRegistry, runDataValidation } from './data-validation'
