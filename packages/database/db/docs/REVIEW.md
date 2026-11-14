@@ -190,3 +190,17 @@
 - 집중 테스트는 2/2, exit `0`; `@maple/db` typecheck는 exit `0`; `git diff --check`는 exit `0`이었다.
 - 테스트는 live DB나 app consumer가 아니라 `ready` 버전 resolution을 mock으로 검증한다. `1.2.424`가 `deleted`, `1.2.419`가 `ready`인 상태는 앞선 체크포인트에서 검증했다.
 - DB write는 수행하지 않았다. GOAL·ROADMAP 완료 표시는 변경하지 않았으며 P02~P05는 미완료다.
+
+## 2026-11-09: 보조무기 타입 소스 체크포인트
+
+- 현재 `weapon-types.json` 후보는 주무기 36행과 보조무기 41행, 총 77행이다. 기존 36행 seed 실행·검증 기록은 당시 사실로 유지한다.
+- 사용자 결정에 따라 `weapon_types` schema를 유지하고 보조무기에는 직업별 값을 넣지 않는다. 41행 모두 `availabilityMode: common` 필수 placeholder를 사용한다.
+- 중복 파츠였던 `ballast`를 제거하고 canonical key `seonchu`로 통합했다. 아란·호영의 아이템별 `requiredClass` metadata는 유지된다.
+- 직업 DB에 전용무기 관계를 구현하기 전까지 repository는 연결된 보조무기의 placeholder를 착용 권한으로 해석하지 않고 item의 기존 `requiredClass`로 fallback한다. 보조무기 원천 회귀 테스트 1개, 로더 테스트 3개, DB seed·장비 연결·조회 테스트 25개, 장비 패키지 build와 장비·DB·data-admin 타입 검사가 통과했다. 실제 DB와 Electron 동작은 검증하지 않았다.
+- 이번 변경에서 migration·seed·backfill을 실행하지 않았고 기존 DB 행도 갱신하지 않았다. DB의 마지막 확인 상태는 주무기 36행·보조무기 0행이다. 실제 seed·backfill은 별도 승인이 필요하며 기존 ready 버전 equipment 재seed는 ID 보존상 안전하지 않다. 어느 Phase도 완료 처리하지 않는다.
+
+## 2026-11-09: 기존 무기상수 Decimal seed 비교 보완
+
+- 사용자 seed 실행은 기존 무기 행 비교 중 `Weapon type seed contains an invalid weaponConstant`로 중단됐다. 기존 `instanceof Prisma.Decimal` 판정을 `Prisma.Decimal.isDecimal`로 교체해 서로 다른 런타임의 Decimal을 수용하고, 문자열·Decimal 이외 입력 거부와 기존 정밀도 검증은 유지했다.
+- `instanceof`가 실패하는 Decimal을 모사한 회귀 테스트에서 기존 행 skip과 신규 보조무기 insert를 모의 transaction으로 확인했다. seed 집중 테스트 6개와 DB 타입 검사가 통과했다. 실제 재실행은 하지 않았다.
+- 읽기 전용 조회에서 DB에는 주무기 36행만 확인됐다. 이번 작업은 DB를 쓰지 않았고 실제 seed 성공은 미검증이다.

@@ -30,7 +30,7 @@ export const warriorFinalClasses = [
 // Far Sight
 // Powder Keg
 // Jewel
-// Ballast
+// Seonchu
 // Document
 // Orb
 // Magic Arrow
@@ -94,7 +94,6 @@ export const subWeaponTypes = [
   'weaponTransmitter',
   'magicWing',
   'pass',
-  'ballast',
   'bracelet',
   'forceShield',
   'soulShield',

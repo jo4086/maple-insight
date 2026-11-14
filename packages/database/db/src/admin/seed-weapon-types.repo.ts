@@ -18,22 +18,23 @@ type WeaponTypeSeedRowBase = {
   isDedicated: boolean;
 };
 
-export type ValidatedWeaponTypeSeedRow = WeaponTypeSeedRowBase & (
-  | {
-      category: 'weapon';
-      handType: 'oneHanded' | 'twoHanded';
-      weaponConstant: Prisma.Decimal | string;
-      weaponConstantOverrides: WeaponConstantOverride[] | null;
-      attackSpeed: number | null;
-    }
-  | {
-      category: 'subWeapon';
-      handType: null;
-      weaponConstant: null;
-      weaponConstantOverrides: null;
-      attackSpeed: null;
-    }
-);
+export type ValidatedWeaponTypeSeedRow = WeaponTypeSeedRowBase &
+  (
+    | {
+        category: 'weapon';
+        handType: 'oneHanded' | 'twoHanded';
+        weaponConstant: Prisma.Decimal | string;
+        weaponConstantOverrides: WeaponConstantOverride[] | null;
+        attackSpeed: number | null;
+      }
+    | {
+        category: 'subWeapon';
+        handType: null;
+        weaponConstant: null;
+        weaponConstantOverrides: null;
+        attackSpeed: null;
+      }
+  );
 
 export type SeedWeaponTypesResult = {
   inserted: number;
@@ -77,7 +78,7 @@ function assertExactFields(value: Record<string, unknown>, fields: ReadonlySet<s
 }
 
 function decimal(value: unknown, field: string): Prisma.Decimal {
-  if (typeof value !== 'string' && !(value instanceof Prisma.Decimal)) {
+  if (typeof value !== 'string' && !Prisma.Decimal.isDecimal(value)) {
     throw new Error(`Weapon type seed contains an invalid ${field}`);
   }
 
@@ -93,9 +94,7 @@ function decimal(value: unknown, field: string): Prisma.Decimal {
 }
 
 function assertUniqueNonemptyStrings(value: unknown, field: string, validate?: (item: string) => boolean): asserts value is string[] {
-  if (!Array.isArray(value)
-    || value.some((item) => typeof item !== 'string' || item.length === 0 || (validate && !validate(item)))
-    || new Set(value).size !== value.length) {
+  if (!Array.isArray(value) || value.some((item) => typeof item !== 'string' || item.length === 0 || (validate && !validate(item))) || new Set(value).size !== value.length) {
     throw new Error(`Weapon type seed contains invalid ${field}`);
   }
 }
@@ -131,10 +130,7 @@ function validateRows(rows: unknown): NormalizedWeaponTypeSeedRow[] {
     assertExactFields(value, rowFields, 'row');
 
     const row = value as Record<keyof ValidatedWeaponTypeSeedRow, unknown>;
-    if (typeof row.part !== 'string'
-      || typeof row.normalizedPart !== 'string'
-      || row.part.length === 0
-      || row.normalizedPart !== row.part.replace(/\s+/g, '')) {
+    if (typeof row.part !== 'string' || typeof row.normalizedPart !== 'string' || row.part.length === 0 || row.normalizedPart !== row.part.replace(/\s+/g, '')) {
       throw new Error('Weapon type seed contains an invalid normalizedPart');
     }
     if (row.category !== 'weapon' && row.category !== 'subWeapon') {
@@ -150,14 +146,12 @@ function validateRows(rows: unknown): NormalizedWeaponTypeSeedRow[] {
       throw new Error('Weapon type seed contains an invalid classGroupKeys value');
     }
 
-    const validAvailability = row.availabilityMode === 'common'
-      ? row.classGroupKeys.length === 0 && row.allowedJobIds.length === 0 && !row.isDedicated
-      : row.availabilityMode === 'class_groups'
-        ? row.classGroupKeys.length > 0 && row.allowedJobIds.length === 0 && !row.isDedicated
-        : row.availabilityMode === 'job_ids'
-          && row.classGroupKeys.length === 0
-          && row.allowedJobIds.length > 0
-          && (!row.isDedicated || row.allowedJobIds.length === 1);
+    const validAvailability =
+      row.availabilityMode === 'common'
+        ? row.classGroupKeys.length === 0 && row.allowedJobIds.length === 0 && !row.isDedicated
+        : row.availabilityMode === 'class_groups'
+          ? row.classGroupKeys.length > 0 && row.allowedJobIds.length === 0 && !row.isDedicated
+          : row.availabilityMode === 'job_ids' && row.classGroupKeys.length === 0 && row.allowedJobIds.length > 0 && (!row.isDedicated || row.allowedJobIds.length === 1);
     if (!validAvailability) {
       throw new Error('Weapon type seed contains an invalid availability configuration');
     }
@@ -168,14 +162,8 @@ function validateRows(rows: unknown): NormalizedWeaponTypeSeedRow[] {
         throw new Error('Weapon type seed contains an invalid handType');
       }
       const weaponConstant = decimal(row.weaponConstant, 'weaponConstant');
-      const weaponConstantOverrides = row.weaponConstantOverrides === null
-        ? null
-        : normalizeOverrides(row.weaponConstantOverrides);
-      if (row.attackSpeed !== null
-        && (typeof row.attackSpeed !== 'number'
-          || !Number.isInteger(row.attackSpeed)
-          || row.attackSpeed < 1
-          || row.attackSpeed > 8)) {
+      const weaponConstantOverrides = row.weaponConstantOverrides === null ? null : normalizeOverrides(row.weaponConstantOverrides);
+      if (row.attackSpeed !== null && (typeof row.attackSpeed !== 'number' || !Number.isInteger(row.attackSpeed) || row.attackSpeed < 1 || row.attackSpeed > 8)) {
         throw new Error('Weapon type seed contains an invalid attackSpeed');
       }
       normalized = {
@@ -184,10 +172,7 @@ function validateRows(rows: unknown): NormalizedWeaponTypeSeedRow[] {
         weaponConstantOverrides,
       };
     } else {
-      if (row.handType !== null
-        || row.weaponConstant !== null
-        || row.weaponConstantOverrides !== null
-        || row.attackSpeed !== null) {
+      if (row.handType !== null || row.weaponConstant !== null || row.weaponConstantOverrides !== null || row.attackSpeed !== null) {
         throw new Error('Weapon type seed contains invalid subWeapon fields');
       }
       normalized = value as NormalizedWeaponTypeSeedRow;
@@ -217,33 +202,33 @@ function canonicalExistingOverrides(value: Prisma.JsonValue | null): WeaponConst
 
 function rowsEqual(existing: WeaponType, input: NormalizedWeaponTypeSeedRow): boolean {
   const existingOverrides = canonicalExistingOverrides(existing.weaponConstantOverrides);
-  return existingOverrides !== undefined
-    && existing.part === input.part
-    && existing.normalizedPart === input.normalizedPart
-    && existing.category === input.category
-    && existing.handType === input.handType
-    && existing.availabilityMode === input.availabilityMode
-    && existing.isDedicated === input.isDedicated
-    && existing.attackSpeed === input.attackSpeed
-    && canonicalDecimal(existing.weaponConstant) === canonicalDecimal(input.weaponConstant)
-    && JSON.stringify(existingOverrides) === JSON.stringify(input.weaponConstantOverrides)
-    && existing.classGroupKeys.length === input.classGroupKeys.length
-    && existing.classGroupKeys.every((value, index) => value === input.classGroupKeys[index])
-    && existing.allowedJobIds.length === input.allowedJobIds.length
-    && existing.allowedJobIds.every((value, index) => value === input.allowedJobIds[index]);
+  return (
+    existingOverrides !== undefined &&
+    existing.part === input.part &&
+    existing.normalizedPart === input.normalizedPart &&
+    existing.category === input.category &&
+    existing.handType === input.handType &&
+    existing.availabilityMode === input.availabilityMode &&
+    existing.isDedicated === input.isDedicated &&
+    existing.attackSpeed === input.attackSpeed &&
+    canonicalDecimal(existing.weaponConstant) === canonicalDecimal(input.weaponConstant) &&
+    JSON.stringify(existingOverrides) === JSON.stringify(input.weaponConstantOverrides) &&
+    existing.classGroupKeys.length === input.classGroupKeys.length &&
+    existing.classGroupKeys.every((value, index) => value === input.classGroupKeys[index]) &&
+    existing.allowedJobIds.length === input.allowedJobIds.length &&
+    existing.allowedJobIds.every((value, index) => value === input.allowedJobIds[index])
+  );
 }
 
-export async function seedWeaponTypesInTransaction(
-  tx: Prisma.TransactionClient,
-  rows: readonly NormalizedWeaponTypeSeedRow[],
-): Promise<SeedWeaponTypesResult> {
-  const existingRows = rows.length === 0
-    ? []
-    : await tx.weaponType.findMany({
-        where: {
-          OR: rows.map(({ category, normalizedPart }) => ({ category, normalizedPart })),
-        },
-      });
+export async function seedWeaponTypesInTransaction(tx: Prisma.TransactionClient, rows: readonly NormalizedWeaponTypeSeedRow[]): Promise<SeedWeaponTypesResult> {
+  const existingRows =
+    rows.length === 0
+      ? []
+      : await tx.weaponType.findMany({
+          where: {
+            OR: rows.map(({ category, normalizedPart }) => ({ category, normalizedPart })),
+          },
+        });
   const existingByKey = new Map(existingRows.map((row) => [keyOf(row), row]));
 
   for (const row of rows) {
@@ -258,9 +243,7 @@ export async function seedWeaponTypesInTransaction(
     if (existingByKey.has(keyOf(row))) continue;
     const { weaponConstantOverrides, ...data } = row;
     await tx.weaponType.create({
-      data: weaponConstantOverrides === null
-        ? data
-        : { ...data, weaponConstantOverrides },
+      data: weaponConstantOverrides === null ? data : { ...data, weaponConstantOverrides },
     });
     inserted++;
   }

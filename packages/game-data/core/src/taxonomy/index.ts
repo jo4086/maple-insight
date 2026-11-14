@@ -7,6 +7,7 @@ export * from './class';
 export * from './class-code';
 export * from './class-tree';
 export * from './generator';
+export * from './job-id-classifier';
 export { isClassGroup, mapClassGroupKey, mapClassNameKey, resolveClassNameGroups } from './mapper';
 
 export type EquipmentClassType = AllClassName | ClassGroup | '공용';

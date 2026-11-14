@@ -17,10 +17,22 @@ const viewLabels = {
   compare: '비교',
   equipment: '장비 데이터',
   class: '직업 데이터',
+  'skill-list': '스킬 목록',
+  'skill-editor': '스킬 에디터',
+  'skill-image': '스킬 이미지',
   operations: 'DB · 타입 작업'
 }
 
-const viewsWithoutPageTitle = new Set(['overview', 'upload', 'equipment', 'class', 'operations'])
+const viewsWithoutPageTitle = new Set([
+  'overview',
+  'upload',
+  'equipment',
+  'class',
+  'skill-list',
+  'skill-editor',
+  'skill-image',
+  'operations'
+])
 
 function getTargetViews() {
   if (process.argv.includes('--all')) return Object.keys(viewLabels)
@@ -85,11 +97,13 @@ async function applyTheme(page, theme) {
 
 async function navigateToView(page, view) {
   const navigation = page.getByRole('navigation', { name: '주 탐색' })
-  const nestedView = view === 'version-list' || view === 'compare'
+  const nestedView = view === 'version-list' || view === 'compare' || view.startsWith('skill-')
   if (nestedView) {
-    const versionNavigation = navigation.getByRole('button', { name: /버전 관리/ })
-    if ((await versionNavigation.getAttribute('aria-expanded')) !== 'true') {
-      await versionNavigation.click()
+    const groupNavigation = navigation.getByRole('button', {
+      name: view.startsWith('skill-') ? /스킬 데이터/ : /버전 관리/
+    })
+    if ((await groupNavigation.getAttribute('aria-expanded')) !== 'true') {
+      await groupNavigation.click()
     }
   }
 

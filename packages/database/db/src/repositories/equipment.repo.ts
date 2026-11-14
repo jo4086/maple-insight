@@ -46,6 +46,7 @@ export async function findEquipmentItemsByNormalizedNames(normalizedNames: reado
 type EquipmentAvailabilityRow = {
   name: string;
   normalizedName: string;
+  category: string;
   requiredClass: unknown;
   requiredClassOverride: unknown | null;
   weaponTypeId: bigint | null;
@@ -81,6 +82,7 @@ export async function findEquipmentAvailabilityByNormalizedNames(normalizedNames
     SELECT
       item."name",
       item."normalized_name" AS "normalizedName",
+      item."category",
       item."required_class" AS "requiredClass",
       item."required_class_override" AS "requiredClassOverride",
       item."weapon_type_id" AS "weaponTypeId",
@@ -97,7 +99,8 @@ export async function findEquipmentAvailabilityByNormalizedNames(normalizedNames
     name: row.name,
     normalizedName: row.normalizedName,
     effectiveAvailability: resolveEffectiveEquipmentAvailability({
-      weaponType: weaponTypeAvailability(row),
+      // Subweapon catalog availability is structural until job-DB authorization is implemented.
+      weaponType: row.category === '보조무기' ? null : weaponTypeAvailability(row),
       requiredClassOverride: row.requiredClassOverride,
       legacyRequiredClass: row.requiredClass,
     }),

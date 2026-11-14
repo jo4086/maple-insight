@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@electron-toolkit/utils": "^4.0.0",
+    "@maple/data-core": "workspace:*",
     "@maple/db": "workspace:*",
     "@typesafe-ai/sdk": "^0.6.0",
     "csv-parse": "^7.0.3",

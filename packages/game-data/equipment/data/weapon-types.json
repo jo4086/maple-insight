@@ -4,9 +4,7 @@
     "normalizedPart": "한손검",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -24,9 +22,7 @@
     "normalizedPart": "한손도끼",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -39,9 +35,7 @@
     "normalizedPart": "한손둔기",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -63,9 +57,7 @@
     "normalizedPart": "데스페라도",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -78,9 +70,7 @@
     "normalizedPart": "튜너",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -93,9 +83,7 @@
     "normalizedPart": "장검",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -108,9 +96,7 @@
     "normalizedPart": "스태프",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -123,9 +109,7 @@
     "normalizedPart": "완드",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -138,9 +122,7 @@
     "normalizedPart": "샤이닝로드",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -153,9 +135,7 @@
     "normalizedPart": "ESP리미터",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -168,9 +148,7 @@
     "normalizedPart": "매직건틀렛",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -183,9 +161,7 @@
     "normalizedPart": "카르타",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "mage"
-    ],
+    "classGroupKeys": ["mage"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -198,9 +174,7 @@
     "normalizedPart": "브레스슈터",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "archer"
-    ],
+    "classGroupKeys": ["archer"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -213,9 +187,7 @@
     "normalizedPart": "단검",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -228,9 +200,7 @@
     "normalizedPart": "케인",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -243,10 +213,7 @@
     "normalizedPart": "에너지소드",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "thief",
-      "pirate"
-    ],
+    "classGroupKeys": ["thief", "pirate"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -259,9 +226,7 @@
     "normalizedPart": "체인",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -274,9 +239,7 @@
     "normalizedPart": "부채",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -289,9 +252,7 @@
     "normalizedPart": "소울슈터",
     "category": "weapon",
     "handType": "oneHanded",
-    "classGroupKeys": [
-      "pirate"
-    ],
+    "classGroupKeys": ["pirate"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -304,9 +265,7 @@
     "normalizedPart": "두손검",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -324,9 +283,7 @@
     "normalizedPart": "두손도끼",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -339,9 +296,7 @@
     "normalizedPart": "두손둔기",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -359,9 +314,7 @@
     "normalizedPart": "창",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -374,9 +327,7 @@
     "normalizedPart": "폴암",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -389,9 +340,7 @@
     "normalizedPart": "태도",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -404,9 +353,7 @@
     "normalizedPart": "대검",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -419,9 +366,7 @@
     "normalizedPart": "건틀렛리볼버",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "warrior"
-    ],
+    "classGroupKeys": ["warrior"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -434,9 +379,7 @@
     "normalizedPart": "활",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "archer"
-    ],
+    "classGroupKeys": ["archer"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -449,9 +392,7 @@
     "normalizedPart": "석궁",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "archer"
-    ],
+    "classGroupKeys": ["archer"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -464,9 +405,7 @@
     "normalizedPart": "듀얼보우건",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "archer"
-    ],
+    "classGroupKeys": ["archer"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -479,9 +418,7 @@
     "normalizedPart": "에인션트보우",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "archer"
-    ],
+    "classGroupKeys": ["archer"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -494,9 +431,7 @@
     "normalizedPart": "아대",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -509,9 +444,7 @@
     "normalizedPart": "차크람",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "thief"
-    ],
+    "classGroupKeys": ["thief"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -524,9 +457,7 @@
     "normalizedPart": "건",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "pirate"
-    ],
+    "classGroupKeys": ["pirate"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -539,9 +470,7 @@
     "normalizedPart": "너클",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "pirate"
-    ],
+    "classGroupKeys": ["pirate"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
@@ -554,14 +483,545 @@
     "normalizedPart": "핸드캐논",
     "category": "weapon",
     "handType": "twoHanded",
-    "classGroupKeys": [
-      "pirate"
-    ],
+    "classGroupKeys": ["pirate"],
     "availabilityMode": "class_groups",
     "allowedJobIds": [],
     "isDedicated": false,
     "weaponConstant": "1.5",
     "weaponConstantOverrides": null,
     "attackSpeed": 2
+  },
+  {
+    "part": "메달",
+    "normalizedPart": "메달",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "로자리오",
+    "normalizedPart": "로자리오",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "방패",
+    "normalizedPart": "방패",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "쇠사슬",
+    "normalizedPart": "쇠사슬",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "마도서",
+    "normalizedPart": "마도서",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "화살깃",
+    "normalizedPart": "화살깃",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "활골무",
+    "normalizedPart": "활골무",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "렐릭",
+    "normalizedPart": "렐릭",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "부적",
+    "normalizedPart": "부적",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "단검용 검집",
+    "normalizedPart": "단검용검집",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "블레이드",
+    "normalizedPart": "블레이드",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "리스트밴드",
+    "normalizedPart": "리스트밴드",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "조준기",
+    "normalizedPart": "조준기",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "화약통",
+    "normalizedPart": "화약통",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "보석",
+    "normalizedPart": "보석",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "무게추",
+    "normalizedPart": "무게추",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "문서",
+    "normalizedPart": "문서",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "오브",
+    "normalizedPart": "오브",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "마법화살",
+    "normalizedPart": "마법화살",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "카드",
+    "normalizedPart": "카드",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "여우구슬",
+    "normalizedPart": "여우구슬",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "마법구슬",
+    "normalizedPart": "마법구슬",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "화살촉",
+    "normalizedPart": "화살촉",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "컨트롤러",
+    "normalizedPart": "컨트롤러",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "매그넘",
+    "normalizedPart": "매그넘",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "노바의 정수",
+    "normalizedPart": "노바의정수",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "소울링",
+    "normalizedPart": "소울링",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "체스피스",
+    "normalizedPart": "체스피스",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "장약",
+    "normalizedPart": "장약",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "무기 전송장치",
+    "normalizedPart": "무기전송장치",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "매직 윙",
+    "normalizedPart": "매직윙",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "패스",
+    "normalizedPart": "패스",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "브레이슬릿",
+    "normalizedPart": "브레이슬릿",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "포스실드",
+    "normalizedPart": "포스실드",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "소울실드",
+    "normalizedPart": "소울실드",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "웨폰벨트",
+    "normalizedPart": "웨폰벨트",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "노리개",
+    "normalizedPart": "노리개",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "선추",
+    "normalizedPart": "선추",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "헥스시커",
+    "normalizedPart": "헥스시커",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "여의보주",
+    "normalizedPart": "여의보주",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
+  },
+  {
+    "part": "모래시계",
+    "normalizedPart": "모래시계",
+    "category": "subWeapon",
+    "handType": null,
+    "classGroupKeys": [],
+    "availabilityMode": "common",
+    "allowedJobIds": [],
+    "isDedicated": false,
+    "weaponConstant": null,
+    "weaponConstantOverrides": null,
+    "attackSpeed": null
   }
 ]

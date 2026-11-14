@@ -35,6 +35,13 @@ type MapleAdminApi = {
     listener: (progress: DataDirectoryConversionProgress) => void
   ) => () => void
   listDataVersions: () => Promise<string[]>
+  listJobData: (version: string) => Promise<JobDataSnapshot>
+  listSkillData: (request: ListSkillDataRequest) => Promise<SkillSummary[]>
+  previewJobDraftRecovery: (version: string) => Promise<JobDraftRecoveryPreview>
+  copySelectedJobDraftRecovery: (
+    request: CopySelectedJobDraftRecoveryRequest
+  ) => Promise<CopySelectedJobDraftRecoveryResult>
+  saveJobDraft: (request: SaveJobDraftRequest) => Promise<JobDraft>
   listRegisteredDataVersions: () => Promise<RegisteredDataVersion[]>
   updateDataVersionReleaseDate: (request: UpdateDataVersionReleaseDateRequest) => Promise<void>
   copyDataVersion: (request: CopyDataVersionRequest) => Promise<void>
@@ -77,7 +84,16 @@ import type {
   RawDataComparison,
   SaveRawDataDiffRequest
 } from '../shared/raw-data-diff'
+import type {
+  CopySelectedJobDraftRecoveryRequest,
+  CopySelectedJobDraftRecoveryResult,
+  JobDataSnapshot,
+  JobDraft,
+  JobDraftRecoveryPreview,
+  SaveJobDraftRequest
+} from '../shared/job-data'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
+import type { ListSkillDataRequest, SkillSummary } from '../shared/skill-data'
 import type {
   CopyDataVersionRequest,
   DeleteDataVersionRequest,

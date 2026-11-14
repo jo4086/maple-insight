@@ -1,5 +1,15 @@
 export type View =
-  'overview' | 'upload' | 'version-list' | 'compare' | 'equipment' | 'class' | 'operations'
+  | 'overview'
+  | 'upload'
+  | 'version-list'
+  | 'compare'
+  | 'equipment'
+  | 'class'
+  | 'class-editor'
+  | 'skill-list'
+  | 'skill-editor'
+  | 'skill-image'
+  | 'operations'
 
 export type NavigationItem =
   | { id: View; label: string; icon: string }
@@ -17,6 +27,22 @@ export const navigation: NavigationItem[] = [
     ]
   },
   { id: 'equipment', label: '장비 데이터', icon: '04' },
-  { id: 'class', label: '직업 데이터', icon: '05' },
-  { id: 'operations', label: 'DB · 타입 작업', icon: '06' }
+  {
+    label: '직업 데이터',
+    icon: '05',
+    children: [
+      { id: 'class', label: '직업 정보' },
+      { id: 'class-editor', label: '에디터' }
+    ]
+  },
+  {
+    label: '스킬 데이터',
+    icon: '06',
+    children: [
+      { id: 'skill-list', label: '스킬 목록' },
+      { id: 'skill-editor', label: '스킬 에디터' },
+      { id: 'skill-image', label: '스킬 이미지' }
+    ]
+  },
+  { id: 'operations', label: 'DB · 타입 작업', icon: '07' }
 ]

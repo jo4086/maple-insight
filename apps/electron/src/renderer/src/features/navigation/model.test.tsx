@@ -6,7 +6,7 @@ import { AppShell } from '../../components/layout/AppShell'
 
 import type { View } from './model'
 
-const hookState = vi.hoisted(() => ({ versionExpanded: undefined as boolean | undefined }))
+const hookState = vi.hoisted(() => ({ states: [] as boolean[], cursor: 0 }))
 
 vi.mock('react', async (importOriginal) => {
   const react = await importOriginal<typeof import('react')>()
@@ -14,15 +14,15 @@ vi.mock('react', async (importOriginal) => {
   return {
     ...react,
     useState: (initial: boolean | (() => boolean)) => {
-      if (hookState.versionExpanded === undefined) {
-        hookState.versionExpanded = typeof initial === 'function' ? initial() : initial
-      }
+      const index = hookState.cursor++
+      if (hookState.states[index] === undefined)
+        hookState.states[index] = typeof initial === 'function' ? initial() : initial
 
       return [
-        hookState.versionExpanded,
+        hookState.states[index],
         (next: boolean | ((expanded: boolean) => boolean)) => {
-          hookState.versionExpanded =
-            typeof next === 'function' ? next(hookState.versionExpanded as boolean) : next
+          hookState.states[index] =
+            typeof next === 'function' ? next(hookState.states[index]) : next
         }
       ]
     }
@@ -39,7 +39,8 @@ type ButtonElement = ReactElement<{
 
 describe('version navigation', () => {
   beforeEach(() => {
-    hookState.versionExpanded = undefined
+    hookState.states = []
+    hookState.cursor = 0
   })
 
   function render(
@@ -47,6 +48,7 @@ describe('version navigation', () => {
     onNavigate = vi.fn(),
     layout: 'default' | 'workspace' = 'default'
   ): ReactElement {
+    hookState.cursor = 0
     return AppShell({
       layout,
       view,

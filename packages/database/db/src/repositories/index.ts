@@ -1,5 +1,6 @@
 export * from './character-group.repo';
 export * from './equipment.repo';
+export * from './job-data.repo';
 export * from './ocid.repo';
 export * from './ranking-snapshot.repo';
 export * from './search-history.repo';

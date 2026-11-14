@@ -1,5 +1,7 @@
 # Packages
 
+- [`@maple/data-core` 문서](./game-data/core/docs/REQUIREMENTS/README.md)
+
 ## Build Order
 
 직업 taxonomy 데이터는 `@maple/data-core`에 입력 데이터와 생성 결과가 함께 있고,

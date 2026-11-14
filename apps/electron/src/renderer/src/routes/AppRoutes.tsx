@@ -1,9 +1,13 @@
 import { Navigate, useRoutes, type RouteObject } from 'react-router'
 
+import { JobEditorIndex } from '../features/jobs/JobEditorIndex'
 import { WorkspaceLayout } from '../layouts/WorkspaceLayout'
 import {
   DashboardPage,
+  JobDataPage,
+  JobEditPage,
   OperationsPage,
+  SkillListPage,
   UploadPage,
   VersionedDataPage,
   VersionListPage
@@ -19,7 +23,12 @@ const routes: RouteObject[] = [
       { path: 'compare', element: null },
       { path: 'compare-results', element: <Navigate replace to="/compare" /> },
       { path: 'equipment', element: <VersionedDataPage kind="equipment" /> },
-      { path: 'class', element: <VersionedDataPage kind="class" /> },
+      { path: 'class', element: <JobDataPage /> },
+      { path: 'class/editor', element: <JobEditorIndex /> },
+      { path: 'class/edit/:jobId', element: <JobEditPage /> },
+      { path: 'skill', element: <SkillListPage /> },
+      { path: 'skill/editor', element: null },
+      { path: 'skill/image', element: null },
       { path: 'operations', element: <OperationsPage /> },
       { path: '*', element: <DashboardPage /> }
     ]

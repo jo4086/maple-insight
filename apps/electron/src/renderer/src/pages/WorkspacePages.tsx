@@ -4,8 +4,11 @@ import { useWorkspace } from '../app/WorkspaceContext'
 import { CompareView } from '../features/compare/CompareView'
 import { Dashboard } from '../features/dashboard/Dashboard'
 import { VersionedDataView } from '../features/data-management/VersionedDataView'
+import { JobDataView } from '../features/jobs/JobDataView'
+import { JobEditView } from '../features/jobs/JobEditView'
 import type { View } from '../features/navigation/model'
 import { OperationsView } from '../features/operations/OperationsView'
+import { SkillListView } from '../features/skills/SkillListView'
 import { UploadView } from '../features/upload/UploadView'
 import { VersionListView } from '../features/version/VersionListView'
 import { viewPaths } from '../routes/paths'
@@ -58,6 +61,21 @@ export function VersionedDataPage({ kind }: { kind: 'equipment' | 'class' }): Re
       onCurrentVersionChange={version.changeCurrentVersion}
     />
   )
+}
+
+export function JobDataPage(): React.JSX.Element {
+  const { version } = useWorkspace()
+  return <JobDataView version={version.currentVersion} versions={version.versions} />
+}
+
+export function JobEditPage(): React.JSX.Element {
+  const { version } = useWorkspace()
+  return <JobEditView version={version.currentVersion} />
+}
+
+export function SkillListPage(): React.JSX.Element {
+  const { version } = useWorkspace()
+  return <SkillListView version={version.currentVersion} />
 }
 
 export function OperationsPage(): React.JSX.Element {
