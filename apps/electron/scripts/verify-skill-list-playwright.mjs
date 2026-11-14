@@ -42,6 +42,9 @@ async function waitForRenderer(server) {
 
 async function installMock(context) {
   await context.addInitScript(() => {
+    let imagesExtracted = false
+    const iconData =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/Y+0AAAAASUVORK5CYII='
     const advancements = [
       {
         stage: 0,
@@ -80,6 +83,30 @@ async function installMock(context) {
         reqSkill: null,
         reqSkillLevel: null,
         reqLevel: 30
+      },
+      {
+        skillId: '1121000',
+        jobId: '112',
+        skillName: '메이플 용사',
+        skillDesc: null,
+        maxLevel: 30,
+        invisible: false,
+        hyper: 0,
+        reqSkill: null,
+        reqSkillLevel: null,
+        reqLevel: 100
+      },
+      {
+        skillId: '1121400',
+        jobId: '112',
+        skillName: '하이퍼 테스트 스킬',
+        skillDesc: null,
+        maxLevel: 1,
+        invisible: false,
+        hyper: 1,
+        reqSkill: null,
+        reqSkillLevel: null,
+        reqLevel: 140
       },
       ...Array.from({ length: 12 }, (_, index) => ({
         skillId: String(1200000 + index),
@@ -122,6 +149,24 @@ async function installMock(context) {
         editorAvailable: false
       }),
       listSkillData: async ({ jobIds }) => skills.filter((skill) => jobIds.includes(skill.jobId)),
+      listSkillLevels: async ({ skillId }) =>
+        skillId === '1101000' || skillId === '1121000'
+          ? Array.from({ length: skillId === '1121000' ? 32 : 22 }, (_, index) => ({
+              level: index + 1,
+              levelDesc: `데미지 ${index + 11}%, MP 10 소비`
+            }))
+          : [],
+      listSkillImages: async ({ identities }) =>
+        identities.map((identity) => ({
+          ...identity,
+          icon: identity.skillId === '1001000' || imagesExtracted ? iconData : null,
+          iconMouseOver: identity.skillId === '1001000' ? iconData : null,
+          iconDisabled: identity.skillId === '1001000' ? iconData : null
+        })),
+      extractSkillImages: async () => {
+        imagesExtracted = true
+        return { jobs: 5, created: 12, reused: 3, missing: 0, failed: 0, missingJobs: 0 }
+      },
       openRawDataDiff: async () => null,
       onDataDirectoryConversionProgress: noop,
       onDataValidationProgress: noop,
@@ -144,6 +189,12 @@ async function main() {
     await page.getByRole('button', { name: '스킬 데이터' }).click()
     await page.getByRole('button', { name: '스킬 목록', exact: true }).click()
     await page.getByText('브랜디쉬', { exact: true }).waitFor()
+    await page.locator('tbody tr').first().locator('img').waitFor()
+    if ((await page.locator('aside[aria-label="스킬 상세"] img').count()) !== 3)
+      throw new Error('Selected skill did not show all three icon variants')
+    await page.getByRole('button', { name: '이미지 추출 및 등록' }).click()
+    await page.getByText('5개 전직 처리 · 새 이미지 12개').waitFor()
+    await page.locator('tbody tr').nth(1).locator('img').waitFor()
     if ((await page.getByRole('row').count()) !== 11) throw new Error('Skill rows did not load')
     const headers = await page.getByRole('columnheader').allTextContents()
     if (
@@ -163,6 +214,10 @@ async function main() {
       )
     if (alignment.some(({ align, rightPadding }) => align !== 'center' || rightPadding !== '0px'))
       throw new Error('Icon, type, or max level alignment changed')
+
+    await page.locator('tbody tr').nth(1).focus()
+    await page.keyboard.press('Enter')
+    await page.locator('aside[aria-label="스킬 상세"] strong').first().getByText('브랜디쉬').waitFor()
 
     await page.getByRole('button', { name: '0차', exact: true }).click()
     await page.getByText('0차 · 초보자', { exact: true }).first().waitFor()
@@ -192,6 +247,27 @@ async function main() {
     await page.getByRole('button', { name: '2차', exact: true }).click()
     await page.waitForFunction(() => document.querySelectorAll('tr').length === 2)
     if ((await page.getByRole('row').count()) !== 2) throw new Error('Stage filter did not apply')
+    await page.getByRole('row', { name: /브랜디쉬/ }).locator('td').nth(1).click()
+    await page.getByText('1/20 스킬 정보').waitFor()
+    await page.getByRole('button', { name: '레벨 올리기' }).click()
+    await page.getByText('2/20 스킬 정보').waitFor()
+    if ((await page.getByText('12%', { exact: true }).count()) === 0)
+      throw new Error('Changed level text was not highlighted')
+    await page.getByRole('button', { name: '마스터하기' }).click()
+    await page.getByText('20/20 스킬 정보').waitFor()
+    await page.getByRole('button', { name: '레벨 올리기' }).click()
+    await page.getByText('21/20 스킬 정보').waitFor()
+    await page.getByRole('button', { name: '하이퍼', exact: true }).click()
+    await page.locator('tbody').getByText('하이퍼 테스트 스킬', { exact: true }).waitFor()
+    if ((await page.locator('tbody tr').count()) !== 1) throw new Error('Hyper filter included a normal skill')
+    await page.getByRole('button', { name: '4차', exact: true }).click()
+    await page.locator('tbody').getByText('메이플 용사', { exact: true }).waitFor()
+    if ((await page.locator('tbody tr').count()) !== 1) throw new Error('Normal fourth-job filter included a hyper skill')
+    await page.getByRole('button', { name: '마스터하기' }).click()
+    await page.getByText('30/30 스킬 정보').waitFor()
+    await page.getByRole('button', { name: '레벨 올리기' }).click()
+    await page.getByText('31/30 스킬 정보').waitFor()
+    await page.getByRole('button', { name: '2차', exact: true }).click()
     await page.getByRole('button', { name: '사이드바 접기' }).click()
     await page.getByRole('button', { name: '사이드바 펼치기' }).waitFor()
     await mkdir(outputDirectory, { recursive: true })

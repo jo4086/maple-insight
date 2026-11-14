@@ -1,5 +1,29 @@
 # Maple Insight Data Studio Review
 
+## REQ004 스킬 레벨 상세·하이퍼 필터 부분 검증 (2026-11-14)
+
+- 스킬 표의 행 전체를 마우스·키보드로 선택한다. 선택한 버전과 스킬 ID로 `GameSkillLevel`을 조회해 실제 레벨 행의 설명을 표시하고, 이웃 레벨과 달라진 텍스트만 강조한다. 원본의 문자 `\\n`은 표시할 때 줄바꿈으로 바꾼다.
+- `−`·`+`는 실제 존재하는 레벨 행을 이동하고 `마스터하기`는 `maxLevel` 이하의 마지막 레벨로 이동한다. `maxLevel`보다 높은 레벨 행은 `+`로 계속 열람할 수 있다. 원본 `1.2.419`의 `1121000`은 `maxLevel=30`, 최고 레벨 행 `32`임을 확인했다.
+- `hyper === 1`은 하이퍼 필터에만, 일반 차수에는 `hyper !== 1`을 표시한다. 전체에는 둘 다 표시한다. 5차 분류는 후속 범위다.
+- DB 패키지 JS·타입 빌드, Electron Node/Web TypeScript 검사, 집중 Vitest 4개, 대상 ESLint·Prettier, Electron production build, mocked Chromium Playwright가 통과했다. Playwright는 행 클릭·Enter, 레벨 변경·강조·마스터·31/30 초과 열람, 하이퍼와 4차 분리, 기존 desktop/mobile 흐름을 확인했다. 읽기 전용 실제 DB 조회에서는 `1.2.419`의 `1121000` 레벨 1~32에 해당하는 행 32개와 jobID `112`의 `hyper=1` 스킬 9개를 확인했다. native Electron 화면은 검증하지 않았다.
+
+## REQ003 스킬 이미지 버전별 경로 분리 (2026-11-14)
+
+- 스킬 이미지 조회·추출 경로를 `skills/{version}/{jobID}/{skillID}/`로 분리하고, Renderer→Preload→Main의 조회 요청에도 데이터 버전을 명시했다. 사용자가 기존 PNG의 출처를 `1.2.419`로 확인한 뒤, 기존 전직 폴더 23개와 PNG 986개를 `skills/1.2.419/`로 이전했다. 새 경로의 PNG 수가 이전과 같고 루트에 남은 전직 폴더가 없음을 확인했다.
+- 버전별 동일 스킬 ID의 조회 격리 테스트 1개, Node/Web TypeScript 검사, 대상 ESLint·Prettier, Electron production build와 mocked Chromium 스킬 목록 Playwright가 통과했다. 실제 WZ 원본 버전과 선택한 DB 버전의 일치 여부 및 새 경로에서의 실제 WZ 재추출은 검증하지 않았다.
+
+## 스킬 목록 컴포넌트 분리 검증 (2026-11-14)
+
+- `SkillListView`의 직업 선택 사이드바, 스킬 표, 상세 패널을 `features/skills` 내부 컴포넌트로 분리했다. 표와 상세에서 쓰는 이미지 표시를 `SkillIcon`으로 공통화하고, 차수 표기 함수도 한곳으로 옮겼다. 목록 뷰는 데이터 조회·필터·선택·추출 상태를 담당한다.
+- Web TypeScript 검사, 대상 ESLint·Prettier, Electron production build와 mocked Chromium 스킬 목록 Playwright가 통과했다. Playwright에서 차수 링크, 사이드바 접기, 아이콘 표시와 desktop/mobile 레이아웃을 확인했다.
+
+## REQ003 스킬 이미지 로컬 연결 부분 검증 (2026-11-14)
+
+- `tools/maple-skill-extractor/output/skills`의 PNG를 Main IPC에서 읽어 현재 스킬 목록의 기본 아이콘과 상세의 3종 아이콘에 표시한다. Renderer에는 검증된 PNG 데이터 URL만 전달하고 로컬 파일 경로는 전달하지 않는다.
+- `이미지 추출 및 등록` 버튼은 현재 버전의 직업 데이터에서 대표 직업의 연결 전직 ID를 다시 조회해 Windows .NET 추출기에 전달한다. 단일 실행 잠금을 두고, 완료 뒤 현재 목록의 이미지 연결을 갱신한다. 등록은 로컬 이미지 연결이며 DB 이미지 바이트 저장은 이 범위에 포함하지 않는다.
+- Node/Web TypeScript 검사, 대상 ESLint, Electron production build, mocked Chromium 스킬 목록 Playwright가 exit 0이었다. Playwright는 목록 기본 아이콘, 상세 아이콘 3종, 버튼 실행 뒤 갱신을 확인했다. `xvfb-run` 실제 WSL Electron에서 버전 `1.2.419`의 히어로 아이콘 6개가 보였고 버튼 결과는 `jobs=6`, `created=0`, `reused=342`, `missing=42`, `failed=0`이었다. 실제 PNG 표시와 결과는 Git 제외 스크린샷 `screenshots/playwright/electron/skill-images-native.png`로 확인했다. 앞선 CLI 검증에서 히어로·팔라딘 공통 전직 재사용과 파일 한 개 누락 복구를 확인했다.
+- WZ 경로 설정 UI, Windows 설치본 패키징·실행, DB 이미지 백업, 전체 직업 자동 생성과 WZ 원본·DB 버전 일치 검사는 대기 범위다. REQ003의 Windows 수용 항목과 Electron Phase 04는 미완료로 유지한다.
+
 ## 스킬 목록 전체 화면 열 폭 보정 검증 (2026-11-14)
 
 - 사용자 제공 `screenshots/manual/electron/electron-2026-11-14T11-23-27-234Z.png`에서 전체 화면의 스킬 ID·차수/직업 열이 지나치게 넓어지는 것을 확인했다. 두 열을 각각 96px·170px로 고정하고 아이콘·타입·최대 레벨의 기존 고정 폭을 유지해 남는 너비를 스킬명에 배분했다.

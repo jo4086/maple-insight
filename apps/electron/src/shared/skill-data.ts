@@ -15,3 +15,13 @@ export type ListSkillDataRequest = {
   version: string
   jobIds: string[]
 }
+
+export type SkillLevel = {
+  level: number
+  levelDesc: string | null
+}
+
+export type ListSkillLevelsRequest = {
+  version: string
+  skillId: string
+}
