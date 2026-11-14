@@ -1,0 +1,12 @@
+# Decompiled reference materials
+/maple-skill-extractor/references/
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# MapleStory source files
+*.wz
+
+# Generated extraction outputs
+/maple-skill-extractor/output/
