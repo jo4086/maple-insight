@@ -502,6 +502,7 @@ function groupJobs(jobs: JobSummary[]): JobGroup[] {
           .map((match) => ({
             jobId: job.jobId,
             jobName: job.jobName,
+            displayName: match.className,
             stage: match.stage,
             requiresReview: candidate.ambiguous
           }))

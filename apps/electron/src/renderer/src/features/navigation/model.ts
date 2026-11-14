@@ -6,6 +6,9 @@ export type View =
   | 'equipment'
   | 'class'
   | 'class-editor'
+  | 'skill-list'
+  | 'skill-editor'
+  | 'skill-image'
   | 'operations'
 
 export type NavigationItem =
@@ -32,5 +35,14 @@ export const navigation: NavigationItem[] = [
       { id: 'class-editor', label: '에디터' }
     ]
   },
-  { id: 'operations', label: 'DB · 타입 작업', icon: '06' }
+  {
+    label: '스킬 데이터',
+    icon: '06',
+    children: [
+      { id: 'skill-list', label: '스킬 목록' },
+      { id: 'skill-editor', label: '스킬 에디터' },
+      { id: 'skill-image', label: '스킬 이미지' }
+    ]
+  },
+  { id: 'operations', label: 'DB · 타입 작업', icon: '07' }
 ]

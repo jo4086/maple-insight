@@ -1,5 +1,32 @@
 # Maple Insight Data Studio Review
 
+## 스킬 목록 아이콘·타입 열 UI 검증 (2026-11-14)
+
+- 스킬 표를 `스킬 ID | 아이콘 | 스킬명 | 차수 · 직업 | 타입 | 최대 레벨` 순서의 고정 열로 구성했다. 아이콘·타입·최대 레벨을 가운데 정렬하고 마지막 열의 셀 여백과 표 오른쪽 여백을 제거했다.
+- 아이콘은 미등록 자리 표시이며, 타입은 액티브·패시브 판정 근거가 아직 없어 `—`로 표시한다. `invisible`을 패시브 판정으로 사용하지 않는다. 실제 이미지 연결과 타입 분류 검증은 후속 작업이다.
+- Web typecheck, 대상 ESLint·Prettier와 mocked Chromium Playwright가 통과했다. Playwright는 여섯 열의 순서, 아이콘·타입·최대 레벨 가운데 정렬 및 셀 오른쪽 여백 0을 확인했다. 스크린샷은 `screenshots/playwright/electron/skill-list-{desktop,mobile}.png`에 Git 제외 상태로 저장했다.
+
+## 스킬 표 열 고정·차수 표시명·직업 트리 접기 검증 (2026-11-14)
+
+- 사용자 제공 최신 `screenshots/manual/electron/electron-2026-11-14T10-47-*.png` 네 장에서 페이지별 내용 길이에 따라 스킬 ID·스킬명·차수/직업·최대 레벨 열이 이동하는 현상을 확인했다. 표에 고정 레이아웃과 명시적 열 너비를 적용하고 긴 값은 해당 열 안에서 잘리도록 했다.
+- 직업 데이터 응답의 `JobAdvancement`에 taxonomy가 정한 차수별 `displayName`을 함께 제공한다. 원본 DB `GameJob.jobName`은 보존하고 스킬 화면은 직업 데이터 응답의 표시명만 사용한다. 스킬 화면에서 `@maple/data-core`를 직접 가져오거나 DB 스키마를 바꾸지 않았다.
+- 선택된 직업 이름을 다시 누르면 차수 목록이 접히고 다시 누르면 펼쳐진다. mocked Chromium Playwright에서 페이지 1·2의 네 열 시작 좌표가 같고, 원본명과 다른 표시명·재클릭 접기·차수 링크를 확인했다. Node/Web typecheck, 전체 Vitest 25개 파일·275개 테스트, 대상 ESLint·Prettier와 production build가 통과했다.
+- `xvfb-run` native Electron 읽기 전용 DB 버전 `1.2.419` 화면에서 0차 직업명이 DB 원본 `모험의 기술` 대신 `초보자`로 표시되는 것을 `screenshots/playwright/electron/2026-11-14T11-10-06-645Z-light-skill-list.png`로 확인했다. DB에 표시명을 별도로 저장하는 작업은 수행하지 않았다.
+
+## 스킬 목록·차수 이동·사이드바 접기 부분 검증 (2026-11-14)
+
+- `screenshots/manual/electron/maple-insight-skill-management-sidebar-layout.png`를 참고해 버전별 직업 트리, 차수 필터, DB 스킬 기본 정보 목록·상세와 검색·페이지 이동을 읽기 전용으로 연결했다. 기존 DB 조회 API를 재사용하며 DB 쓰기나 패키지 변경은 없다.
+- 직업 정보의 `스킬 정보` 탭에서 차수별 링크를 누르면 해당 대표 직업과 차수 필터가 선택된 스킬 목록으로 이동한다. 5차는 현재 직업 데이터에 전용 jobID 연결이 없어 필터만 제공하고 분류 부재를 안내한다. 6차는 기존 전직 트리의 6차 jobID를 사용한다.
+- 전역 좌측 사이드바에 접기·펼치기를 추가했다. 접힌 상태는 아이콘 탐색을 사용하며 다시 펼치면 하위 메뉴가 보인다. 스킬 에디터·이미지 본문은 계속 비워 둔다.
+- Node/Web typecheck, 전체 Vitest 25개 파일·275개 테스트, 변경 파일 ESLint·Prettier, production build와 `git diff --check`를 통과했다. SPEC 문서의 전체 Prettier 검사는 변경 전에도 실패하던 기존 서식 문제로 실패했다. mocked Chromium Playwright는 desktop 1480×920·mobile 390×844의 조회·차수 필터·직업 링크·사이드바 토글·가로 overflow 부재를 확인했고 `screenshots/playwright/electron/skill-list-{desktop,collapsed,mobile}.png`를 Git 제외 상태로 저장했다.
+- `xvfb-run`의 native Electron read-only 조회에서 DB 버전 `1.2.419`의 히어로 직업군 스킬 147개가 목록·상세에 표시됐고 `screenshots/playwright/electron/2026-11-14T10-09-37-509Z-current-skill-list.png`를 확인했다. native 차수 이동·사이드바 토글과 스킬 편집은 미검증이며 Phase 04 완료 항목은 변경하지 않는다.
+
+## 스킬 데이터 메인 탭 진입 구조 부분 검증 (2026-11-14)
+
+- 사용자 제공 `screenshots/manual/electron/skill_data_tab_ui.png`와 최신 스킬 화면 3개를 확인하고, 사이드바에 `스킬 데이터` 그룹과 `스킬 목록`·`스킬 에디터`·`스킬 이미지` 하위 라우트를 추가했다. `DB · 타입 작업` 번호는 07로 이동했다.
+- 당시 세 라우트의 본문은 사용자 요청에 따라 비워 두었다. 이후 위 작업에서 스킬 목록만 조회 화면으로 구성했으며 에디터·이미지 본문은 계속 비어 있다.
+- Web typecheck, navigation Vitest 6개, 변경 파일 ESLint·Prettier, production build가 exit 0이었다. native Electron 화면 검증은 실행하지 못했으며 Phase 04 완료 항목은 변경하지 않는다.
+
 ## Phase 04 edit workbench lock 경합 수정 부분 검증 (2026-11-14)
 
 - 사용자 native `job-data:list`는 live Electron PID 32650이 보유한 `.create.lock` 때문에 `Edit workbench creation is already locked by active process 32650` 오류로 전체 직업 snapshot 조회에 실패했고, 해당 프로세스는 이후 종료했다. 원인은 같은 프로세스의 concurrent workbench open과 metadata read가 `.create.lock`에서 경합한 것이다.

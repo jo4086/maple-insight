@@ -230,6 +230,7 @@ describe('job data grouping', () => {
         {
           jobId: '3212',
           jobName: '최상급 흑마법',
+          displayName: '배틀메이지',
           stage: 4,
           requiresReview: false
         }
@@ -237,22 +238,28 @@ describe('job data grouping', () => {
     })
     expect(groups.has('bishop')).toBe(false)
     expect(groups.get('hero')?.advancements).toEqual([
-      { jobId: '0', jobName: 'DB 초보자', stage: 0, requiresReview: false },
-      { jobId: '100', jobName: 'DB 검사', stage: 1, requiresReview: false },
-      { jobId: '110', jobName: 'DB 파이터', stage: 2, requiresReview: false },
-      { jobId: '112', jobName: 'Hero DB', stage: 4, requiresReview: false }
+      { jobId: '0', jobName: 'DB 초보자', displayName: '초보자', stage: 0, requiresReview: false },
+      { jobId: '100', jobName: 'DB 검사', displayName: '검사', stage: 1, requiresReview: false },
+      {
+        jobId: '110',
+        jobName: 'DB 파이터',
+        displayName: '파이터',
+        stage: 2,
+        requiresReview: false
+      },
+      { jobId: '112', jobName: 'Hero DB', displayName: '히어로', stage: 4, requiresReview: false }
     ])
     expect(groups.get('dual-blader')?.advancements.map(({ stage }) => stage)).toEqual([
       0, 1.5, 2, 2.5, 3, 4
     ])
     expect(groups.get('evan')?.advancements.map(({ stage }) => stage)).toEqual([1, 2, 3, 4, 6])
-    expect(groups.get('demon-slayer')?.advancements[0]).toEqual({
+    expect(groups.get('demon-slayer')?.advancements[0]).toMatchObject({
       jobId: '3001',
       jobName: 'Demon beginner DB',
       stage: 0,
       requiresReview: true
     })
-    expect(groups.get('demon-avenger')?.advancements[0]).toEqual({
+    expect(groups.get('demon-avenger')?.advancements[0]).toMatchObject({
       jobId: '3001',
       jobName: 'Demon beginner DB',
       stage: 0,
@@ -322,12 +329,14 @@ describe('job data grouping', () => {
           {
             jobId: '00100',
             jobName: 'Padded Swordman DB',
+            displayName: '검사',
             stage: 1,
             requiresReview: false
           },
           {
             jobId: '00112',
             jobName: 'Padded Hero DB',
+            displayName: '히어로',
             stage: 4,
             requiresReview: false
           }

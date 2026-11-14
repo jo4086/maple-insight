@@ -34,6 +34,7 @@ import type {
   SaveRawDataDiffRequest
 } from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
+import type { ListSkillDataRequest, SkillSummary } from '../shared/skill-data'
 
 const api = {
   openDataFile: () => ipcRenderer.invoke('data-file:open'),
@@ -70,6 +71,8 @@ const api = {
   listDataVersions: (): Promise<string[]> => ipcRenderer.invoke('data-version:list'),
   listJobData: (version: string): Promise<JobDataSnapshot> =>
     ipcRenderer.invoke('job-data:list', version),
+  listSkillData: (request: ListSkillDataRequest): Promise<SkillSummary[]> =>
+    ipcRenderer.invoke('skill-data:list', request),
   previewJobDraftRecovery: (version: string): Promise<JobDraftRecoveryPreview> =>
     ipcRenderer.invoke('job-data:draft-recovery:preview', version),
   copySelectedJobDraftRecovery: (

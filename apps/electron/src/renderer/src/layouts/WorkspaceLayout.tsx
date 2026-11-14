@@ -19,7 +19,7 @@ export function WorkspaceLayout(): React.JSX.Element {
       layout={
         view === 'compare'
           ? 'workspace'
-          : view === 'class' || view === 'class-editor'
+          : view === 'class' || view === 'class-editor' || view.startsWith('skill-')
             ? 'document'
             : 'default'
       }

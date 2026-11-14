@@ -8,6 +8,7 @@ import { JobDataView } from '../features/jobs/JobDataView'
 import { JobEditView } from '../features/jobs/JobEditView'
 import type { View } from '../features/navigation/model'
 import { OperationsView } from '../features/operations/OperationsView'
+import { SkillListView } from '../features/skills/SkillListView'
 import { UploadView } from '../features/upload/UploadView'
 import { VersionListView } from '../features/version/VersionListView'
 import { viewPaths } from '../routes/paths'
@@ -70,6 +71,11 @@ export function JobDataPage(): React.JSX.Element {
 export function JobEditPage(): React.JSX.Element {
   const { version } = useWorkspace()
   return <JobEditView version={version.currentVersion} />
+}
+
+export function SkillListPage(): React.JSX.Element {
+  const { version } = useWorkspace()
+  return <SkillListView version={version.currentVersion} />
 }
 
 export function OperationsPage(): React.JSX.Element {

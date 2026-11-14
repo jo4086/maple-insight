@@ -8,6 +8,9 @@ export const viewPaths: Record<View, string> = {
   equipment: '/equipment',
   class: '/class',
   'class-editor': '/class/editor',
+  'skill-list': '/skill',
+  'skill-editor': '/skill/editor',
+  'skill-image': '/skill/image',
   operations: '/operations'
 }
 

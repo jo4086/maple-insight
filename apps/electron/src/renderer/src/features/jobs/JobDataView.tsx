@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronRight, Pencil, Search } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 import type {
   JobDataSnapshot,
@@ -626,9 +626,42 @@ export function JobDataView({
                 )}
               </section>
             )}
-            {activeTab !== '기본 정보' && activeTab !== '전직 정보' && (
-              <div aria-label={`${activeTab} 빈 화면`} className="min-h-40" />
+            {activeTab === '스킬 정보' && (
+              <section aria-label="차수별 스킬 이동" className="mt-5">
+                {selectedGroup ? (
+                  <div className="grid gap-2">
+                    {[
+                      ...new Set([
+                        ...selectedGroup.advancements.map(({ stage }) => String(stage)),
+                        '5',
+                        '6'
+                      ])
+                    ]
+                      .sort((a, b) => Number(a) - Number(b))
+                      .map((stage) => (
+                        <Link
+                          className="flex items-center justify-between rounded-lg border border-app-border bg-app-surface px-4 py-3 text-body text-app-text hover:border-app-accent hover:text-app-accent"
+                          key={stage}
+                          to={`/skill?jobId=${encodeURIComponent(selectedGroup.representativeJobId)}&stage=${encodeURIComponent(stage)}`}
+                          onClick={(event) => {
+                            if (!confirmInlineNavigation()) event.preventDefault()
+                          }}
+                        >
+                          <span>{stage}차 스킬 목록</span>
+                          <ChevronRight aria-hidden="true" size={16} />
+                        </Link>
+                      ))}
+                  </div>
+                ) : (
+                  <p className="text-body text-app-muted">연결된 직업 차수가 없습니다.</p>
+                )}
+              </section>
             )}
+            {activeTab !== '기본 정보' &&
+              activeTab !== '전직 정보' &&
+              activeTab !== '스킬 정보' && (
+                <div aria-label={`${activeTab} 빈 화면`} className="min-h-40" />
+              )}
           </>
         )}
       </section>

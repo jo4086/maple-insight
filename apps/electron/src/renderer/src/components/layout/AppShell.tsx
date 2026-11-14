@@ -1,4 +1,18 @@
-import { Bell, ChevronDown, ChevronUp, X } from 'lucide-react'
+import {
+  Bell,
+  BriefcaseBusiness,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  Database,
+  GitBranch,
+  House,
+  Layers3,
+  Upload,
+  X,
+  Zap
+} from 'lucide-react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 import { navigation, type View } from '../../features/navigation/model'
@@ -186,78 +200,121 @@ export function AppShell({
     () => view === 'version-list' || view === 'compare'
   )
   const [jobExpanded, setJobExpanded] = useState(() => view === 'class' || view === 'class-editor')
+  const [skillExpanded, setSkillExpanded] = useState(() => view.startsWith('skill-'))
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const sidebarIcons = [House, Upload, GitBranch, Layers3, BriefcaseBusiness, Zap, Database]
 
   return (
-    <div className="grid min-h-screen grid-cols-[244px_1fr] max-[767px]:grid-cols-1">
-      <aside className="fixed inset-y-0 left-0 z-10 flex w-[244px] flex-col border-r border-app-border bg-app-sidebar px-[17px] py-7 max-[767px]:static max-[767px]:w-full max-[767px]:border-r-0 max-[767px]:border-b">
-        <div className="flex items-center gap-3 px-2.5 pb-8">
+    <div
+      className={`grid min-h-screen max-[767px]:grid-cols-1 ${sidebarCollapsed ? 'grid-cols-[72px_1fr]' : 'grid-cols-[244px_1fr]'}`}
+    >
+      <aside
+        className={`fixed inset-y-0 left-0 z-10 flex flex-col border-r border-app-border bg-app-sidebar py-7 max-[767px]:static max-[767px]:w-full max-[767px]:border-r-0 max-[767px]:border-b ${sidebarCollapsed ? 'w-[72px] px-3' : 'w-[244px] px-[17px]'}`}
+      >
+        <div
+          className={`flex items-center pb-8 ${sidebarCollapsed ? 'flex-col gap-4' : 'gap-3 px-2.5'}`}
+        >
           <div className="grid h-[38px] w-[38px] place-items-center rounded-xl bg-app-accent text-[13px] font-extrabold text-app-accent-contrast">
             MI
           </div>
-          <div>
-            <strong className="block text-[13px] font-bold">Maple Insight</strong>
-            <span className="mt-0.5 block text-[10px] font-semibold tracking-[0.16em] text-app-muted uppercase">
-              Data Studio
-            </span>
-          </div>
+          {!sidebarCollapsed && (
+            <div className="min-w-0 flex-1">
+              <strong className="block text-[13px] font-bold">Maple Insight</strong>
+              <span className="mt-0.5 block text-[10px] font-semibold tracking-[0.16em] text-app-muted uppercase">
+                Data Studio
+              </span>
+            </div>
+          )}
+          <button
+            aria-label={sidebarCollapsed ? '사이드바 펼치기' : '사이드바 접기'}
+            aria-pressed={sidebarCollapsed}
+            className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-app-border-strong bg-app-input text-app-muted hover:text-app-accent"
+            type="button"
+            onClick={() => setSidebarCollapsed((current) => !current)}
+          >
+            {sidebarCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+          </button>
         </div>
 
         <nav aria-label="주 탐색" className="grid gap-1">
-          {navigation.map((item) => {
+          {navigation.map((item, index) => {
+            const Icon = sidebarIcons[index]
             if ('children' in item) {
               const active = item.children.some((child) => child.id === view)
               const isVersionGroup = item.children[0]?.id === 'version-list'
-              const expanded = isVersionGroup ? versionExpanded : jobExpanded
+              const isSkillGroup = item.children[0]?.id === 'skill-list'
+              const expanded = isVersionGroup
+                ? versionExpanded
+                : isSkillGroup
+                  ? skillExpanded
+                  : jobExpanded
               const childrenId = `${item.children[0]?.id}-navigation-children`
 
               return (
                 <div key={item.label}>
-                  <button
-                    aria-controls={childrenId}
-                    aria-expanded={expanded}
-                    className={`group flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
-                    type="button"
-                    onClick={() =>
-                      isVersionGroup
-                        ? setVersionExpanded((current) => !current)
-                        : setJobExpanded((current) => !current)
-                    }
-                  >
-                    <span
-                      className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
+                  {sidebarCollapsed ? (
+                    <button
+                      aria-current={active ? 'page' : undefined}
+                      aria-label={item.label}
+                      className={`grid h-11 w-full place-items-center rounded-lg border-0 ${active ? 'bg-app-accent-bg text-app-accent' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                      title={item.label}
+                      type="button"
+                      onClick={() => onNavigate(item.children[0].id)}
                     >
-                      {item.icon}
-                    </span>
-                    <span>{item.label}</span>
-                    <span className="ml-auto grid h-4 w-4 shrink-0 place-items-center text-app-muted transition-colors group-hover:text-app-text group-focus-visible:text-app-text">
-                      {expanded ? (
-                        <ChevronUp size={16} strokeWidth={1.75} />
-                      ) : (
-                        <ChevronDown size={16} strokeWidth={1.75} />
-                      )}
-                    </span>
-                  </button>
-                  <div
-                    aria-label={`${item.label} 하위 탐색`}
-                    className={`ml-8 gap-1 border-l border-app-border pl-3 ${expanded ? 'grid' : 'hidden'}`}
-                    id={childrenId}
-                  >
-                    {item.children.map((child) => {
-                      const childActive = view === child.id
+                      <Icon aria-hidden="true" size={19} />
+                    </button>
+                  ) : (
+                    <button
+                      aria-controls={childrenId}
+                      aria-expanded={expanded}
+                      className={`group flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                      type="button"
+                      onClick={() =>
+                        isVersionGroup
+                          ? setVersionExpanded((current) => !current)
+                          : isSkillGroup
+                            ? setSkillExpanded((current) => !current)
+                            : setJobExpanded((current) => !current)
+                      }
+                    >
+                      <span
+                        className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                      <span className="ml-auto grid h-4 w-4 shrink-0 place-items-center text-app-muted transition-colors group-hover:text-app-text group-focus-visible:text-app-text">
+                        {expanded ? (
+                          <ChevronUp size={16} strokeWidth={1.75} />
+                        ) : (
+                          <ChevronDown size={16} strokeWidth={1.75} />
+                        )}
+                      </span>
+                    </button>
+                  )}
+                  {!sidebarCollapsed && (
+                    <div
+                      aria-label={`${item.label} 하위 탐색`}
+                      className={`ml-8 gap-1 border-l border-app-border pl-3 ${expanded ? 'grid' : 'hidden'}`}
+                      id={childrenId}
+                    >
+                      {item.children.map((child) => {
+                        const childActive = view === child.id
 
-                      return (
-                        <button
-                          aria-current={childActive ? 'page' : undefined}
-                          className={`rounded-lg border-0 px-3 py-2 text-left text-[11px] font-semibold transition-colors ${childActive ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
-                          key={child.id}
-                          type="button"
-                          onClick={() => onNavigate(child.id)}
-                        >
-                          {child.label}
-                        </button>
-                      )
-                    })}
-                  </div>
+                        return (
+                          <button
+                            aria-current={childActive ? 'page' : undefined}
+                            className={`rounded-lg border-0 px-3 py-2 text-left text-[11px] font-semibold transition-colors ${childActive ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                            key={child.id}
+                            type="button"
+                            onClick={() => onNavigate(child.id)}
+                          >
+                            {child.label}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
               )
             }
@@ -267,31 +324,41 @@ export function AppShell({
             return (
               <button
                 aria-current={active ? 'page' : undefined}
-                className={`flex w-full items-center gap-[13px] rounded-lg border-0 px-[13px] py-3 text-left text-[12px] font-semibold transition-colors ${active ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
+                aria-label={sidebarCollapsed ? item.label : undefined}
+                className={`${sidebarCollapsed ? 'grid h-11 place-items-center' : 'flex items-center gap-[13px] px-[13px] py-3 text-left text-[12px] font-semibold'} w-full rounded-lg border-0 transition-colors ${active ? 'bg-app-accent-bg text-app-text' : 'bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-text'}`}
                 key={item.id}
+                title={sidebarCollapsed ? item.label : undefined}
                 type="button"
                 onClick={() => onNavigate(item.id)}
               >
-                <span
-                  className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
-                >
-                  {item.icon}
-                </span>
-                {item.label}
+                {sidebarCollapsed ? (
+                  <Icon aria-hidden="true" size={19} />
+                ) : (
+                  <>
+                    <span
+                      className={`w-[22px] font-mono text-[9px] ${active ? 'text-app-accent' : 'text-app-subtle'}`}
+                    >
+                      {item.icon}
+                    </span>
+                    {item.label}
+                  </>
+                )}
               </button>
             )
           })}
         </nav>
 
-        <div className="mt-auto flex items-center gap-2.5 border-t border-app-border px-3 pt-4">
-          <StatusDot state="done" />
-          <div>
-            <strong className="block text-[10px] font-semibold text-app-muted">
-              Local workspace
-            </strong>
-            <small className="block text-[9px] text-app-subtle">main process connected</small>
+        {!sidebarCollapsed && (
+          <div className="mt-auto flex items-center gap-2.5 border-t border-app-border px-3 pt-4">
+            <StatusDot state="done" />
+            <div>
+              <strong className="block text-[10px] font-semibold text-app-muted">
+                Local workspace
+              </strong>
+              <small className="block text-[9px] text-app-subtle">main process connected</small>
+            </div>
           </div>
-        </div>
+        )}
       </aside>
 
       <main className="col-start-2 min-w-0 max-[767px]:col-start-auto">
