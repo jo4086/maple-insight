@@ -1,12 +1,11 @@
-import { ChevronDown, ChevronUp, FilePlus, Plus, Search, X } from 'lucide-react'
+import { ChevronDown, Plus, Search, X } from 'lucide-react'
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 
 import type {
   JobDataSnapshot,
   JobDraft,
-  JobSummary,
-  NewWeaponType,
+  SaveJobDraftRequest,
   WeaponTypeOption
 } from '../../../../shared/job-data'
 import { getErrorMessage } from '../../shared/lib/error-message'
@@ -14,12 +13,12 @@ import { getErrorMessage } from '../../shared/lib/error-message'
 import {
   decodeJobId,
   emptyJobDraft,
+  isStaleJobDraftError,
   jobDraftChanged,
+  jobDraftForSave,
   mergeSavedDraft,
   validateJobDraft,
   withPersistedRevision,
-  validateNewWeaponType,
-  weaponClassGroups,
   weaponOptionLabel
 } from './job-model'
 import { JobStatPicker } from './JobStatPicker'
@@ -27,26 +26,12 @@ import { useNavigationWarning } from './use-navigation-warning'
 
 type JobApi = typeof window.api & {
   listJobData: (version: string) => Promise<JobDataSnapshot>
-  saveJobDraft: (request: { version: string; draft: JobDraft }) => Promise<JobDraft>
+  saveJobDraft: (request: SaveJobDraftRequest) => Promise<JobDraft>
 }
-
-type NewJobLocation = { newJob?: JobSummary }
 
 const jobApi = (): JobApi => window.api as JobApi
 const classGroups = ['전사', '마법사', '궁수', '도적', '해적']
 const affiliations = ['모험가', '시그너스 기사단', '영웅', '레지스탕스', '노바', '레프', '아니마']
-
-function blankWeapon(category: 'weapon' | 'subWeapon'): NewWeaponType {
-  return {
-    key: crypto.randomUUID(),
-    category,
-    part: '',
-    englishName: '',
-    classGroupKeys: [],
-    handType: null,
-    weaponConstant: null
-  }
-}
 
 function LabeledField({
   label,
@@ -105,15 +90,15 @@ function WeaponPicker({
   category,
   selected,
   options,
-  onChange,
-  onStage
+  disabled,
+  onChange
 }: {
   label: string
   category: 'weapon' | 'subWeapon'
   selected: string[]
   options: WeaponTypeOption[]
+  disabled: boolean
   onChange: (keys: string[]) => void
-  onStage: (weapon: NewWeaponType) => void
 }): React.JSX.Element {
   const listboxId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -121,15 +106,13 @@ function WeaponPicker({
   const [query, setQuery] = useState('')
   const [chooserOpen, setChooserOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [expanded, setExpanded] = useState(false)
-  const [weapon, setWeapon] = useState(() => blankWeapon(category))
-  const [errors, setErrors] = useState<string[]>([])
   const available = options.filter(
     (option) =>
       option.category === category &&
       !selected.includes(option.key) &&
       `${option.key} ${option.part}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())
   )
+  const activeOption = available[activeIndex]
 
   const closeChooser = (): void => {
     setChooserOpen(false)
@@ -142,21 +125,6 @@ function WeaponPicker({
     onChange([...selected, option.key])
     closeChooser()
   }
-
-  const stage = (): void => {
-    const validation = validateNewWeaponType(weapon, options, [])
-    if (validation.length) {
-      setErrors(validation)
-      return
-    }
-    onStage(weapon)
-    setWeapon(blankWeapon(category))
-    setErrors([])
-    setExpanded(false)
-  }
-
-  const energySword = /energy[- ]?sword|에너지\s*소드/i.test(`${weapon.part} ${weapon.englishName}`)
-  const activeOption = available[activeIndex]
 
   return (
     <section className="border-t border-app-border pt-5">
@@ -179,7 +147,8 @@ function WeaponPicker({
             )}
             <button
               aria-label={`${key} 제거`}
-              className="border-0 bg-transparent text-inherit"
+              className="border-0 bg-transparent text-inherit disabled:opacity-50"
+              disabled={disabled}
               type="button"
               onClick={() => onChange(selected.filter((value) => value !== key))}
             >
@@ -217,12 +186,6 @@ function WeaponPicker({
                 } else if (event.key === 'ArrowUp' && available.length) {
                   event.preventDefault()
                   setActiveIndex((index) => Math.max(index - 1, 0))
-                } else if (event.key === 'Home' && available.length) {
-                  event.preventDefault()
-                  setActiveIndex(0)
-                } else if (event.key === 'End' && available.length) {
-                  event.preventDefault()
-                  setActiveIndex(available.length - 1)
                 } else if (event.key === 'Enter' && activeOption) {
                   event.preventDefault()
                   choose(activeOption)
@@ -264,7 +227,8 @@ function WeaponPicker({
         ) : (
           <button
             ref={addButtonRef}
-            className="flex h-9 items-center gap-1.5 rounded-md border border-app-border-strong bg-app-input px-3 text-small font-semibold"
+            className="flex h-9 items-center gap-1.5 rounded-md border border-app-border-strong bg-app-input px-3 text-small font-semibold disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={disabled}
             type="button"
             onClick={() => {
               setChooserOpen(true)
@@ -275,134 +239,35 @@ function WeaponPicker({
             <Plus aria-hidden="true" size={15} /> 추가하기
           </button>
         )}
-        <button
-          aria-expanded={expanded}
-          className="flex h-9 items-center gap-1.5 rounded-md border border-app-border-strong bg-app-input px-3 text-small font-semibold"
-          type="button"
-          onClick={() => setExpanded((open) => !open)}
-        >
-          <FilePlus aria-hidden="true" size={15} /> 새 무기 등록
-          {expanded ? (
-            <ChevronUp aria-hidden="true" size={14} />
-          ) : (
-            <ChevronDown aria-hidden="true" size={14} />
-          )}
-        </button>
       </div>
-      {expanded && (
-        <div className="mt-4 grid gap-3 border-t border-app-border pt-4">
-          {errors.length > 0 && (
-            <ul className="m-0 rounded-md bg-app-danger-bg p-3 pl-7 text-small text-app-danger">
-              {errors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          )}
-          <div className="grid grid-cols-2 gap-3 max-[700px]:grid-cols-1">
-            <LabeledField label="부위">
-              <input
-                className="h-9 rounded-md border border-app-border-strong bg-app-input px-3 text-body"
-                value={weapon.part}
-                onChange={(event) => setWeapon({ ...weapon, part: event.target.value })}
-              />
-            </LabeledField>
-            <LabeledField label="영문 이름">
-              <input
-                className="h-9 rounded-md border border-app-border-strong bg-app-input px-3 text-body"
-                value={weapon.englishName}
-                onChange={(event) => setWeapon({ ...weapon, englishName: event.target.value })}
-              />
-            </LabeledField>
-            {category === 'weapon' && (
-              <>
-                <LabeledField label="한손/두손">
-                  <span className="group relative block w-full max-w-[180px]">
-                    <select
-                      aria-label="한손/두손"
-                      className="h-9 w-full appearance-none rounded-md border border-app-border-strong bg-app-input pr-9 pl-3 text-body"
-                      value={weapon.handType ?? ''}
-                      onChange={(event) =>
-                        setWeapon({ ...weapon, handType: event.target.value || null })
-                      }
-                    >
-                      <option value="">선택</option>
-                      <option value="oneHanded">한손</option>
-                      <option value="twoHanded">두손</option>
-                    </select>
-                    <ChevronDown
-                      aria-hidden="true"
-                      className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-app-muted group-hover:text-app-text group-focus-within:text-app-text"
-                      size={15}
-                    />
-                  </span>
-                </LabeledField>
-                <LabeledField label="무기 상수">
-                  <input
-                    className="h-9 rounded-md border border-app-border-strong bg-app-input px-3 text-body"
-                    inputMode="decimal"
-                    value={weapon.weaponConstant ?? ''}
-                    onChange={(event) =>
-                      setWeapon({ ...weapon, weaponConstant: event.target.value || null })
-                    }
-                  />
-                </LabeledField>
-              </>
-            )}
-          </div>
-          <fieldset className="border-0 p-0">
-            <legend className="field-label mb-2">
-              직업군 {energySword ? '(도적 + 해적)' : '(하나 선택)'}
-            </legend>
-            <div className="flex flex-wrap gap-2">
-              {weaponClassGroups.map((group) => {
-                const active = weapon.classGroupKeys.includes(group.key)
-                return (
-                  <button
-                    className={`rounded-md border px-3 py-1.5 text-small ${active ? 'border-app-accent bg-app-accent-bg text-app-accent' : 'border-app-border bg-app-input text-app-muted'}`}
-                    key={group.key}
-                    type="button"
-                    onClick={() =>
-                      setWeapon({
-                        ...weapon,
-                        classGroupKeys: energySword
-                          ? active
-                            ? weapon.classGroupKeys.filter((value) => value !== group.key)
-                            : [...weapon.classGroupKeys, group.key]
-                          : [group.key]
-                      })
-                    }
-                  >
-                    {group.label}
-                  </button>
-                )
-              })}
-            </div>
-          </fieldset>
-          <button className="action-primary justify-self-end" type="button" onClick={stage}>
-            작업본에 옵션 추가
-          </button>
-        </div>
-      )}
     </section>
   )
 }
 
 export function JobEditView({ version }: { version: string }): React.JSX.Element {
   const navigate = useNavigate()
-  const location = useLocation()
   const { jobId: encodedJobId } = useParams()
   const jobId = decodeJobId(encodedJobId)
-  const locationJob = (location.state as NewJobLocation | null)?.newJob
+  const editorIdentity = `${version}:${jobId}`
+  const editorContext = useRef({ generation: 0, identity: editorIdentity })
+  if (editorContext.current.identity !== editorIdentity) {
+    editorContext.current = {
+      generation: editorContext.current.generation + 1,
+      identity: editorIdentity
+    }
+  }
+  const editorGeneration = editorContext.current.generation
   const [snapshot, setSnapshot] = useState<JobDataSnapshot | null>(null)
   const [draft, setDraft] = useState<JobDraft | null>(null)
-  const [selectedAdvancementJobIds, setSelectedAdvancementJobIds] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
+  const [staleConflict, setStaleConflict] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const hydrated = useRef(false)
   const editSequence = useRef(0)
   const saveChain = useRef<Promise<void>>(Promise.resolve())
-  const pendingSaves = useRef(0)
+  const pendingSaves = useRef(new Map<number, number>())
+  const persistedDrafts = useRef(new Map<number, JobDraft>())
   const persistedDraft = useRef<JobDraft | null>(null)
   const lastQueuedSequence = useRef(-1)
   const dirty = Boolean(
@@ -421,61 +286,92 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
 
   useEffect(() => {
     let active = true
+    const isCurrentEditor = (): boolean =>
+      active &&
+      editorContext.current.generation === editorGeneration &&
+      editorContext.current.identity === editorIdentity
+
     hydrated.current = false
+    editSequence.current = 0
+    persistedDraft.current = null
+    persistedDrafts.current.delete(editorGeneration)
+    pendingSaves.current.set(editorGeneration, 0)
     setSnapshot(null)
     setDraft(null)
+    setSaving(false)
+    setStaleConflict(false)
+    setMessage('')
     setError('')
     void jobApi()
       .listJobData(version)
       .then((next) => {
-        if (!active) return
+        if (!isCurrentEditor()) return
         const savedDraft = next.drafts.find((candidate) => candidate.jobId === jobId)
-        const job =
-          next.jobs.find((candidate) => candidate.jobId === jobId) ??
-          (savedDraft ? { jobId: savedDraft.jobId, jobName: savedDraft.jobName } : null) ??
-          (locationJob?.jobId === jobId ? locationJob : null)
+        const job = next.jobs.find((candidate) => candidate.jobId === jobId) ?? null
         if (!job) {
-          setError('직업을 찾을 수 없습니다.')
+          setSnapshot(next)
+          setError('DB에 없는 직업은 편집 작업본에 저장할 수 없습니다.')
+          return
+        }
+        if (!next.editorAvailable || !next.changeSetId) {
+          setSnapshot(next)
+          setError('현재 버전의 편집 작업본을 사용할 수 없습니다. DB 직업 정보만 볼 수 있습니다.')
           return
         }
         const representativeGroup = next.jobGroups.find(
           ({ representativeJobId }) => representativeJobId === jobId
         )
         const loaded = savedDraft ?? emptyJobDraft(job, representativeGroup?.classKey)
-        const defaultAdvancementJobIds = [
-          ...new Set(
-            next.jobGroups
-              .filter(({ representativeJobId }) => representativeJobId === jobId)
-              .flatMap(({ advancements }) => advancements.map(({ jobId }) => jobId))
-          )
-        ]
+        persistedDrafts.current.set(editorGeneration, loaded)
         persistedDraft.current = loaded
         lastQueuedSequence.current = -1
         setSnapshot(next)
         setDraft(loaded)
-        setSelectedAdvancementJobIds(savedDraft?.advancementJobIds ?? defaultAdvancementJobIds)
         queueMicrotask(() => {
-          hydrated.current = true
+          if (isCurrentEditor()) hydrated.current = true
         })
       })
       .catch((caught: unknown) => {
-        if (active) setError(getErrorMessage(caught))
+        if (isCurrentEditor()) setError(getErrorMessage(caught))
       })
     return () => {
       active = false
     }
-  }, [jobId, locationJob, version])
+  }, [editorGeneration, editorIdentity, jobId, version])
 
   const save = useCallback(
     (candidate: JobDraft, sequence: number, announce: boolean): void => {
-      pendingSaves.current += 1
+      const isCurrentEditor = (): boolean =>
+        editorContext.current.generation === editorGeneration &&
+        editorContext.current.identity === editorIdentity
+      if (!isCurrentEditor()) return
+      const validationErrors = validateJobDraft(candidate)
+      if (validationErrors.length) {
+        setError(validationErrors.join(' '))
+        return
+      }
+
+      pendingSaves.current.set(
+        editorGeneration,
+        (pendingSaves.current.get(editorGeneration) ?? 0) + 1
+      )
       setSaving(true)
       setError('')
       saveChain.current = saveChain.current.then(async () => {
         try {
-          const revision = persistedDraft.current?.revision ?? candidate.revision
-          const requestDraft = withPersistedRevision(candidate, revision)
-          const saved = await jobApi().saveJobDraft({ version, draft: requestDraft })
+          if (!isCurrentEditor()) return
+          const revision =
+            persistedDrafts.current.get(editorGeneration)?.revision ?? candidate.revision
+          const requestDraft = jobDraftForSave(candidate, revision)
+          if (!snapshot?.changeSetId)
+            throw new Error('현재 버전의 편집 작업본을 사용할 수 없습니다.')
+          const saved = await jobApi().saveJobDraft({
+            version,
+            expectedChangeSetId: snapshot.changeSetId,
+            draft: requestDraft
+          })
+          if (!isCurrentEditor()) return
+          persistedDrafts.current.set(editorGeneration, saved)
           persistedDraft.current = saved
           setDraft((current) => (current ? mergeSavedDraft(current, saved) : saved))
           setError('')
@@ -483,18 +379,34 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
             setMessage('작업본을 저장했습니다.')
           }
         } catch (caught) {
-          setError(`${getErrorMessage(caught)} 저장하기를 눌러 다시 시도하세요.`)
+          if (!isCurrentEditor()) return
+          const stale = isStaleJobDraftError(caught)
+          setStaleConflict(stale)
+          setError(
+            stale
+              ? '다른 변경으로 작업본 기준이 바뀌었습니다. 현재 입력은 유지되며 사용자 선택 전에는 자동 재시도하지 않습니다.'
+              : `${getErrorMessage(caught)} 저장하기를 눌러 다시 시도하세요.`
+          )
         } finally {
-          pendingSaves.current -= 1
-          if (pendingSaves.current === 0) setSaving(false)
+          const remaining = Math.max(0, (pendingSaves.current.get(editorGeneration) ?? 1) - 1)
+          pendingSaves.current.set(editorGeneration, remaining)
+          if (isCurrentEditor() && remaining === 0) setSaving(false)
         }
       })
     },
-    [version]
+    [editorGeneration, editorIdentity, snapshot?.changeSetId, version]
   )
 
   useEffect(() => {
-    if (!hydrated.current || !dirty || !draft || error) return
+    if (
+      !hydrated.current ||
+      !dirty ||
+      !draft ||
+      error ||
+      staleConflict ||
+      !snapshot?.editorAvailable
+    )
+      return
     const sequence = editSequence.current
     if (lastQueuedSequence.current === sequence) return
     const timer = window.setTimeout(() => {
@@ -503,13 +415,13 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
       save(draft, sequence, false)
     }, 700)
     return () => window.clearTimeout(timer)
-  }, [dirty, draft, error, save])
+  }, [dirty, draft, error, save, snapshot?.editorAvailable, staleConflict])
 
   const update = <K extends keyof JobDraft>(key: K, value: JobDraft[K]): void => {
     if (!draft) return
     editSequence.current += 1
     setMessage('')
-    setError('')
+    if (!staleConflict) setError('')
     setDraft({ ...draft, [key]: value })
   }
 
@@ -518,27 +430,9 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
       snapshot?.jobGroups.filter(({ representativeJobId }) => representativeJobId === jobId) ?? [],
     [jobId, snapshot]
   )
-  const actualAdvancementJobIds = useMemo(
-    () =>
-      new Set(
-        representativeGroups.flatMap(({ advancements }) => advancements.map(({ jobId }) => jobId))
-      ),
-    [representativeGroups]
-  )
-
   const options = useMemo<WeaponTypeOption[]>(() => {
     if (!snapshot || !draft) return []
-    return [
-      ...snapshot.weaponTypes,
-      ...draft.newWeaponTypes.map((weapon) => ({
-        key: weapon.key,
-        category: weapon.category,
-        part: weapon.part,
-        classGroupKeys: weapon.classGroupKeys,
-        handType: weapon.handType,
-        weaponConstant: weapon.weaponConstant
-      }))
-    ]
+    return snapshot.weaponTypes
   }, [draft, snapshot])
 
   const explicitSave = (): void => {
@@ -553,21 +447,57 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
     save(draft, editSequence.current, true)
   }
 
-  const linkAdvancementJobIds = (): void => {
+  const refreshLatest = async (retry: boolean): Promise<void> => {
     if (!draft) return
-    if (
-      !actualAdvancementJobIds.has(draft.jobId) ||
-      !selectedAdvancementJobIds.includes(draft.jobId)
-    ) {
-      setError('전직 ID 연결에는 대표 직업 ID가 포함되어야 합니다.')
-      return
+    if (!retry && !window.confirm('현재 입력을 버리고 최신 작업본을 불러올까요?')) return
+    const generation = editorGeneration
+    const identity = editorIdentity
+    const isCurrentEditor = (): boolean =>
+      editorContext.current.generation === generation && editorContext.current.identity === identity
+    setSaving(true)
+    try {
+      const next = await jobApi().listJobData(version)
+      if (!isCurrentEditor()) return
+      const latest =
+        next.drafts.find(({ jobId: candidateId }) => candidateId === jobId) ??
+        emptyJobDraft(
+          next.jobs.find(({ jobId: candidateId }) => candidateId === jobId)!,
+          representativeGroups[0]?.classKey
+        )
+      if (!next.editorAvailable || !next.changeSetId)
+        throw new Error('현재 버전의 편집 작업본을 사용할 수 없습니다.')
+      setSnapshot(next)
+      persistedDrafts.current.set(generation, latest)
+      persistedDraft.current = latest
+      setStaleConflict(false)
+      setError('')
+      if (retry) {
+        const candidate = jobDraftForSave({ ...draft, jobName: latest.jobName }, latest.revision)
+        const validationErrors = validateJobDraft(candidate)
+        if (validationErrors.length) throw new Error(validationErrors.join(' '))
+        setDraft(candidate)
+        lastQueuedSequence.current = editSequence.current
+        const saved = await jobApi().saveJobDraft({
+          version,
+          expectedChangeSetId: next.changeSetId,
+          draft: candidate
+        })
+        if (!isCurrentEditor()) return
+        persistedDrafts.current.set(generation, saved)
+        persistedDraft.current = saved
+        setDraft((current) => (current ? mergeSavedDraft(current, saved) : saved))
+        setMessage('최신 기준으로 작업본을 저장했습니다.')
+      } else {
+        setDraft(latest)
+        setMessage('최신 작업본을 불러왔습니다.')
+      }
+    } catch (caught) {
+      if (!isCurrentEditor()) return
+      setStaleConflict(isStaleJobDraftError(caught))
+      setError(getErrorMessage(caught))
+    } finally {
+      if (isCurrentEditor()) setSaving(false)
     }
-    if (selectedAdvancementJobIds.some((id) => !actualAdvancementJobIds.has(id))) {
-      setError('현재 전직 그룹에 없는 ID는 연결할 수 없습니다.')
-      return
-    }
-    update('advancementJobIds', selectedAdvancementJobIds)
-    setMessage('전직 ID 연결을 작업본에 자동 저장합니다.')
   }
 
   const cancelNavigation = (): void => {
@@ -583,7 +513,10 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
   if (!draft) {
     return (
       <div className="px-[42px] pt-[42px] text-body text-app-muted max-[1200px]:px-7 max-[767px]:px-4 max-[767px]:pt-6">
-        {error || '직업 작업본을 불러오는 중입니다.'}
+        {error ||
+          (snapshot && !snapshot.editorAvailable
+            ? '현재 버전의 편집 작업본을 사용할 수 없습니다. DB 직업 정보는 직업 정보 화면에서 볼 수 있습니다.'
+            : '직업 작업본을 불러오는 중입니다.')}
       </div>
     )
   }
@@ -617,6 +550,30 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
           role="alert"
         >
           {error}
+        </div>
+      )}
+      {staleConflict && (
+        <div
+          className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning"
+          role="status"
+        >
+          <span>현재 입력을 유지했습니다.</span>
+          <button
+            className="action-secondary"
+            disabled={saving}
+            type="button"
+            onClick={() => void refreshLatest(false)}
+          >
+            최신 작업본 불러오기
+          </button>
+          <button
+            className="action-primary"
+            disabled={saving}
+            type="button"
+            onClick={() => void refreshLatest(true)}
+          >
+            최신 기준으로 재시도
+          </button>
         </div>
       )}
       {message && (
@@ -654,9 +611,10 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
           className="grid grid-cols-[112px_minmax(0,1fr)] items-center gap-3 max-[480px]:grid-cols-[88px_minmax(0,1fr)]"
         >
           <input
-            className="h-8 w-full max-w-[320px] min-w-0 rounded-md border border-app-border-strong bg-app-input px-3 text-body"
+            className="h-8 w-full max-w-[320px] min-w-0 rounded-md border border-app-border-strong bg-app-surface px-3 text-body text-app-muted"
+            readOnly
+            title="DB 원본 직업명은 편집 대상에서 제외됩니다"
             value={draft.jobName}
-            onChange={(event) => update('jobName', event.target.value)}
           />
         </LabeledField>
         <LabeledField
@@ -713,110 +671,50 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
 
       <section className="mt-6 border-t border-app-border pt-5">
         <h2 className="section-title">전직 ID 연결</h2>
+        <p className="mb-4 rounded-md border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning">
+          전직 연결은 현재 metadata 편집 대상에서 제외됩니다. DB 전직 트리를 읽기 전용으로
+          표시합니다.
+        </p>
         {representativeGroups.length > 0 ? (
-          <>
-            <p className="mb-4 text-small text-app-muted">
-              현재 버전 DB의 전직 트리입니다. 같은 대표 작업본에 연결할 실제 ID만 선택하세요.
-            </p>
-            <div className="divide-y divide-app-border">
-              {representativeGroups.map((group) => (
-                <fieldset className="border-0 px-0 py-5" key={group.classKey}>
-                  <legend className="mb-2 text-body font-bold text-app-text">
-                    {group.representativeName}
-                  </legend>
-                  <div className="divide-y divide-app-border">
-                    {group.advancements.map((advancement, index) => {
-                      const inputId = `advancement-${group.classKey}-${index}-${advancement.jobId}`
-                      const representative = advancement.jobId === draft.jobId
-                      return (
-                        <label
-                          className="grid grid-cols-[auto_70px_minmax(0,1fr)_minmax(0,1fr)] items-center gap-3 px-1 py-3 text-small max-[700px]:grid-cols-[auto_56px_minmax(0,1fr)]"
-                          htmlFor={inputId}
-                          key={inputId}
-                        >
-                          <input
-                            checked={selectedAdvancementJobIds.includes(advancement.jobId)}
-                            disabled={representative}
-                            id={inputId}
-                            type="checkbox"
-                            onChange={(event) =>
-                              setSelectedAdvancementJobIds((current) =>
-                                event.target.checked
-                                  ? [...new Set([...current, advancement.jobId])]
-                                  : current.filter((id) => id !== advancement.jobId)
-                              )
-                            }
-                          />
-                          <span className="font-semibold text-app-muted">
-                            {advancement.stage}차
-                          </span>
-                          <span className="font-mono text-app-text">{advancement.jobId}</span>
-                          <span className="grid gap-1 text-app-text max-[700px]:col-start-3">
-                            {advancement.stage === 4 && (
-                              <span>
-                                <span className="mr-2 text-caption text-app-muted">대표 이름</span>
-                                {group.representativeName}
-                              </span>
-                            )}
-                            <span>
-                              <span className="mr-2 text-caption text-app-muted">원본 이름</span>
-                              {advancement.jobName}
-                              {advancement.requiresReview ? ' · 검토 필요' : ''}
-                            </span>
-                          </span>
-                        </label>
-                      )
-                    })}
-                  </div>
-                </fieldset>
+          <div className="divide-y divide-app-border">
+            {representativeGroups
+              .flatMap((group) => group.advancements)
+              .map((advancement) => (
+                <div
+                  className="grid grid-cols-[70px_100px_minmax(0,1fr)] gap-3 px-1 py-3 text-small"
+                  key={`${advancement.stage}-${advancement.jobId}`}
+                >
+                  <span>{advancement.stage}차</span>
+                  <code>{advancement.jobId}</code>
+                  <span>{advancement.jobName}</span>
+                </div>
               ))}
-            </div>
-            <div className="mt-4 flex justify-end">
-              <button className="action-secondary" type="button" onClick={linkAdvancementJobIds}>
-                전직 ID 연결
-              </button>
-            </div>
-          </>
+          </div>
         ) : (
-          <p className="m-0 text-small text-app-muted">
-            이 직업은 현재 버전의 전직 그룹이 없습니다. 신규·미분류 직업은 가짜 연결을 만들지 않고
-            기존 기본 정보 편집을 유지하며 수동 검토해야 합니다.
-          </p>
+          <p className="m-0 text-small text-app-muted">연결된 DB 전직 정보가 없습니다.</p>
         )}
       </section>
 
       <div className="mt-6 grid gap-4">
+        <p className="rounded-md border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning">
+          새 무기 후보 등록은 현재 metadata 편집 대상에서 제외됩니다. 기존 전역 무기 유형만 선택할
+          수 있습니다.
+        </p>
         <WeaponPicker
           label="주무기"
           category="weapon"
           selected={draft.primaryWeapons}
           options={options}
+          disabled={saving || staleConflict}
           onChange={(keys) => update('primaryWeapons', keys)}
-          onStage={(weapon) => {
-            editSequence.current += 1
-            setError('')
-            setDraft({
-              ...draft,
-              newWeaponTypes: [...draft.newWeaponTypes, weapon],
-              primaryWeapons: [...draft.primaryWeapons, weapon.key]
-            })
-          }}
         />
         <WeaponPicker
           label="보조무기"
           category="subWeapon"
           selected={draft.secondaryWeapons}
           options={options}
+          disabled={saving || staleConflict}
           onChange={(keys) => update('secondaryWeapons', keys)}
-          onStage={(weapon) => {
-            editSequence.current += 1
-            setError('')
-            setDraft({
-              ...draft,
-              newWeaponTypes: [...draft.newWeaponTypes, weapon],
-              secondaryWeapons: [...draft.secondaryWeapons, weapon.key]
-            })
-          }}
         />
       </div>
 
@@ -836,7 +734,7 @@ export function JobEditView({ version }: { version: string }): React.JSX.Element
         </button>
         <button
           className="action-primary"
-          disabled={!dirty || saving}
+          disabled={!dirty || saving || staleConflict || !snapshot?.editorAvailable}
           type="button"
           onClick={explicitSave}
         >

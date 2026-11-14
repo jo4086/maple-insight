@@ -104,9 +104,14 @@ export function registerJobDataHandlers(context: MainIpcContext): string[] {
   ipcMain.handle(SAVE_JOB_DRAFT_CHANNEL, async (_, request: unknown): Promise<JobDraft> => {
     if (
       !isObject(request) ||
+      Object.keys(request).length !== 3 ||
+      !Object.keys(request).every((key) =>
+        ['version', 'expectedChangeSetId', 'draft'].includes(key)
+      ) ||
       !isVersion(request.version) ||
-      !isObject(request.draft) ||
-      Object.keys(request).some((key) => key !== 'version' && key !== 'draft')
+      typeof request.expectedChangeSetId !== 'string' ||
+      !UUID_PATTERN.test(request.expectedChangeSetId) ||
+      !isObject(request.draft)
     )
       throw new Error('Invalid save job draft request')
     const input = request as SaveJobDraftRequest

@@ -9,6 +9,8 @@ import {
   fallbackJobs,
   filterJobGroups,
   filterJobs,
+  isStaleJobDraftError,
+  jobDraftForSave,
   jobEditPath,
   jobsWithDrafts,
   mergeSavedDraft,
@@ -387,6 +389,29 @@ describe('job model', () => {
     })
   })
 
+  it('omits excluded fields from every workbench save payload', () => {
+    expect(
+      jobDraftForSave(
+        {
+          ...draft,
+          advancementJobIds: ['0100'],
+          newWeaponTypes: [
+            {
+              key: '550e8400-e29b-41d4-a716-446655440000',
+              category: 'weapon',
+              part: '한손검',
+              englishName: 'Sword',
+              classGroupKeys: ['warrior'],
+              handType: 'oneHanded',
+              weaponConstant: '1.2'
+            }
+          ]
+        },
+        3
+      )
+    ).toEqual({ ...draft, newWeaponTypes: [], revision: 3 })
+  })
+
   it('includes saved draft-only jobs once for list and reload', () => {
     expect(
       jobsWithDrafts(
@@ -397,6 +422,13 @@ describe('job model', () => {
       { jobId: '0100', jobName: '히어로' },
       { jobId: '99999', jobName: '새 직업' }
     ])
+  })
+
+  it('recognizes stale change-set and revision failures only', () => {
+    expect(isStaleJobDraftError(new Error('Stale job metadata changeSetId'))).toBe(true)
+    expect(isStaleJobDraftError(new Error('Stale job metadata revision'))).toBe(true)
+    expect(isStaleJobDraftError(new Error('Invalid job draft revision'))).toBe(false)
+    expect(isStaleJobDraftError(new Error('Mock draft save failure'))).toBe(false)
   })
 
   it('blocks inline navigation for unsaved changes and active saves', () => {

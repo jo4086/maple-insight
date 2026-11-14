@@ -43,6 +43,11 @@ export function withPersistedRevision(draft: JobDraft, revision: number): JobDra
   return { ...draft, revision }
 }
 
+export function jobDraftForSave(draft: JobDraft, revision = draft.revision): JobDraft {
+  const { advancementJobIds: _advancementJobIds, ...editable } = draft
+  return { ...editable, newWeaponTypes: [], revision }
+}
+
 export function jobsWithDrafts(jobs: JobSummary[], drafts: JobDraft[]): JobSummary[] {
   const byId = new Map(jobs.map((job) => [job.jobId, job]))
   for (const draft of drafts) {
@@ -58,6 +63,11 @@ export function jobDraftChanged(before: JobDraft, after: JobDraft): boolean {
 
 export function shouldConfirmInlineNavigation(changed: boolean, saving: boolean): boolean {
   return changed || saving
+}
+
+export function isStaleJobDraftError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error)
+  return /stale job metadata (?:changesetid|revision)/i.test(message)
 }
 
 export function weaponOptionLabel(option: WeaponTypeOption): string {

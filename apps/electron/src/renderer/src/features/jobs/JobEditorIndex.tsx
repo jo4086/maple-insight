@@ -16,6 +16,8 @@ type JobApi = typeof window.api & {
 
 type EditorEntry = JobSummary & {
   classKey?: string
+  englishName?: string
+  revision?: number
 }
 
 type RecoveryCopyStatus =
@@ -33,11 +35,16 @@ function editorEntries(snapshot: JobDataSnapshot): {
   const groupedIds = new Set(
     snapshot.jobGroups.flatMap(({ advancements }) => advancements.map(({ jobId }) => jobId))
   )
-  const representatives = snapshot.jobGroups.map((group) => ({
-    jobId: group.representativeJobId,
-    jobName: group.representativeName,
-    classKey: group.classKey
-  }))
+  const representatives = snapshot.jobGroups.map((group) => {
+    const draft = snapshot.drafts.find(({ jobId }) => jobId === group.representativeJobId)
+    return {
+      jobId: group.representativeJobId,
+      jobName: group.representativeName,
+      classKey: group.classKey,
+      englishName: draft?.englishName,
+      revision: draft?.revision
+    }
+  })
   const fallback = new Map<string, EditorEntry>()
 
   for (const job of snapshot.jobs) {
@@ -49,7 +56,9 @@ function editorEntries(snapshot: JobDataSnapshot): {
     if (!representativeIds.has(draft.jobId)) {
       fallback.set(draft.jobId, {
         jobId: draft.jobId,
-        jobName: snapshot.jobs.find(({ jobId }) => jobId === draft.jobId)?.jobName ?? draft.jobName
+        jobName: snapshot.jobs.find(({ jobId }) => jobId === draft.jobId)?.jobName ?? draft.jobName,
+        englishName: draft.englishName,
+        revision: draft.revision
       })
     }
   }
@@ -147,11 +156,13 @@ function RecoveryCopyFeedback({
   return null
 }
 
-function JobButton({ job }: { job: EditorEntry }): React.JSX.Element {
+function JobButton({ job, disabled }: { job: EditorEntry; disabled: boolean }): React.JSX.Element {
   const navigate = useNavigate()
   return (
     <button
-      className="flex w-full items-center justify-between gap-4 rounded-lg border border-app-border bg-app-surface px-4 py-3 text-left hover:border-app-accent hover:bg-app-surface-hover"
+      className="flex w-full items-center justify-between gap-4 rounded-lg border border-app-border bg-app-surface px-4 py-3 text-left hover:border-app-accent hover:bg-app-surface-hover disabled:cursor-not-allowed disabled:opacity-50"
+      disabled={disabled}
+      title={disabled ? '현재 버전의 편집 작업본을 사용할 수 없습니다' : undefined}
       type="button"
       onClick={() => navigate(`/class/edit/${encodeURIComponent(job.jobId)}`)}
     >
@@ -159,7 +170,14 @@ function JobButton({ job }: { job: EditorEntry }): React.JSX.Element {
         <strong className="text-body text-app-text">{job.jobName}</strong>
         {job.classKey && <span className="text-caption text-app-muted">{job.classKey}</span>}
       </span>
-      <span className="font-mono text-small text-app-muted">{job.jobId}</span>
+      <span className="grid justify-items-end gap-1 font-mono text-small text-app-muted">
+        <span>{job.jobId}</span>
+        {job.englishName && (
+          <span className="font-sans text-caption">
+            {job.englishName} · revision {job.revision}
+          </span>
+        )}
+      </span>
     </button>
   )
 }
@@ -238,7 +256,7 @@ export function JobEditorIndex(): React.JSX.Element {
   const copySelectedRecovery = (jobId: string, recoveryId: string, sourceSha256: string): void => {
     if (pendingRecoveryCopies.current.has(jobId)) return
     const confirmed = window.confirm(
-      '이 직업의 메타데이터만 Phase 4 편집 작업본의 불변 revision 1로 복사합니다. 제외된 jobName, newWeaponTypes, advancementJobIds는 원본에 남고 적용되지 않습니다. 현재 에디터 저장은 계속 복구 초안에 기록되며 DB publish는 실행하지 않습니다. 계속할까요?'
+      '이 직업의 메타데이터만 Phase 4 편집 작업본의 불변 revision 1로 복사합니다. 제외된 jobName, newWeaponTypes, advancementJobIds는 원본에 남고 적용되지 않습니다. 에디터는 복사 후 편집 작업본만 읽고 저장하며 DB publish는 실행하지 않습니다. 계속할까요?'
     )
     if (!confirmed || pendingRecoveryCopies.current.has(jobId)) return
 
@@ -257,12 +275,19 @@ export function JobEditorIndex(): React.JSX.Element {
         sourceSha256,
         jobId
       })
-      .then((result) => {
+      .then(async (result) => {
         if (
           generation !== recoveryCopyGeneration.current ||
           requestedVersion !== currentVersion.current
         )
           return
+        const next = await (window.api as JobApi).listJobData(requestedVersion)
+        if (
+          generation !== recoveryCopyGeneration.current ||
+          requestedVersion !== currentVersion.current
+        )
+          return
+        setSnapshot(next)
         setRecoveryCopyStatuses((statuses) => ({
           ...statuses,
           [jobId]: { state: 'success', ...result }
@@ -310,6 +335,15 @@ export function JobEditorIndex(): React.JSX.Element {
           <h1 className="page-title">직업 에디터</h1>
           <p className="page-description">최종 전직 대표 직업을 선택하세요.</p>
         </header>
+        {snapshot && !snapshot.editorAvailable && (
+          <div
+            className="mb-6 rounded-lg border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning"
+            role="status"
+          >
+            현재 버전의 편집 작업본을 사용할 수 없습니다. DB 직업 목록은 볼 수 있지만 편집 화면을
+            열거나 저장할 수 없습니다.
+          </div>
+        )}
         <section
           className="mt-8 border-t border-app-border pt-6"
           aria-labelledby="recovery-review-heading"
@@ -333,7 +367,7 @@ export function JobEditorIndex(): React.JSX.Element {
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <p className="m-0 max-w-[680px] text-small text-app-muted">
                   복사는 선택한 직업의 메타데이터만 Phase 4 편집 작업본에 불변 revision 1로
-                  기록합니다. 기존 복구 파일은 유지되며 현재 에디터 저장은 계속 복구 초안에 기록되고
+                  기록합니다. 기존 복구 파일은 유지됩니다. 에디터는 현재 편집 작업본만 읽고 저장하며
                   DB publish는 실행하지 않습니다.
                 </p>
                 <button
@@ -413,7 +447,10 @@ export function JobEditorIndex(): React.JSX.Element {
                               <button
                                 className="shrink-0 rounded-md border border-app-border-strong bg-app-surface px-3 py-1.5 text-small font-semibold text-app-text hover:border-app-accent disabled:cursor-not-allowed disabled:opacity-60"
                                 type="button"
-                                disabled={recoveryCopyStatuses[draft.jobId] !== undefined}
+                                disabled={
+                                  !snapshot?.editorAvailable ||
+                                  recoveryCopyStatuses[draft.jobId] !== undefined
+                                }
                                 onClick={() =>
                                   copySelectedRecovery(
                                     draft.jobId,
@@ -569,7 +606,7 @@ export function JobEditorIndex(): React.JSX.Element {
                 <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 max-[700px]:grid-cols-1">
                   {entries.representatives.map((job) => (
                     <li key={job.classKey ?? job.jobId}>
-                      <JobButton job={job} />
+                      <JobButton job={job} disabled={!snapshot.editorAvailable} />
                     </li>
                   ))}
                 </ul>
@@ -587,7 +624,7 @@ export function JobEditorIndex(): React.JSX.Element {
                 <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 max-[700px]:grid-cols-1">
                   {entries.fallback.map((job) => (
                     <li key={job.jobId}>
-                      <JobButton job={job} />
+                      <JobButton job={job} disabled={!snapshot.editorAvailable} />
                     </li>
                   ))}
                 </ul>

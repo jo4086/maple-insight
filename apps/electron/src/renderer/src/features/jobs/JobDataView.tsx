@@ -1,11 +1,12 @@
 import { ChevronDown, ChevronRight, Pencil, Search } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import type {
   JobDataSnapshot,
   JobDraft,
   JobSummary,
+  SaveJobDraftRequest,
   WeaponTypeOption
 } from '../../../../shared/job-data'
 import { getErrorMessage } from '../../shared/lib/error-message'
@@ -16,7 +17,9 @@ import {
   fallbackJobs,
   filterJobGroups,
   filterJobs,
+  isStaleJobDraftError,
   jobDraftChanged,
+  jobDraftForSave,
   jobEditPath,
   newJobsFromComparison,
   olderVersions,
@@ -30,7 +33,7 @@ import { useNavigationWarning } from './use-navigation-warning'
 
 type JobApi = typeof window.api & {
   listJobData: (version: string) => Promise<JobDataSnapshot>
-  saveJobDraft: (request: { version: string; draft: JobDraft }) => Promise<JobDraft>
+  saveJobDraft: (request: SaveJobDraftRequest) => Promise<JobDraft>
 }
 
 const jobApi = (): JobApi => window.api as JobApi
@@ -89,12 +92,20 @@ export function JobDataView({
   const [editing, setEditing] = useState<JobDraft | null>(null)
   const [editBaseline, setEditBaseline] = useState<JobDraft | null>(null)
   const [saving, setSaving] = useState(false)
+  const [staleConflict, setStaleConflict] = useState(false)
   const [error, setError] = useState('')
   const [notices, setNotices] = useState<NewJobNotice[]>([])
   const [noticeError, setNoticeError] = useState('')
   const [noticeOpen, setNoticeOpen] = useState(false)
   const [noticeVersion, setNoticeVersion] = useState('')
   const [expandedNoticeJob, setExpandedNoticeJob] = useState('')
+  const inlineOperationGeneration = useRef(0)
+  const activeInlineOperation = useRef<number | null>(null)
+  const inlineContext = useRef({ version, selectedId })
+  if (inlineContext.current.version !== version) {
+    inlineOperationGeneration.current += 1
+    inlineContext.current = { version, selectedId }
+  }
   const hasInlineChanges = Boolean(
     editing && editBaseline && jobDraftChanged(editBaseline, editing)
   )
@@ -106,27 +117,42 @@ export function JobDataView({
     : ''
   useNavigationWarning(warning)
 
+  const selectInlineJob = (jobId: string): void => {
+    if (inlineContext.current.selectedId !== jobId) {
+      inlineOperationGeneration.current += 1
+      inlineContext.current = { version, selectedId: jobId }
+      setSaving(false)
+    }
+    setSelectedId(jobId)
+  }
+
   useEffect(() => {
     let active = true
+    inlineOperationGeneration.current += 1
+    inlineContext.current = { version, selectedId: '' }
     setSnapshot(null)
     setSelectedId('')
+    setSaving(false)
     setFilters(emptyJobFilters())
     setActiveTab('기본 정보')
     setEditing(null)
     setEditBaseline(null)
     setError('')
+    setStaleConflict(false)
 
     void jobApi()
       .listJobData(version)
       .then((next) => {
         if (!active) return
         const groups = next.jobGroups ?? []
-        setSnapshot(next)
-        setSelectedId(
+        const nextSelectedId =
           groups[0]?.representativeJobId ??
-            fallbackJobs(next.jobs, groups, next.drafts)[0]?.jobId ??
-            ''
-        )
+          fallbackJobs(next.jobs, groups, next.drafts)[0]?.jobId ??
+          ''
+        inlineOperationGeneration.current += 1
+        inlineContext.current = { version, selectedId: nextSelectedId }
+        setSnapshot(next)
+        setSelectedId(nextSelectedId)
       })
       .catch((caught: unknown) => {
         if (active) setError(getErrorMessage(caught))
@@ -197,37 +223,127 @@ export function JobDataView({
     : (fallback.find((job) => job.jobId === selectedId) ?? null)
   const currentDraft =
     editing ?? (snapshot && selectedJob ? savedDraft(snapshot, selectedJob) : null)
-  const weaponTypes =
-    snapshot && currentDraft ? [...snapshot.weaponTypes, ...currentDraft.newWeaponTypes] : []
+  const weaponTypes = snapshot?.weaponTypes ?? []
   const activeNotice = notices.find((notice) => notice.baseVersion === noticeVersion)
 
   const beginInlineEdit = (): void => {
-    if (!snapshot || !selectedJob) return
+    if (!snapshot?.editorAvailable || !selectedJob) return
     const current = savedDraft(snapshot, selectedJob)
     setEditBaseline(current)
     setEditing({ ...current })
+    setStaleConflict(false)
+  }
+
+  type InlineOperation = { generation: number; version: string; jobId: string }
+
+  const beginInlineOperation = (jobId: string): InlineOperation => {
+    const generation = inlineOperationGeneration.current + 1
+    inlineOperationGeneration.current = generation
+    activeInlineOperation.current = generation
+    setSaving(true)
+    return { generation, version, jobId }
+  }
+
+  const isCurrentInlineOperation = (operation: InlineOperation): boolean =>
+    inlineOperationGeneration.current === operation.generation &&
+    inlineContext.current.version === operation.version &&
+    inlineContext.current.selectedId === operation.jobId
+
+  const finishInlineOperation = (operation: InlineOperation): void => {
+    if (activeInlineOperation.current !== operation.generation) return
+    activeInlineOperation.current = null
+    setSaving(false)
+  }
+
+  const commitInlineSave = async (
+    candidate: JobDraft,
+    expectedChangeSetId: string,
+    operation: InlineOperation
+  ): Promise<void> => {
+    const saved = await jobApi().saveJobDraft({
+      version: operation.version,
+      expectedChangeSetId,
+      draft: jobDraftForSave(candidate)
+    })
+    if (!isCurrentInlineOperation(operation)) return
+    setSnapshot((current) =>
+      current
+        ? {
+            ...current,
+            drafts: [...current.drafts.filter((draft) => draft.jobId !== saved.jobId), saved]
+          }
+        : current
+    )
+    setEditing(null)
+    setEditBaseline(null)
+    setStaleConflict(false)
   }
 
   const saveInline = async (): Promise<void> => {
-    if (!editing) return
-    setSaving(true)
+    if (!editing || !snapshot?.changeSetId || staleConflict) return
+    const operation = beginInlineOperation(editing.jobId)
     setError('')
     try {
-      const saved = await jobApi().saveJobDraft({ version, draft: editing })
-      setSnapshot((current) =>
-        current
-          ? {
-              ...current,
-              drafts: [...current.drafts.filter((draft) => draft.jobId !== saved.jobId), saved]
-            }
-          : current
+      await commitInlineSave(editing, snapshot.changeSetId, operation)
+    } catch (caught) {
+      if (!isCurrentInlineOperation(operation)) return
+      setStaleConflict(isStaleJobDraftError(caught))
+      setError(
+        isStaleJobDraftError(caught)
+          ? '다른 변경으로 작업본 기준이 바뀌었습니다. 현재 입력은 유지됩니다.'
+          : getErrorMessage(caught)
       )
+    } finally {
+      finishInlineOperation(operation)
+    }
+  }
+
+  const reloadInlineLatest = async (): Promise<void> => {
+    if (!selectedJob || !window.confirm('현재 입력을 버리고 최신 작업본을 불러올까요?')) return
+    const operation = beginInlineOperation(selectedJob.jobId)
+    try {
+      const next = await jobApi().listJobData(operation.version)
+      if (!isCurrentInlineOperation(operation)) return
+      setSnapshot(next)
       setEditing(null)
       setEditBaseline(null)
+      setStaleConflict(false)
+      setError('')
     } catch (caught) {
+      if (isCurrentInlineOperation(operation)) setError(getErrorMessage(caught))
+    } finally {
+      finishInlineOperation(operation)
+    }
+  }
+
+  const retryInlineLatest = async (): Promise<void> => {
+    if (!editing) return
+    const operation = beginInlineOperation(editing.jobId)
+    try {
+      const next = await jobApi().listJobData(operation.version)
+      if (!isCurrentInlineOperation(operation)) return
+      const latest = next.drafts.find(({ jobId }) => jobId === operation.jobId)
+      const databaseJob = next.jobs.find(({ jobId }) => jobId === operation.jobId)
+      if (!next.editorAvailable || !next.changeSetId)
+        throw new Error('현재 버전의 편집 작업본을 사용할 수 없습니다.')
+      if (!latest && !databaseJob) throw new Error('DB 직업 데이터를 찾을 수 없습니다.')
+      const candidate = jobDraftForSave(
+        {
+          ...editing,
+          jobName: latest?.jobName ?? databaseJob!.jobName
+        },
+        latest?.revision ?? 0
+      )
+      setSnapshot(next)
+      setEditing(candidate)
+      await commitInlineSave(candidate, next.changeSetId, operation)
+      if (isCurrentInlineOperation(operation)) setError('')
+    } catch (caught) {
+      if (!isCurrentInlineOperation(operation)) return
+      setStaleConflict(isStaleJobDraftError(caught))
       setError(getErrorMessage(caught))
     } finally {
-      setSaving(false)
+      finishInlineOperation(operation)
     }
   }
 
@@ -242,11 +358,13 @@ export function JobDataView({
     }))
   }
 
-  const openEditor = (job: JobSummary, state?: { newJob: JobSummary }): void => {
+  const openEditor = (job: JobSummary): void => {
+    if (!snapshot?.editorAvailable || !snapshot.jobs.some(({ jobId }) => jobId === job.jobId))
+      return
     if (!confirmInlineNavigation()) return
     setEditing(null)
     setEditBaseline(null)
-    navigate(jobEditPath(job.jobId), state ? { state } : undefined)
+    navigate(jobEditPath(job.jobId))
   }
 
   return (
@@ -258,6 +376,39 @@ export function JobDataView({
             role="alert"
           >
             {error}
+          </div>
+        )}
+        {snapshot && !snapshot.editorAvailable && (
+          <div
+            className="mb-4 rounded-lg border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning"
+            role="status"
+          >
+            현재 버전의 편집 작업본을 사용할 수 없습니다. DB 직업 데이터는 볼 수 있지만 저장할 수
+            없습니다.
+          </div>
+        )}
+        {staleConflict && (
+          <div
+            className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning"
+            role="status"
+          >
+            <span>현재 입력을 유지했습니다. 사용자 선택 전에는 자동 재시도하지 않습니다.</span>
+            <button
+              className="action-secondary"
+              disabled={saving}
+              type="button"
+              onClick={() => void reloadInlineLatest()}
+            >
+              최신 작업본 불러오기
+            </button>
+            <button
+              className="action-primary"
+              disabled={saving}
+              type="button"
+              onClick={() => void retryInlineLatest()}
+            >
+              최신 기준으로 재시도
+            </button>
           </div>
         )}
         {!snapshot && !error && (
@@ -277,7 +428,9 @@ export function JobDataView({
               </div>
               <button
                 aria-label={`${selectedJob.jobName} 전체 편집`}
-                className="grid h-8 w-8 place-items-center rounded-md border-0 bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-accent"
+                className="grid h-8 w-8 place-items-center rounded-md border-0 bg-transparent text-app-muted hover:bg-app-surface-hover hover:text-app-accent disabled:cursor-not-allowed disabled:opacity-40"
+                disabled={!snapshot.editorAvailable}
+                title={snapshot.editorAvailable ? '전체 편집' : '편집 작업본을 사용할 수 없습니다'}
                 type="button"
                 onClick={() => openEditor(selectedJob)}
               >
@@ -399,8 +552,18 @@ export function JobDataView({
                     </dd>
                   </div>
                 </dl>
+                {editing && (
+                  <p className="mt-4 rounded-md border border-app-warning-border bg-app-warning-bg p-3 text-small text-app-warning">
+                    DB 원본 직업명, 새 무기 후보, 전직 연결은 이 metadata 편집에서 제외됩니다.
+                  </p>
+                )}
                 {!editing && (
-                  <button className="action-secondary mt-5" type="button" onClick={beginInlineEdit}>
+                  <button
+                    className="action-secondary mt-5"
+                    disabled={!snapshot.editorAvailable}
+                    type="button"
+                    onClick={beginInlineEdit}
+                  >
                     기본 정보 수정
                   </button>
                 )}
@@ -547,7 +710,7 @@ export function JobDataView({
                     if (confirmInlineNavigation()) {
                       setEditing(null)
                       setEditBaseline(null)
-                      setSelectedId(group.representativeJobId)
+                      selectInlineJob(group.representativeJobId)
                     }
                   }}
                 >
@@ -578,7 +741,7 @@ export function JobDataView({
                       if (confirmInlineNavigation()) {
                         setEditing(null)
                         setEditBaseline(null)
-                        setSelectedId(job.jobId)
+                        selectInlineJob(job.jobId)
                       }
                     }}
                   >
@@ -607,13 +770,14 @@ export function JobDataView({
               onClick={() => {
                 setEditing(null)
                 setEditBaseline(null)
+                setStaleConflict(false)
               }}
             >
               편집 취소
             </button>
             <button
               className="action-primary"
-              disabled={saving || !hasInlineChanges}
+              disabled={saving || !hasInlineChanges || staleConflict || !snapshot?.editorAvailable}
               type="button"
               onClick={() => void saveInline()}
             >
@@ -679,13 +843,9 @@ export function JobDataView({
                     {expandedNoticeJob === job.jobId && (
                       <div className="mb-2 rounded bg-app-surface-2 p-2 text-small text-app-muted">
                         <p className="m-0">기준 버전에 없던 신규 직업입니다.</p>
-                        <button
-                          className="mt-2 font-semibold text-app-accent"
-                          type="button"
-                          onClick={() => openEditor(job, { newJob: job })}
-                        >
-                          ID와 이름으로 편집 시작
-                        </button>
+                        <p className="mt-2 mb-0 font-semibold text-app-warning">
+                          아직 DB에 없는 직업은 편집 작업본에 저장할 수 없습니다.
+                        </p>
                       </div>
                     )}
                   </div>

@@ -1,5 +1,21 @@
 # Maple Insight Data Studio Review
 
+## Phase 04 edit workbench lock 경합 수정 부분 검증 (2026-11-14)
+
+- 사용자 native `job-data:list`는 live Electron PID 32650이 보유한 `.create.lock` 때문에 `Edit workbench creation is already locked by active process 32650` 오류로 전체 직업 snapshot 조회에 실패했고, 해당 프로세스는 이후 종료했다. 원인은 같은 프로세스의 concurrent workbench open과 metadata read가 `.create.lock`에서 경합한 것이다.
+- root-local in-process queue로 같은 root의 open·read·save를 직렬화했다. 외부 프로세스 lock과 dead·malformed lock은 계속 fail closed하며 자동 제거하지 않고, 같은 root의 중첩 호출은 즉시 거부한다.
+- 전체 Node/Web typecheck, Vitest 24개 파일·273개 테스트, lint, build, 변경 범위 Prettier와 `git diff --check`가 모두 exit 0이었다. mocked browser desktop·mobile도 통과했다.
+- native Electron read-only DB 버전 `1.2.419`의 297개 직업과 폐기 가능한 synthetic ready workspace에서 네 개의 concurrent `job-data:list` 결과가 같은 `changeSetId`로 일관됐고 jobID 화면이 렌더링됐으며 exit 0이었다. workbench가 없는 같은 native read-only DB에서도 297개 직업을 반환했지만 편집은 사용할 수 없었다.
+- synthetic workspace는 검증된 실제 데이터가 아니다. 실제 DB 쓰기와 유효 저장·복사는 검증하지 않았으며 Phase 04 완료 상태와 체크박스는 변경하지 않는다.
+
+## Phase 04 직업 에디터 작업본 전환 부분 검증 (2026-11-13)
+
+- DB 등록 직업은 edit workbench에서 `englishName`·`classGroup`·`affiliation`·`mainStat`·`subStat`·`primaryWeapons`·`secondaryWeapons` 7개 metadata 필드를 일괄 조회하고 저장·재열며, job별 workbench scan 대신 metadata batch read를 사용한다. 저장은 `changeSetId`와 `revision` stale guard를 모두 적용하고 DB 미등록 직업을 차단한다. legacy 복구 저장소에는 쓰지 않는다.
+- ready validation workspace가 있을 때만 편집한다. 없으면 DB 직업을 읽기 전용으로 탐색한다. legacy 복구 미리보기·선택 복사를 유지하고 제외 필드 `jobName`·`newWeaponTypes`·`advancementJobIds`를 화면에 표시한다. 비동기 이전 저장 응답 경합, autosave validation, 복사 DB ID, IPC·서비스 trust boundary도 보강했다.
+- 최종 Node/Web typecheck와 build, 전체 24개 파일·270개 테스트, lint, 변경 범위 Prettier와 `git diff --check`가 exit 0이었다.
+- `verify-job-data-playwright.mjs`는 exit 0이었다. mocked browser desktop 1480×920·mobile 390×844에서 route 일관성, mock 저장·재열기, stale, unavailable workspace와 복구 복사를 확인했다. native Electron smoke는 폐기 가능한 data root에서 startup, preload, 잘못된 save guard와 job/operations route를 확인하고 exit 0이었다.
+- 실제 DB·ready validation fixture를 사용한 native 유효 저장·재열기·복사, credential-backed 또는 실제 DB 흐름, 비협조적 외부 프로세스의 source writer 경합은 검증하지 않았다. Phase 04는 미완료이며 체크박스는 그대로다.
+
 ## Main process 구조 재정리 구현 완료·부분 검증 (2026-11-13)
 
 - [요청 문서](./REQUESTS/main-process-architecture.md#review--구현-완료부분-검증-2026-11-13)에 따라 1,098줄 `index.ts`의 서비스, IPC와 app/window/runtime 책임을 분리하고 60줄 bootstrap으로 정리했다. Phase 04 완료 상태는 변경하지 않았다.

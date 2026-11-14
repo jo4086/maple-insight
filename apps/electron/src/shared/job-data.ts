@@ -72,10 +72,13 @@ export type JobDataSnapshot = {
   jobGroups: JobGroup[]
   weaponTypes: WeaponTypeOption[]
   drafts: JobDraft[]
+  changeSetId: string | null
+  editorAvailable: boolean
 }
 
 export type SaveJobDraftRequest = {
   version: string
+  expectedChangeSetId: string
   draft: JobDraft
 }
 

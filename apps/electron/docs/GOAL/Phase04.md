@@ -1,6 +1,6 @@
 # Phase 04 — 직업·스킬·장비 데이터 편집
 
-**상태: 진행 중 (기초 저장 및 EWB-005 일부).** [Phase 03](./Phase03.md)의 검증 작업본을 입력으로 하는 내부 미연결 서비스는 같은 입력 hash의 UUID change-set을 재열고, 입력 hash 변경 시 이전 change-set을 `superseded`로 보존한 뒤 child를 만든다. 중단된 supersession과 staging 보존, lock fail-closed 경계, 내부 직업 메타데이터 변경 이력까지 구현했다. 복구 초안의 읽기 전용 검토 UI·IPC와 직업별 명시적 선택 복사를 구현했으나 일괄 복사, 기존 에디터의 새 workbench 읽기·쓰기, DB 연동은 없다. Phase 4a~4c 기능과 완료 조건은 아직 충족하지 않았다.
+**상태: 진행 중 (직업 에디터 작업본 전환 부분 검증).** [Phase 03](./Phase03.md)의 ready 검증 작업본을 입력으로 같은 입력 hash의 UUID change-set을 재열고, 입력 hash 변경 시 이전 change-set을 `superseded`로 보존한 뒤 child를 만든다. DB 등록 직업의 metadata 7개 필드를 새 edit workbench에서 조회·저장·재열고 복구 초안의 읽기 전용 검토·명시적 선택 복사를 함께 유지한다. 실제 DB·ready validation fixture를 사용한 native Electron 유효 저장·재열기·복사와 외부 source writer 경합은 미검증이다. Phase 4a~4c 기능과 완료 조건은 아직 충족하지 않았다.
 
 관련 문서:
 
@@ -17,8 +17,15 @@
 ### 기존 직업 복구 초안 cutover 방향
 
 - **검토 뒤 복사**를 승인 방향으로 삼는다. `.job-draft-recovery` 원본을 보존하고 버전·직업 ID별 사용자 검토·선택 뒤 선택값만 새 change-set의 변경 불가능한 첫 revision으로 복사한다. 자동 import, dual write, 원본 삭제는 하지 않는다.
-- [ ] 부분 구현한 변환 선택·결과 record, 원본 provenance와 source/target hash 검증을 native Electron·실제 데이터와 외부 동시 source writer 조건까지 검증하고 기존 에디터를 새 workbench 읽기·쓰기로 전환한다. `newWeaponTypes`와 전직 연결은 도메인 mapping 승인 전 제외하되 조용히 버리지 않고 제외 사실과 원본 보존을 검토 화면·record에 남긴다.
-- 현재 읽기 전용 검토와 직업별 명시적 `선택 직업 복사`가 있다. 일괄 복사는 없으며 기존 에디터는 계속 기존 복구 저장소에 저장하고 새 workbench를 읽지 않는다.
+- [ ] 부분 구현한 변환 선택·결과 record, 원본 provenance와 source/target hash 검증을 native Electron·실제 데이터와 외부 동시 source writer 조건까지 검증한다. `newWeaponTypes`와 전직 연결은 도메인 mapping 승인 전 제외하되 조용히 버리지 않고 제외 사실과 원본 보존을 검토 화면·record에 남긴다.
+- 현재 직업 에디터는 DB 등록 직업 metadata를 새 workbench에서 읽고 저장하며 legacy 복구 저장소에는 쓰지 않는다. 읽기 전용 복구 검토와 직업별 명시적 `선택 직업 복사`를 유지하고 일괄 복사는 제공하지 않는다.
+
+### 직업 에디터 작업본 전환 부분 검증 (2026-11-13)
+
+- DB 등록 직업의 `englishName`·`classGroup`·`affiliation`·`mainStat`·`subStat`·`primaryWeapons`·`secondaryWeapons` 7개 metadata 필드를 edit workbench에서 일괄 조회하고 저장·재열며, job별 scan 대신 metadata batch read를 사용한다.
+- 저장은 `changeSetId`와 `revision` stale guard를 적용한다. DB 미등록 직업 편집을 차단하고 ready validation workspace가 없으면 DB 직업을 읽기 전용으로 탐색한다. legacy 복구 저장소에는 쓰지 않는다.
+- 복구 미리보기·선택 복사를 보존하고 제외 필드 `jobName`·`newWeaponTypes`·`advancementJobIds`를 표시한다. 비동기 이전 저장 응답 경합, autosave validation, 복사 DB ID와 trust boundary를 보강했다.
+- 자동 검사, mocked browser와 제한된 native smoke는 통과했다. 실제 DB·ready validation fixture의 native 유효 저장·재열기·복사, credential-backed 또는 실제 DB 흐름과 외부 source writer 경합은 미검증이다. Phase 04는 미완료이며 체크박스는 그대로다.
 
 ### 복구 초안 선택 복사 부분 구현·검증 (2026-11-13)
 

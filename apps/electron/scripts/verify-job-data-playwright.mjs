@@ -323,6 +323,9 @@ async function installMock(context) {
       }
     ]
     const storageKey = 'job-playwright-drafts'
+    const changeSetIds = Object.fromEntries(
+      versions.map((version, index) => [version, `${index + 1}1111111-1111-4111-8111-111111111111`])
+    )
     const readStore = () =>
       JSON.parse(localStorage.getItem(storageKey) || 'null') ||
       Object.fromEntries(versions.map((version) => [version, structuredClone(initialDrafts)]))
@@ -388,6 +391,8 @@ async function installMock(context) {
     const control = (window.__jobMock = {
       failVersion: '',
       failNextSave: false,
+      staleNextSave: false,
+      unavailableVersion: '',
       failRecoveryVersion: '',
       emptyRecoveryVersion: '',
       nextRecoveryDelay: 0,
@@ -398,6 +403,7 @@ async function installMock(context) {
       copyCallCount: 0,
       copyRequests: [],
       saveCallCount: 0,
+      saveRequests: [],
       databaseCallCount: 0,
       screenshotCount: 0
     })
@@ -417,11 +423,14 @@ async function installMock(context) {
         if (control.failVersion === version) {
           throw new Error('Mock job list failure')
         }
+        const editorAvailable = control.unavailableVersion !== version
         return {
           jobs,
           jobGroups,
           weaponTypes,
-          drafts: readStore()[version] || []
+          drafts: editorAvailable ? readStore()[version] || [] : [],
+          changeSetId: editorAvailable ? changeSetIds[version] : null,
+          editorAvailable
         }
       },
       previewJobDraftRecovery: async (version) => {
@@ -451,14 +460,40 @@ async function installMock(context) {
           'missing-ready': 'Validation workspace is not ready'
         }
         if (control.copyFailureMode) throw new Error(failures[control.copyFailureMode])
+        const source = recoveryPreview.drafts.find((draft) => draft.jobId === request.jobId)
+        const databaseJob = jobs.find((job) => job.jobId === request.jobId)
+        const store = readStore()
+        store[request.version] = [
+          ...(store[request.version] || []).filter((draft) => draft.jobId !== request.jobId),
+          {
+            jobId: request.jobId,
+            jobName: databaseJob.jobName,
+            ...source.proposedAfter,
+            newWeaponTypes: [],
+            revision: 1
+          }
+        ]
+        writeStore(store)
         return {
-          changeSetId: '11111111-1111-4111-8111-111111111111',
+          changeSetId: changeSetIds[request.version],
           recordId: '22222222-2222-4222-8222-222222222222',
           revision: 1
         }
       },
-      saveJobDraft: async ({ version, draft }) => {
+      saveJobDraft: async ({ version, expectedChangeSetId, draft }) => {
         control.saveCallCount += 1
+        control.saveRequests.push(structuredClone({ version, expectedChangeSetId, draft }))
+        if (
+          ![
+            draft.jobName,
+            draft.englishName,
+            draft.classGroup,
+            draft.affiliation,
+            draft.mainStat
+          ].every((value) => typeof value === 'string' && value.trim())
+        ) {
+          throw new Error('Mock invalid job draft')
+        }
         if (control.nextSaveDelay) {
           const delay = control.nextSaveDelay
           control.nextSaveDelay = 0
@@ -468,6 +503,18 @@ async function installMock(context) {
           control.failNextSave = false
           throw new Error('Mock draft save failure')
         }
+        if (control.staleNextSave) {
+          control.staleNextSave = false
+          throw new Error('Stale job metadata changeSetId')
+        }
+        if (expectedChangeSetId !== changeSetIds[version])
+          throw new Error('Stale job metadata changeSetId')
+        if (control.unavailableVersion === version)
+          throw new Error('Validation workspace is not ready')
+        if (!jobs.some((job) => job.jobId === draft.jobId))
+          throw new Error('Job draft must reference an existing DB job')
+        if (draft.newWeaponTypes.length || draft.advancementJobIds !== undefined)
+          throw new Error('Excluded metadata field')
         const store = readStore()
         const current = (store[version] || []).find((candidate) => candidate.jobId === draft.jobId)
         const expectedRevision = current?.revision || 0
@@ -938,40 +985,14 @@ async function verifyJobFlow(page) {
   await secondary.getByRole('button', { name: 'medallion 제거' }).click()
   await secondary.getByRole('button', { name: '추가하기' }).waitFor()
 
-  const newWeaponToggle = primary.getByRole('button', { name: /새 무기 등록/ })
+  await page
+    .getByText('새 무기 후보 등록은 현재 metadata 편집 대상에서 제외됩니다.', { exact: false })
+    .waitFor()
   assert(
-    (await newWeaponToggle.getAttribute('aria-expanded')) === 'false',
-    'New weapon toggle missing.'
+    (await primary.getByRole('button', { name: /새 무기 등록/ }).count()) === 0,
+    'Excluded new weapon editor remained available.'
   )
-  await newWeaponToggle.click()
-  assert(
-    (await newWeaponToggle.getAttribute('aria-expanded')) === 'true',
-    'New weapon form did not open.'
-  )
-  await primary.getByLabel('부위').fill('테스트 블레이드')
-  await primary.getByLabel('영문 이름').fill('Test Blade')
-  const handType = primary.getByLabel('한손/두손')
-  const handTypeBox = await handType.boundingBox()
-  const handTypeArrowBox = await handType.locator('..').locator('svg').boundingBox()
-  assert(handTypeBox && handTypeBox.width <= 180, 'Weapon hand type select was not compact.')
-  assert(
-    handTypeBox &&
-      handTypeArrowBox &&
-      handTypeBox.x + handTypeBox.width - handTypeArrowBox.x >= 20 &&
-      handTypeBox.x + handTypeBox.width - handTypeArrowBox.x <= 32,
-    'Weapon hand type chevron was not inset at the right edge.'
-  )
-  await handType.selectOption('oneHanded')
-  await primary.getByLabel('무기 상수').fill('1.3')
-  await primary.getByRole('button', { name: '전사' }).click()
-  await primary.getByRole('button', { name: '작업본에 옵션 추가' }).click()
-  const stagedLabel = page.getByText('테스트 블레이드', { exact: true })
-  await stagedLabel.first().waitFor()
-  await page.getByText(/저장됨 · revision [3-9]/).waitFor({ timeout: 5_000 })
-  await page.reload()
-  await navigate(page, '직업 정보')
-  await page.getByRole('button', { name: '히어로 전체 편집' }).click()
-  await page.getByText('테스트 블레이드', { exact: true }).waitFor()
+  await page.getByText(/저장됨 · revision [2-9]/).waitFor({ timeout: 5_000 })
 
   await page.evaluate(() => {
     window.__jobMock.failNextSave = true
@@ -992,33 +1013,14 @@ async function verifyJobFlow(page) {
   await page.getByText('기준 버전에 없던 신규 직업입니다.').waitFor()
   await page.getByRole('button', { name: '1.2.419 → 1.2.420' }).click()
   await page.getByRole('button', { name: /렌/ }).click()
-  await page.getByRole('button', { name: 'ID와 이름으로 편집 시작' }).click()
-  await page.getByRole('heading', { name: '렌', level: 1 }).waitFor()
-  assert(
-    (await page.getByLabel('직업 영문명').inputValue()) === '',
-    'Unknown new job received an English default.'
-  )
-  await page.getByLabel('직업 영문명').fill('Ren')
-  await page.getByLabel('직업군').selectOption('전사')
-  await page.getByLabel('소속').selectOption('아니마')
-  const newJobMainStat = page.getByRole('group', { name: '주스탯' })
-  const newJobSubStat = page.getByRole('group', { name: '부스탯' })
-  await newJobMainStat.getByRole('button', { name: 'INT 추가' }).click()
-  await newJobSubStat.getByRole('button', { name: 'LUK 추가' }).click()
-  await assertStats(newJobMainStat, ['INT'], 'New-job main stat selection failed.')
-  await assertStats(newJobSubStat, ['LUK'], 'New-job secondary stat selection failed.')
-  await page.getByText(/저장됨 · revision 1/).waitFor({ timeout: 5_000 })
-  await page.reload()
-  await navigate(page, '직업 정보')
   await page
-    .getByRole('region', { name: '기타 · 복구 초안' })
-    .getByRole('button', { name: /렌\s*650/ })
-    .click()
-  await page.getByRole('button', { name: '렌 전체 편집' }).click()
-  if ((await page.getByLabel('직업 영문명').inputValue()) !== 'Ren')
-    throw new Error('New-job draft did not reload')
+    .getByText('아직 DB에 없는 직업은 편집 작업본에 저장할 수 없습니다.', { exact: true })
+    .waitFor()
+  assert(
+    (await page.getByRole('button', { name: 'ID와 이름으로 편집 시작' }).count()) === 0,
+    'Non-DB job exposed editor action.'
+  )
 
-  await page.getByRole('button', { name: '목록으로' }).click()
   await navigate(page, '대시보드')
   const errorVersion = await page.getByLabel('현재 버전').first().inputValue()
   await page.evaluate((version) => {
@@ -1140,6 +1142,10 @@ async function verifyRecoveryCopyFlow(page, recovery, size) {
   page.off('dialog', acceptSuccess)
   await recovery.getByText('11111111-1111-4111-8111-111111111111', { exact: true }).waitFor()
   await recovery.getByText('22222222-2222-4222-8222-222222222222', { exact: true }).waitFor()
+  await page
+    .getByRole('region', { name: '1.2.420 최종 전직 대표' })
+    .getByRole('button', { name: /히어로\s+hero\s+112\s+Recovered Hero · revision 1/ })
+    .waitFor()
   const copyState = await page.evaluate(() => ({
     calls: window.__jobMock.copyCallCount,
     requests: window.__jobMock.copyRequests,
@@ -1286,13 +1292,13 @@ async function verifyEditorPicker(page) {
   assert(
     JSON.stringify(representativeLabels) ===
       JSON.stringify([
-        '히어로 hero 112',
+        '히어로 hero 112 Recovered Hero · revision 1',
         '팔라딘 paladin 122',
         '다크나이트 dark-knight 132',
-        '아크메이지(불,독) arch-mage-fire-poison 212',
-        '미하일 mikhail 5112',
-        '배틀메이지 battle-mage 3212',
-        '제논 xenon 3612'
+        '아크메이지(불,독) arch-mage-fire-poison 212 Arch Mage Fire Poison · revision 1',
+        '미하일 mikhail 5112 Mikhail · revision 1',
+        '배틀메이지 battle-mage 3212 Battle Mage · revision 1',
+        '제논 xenon 3612 Xenon · revision 1'
       ]),
     `Unexpected editor representatives: ${representativeLabels.join(', ')}`
   )
@@ -1370,21 +1376,15 @@ async function verifyEditorPicker(page) {
     assert(box && box.width <= 320, `${label} exceeded 320px.`)
   }
 
-  const advancementRows = page
-    .getByRole('heading', { name: '전직 ID 연결' })
-    .locator('..')
-    .locator('label')
-  const advancementRowClass = (await advancementRows.first().getAttribute('class')) ?? ''
-  assert(
-    !advancementRowClass.includes('rounded') && !advancementRowClass.includes('bg-app-input'),
-    'Advancement rows retained individual boxes.'
-  )
+  await page
+    .getByText('전직 연결은 현재 metadata 편집 대상에서 제외됩니다.', { exact: false })
+    .waitFor()
   const rawBattleMageName = page.getByLabel('원본 직업명')
   const englishBattleMageName = page.getByLabel('직업 영문명')
   assert(
     (await rawBattleMageName.inputValue()) === '최상급 흑마법' &&
-      (await rawBattleMageName.isEditable()),
-    'Editor did not expose editable raw Battle Mage name.'
+      !(await rawBattleMageName.isEditable()),
+    'Excluded DB job name remained editable.'
   )
   assert(
     !(await page.getByLabel('직업명', { exact: true }).isEditable()),
@@ -1522,44 +1522,340 @@ async function verifyEditorPicker(page) {
     .getByRole('region', { name: '1.2.420 최종 전직 대표' })
     .getByRole('button', { name: /히어로\s+hero\s+112/ })
     .click()
-  await page.getByRole('heading', { name: '히어로', level: 1 }).waitFor()
-  await page.getByRole('button', { name: '전직 ID 연결' }).click()
   await page
-    .getByRole('status')
-    .filter({ hasText: '전직 ID 연결을 작업본에 자동 저장합니다.' })
+    .getByText('전직 연결은 현재 metadata 편집 대상에서 제외됩니다.', { exact: false })
     .waitFor()
-  await page.getByText('저장됨 · revision 2', { exact: true }).waitFor({ timeout: 5_000 })
-
-  const expectedIds = ['0', '100', '110', '111', '112', '114']
-  await navigate(page, '에디터')
-  await page
-    .getByRole('region', { name: '1.2.420 최종 전직 대표' })
-    .getByRole('button', { name: /히어로\s+hero\s+112/ })
-    .click()
-  for (const jobId of expectedIds) {
-    const checkbox = page.locator(`input[id$="-${jobId}"]`)
-    assert(await checkbox.isChecked(), `Linked advancement ${jobId} did not persist.`)
-  }
-
-  const sharedStage = page.locator('input[id$="-100"]')
-  await sharedStage.uncheck()
-  await page.getByRole('button', { name: '전직 ID 연결' }).click()
-  await page.getByText('저장됨 · revision 3', { exact: true }).waitFor({ timeout: 5_000 })
-  await navigate(page, '에디터')
-  await page
-    .getByRole('region', { name: '1.2.420 최종 전직 대표' })
-    .getByRole('button', { name: /히어로\s+hero\s+112/ })
-    .click()
   assert(
-    !(await page.locator('input[id$="-100"]').isChecked()),
-    'Shared stage deselection was lost.'
+    (await page.getByRole('button', { name: '전직 ID 연결' }).count()) === 0,
+    'Excluded advancement editor remained available.'
   )
-  for (const jobId of expectedIds.filter((id) => id !== '100')) {
-    assert(await page.locator(`input[id$="-${jobId}"]`).isChecked(), `${jobId} selection was lost.`)
-  }
 
   await page.getByRole('button', { name: '목록으로' }).click()
   await page.getByRole('button', { name: '기본 정보 수정' }).waitFor()
+}
+
+async function verifyFullEditorSaveGuards(page) {
+  await navigate(page, '에디터')
+  const representatives = page.getByRole('region', {
+    name: '1.2.420 최종 전직 대표'
+  })
+  await representatives.getByRole('button', { name: /히어로\s+hero\s+112/ }).click()
+  await page.getByRole('heading', { name: '히어로', level: 1 }).waitFor()
+  const callsBeforeDelayedSave = await page.evaluate(() => window.__jobMock.saveCallCount)
+  await page.evaluate(() => {
+    window.__jobMock.nextSaveDelay = 1_200
+  })
+  await page.getByLabel('직업 영문명').fill('Hero Delayed Route Save')
+  await page.getByRole('button', { name: '저장하기' }).click()
+  await page.getByRole('button', { name: '저장 중...' }).waitFor()
+
+  const acceptEditorExit = (dialog) => dialog.accept()
+  page.on('dialog', acceptEditorExit)
+  try {
+    await page.getByRole('button', { name: '목록으로' }).evaluate((button) => {
+      const propsKey = Object.keys(button).find((key) => key.startsWith('__reactProps$'))
+      button[propsKey]?.onClick()
+    })
+    await page.getByRole('button', { name: '기본 정보 수정' }).waitFor()
+  } finally {
+    page.off('dialog', acceptEditorExit)
+  }
+  await navigate(page, '에디터')
+  const delayedSaveState = await page.evaluate(() => ({
+    calls: window.__jobMock.saveCallCount,
+    englishName: JSON.parse(localStorage.getItem('job-playwright-drafts'))['1.2.420'].find(
+      (draft) => draft.jobId === '112'
+    )?.englishName
+  }))
+  assert(
+    delayedSaveState.calls === callsBeforeDelayedSave + 1 &&
+      delayedSaveState.englishName !== 'Hero Delayed Route Save',
+    `Hero save did not remain pending before opening Paladin: ${JSON.stringify(delayedSaveState)}`
+  )
+  await representatives.getByRole('button', { name: /팔라딘\s+paladin\s+122/ }).click()
+  await page.getByRole('heading', { name: '팔라딘', level: 1 }).waitFor()
+  const paladinName = page.getByLabel('직업 영문명')
+  const baseline = await page.evaluate(() => ({
+    calls: window.__jobMock.saveCallCount,
+    revision:
+      JSON.parse(localStorage.getItem('job-playwright-drafts'))['1.2.420'].find(
+        (draft) => draft.jobId === '122'
+      )?.revision ?? 0
+  }))
+  await paladinName.fill('')
+  await page
+    .getByRole('alert')
+    .filter({ hasText: '영문 이름을 입력하세요.' })
+    .waitFor({ timeout: 2_000 })
+  await page.waitForFunction(
+    () =>
+      JSON.parse(localStorage.getItem('job-playwright-drafts'))['1.2.420'].find(
+        (draft) => draft.jobId === '112'
+      )?.englishName === 'Hero Delayed Route Save'
+  )
+  const result = await page.evaluate(() => ({
+    calls: window.__jobMock.saveCallCount,
+    revision:
+      JSON.parse(localStorage.getItem('job-playwright-drafts'))['1.2.420'].find(
+        (draft) => draft.jobId === '122'
+      )?.revision ?? 0
+  }))
+  assert(
+    (await paladinName.inputValue()) === '',
+    'Delayed prior save overwrote current editor input.'
+  )
+  assert(
+    JSON.stringify(result) === JSON.stringify(baseline),
+    `Invalid autosave persisted or changed revision: ${JSON.stringify(baseline)} -> ${JSON.stringify(result)}`
+  )
+  await page.getByText('자동 저장 대기', { exact: true }).waitFor()
+  assert(
+    (await page.getByRole('status').filter({ hasText: '작업본을 저장했습니다.' }).count()) === 0,
+    'Delayed prior save displayed obsolete success.'
+  )
+  await page.getByRole('alert').filter({ hasText: '영문 이름을 입력하세요.' }).waitFor()
+
+  const acceptCleanup = (dialog) => dialog.accept()
+  page.on('dialog', acceptCleanup)
+  try {
+    await navigate(page, '대시보드')
+  } finally {
+    page.off('dialog', acceptCleanup)
+  }
+}
+
+async function verifyInlineContextGuards(page) {
+  await page.setViewportSize({ width: 1480, height: 920 })
+  await navigate(page, '직업 정보')
+  const representatives = page.getByRole('region', { name: '대표 직업' })
+  await representatives.getByRole('button', { name: /히어로\s*112/ }).click()
+  await page.getByRole('button', { name: '기본 정보 수정' }).click()
+  const delayedHeroName = 'Hero Delayed Inline Context'
+  await page.getByLabel('영문 이름').fill(delayedHeroName)
+  await page.evaluate(() => {
+    window.__jobMock.nextSaveDelay = 700
+  })
+  await page.getByRole('button', { name: '작업본에 적용' }).click()
+  await page.getByRole('button', { name: '저장 중...' }).waitFor()
+
+  page.once('dialog', (dialog) => dialog.accept())
+  await page.getByLabel('현재 버전').first().selectOption('1.2.419')
+  await page.getByRole('heading', { name: '히어로', level: 1 }).waitFor()
+  await representatives.getByRole('button', { name: /배틀메이지\s*3212/ }).click()
+  await page.getByRole('heading', { name: '배틀메이지', level: 1 }).waitFor()
+  await page.getByRole('button', { name: '기본 정보 수정' }).click()
+  const currentBattleMageName = 'Battle Mage Current Context'
+  await page.getByLabel('영문 이름').fill(currentBattleMageName)
+  await page.waitForFunction(
+    ({ version, jobId, englishName }) =>
+      JSON.parse(localStorage.getItem('job-playwright-drafts'))[version].find(
+        (draft) => draft.jobId === jobId
+      )?.englishName === englishName,
+    { version: '1.2.420', jobId: '112', englishName: delayedHeroName }
+  )
+  assert(
+    (await page.getByRole('heading', { name: '배틀메이지', level: 1 }).count()) === 1 &&
+      (await page.getByLabel('영문 이름').inputValue()) === currentBattleMageName,
+    'Delayed inline save replaced current version/job state.'
+  )
+  assert(
+    await page.getByRole('button', { name: '작업본에 적용' }).isEnabled(),
+    'Delayed stale inline response left current context saving.'
+  )
+
+  page.once('dialog', (dialog) => dialog.accept())
+  await page.getByLabel('현재 버전').first().selectOption('1.2.420')
+  await page.getByRole('heading', { name: '히어로', level: 1 }).waitFor()
+  await representatives.getByRole('button', { name: /배틀메이지\s*3212/ }).click()
+  await page.getByRole('button', { name: '기본 정보 수정' }).click()
+  const retryValue = 'Battle Mage No Latest Retry'
+  await page.getByLabel('영문 이름').fill(retryValue)
+  await page.evaluate(() => {
+    window.__jobMock.staleNextSave = true
+  })
+  await page.getByRole('button', { name: '작업본에 적용' }).click()
+  await page
+    .getByRole('alert')
+    .filter({ hasText: '다른 변경으로 작업본 기준이 바뀌었습니다.' })
+    .waitFor()
+  const requestsBeforeRetry = await page.evaluate(() => {
+    const store = JSON.parse(localStorage.getItem('job-playwright-drafts'))
+    store['1.2.420'] = store['1.2.420'].filter((draft) => draft.jobId !== '3212')
+    localStorage.setItem('job-playwright-drafts', JSON.stringify(store))
+    return window.__jobMock.saveRequests.length
+  })
+  await page.getByRole('button', { name: '최신 기준으로 재시도' }).click()
+  await page.getByText(retryValue, { exact: true }).waitFor()
+  const retryRequest = await page.evaluate(
+    (index) => window.__jobMock.saveRequests[index],
+    requestsBeforeRetry
+  )
+  assert(
+    retryRequest?.draft.jobName === '최상급 흑마법',
+    `No-latest retry used display name instead of DB name: ${retryRequest?.draft.jobName}`
+  )
+}
+
+async function verifyWorkbenchGuardPaths(page) {
+  for (const size of [
+    { width: 1480, height: 920 },
+    { width: 390, height: 844 }
+  ]) {
+    await page.setViewportSize(size)
+    await page.evaluate(() => {
+      Object.assign(window.__jobMock, {
+        failNextSave: false,
+        staleNextSave: false,
+        nextSaveDelay: 0,
+        unavailableVersion: ''
+      })
+    })
+    await navigate(page, '에디터')
+    const representatives = page.getByRole('region', {
+      name: '1.2.420 최종 전직 대표'
+    })
+    await representatives.getByRole('button', { name: /팔라딘\s+paladin\s+122/ }).click()
+    const fullEditorName = page.getByLabel('직업 영문명')
+    const classGroup = page.getByLabel('직업군')
+    const affiliation = page.getByLabel('소속')
+    if (!(await classGroup.inputValue())) await classGroup.selectOption({ label: '전사' })
+    if (!(await affiliation.inputValue())) await affiliation.selectOption({ label: '모험가' })
+    const mainStat = page.getByRole('group', { name: '주스탯' })
+    const addStrength = mainStat.getByRole('button', { name: 'STR 추가' })
+    if (await addStrength.count()) await addStrength.click()
+    const prepareSave = page.getByRole('button', { name: '저장하기' })
+    if (await prepareSave.isEnabled()) {
+      await prepareSave.click()
+      await page.getByRole('status').filter({ hasText: '작업본을 저장했습니다.' }).waitFor()
+    }
+
+    const staleFullValue = `Paladin Stale ${size.width}`
+    const callsBeforeFullStale = await page.evaluate(() => {
+      window.__jobMock.staleNextSave = true
+      return window.__jobMock.saveCallCount
+    })
+    await fullEditorName.fill(staleFullValue)
+    await page.waitForFunction(
+      (calls) => window.__jobMock.saveCallCount === calls + 1,
+      callsBeforeFullStale,
+      { timeout: 3_000 }
+    )
+    await page
+      .getByRole('alert')
+      .filter({ hasText: '다른 변경으로 작업본 기준이 바뀌었습니다.' })
+      .waitFor({ timeout: 3_000 })
+    assert(
+      (await fullEditorName.inputValue()) === staleFullValue,
+      `Full editor lost stale local input at ${size.width}px.`
+    )
+    const callsAfterFullStale = await page.evaluate(() => window.__jobMock.saveCallCount)
+    await page.waitForTimeout(900)
+    assert(
+      (await page.evaluate(() => window.__jobMock.saveCallCount)) === callsAfterFullStale,
+      `Full editor retried stale save without user action at ${size.width}px.`
+    )
+    await page.getByRole('button', { name: '최신 기준으로 재시도' }).click()
+    await page
+      .getByRole('status')
+      .filter({ hasText: '최신 기준으로 작업본을 저장했습니다.' })
+      .waitFor()
+    assert(
+      (await fullEditorName.inputValue()) === staleFullValue,
+      `Full editor retry lost local input at ${size.width}px.`
+    )
+
+    await page.getByRole('button', { name: '목록으로' }).click()
+    await page.getByRole('button', { name: '기본 정보 수정' }).click()
+    const inlineName = page.getByLabel('영문 이름')
+    const staleInlineValue = `Hero Inline Stale ${size.width}`
+    await page.evaluate(() => {
+      window.__jobMock.staleNextSave = true
+    })
+    await inlineName.fill(staleInlineValue)
+    await page.getByRole('button', { name: '작업본에 적용' }).click()
+    await page
+      .getByRole('alert')
+      .filter({ hasText: '다른 변경으로 작업본 기준이 바뀌었습니다.' })
+      .waitFor()
+    assert(
+      (await inlineName.inputValue()) === staleInlineValue,
+      `Inline editor lost stale local input at ${size.width}px.`
+    )
+    const callsAfterInlineStale = await page.evaluate(() => window.__jobMock.saveCallCount)
+    await page.waitForTimeout(900)
+    assert(
+      (await page.evaluate(() => window.__jobMock.saveCallCount)) === callsAfterInlineStale,
+      `Inline editor retried stale save without user action at ${size.width}px.`
+    )
+    await page.getByRole('button', { name: '최신 기준으로 재시도' }).click()
+    await page.getByText(staleInlineValue, { exact: true }).waitFor()
+
+    await page.evaluate(() => {
+      window.__jobMock.unavailableVersion = '1.2.420'
+    })
+    await navigate(page, '대시보드')
+    await navigate(page, '직업 정보')
+    await page
+      .getByText('DB 직업 데이터는 볼 수 있지만 저장할 수 없습니다.', { exact: false })
+      .waitFor()
+    await page.getByRole('heading', { name: '히어로', level: 1 }).waitFor()
+    assert(
+      await page.getByRole('button', { name: '기본 정보 수정' }).isDisabled(),
+      `Unavailable inline editor stayed enabled at ${size.width}px.`
+    )
+    assert(
+      await page.getByRole('button', { name: '히어로 전체 편집' }).isDisabled(),
+      `Unavailable full editor route stayed enabled at ${size.width}px.`
+    )
+
+    await navigate(page, '에디터')
+    await page
+      .getByText('DB 직업 목록은 볼 수 있지만 편집 화면을 열거나 저장할 수 없습니다.', {
+        exact: false
+      })
+      .waitFor()
+    const unavailableRepresentatives = page.getByRole('region', {
+      name: '1.2.420 최종 전직 대표'
+    })
+    assert(
+      await unavailableRepresentatives
+        .getByRole('button', { name: /히어로\s+hero\s+112/ })
+        .isDisabled(),
+      `Unavailable editor index button stayed enabled at ${size.width}px.`
+    )
+    const recovery = await openRecoveryPreview(page)
+    assert(
+      await recovery
+        .locator('li')
+        .filter({ hasText: '복구 검성' })
+        .getByRole('button', { name: /복사/ })
+        .isDisabled(),
+      `Unavailable recovery copy stayed enabled at ${size.width}px.`
+    )
+    await page.evaluate(() => {
+      window.__jobMock.unavailableVersion = ''
+    })
+    await navigate(page, '대시보드')
+  }
+}
+
+async function assertWorkbenchSaveRequests(page) {
+  const requests = await page.evaluate(() => window.__jobMock.saveRequests)
+  assert(requests.length > 0, 'No workbench save request was recorded.')
+  for (const request of requests) {
+    assert(
+      request.expectedChangeSetId === '11111111-1111-4111-8111-111111111111',
+      `Save used wrong changeSetId: ${request.expectedChangeSetId}`
+    )
+    assert(
+      !Object.hasOwn(request.draft, 'advancementJobIds'),
+      `Save included advancementJobIds: ${JSON.stringify(request.draft)}`
+    )
+    assert(
+      request.draft.newWeaponTypes.length === 0,
+      `Save included newWeaponTypes: ${JSON.stringify(request.draft)}`
+    )
+  }
 }
 
 async function verifyAdjacentWeaponRoutes(page) {
@@ -1665,14 +1961,12 @@ async function verifyRelatedRoutes(page) {
           classGroupBox.x + classGroupBox.width - classGroupArrowBox.x <= 32,
         `Editor select chevron was not inset at ${size.width}px.`
       )
-      const advancementSection = page.getByRole('heading', { name: '전직 ID 연결' }).locator('..')
-      const heroFieldset = advancementSection.getByRole('group', { name: '히어로' })
-      assert((await heroFieldset.count()) === 1, 'Advancement fieldset lost its accessible legend.')
-      const representativeCheckbox = heroFieldset.locator('input[id$="-112"]')
+      await page
+        .getByText('전직 연결은 현재 metadata 편집 대상에서 제외됩니다.', { exact: false })
+        .waitFor()
       assert(
-        (await representativeCheckbox.isDisabled()) &&
-          (await representativeCheckbox.locator('..').count()) === 1,
-        'Representative advancement checkbox lost its label or disabled state.'
+        (await page.getByRole('button', { name: '전직 ID 연결' }).count()) === 0,
+        'Excluded advancement control appeared.'
       )
       assert(
         (await page.locator('html').getAttribute('data-theme')) === theme,
@@ -1721,11 +2015,15 @@ async function main() {
     }
     await verifyRecoveryPreview(page)
     await verifyEditorPicker(page)
+    await verifyFullEditorSaveGuards(page)
     await verifyScreenshotNotifications(page)
     await verifyJobFlow(page)
+    await verifyInlineContextGuards(page)
+    await verifyWorkbenchGuardPaths(page)
     await verifyAdjacentWeaponRoutes(page)
     await verifyRouteRegression(page)
     await verifyRelatedRoutes(page)
+    await assertWorkbenchSaveRequests(page)
     await page.setViewportSize({ width: 1480, height: 920 })
     await setTheme(page, 'dark')
     await navigate(page, '직업 정보')

@@ -6,7 +6,11 @@ import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import type { JobDraft } from '../../../shared/job-data'
-import { openOrCreateEditWorkbench, saveJobMetadataRecord } from '../workbench/edit-workbench'
+import {
+  openOrCreateEditWorkbench,
+  readJobMetadataRecords,
+  saveJobMetadataRecord
+} from '../workbench/edit-workbench'
 
 import {
   copySelectedJobDraftRecovery,
@@ -92,7 +96,8 @@ async function writeRecovery(
 }
 
 async function createReadyValidationWorkspace(
-  options: Awaited<ReturnType<typeof createOptions>>
+  options: Awaited<ReturnType<typeof createOptions>>,
+  workspaceJobs = `${JSON.stringify([{ id: 100, name: 'Swordman' }], null, 2)}\n`
 ): Promise<void> {
   const convertedDirectory = join(options.dataRoot, options.environment, options.version)
   const workspaceDirectory = join(
@@ -105,7 +110,6 @@ async function createReadyValidationWorkspace(
   await mkdir(convertedDirectory, { recursive: true })
 
   const convertedManifest = `${JSON.stringify({ schemaVersion: 1, files: [{ output: 'json/jobs.json', records: 1 }] }, null, 2)}\n`
-  const workspaceJobs = `${JSON.stringify([{ id: 100, name: 'Swordman' }], null, 2)}\n`
   const manifestSha256 = sha256(convertedManifest)
   const files = [
     {
@@ -610,55 +614,23 @@ describe('selected job draft recovery copy', () => {
     expect(await readFile(locatorPath)).toEqual(beforeLocator)
   })
 
-  it('serializes recovery copy with concurrent draft saves and keeps retries idempotent', async () => {
-    let releaseCopyLoad!: () => void
-    let markCopyLoadStarted!: () => void
-    let markSaveLoadStarted!: () => void
-    const copyLoadHeld = new Promise<void>((resolve) => {
-      releaseCopyLoad = resolve
-    })
-    const copyLoadStarted = new Promise<void>((resolve) => {
-      markCopyLoadStarted = resolve
-    })
-    const saveLoadStarted = new Promise<void>((resolve) => {
-      markSaveLoadStarted = resolve
-    })
-    let loadCount = 0
-    const options = await createOptions({
-      ...repository,
-      findGameJobsByVersion: async () => {
-        loadCount += 1
-        if (loadCount === 1) {
-          markCopyLoadStarted()
-          await copyLoadHeld
-        } else if (loadCount === 2) markSaveLoadStarted()
-        return repository.findGameJobsByVersion()
-      }
-    })
+  it('preserves recovery source while copied metadata is saved and keeps copy retries idempotent', async () => {
+    const options = await createOptions()
     await createReadyValidationWorkspace(options)
     const source = JSON.stringify([draft()])
     const path = await writeRecovery(options, source)
     const request = copyRequest(options, source)
 
-    const copying = copySelectedJobDraftRecovery(options, request)
-    await copyLoadStarted
-    const saving = saveJobDraft(options, {
+    const copied = await copySelectedJobDraftRecovery(options, request)
+    const saved = await saveJobDraft(options, {
       version: options.version,
-      draft: draft({ englishName: 'Updated Swordman' })
+      expectedChangeSetId: copied.changeSetId,
+      draft: draft({ englishName: 'Updated Swordman', revision: 1 })
     })
-    await saveLoadStarted
-    await new Promise<void>((resolve) => setImmediate(resolve))
-    await expect(readFile(path, 'utf8')).resolves.toBe(source)
-
-    releaseCopyLoad()
-    const [copied, saved] = await Promise.all([copying, saving])
 
     expect(copied.record.after.englishName).toBe('Swordman')
-    expect(copied.record.recoveryCopy?.source).toMatchObject({
-      sourceSha256: sha256(source),
-      revision: 0
-    })
-    expect(saved).toMatchObject({ englishName: 'Updated Swordman', revision: 1 })
+    expect(saved).toMatchObject({ englishName: 'Updated Swordman', revision: 2 })
+    await expect(readFile(path, 'utf8')).resolves.toBe(source)
     await expect(copySelectedJobDraftRecovery(options, request)).resolves.toEqual(copied)
   })
 
@@ -670,7 +642,7 @@ describe('selected job draft recovery copy', () => {
       ...repository,
       findGameJobsByVersion: async () => {
         loadCount += 1
-        if (loadCount === 2) await writeRecovery(options, rotatedSource, rotatedRecoveryId)
+        if (loadCount === 3) await writeRecovery(options, rotatedSource, rotatedRecoveryId)
         return repository.findGameJobsByVersion()
       }
     })
@@ -761,24 +733,58 @@ describe('selected job draft recovery copy', () => {
     expect(await readFile(path, 'utf8')).toBe(source)
   })
 
-  it('rejects unknown IDs and preserves a selected leading-zero ID', async () => {
+  it('rejects unknown and exact leading-zero mismatched DB IDs without workbench records', async () => {
     const options = await createOptions()
     await createReadyValidationWorkspace(options)
     const source = JSON.stringify([
       draft(),
-      draft({ jobId: '00100', jobName: '앞자리 검사', revision: 2 })
+      draft({ jobId: '00100', jobName: '앞자리 검사', revision: 2 }),
+      draft({ jobId: '99999', jobName: '없는 직업', revision: 3 })
     ])
-    await writeRecovery(options, source)
+    const path = await writeRecovery(options, source)
 
-    await expect(
-      copySelectedJobDraftRecovery(options, copyRequest(options, source, { jobId: '99999' }))
-    ).rejects.toThrow('Selected job draft recovery was not found')
-    const copied = await copySelectedJobDraftRecovery(
-      options,
-      copyRequest(options, source, { jobId: '00100' })
+    for (const jobId of ['99999', '00100'])
+      await expect(
+        copySelectedJobDraftRecovery(options, copyRequest(options, source, { jobId }))
+      ).rejects.toThrow('Selected job draft recovery must reference an existing DB job')
+
+    const workbenchRoot = join(
+      options.dataRoot,
+      '.edit-workbenches',
+      options.environment,
+      options.version
     )
-    expect(copied.record.rawIdentity.jobID).toBe('00100')
-    expect(copied.record.recoveryCopy?.source.jobId).toBe('00100')
+    const [changeSetId] = await readdir(workbenchRoot)
+    expect(await readdir(join(workbenchRoot, changeSetId))).toEqual(['manifest.json'])
+    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [] })
+    await expect(readFile(path, 'utf8')).resolves.toBe(source)
+  })
+
+  it('lists a newly copied record without stale results among many DB jobs', async () => {
+    const jobs = [
+      { jobId: '100', jobName: '검사' },
+      ...Array.from({ length: 400 }, (_, index) => ({
+        jobId: String(10000 + index),
+        jobName: `직업 ${index}`
+      }))
+    ]
+    const options = await createOptions({
+      ...repository,
+      findGameJobsByVersion: async () => jobs
+    })
+    await createReadyValidationWorkspace(options)
+    const source = JSON.stringify([draft({ englishName: 'Recovered Swordman' })])
+    await writeRecovery(options, source)
+    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [] })
+
+    const copied = await copySelectedJobDraftRecovery(options, copyRequest(options, source))
+
+    const snapshot = await listJobData(options)
+    expect(snapshot.jobs).toHaveLength(401)
+    expect(snapshot).toMatchObject({
+      changeSetId: copied.changeSetId,
+      drafts: [{ jobId: '100', englishName: 'Recovered Swordman', revision: 1 }]
+    })
   })
 
   it('returns the persisted first record before reading a rotated source', async () => {
@@ -853,440 +859,219 @@ describe('selected job draft recovery copy', () => {
   })
 })
 
-describe('job data drafts', () => {
-  it('canonicalizes valid stats at save boundary', async () => {
-    const xenonOptions = await createOptions()
-    await expect(
-      saveJobDraft(xenonOptions, {
-        version: xenonOptions.version,
-        draft: draft({ jobId: '3612', mainStat: 'STR,DEX,LUK', subStat: '' })
-      })
-    ).resolves.toMatchObject({ mainStat: 'STR, DEX, LUK', subStat: '' })
+describe('job data workbench editor', () => {
+  async function readyEditor(options: Awaited<ReturnType<typeof createOptions>>) {
+    await createReadyValidationWorkspace(options)
+    const snapshot = await listJobData(options)
+    if (snapshot.changeSetId === null) throw new Error('Expected available editor')
+    return snapshot
+  }
 
-    const dexOptions = await createOptions()
+  function saveRequest(
+    options: Awaited<ReturnType<typeof createOptions>>,
+    changeSetId: string,
+    value: JobDraft = draft()
+  ) {
+    return {
+      version: options.version,
+      expectedChangeSetId: changeSetId,
+      draft: value
+    }
+  }
+
+  it('reads copied metadata as editor state with immutable DB name', async () => {
+    const options = await createOptions()
+    await createReadyValidationWorkspace(options)
+    const source = JSON.stringify([draft({ jobName: '복구 이름', englishName: 'Recovered' })])
+    await writeRecovery(options, source)
+    const copied = await copySelectedJobDraftRecovery(options, copyRequest(options, source))
+
+    const snapshot = await listJobData(options)
+    expect(snapshot).toMatchObject({
+      editorAvailable: true,
+      changeSetId: copied.changeSetId,
+      drafts: [
+        {
+          jobId: '100',
+          jobName: '검사',
+          englishName: 'Recovered',
+          newWeaponTypes: [],
+          revision: 1
+        }
+      ]
+    })
+  })
+
+  it('saves and reopens metadata without writing legacy recovery', async () => {
+    const options = await createOptions()
+    const snapshot = await readyEditor(options)
+    const source = JSON.stringify([draft({ englishName: 'Legacy' })])
+    const legacyPath = await writeRecovery(options, source)
+    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [] })
+
+    const saved = await saveJobDraft(
+      options,
+      saveRequest(options, snapshot.changeSetId!, draft({ englishName: 'Workbench' }))
+    )
+    expect(saved).toMatchObject({ englishName: 'Workbench', revision: 1, jobName: '검사' })
+    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [saved] })
+    await expect(readFile(legacyPath, 'utf8')).resolves.toBe(source)
+  })
+
+  it('rejects blank required metadata without changing history or legacy recovery', async () => {
+    const options = await createOptions()
+    const snapshot = await readyEditor(options)
+    const source = JSON.stringify([draft({ englishName: 'Legacy' })])
+    const legacyPath = await writeRecovery(options, source)
+    const first = await saveJobDraft(
+      options,
+      saveRequest(options, snapshot.changeSetId!, draft({ englishName: 'First' }))
+    )
+    const historyOptions = {
+      dataRoot: options.dataRoot,
+      environment: options.environment,
+      version: options.version,
+      creatorLocalId: 'test-operator',
+      changeSetId: snapshot.changeSetId!,
+      jobID: first.jobId
+    }
+    const beforeHistory = await readJobMetadataRecords(historyOptions)
+
+    for (const field of ['englishName', 'classGroup', 'affiliation'] as const) {
+      await expect(
+        saveJobDraft(
+          options,
+          saveRequest(options, snapshot.changeSetId!, { ...first, [field]: ' \t ' })
+        )
+      ).rejects.toThrow(`Invalid job draft field: ${field}`)
+    }
+
+    await expect(readJobMetadataRecords(historyOptions)).resolves.toEqual(beforeHistory)
+    await expect(readFile(legacyPath, 'utf8')).resolves.toBe(source)
+  })
+
+  it('rejects stale change sets and revisions while preserving history', async () => {
+    const options = await createOptions()
+    const firstSnapshot = await readyEditor(options)
+    const first = await saveJobDraft(
+      options,
+      saveRequest(options, firstSnapshot.changeSetId!, draft({ englishName: 'First' }))
+    )
+
     await expect(
-      saveJobDraft(dexOptions, {
-        version: dexOptions.version,
-        draft: draft({ mainStat: 'DEX', subStat: 'STR' })
-      })
-    ).resolves.toMatchObject({ mainStat: 'DEX', subStat: 'STR' })
+      saveJobDraft(
+        options,
+        saveRequest(options, firstSnapshot.changeSetId!, draft({ englishName: 'Stale revision' }))
+      )
+    ).rejects.toThrow('Stale job metadata revision')
+    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [first] })
+
+    await createReadyValidationWorkspace(options, '[{"id":100,"name":"Changed input"}]\n')
+    const secondSnapshot = await listJobData(options)
+    expect(secondSnapshot.changeSetId).not.toBe(firstSnapshot.changeSetId)
+    await expect(
+      saveJobDraft(
+        options,
+        saveRequest(options, firstSnapshot.changeSetId!, { ...first, revision: 1 })
+      )
+    ).rejects.toThrow('Stale job metadata changeSetId')
+  })
+
+  it('returns DB browse data when workspace is missing or not ready', async () => {
+    const missing = await createOptions()
+    await expect(listJobData(missing)).resolves.toMatchObject({
+      jobs: [{ jobId: '100', jobName: '검사' }],
+      drafts: [],
+      changeSetId: null,
+      editorAvailable: false
+    })
+
+    const notReady = await createOptions()
+    await createReadyValidationWorkspace(notReady)
+    const workspacePath = join(
+      notReady.dataRoot,
+      '.workspaces',
+      notReady.environment,
+      notReady.version,
+      'workspace.json'
+    )
+    const workspace = JSON.parse(await readFile(workspacePath, 'utf8'))
+    workspace.status = 'review'
+    await writeFile(workspacePath, `${JSON.stringify(workspace)}\n`)
+    await expect(listJobData(notReady)).resolves.toMatchObject({
+      drafts: [],
+      changeSetId: null,
+      editorAvailable: false
+    })
+  })
+
+  it('fails closed on corrupt workbench state', async () => {
+    const options = await createOptions()
+    const snapshot = await readyEditor(options)
+    const manifestPath = join(
+      options.dataRoot,
+      '.edit-workbenches',
+      options.environment,
+      options.version,
+      snapshot.changeSetId!,
+      'manifest.json'
+    )
+    await writeFile(manifestPath, '{}\n')
+    await expect(listJobData(options)).rejects.toThrow('Corrupt edit workbench manifest')
   })
 
   it.each([
-    ['unknown stat', { mainStat: 'HP' }],
-    ['duplicate stat', { mainStat: 'STR, STR' }],
-    ['malformed stat', { subStat: 'DEX,,STR' }]
-  ])('rejects %s at save boundary', async (_label, overrides) => {
+    ['jobName', draft({ jobName: '변경 이름' }), 'Job name is immutable'],
+    [
+      'newWeaponTypes',
+      draft({
+        primaryWeapons: ['123e4567-e89b-42d3-a456-426614174000'],
+        newWeaponTypes: [
+          {
+            key: '123e4567-e89b-42d3-a456-426614174000',
+            category: 'weapon',
+            part: '건틀렛',
+            englishName: 'Gauntlet',
+            classGroupKeys: ['pirate'],
+            handType: 'twoHanded',
+            weaponConstant: '1.5'
+          }
+        ]
+      }),
+      'Saving newWeaponTypes'
+    ],
+    ['advancementJobIds', draft({ advancementJobIds: ['100'] }), 'Saving advancementJobIds'],
+    ['non-DB job', draft({ jobId: '200', jobName: '신규' }), 'existing DB job']
+  ])('rejects excluded %s changes', async (_field, value, message) => {
     const options = await createOptions()
+    const snapshot = await readyEditor(options)
     await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft(overrides)
-      })
-    ).rejects.toThrow('Invalid job draft field')
+      saveJobDraft(options, saveRequest(options, snapshot.changeSetId!, value as JobDraft))
+    ).rejects.toThrow(message)
   })
 
-  it('reads legacy stat values without rewriting them', async () => {
+  it('validates exact request, metadata fields, stats, and weapon categories', async () => {
     const options = await createOptions()
-    const recoveryId = '123e4567-e89b-42d3-a456-426614174099'
-    const root = join(options.dataRoot, '.job-draft-recovery', options.environment, options.version)
-    const draftPath = join(root, recoveryId, 'drafts.json')
-    const legacyContent = `${JSON.stringify([draft({ mainStat: 'HP', subStat: 'MP' })])}\n`
-    await mkdir(join(root, recoveryId), { recursive: true })
-    await writeFile(join(root, 'current.json'), `${JSON.stringify({ recoveryId })}\n`)
-    await writeFile(draftPath, legacyContent)
+    const snapshot = await readyEditor(options)
+    const valid = saveRequest(options, snapshot.changeSetId!)
 
-    await expect(listJobData(options)).resolves.toMatchObject({
-      drafts: [{ mainStat: 'HP', subStat: 'MP' }]
-    })
-    await expect(readFile(draftPath, 'utf8')).resolves.toBe(legacyContent)
-  })
-
-  it('saves atomically and reopens a version-isolated draft', async () => {
-    const options = await createOptions()
-    const saved = await saveJobDraft(options, { version: options.version, draft: draft() })
-
-    expect(saved.revision).toBe(1)
-    const recoveryEntries = await readdir(
-      join(options.dataRoot, '.job-draft-recovery', 'production', options.version),
-      { withFileTypes: true }
+    await expect(
+      saveJobDraft(options, { version: options.version, draft: draft() } as never)
+    ).rejects.toThrow('Invalid save job draft request')
+    await expect(saveJobDraft(options, { ...valid, unexpected: true } as never)).rejects.toThrow(
+      'Invalid save job draft request'
     )
-    expect(
-      recoveryEntries.filter((entry) => entry.isDirectory()).map((entry) => entry.name)
-    ).toEqual([
-      expect.stringMatching(
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-      )
-    ])
-    await expect(listJobData(options)).resolves.toEqual({
-      jobs: [{ jobId: '100', jobName: '검사' }],
-      jobGroups: [],
-      weaponTypes: [
-        {
-          key: '12',
-          category: 'weapon',
-          part: '한손검',
-          classGroupKeys: ['warrior'],
-          handType: 'oneHanded',
-          weaponConstant: '1.2'
-        },
-        {
-          key: '13',
-          category: 'subWeapon',
-          part: '방패',
-          classGroupKeys: ['warrior'],
-          handType: null,
-          weaponConstant: null
-        }
-      ],
-      drafts: [saved]
-    })
-    await expect(listJobData({ ...options, version: '1.2.420' })).resolves.toMatchObject({
-      drafts: []
-    })
-  })
-
-  it('loads and saves legacy drafts without adding advancement linkage', async () => {
-    const options = await createOptions()
-    const saved = await saveJobDraft(options, { version: options.version, draft: draft() })
-
-    expect(saved).not.toHaveProperty('advancementJobIds')
-    const snapshot = await listJobData(options)
-    expect(snapshot.drafts[0]).not.toHaveProperty('advancementJobIds')
-  })
-
-  it('accepts one exact canonical group and rejects cross-branch or missing representatives', async () => {
-    const options = await createOptions({
-      ...repository,
-      findGameJobsByVersion: async () => [
-        { jobId: '0', jobName: '초보자' },
-        { jobId: '100', jobName: '검사' },
-        { jobId: '110', jobName: '파이터' },
-        { jobId: '112', jobName: '히어로' },
-        { jobId: '120', jobName: '페이지' },
-        { jobId: '122', jobName: '팔라딘' }
-      ]
-    })
     await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ jobId: '112', advancementJobIds: ['0', '100', '110', '112'] })
-      })
-    ).resolves.toMatchObject({ advancementJobIds: ['0', '100', '110', '112'] })
-
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ jobId: '112', advancementJobIds: ['100', '110'] })
-      })
-    ).rejects.toThrow('must include the owning job')
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ jobId: '112', advancementJobIds: ['100', '112', '122'] })
-      })
-    ).rejects.toThrow('one canonical job group')
-  })
-
-  it('allows only own linkage for nonrepresentative and unknown drafts', async () => {
-    const options = await createOptions()
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ jobId: '30000', advancementJobIds: ['30000'] })
-      })
-    ).resolves.toMatchObject({ advancementJobIds: ['30000'] })
-
-    for (const advancementJobIds of [
-      [],
-      ['100', '112'],
-      ['100', '100'],
-      ['7000'],
-      ['40000'],
-      ['123456'],
-      ['abc'],
-      Array.from({ length: 21 }, (_, index) => String(index + 1))
-    ]) {
-      await expect(
-        saveJobDraft(options, {
-          version: options.version,
-          draft: draft({ advancementJobIds })
-        })
-      ).rejects.toThrow()
-    }
-  })
-
-  it('rejects invalid fields, system IDs, unknown weapon keys, and duplicate new types', async () => {
-    const options = await createOptions()
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: { ...draft(), unexpected: true } as JobDraft
-      })
+      saveJobDraft(options, { ...valid, draft: { ...draft(), unexpected: true } as JobDraft })
     ).rejects.toThrow('Invalid job draft fields')
     await expect(
-      saveJobDraft(options, { version: options.version, draft: draft({ jobId: '800000' }) })
-    ).rejects.toThrow('System job drafts are excluded')
+      saveJobDraft(options, saveRequest(options, snapshot.changeSetId!, draft({ mainStat: 'HP' })))
+    ).rejects.toThrow('Invalid job draft field: mainStat')
     await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ primaryWeapons: ['missing'] })
-      })
+      saveJobDraft(
+        options,
+        saveRequest(options, snapshot.changeSetId!, draft({ primaryWeapons: ['13'] }))
+      )
     ).rejects.toThrow('Primary weapons must reference weapon category keys')
-
-    const type = {
-      key: '123e4567-e89b-12d3-a456-426614174000',
-      category: 'subWeapon' as const,
-      part: '방패',
-      englishName: 'Shield',
-      classGroupKeys: ['warrior'],
-      handType: null,
-      weaponConstant: null
-    }
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({
-          newWeaponTypes: [type, { ...type, key: '123e4567-e89b-12d3-a456-426614174001' }]
-        })
-      })
-    ).rejects.toThrow('New weapon types must be unique')
-  })
-
-  it('enforces weapon categories and DB catalog boundaries', async () => {
-    const options = await createOptions()
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ primaryWeapons: ['13'] })
-      })
-    ).rejects.toThrow('Primary weapons must reference weapon category keys')
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ secondaryWeapons: ['12'] })
-      })
-    ).rejects.toThrow('Secondary weapons must reference subWeapon category keys')
-
-    const primary = {
-      key: '123e4567-e89b-42d3-a456-426614174000',
-      category: 'weapon' as const,
-      part: '에너지 소드',
-      englishName: 'Energy Sword',
-      classGroupKeys: ['thief', 'pirate'],
-      handType: 'twoHanded',
-      weaponConstant: '1.3125'
-    }
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ primaryWeapons: [primary.key], newWeaponTypes: [primary] })
-      })
-    ).resolves.toMatchObject({ revision: 1 })
-
-    for (const invalid of [
-      { ...primary, key: '123e4567-e89b-42d3-a456-426614174001', classGroupKeys: ['thief'] },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174002',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        classGroupKeys: ['mage', 'pirate']
-      },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174003',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        classGroupKeys: ['invalid']
-      },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174004',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        handType: null
-      },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174005',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        weaponConstant: '0'
-      },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174006',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        weaponConstant: '10000'
-      },
-      {
-        ...primary,
-        key: '123e4567-e89b-42d3-a456-426614174007',
-        part: '건틀렛',
-        englishName: 'Gauntlet',
-        weaponConstant: '1.00001'
-      }
-    ]) {
-      await expect(
-        saveJobDraft(options, {
-          version: options.version,
-          draft: draft({ primaryWeapons: [invalid.key], newWeaponTypes: [invalid] })
-        })
-      ).rejects.toThrow()
-    }
-
-    const secondary = {
-      key: '123e4567-e89b-42d3-a456-426614174008',
-      category: 'subWeapon' as const,
-      part: '마도서',
-      englishName: 'Spellbook',
-      classGroupKeys: ['mage'],
-      handType: 'oneHanded',
-      weaponConstant: null
-    }
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ secondaryWeapons: [secondary.key], newWeaponTypes: [secondary] })
-      })
-    ).rejects.toThrow('Secondary weapon handType and weaponConstant must be null')
-  })
-
-  it('rejects normalized-space catalog duplicates', async () => {
-    const options = await createOptions()
-    const duplicate = {
-      key: '123e4567-e89b-42d3-a456-426614174009',
-      category: 'weapon' as const,
-      part: '한 손 검',
-      englishName: 'One-handed Sword',
-      classGroupKeys: ['warrior'],
-      handType: 'oneHanded',
-      weaponConstant: '1.2'
-    }
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({ primaryWeapons: [duplicate.key], newWeaponTypes: [duplicate] })
-      })
-    ).rejects.toThrow('conflicts with the global catalog')
-  })
-
-  it('rejects normalized-space candidate duplicates across job drafts', async () => {
-    const options = await createOptions()
-    const firstCandidate = {
-      key: '123e4567-e89b-42d3-a456-426614174010',
-      category: 'weapon' as const,
-      part: '건 틀렛',
-      englishName: 'Gauntlet',
-      classGroupKeys: ['pirate'],
-      handType: 'twoHanded',
-      weaponConstant: '1.5'
-    }
-    await saveJobDraft(options, {
-      version: options.version,
-      draft: draft({
-        jobId: '200',
-        jobName: '신규 A',
-        primaryWeapons: [firstCandidate.key],
-        newWeaponTypes: [firstCandidate]
-      })
-    })
-
-    const duplicateCandidate = {
-      ...firstCandidate,
-      key: '123e4567-e89b-42d3-a456-426614174011',
-      part: '건틀렛'
-    }
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: draft({
-          jobId: '201',
-          jobName: '신규 B',
-          primaryWeapons: [duplicateCandidate.key],
-          newWeaponTypes: [duplicateCandidate]
-        })
-      })
-    ).rejects.toThrow('New weapon type conflicts with another job draft: weapon/건틀렛')
-  })
-
-  it('keeps a draft visible when its candidate later appears in the catalog', async () => {
-    let catalogChanged = false
-    const changingRepository = {
-      ...repository,
-      findGlobalWeaponTypes: async () => [
-        ...(await repository.findGlobalWeaponTypes()),
-        ...(catalogChanged
-          ? [
-              {
-                id: 14n,
-                category: 'weapon',
-                part: '건틀렛',
-                normalizedPart: '건틀렛',
-                classGroupKeys: ['pirate'],
-                handType: 'twoHanded',
-                weaponConstant: { toString: () => '1.5' }
-              }
-            ]
-          : [])
-      ]
-    }
-    const options = await createOptions(changingRepository)
-    const candidate = {
-      key: '123e4567-e89b-42d3-a456-426614174012',
-      category: 'weapon' as const,
-      part: '건틀렛',
-      englishName: 'Gauntlet',
-      classGroupKeys: ['pirate'],
-      handType: 'twoHanded',
-      weaponConstant: '1.5'
-    }
-    const saved = await saveJobDraft(options, {
-      version: options.version,
-      draft: draft({ primaryWeapons: [candidate.key], newWeaponTypes: [candidate] })
-    })
-
-    catalogChanged = true
-    await expect(listJobData(options)).resolves.toMatchObject({ drafts: [saved] })
-    await expect(saveJobDraft(options, { version: options.version, draft: saved })).rejects.toThrow(
-      'New weapon type conflicts with the global catalog'
-    )
-  })
-
-  it('allows new valid job IDs and blocks ID mutation from overwriting another draft', async () => {
-    const options = await createOptions()
-    const first = await saveJobDraft(options, {
-      version: options.version,
-      draft: draft({ jobId: '200', jobName: '신규 A' })
-    })
-    const second = await saveJobDraft(options, {
-      version: options.version,
-      draft: draft({ jobId: '201', jobName: '신규 B' })
-    })
-    expect([first.revision, second.revision]).toEqual([1, 2])
-
-    await expect(
-      saveJobDraft(options, {
-        version: options.version,
-        draft: { ...first, jobId: second.jobId, jobName: '덮어쓰기' }
-      })
-    ).rejects.toThrow('revision conflict')
-  })
-
-  it('rejects stale revisions and symbolic-link storage', async () => {
-    const options = await createOptions()
-    await saveJobDraft(options, { version: options.version, draft: draft() })
-    await expect(
-      saveJobDraft(options, { version: options.version, draft: draft() })
-    ).rejects.toThrow('revision conflict')
-
-    const linkedOptions = await createOptions()
-    const outside = await mkdtemp(join(tmpdir(), 'job-data-outside-'))
-    roots.push(outside)
-    await mkdir(join(linkedOptions.dataRoot, '.job-draft-recovery'), { recursive: true })
-    await symlink(outside, join(linkedOptions.dataRoot, '.job-draft-recovery', 'production'))
-    await expect(listJobData(linkedOptions)).rejects.toThrow('Symbolic links are not allowed')
   })
 })

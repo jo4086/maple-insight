@@ -16,6 +16,7 @@ import { dirname, join } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
+  listJobMetadataRecords,
   openOrCreateEditWorkbench,
   readJobMetadataRecords,
   saveJobMetadataRecord,
@@ -508,6 +509,86 @@ describe('edit workbench', () => {
     expect(await workbenchEntries(root)).toEqual([])
   })
 
+  it('serializes concurrent open, list, and read calls behind a held in-process lock', async () => {
+    const root = await createRoot()
+    const workbench = await openOrCreateEditWorkbench(options(root))
+    let markHeld!: () => void
+    const held = new Promise<void>((resolve) => {
+      markHeld = resolve
+    })
+    let releaseHeld!: () => void
+    const release = new Promise<void>((resolve) => {
+      releaseHeld = resolve
+    })
+    const request = {
+      ...recoveredOptions(root, workbench),
+      INTERNAL_beforeFirstRevisionPublish: async () => {
+        markHeld()
+        await release
+      }
+    }
+    const saving = saveRecoveredJobMetadataFirstRevision(request)
+    await held
+
+    const opening = openOrCreateEditWorkbench(options(root))
+    const listing = listJobMetadataRecords({
+      ...options(root),
+      changeSetId: workbench.manifest.changeSetId
+    })
+    const reading = readJobMetadataRecords(request)
+    let waiting = true
+    const queued = Promise.all([opening, listing, reading]).finally(() => {
+      waiting = false
+    })
+    try {
+      await Promise.resolve()
+      expect(waiting).toBe(true)
+    } finally {
+      releaseHeld()
+    }
+    const saved = await saving
+    const [reopened, listed, history] = await queued
+    expect(reopened).toMatchObject({ reused: true })
+    expect(listed).toEqual([saved])
+    expect(history).toEqual({ latest: saved, history: [saved] })
+  })
+
+  it('rejects same-root lock reentrancy without publishing and leaves the queue usable', async () => {
+    const root = await createRoot()
+    const workbench = await openOrCreateEditWorkbench(options(root))
+    const request = recoveredOptions(root, workbench)
+    let callbackCalls = 0
+
+    await expect(
+      saveRecoveredJobMetadataFirstRevision({
+        ...request,
+        INTERNAL_beforeFirstRevisionPublish: async () => {
+          callbackCalls += 1
+          await readJobMetadataRecords(request)
+        }
+      })
+    ).rejects.toThrow('Edit workbench lock does not allow same-root reentrancy')
+
+    expect(callbackCalls).toBe(1)
+    await expect(readJobMetadataRecords(request)).resolves.toEqual({ latest: null, history: [] })
+  })
+
+  it('allows a different workbench root nested inside a held lock', async () => {
+    const heldRoot = await createRoot()
+    const nestedRoot = await createRoot()
+    const workbench = await openOrCreateEditWorkbench(options(heldRoot))
+    let nestedWorkbench: Awaited<ReturnType<typeof openOrCreateEditWorkbench>> | undefined
+
+    await saveRecoveredJobMetadataFirstRevision({
+      ...recoveredOptions(heldRoot, workbench),
+      INTERNAL_beforeFirstRevisionPublish: async () => {
+        nestedWorkbench = await openOrCreateEditWorkbench(options(nestedRoot))
+      }
+    })
+
+    expect(nestedWorkbench).toMatchObject({ reused: false })
+  })
+
   it.skipIf(process.platform !== 'linux')(
     'blocks creation and preserves a valid dead process lock',
     async () => {
@@ -561,6 +642,9 @@ describe('edit workbench', () => {
     )
     expect(await readFile(lockPath, 'utf8')).toBe('other-process')
     expect(await workbenchEntries(root)).toEqual(['.create.lock'])
+
+    await rm(lockPath)
+    await expect(openOrCreateEditWorkbench(options(root))).resolves.toMatchObject({ reused: false })
   })
 
   it.skipIf(process.platform !== 'linux')(
@@ -660,6 +744,12 @@ describe('edit workbench', () => {
       latest: saved,
       history: [saved]
     })
+    await expect(
+      listJobMetadataRecords({
+        ...options(root),
+        changeSetId: workbench.manifest.changeSetId
+      })
+    ).resolves.toEqual([saved])
   })
 
   it('keeps recovered provenance immutable while later generic revisions omit it', async () => {

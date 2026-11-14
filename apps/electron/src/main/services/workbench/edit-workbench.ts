@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from 'node:async_hooks'
 import { createHash, randomUUID } from 'node:crypto'
 import { constants } from 'node:fs'
 import type { FileHandle } from 'node:fs/promises'
@@ -91,8 +92,11 @@ export type JobMetadataRecordHistory = {
   history: JobMetadataRecord[]
 }
 
-export type JobMetadataRecordOptions = OpenOrCreateEditWorkbenchOptions & {
+export type ListJobMetadataRecordsOptions = OpenOrCreateEditWorkbenchOptions & {
   changeSetId: string
+}
+
+export type JobMetadataRecordOptions = ListJobMetadataRecordsOptions & {
   jobID: string
 }
 
@@ -770,6 +774,43 @@ async function releaseOwnedLock(dataRoot: string, root: string, lock: OpenedLock
   await removeOpenedLock(dataRoot, join(root, '.create.lock'), lock)
 }
 
+const inProcessLockQueues = new Map<string, Promise<void>>()
+const heldWorkbenchRoots = new AsyncLocalStorage<ReadonlySet<string>>()
+
+async function withWorkbenchLock<T>(
+  dataRoot: string,
+  root: string,
+  operation: () => Promise<T>
+): Promise<T> {
+  const currentRoots = heldWorkbenchRoots.getStore()
+  if (currentRoots?.has(root))
+    throw new Error('Edit workbench lock does not allow same-root reentrancy')
+
+  const previous = inProcessLockQueues.get(root) ?? Promise.resolve()
+  let releaseQueue!: () => void
+  const queued = new Promise<void>((resolve) => {
+    releaseQueue = resolve
+  })
+  inProcessLockQueues.set(root, queued)
+  await previous
+
+  let lock: OpenedLock | undefined
+  const operationRoots = new Set(currentRoots)
+  try {
+    lock = await acquireLock(dataRoot, root)
+    operationRoots.add(root)
+    return await heldWorkbenchRoots.run(operationRoots, operation)
+  } finally {
+    try {
+      if (lock) await releaseOwnedLock(dataRoot, root, lock)
+    } finally {
+      operationRoots.delete(root)
+      releaseQueue()
+      if (inProcessLockQueues.get(root) === queued) inProcessLockQueues.delete(root)
+    }
+  }
+}
+
 function sameWorkspace(first: WorkspaceSnapshot, second: WorkspaceSnapshot): boolean {
   return first.sha256 === second.sha256 && first.rawInputSha256 === second.rawInputSha256
 }
@@ -778,9 +819,13 @@ function nextTimestamp(previous: string): string {
   return new Date(Math.max(Date.now(), new Date(previous).getTime() + 1)).toISOString()
 }
 
-function assertJobMetadataOptions(options: JobMetadataRecordOptions): void {
+function assertListJobMetadataOptions(options: ListJobMetadataRecordsOptions): void {
   assertOptions(options)
   if (!UUID_PATTERN.test(options.changeSetId)) throw new Error('Invalid edit workbench changeSetId')
+}
+
+function assertJobMetadataOptions(options: JobMetadataRecordOptions): void {
+  assertListJobMetadataOptions(options)
   if (!JOB_ID_PATTERN.test(options.jobID)) throw new Error('Invalid job metadata jobID')
 }
 
@@ -1130,7 +1175,7 @@ async function changeSetForRecordRead(
   dataRoot: string,
   root: string,
   workspaceDirectory: string,
-  options: JobMetadataRecordOptions
+  options: ListJobMetadataRecordsOptions
 ): Promise<{ changeSet: ChangeSet; workspace: WorkspaceSnapshot }> {
   const workspace = await readWorkspaceSnapshot(dataRoot, workspaceDirectory, options)
   const history = await readHistory(dataRoot, root, options)
@@ -1314,8 +1359,7 @@ export async function openOrCreateEditWorkbench(
   const workspaceDirectory = join(dataRoot, '.workspaces', options.environment, options.version)
   const root = join(dataRoot, '.edit-workbenches', options.environment, options.version)
   await ensureDirectory(dataRoot, root)
-  const lock = await acquireLock(dataRoot, root)
-  try {
+  return withWorkbenchLock(dataRoot, root, async () => {
     const workspace = await readWorkspaceSnapshot(dataRoot, workspaceDirectory, options)
     const history = await readHistory(dataRoot, root, options)
     if (history.draft?.manifest.rawInputSha256 === workspace.rawInputSha256) {
@@ -1340,22 +1384,19 @@ export async function openOrCreateEditWorkbench(
       workspace,
       parent?.manifest.changeSetId ?? null
     )
-  } finally {
-    await releaseOwnedLock(dataRoot, root, lock)
-  }
+  })
 }
 
-export async function readJobMetadataRecords(
-  options: JobMetadataRecordOptions
-): Promise<JobMetadataRecordHistory> {
-  assertJobMetadataOptions(options)
+async function readJobMetadataRecordMap(
+  options: ListJobMetadataRecordsOptions
+): Promise<Map<string, JobMetadataRecord[]>> {
+  assertListJobMetadataOptions(options)
   const dataRoot = resolve(options.dataRoot)
   await assertDirectory(dataRoot, dataRoot)
   const workspaceDirectory = join(dataRoot, '.workspaces', options.environment, options.version)
   const root = join(dataRoot, '.edit-workbenches', options.environment, options.version)
   await ensureDirectory(dataRoot, root)
-  const lock = await acquireLock(dataRoot, root)
-  try {
+  return withWorkbenchLock(dataRoot, root, async () => {
     const { changeSet, workspace } = await changeSetForRecordRead(
       dataRoot,
       root,
@@ -1366,11 +1407,26 @@ export async function readJobMetadataRecords(
     const unchanged = await readWorkspaceSnapshot(dataRoot, workspaceDirectory, options)
     if (!sameWorkspace(unchanged, workspace))
       throw new Error('Validation workspace changed while reading job metadata')
-    const history = records.get(options.jobID) ?? []
-    return { latest: history.at(-1) ?? null, history }
-  } finally {
-    await releaseOwnedLock(dataRoot, root, lock)
-  }
+    return records
+  })
+}
+
+export async function listJobMetadataRecords(
+  options: ListJobMetadataRecordsOptions
+): Promise<JobMetadataRecord[]> {
+  const records = await readJobMetadataRecordMap(options)
+  return [...records.values()]
+    .map((history) => history.at(-1)!)
+    .sort((left, right) => left.rawIdentity.jobID.localeCompare(right.rawIdentity.jobID))
+}
+
+export async function readJobMetadataRecords(
+  options: JobMetadataRecordOptions
+): Promise<JobMetadataRecordHistory> {
+  assertJobMetadataOptions(options)
+  const records = await readJobMetadataRecordMap(options)
+  const history = records.get(options.jobID) ?? []
+  return { latest: history.at(-1) ?? null, history }
 }
 
 export async function saveRecoveredJobMetadataFirstRevision(
@@ -1423,8 +1479,7 @@ export async function saveRecoveredJobMetadataFirstRevision(
   const workspaceDirectory = join(dataRoot, '.workspaces', options.environment, options.version)
   const root = join(dataRoot, '.edit-workbenches', options.environment, options.version)
   await ensureDirectory(dataRoot, root)
-  const lock = await acquireLock(dataRoot, root)
-  try {
+  return withWorkbenchLock(dataRoot, root, async () => {
     const { changeSet, workspace } = await currentDraftForRecordOperation(
       dataRoot,
       root,
@@ -1488,9 +1543,7 @@ export async function saveRecoveredJobMetadataFirstRevision(
     await ensureDirectory(dataRoot, domainDirectory)
     await publishJobMetadataRevision(dataRoot, domainDirectory, record)
     return record
-  } finally {
-    await releaseOwnedLock(dataRoot, root, lock)
-  }
+  })
 }
 
 export async function saveJobMetadataRecord(
@@ -1506,8 +1559,7 @@ export async function saveJobMetadataRecord(
   const workspaceDirectory = join(dataRoot, '.workspaces', options.environment, options.version)
   const root = join(dataRoot, '.edit-workbenches', options.environment, options.version)
   await ensureDirectory(dataRoot, root)
-  const lock = await acquireLock(dataRoot, root)
-  try {
+  return withWorkbenchLock(dataRoot, root, async () => {
     const { changeSet, workspace } = await currentDraftForRecordOperation(
       dataRoot,
       root,
@@ -1542,7 +1594,5 @@ export async function saveJobMetadataRecord(
     await ensureDirectory(dataRoot, domainDirectory)
     await publishJobMetadataRevision(dataRoot, domainDirectory, record)
     return record
-  } finally {
-    await releaseOwnedLock(dataRoot, root, lock)
-  }
+  })
 }
