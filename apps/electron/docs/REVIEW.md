@@ -1,5 +1,10 @@
 # Maple Insight Data Studio Review
 
+## 스킬 목록 전체 화면 열 폭 보정 검증 (2026-11-14)
+
+- 사용자 제공 `screenshots/manual/electron/electron-2026-11-14T11-23-27-234Z.png`에서 전체 화면의 스킬 ID·차수/직업 열이 지나치게 넓어지는 것을 확인했다. 두 열을 각각 96px·170px로 고정하고 아이콘·타입·최대 레벨의 기존 고정 폭을 유지해 남는 너비를 스킬명에 배분했다.
+- mocked Chromium Playwright의 1920×1080 화면에서 스킬 ID·차수/직업 열의 실제 너비 상한과 스킬명 확장을 확인했다. 1480×920의 페이지 간 열 위치와 390×844의 가로 overflow 부재도 확인했다. 스크린샷 `screenshots/playwright/electron/skill-list-{wide,desktop,mobile}.png`는 Git 제외 상태다.
+
 ## 스킬 목록 아이콘·타입 열 UI 검증 (2026-11-14)
 
 - 스킬 표를 `스킬 ID | 아이콘 | 스킬명 | 차수 · 직업 | 타입 | 최대 레벨` 순서의 고정 열로 구성했다. 아이콘·타입·최대 레벨을 가운데 정렬하고 마지막 열의 셀 여백과 표 오른쪽 여백을 제거했다.

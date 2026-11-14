@@ -206,6 +206,17 @@ async function main() {
       fullPage: true
     })
 
+    await page.setViewportSize({ width: 1920, height: 1080 })
+    const columnWidths = await page
+      .getByRole('columnheader')
+      .evaluateAll((headers) => headers.map((header) => header.getBoundingClientRect().width))
+    if (columnWidths[0] > 97 || columnWidths[3] > 171 || columnWidths[2] <= columnWidths[3])
+      throw new Error(`Wide skill columns exceeded their caps: ${columnWidths.join(', ')}`)
+    await page.screenshot({
+      path: path.join(outputDirectory, 'skill-list-wide.png'),
+      fullPage: true
+    })
+
     await page.getByRole('button', { name: '직업 데이터' }).click()
     await page.getByRole('button', { name: '직업 정보', exact: true }).click()
     await page.getByRole('tab', { name: '스킬 정보' }).click()

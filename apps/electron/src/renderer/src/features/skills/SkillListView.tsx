@@ -271,16 +271,16 @@ export function SkillListView({ version }: { version: string }): React.JSX.Eleme
           <div className="-mr-4 overflow-x-auto">
             <table className="w-full min-w-[680px] table-fixed border-collapse text-left text-small">
               <colgroup>
-                <col className="w-[17%]" />
-                <col className="w-[8%]" />
-                <col className="w-[25%]" />
-                <col className="w-[30%]" />
-                <col className="w-[12%]" />
-                <col className="w-[8%]" />
+                <col className="w-[96px]" />
+                <col className="w-[64px]" />
+                <col />
+                <col className="w-[170px]" />
+                <col className="w-[80px]" />
+                <col className="w-[64px]" />
               </colgroup>
               <thead className="bg-app-surface-2 text-app-muted">
                 <tr>
-                  <th className="px-3 py-2">스킬 ID</th>
+                  <th className="px-1 py-2">스킬 ID</th>
                   <th className="px-0 py-2 text-center">아이콘</th>
                   <th className="px-3 py-2">스킬명</th>
                   <th className="px-3 py-2">차수 · 직업</th>
@@ -296,7 +296,12 @@ export function SkillListView({ version }: { version: string }): React.JSX.Eleme
                       className={`border-b border-app-border ${selectedSkill?.skillId === skill.skillId ? 'bg-app-accent-bg' : 'hover:bg-app-surface-hover'}`}
                       key={skill.skillId}
                     >
-                      <td className="px-3 py-3 font-mono whitespace-nowrap">{skill.skillId}</td>
+                      <td
+                        className="truncate px-1 py-3 font-mono text-[10px]"
+                        title={skill.skillId}
+                      >
+                        {skill.skillId}
+                      </td>
                       <td className="px-0 py-2 text-center">
                         <span
                           aria-label="스킬 이미지 미등록"
