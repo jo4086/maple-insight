@@ -1,5 +1,10 @@
 # Database Review
 
+## 2026-11-14: 스킬 레벨 읽기 조회 추가
+
+- 기존 `GameSkillLevel` 모델에 대한 버전·스킬 ID 조건의 읽기 전용 조회를 `game-skill-query.repo.ts`에 추가했다. 레벨 오름차순으로 `level`, `levelDesc`만 반환하며 스키마·데이터는 변경하지 않았다.
+- DB 패키지의 JS·타입 빌드와 Electron IPC 집중 테스트가 통과했다. 읽기 전용 실제 DB 조회에서 `1.2.419`의 `1121000` 레벨 1~32를 반환했다. 소비 측 요구사항은 [Electron REQ004](../../../../apps/electron/docs/REQUIREMENTS/REQ004.md)에서 관리한다.
+
 ## 2026-10-27: Weapon type 구현 검증
 
 ### 통과

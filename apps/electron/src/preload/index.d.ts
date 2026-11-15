@@ -37,6 +37,9 @@ type MapleAdminApi = {
   listDataVersions: () => Promise<string[]>
   listJobData: (version: string) => Promise<JobDataSnapshot>
   listSkillData: (request: ListSkillDataRequest) => Promise<SkillSummary[]>
+  listSkillLevels: (request: ListSkillLevelsRequest) => Promise<SkillLevel[]>
+  listSkillImages: (request: ListSkillImagesRequest) => Promise<SkillImageData[]>
+  extractSkillImages: (request: ExtractSkillImagesRequest) => Promise<ExtractSkillImagesResult>
   previewJobDraftRecovery: (version: string) => Promise<JobDraftRecoveryPreview>
   copySelectedJobDraftRecovery: (
     request: CopySelectedJobDraftRecoveryRequest
@@ -93,7 +96,18 @@ import type {
   SaveJobDraftRequest
 } from '../shared/job-data'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
-import type { ListSkillDataRequest, SkillSummary } from '../shared/skill-data'
+import type {
+  ListSkillDataRequest,
+  ListSkillLevelsRequest,
+  SkillLevel,
+  SkillSummary
+} from '../shared/skill-data'
+import type {
+  ExtractSkillImagesRequest,
+  ExtractSkillImagesResult,
+  ListSkillImagesRequest,
+  SkillImageData
+} from '../shared/skill-images'
 import type {
   CopyDataVersionRequest,
   DeleteDataVersionRequest,

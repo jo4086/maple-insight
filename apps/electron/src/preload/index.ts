@@ -34,7 +34,18 @@ import type {
   SaveRawDataDiffRequest
 } from '../shared/raw-data-diff'
 import type { ScreenshotCaptureEvent, ScreenshotCaptureResult } from '../shared/screenshot'
-import type { ListSkillDataRequest, SkillSummary } from '../shared/skill-data'
+import type {
+  ListSkillDataRequest,
+  ListSkillLevelsRequest,
+  SkillLevel,
+  SkillSummary
+} from '../shared/skill-data'
+import type {
+  ExtractSkillImagesRequest,
+  ExtractSkillImagesResult,
+  ListSkillImagesRequest,
+  SkillImageData
+} from '../shared/skill-images'
 
 const api = {
   openDataFile: () => ipcRenderer.invoke('data-file:open'),
@@ -73,6 +84,12 @@ const api = {
     ipcRenderer.invoke('job-data:list', version),
   listSkillData: (request: ListSkillDataRequest): Promise<SkillSummary[]> =>
     ipcRenderer.invoke('skill-data:list', request),
+  listSkillLevels: (request: ListSkillLevelsRequest): Promise<SkillLevel[]> =>
+    ipcRenderer.invoke('skill-levels:list', request),
+  listSkillImages: (request: ListSkillImagesRequest): Promise<SkillImageData[]> =>
+    ipcRenderer.invoke('skill-images:list', request),
+  extractSkillImages: (request: ExtractSkillImagesRequest): Promise<ExtractSkillImagesResult> =>
+    ipcRenderer.invoke('skill-images:extract', request),
   previewJobDraftRecovery: (version: string): Promise<JobDraftRecoveryPreview> =>
     ipcRenderer.invoke('job-data:draft-recovery:preview', version),
   copySelectedJobDraftRecovery: (

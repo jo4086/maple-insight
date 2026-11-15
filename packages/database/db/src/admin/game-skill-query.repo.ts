@@ -21,6 +21,19 @@ export type FindGameSkillsByJobIdsOptions = {
   jobIds: readonly string[];
 };
 
+export type GameSkillLevelRow = {
+  level: number;
+  levelDesc: string | null;
+};
+
+export async function findGameSkillLevels(options: { version: string; skillId: string }): Promise<GameSkillLevelRow[]> {
+  return prisma.gameSkillLevel.findMany({
+    where: { version: options.version, skillId: options.skillId },
+    orderBy: { level: 'asc' },
+    select: { level: true, levelDesc: true },
+  });
+}
+
 export async function findGameSkillsByJobIds(options: FindGameSkillsByJobIdsOptions): Promise<GameSkillByJobIdRow[]> {
   if (options.jobIds.length === 0) {
     return [];
