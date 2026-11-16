@@ -69,6 +69,7 @@ pnpm --filter @apps/electron typecheck
 
 ## 문서
 
+- [포트폴리오용 프로젝트 분석](./docs/portfolio/README.md): 아키텍처, 데이터 흐름, 앱·패키지, 구현 상태와 사례 구성 가이드
 - [전체 명세](./SPEC.md) · [개발 순서](./ROADMAP.md) · [현재 목표](./GOAL.md)
 - [Electron 요구사항](./apps/electron/docs/REQUIREMENTS/README.md) · [단계별 목표](./apps/electron/docs/GOAL/README.md) · [검증 기록](./apps/electron/docs/REVIEW.md)
 - [기존 아키텍처 기록](./docs/Architecture.md) · [개발 일지](./docs/dev-log.md)
